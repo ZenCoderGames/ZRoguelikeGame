@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="ZRoguelikeGame"
+run/main_scene="res://scene/main/MainScene.tscn"
 config/icon="res://resource/icon.png"
 
 [display]
