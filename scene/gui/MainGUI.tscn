@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
+
+[node name="MainGUI" type="Control"]
+margin_right = 800.0
+margin_bottom = 601.0
+
+[node name="Bottom" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 553.0
+margin_right = 265.0
+margin_bottom = 584.0
+theme = ExtResource( 1 )
+text = "Hello World!"
+valign = 1
+
+[node name="Sidebar" type="Label" parent="."]
+margin_left = 591.0
+margin_top = 24.0
+margin_right = 773.0
+margin_bottom = 44.0
+theme = ExtResource( 1 )
+text = "Turn: 42"
+align = 2
+valign = 1
