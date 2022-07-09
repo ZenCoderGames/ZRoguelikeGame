@@ -46,11 +46,14 @@ func _init_arrows():
 	_create_sprite("arrow", ArrowX, _new_GroupName.room_floor, 0, 5, -20)
 	
 func _init_enemies():
-	_create_sprite("dwarf", Dwarf, _new_GroupName.enemies, 3, 3)
-	_create_sprite("dwarf", Dwarf, _new_GroupName.enemies, 9, 9)
+	var dwarf1:Node = _create_sprite("dwarf", Dwarf, _new_GroupName.enemies, 3, 3)
+	dwarf1.init(3, 3, 100, 10)
+	var dwarf2:Node = _create_sprite("dwarf", Dwarf, _new_GroupName.enemies, 9, 9)
+	dwarf2.init(9, 9, 100, 10)
 
 func _init_player():
-	var pc:Sprite = _create_sprite("pc", Player, _new_GroupName.pc, 0, 0)
+	var pc:Node = _create_sprite("pc", Player, _new_GroupName.pc, 0, 0)
+	pc.init(0, 0, 100, 10)
 	emit_signal("OnPlayerCreated", pc)
 
 func _create_sprite(name : String, prefab: PackedScene, group: String, x: int, y: int,

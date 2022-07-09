@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/InitWorld.gd" type="Script" id=1]
 [ext_resource path="res://scene/gui/MainGUI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/PlayerInput.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Dungeon/PlayerInput.gd" type="Script" id=3]
 
 [node name="MainScene" type="Node2D"]
 
