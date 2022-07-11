@@ -5,17 +5,19 @@ var entityType:int = Constants.ENTITY_TYPE.NONE
 var floorObject = null
 var entity = null
 
+var room
 var row:int
 var col:int
 var pos:Vector2
 
-func _init(r:int, c:int):
+func _init(roomRef, r:int, c:int):
+	room = roomRef
 	row = r
 	col = c
-	pos = Utils.index_to_vector(c, r, 0, 0)
+	pos = room.get_world_position(r, c)
 
 func is_edge_of_room():
-	return row==0 || col==0 || row==Constants.MAX_ROWS-1 || col==Constants.MAX_COLS-1
+	return row==0 || col==0 || row==room.maxRows-1 || col==room.maxCols-1
 
 # CELL TYPE
 func init_cell(obj, cellType:int):

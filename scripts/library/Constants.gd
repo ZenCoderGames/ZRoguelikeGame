@@ -1,16 +1,6 @@
 extends Node
 
 # DUNGEON ROOM
-const MAX_ROWS: int = 15
-const MAX_COLS: int = 21
-
-const CENTER_ROW: int = 10
-const CENTER_COL: int = 7
-
-const ARROW_MARGIN: int = 32
-
-const START_X: int = 50
-const START_Y: int = 54
 const STEP_X: int = 26
 const STEP_Y: int = 34
 

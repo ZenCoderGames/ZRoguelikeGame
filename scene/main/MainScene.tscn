@@ -10,4 +10,11 @@
 [node name="PlayerInput" type="Node" parent="Dungeon"]
 script = ExtResource( 3 )
 
-[node name="MainGUI" parent="." instance=ExtResource( 2 )]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 400, 300 )
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainGUI" parent="CanvasLayer" instance=ExtResource( 2 )]
