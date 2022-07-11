@@ -8,11 +8,27 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Cell",
+"language": "GDScript",
+"path": "res://scripts/library/Utils.gd"
+} ]
+_global_script_class_icons={
+"Cell": ""
+}
+
 [application]
 
 config/name="ZRoguelikeGame"
 run/main_scene="res://scene/main/MainScene.tscn"
 config/icon="res://resource/icon.png"
+
+[autoload]
+
+Constants="*res://scripts/library/Constants.gd"
+Utils="*res://scripts/library/Utils.gd"
+Dungeon="*res://scripts/Dungeon.gd"
 
 [display]
 
