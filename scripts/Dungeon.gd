@@ -2,7 +2,7 @@
 
 extends Node2D
 
-const Player := preload("res://sprite/PC.tscn")
+const Player := preload("res://entity/Player.tscn")
 const Room := preload("res://scripts/battle/Room.gd")
 
 # signals
@@ -20,6 +20,7 @@ func _init_room():
 	currentRoom.populate_room()
 
 func _init_player():
-	var pc:Node = Utils.create_scene("pc", Player, Constants.pc, currentRoom.get_cell(0, 0))
-	pc.init(currentRoom.get_cell(0, 0), 100, 10)
-	emit_signal("OnPlayerCreated", pc)
+	var cell = currentRoom.get_cell(2, 1)
+	var player:Node = Utils.create_scene("player", Player, Constants.pc, cell)
+	player.init(cell, 100, 10)
+	emit_signal("OnPlayerCreated", player)

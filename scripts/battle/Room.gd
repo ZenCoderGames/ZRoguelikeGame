@@ -3,11 +3,9 @@
 const Cell = preload("res://scripts/battle/Cell.gd")
 var cells:Array = []
 
-const Floor := preload("res://sprite/Floor.tscn")
-const Wall := preload("res://sprite/Wall.tscn")
-const ArrowX := preload("res://sprite/ArrowX.tscn")
-const ArrowY := preload("res://sprite/ArrowY.tscn")
-const Dwarf := preload("res://sprite/Dwarf.tscn")
+const Floor := preload("res://entity/Floor.tscn")
+const Wall := preload("res://entity/Wall.tscn")
+const Dwarf := preload("res://entity/Dwarf.tscn")
 
 func _init():
 	for r in Constants.MAX_ROWS:
@@ -25,27 +23,31 @@ func populate_room():
 		cells[i].init_cell(floorObj, Constants.CELL_TYPE.FLOOR)
 
 	_init_walls()
-	_init_connectors()
 	_init_enemies()
 
 func _init_walls():
-	var walls:Array = [5,5, 6,5, 7,5, 8,5]
+	# Room Walls
+	var connector1 = get_cell(0, 5)
+	var connector2 = get_cell(7, 0)
+	for cell in cells:
+		if(cell==connector1 || cell==connector2):
+			continue
+		
+		if(cell.is_edge_of_room()):
+			_create_wall(cell.row, cell.col)
+	
+	# Obstacle Walls
+	var innerWalls:Array = [5,5, 6,5, 7,5, 8,5]
 	var i:int = 0
-	while i < walls.size()-1:
-		var cell = get_cell(walls[i], walls[i+1])
-		var wall = Utils.create_scene("wall", Wall, Constants.room_floor, cell)
-		cell.init_entity(wall, Constants.ENTITY_TYPE.STATIC)
+	while i < innerWalls.size()-1:
+		_create_wall(innerWalls[i], innerWalls[i+1])
 		i = i+2
 		
-func _init_connectors():
-	var cell = get_cell(0, 5)
-	var arrowY = Utils.create_scene("arrow", ArrowY, Constants.room_floor, cell, 0, -20)
-	cell.init_cell(arrowY, Constants.CELL_TYPE.CONNECTOR)
-	
-	cell = get_cell(7, 0)
-	var arrowX = Utils.create_scene("arrow", ArrowX, Constants.room_floor, cell, -20)
-	cell.init_cell(arrowX, Constants.CELL_TYPE.CONNECTOR)
-	
+func _create_wall(r, c):
+	var cell = get_cell(r, c)
+	var wall = Utils.create_scene("wall", Wall, Constants.room_floor, cell)
+	cell.init_entity(wall, Constants.ENTITY_TYPE.STATIC)
+		
 func _init_enemies():
 	var cell =  get_cell(3, 3)
 	var dwarf1:Node = Utils.create_scene("dwarf", Dwarf, Constants.enemies, cell)

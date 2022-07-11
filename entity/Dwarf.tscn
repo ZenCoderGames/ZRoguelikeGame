@@ -9,7 +9,7 @@ atlas = ExtResource( 1 )
 region = Rect2( 96, 216, 24, 36 )
 
 [node name="Dwarf" type="Sprite"]
-modulate = Color( 0.670588, 0.698039, 0.74902, 1 )
+modulate = Color( 0.419608, 0.105882, 0.137255, 1 )
 position = Vector2( 209, 69 )
 texture = SubResource( 1 )
 script = ExtResource( 2 )
