@@ -18,29 +18,31 @@ func _init(mR, mC, sX, sY):
 	maxCols = mC
 	startX = sX
 	startY = sY
-	
+
+func initialize():
 	for r in maxRows:
 		for c in maxCols:
 			cells.append(Cell.new(self, r, c))
+			
+	populate()
 
-func populate_room():
+func populate():
 	# Init Floor
 	for i in range(0, cells.size()):
 		var r = i/maxCols
 		var c = i%maxCols
 		var cell = get_cell(r, c)
-		#var cell = cells[i]
 		var floorObj = Utils.create_scene(str(r) + "_" + str(c), Floor, Constants.room_floor, cell)
 		cells[i].init_cell(floorObj, Constants.CELL_TYPE.FLOOR)
 
 	_init_walls()
-	_init_enemies()
+	#_init_enemies()
 
 func _init_walls():
 	# Connector Cells
-	connectorCells.append(get_cell(0, 5))
-	connectorCells.append(get_cell(7, 0))
-	connectorCells.append(get_cell(10, maxCols-1))
+	#connectorCells.append(get_cell(0, 5))
+	#connectorCells.append(get_cell(7, 0))
+	#connectorCells.append(get_cell(10, maxCols-1))
 	
 	# Room Walls
 	for cell in cells:
@@ -57,11 +59,11 @@ func _init_walls():
 			_create_wall(cell.row, cell.col)
 	
 	# Obstacle Walls
-	var innerWalls:Array = [5,5, 6,5, 7,5, 8,5]
-	var i:int = 0
-	while i < innerWalls.size()-1:
-		_create_wall(innerWalls[i], innerWalls[i+1])
-		i = i+2
+	##var innerWalls:Array = [5,5, 6,5, 7,5, 8,5]
+	##var i:int = 0
+	##while i < innerWalls.size()-1:
+	##	_create_wall(innerWalls[i], innerWalls[i+1])
+	##	i = i+2
 		
 func _create_wall(r, c):
 	var cell = get_cell(r, c)
@@ -95,8 +97,16 @@ func get_random_connector_cell():
 	randomize()
 	return connectorCells[randi()%connectorCells.size()]
 
+func get_safe_starting_cell():
+	return get_cell(maxRows/2, maxCols/2)
+
 func get_world_position(r: int, c: int) -> Vector2:
 	var col_vector: int = startX + Constants.STEP_X * c
 	var row_vector: int = startY + Constants.STEP_Y * r
 
 	return Vector2(col_vector, row_vector)
+
+func is_point_inside(pX:int, pY:int, buffer:int):
+	var pXInside = pX >= startX - buffer and pX <= (startX + Constants.STEP_X * maxCols)
+	var pYInside = pY >= startY - buffer and pY <= (startY + Constants.STEP_Y * maxRows)
+	return pXInside and pYInside
