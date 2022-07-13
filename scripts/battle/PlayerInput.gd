@@ -2,12 +2,6 @@
 
 extends Node
 
-var player = null
-
-func _ready():
-	var __  = Dungeon.connect("OnPlayerCreated", self,
-			"_onPlayerCreated")
-
 func _unhandled_input(event: InputEvent) -> void:
 	var x:int = 0
 	var y:int = 0
@@ -21,11 +15,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
 		y = 1
 
-	player.move(x, y)
+	if Dungeon.player != null:
+		Dungeon.player.move(x, y)
 
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		get_tree().quit()
-		
-
-func _onPlayerCreated(newPlayer):
-	player = newPlayer

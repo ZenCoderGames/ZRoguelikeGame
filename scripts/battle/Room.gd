@@ -13,6 +13,8 @@ var maxCols:int
 var startX:int
 var startY:int
 
+var loadedScenes:Array = []
+
 func _init(mR, mC, sX, sY):
 	maxRows = mR
 	maxCols = mC
@@ -32,7 +34,7 @@ func populate():
 		var r = i/maxCols
 		var c = i%maxCols
 		var cell = get_cell(r, c)
-		var floorObj = Utils.create_scene(str(r) + "_" + str(c), Floor, Constants.room_floor, cell)
+		var floorObj = Utils.create_scene(loadedScenes, str(r) + "_" + str(c), Floor, Constants.room_floor, cell)
 		cells[i].init_cell(floorObj, Constants.CELL_TYPE.FLOOR)
 
 	_init_walls()
@@ -67,19 +69,25 @@ func _init_walls():
 		
 func _create_wall(r, c):
 	var cell = get_cell(r, c)
-	var wall = Utils.create_scene("wall", Wall, Constants.room_floor, cell)
+	var wall = Utils.create_scene(loadedScenes, "wall", Wall, Constants.room_floor, cell)
 	cell.init_entity(wall, Constants.ENTITY_TYPE.STATIC)
 		
 func _init_enemies():
 	var cell =  get_cell(3, 3)
-	var dwarf1:Node = Utils.create_scene("dwarf", Dwarf, Constants.enemies, cell)
+	var dwarf1:Node = Utils.create_scene(loadedScenes, "dwarf", Dwarf, Constants.enemies, cell)
 	cell.init_entity(dwarf1, Constants.ENTITY_TYPE.DYNAMIC)
 	dwarf1.init(cell, 100, 10)
 	
 	cell =  get_cell(9, 9)
-	var dwarf2:Node = Utils.create_scene("dwarf", Dwarf, Constants.enemies, cell)
+	var dwarf2:Node = Utils.create_scene(loadedScenes, "dwarf", Dwarf, Constants.enemies, cell)
 	cell.init_entity(dwarf2, Constants.ENTITY_TYPE.DYNAMIC)
 	dwarf2.init(cell, 100, 10)
+
+func clean_up():
+	for loadedScene in loadedScenes:
+		loadedScene.queue_free()
+	loadedScenes.clear()
+	cells.clear()
 
 # HELPERS
 func get_cell(r:int, c:int):
@@ -107,6 +115,15 @@ func get_world_position(r: int, c: int) -> Vector2:
 	return Vector2(col_vector, row_vector)
 
 func is_point_inside(pX:int, pY:int, buffer:int):
-	var pXInside = pX >= startX - buffer and pX <= (startX + Constants.STEP_X * maxCols)
-	var pYInside = pY >= startY - buffer and pY <= (startY + Constants.STEP_Y * maxRows)
+	var pXInside = pX >= startX - buffer and pX <= (startX + Constants.STEP_X * maxCols) - buffer
+	var pYInside = pY >= startY - buffer and pY <= (startY + Constants.STEP_Y * maxRows) - buffer
 	return pXInside and pYInside
+
+func get_center():
+	return Vector2(startX + Constants.STEP_X/2 * maxCols, startY + Constants.STEP_Y/2 * maxRows)
+	
+func get_size():
+	return Vector2(Constants.STEP_X * maxCols, Constants.STEP_Y * maxRows)
+
+func get_half_size():
+	return Vector2(Constants.STEP_X/2 * maxCols, Constants.STEP_Y/2 * maxRows)

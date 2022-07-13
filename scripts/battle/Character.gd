@@ -14,7 +14,7 @@ func move(x, y):
 	var newR:int = cell.row + y
 	var newC:int = cell.col + x
 	
-	Dungeon.currentRoom.move_entity(self, cell, newR, newC)
+	cell.room.move_entity(self, cell, newR, newC)
 
 func move_to_cell(newCell):
 	cell = newCell
