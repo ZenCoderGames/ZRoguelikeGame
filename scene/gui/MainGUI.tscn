@@ -12,7 +12,7 @@ margin_top = 553.0
 margin_right = 265.0
 margin_bottom = 584.0
 theme = ExtResource( 1 )
-text = "First Room"
+text = "Dungeon"
 valign = 1
 
 [node name="Sidebar" type="Label" parent="."]

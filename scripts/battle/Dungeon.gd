@@ -17,6 +17,7 @@ var loadedScenes:Array = []
 
 func create() -> void:
 	_init_rooms()
+	_init_connections()
 	_init_player()
 
 func _init_rooms():
@@ -73,8 +74,9 @@ func _init_rooms():
 				moveY = yDirn
 			# move out of start spawn room
 			while is_intersecting_with_room(newRoom, startSpawnRoom):
-				newRoom.startX += moveX
-				newRoom.startY += moveY
+				newRoom.startX += moveX * 1 # Constants.STEP_X
+				newRoom.startY += moveY * 1 # Constants.STEP_Y
+				
 			# if you are still intersecting with a room,
 			# fail and find a different spawn room
 			if is_intersecting_with_any_room(newRoom):
@@ -85,6 +87,46 @@ func _init_rooms():
 		newRoom.initialize()
 		rooms.append(newRoom)
 
+func _init_connections():
+	# Try and find connections for each wall in each room
+	for currentRoom in rooms:
+		for room in rooms:
+			if currentRoom == room:
+				continue
+
+			# check for Top connection
+			findConnection(currentRoom.topConnection, room.botConnection, currentRoom.wallCellsTop, room.wallCellsBot, true)
+			# check for Bot connection
+			findConnection(currentRoom.botConnection, room.topConnection, currentRoom.wallCellsBot, room.wallCellsTop, true)
+			# check for Left connection
+			findConnection(currentRoom.leftConnection, room.rightConnection, currentRoom.wallCellsLeft, room.wallCellsRight, false)
+			# check for Right connection
+			findConnection(currentRoom.rightConnection, room.leftConnection, currentRoom.wallCellsRight, room.wallCellsLeft, false)
+			
+
+func findConnection(con1, con2, con1Array, con2Array, isYCheck):
+	if con1==null and con2==null:
+		# if this is an adjacent y room, continue to check it
+		if (isYCheck and con1Array[0].is_y_adjacent(con2Array[0])) or\
+			(!isYCheck and con1Array[0].is_x_adjacent(con2Array[0])):
+			var arrayMidSize:int = con1Array.size()/2
+			# check cells from the middle outwards
+			for i in arrayMidSize:
+				var c1:int = arrayMidSize - i
+				var c2:int = arrayMidSize + i
+				for botCell in con2Array:
+					# found connection c1
+					if c1>=0 and ((isYCheck and botCell.is_x_identical(con1Array[c1])) or (!isYCheck and botCell.is_y_identical(con1Array[c1]))):
+						con1Array[c1].connect_cell(botCell)
+						botCell.connect_cell(con1Array[c1])
+						return
+					# found connection c2
+					if c2<arrayMidSize*2 and ((isYCheck and botCell.is_x_identical(con1Array[c2])) or (!isYCheck and botCell.is_y_identical(con1Array[c2]))):
+						con1Array[c2].connect_cell(botCell)
+						botCell.connect_cell(con1Array[c2])
+						return
+
+		
 func _init_player():
 	var cell = rooms[0].get_safe_starting_cell()
 	player = Utils.create_scene(loadedScenes, "player", Player, Constants.pc, cell)
