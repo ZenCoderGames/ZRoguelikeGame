@@ -25,7 +25,13 @@ var startY:int
 
 var loadedScenes:Array = []
 
-func _init(mR, mC, sX, sY):
+var wasRoomVisited:bool = false
+
+var player = null
+var roomId:int = -1
+
+func _init(id, mR, mC, sX, sY):
+	roomId = id
 	maxRows = mR
 	maxCols = mC
 	startX = sX
@@ -80,14 +86,6 @@ func _init_enemies():
 	cell.init_entity(dwarf2, Constants.ENTITY_TYPE.DYNAMIC)
 	dwarf2.init(cell, 100, 10)
 
-func move_entity(entity, currentCell, newR:int, newC:int):
-	if newC>=0 and newR>=0 and newC<maxCols and newR<maxRows:
-		var cell = get_cell(newR, newC)
-		if(!cell.has_entity()):
-			cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
-			entity.move_to_cell(cell)
-			currentCell.clear_entity()
-
 func register_cell_connection(myCell):
 	if myCell.is_top_edge():
 		topConnection = myCell
@@ -107,6 +105,53 @@ func clean_up():
 		loadedScene.queue_free()
 	loadedScenes.clear()
 	cells.clear()
+
+func update():
+	var isPlayerCurrent:bool = Dungeon.player.is_in_room(self)
+	var isPlayerPrevious:bool = Dungeon.player.is_prev_room(self)
+	if isPlayerCurrent:
+		_show()
+		wasRoomVisited = true
+	elif isPlayerPrevious:
+		_show()
+	elif wasRoomVisited:
+		_dim()
+	else:
+		_hide()
+
+# VISIBILITY
+func _show():
+	for cell in cells:
+		cell.show()
+
+func _dim():
+	for cell in cells:
+		cell.dim()
+
+func _hide():
+	for cell in cells:
+		cell.hide()
+
+# ENTITY
+func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
+	# within bounds of room
+	if newC>=0 and newR>=0 and newC<maxCols and newR<maxRows:
+		var cell = get_cell(newR, newC)
+		if(!cell.has_entity()):
+			cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
+			entity.move_to_cell(cell)
+			currentCell.clear_entity()
+			return true
+	# out of bounds of room
+	else:
+		# if there is a connection, move to the connected cell
+		if currentCell.has_connection():
+			entity.move_to_cell(currentCell.connectedCell)
+			currentCell.connectedCell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
+			currentCell.clear_entity()
+			return true
+	
+	return false
 
 # HELPERS
 func get_cell(r:int, c:int):

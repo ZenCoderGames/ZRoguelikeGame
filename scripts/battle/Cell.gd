@@ -3,7 +3,7 @@ var cellType:int = Constants.CELL_TYPE.NONE
 var entityType:int = Constants.ENTITY_TYPE.NONE
 
 var floorObject = null
-var entity = null
+var entityObject = null
 
 var connectedCell = null
 
@@ -31,7 +31,7 @@ func is_cell_type(type:int):
 	
 # ENTITY TYPE
 func init_entity(obj, type:int):
-	entity = obj
+	entityObject = obj
 	set_entity_type(type)
 	floorObject.hide()
 	
@@ -45,16 +45,40 @@ func has_entity():
 	return entityType != Constants.ENTITY_TYPE.NONE
 	
 func clear_entity():
-	entity = null
 	entityType = Constants.ENTITY_TYPE.NONE
 	floorObject.show()
+	entityObject = null
+	
+func unload_entity():
+	room.clean_up_loaded_scene(entityObject)
+	clear_entity()
 
 # CONNECTIONS
 func connect_cell(conCell):
 	set_cell_type(Constants.CELL_TYPE.CONNECTOR)
 	connectedCell = conCell
-	room.clean_up_loaded_scene(entity)
 	room.register_cell_connection(self)
+	unload_entity()
+
+func has_connection():
+	return connectedCell != null
+
+# VISIBILITY
+func show():
+	floorObject.show()
+	if entityObject!=null:
+		floorObject.hide()
+		entityObject.show()
+
+func hide():
+	floorObject.hide()
+	if entityObject!=null:
+		entityObject.hide()
+
+func dim():
+	floorObject.hide()
+	if entityObject!=null:
+		entityObject.hide()
 
 # HELPERS
 func is_edge_of_room():

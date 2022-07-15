@@ -12,6 +12,7 @@ var rooms:Array = []
 const intersectionBuffer:int = 0
 
 var player:Node = null
+var turnsTaken:int = 0
 
 var loadedScenes:Array = []
 
@@ -42,7 +43,7 @@ func _init_rooms():
 		randomize()
 		var numR:int = roomMinRows + randi() % (roomMaxRows - roomMinRows + 1)
 		var numC:int = roomMinCols + randi() % (roomMaxCols - roomMinCols + 1)
-		var newRoom = Room.new(numR, numC, 0, 0)
+		var newRoom = Room.new(rooms.size(), numR, numC, 0, 0)
 		if rooms.size()>0:
 			# Choose a random room to start on
 			var startSpawnRoom = rooms[randi() % rooms.size()]
@@ -130,8 +131,16 @@ func findConnection(con1, con2, con1Array, con2Array, isYCheck):
 func _init_player():
 	var cell = rooms[0].get_safe_starting_cell()
 	player = Utils.create_scene(loadedScenes, "player", Player, Constants.pc, cell)
-	player.init(cell, 100, 10)
+	player.init(100, 10)
+	player.move_to_cell(cell)
 	emit_signal("OnPlayerCreated", player)
+	_on_turn_taken(0, 0)
+	player.connect("OnCharacterMove", self, "_on_turn_taken") 
+
+func _on_turn_taken(x, y):
+	turnsTaken += 1
+	for room in rooms:
+		room.update()
 
 func clean_up():
 	for loadedScene in loadedScenes:

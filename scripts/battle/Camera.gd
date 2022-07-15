@@ -1,5 +1,18 @@
 extends Camera2D
 
+var player
+
+func _ready():
+	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
+	
+func _register_player(playerRef):
+	player = playerRef
+	player.connect("OnCharacterMove", self, "_update_camera") 
+
+func _update_camera(x:int, y:int):
+	self.position += Vector2(x * Constants.STEP_X, y * Constants.STEP_Y)
+
+# DEBUG
 func _process(delta):
 	_zoom_input()
 	_move_input()
