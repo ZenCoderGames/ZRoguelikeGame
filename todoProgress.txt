@@ -17,7 +17,8 @@ Roguelike Dev:
 (D)- Directionality of damage numbers
 (D)- Health ui
 
-- Death
+- Player Death
+- Enemy nearby UI recognition
 
 - Djisktra
 

@@ -118,7 +118,8 @@ func register_cell_connection(myCell):
 
 func clean_up_loaded_scene(sceneToCleanUp):
 	loadedScenes.erase(sceneToCleanUp)
-	sceneToCleanUp.queue_free()
+	if sceneToCleanUp!=null:
+		sceneToCleanUp.queue_free()
 
 func clean_up():
 	for loadedScene in loadedScenes:
