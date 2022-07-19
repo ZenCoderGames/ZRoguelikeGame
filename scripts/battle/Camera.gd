@@ -2,15 +2,20 @@ extends Camera2D
 
 var player
 
+func _init():
+	pass
+	
 func _ready():
 	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
+	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	
 func _register_player(playerRef):
 	player = playerRef
-	player.connect("OnCharacterMove", self, "_update_camera") 
+	player.connect("OnCharacterMove", self, "_update_camera")
+	self.position = player.cell.pos
 
 func _update_camera(x:int, y:int):
-	self.position += Vector2(x * Constants.STEP_X, y * Constants.STEP_Y)
+	self.position = player.cell.pos
 
 # DEBUG
 func _process(delta):

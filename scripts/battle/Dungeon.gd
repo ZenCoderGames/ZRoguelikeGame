@@ -7,6 +7,9 @@ const Room := preload("res://scripts/battle/Room.gd")
 
 # signals
 signal OnPlayerCreated(newPlayer)
+signal OnTurnCompleted()
+signal OnAttack(attacker, defender, damageValue)
+signal OnKill(attacker, defender)
 
 var rooms:Array = []
 const intersectionBuffer:int = 0
@@ -16,9 +19,16 @@ var turnsTaken:int = 0
 
 var loadedScenes:Array = []
 
+var battleInstance
+
+func init(battleInst):
+	battleInstance = battleInst
+
 func create() -> void:
 	_init_rooms()
 	_init_connections()
+	_init_path()
+	_init_enemies()
 	_init_player()
 
 func _init_rooms():
@@ -115,23 +125,84 @@ func findConnection(con1, con2, con1Array, con2Array, isYCheck):
 			for i in arrayMidSize:
 				var c1:int = arrayMidSize - i
 				var c2:int = arrayMidSize + i
-				for botCell in con2Array:
+				for conCell in con2Array:
 					# found connection c1
-					if c1>=0 and ((isYCheck and botCell.is_x_identical(con1Array[c1])) or (!isYCheck and botCell.is_y_identical(con1Array[c1]))):
-						con1Array[c1].connect_cell(botCell)
-						botCell.connect_cell(con1Array[c1])
+					if c1>=0 and ((isYCheck and conCell.is_x_identical(con1Array[c1])) or (!isYCheck and conCell.is_y_identical(con1Array[c1]))):
+						con1Array[c1].connect_cell(conCell)
+						conCell.connect_cell(con1Array[c1])
 						return
 					# found connection c2
-					if c2<arrayMidSize*2 and ((isYCheck and botCell.is_x_identical(con1Array[c2])) or (!isYCheck and botCell.is_y_identical(con1Array[c2]))):
-						con1Array[c2].connect_cell(botCell)
-						botCell.connect_cell(con1Array[c2])
+					if c2<arrayMidSize*2 and ((isYCheck and conCell.is_x_identical(con1Array[c2])) or (!isYCheck and conCell.is_y_identical(con1Array[c2]))):
+						con1Array[c2].connect_cell(conCell)
+						conCell.connect_cell(con1Array[c2])
 						return
 
-		
+var costFromStart:Dictionary = {}
+var roomsToVisit:Array = []
+var visitedRooms:Dictionary = {}
+var reverse_path:Array = []
+var startRoom
+var furthestRoom 
+func _init_path():
+	# reset variables
+	startRoom = rooms[0]
+	furthestRoom = null
+	reverse_path = []
+	visitedRooms = {}
+	roomsToVisit = []
+	costFromStart = {}
+	# start with first room
+	startRoom.isStartRoom = true
+	costFromStart[startRoom] = 0
+	roomsToVisit.append(startRoom)
+	# do path calculations
+	while roomsToVisit.size()>0:
+		var room = roomsToVisit[0]
+		for connection in room.connections:
+			var connectedRoom = connection.connectedCell.room
+			var pathCost = costFromStart[room]+1
+			if !visitedRooms.has(connectedRoom) or\
+				pathCost<costFromStart[connectedRoom]:
+				costFromStart[connectedRoom] = pathCost
+				roomsToVisit.append(connectedRoom)
+		visitedRooms[room] = true
+		roomsToVisit.remove(0)
+	# find the furthest room
+	var furthestCost:int = 0
+	for room in rooms:
+		if costFromStart[room] > furthestCost:
+			furthestCost = costFromStart[room]
+			furthestRoom = room
+	furthestRoom.isEndRoom = true
+	# find path
+	reverse_path.append(furthestRoom)
+	var room = furthestRoom
+	while room!= startRoom:
+		var shortestPathConnectedRoom = room.connections[0].connectedCell.room
+		var shortestPathConnectionCost:int = costFromStart[shortestPathConnectedRoom]
+		for connection in room.connections:
+			var connectedRoom = connection.connectedCell.room
+			var pathCost = costFromStart[connectedRoom]
+			if pathCost < shortestPathConnectionCost:
+				shortestPathConnectedRoom = connectedRoom
+				shortestPathConnectionCost = pathCost
+		room = shortestPathConnectedRoom
+		room.isCriticalPathRoom = true
+		reverse_path.append(room)
+	reverse_path.append(startRoom)
+
+func _init_enemies():
+	startRoom.generate_enemies(1)
+	pass
+	for room in rooms:
+		if !room.isStartRoom:
+			room.generate_enemies(randi() % 3 + 1)
+			#room.generate_enemies(1)
+
 func _init_player():
 	var cell = rooms[0].get_safe_starting_cell()
 	player = Utils.create_scene(loadedScenes, "player", Player, Constants.pc, cell)
-	player.init(100, 10)
+	player.init(100, 10, Constants.TEAM.PLAYER)
 	player.move_to_cell(cell)
 	emit_signal("OnPlayerCreated", player)
 	_on_turn_taken(0, 0)
@@ -139,8 +210,12 @@ func _init_player():
 
 func _on_turn_taken(x, y):
 	turnsTaken += 1
+	emit_signal("OnTurnCompleted")
+
 	for room in rooms:
-		room.update()
+		room.update_visibility()
+		
+	player.cell.room.update_entities()
 
 func clean_up():
 	for loadedScene in loadedScenes:

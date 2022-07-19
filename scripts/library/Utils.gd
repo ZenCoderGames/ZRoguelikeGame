@@ -14,3 +14,13 @@ func create_scene(container:Array, name : String, prefab: PackedScene, group: St
 
 	add_child(new_scene)
 	return new_scene
+
+# GENERAL
+func create_tween_vector2(node, fieldName, startPose, endPose, duration, transType, easeType):
+	var tween = Tween.new()
+	add_child(tween)
+	tween.interpolate_property(
+		node, fieldName, 
+		startPose, endPose, duration,
+		Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	tween.start()

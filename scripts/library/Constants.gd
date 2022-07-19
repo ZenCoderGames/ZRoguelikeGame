@@ -1,11 +1,16 @@
 extends Node
 
+# GENERAL
+enum DIRN_TYPE { LEFT, RIGHT, UP, DOWN }
+
 # DUNGEON ROOM
 const STEP_X: int = 26
 const STEP_Y: int = 34
 
 enum CELL_TYPE { NONE, FLOOR, CONNECTOR }
 enum ENTITY_TYPE { NONE, STATIC, DYNAMIC }
+
+enum TEAM { NONE, PLAYER, ENEMY }
 
 # GROUPS
 const pc: String = "pc"

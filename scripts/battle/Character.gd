@@ -1,20 +1,39 @@
 # Character.gd
 extends Node
 
+export(String) var characterName
+onready var damageText:Label = get_node("DamageText")
+
 var health: int = 0
+var maxHealth: int = 0
 var damage: int = 0
+var team: int = 0
 var cell
 
 var currentRoom = null
 var prevRoom = null
 
 signal OnCharacterMove(x, y)
+signal OnHealthChanged(characterName, newVal, maxHealth)
 
-func init(hlth, dmg):
+var originalColor:Color
+
+func init(hlth, dmg, teamVal):
 	health = hlth
+	maxHealth = hlth
 	damage = dmg
+	team = teamVal
+	originalColor = self.self_modulate
+	if team==Constants.TEAM.ENEMY:
+		damageText.self_modulate = Dungeon.battleInstance.playerDamageColor
+	else:
+		damageText.self_modulate = Dungeon.battleInstance.enemyDamageColor
 
+# MOVEMENT
 func move(x, y):
+	if x==0 and y==0:
+		return
+
 	var newR:int = cell.row + y
 	var newC:int = cell.col + x
 	
@@ -29,9 +48,85 @@ func move_to_cell(newCell):
 		prevRoom = currentRoom
 	currentRoom = cell.room
 
+# COMBAT
+func attack(entity):
+	print("attack:", self.characterName, "->", entity.characterName)
+	if entity.is_class(self.get_class()):
+		entity.take_damage(self, damage)
+
+func take_damage(entity, dmg):
+	health -= dmg
+	if health<=0:
+		Dungeon.emit_signal("OnKill", entity, self)
+		die()
+	else:
+		show_hit(entity, dmg)
+		Dungeon.emit_signal("OnAttack", entity, self, dmg)
+		emit_signal("OnHealthChanged", characterName, health, maxHealth)
+
+func die():
+	cell.room.enemy_died(self)
+	cell.unload_entity()
+
+func show_hit(entity, dmg):
+	if team==Constants.TEAM.PLAYER:
+		yield(get_tree().create_timer(0.25), "timeout")
+	
+	show_hit_flash()
+	show_damage_text(entity, dmg)
+
+func show_hit_flash():
+	self.self_modulate = Color.white
+	yield(get_tree().create_timer(0.2), "timeout")
+	self.self_modulate = originalColor
+	
+func show_damage_text(entity, dmg):
+	damageText.visible = true
+	damageText.text = str(dmg)
+
+	var startPos:Vector2 = Vector2(0,-30)
+	var endPos:Vector2 = Vector2(10,-60)
+	var dirn:int = dirn_to_character(entity)
+	print(dirn)
+	if dirn==Constants.DIRN_TYPE.RIGHT:
+		startPos = Vector2(0, -5)
+		endPos = Vector2(20, -3)
+	elif dirn==Constants.DIRN_TYPE.LEFT:
+		startPos = Vector2(-30, 0)
+		endPos = Vector2(-40, 0)
+	elif dirn==Constants.DIRN_TYPE.UP:
+		startPos = Vector2(0, -30)
+		endPos = Vector2(0,-40)
+	elif dirn==Constants.DIRN_TYPE.DOWN:
+		startPos = Vector2(0, 0)
+		endPos = Vector2(10, 20)
+
+	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	yield(get_tree().create_timer(0.5), "timeout")
+	damageText.visible = false
+
 # HELPERS
 func is_in_room(room):
 	return currentRoom == room
 
 func is_prev_room(room):
 	return prevRoom == room
+
+func adjacent_character(character):
+	return (abs(character.cell.col-cell.col)==0 and abs(character.cell.row-cell.row)==1) or\
+			(abs(character.cell.row-cell.row)==0 and abs(character.cell.col-cell.col)==1) 
+
+func dirn_to_character(character) -> int:
+	if character.cell.col-cell.col<0:
+		return Constants.DIRN_TYPE.RIGHT
+	elif character.cell.col-cell.col>0:
+		return Constants.DIRN_TYPE.LEFT
+	elif character.cell.row-cell.row<0:
+		return Constants.DIRN_TYPE.DOWN
+	elif character.cell.row-cell.row>0:
+		return Constants.DIRN_TYPE.UP
+
+	return -1
+
+func is_opposite_team(entity):
+	return team != entity.team

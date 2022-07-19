@@ -70,15 +70,41 @@ func show():
 		floorObject.hide()
 		entityObject.show()
 
+	# color
+	floorObject.modulate = Dungeon.battleInstance.showFloorColor
+	if entityObject!=null:
+		if is_entity_type(Constants.ENTITY_TYPE.STATIC):
+			entityObject.modulate = Dungeon.battleInstance.showWallColor
+
 func hide():
 	floorObject.hide()
 	if entityObject!=null:
 		entityObject.hide()
 
 func dim():
-	floorObject.hide()
+	floorObject.show()
 	if entityObject!=null:
+		floorObject.hide()
 		entityObject.hide()
+		
+	# color
+	floorObject.modulate = Dungeon.battleInstance.dimFloorColor
+	if entityObject!=null:
+		if is_entity_type(Constants.ENTITY_TYPE.STATIC):
+			entityObject.show()
+			entityObject.modulate = Dungeon.battleInstance.dimWallColor
+
+func showDebug(colorVal):
+	floorObject.show()
+	if entityObject!=null:
+		floorObject.hide()
+		entityObject.show()
+		
+	# color
+	floorObject.modulate = colorVal
+	if entityObject!=null:
+		if is_entity_type(Constants.ENTITY_TYPE.STATIC):
+			entityObject.modulate = colorVal
 
 # HELPERS
 func is_edge_of_room():
@@ -125,3 +151,6 @@ func is_x_identical(cell):
 
 func is_y_identical(cell):
 	return abs(pos.y - cell.pos.y) == 0
+
+func is_empty():
+	return is_cell_type(Constants.CELL_TYPE.FLOOR) && !has_entity()

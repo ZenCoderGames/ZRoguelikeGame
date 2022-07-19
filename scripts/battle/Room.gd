@@ -6,17 +6,26 @@ const Dwarf := preload("res://entity/Dwarf.tscn")
 const Cell = preload("res://scripts/battle/Cell.gd")
 var cells:Array = []
 
-# wall references
+# Wall references
 var wallCellsTop:Array = []
 var wallCellsRight:Array = []
 var wallCellsBot:Array = []
 var wallCellsLeft:Array = []
 
-# connections
+# Connections
 var leftConnection = null
 var rightConnection = null
 var topConnection = null
 var botConnection = null
+var connections:Array = []
+
+# Path
+var isStartRoom:bool
+var isCriticalPathRoom:bool
+var isEndRoom:bool
+
+# Enemies
+var enemies:Array = []
 
 var maxRows:int
 var maxCols:int
@@ -27,7 +36,6 @@ var loadedScenes:Array = []
 
 var wasRoomVisited:bool = false
 
-var player = null
 var roomId:int = -1
 
 func _init(id, mR, mC, sX, sY):
@@ -75,26 +83,38 @@ func _create_wall(r, c):
 	var wall = Utils.create_scene(loadedScenes, "wall", Wall, Constants.room_floor, cell)
 	cell.init_entity(wall, Constants.ENTITY_TYPE.STATIC)
 		
-func _init_enemies():
-	var cell =  get_cell(3, 3)
-	var dwarf1:Node = Utils.create_scene(loadedScenes, "dwarf", Dwarf, Constants.enemies, cell)
-	cell.init_entity(dwarf1, Constants.ENTITY_TYPE.DYNAMIC)
-	dwarf1.init(cell, 100, 10)
+func generate_enemies(totalEnemiesToSpawn):
+	for i in totalEnemiesToSpawn:
+		spawnEnemy()
+
+func spawnEnemy():
+	# find free cells
+	var freeCells:Array = []
+	for cell in cells:
+		if cell.is_empty() and !cell.is_edge_of_room():
+			freeCells.append(cell)
 	
-	cell =  get_cell(9, 9)
-	var dwarf2:Node = Utils.create_scene(loadedScenes, "dwarf", Dwarf, Constants.enemies, cell)
-	cell.init_entity(dwarf2, Constants.ENTITY_TYPE.DYNAMIC)
-	dwarf2.init(cell, 100, 10)
+	# choose random free cell
+	var randomCell = freeCells[randi() % freeCells.size()]
+	var dwarf:Node = Utils.create_scene(loadedScenes, "dwarf", Dwarf, Constants.enemies, randomCell)
+	randomCell.init_entity(dwarf, Constants.ENTITY_TYPE.DYNAMIC)
+	dwarf.init(30, 10, Constants.TEAM.ENEMY)
+	dwarf.move_to_cell(randomCell)
+	enemies.append(dwarf)
 
 func register_cell_connection(myCell):
 	if myCell.is_top_edge():
 		topConnection = myCell
+		connections.append(topConnection)
 	if myCell.is_bot_edge():
 		botConnection = myCell
+		connections.append(botConnection)
 	if myCell.is_left_edge():
 		leftConnection = myCell
+		connections.append(leftConnection)
 	if myCell.is_right_edge():
 		rightConnection = myCell
+		connections.append(rightConnection)
 
 func clean_up_loaded_scene(sceneToCleanUp):
 	loadedScenes.erase(sceneToCleanUp)
@@ -106,18 +126,32 @@ func clean_up():
 	loadedScenes.clear()
 	cells.clear()
 
-func update():
-	var isPlayerCurrent:bool = Dungeon.player.is_in_room(self)
-	var isPlayerPrevious:bool = Dungeon.player.is_prev_room(self)
-	if isPlayerCurrent:
-		_show()
-		wasRoomVisited = true
-	elif isPlayerPrevious:
-		_show()
-	elif wasRoomVisited:
-		_dim()
-	else:
-		_hide()
+func update_visibility():
+	# VISIBILITY
+	if Dungeon.battleInstance.debugShowAllRooms:
+		if isStartRoom:
+			_show_debug(Dungeon.battleInstance.debugStartRoomColor)
+		elif isEndRoom:
+			_show_debug(Dungeon.battleInstance.debugEndRoomColor)
+		elif isCriticalPathRoom:
+			_show_debug(Dungeon.battleInstance.debugCriticalPathRoomColor)
+	else:	
+		var isPlayerCurrent:bool = Dungeon.player.is_in_room(self)
+		var isPlayerPrevious:bool = Dungeon.player.is_prev_room(self)
+		if isPlayerCurrent:
+			_show()
+			wasRoomVisited = true
+		elif isPlayerPrevious:
+			_dim()
+		elif wasRoomVisited:
+			_dim()
+		else:
+			_hide()
+	
+func update_entities():
+	# ENEMIES
+	for enemy in enemies:
+		enemy.update()
 
 # VISIBILITY
 func _show():
@@ -132,16 +166,25 @@ func _hide():
 	for cell in cells:
 		cell.hide()
 
+func _show_debug(colorVal):
+	for cell in cells:
+		cell.showDebug(colorVal)
+
 # ENTITY
 func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 	# within bounds of room
 	if newC>=0 and newR>=0 and newC<maxCols and newR<maxRows:
 		var cell = get_cell(newR, newC)
+		# empty cell
 		if(!cell.has_entity()):
+			currentCell.clear_entity()
 			cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
 			entity.move_to_cell(cell)
-			currentCell.clear_entity()
 			return true
+		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
+			if entity.is_opposite_team(cell.entityObject):
+				entity.attack(cell.entityObject)
+				return true
 	# out of bounds of room
 	else:
 		# if there is a connection, move to the connected cell
@@ -152,6 +195,9 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			return true
 	
 	return false
+
+func enemy_died(entity):
+	enemies.remove(enemies.find(entity))
 
 # HELPERS
 func get_cell(r:int, c:int):

@@ -15,7 +15,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
 		y = 1
 
-	if Dungeon.player != null:
+	if Dungeon.player != null and !(x==0 and y==0):
 		Dungeon.player.move(x, y)
 
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):

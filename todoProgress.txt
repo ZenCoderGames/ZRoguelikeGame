@@ -1,0 +1,34 @@
+
+Roguelike Dev:
+
+(D)- Debug Camera controls
+(D)- Multiple dungeons
+(D)- Room connections
+(D)- Move camera with player
+
+(D)- Camera starting at player
+(D)- Color and Dim rooms
+(D)- Dungeon start and end and critical path
+(D)- Enemies
+(D)- Bumps
+(D)- Turns and Enemy Movement
+(D)- Basic Combat
+(D)- Enemy attacking player broken on repeated attacks
+(D)- Directionality of damage numbers
+(D)- Health ui
+
+- Death
+
+- Djisktra
+
+- Game Feel stuff
+
+- Better enemy composition across dungeon (use total pool) 
+
+- Floors
+
+- Random walls in rooms
+- Better FOV (http://www.roguebasin.com/index.php/Quick_and_dirty_FOV/LOS)
+
+- Inventory/Items
+- More enemies
