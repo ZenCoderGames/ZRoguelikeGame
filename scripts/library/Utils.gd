@@ -22,5 +22,5 @@ func create_tween_vector2(node, fieldName, startPose, endPose, duration, transTy
 	tween.interpolate_property(
 		node, fieldName, 
 		startPose, endPose, duration,
-		Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+		transType, easeType)
 	tween.start()

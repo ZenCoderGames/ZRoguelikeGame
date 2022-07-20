@@ -9,12 +9,15 @@ var maxHealth: int = 0
 var damage: int = 0
 var team: int = 0
 var cell
+var isDead:bool = false
 
 var currentRoom = null
 var prevRoom = null
 
 signal OnCharacterMove(x, y)
+signal OnCharacterRoomChanged(newRoom)
 signal OnHealthChanged(characterName, newVal, maxHealth)
+signal OnDeath()
 
 var originalColor:Color
 
@@ -46,6 +49,7 @@ func move_to_cell(newCell):
 	self.position = Vector2(cell.pos.x, cell.pos.y)
 	if currentRoom != cell.room:
 		prevRoom = currentRoom
+		emit_signal("OnCharacterRoomChanged", cell.room)
 	currentRoom = cell.room
 
 # COMBAT
@@ -59,16 +63,23 @@ func take_damage(entity, dmg):
 	if health<=0:
 		Dungeon.emit_signal("OnKill", entity, self)
 		die()
+		emit_signal("OnHealthChanged", characterName, 0, maxHealth)
+		emit_signal("OnDeath")
 	else:
 		show_hit(entity, dmg)
 		Dungeon.emit_signal("OnAttack", entity, self, dmg)
 		emit_signal("OnHealthChanged", characterName, health, maxHealth)
 
 func die():
+	isDead = true
 	cell.room.enemy_died(self)
-	cell.unload_entity()
+	cell.entityObject.hide()
+	cell.clear_entity()
 
 func show_hit(entity, dmg):
+	if entity.isDead:
+		return
+	
 	if team==Constants.TEAM.PLAYER:
 		yield(get_tree().create_timer(0.25), "timeout")
 	
@@ -81,13 +92,15 @@ func show_hit_flash():
 	self.self_modulate = originalColor
 	
 func show_damage_text(entity, dmg):
+	if entity==null:
+		return
+		
 	damageText.visible = true
 	damageText.text = str(dmg)
 
 	var startPos:Vector2 = Vector2(0,-30)
 	var endPos:Vector2 = Vector2(10,-60)
 	var dirn:int = dirn_to_character(entity)
-	print(dirn)
 	if dirn==Constants.DIRN_TYPE.RIGHT:
 		startPos = Vector2(0, -5)
 		endPos = Vector2(20, -3)

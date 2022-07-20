@@ -32,6 +32,8 @@ func create() -> void:
 	_init_player()
 
 func _init_rooms():
+	rooms = []
+	
 	# Dungeon Size
 	var numRooms := 9
 	var roomMinRows := 8

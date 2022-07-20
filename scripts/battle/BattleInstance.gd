@@ -17,6 +17,7 @@ export var debugCriticalPathRoomColor:Color
 export var debugEndRoomColor:Color
 
 signal OnDungeonInitialized()
+signal OnDungeonRecreated()
 
 func _init():
 	Dungeon.init(self)
@@ -33,3 +34,4 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_RESET_DUNGEON):
 		Dungeon.clean_up()
 		Dungeon.create()
+		emit_signal("OnDungeonRecreated")

@@ -105,3 +105,35 @@ margin_right = 290.0
 margin_bottom = 58.0
 theme = ExtResource( 1 )
 text = "Enemy Health: 100"
+
+[node name="DeathUI" type="Control" parent="."]
+margin_top = 161.0
+margin_right = 801.0
+margin_bottom = 503.0
+
+[node name="Panel" type="Panel" parent="DeathUI"]
+self_modulate = Color( 0.180392, 0.141176, 0.141176, 1 )
+margin_left = -1.0
+margin_right = 798.0
+margin_bottom = 302.0
+
+[node name="Label" type="Label" parent="DeathUI/Panel"]
+margin_left = 131.0
+margin_top = -9.0
+margin_right = 387.0
+margin_bottom = 90.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 1 )
+text = "YOU DIED!"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="DeathUI/Panel"]
+margin_left = 237.0
+margin_top = 202.0
+margin_right = 537.0
+margin_bottom = 301.0
+theme = ExtResource( 1 )
+text = "Press 'R' to restart"
+align = 1
+valign = 1

@@ -11,11 +11,12 @@ func _ready():
 	
 func _register_player(playerRef):
 	player = playerRef
-	player.connect("OnCharacterMove", self, "_update_camera")
+	player.connect("OnCharacterRoomChanged", self, "_update_camera")
 	self.position = player.cell.pos
+	_update_camera(player.cell.room)
 
-func _update_camera(x:int, y:int):
-	self.position = player.cell.pos
+func _update_camera(newRoom):
+	Utils.create_tween_vector2(self, "position", self.position, newRoom.get_center(), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 # DEBUG
 func _process(delta):

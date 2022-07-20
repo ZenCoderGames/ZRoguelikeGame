@@ -2,7 +2,28 @@
 
 extends Node
 
+var player
+var disableInput:bool = true
+
+func _ready():
+	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
+	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_init")
+	
+func _register_player(playerRef):
+	player = playerRef
+	player.connect("OnDeath", self, "_on_player_death")
+
+func _on_dungeon_init():
+	disableInput = false
+
+func _on_player_death():
+	disableInput = true
+
 func _unhandled_input(event: InputEvent) -> void:
+	if disableInput:
+		return
+		
 	var x:int = 0
 	var y:int = 0
 	
@@ -15,8 +36,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
 		y = 1
 
-	if Dungeon.player != null and !(x==0 and y==0):
-		Dungeon.player.move(x, y)
+	if player != null and !(x==0 and y==0):
+		player.move(x, y)
 
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		get_tree().quit()
