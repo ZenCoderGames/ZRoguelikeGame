@@ -98,7 +98,7 @@ func spawnEnemy():
 	var randomCell = freeCells[randi() % freeCells.size()]
 	var dwarf:Node = Utils.create_scene(loadedScenes, "dwarf", Dwarf, Constants.enemies, randomCell)
 	randomCell.init_entity(dwarf, Constants.ENTITY_TYPE.DYNAMIC)
-	dwarf.init(30, 10, Constants.TEAM.ENEMY)
+	dwarf.init(20, 2, Constants.TEAM.ENEMY)
 	dwarf.move_to_cell(randomCell)
 	enemies.append(dwarf)
 

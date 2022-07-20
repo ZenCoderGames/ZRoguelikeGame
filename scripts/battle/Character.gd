@@ -98,9 +98,18 @@ func show_damage_text(entity, dmg):
 	damageText.visible = true
 	damageText.text = str(dmg)
 
+	var dirn:int = dirn_to_character(entity)
+	if dirn==Constants.DIRN_TYPE.RIGHT:
+		Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+	elif dirn==Constants.DIRN_TYPE.LEFT:
+		Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+	elif dirn==Constants.DIRN_TYPE.UP:
+		Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+	elif dirn==Constants.DIRN_TYPE.DOWN:
+		Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+
 	var startPos:Vector2 = Vector2(0,-30)
 	var endPos:Vector2 = Vector2(10,-60)
-	var dirn:int = dirn_to_character(entity)
 	if dirn==Constants.DIRN_TYPE.RIGHT:
 		startPos = Vector2(0, -5)
 		endPos = Vector2(20, -3)
@@ -113,11 +122,10 @@ func show_damage_text(entity, dmg):
 	elif dirn==Constants.DIRN_TYPE.DOWN:
 		startPos = Vector2(0, 0)
 		endPos = Vector2(10, 20)
-
 	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	yield(get_tree().create_timer(0.5), "timeout")
 	damageText.visible = false
-
+	
 # HELPERS
 func is_in_room(room):
 	return currentRoom == room

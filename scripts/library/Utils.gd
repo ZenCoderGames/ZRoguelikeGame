@@ -24,3 +24,22 @@ func create_tween_vector2(node, fieldName, startPose, endPose, duration, transTy
 		startPose, endPose, duration,
 		transType, easeType)
 	tween.start()
+
+func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, transType, easeType):
+	var tween = Tween.new()
+	add_child(tween)
+	tween.interpolate_property(
+		node, fieldName, 
+		startPose, endPose, duration,
+		transType, easeType)
+	tween.start()
+
+	yield(get_tree().create_timer(duration), "timeout")
+
+	var return_tween = Tween.new()
+	add_child(return_tween)
+	return_tween.interpolate_property(
+		node, fieldName, 
+		endPose, startPose, duration,
+		transType, easeType)
+	return_tween.start()

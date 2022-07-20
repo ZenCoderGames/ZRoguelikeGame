@@ -204,7 +204,7 @@ func _init_enemies():
 func _init_player():
 	var cell = rooms[0].get_safe_starting_cell()
 	player = Utils.create_scene(loadedScenes, "player", Player, Constants.pc, cell)
-	player.init(100, 10, Constants.TEAM.PLAYER)
+	player.init(30, 5, Constants.TEAM.PLAYER)
 	player.move_to_cell(cell)
 	emit_signal("OnPlayerCreated", player)
 	_on_turn_taken(0, 0)

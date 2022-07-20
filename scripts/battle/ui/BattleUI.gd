@@ -45,7 +45,10 @@ func _on_attack(attacker, defender, damage):
 		defender.connect("OnHealthChanged", self, "_on_enemy_health_changed")
 		registeredEnemies[defender] = true
 	
-	_on_enemy_health_changed(defender.characterName, defender.health, defender.maxHealth)
+	if defender.team==Constants.TEAM.ENEMY:
+		_on_enemy_health_changed(defender.characterName, defender.health, defender.maxHealth)
+	else:
+		_on_enemy_health_changed(attacker.characterName, attacker.health, attacker.maxHealth)
 	#yield(get_tree().create_timer(10), "timeout")
 	#detailsUI.visible = false
 	#enemyHealthUI.visible = false

@@ -16,15 +16,21 @@ Roguelike Dev:
 (D)- Enemy attacking player broken on repeated attacks
 (D)- Directionality of damage numbers
 (D)- Health ui
+(D)- Player Death
 
-- Player Death
 - Enemy nearby UI recognition
+- History of actions
+- Component system
+- Djisktra or A*
+- Better ways of defining enemies
+- Better enemy composition across dungeon (use total pool) 
 
-- Djisktra
+- RPG Stats
+- Items and Inventory
+
+- Ranged scrolls and targeting
 
 - Game Feel stuff
-
-- Better enemy composition across dungeon (use total pool) 
 
 - Floors
 

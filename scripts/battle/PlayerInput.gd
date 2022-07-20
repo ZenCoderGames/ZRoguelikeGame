@@ -21,6 +21,9 @@ func _on_player_death():
 	disableInput = true
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
+		get_tree().quit()
+
 	if disableInput:
 		return
 		
@@ -38,6 +41,3 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if player != null and !(x==0 and y==0):
 		player.move(x, y)
-
-	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
-		get_tree().quit()
