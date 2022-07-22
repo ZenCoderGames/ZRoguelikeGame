@@ -157,17 +157,19 @@ func _init_path():
 	startRoom.isStartRoom = true
 	costFromStart[startRoom] = 0
 	roomsToVisit.append(startRoom)
+	visitedRooms[startRoom] = true
 	# do path calculations
 	while roomsToVisit.size()>0:
 		var room = roomsToVisit[0]
 		for connection in room.connections:
 			var connectedRoom = connection.connectedCell.room
+			if visitedRooms.has(connectedRoom):
+				continue
+			roomsToVisit.append(connectedRoom)
+			visitedRooms[connectedRoom] = true
 			var pathCost = costFromStart[room]+1
-			if !visitedRooms.has(connectedRoom) or\
-				pathCost<costFromStart[connectedRoom]:
+			if !costFromStart.has(connectedRoom) or pathCost<costFromStart[connectedRoom]:
 				costFromStart[connectedRoom] = pathCost
-				roomsToVisit.append(connectedRoom)
-		visitedRooms[room] = true
 		roomsToVisit.remove(0)
 	# find the furthest room
 	var furthestCost:int = 0
@@ -211,6 +213,8 @@ func _init_player():
 	player.connect("OnCharacterMove", self, "_on_turn_taken") 
 
 func _on_turn_taken(x, y):
+	player.update()
+
 	turnsTaken += 1
 	emit_signal("OnTurnCompleted")
 

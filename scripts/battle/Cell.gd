@@ -21,6 +21,7 @@ func _init(roomRef, r:int, c:int):
 # CELL TYPE
 func init_cell(obj, cellTypeEnum:int):
 	floorObject = obj
+	floorObject.get_child(0).text = ""
 	set_cell_type(cellTypeEnum)
 
 func set_cell_type(newCellType:int):
@@ -28,6 +29,10 @@ func set_cell_type(newCellType:int):
 
 func is_cell_type(type:int):
 	return cellType == type
+	
+func show_debug_path_cell(cost):
+	floorObject.get_child(0).visible = true
+	floorObject.get_child(0).text = str(cost)
 	
 # ENTITY TYPE
 func init_entity(obj, type:int):
@@ -107,6 +112,9 @@ func showDebug(colorVal):
 			entityObject.modulate = colorVal
 
 # HELPERS
+func is_obstacle():
+	return entityType == Constants.ENTITY_TYPE.STATIC
+
 func is_edge_of_room():
 	return row==0 || col==0 || row==room.maxRows-1 || col==room.maxCols-1
 
@@ -154,3 +162,6 @@ func is_y_identical(cell):
 
 func is_empty():
 	return is_cell_type(Constants.CELL_TYPE.FLOOR) && !has_entity()
+
+func highlight(color):
+	floorObject.self_modulate = color

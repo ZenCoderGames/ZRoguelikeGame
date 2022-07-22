@@ -62,7 +62,6 @@ func populate():
 		cells[i].init_cell(floorObj, Constants.CELL_TYPE.FLOOR)
 
 	_init_walls()
-	#_init_enemies()
 
 func _init_walls():
 	# Room Walls
@@ -199,6 +198,67 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 
 func enemy_died(entity):
 	enemies.remove(enemies.find(entity))
+
+# DJIKSTRA MAP
+var shortestNodeToStart = {}
+var visitedCells = {}
+func update_path_map():
+	# reset variables
+	var playerCell = Dungeon.player.cell
+	visitedCells = {}
+	var cellsToVisit = []
+	var costFromStart = {}
+	shortestNodeToStart = {}
+	# start with first room
+	costFromStart[playerCell] = 0
+	cellsToVisit.append(playerCell)		
+	visitedCells[playerCell] = true
+	# do path calculations
+	while cellsToVisit.size()>0:
+		var currentCell = cellsToVisit[0]
+		var neighbors:Array = _find_valid_neighboring_cells(currentCell)
+		for cell in neighbors:
+			if visitedCells.has(cell):
+				continue
+
+			var pathCost = costFromStart[currentCell]+1
+			cellsToVisit.append(cell)
+			visitedCells[cell] = true
+			if !costFromStart.has(cell) or pathCost<costFromStart[cell]:
+				costFromStart[cell] = pathCost
+				shortestNodeToStart[cell] = currentCell
+		cellsToVisit.remove(0)
+
+	# DEBUG DRAW
+	var showDebug:bool = false
+	if showDebug:
+		for cell in cells:
+			if costFromStart.has(cell):
+				cell.show_debug_path_cell(costFromStart[cell])
+
+func _find_valid_neighboring_cells(cell):
+	var validNeighborCells:Array = []
+	var validCells:Array = []
+	if cell.row+1<maxRows:
+		validCells.append(get_cell(cell.row+1, cell.col))
+	if cell.row-1>=0:
+		validCells.append(get_cell(cell.row-1, cell.col))
+	if cell.col+1>=0:
+		validCells.append(get_cell(cell.row, cell.col+1))
+	if cell.col-1>=0:
+		validCells.append(get_cell(cell.row, cell.col-1))
+
+	for validCell in validCells:
+		if validCell!=null and !validCell.is_obstacle() and validCell.room == cell.room:
+			validNeighborCells.append(validCell)
+
+	return validNeighborCells
+
+func find_next_best_path_cell(currentCell)->Cell:
+	if shortestNodeToStart.has(currentCell):
+		return shortestNodeToStart[currentCell]
+
+	return null
 
 # HELPERS
 func get_cell(r:int, c:int):

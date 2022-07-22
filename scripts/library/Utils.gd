@@ -1,7 +1,5 @@
 extends Node
 
-class_name Cell
-
 # DUNGEON
 func create_scene(container:Array, name : String, prefab: PackedScene, group: String, cell:Object,
 	x_offset: int = 0, y_offset: int = 0):

@@ -22,20 +22,32 @@ Roguelike Dev:
 - History of actions
 - Component system
 - Djisktra or A*
-- Better ways of defining enemies
+- Better ways of defining enemies (+1 more enemy type)
 - Better enemy composition across dungeon (use total pool) 
+- Game Feel stuff (damage number randomness, bounce on movement, death effects, death corpse, hit effect)
+- FOV around entrance of room
+- Walls in rooms
 
 - RPG Stats
 - Items and Inventory
 
 - Ranged scrolls and targeting
 
-- Game Feel stuff
-
 - Floors
 
-- Random walls in rooms
-- Better FOV (http://www.roguebasin.com/index.php/Quick_and_dirty_FOV/LOS)
+-------------------------
 
-- Inventory/Items
-- More enemies
+- fov at entrance of rooms
+- lower fov in trap rooms
+- identify scroll
+- random spawner instead of already spawned enemy
+- show end room
+- cursed items
+- leveling up
+- armor
+
+----------------
+
+- real power fantasy
+- ceremony for big moments
+- tools are powerful but have limitations

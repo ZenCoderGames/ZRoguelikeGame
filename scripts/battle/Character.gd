@@ -54,7 +54,6 @@ func move_to_cell(newCell):
 
 # COMBAT
 func attack(entity):
-	print("attack:", self.characterName, "->", entity.characterName)
 	if entity.is_class(self.get_class()):
 		entity.take_damage(self, damage)
 
@@ -126,6 +125,9 @@ func show_damage_text(entity, dmg):
 	yield(get_tree().create_timer(0.5), "timeout")
 	damageText.visible = false
 	
+func update():
+	pass
+
 # HELPERS
 func is_in_room(room):
 	return currentRoom == room
