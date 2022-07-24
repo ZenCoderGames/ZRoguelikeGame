@@ -243,8 +243,6 @@ func _on_turn_taken(x, y):
 		
 	player.cell.room.update_entities()
 
-	Dungeon.turnLocked = false
-
 func clean_up():
 	for loadedScene in loadedScenes:
 		loadedScene.queue_free()
@@ -291,3 +289,6 @@ func load_character(parentContainer, cell, characterData, entityType, groupName,
 	charObject.init(characterData, team)
 	charObject.move_to_cell(cell)
 	return charObject
+
+func create_delay(timeToDelay):
+	yield(battleInstance.get_tree().create_timer(timeToDelay), "timeout")  

@@ -4,7 +4,7 @@
 			"id": "PLAYER",
 			"displayName": "You",
 			"path": "entity/Player.tscn",
-			"health": 30,
+			"health": 50,
 			"damage": 2
 		},
 		{

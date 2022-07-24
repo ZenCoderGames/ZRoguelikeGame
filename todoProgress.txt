@@ -17,16 +17,15 @@ Roguelike Dev:
 (D)- Directionality of damage numbers
 (D)- Health ui
 (D)- Player Death
+(D)- Djisktra or A*
 
-- Enemy nearby UI recognition
-- History of actions
+(D)- Better ways of defining enemies (+1 more enemy type)
+- Typed pass
 - Component system
-- Djisktra or A*
-- Better ways of defining enemies (+1 more enemy type)
 - Better enemy composition across dungeon (use total pool) 
-- Game Feel stuff (damage number randomness, bounce on movement, death effects, death corpse, hit effect)
-- FOV around entrance of room
+- Game Feel (death, better damage number font)
 - Walls in rooms
+- History of actions
 
 - RPG Stats
 - Items and Inventory

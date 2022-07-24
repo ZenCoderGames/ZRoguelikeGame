@@ -81,8 +81,8 @@ func show_hit(entity, dmg):
 	if entity.isDead:
 		return
 	
-	if team==Constants.TEAM.PLAYER:
-		yield(get_tree().create_timer(0.25), "timeout")
+	#if team==Constants.TEAM.PLAYER:
+	#	yield(get_tree().create_timer(0.25), "timeout")
 	
 	show_hit_flash()
 	show_damage_text(entity, dmg)

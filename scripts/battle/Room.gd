@@ -153,7 +153,10 @@ func update_visibility():
 func update_entities():
 	# ENEMIES
 	for enemy in enemies:
+		yield(Dungeon.battleInstance.get_tree().create_timer(Dungeon.battleInstance.timeBetweenMoves), "timeout")
 		enemy.update()
+
+	Dungeon.turnLocked = false
 
 # VISIBILITY
 func _show():

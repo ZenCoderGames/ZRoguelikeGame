@@ -6,6 +6,7 @@ export var dimWallColor:Color
 export var dimFloorColor:Color
 export var playerDamageColor:Color
 export var enemyDamageColor:Color
+export var timeBetweenMoves:float
 
 # DEBUG
 export var pauseAIMovement:bool
