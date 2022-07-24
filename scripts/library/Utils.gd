@@ -41,3 +41,15 @@ func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, 
 		endPose, startPose, duration,
 		transType, easeType)
 	return_tween.start()
+
+func load_data_from_file(relativePath) -> JSON:
+	var data_file = File.new()
+	if data_file.open(str("res://",relativePath), File.READ) != OK:
+		return null
+	var data_text = data_file.get_as_text()
+	data_file.close()
+	var data_parse = JSON.parse(data_text)
+	if data_parse.error != OK:
+		return null
+	return data_parse.result
+	#$Label.text = data["1"].name

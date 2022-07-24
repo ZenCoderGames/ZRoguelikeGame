@@ -1,9 +1,9 @@
 # Character.gd
 extends Node
 
-export(String) var characterName
 onready var damageText:Label = get_node("DamageText")
 
+var displayName: String = ""
 var health: int = 0
 var maxHealth: int = 0
 var damage: int = 0
@@ -16,15 +16,16 @@ var prevRoom = null
 
 signal OnCharacterMove(x, y)
 signal OnCharacterRoomChanged(newRoom)
-signal OnHealthChanged(characterName, newVal, maxHealth)
+signal OnHealthChanged(displayName, newVal, maxHealth)
 signal OnDeath()
 
 var originalColor:Color
 
-func init(hlth, dmg, teamVal):
-	health = hlth
-	maxHealth = hlth
-	damage = dmg
+func init(charData, teamVal):
+	displayName = charData.displayName
+	health = charData.health
+	maxHealth = charData.health
+	damage = charData.damage
 	team = teamVal
 	originalColor = self.self_modulate
 	if team==Constants.TEAM.ENEMY:
@@ -62,17 +63,18 @@ func take_damage(entity, dmg):
 	if health<=0:
 		Dungeon.emit_signal("OnKill", entity, self)
 		die()
-		emit_signal("OnHealthChanged", characterName, 0, maxHealth)
+		emit_signal("OnHealthChanged", displayName, 0, maxHealth)
 		emit_signal("OnDeath")
 	else:
 		show_hit(entity, dmg)
 		Dungeon.emit_signal("OnAttack", entity, self, dmg)
-		emit_signal("OnHealthChanged", characterName, health, maxHealth)
+		emit_signal("OnHealthChanged", displayName, health, maxHealth)
 
 func die():
 	isDead = true
 	cell.room.enemy_died(self)
-	cell.entityObject.hide()
+	if cell.entityObject!=null:
+		cell.entityObject.hide()
 	cell.clear_entity()
 
 func show_hit(entity, dmg):

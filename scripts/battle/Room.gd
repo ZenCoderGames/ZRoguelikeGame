@@ -1,3 +1,5 @@
+extends Node
+
 # Room.gd
 const Floor := preload("res://entity/Floor.tscn")
 const Wall := preload("res://entity/Wall.tscn")
@@ -95,11 +97,11 @@ func spawnEnemy():
 	
 	# choose random free cell
 	var randomCell = freeCells[randi() % freeCells.size()]
-	var dwarf:Node = Utils.create_scene(loadedScenes, "dwarf", Dwarf, Constants.enemies, randomCell)
-	randomCell.init_entity(dwarf, Constants.ENTITY_TYPE.DYNAMIC)
-	dwarf.init(20, 2, Constants.TEAM.ENEMY)
-	dwarf.move_to_cell(randomCell)
-	enemies.append(dwarf)
+
+	# spawn random enemy
+	var randomEnemyData = Dungeon.get_random_enemy_data()
+	var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
+	enemies.append(enemy)
 
 func register_cell_connection(myCell):
 	if myCell.is_top_edge():
@@ -201,13 +203,14 @@ func enemy_died(entity):
 
 # DJIKSTRA MAP
 var shortestNodeToStart = {}
+var costFromStart = {}
 var visitedCells = {}
 func update_path_map():
 	# reset variables
 	var playerCell = Dungeon.player.cell
 	visitedCells = {}
 	var cellsToVisit = []
-	var costFromStart = {}
+	costFromStart = {}
 	shortestNodeToStart = {}
 	# start with first room
 	costFromStart[playerCell] = 0
@@ -236,7 +239,7 @@ func update_path_map():
 			if costFromStart.has(cell):
 				cell.show_debug_path_cell(costFromStart[cell])
 
-func _find_valid_neighboring_cells(cell):
+func _find_valid_neighboring_cells(cell, onlyEmpty:bool = false):
 	var validNeighborCells:Array = []
 	var validCells:Array = []
 	if cell.row+1<maxRows:
@@ -250,13 +253,30 @@ func _find_valid_neighboring_cells(cell):
 
 	for validCell in validCells:
 		if validCell!=null and !validCell.is_obstacle() and validCell.room == cell.room:
-			validNeighborCells.append(validCell)
+			if !onlyEmpty or validCell.is_empty():
+				validNeighborCells.append(validCell)
 
 	return validNeighborCells
 
 func find_next_best_path_cell(currentCell)->Cell:
+	var neighbors:Array = _find_valid_neighboring_cells(currentCell, true)
+	if neighbors.size()>0:
+		var lowestCost:int = costFromStart[neighbors[0]]
+		var lowestNeighbor:Cell = neighbors[0]
+		for cell in neighbors:
+			if costFromStart[cell] < lowestCost:
+				lowestCost = costFromStart[cell]
+				lowestNeighbor = cell
+			# if the costs are the same, choose the closest to the player
+			elif costFromStart[cell] == lowestCost and\
+				Dungeon.player.cell.pos.distance_to(cell.pos)<Dungeon.player.cell.pos.distance_to(lowestNeighbor.pos):
+				lowestNeighbor = cell
+				
+		return lowestNeighbor
+
+	""" Alt method: Use Shortest Node Dict
 	if shortestNodeToStart.has(currentCell):
-		return shortestNodeToStart[currentCell]
+		return shortestNodeToStart[currentCell]"""
 
 	return null
 

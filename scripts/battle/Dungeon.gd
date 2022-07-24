@@ -4,6 +4,7 @@ extends Node2D
 
 const Player := preload("res://entity/Player.tscn")
 const Room := preload("res://scripts/battle/Room.gd")
+const CharacterData := preload("res://scripts/battle/data/CharacterData.gd")
 
 # signals
 signal OnPlayerCreated(newPlayer)
@@ -20,6 +21,11 @@ var turnsTaken:int = 0
 var loadedScenes:Array = []
 
 var battleInstance
+var playerData
+var characterDataDict = {}
+var enemyDataList = []
+
+var turnLocked:bool = false
 
 func init(battleInst):
 	battleInstance = battleInst
@@ -28,6 +34,7 @@ func create() -> void:
 	_init_rooms()
 	_init_connections()
 	_init_path()
+	_init_data()
 	_init_enemies()
 	_init_player()
 
@@ -195,7 +202,21 @@ func _init_path():
 		reverse_path.append(room)
 	reverse_path.append(startRoom)
 
+func _init_data():
+	var data = Utils.load_data_from_file("resource/characters.json")
+	var charDataJSList:Array = data["characters"]
+	for charDataJS in charDataJSList:
+		var newCharData = CharacterData.new(charDataJS)
+		characterDataDict[newCharData.id] = newCharData
+		if newCharData.id == "PLAYER":
+			playerData = newCharData
+		else:
+			enemyDataList.append(newCharData)
+
 func _init_enemies():
+	if battleInstance.dontSpawnEnemies:
+		return
+
 	startRoom.generate_enemies(1)
 	pass
 	for room in rooms:
@@ -205,14 +226,13 @@ func _init_enemies():
 
 func _init_player():
 	var cell = rooms[0].get_safe_starting_cell()
-	player = Utils.create_scene(loadedScenes, "player", Player, Constants.pc, cell)
-	player.init(30, 5, Constants.TEAM.PLAYER)
-	player.move_to_cell(cell)
+	player = load_character(loadedScenes, cell, playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
 	emit_signal("OnPlayerCreated", player)
 	_on_turn_taken(0, 0)
 	player.connect("OnCharacterMove", self, "_on_turn_taken") 
 
 func _on_turn_taken(x, y):
+	Dungeon.turnLocked = true
 	player.update()
 
 	turnsTaken += 1
@@ -222,6 +242,8 @@ func _on_turn_taken(x, y):
 		room.update_visibility()
 		
 	player.cell.room.update_entities()
+
+	Dungeon.turnLocked = false
 
 func clean_up():
 	for loadedScene in loadedScenes:
@@ -235,6 +257,9 @@ func clean_up():
 	rooms.clear()
 
 # HELPERS
+func get_random_enemy_data():
+	return enemyDataList[randi() % enemyDataList.size()]
+
 func is_intersecting_with_any_room(testRoom):
 	for room in rooms:
 		if is_intersecting_with_room(testRoom, room) or\
@@ -258,3 +283,11 @@ func is_intersecting_with_room_test(testRoom, room):
 		   room.is_point_inside(p3.x, p3.y, intersectionBuffer) or\
 		   room.is_point_inside(p4.x, p4.y, intersectionBuffer) or\
 		   room.is_point_inside(p5.x, p5.y, 0)
+
+func load_character(parentContainer, cell, characterData, entityType, groupName, team):
+	var charPrefab := load(str("res://", characterData.path))
+	var charObject = Utils.create_scene(parentContainer, characterData.displayName, charPrefab, groupName, cell)
+	cell.init_entity(charObject, entityType)
+	charObject.init(characterData, team)
+	charObject.move_to_cell(cell)
+	return charObject

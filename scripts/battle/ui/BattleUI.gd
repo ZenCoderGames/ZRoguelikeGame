@@ -31,7 +31,7 @@ func _on_dungeon_init():
 	Dungeon.player.connect("OnHealthChanged", self, "_on_player_health_changed")
 	Dungeon.player.connect("OnDeath", self, "_on_player_death")
 	
-	_on_player_health_changed(Dungeon.player.characterName, Dungeon.player.health, Dungeon.player.maxHealth)
+	_on_player_health_changed(Dungeon.player.displayName, Dungeon.player.health, Dungeon.player.maxHealth)
 	
 func _on_turn_taken():
 	turnLabel.text = str("Turns: ", Dungeon.turnsTaken)
@@ -39,16 +39,16 @@ func _on_turn_taken():
 func _on_attack(attacker, defender, damage):
 	#detailsUI.visible = true
 	enemyHealthUI.visible = true
-	detailsLabel.text = str(attacker.characterName, " attacked ", defender.characterName, " for ", damage, " damage")
+	detailsLabel.text = str(attacker.displayName, " attacked ", defender.displayName, " for ", damage, " damage")
 	
 	if defender.team==Constants.TEAM.ENEMY and !registeredEnemies.has(defender):
 		defender.connect("OnHealthChanged", self, "_on_enemy_health_changed")
 		registeredEnemies[defender] = true
 	
 	if defender.team==Constants.TEAM.ENEMY:
-		_on_enemy_health_changed(defender.characterName, defender.health, defender.maxHealth)
+		_on_enemy_health_changed(defender.displayName, defender.health, defender.maxHealth)
 	else:
-		_on_enemy_health_changed(attacker.characterName, attacker.health, attacker.maxHealth)
+		_on_enemy_health_changed(attacker.displayName, attacker.health, attacker.maxHealth)
 	#yield(get_tree().create_timer(10), "timeout")
 	#detailsUI.visible = false
 	#enemyHealthUI.visible = false
@@ -56,7 +56,7 @@ func _on_attack(attacker, defender, damage):
 	
 func _on_kill(attacker, defender):
 	detailsUI.visible = true
-	detailsLabel.text = str(attacker.characterName, " killed ", defender.characterName)
+	detailsLabel.text = str(attacker.displayName, " killed ", defender.displayName)
 	if defender.team==Constants.TEAM.ENEMY:
 		enemyHealthUI.visible = false
 	yield(get_tree().create_timer(1), "timeout")

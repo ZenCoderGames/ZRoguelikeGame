@@ -1,0 +1,25 @@
+{
+	"characters": [
+		{
+			"id": "PLAYER",
+			"displayName": "You",
+			"path": "entity/Player.tscn",
+			"health": 30,
+			"damage": 2
+		},
+		{
+			"id": "DWARF_00",
+			"displayName": "Dwarf",
+			"path": "entity/Dwarf.tscn",
+			"health": 10,
+			"damage": 2
+		},
+		{
+			"id": "GIANT_00",
+			"displayName": "Giant",
+			"path": "entity/Giant.tscn",
+			"health": 40,
+			"damage": 4
+		}
+	]
+}

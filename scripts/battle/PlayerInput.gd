@@ -26,6 +26,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if disableInput:
 		return
+
+	if Dungeon.turnLocked:
+		return
 		
 	var x:int = 0
 	var y:int = 0
