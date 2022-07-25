@@ -25,8 +25,6 @@ var playerData
 var characterDataDict = {}
 var enemyDataList = []
 
-var turnLocked:bool = false
-
 func init(battleInst):
 	battleInstance = battleInst
 
@@ -42,11 +40,11 @@ func _init_rooms():
 	rooms = []
 	
 	# Dungeon Size
-	var numRooms := 9
-	var roomMinRows := 8
-	var roomMaxRows := 16
-	var roomMinCols := 8
-	var roomMaxCols := 16
+	var numRooms := 10
+	var roomMinRows := 10
+	var roomMaxRows := 15
+	var roomMinCols := 10
+	var roomMaxCols := 15
 	
 	# Choose a leaning direction for less sprawled paths
 	var xDirn = 1 if randi() % 100 < 50 else -1
@@ -218,7 +216,7 @@ func _init_enemies():
 		return
 
 	startRoom.generate_enemies(1)
-	pass
+	
 	for room in rooms:
 		if !room.isStartRoom:
 			room.generate_enemies(randi() % 3 + 1)
@@ -232,7 +230,6 @@ func _init_player():
 	player.connect("OnCharacterMove", self, "_on_turn_taken") 
 
 func _on_turn_taken(x, y):
-	Dungeon.turnLocked = true
 	player.update()
 
 	turnsTaken += 1
@@ -240,7 +237,7 @@ func _on_turn_taken(x, y):
 
 	for room in rooms:
 		room.update_visibility()
-		
+
 	player.cell.room.update_entities()
 
 func clean_up():
@@ -253,6 +250,8 @@ func clean_up():
 	for room in rooms:
 		room.clean_up()
 	rooms.clear()
+	
+	turnsTaken = 0
 
 # HELPERS
 func get_random_enemy_data():

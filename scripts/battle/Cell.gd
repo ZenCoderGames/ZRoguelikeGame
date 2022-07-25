@@ -33,6 +33,9 @@ func is_cell_type(type:int):
 func show_debug_path_cell(cost):
 	floorObject.get_child(0).visible = true
 	floorObject.get_child(0).text = str(cost)
+
+func is_connection():
+	return is_cell_type(Constants.CELL_TYPE.CONNECTOR)
 	
 # ENTITY TYPE
 func init_entity(obj, type:int):
@@ -53,6 +56,12 @@ func clear_entity():
 	entityType = Constants.ENTITY_TYPE.NONE
 	floorObject.show()
 	entityObject = null
+
+func clear_entity_on_death():
+	clear_entity()
+	var deathNode = floorObject.get_node("Death")
+	deathNode.rotate(rand_range(0, 180))
+	deathNode.visible = true
 	
 func unload_entity():
 	room.clean_up_loaded_scene(entityObject)
@@ -117,6 +126,9 @@ func is_obstacle():
 
 func is_edge_of_room():
 	return row==0 || col==0 || row==room.maxRows-1 || col==room.maxCols-1
+
+func is_within_room_buffered(buffer:int):
+	return row>=buffer && col>=buffer && row<=room.maxRows-1-buffer && col==room.maxCols-1-buffer
 
 func is_left_edge():
 	return col==0

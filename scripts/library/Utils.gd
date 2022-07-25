@@ -53,3 +53,8 @@ func load_data_from_file(relativePath) -> JSON:
 		return null
 	return data_parse.result
 	#$Label.text = data["1"].name
+
+func do_hit_pause():
+	get_tree().paused = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	get_tree().paused = false

@@ -4,8 +4,8 @@
 			"id": "PLAYER",
 			"displayName": "You",
 			"path": "entity/Player.tscn",
-			"health": 50,
-			"damage": 2
+			"health": 30,
+			"damage": 6
 		},
 		{
 			"id": "DWARF_00",
@@ -18,8 +18,8 @@
 			"id": "GIANT_00",
 			"displayName": "Giant",
 			"path": "entity/Giant.tscn",
-			"health": 40,
-			"damage": 4
+			"health": 30,
+			"damage": 3
 		}
 	]
 }

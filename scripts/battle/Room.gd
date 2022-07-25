@@ -92,7 +92,7 @@ func spawnEnemy():
 	# find free cells
 	var freeCells:Array = []
 	for cell in cells:
-		if cell.is_empty() and !cell.is_edge_of_room():
+		if cell.is_empty() and cell.is_within_room_buffered(3):
 			freeCells.append(cell)
 	
 	# choose random free cell
@@ -151,12 +151,16 @@ func update_visibility():
 			_hide()
 	
 func update_entities():
+	if Dungeon.player.cell.is_connection():
+		return
+
+	if enemies.size()>0:
+		yield(Dungeon.battleInstance.get_tree().create_timer(Dungeon.battleInstance.timeBetweenMoves), "timeout")
+	
 	# ENEMIES
 	for enemy in enemies:
-		yield(Dungeon.battleInstance.get_tree().create_timer(Dungeon.battleInstance.timeBetweenMoves), "timeout")
-		enemy.update()
-
-	Dungeon.turnLocked = false
+		if !enemy.isDead:
+			enemy.update()
 
 # VISIBILITY
 func _show():

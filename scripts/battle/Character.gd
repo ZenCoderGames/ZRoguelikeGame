@@ -56,12 +56,27 @@ func move_to_cell(newCell):
 # COMBAT
 func attack(entity):
 	if entity.is_class(self.get_class()):
+		# shove towards
+		var dirn:int = dirn_to_character(entity)
+		if dirn==Constants.DIRN_TYPE.LEFT:
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(5, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+		elif dirn==Constants.DIRN_TYPE.RIGHT:
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-5, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+		elif dirn==Constants.DIRN_TYPE.DOWN:
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -5), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+		elif dirn==Constants.DIRN_TYPE.UP:
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 5), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+
+		yield(get_tree().create_timer(0.1), "timeout")
 		entity.take_damage(self, damage)
 
 func take_damage(entity, dmg):
 	health -= dmg
 	if health<=0:
+		isDead = true
 		Dungeon.emit_signal("OnKill", entity, self)
+		show_hit(entity, dmg)
+		yield(get_tree().create_timer(0.1), "timeout")
 		die()
 		emit_signal("OnHealthChanged", displayName, 0, maxHealth)
 		emit_signal("OnDeath")
@@ -71,21 +86,27 @@ func take_damage(entity, dmg):
 		emit_signal("OnHealthChanged", displayName, health, maxHealth)
 
 func die():
-	isDead = true
 	cell.room.enemy_died(self)
 	if cell.entityObject!=null:
 		cell.entityObject.hide()
-	cell.clear_entity()
+	cell.clear_entity_on_death()
 
 func show_hit(entity, dmg):
-	if entity.isDead:
-		return
-	
-	#if team==Constants.TEAM.PLAYER:
-	#	yield(get_tree().create_timer(0.25), "timeout")
+	# shove
+	if !isDead:
+		var dirn:int = dirn_to_character(entity)
+		if dirn==Constants.DIRN_TYPE.RIGHT:
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+		elif dirn==Constants.DIRN_TYPE.LEFT:
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+		elif dirn==Constants.DIRN_TYPE.UP:
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+		elif dirn==Constants.DIRN_TYPE.DOWN:
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 	
 	show_hit_flash()
 	show_damage_text(entity, dmg)
+	#Utils.do_hit_pause()
 
 func show_hit_flash():
 	self.self_modulate = Color.white
@@ -100,15 +121,7 @@ func show_damage_text(entity, dmg):
 	damageText.text = str(dmg)
 
 	var dirn:int = dirn_to_character(entity)
-	if dirn==Constants.DIRN_TYPE.RIGHT:
-		Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-	elif dirn==Constants.DIRN_TYPE.LEFT:
-		Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-	elif dirn==Constants.DIRN_TYPE.UP:
-		Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-	elif dirn==Constants.DIRN_TYPE.DOWN:
-		Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-
+	# damage text
 	var startPos:Vector2 = Vector2(0,-30)
 	var endPos:Vector2 = Vector2(10,-60)
 	if dirn==Constants.DIRN_TYPE.RIGHT:
@@ -124,7 +137,7 @@ func show_damage_text(entity, dmg):
 		startPos = Vector2(0, 0)
 		endPos = Vector2(10, 20)
 	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.35), "timeout")
 	damageText.visible = false
 	
 func update():
