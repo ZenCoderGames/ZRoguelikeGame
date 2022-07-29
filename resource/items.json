@@ -1,0 +1,31 @@
+{
+	"items": [
+		{
+			"id": "SWORD_00",
+			"name": "Basic Sword",
+			"description": "Just a simple sword",
+			"actions": [
+				{
+					"actionId": "MELEE_ATTACK",
+					"overrideParams": {
+						"damageBonus": 2
+					}
+				}
+			]
+		},
+		{
+			"id": "SWORD_01",
+			"name": "Heavy Sword",
+			"description": "A heavier more powerful sword",
+			"actions": [
+				{
+					"actionId": "MELEE_ATTACK",
+					"overrideParams": {
+						"staminaCost": 2,
+						"damageBonus": 5
+					}
+				}
+			]
+		}
+	]
+}

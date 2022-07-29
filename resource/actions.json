@@ -1,0 +1,27 @@
+{
+	"actions": [
+		{
+			"id": "MOVE",
+			"staminaCost": 1,
+			"type": "MOVEMENT",
+			"params": {
+				"numCells": 1
+			}
+		},
+		{
+			"id": "LEAP",
+			"staminaCost": 2,
+			"type": "MOVEMENT",
+			"params": {
+				"numCells": 2
+			}
+		},
+		{
+			"id": "MELEE_ATTACK",
+			"staminaCost": 1,
+			"type": "ATTACK",
+			"params": {
+			}
+		}
+	]
+}

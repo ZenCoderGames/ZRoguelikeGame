@@ -1,11 +1,10 @@
-extends Node
+class_name DungeonRoom
 
 # Room.gd
 const Floor := preload("res://entity/Floor.tscn")
 const Wall := preload("res://entity/Wall.tscn")
 const Dwarf := preload("res://entity/Dwarf.tscn")
 
-const Cell = preload("res://scripts/battle/Cell.gd")
 var cells:Array = []
 
 # Wall references
@@ -50,7 +49,7 @@ func _init(id, mR, mC, sX, sY):
 func initialize():
 	for r in maxRows:
 		for c in maxCols:
-			cells.append(Cell.new(self, r, c))
+			cells.append(DungeonCell.new(self, r, c))
 			
 	populate()
 
@@ -99,7 +98,7 @@ func spawnEnemy():
 	var randomCell = freeCells[randi() % freeCells.size()]
 
 	# spawn random enemy
-	var randomEnemyData = Dungeon.get_random_enemy_data()
+	var randomEnemyData = Dungeon.dataManager.get_random_enemy_data()
 	var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 	enemies.append(enemy)
 
@@ -265,11 +264,11 @@ func _find_valid_neighboring_cells(cell, onlyEmpty:bool = false):
 
 	return validNeighborCells
 
-func find_next_best_path_cell(currentCell)->Cell:
+func find_next_best_path_cell(currentCell)->DungeonCell:
 	var neighbors:Array = _find_valid_neighboring_cells(currentCell, true)
 	if neighbors.size()>0:
 		var lowestCost:int = costFromStart[neighbors[0]]
-		var lowestNeighbor:Cell = neighbors[0]
+		var lowestNeighbor:DungeonCell = neighbors[0]
 		for cell in neighbors:
 			if costFromStart[cell] < lowestCost:
 				lowestCost = costFromStart[cell]

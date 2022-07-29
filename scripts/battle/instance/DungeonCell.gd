@@ -1,4 +1,5 @@
-# Cell.gd
+class_name DungeonCell
+
 var cellType:int = Constants.CELL_TYPE.NONE
 var entityType:int = Constants.ENTITY_TYPE.NONE
 

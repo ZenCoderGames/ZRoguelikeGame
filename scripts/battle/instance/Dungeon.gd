@@ -3,8 +3,6 @@
 extends Node2D
 
 const Player := preload("res://entity/Player.tscn")
-const Room := preload("res://scripts/battle/Room.gd")
-const CharacterData := preload("res://scripts/battle/data/CharacterData.gd")
 
 # signals
 signal OnPlayerCreated(newPlayer)
@@ -21,9 +19,8 @@ var turnsTaken:int = 0
 var loadedScenes:Array = []
 
 var battleInstance
-var playerData
-var characterDataDict = {}
-var enemyDataList = []
+
+var dataManager:DungeonDataManager
 
 func init(battleInst):
 	battleInstance = battleInst
@@ -41,10 +38,10 @@ func _init_rooms():
 	
 	# Dungeon Size
 	var numRooms := 10
-	var roomMinRows := 10
-	var roomMaxRows := 15
-	var roomMinCols := 10
-	var roomMaxCols := 15
+	var roomMinRows := 9
+	var roomMaxRows := 14
+	var roomMinCols := 9
+	var roomMaxCols := 14
 	
 	# Choose a leaning direction for less sprawled paths
 	var xDirn = 1 if randi() % 100 < 50 else -1
@@ -60,7 +57,7 @@ func _init_rooms():
 		randomize()
 		var numR:int = roomMinRows + randi() % (roomMaxRows - roomMinRows + 1)
 		var numC:int = roomMinCols + randi() % (roomMaxCols - roomMinCols + 1)
-		var newRoom = Room.new(rooms.size(), numR, numC, 0, 0)
+		var newRoom = DungeonRoom.new(rooms.size(), numR, numC, 0, 0)
 		if rooms.size()>0:
 			# Choose a random room to start on
 			var startSpawnRoom = rooms[randi() % rooms.size()]
@@ -201,15 +198,7 @@ func _init_path():
 	reverse_path.append(startRoom)
 
 func _init_data():
-	var data = Utils.load_data_from_file("resource/characters.json")
-	var charDataJSList:Array = data["characters"]
-	for charDataJS in charDataJSList:
-		var newCharData = CharacterData.new(charDataJS)
-		characterDataDict[newCharData.id] = newCharData
-		if newCharData.id == "PLAYER":
-			playerData = newCharData
-		else:
-			enemyDataList.append(newCharData)
+	dataManager = DungeonDataManager.new()
 
 func _init_enemies():
 	if battleInstance.dontSpawnEnemies:
@@ -224,7 +213,7 @@ func _init_enemies():
 
 func _init_player():
 	var cell = rooms[0].get_safe_starting_cell()
-	player = load_character(loadedScenes, cell, playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
+	player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
 	emit_signal("OnPlayerCreated", player)
 	_on_turn_taken(0, 0)
 	player.connect("OnCharacterMove", self, "_on_turn_taken") 
@@ -254,9 +243,6 @@ func clean_up():
 	turnsTaken = 0
 
 # HELPERS
-func get_random_enemy_data():
-	return enemyDataList[randi() % enemyDataList.size()]
-
 func is_intersecting_with_any_room(testRoom):
 	for room in rooms:
 		if is_intersecting_with_room(testRoom, room) or\

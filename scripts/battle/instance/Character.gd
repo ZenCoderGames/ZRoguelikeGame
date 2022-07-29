@@ -8,6 +8,7 @@ var health: int = 0
 var maxHealth: int = 0
 var damage: int = 0
 var team: int = 0
+var stamina: int = 0
 var cell
 var isDead:bool = false
 
@@ -23,8 +24,9 @@ var originalColor:Color
 
 func init(charData, teamVal):
 	displayName = charData.displayName
-	health = charData.health
-	maxHealth = charData.health
+	health = charData.maxHealth
+	maxHealth = charData.maxHealth
+	stamina = charData.maxStamina
 	damage = charData.damage
 	team = teamVal
 	originalColor = self.self_modulate
@@ -67,7 +69,7 @@ func attack(entity):
 		elif dirn==Constants.DIRN_TYPE.UP:
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 5), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 
-		yield(get_tree().create_timer(0.1), "timeout")
+		yield(get_tree().create_timer(0.075), "timeout")
 		entity.take_damage(self, damage)
 
 func take_damage(entity, dmg):

@@ -4,21 +4,24 @@
 			"id": "PLAYER",
 			"displayName": "You",
 			"path": "entity/Player.tscn",
-			"health": 30,
+			"maxHealth": 30,
+			"maxStamina": 3,
 			"damage": 6
 		},
 		{
 			"id": "DWARF_00",
 			"displayName": "Dwarf",
 			"path": "entity/Dwarf.tscn",
-			"health": 10,
+			"maxHealth": 10,
+			"maxStamina": 1,
 			"damage": 2
 		},
 		{
 			"id": "GIANT_00",
 			"displayName": "Giant",
 			"path": "entity/Giant.tscn",
-			"health": 30,
+			"maxHealth": 30,
+			"maxStamina": 2,
 			"damage": 3
 		}
 	]

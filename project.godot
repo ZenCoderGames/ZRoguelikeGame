@@ -8,6 +8,58 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "ActionAttackData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionAttackData.gd"
+}, {
+"base": "Reference",
+"class": "ActionData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionData.gd"
+}, {
+"base": "Reference",
+"class": "ActionDataTypes",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionDataTypes.gd"
+}, {
+"base": "Reference",
+"class": "ActionMoveData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionMoveData.gd"
+}, {
+"base": "Reference",
+"class": "CharacterData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/CharacterData.gd"
+}, {
+"base": "Reference",
+"class": "DungeonCell",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/DungeonCell.gd"
+}, {
+"base": "Reference",
+"class": "DungeonDataManager",
+"language": "GDScript",
+"path": "res://scripts/battle/data/DungeonDataManager.gd"
+}, {
+"base": "Reference",
+"class": "DungeonRoom",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/DungeonRoom.gd"
+} ]
+_global_script_class_icons={
+"ActionAttackData": "",
+"ActionData": "",
+"ActionDataTypes": "",
+"ActionMoveData": "",
+"CharacterData": "",
+"DungeonCell": "",
+"DungeonDataManager": "",
+"DungeonRoom": ""
+}
+
 [application]
 
 config/name="ZRoguelikeGame"
@@ -19,7 +71,7 @@ config/icon="res://resource/icon.png"
 
 Constants="*res://scripts/library/Constants.gd"
 Utils="*res://scripts/library/Utils.gd"
-Dungeon="*res://scripts/battle/Dungeon.gd"
+Dungeon="*res://scripts/battle/instance/Dungeon.gd"
 
 [display]
 
