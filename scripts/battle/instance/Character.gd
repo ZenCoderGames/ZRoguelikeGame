@@ -1,6 +1,8 @@
 # Character.gd
 extends Node
 
+class_name Character
+
 onready var damageText:Label = get_node("DamageText")
 
 var displayName: String = ""

@@ -1,4 +1,4 @@
-extends "res://scripts/battle/instance/Character.gd"
+extends Character
 
 func update():
 	.update()

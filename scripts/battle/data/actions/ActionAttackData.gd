@@ -1,4 +1,4 @@
-extends "res://scripts/battle/data/actions/ActionData.gd"
+extends ActionData
 
 class_name ActionAttackData
 

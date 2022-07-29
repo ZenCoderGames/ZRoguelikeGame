@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Action",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/actions/Action.gd"
+}, {
+"base": "ActionData",
 "class": "ActionAttackData",
 "language": "GDScript",
 "path": "res://scripts/battle/data/actions/ActionAttackData.gd"
@@ -24,15 +29,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/battle/data/actions/ActionDataTypes.gd"
 }, {
-"base": "Reference",
+"base": "ActionData",
 "class": "ActionMoveData",
 "language": "GDScript",
 "path": "res://scripts/battle/data/actions/ActionMoveData.gd"
+}, {
+"base": "Node",
+"class": "Character",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/Character.gd"
 }, {
 "base": "Reference",
 "class": "CharacterData",
 "language": "GDScript",
 "path": "res://scripts/battle/data/CharacterData.gd"
+}, {
+"base": "Camera2D",
+"class": "DungeonCamera",
+"language": "GDScript",
+"path": "res://scripts/battle/DungeonCamera.gd"
 }, {
 "base": "Reference",
 "class": "DungeonCell",
@@ -50,11 +65,14 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/instance/DungeonRoom.gd"
 } ]
 _global_script_class_icons={
+"Action": "",
 "ActionAttackData": "",
 "ActionData": "",
 "ActionDataTypes": "",
 "ActionMoveData": "",
+"Character": "",
 "CharacterData": "",
+"DungeonCamera": "",
 "DungeonCell": "",
 "DungeonDataManager": "",
 "DungeonRoom": ""

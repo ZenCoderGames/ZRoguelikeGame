@@ -1,5 +1,7 @@
 extends Camera2D
 
+class_name DungeonCamera
+
 var player
 
 func _init():
