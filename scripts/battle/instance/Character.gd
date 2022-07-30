@@ -50,6 +50,12 @@ func init(charData, teamVal):
 func sort_actions_by_priority(a, b):
 	return a.actionData.priority >= b.actionData.priority
 
+func get_action(actionType):
+	for action in actions:
+		if action.actionData.type == "MOVEMENT":
+			return action
+
+	return null
 
 # MOVEMENT
 func move(x, y):
