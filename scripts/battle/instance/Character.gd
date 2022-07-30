@@ -14,6 +14,8 @@ var stamina: int = 0
 var cell
 var isDead:bool = false
 
+var actions:Array = []
+
 var currentRoom = null
 var prevRoom = null
 
@@ -36,6 +38,18 @@ func init(charData, teamVal):
 		damageText.self_modulate = Dungeon.battleInstance.playerDamageColor
 	else:
 		damageText.self_modulate = Dungeon.battleInstance.enemyDamageColor
+
+	# Actions
+	for actionData in charData.actionDataList:
+		var action = ActionTypes.create(Dungeon.dataManager.get_action(actionData), self)
+		if action!=null:
+			actions.append(action)
+
+	actions.sort_custom(self, "sort_actions_by_priority")
+
+func sort_actions_by_priority(a, b):
+	return a.actionData.priority >= b.actionData.priority
+
 
 # MOVEMENT
 func move(x, y):

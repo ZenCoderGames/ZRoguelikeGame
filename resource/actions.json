@@ -1,25 +1,37 @@
 {
 	"actions": [
 		{
-			"id": "MOVE",
-			"staminaCost": 1,
+			"id": "MOVE_INPUT",
 			"type": "MOVEMENT",
+			"staminaCost": 1,
+			"priority": 0,
 			"params": {
-				"numCells": 1
+				"moveType": "INPUT"
 			}
 		},
 		{
-			"id": "LEAP",
-			"staminaCost": 2,
+			"id": "MOVE_WANDER",
 			"type": "MOVEMENT",
+			"staminaCost": 2,
+			"priority": 0,
 			"params": {
-				"numCells": 2
+				"moveType": "WANDER"
+			}
+		},
+		{
+			"id": "MOVE_PATHFIND",
+			"type": "MOVEMENT",
+			"staminaCost": 2,
+			"priority": 0,
+			"params": {
+				"moveType": "PATHFIND_TO_TARGET"
 			}
 		},
 		{
 			"id": "MELEE_ATTACK",
-			"staminaCost": 1,
 			"type": "ATTACK",
+			"staminaCost": 1,
+			"priority": 1,
 			"params": {
 			}
 		}

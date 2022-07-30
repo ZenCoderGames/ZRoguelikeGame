@@ -4,7 +4,13 @@ class_name ActionMoveData
 
 const ID:String = "MOVEMENT"
 
-var numCells:int
+enum MOVE_TYPE { INPUT, WANDER, PATHFIND_TO_TARGET }
+var moveType:int
 
 func _init(dataJS).(dataJS):
-	numCells = params["numCells"]
+	var moveTypeStr = params["moveType"]
+	if MOVE_TYPE.has(moveTypeStr):
+		moveType = MOVE_TYPE.get(moveTypeStr)
+	else:
+		print("ERROR: Invalid Move Type For ActionMoveData - ", moveTypeStr)
+	

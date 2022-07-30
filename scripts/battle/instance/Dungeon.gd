@@ -1,5 +1,4 @@
 # Dungeon.gd
-
 extends Node2D
 
 const Player := preload("res://entity/Player.tscn")
@@ -13,16 +12,16 @@ signal OnKill(attacker, defender)
 var rooms:Array = []
 const intersectionBuffer:int = 0
 
-var player:Node = null
+var player:Character = null
 var turnsTaken:int = 0
 
 var loadedScenes:Array = []
 
-var battleInstance
+var battleInstance:BattleInstance
 
 var dataManager:DungeonDataManager
 
-func init(battleInst):
+func init(battleInst:BattleInstance):
 	battleInstance = battleInst
 
 func create() -> void:
@@ -57,10 +56,10 @@ func _init_rooms():
 		randomize()
 		var numR:int = roomMinRows + randi() % (roomMaxRows - roomMinRows + 1)
 		var numC:int = roomMinCols + randi() % (roomMaxCols - roomMinCols + 1)
-		var newRoom = DungeonRoom.new(rooms.size(), numR, numC, 0, 0)
+		var newRoom:DungeonRoom = DungeonRoom.new(rooms.size(), numR, numC, 0, 0)
 		if rooms.size()>0:
 			# Choose a random room to start on
-			var startSpawnRoom = rooms[randi() % rooms.size()]
+			var startSpawnRoom:DungeonRoom = rooms[randi() % rooms.size()]
 			# Choose to start either at different ends of the start room
 			var startPosType = randi() % 4
 			# top left
@@ -212,7 +211,7 @@ func _init_enemies():
 			#room.generate_enemies(1)
 
 func _init_player():
-	var cell = rooms[0].get_safe_starting_cell()
+	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
 	emit_signal("OnPlayerCreated", player)
 	_on_turn_taken(0, 0)
@@ -256,11 +255,11 @@ func is_intersecting_with_room(testRoom, room):
 			is_intersecting_with_room_test(room, testRoom)
 
 func is_intersecting_with_room_test(testRoom, room):
-	var p1 = Vector2(testRoom.startX, testRoom.startY)
-	var p2 = Vector2(testRoom.startX + Constants.STEP_X * testRoom.maxCols, testRoom.startY)
-	var p3 = Vector2(testRoom.startX, testRoom.startY + Constants.STEP_Y * testRoom.maxRows)
-	var p4 = Vector2(testRoom.startX + Constants.STEP_X * testRoom.maxCols, testRoom.startY + Constants.STEP_Y * testRoom.maxRows)
-	var p5 = Vector2(testRoom.get_center().x, testRoom.get_center().y)
+	var p1 := Vector2(testRoom.startX, testRoom.startY)
+	var p2 := Vector2(testRoom.startX + Constants.STEP_X * testRoom.maxCols, testRoom.startY)
+	var p3 := Vector2(testRoom.startX, testRoom.startY + Constants.STEP_Y * testRoom.maxRows)
+	var p4 := Vector2(testRoom.startX + Constants.STEP_X * testRoom.maxCols, testRoom.startY + Constants.STEP_Y * testRoom.maxRows)
+	var p5 := Vector2(testRoom.get_center().x, testRoom.get_center().y)
 	return room.is_point_inside(p1.x, p1.y, intersectionBuffer) or\
 		   room.is_point_inside(p2.x, p2.y, intersectionBuffer) or\
 		   room.is_point_inside(p3.x, p3.y, intersectionBuffer) or\
@@ -277,3 +276,16 @@ func load_character(parentContainer, cell, characterData, entityType, groupName,
 
 func create_delay(timeToDelay):
 	yield(battleInstance.get_tree().create_timer(timeToDelay), "timeout")  
+
+func get_adjacent_characters(character, relativeTeamType, numTiles:int=1):
+	var currentPlayerRoom:DungeonRoom = player.currentRoom
+	var adjacentChars:Array = []
+
+	if Utils.is_relative_team(character, player, relativeTeamType) and Utils.is_adjacent(character, player, numTiles):
+		adjacentChars.append(player)
+
+	for enemy in currentPlayerRoom.enemies:
+		if Utils.is_relative_team(character, enemy, relativeTeamType) and Utils.is_adjacent(character, enemy, numTiles):
+			adjacentChars.append(enemy)
+	
+	return adjacentChars

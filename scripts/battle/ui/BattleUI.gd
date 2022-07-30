@@ -1,5 +1,7 @@
 extends Node
 
+class_name BattleUI
+
 onready var turnLabel:Label = get_node("TurnLabel")
 # details
 onready var detailsUI:Node = get_node("DetailsUI")

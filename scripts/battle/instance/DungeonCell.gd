@@ -3,10 +3,10 @@ class_name DungeonCell
 var cellType:int = Constants.CELL_TYPE.NONE
 var entityType:int = Constants.ENTITY_TYPE.NONE
 
-var floorObject = null
-var entityObject = null
+var floorObject:Node2D = null
+var entityObject:Node2D = null
 
-var connectedCell = null
+var connectedCell:DungeonCell = null
 
 var room
 var row:int
@@ -20,7 +20,7 @@ func _init(roomRef, r:int, c:int):
 	pos = room.get_world_position(r, c)
 
 # CELL TYPE
-func init_cell(obj, cellTypeEnum:int):
+func init_cell(obj:Node, cellTypeEnum:int):
 	floorObject = obj
 	floorObject.get_child(0).text = ""
 	set_cell_type(cellTypeEnum)
@@ -31,7 +31,7 @@ func set_cell_type(newCellType:int):
 func is_cell_type(type:int):
 	return cellType == type
 	
-func show_debug_path_cell(cost):
+func show_debug_path_cell(cost:int):
 	floorObject.get_child(0).visible = true
 	floorObject.get_child(0).text = str(cost)
 
@@ -39,7 +39,7 @@ func is_connection():
 	return is_cell_type(Constants.CELL_TYPE.CONNECTOR)
 	
 # ENTITY TYPE
-func init_entity(obj, type:int):
+func init_entity(obj:Node, type:int):
 	entityObject = obj
 	set_entity_type(type)
 	floorObject.hide()
@@ -60,7 +60,7 @@ func clear_entity():
 
 func clear_entity_on_death():
 	clear_entity()
-	var deathNode = floorObject.get_node("Death")
+	var deathNode:Node = floorObject.get_node("Death")
 	deathNode.rotate(rand_range(0, 180))
 	deathNode.visible = true
 	

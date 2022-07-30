@@ -1,7 +1,7 @@
 extends Node
 
 # DUNGEON
-func create_scene(container:Array, name : String, prefab: PackedScene, group: String, cell:Object,
+func create_scene(container:Array, name : String, prefab: PackedScene, group: String, cell:DungeonCell,
 	x_offset: int = 0, y_offset: int = 0):
 	var new_scene := prefab.instance()
 	new_scene.position = Vector2(cell.pos.x + x_offset, cell.pos.y + y_offset)
@@ -42,7 +42,7 @@ func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, 
 		transType, easeType)
 	return_tween.start()
 
-func load_data_from_file(relativePath) -> JSON:
+func load_data_from_file(relativePath:String) -> JSON:
 	var data_file = File.new()
 	if data_file.open(str("res://",relativePath), File.READ) != OK:
 		return null
@@ -58,3 +58,24 @@ func do_hit_pause():
 	get_tree().paused = true
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_tree().paused = false
+
+func is_relative_team(char1, char2, relativeTeamType:int):
+	if char1 == char2:
+		return false
+
+	if relativeTeamType == Constants.RELATIVE_TEAM.ANY:
+		return true
+
+	if relativeTeamType == Constants.RELATIVE_TEAM.ALLY:
+		return char1.team == char2.team and char2.team != Constants.TEAM.NPC
+
+	if relativeTeamType == Constants.RELATIVE_TEAM.ENEMY:
+		return char1.team != char2.team and char2.team != Constants.TEAM.NPC
+
+	return false
+
+func is_adjacent(char1, char2, numTiles)->bool:
+	var colDiff = abs(char1.cell.col - char2.cell.col)
+	var rowDiff = abs(char1.cell.row - char2.cell.row)
+
+	return (colDiff==1 and rowDiff==0) or (colDiff==0 and rowDiff==1)

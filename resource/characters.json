@@ -6,7 +6,8 @@
 			"path": "entity/Player.tscn",
 			"maxHealth": 30,
 			"maxStamina": 3,
-			"damage": 6
+			"damage": 6,
+			"actions": ["MOVE_INPUT", "MELEE_ATTACK"]
 		},
 		{
 			"id": "DWARF_00",
@@ -14,15 +15,18 @@
 			"path": "entity/Dwarf.tscn",
 			"maxHealth": 10,
 			"maxStamina": 1,
-			"damage": 2
+			"damage": 2,
+			"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
 		},
 		{
+			"disable": true,
 			"id": "GIANT_00",
 			"displayName": "Giant",
 			"path": "entity/Giant.tscn",
 			"maxHealth": 30,
 			"maxStamina": 2,
-			"damage": 3
+			"damage": 3,
+			"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
 		}
 	]
 }

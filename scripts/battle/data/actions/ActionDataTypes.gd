@@ -7,5 +7,5 @@ static func create(dataJS):
 	elif actionType==ActionAttackData.ID:
 		return ActionAttackData.new(dataJS)
 
-	print_debug("[ERROR] Invalid Action Type", actionType)
+	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

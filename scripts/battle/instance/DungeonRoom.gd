@@ -56,10 +56,10 @@ func initialize():
 func populate():
 	# Init Floor
 	for i in range(0, cells.size()):
-		var r = i/maxCols
-		var c = i%maxCols
-		var cell = get_cell(r, c)
-		var floorObj = Utils.create_scene(loadedScenes, str(r) + "_" + str(c), Floor, Constants.room_floor, cell)
+		var r:int = i/maxCols
+		var c:int = i%maxCols
+		var cell:DungeonCell = get_cell(r, c)
+		var floorObj:Node = Utils.create_scene(loadedScenes, str(r) + "_" + str(c), Floor, Constants.room_floor, cell)
 		cells[i].init_cell(floorObj, Constants.CELL_TYPE.FLOOR)
 
 	_init_walls()
@@ -79,8 +79,8 @@ func _init_walls():
 				wallCellsBot.append(cell)
 
 func _create_wall(r, c):
-	var cell = get_cell(r, c)
-	var wall = Utils.create_scene(loadedScenes, "wall", Wall, Constants.room_floor, cell)
+	var cell:DungeonCell = get_cell(r, c)
+	var wall:Node = Utils.create_scene(loadedScenes, "wall", Wall, Constants.room_floor, cell)
 	cell.init_entity(wall, Constants.ENTITY_TYPE.STATIC)
 		
 func generate_enemies(totalEnemiesToSpawn):
@@ -95,10 +95,10 @@ func spawnEnemy():
 			freeCells.append(cell)
 	
 	# choose random free cell
-	var randomCell = freeCells[randi() % freeCells.size()]
+	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
 	# spawn random enemy
-	var randomEnemyData = Dungeon.dataManager.get_random_enemy_data()
+	var randomEnemyData:CharacterData = Dungeon.dataManager.get_random_enemy_data()
 	var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 	enemies.append(enemy)
 
@@ -182,7 +182,7 @@ func _show_debug(colorVal):
 func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 	# within bounds of room
 	if newC>=0 and newR>=0 and newC<maxCols and newR<maxRows:
-		var cell = get_cell(newR, newC)
+		var cell:DungeonCell = get_cell(newR, newC)
 		# empty cell
 		if(!cell.has_entity()):
 			currentCell.clear_entity()
@@ -213,7 +213,7 @@ var costFromStart = {}
 var visitedCells = {}
 func update_path_map():
 	# reset variables
-	var playerCell = Dungeon.player.cell
+	var playerCell:DungeonCell = Dungeon.player.cell
 	visitedCells = {}
 	var cellsToVisit = []
 	costFromStart = {}
@@ -224,13 +224,13 @@ func update_path_map():
 	visitedCells[playerCell] = true
 	# do path calculations
 	while cellsToVisit.size()>0:
-		var currentCell = cellsToVisit[0]
+		var currentCell:DungeonCell = cellsToVisit[0]
 		var neighbors:Array = _find_valid_neighboring_cells(currentCell)
 		for cell in neighbors:
 			if visitedCells.has(cell):
 				continue
 
-			var pathCost = costFromStart[currentCell]+1
+			var pathCost:int = costFromStart[currentCell]+1
 			cellsToVisit.append(cell)
 			visitedCells[cell] = true
 			if !costFromStart.has(cell) or pathCost<costFromStart[cell]:
@@ -264,11 +264,11 @@ func _find_valid_neighboring_cells(cell, onlyEmpty:bool = false):
 
 	return validNeighborCells
 
-func find_next_best_path_cell(currentCell)->DungeonCell:
+func find_next_best_path_cell(currentCell):
 	var neighbors:Array = _find_valid_neighboring_cells(currentCell, true)
 	if neighbors.size()>0:
 		var lowestCost:int = costFromStart[neighbors[0]]
-		var lowestNeighbor:DungeonCell = neighbors[0]
+		var lowestNeighbor = neighbors[0]
 		for cell in neighbors:
 			if costFromStart[cell] < lowestCost:
 				lowestCost = costFromStart[cell]
@@ -294,14 +294,14 @@ func get_safe_starting_cell():
 	return get_cell(maxRows/2, maxCols/2)
 
 func get_world_position(r: int, c: int) -> Vector2:
-	var col_vector: int = startX + Constants.STEP_X * c
-	var row_vector: int = startY + Constants.STEP_Y * r
+	var col_vector:int = startX + Constants.STEP_X * c
+	var row_vector:int = startY + Constants.STEP_Y * r
 
 	return Vector2(col_vector, row_vector)
 
 func is_point_inside(pX:int, pY:int, buffer:int):
-	var pXInside = pX >= startX - buffer and pX <= (startX + Constants.STEP_X * maxCols) - buffer
-	var pYInside = pY >= startY - buffer and pY <= (startY + Constants.STEP_Y * maxRows) - buffer
+	var pXInside:bool = pX >= startX - buffer and pX <= (startX + Constants.STEP_X * maxCols) - buffer
+	var pYInside:bool = pY >= startY - buffer and pY <= (startY + Constants.STEP_Y * maxRows) - buffer
 	return pXInside and pYInside
 
 func get_center():

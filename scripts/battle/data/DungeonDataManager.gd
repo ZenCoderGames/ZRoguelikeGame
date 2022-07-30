@@ -5,7 +5,7 @@ var actionDataMap = {}
 var itemDataMap = {}
 
 var characterDataDict = {}
-var playerData
+var playerData:CharacterData
 var enemyDataList = []
 
 func _init():
@@ -20,6 +20,8 @@ func init_actions():
 		var newActionData = ActionDataTypes.create(actionDataJS)
 		actionDataMap[newActionData.id] = newActionData
 			
+func get_action(id):
+	return actionDataMap[id]
 
 func init_items():
 	pass
@@ -29,11 +31,12 @@ func init_characters():
 	var charDataJSList:Array = data["characters"]
 	for charDataJS in charDataJSList:
 		var newCharData = CharacterData.new(charDataJS)
-		characterDataDict[newCharData.id] = newCharData
 		if newCharData.id == "PLAYER":
 			playerData = newCharData
 		else:
-			enemyDataList.append(newCharData)
+			if !newCharData.disable:
+				enemyDataList.append(newCharData)
+		characterDataDict[newCharData.id] = newCharData
 
 func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]

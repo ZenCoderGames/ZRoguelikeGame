@@ -1,11 +1,13 @@
 class_name CharacterData
 
-var id
-var displayName
-var path
-var maxHealth
-var damage
-var maxStamina
+var id:String
+var displayName:String
+var path:String
+var maxHealth:int
+var damage:int
+var maxStamina:int
+var actionDataList:Array
+var disable:bool
 
 func _init(dataJS):
 	id = dataJS["id"]
@@ -14,3 +16,6 @@ func _init(dataJS):
 	maxHealth = dataJS["maxHealth"]
 	damage = dataJS["damage"]
 	maxStamina = dataJS["maxStamina"]
+	actionDataList = dataJS["actions"]
+	if dataJS.has("disable"):
+		disable =  dataJS["disable"]

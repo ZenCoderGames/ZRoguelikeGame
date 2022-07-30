@@ -2,7 +2,7 @@
 
 extends Node
 
-var player
+var player:PlayerCharacter
 var disableInput:bool = true
 
 func _ready():

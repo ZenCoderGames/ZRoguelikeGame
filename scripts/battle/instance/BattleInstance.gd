@@ -1,5 +1,7 @@
 extends Node
 
+class_name BattleInstance
+
 export var showWallColor:Color
 export var showFloorColor:Color
 export var dimWallColor:Color

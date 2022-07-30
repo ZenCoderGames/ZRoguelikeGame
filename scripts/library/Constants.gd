@@ -10,7 +10,8 @@ const STEP_Y: int = 34
 enum CELL_TYPE { NONE, FLOOR, CONNECTOR }
 enum ENTITY_TYPE { NONE, STATIC, DYNAMIC }
 
-enum TEAM { NONE, PLAYER, ENEMY }
+enum TEAM { NONE, PLAYER, ENEMY, NPC }
+enum RELATIVE_TEAM { ANY, ALLY, ENEMY }
 
 # GROUPS
 const pc: String = "pc"

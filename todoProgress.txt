@@ -20,7 +20,14 @@ Roguelike Dev:
 (D)- Djisktra or A*
 
 (D)- Better ways of defining enemies (+1 more enemy type)
-- Component system
+- Action system
+- Stamina
+- Stats
+
+- Items and Inventory
+- Ranged Scrolls
+- Targeting
+
 - Typed pass
 - Better enemy composition across dungeon (use total pool) 
 - Game Feel (death, better damage number font)
@@ -28,9 +35,6 @@ Roguelike Dev:
 - History of actions
 
 - RPG Stats
-- Items and Inventory
-
-- Ranged scrolls and targeting
 
 - Floors
 

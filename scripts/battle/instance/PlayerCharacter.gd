@@ -1,5 +1,7 @@
 extends Character
 
+class_name PlayerCharacter
+
 func update():
 	.update()
 
