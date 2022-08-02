@@ -6,15 +6,14 @@ class_name Character
 onready var damageText:Label = get_node("DamageText")
 
 var displayName: String = ""
-var health: int = 0
-var maxHealth: int = 0
-var damage: int = 0
 var team: int = 0
 var stamina: int = 0
 var cell
 var isDead:bool = false
 
+var stats:Array = []
 var actions:Array = []
+var items:Array = []
 
 var currentRoom = null
 var prevRoom = null
@@ -28,10 +27,6 @@ var originalColor:Color
 
 func init(charData, teamVal):
 	displayName = charData.displayName
-	health = charData.maxHealth
-	maxHealth = charData.maxHealth
-	stamina = charData.maxStamina
-	damage = charData.damage
 	team = teamVal
 	originalColor = self.self_modulate
 	if team==Constants.TEAM.ENEMY:
@@ -39,9 +34,15 @@ func init(charData, teamVal):
 	else:
 		damageText.self_modulate = Dungeon.battleInstance.enemyDamageColor
 
+	# Stats
+	for statData in charData.statDataList:
+		var stat = Stat.new(statData)
+		if stat!=null:
+			stats.append(stat)
+
 	# Actions
 	for actionData in charData.actionDataList:
-		var action = ActionTypes.create(Dungeon.dataManager.get_action(actionData), self)
+		var action = ActionTypes.create(actionData, self)
 		if action!=null:
 			actions.append(action)
 
@@ -52,7 +53,7 @@ func sort_actions_by_priority(a, b):
 
 func get_action(actionType):
 	for action in actions:
-		if action.actionData.type == "MOVEMENT":
+		if action.actionData.type == actionType:
 			return action
 
 	return null
@@ -77,6 +78,64 @@ func move_to_cell(newCell):
 		emit_signal("OnCharacterRoomChanged", cell.room)
 	currentRoom = cell.room
 
+# STATS
+func get_stat_value(statType):
+	var statValue:int = 0
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			statValue = statValue + stat.value
+	# iterate through items
+	for item in items:
+		for statData in item.data.statDataList:
+			if statData.type == statType:
+				statValue = statValue + statData.value
+	
+	return statValue
+
+func get_stat_base_value(statType):
+	var statBaseValue:int = 0
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			statBaseValue = statBaseValue + stat.baseValue
+	# iterate through items
+	for item in items:
+		for statData in item.data.statDataList:
+			if statData.type == statType:
+				statBaseValue = statBaseValue + statData.baseValue
+
+	return statBaseValue
+
+func modify_stat(statType, statModifier):
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			statModifier.modify(stat)
+
+func modify_stat_value(statType, modifierValue):
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			stat.value = stat.value + modifierValue
+			return stat.value
+
+	print("ERROR: Can't find stat type - ", statType)
+	return null
+
+# ITEMS
+func add_item(itemToAdd):
+	items.append(itemToAdd)
+
+func remove_item(itemToRemove):
+	var matchingItems:Array = []
+	for item in items:
+		if item == itemToRemove:
+			matchingItems.append(itemToRemove)
+
+	for item in matchingItems:
+		items.erase(item)
+
 # COMBAT
 func attack(entity):
 	if entity.is_class(self.get_class()):
@@ -92,10 +151,11 @@ func attack(entity):
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 5), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 
 		yield(get_tree().create_timer(0.075), "timeout")
-		entity.take_damage(self, damage)
+		entity.take_damage(self, get_stat_value(StatData.STAT_TYPE.DAMAGE))
 
 func take_damage(entity, dmg):
-	health -= dmg
+	var health = modify_stat_value(StatData.STAT_TYPE.HEALTH, -dmg)
+	var maxHealth = get_stat_base_value(StatData.STAT_TYPE.HEALTH)
 	if health<=0:
 		isDead = true
 		Dungeon.emit_signal("OnKill", entity, self)
@@ -192,3 +252,15 @@ func dirn_to_character(character) -> int:
 
 func is_opposite_team(entity):
 	return team != entity.team
+
+func get_health():
+	return get_stat_value(StatData.STAT_TYPE.HEALTH)
+
+func get_max_health():
+	return get_stat_base_value(StatData.STAT_TYPE.HEALTH)
+
+func get_damage():
+	return get_stat_value(StatData.STAT_TYPE.DAMAGE)
+
+func get_armor():
+	return get_stat_value(StatData.STAT_TYPE.ARMOR)

@@ -33,6 +33,8 @@
 			"staminaCost": 1,
 			"priority": 1,
 			"params": {
+				"damageMultiplier": 1,
+				"range": 1
 			}
 		}
 	]

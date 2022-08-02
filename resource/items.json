@@ -4,12 +4,11 @@
 			"id": "SWORD_00",
 			"name": "Basic Sword",
 			"description": "Just a simple sword",
-			"actions": [
+			"type": "EQUIPABLE",
+			"stats": [
 				{
-					"actionId": "MELEE_ATTACK",
-					"overrideParams": {
-						"damageBonus": 2
-					}
+					"type": "DAMAGE",
+					"value": 2
 				}
 			]
 		},
@@ -17,13 +16,47 @@
 			"id": "SWORD_01",
 			"name": "Heavy Sword",
 			"description": "A heavier more powerful sword",
-			"actions": [
+			"type": "EQUIPABLE",
+			"stats": [
 				{
-					"actionId": "MELEE_ATTACK",
-					"overrideParams": {
-						"staminaCost": 2,
-						"damageBonus": 5
-					}
+					"type": "DAMAGE",
+					"value": 4
+				}
+			]
+		},
+		{
+			"id": "ARMOR_00",
+			"name": "Cloth Armor",
+			"description": "Simple clothing to protect you",
+			"type": "EQUIPABLE",
+			"stats": [
+				{
+					"type": "ARMOR",
+					"value": 1
+				}
+			]
+		},
+		{
+			"id": "HEALTH_POTION_00",
+			"name": "Small Health Potion",
+			"description": "A tiny health potion",
+			"type": "CONSUMABLE",
+			"statModifiers": [
+				{
+					"type": "HEALTH",
+					"value": 10
+				}
+			]
+		},
+		{
+			"id": "HEALTH_UPGRADE_00",
+			"name": "Blessing of health",
+			"description": "A boost to base health",
+			"type": "CONSUMABLE",
+			"statModifiers": [
+				{
+					"type": "HEALTH",
+					"baseValue": 10
 				}
 			]
 		}

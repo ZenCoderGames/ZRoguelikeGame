@@ -20,13 +20,15 @@ Roguelike Dev:
 (D)- Djisktra or A*
 
 (D)- Better ways of defining enemies (+1 more enemy type)
-- Action system
-- Stamina
-- Stats
-
-- Items and Inventory
+(D)- Action system
+(D)- Stats
+(D)- Debug why damage happening twice
+(IP)- Items
+- Inventory
 - Ranged Scrolls
 - Targeting
+
+- Stamina
 
 - Typed pass
 - Better enemy composition across dungeon (use total pool) 

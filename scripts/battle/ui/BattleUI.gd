@@ -33,7 +33,7 @@ func _on_dungeon_init():
 	Dungeon.player.connect("OnHealthChanged", self, "_on_player_health_changed")
 	Dungeon.player.connect("OnDeath", self, "_on_player_death")
 	
-	_on_player_health_changed(Dungeon.player.displayName, Dungeon.player.health, Dungeon.player.maxHealth)
+	_on_player_health_changed(Dungeon.player.displayName, Dungeon.player.get_health(), Dungeon.player.get_max_health())
 	
 func _on_turn_taken():
 	turnLabel.text = str("Turns: ", Dungeon.turnsTaken)
@@ -48,9 +48,9 @@ func _on_attack(attacker, defender, damage):
 		registeredEnemies[defender] = true
 	
 	if defender.team==Constants.TEAM.ENEMY:
-		_on_enemy_health_changed(defender.displayName, defender.health, defender.maxHealth)
+		_on_enemy_health_changed(defender.displayName, defender.get_health(), defender.get_max_health())
 	else:
-		_on_enemy_health_changed(attacker.displayName, attacker.health, attacker.maxHealth)
+		_on_enemy_health_changed(attacker.displayName, attacker.get_health(), attacker.get_max_health())
 	#yield(get_tree().create_timer(10), "timeout")
 	#detailsUI.visible = false
 	#enemyHealthUI.visible = false

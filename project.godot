@@ -94,10 +94,40 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/battle/instance/EnemyCharacter.gd"
 }, {
+"base": "Reference",
+"class": "Item",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/items/Item.gd"
+}, {
+"base": "Reference",
+"class": "ItemData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/items/ItemData.gd"
+}, {
 "base": "Character",
 "class": "PlayerCharacter",
 "language": "GDScript",
 "path": "res://scripts/battle/instance/PlayerCharacter.gd"
+}, {
+"base": "Reference",
+"class": "Stat",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/stats/Stat.gd"
+}, {
+"base": "Reference",
+"class": "StatData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/stats/StatData.gd"
+}, {
+"base": "Reference",
+"class": "StatModifier",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/stats/StatModifier.gd"
+}, {
+"base": "Reference",
+"class": "StatModifierData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/stats/StatModifierData.gd"
 } ]
 _global_script_class_icons={
 "Action": "",
@@ -117,7 +147,13 @@ _global_script_class_icons={
 "DungeonDataManager": "",
 "DungeonRoom": "",
 "EnemyCharacter": "",
-"PlayerCharacter": ""
+"Item": "",
+"ItemData": "",
+"PlayerCharacter": "",
+"Stat": "",
+"StatData": "",
+"StatModifier": "",
+"StatModifierData": ""
 }
 
 [application]

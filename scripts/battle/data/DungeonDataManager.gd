@@ -6,6 +6,7 @@ var itemDataMap = {}
 
 var characterDataDict = {}
 var playerData:CharacterData
+var heroDataList = []
 var enemyDataList = []
 
 func _init():
@@ -20,23 +21,34 @@ func init_actions():
 		var newActionData = ActionDataTypes.create(actionDataJS)
 		actionDataMap[newActionData.id] = newActionData
 			
-func get_action(id):
+func get_action_data(id):
 	return actionDataMap[id]
 
 func init_items():
-	pass
+	var data = Utils.load_data_from_file("resource/items.json")
+	var itemDataJSList:Array = data["items"]
+	for itemDataJS in itemDataJSList:
+		var newItemData = ItemData.new(itemDataJS, actionDataMap)
+		itemDataMap[newItemData.id] = newItemData
+
+func get_item_data(id):
+	return itemDataMap[id]
 
 func init_characters():
 	var data = Utils.load_data_from_file("resource/characters.json")
-	var charDataJSList:Array = data["characters"]
-	for charDataJS in charDataJSList:
-		var newCharData = CharacterData.new(charDataJS)
-		if newCharData.id == "PLAYER":
-			playerData = newCharData
-		else:
-			if !newCharData.disable:
-				enemyDataList.append(newCharData)
+	var heroDataJSList:Array = data["characters"]["heroes"]
+	for heroDataJS in heroDataJSList:
+		var newCharData = CharacterData.new(heroDataJS, actionDataMap)
+		heroDataList.append(newCharData)
 		characterDataDict[newCharData.id] = newCharData
+	var enemyDataJSList:Array = data["characters"]["enemies"]
+	for enemyDataJS in enemyDataJSList:
+		var newCharData = CharacterData.new(enemyDataJS, actionDataMap)
+		if !newCharData.disable:
+			enemyDataList.append(newCharData)
+		characterDataDict[newCharData.id] = newCharData
+		
+	playerData = heroDataList[0]
 
 func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]

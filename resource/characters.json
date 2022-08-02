@@ -1,32 +1,73 @@
 {
-	"characters": [
-		{
-			"id": "PLAYER",
-			"displayName": "You",
-			"path": "entity/Player.tscn",
-			"maxHealth": 30,
-			"maxStamina": 3,
-			"damage": 6,
-			"actions": ["MOVE_INPUT", "MELEE_ATTACK"]
-		},
-		{
-			"id": "DWARF_00",
-			"displayName": "Dwarf",
-			"path": "entity/Dwarf.tscn",
-			"maxHealth": 10,
-			"maxStamina": 1,
-			"damage": 2,
-			"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
-		},
-		{
-			"disable": true,
-			"id": "GIANT_00",
-			"displayName": "Giant",
-			"path": "entity/Giant.tscn",
-			"maxHealth": 30,
-			"maxStamina": 2,
-			"damage": 3,
-			"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
-		}
-	]
+	"characters": {
+		"heroes": [
+			{
+				"id": "KNIGHT",
+				"displayName": "You",
+				"path": "entity/Player.tscn",
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 20
+					},
+					{
+						"type": "DAMAGE",
+						"value": 6
+					}
+				],
+				"actions": ["MOVE_INPUT", "MELEE_ATTACK"]
+			},
+			{
+				"id": "BARBARIAN",
+				"displayName": "You",
+				"path": "entity/Player.tscn",
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 30
+					},
+					{
+						"type": "DAMAGE",
+						"value": 3
+					}
+				],
+				"actions": ["MOVE_INPUT", "MELEE_ATTACK"]
+			}
+		],
+		"enemies": [
+			{
+				"id": "DWARF_00",
+				"displayName": "Dwarf",
+				"path": "entity/Dwarf.tscn",
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 10
+					},
+					{
+						"type": "DAMAGE",
+						"value": 2
+					}
+				],
+				"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
+			},
+			{
+				"disable": true,
+				"id": "GIANT_00",
+				"displayName": "Giant",
+				"path": "entity/Giant.tscn",
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 30
+					},
+					{
+						"type": "DAMAGE",
+						"value": 4
+					}
+				],
+				"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
+			}
+		]
+	}
 }
