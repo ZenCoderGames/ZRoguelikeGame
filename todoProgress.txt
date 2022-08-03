@@ -23,9 +23,13 @@ Roguelike Dev:
 (D)- Action system
 (D)- Stats
 (D)- Debug why damage happening twice
-(IP)- Items
+(IP)- Items (Item Pickup UI)
+
 - Inventory
 - Ranged Scrolls
+
+- Encounter Generator
+
 - Targeting
 
 - Stamina

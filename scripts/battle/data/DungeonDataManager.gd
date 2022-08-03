@@ -3,6 +3,7 @@ class_name DungeonDataManager
 
 var actionDataMap = {}
 var itemDataMap = {}
+var itemDataList = []
 
 var characterDataDict = {}
 var playerData:CharacterData
@@ -30,6 +31,7 @@ func init_items():
 	for itemDataJS in itemDataJSList:
 		var newItemData = ItemData.new(itemDataJS, actionDataMap)
 		itemDataMap[newItemData.id] = newItemData
+		itemDataList.append(newItemData)
 
 func get_item_data(id):
 	return itemDataMap[id]
@@ -52,3 +54,7 @@ func init_characters():
 
 func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]
+
+func get_random_item_data():
+	return itemDataList[4]
+	#return itemDataList[randi() % itemDataList.size()]

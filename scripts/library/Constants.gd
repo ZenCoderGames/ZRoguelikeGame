@@ -19,6 +19,7 @@ const room: String = "room"
 const room_floor: String = "floor"
 const room_wall: String = "wall"
 const enemies: String = "enemies"
+const items: String = "items"
 
 # INPUTS
 const INPUT_EXIT_GAME: String = "exit"

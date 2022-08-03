@@ -14,6 +14,7 @@ export var timeBetweenMoves:float
 export var pauseAIMovement:bool
 export var pauseAIAttack:bool
 export var dontSpawnEnemies:bool
+export var dontSpawnItems:bool
 export var setPlayerInvulnerable:bool
 export var debugShowAllRooms:bool
 export var debugStartRoomColor:Color

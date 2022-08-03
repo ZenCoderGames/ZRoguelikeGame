@@ -17,17 +17,24 @@ class_name ItemData
 var id:String
 var name:String
 var description:String
+var path:String
 var statDataList:Array
 var statModifierDataList:Array
 var actionDataList:Array
 
-enum STAT_TYPE { EQUIPABLE, CONSUMABLE }
+enum ITEM_TYPE { EQUIPABLE, CONSUMABLE }
 var type:int
 
 func _init(itemDataJS, actionDataMap):
 	id = itemDataJS["id"]
 	name = itemDataJS["name"]
 	description = itemDataJS["description"]
+	path = itemDataJS["path"]
+	var itemType = itemDataJS["type"]
+	if ITEM_TYPE.has(itemType):
+		type = ITEM_TYPE.get(itemType)
+	else:
+		print("ERROR: Invalid Item Type - ", itemType)
 
 	if itemDataJS.has("stats"):
 		var statDataJSList = itemDataJS["stats"]
@@ -43,3 +50,9 @@ func _init(itemDataJS, actionDataMap):
 		var actionDataIdJSList = itemDataJS["actions"]
 		for actionDataIdJS in actionDataIdJSList:
 			actionDataList.append(actionDataMap[actionDataIdJS])
+
+func is_equippable():
+	return type == ITEM_TYPE.EQUIPABLE
+
+func is_consumable():
+	return type == ITEM_TYPE.CONSUMABLE

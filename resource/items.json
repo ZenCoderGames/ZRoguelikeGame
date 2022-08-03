@@ -4,6 +4,7 @@
 			"id": "SWORD_00",
 			"name": "Basic Sword",
 			"description": "Just a simple sword",
+			"path": "entity/items/Item_BasicSword.tscn",
 			"type": "EQUIPABLE",
 			"stats": [
 				{
@@ -16,6 +17,7 @@
 			"id": "SWORD_01",
 			"name": "Heavy Sword",
 			"description": "A heavier more powerful sword",
+			"path": "entity/items/Item_HeavySword.tscn",
 			"type": "EQUIPABLE",
 			"stats": [
 				{
@@ -28,6 +30,7 @@
 			"id": "ARMOR_00",
 			"name": "Cloth Armor",
 			"description": "Simple clothing to protect you",
+			"path": "entity/items/Item_ClothArmor.tscn",
 			"type": "EQUIPABLE",
 			"stats": [
 				{
@@ -40,6 +43,7 @@
 			"id": "HEALTH_POTION_00",
 			"name": "Small Health Potion",
 			"description": "A tiny health potion",
+			"path": "entity/items/Item_SmallHealingPotion.tscn",
 			"type": "CONSUMABLE",
 			"statModifiers": [
 				{
@@ -52,6 +56,7 @@
 			"id": "HEALTH_UPGRADE_00",
 			"name": "Blessing of health",
 			"description": "A boost to base health",
+			"path": "entity/items/Item_HealthUpgrade.tscn",
 			"type": "CONSUMABLE",
 			"statModifiers": [
 				{

@@ -30,10 +30,12 @@ func _on_dungeon_init():
 	Dungeon.connect("OnAttack", self, "_on_attack")
 	Dungeon.connect("OnKill", self, "_on_kill")
 	
-	Dungeon.player.connect("OnHealthChanged", self, "_on_player_health_changed")
+	Dungeon.player.connect("OnStatChanged", self, "_on_player_stat_changed")
 	Dungeon.player.connect("OnDeath", self, "_on_player_death")
 	
-	_on_player_health_changed(Dungeon.player.displayName, Dungeon.player.get_health(), Dungeon.player.get_max_health())
+	Dungeon.player.connect("OnItemPicked", self, "_on_item_picked")
+	
+	_on_player_stat_changed(Dungeon.player)
 	
 func _on_turn_taken():
 	turnLabel.text = str("Turns: ", Dungeon.turnsTaken)
@@ -44,17 +46,13 @@ func _on_attack(attacker, defender, damage):
 	detailsLabel.text = str(attacker.displayName, " attacked ", defender.displayName, " for ", damage, " damage")
 	
 	if defender.team==Constants.TEAM.ENEMY and !registeredEnemies.has(defender):
-		defender.connect("OnHealthChanged", self, "_on_enemy_health_changed")
+		defender.connect("OnStatChanged", self, "_on_enemy_stat_changed")
 		registeredEnemies[defender] = true
 	
 	if defender.team==Constants.TEAM.ENEMY:
-		_on_enemy_health_changed(defender.displayName, defender.get_health(), defender.get_max_health())
+		_on_enemy_stat_changed(defender)
 	else:
-		_on_enemy_health_changed(attacker.displayName, attacker.get_health(), attacker.get_max_health())
-	#yield(get_tree().create_timer(10), "timeout")
-	#detailsUI.visible = false
-	#enemyHealthUI.visible = false
-	#detailsLabel.text = ""
+		_on_enemy_stat_changed(attacker)
 	
 func _on_kill(attacker, defender):
 	detailsUI.visible = true
@@ -63,15 +61,23 @@ func _on_kill(attacker, defender):
 		enemyHealthUI.visible = false
 	yield(get_tree().create_timer(1), "timeout")
 	detailsUI.visible = false
+	
+func _on_item_picked(item):
+	detailsUI.visible = true
+	detailsLabel.text = str(item.data.name, " picked up ")
+	yield(get_tree().create_timer(1), "timeout")
+	detailsUI.visible = false
 
-func _on_player_health_changed(charName:String, newVal:int, maxHealth:int):
-	healthLabel.text = str("Player Health: ", newVal)
-	var pctHealth:float = float(newVal)/float(maxHealth)
+func _on_player_stat_changed(character):
+	# Update Health
+	healthLabel.text = str("Player Health: ", character.get_health())
+	var pctHealth:float = float(character.get_health())/float(character.get_max_health())
 	healthBar.rect_size = Vector2(pctHealth * originalHealthRect.x, originalHealthRect.y)
 
-func _on_enemy_health_changed(charName:String, newVal:int, maxHealth:int):
-	enemyHealthLabel.text = str(charName, " Health: ", newVal)
-	var pctHealth:float = float(newVal)/float(maxHealth)
+func _on_enemy_stat_changed(character:Character):
+	# Update Health
+	enemyHealthLabel.text = str(character.displayName, " Health: ", character.get_health())
+	var pctHealth:float = float(character.get_health())/float(character.get_max_health())
 	enemyHealthBar.rect_size = Vector2(pctHealth * originalHealthRect.x, originalHealthRect.y)
 
 func _on_player_death():

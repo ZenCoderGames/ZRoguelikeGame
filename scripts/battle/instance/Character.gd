@@ -20,8 +20,9 @@ var prevRoom = null
 
 signal OnCharacterMove(x, y)
 signal OnCharacterRoomChanged(newRoom)
-signal OnHealthChanged(displayName, newVal, maxHealth)
+signal OnStatChanged(character)
 signal OnDeath()
+signal OnItemPicked(item)
 
 var originalColor:Color
 
@@ -107,31 +108,52 @@ func get_stat_base_value(statType):
 
 	return statBaseValue
 
-func modify_stat(statType, statModifier):
+"""func modify_stat(statType, statModifier):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			statModifier.modify(stat)
+			statModifier.modify(stat)"""
 
 func modify_stat_value(statType, modifierValue):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
 			stat.value = stat.value + modifierValue
+			stat.value = clamp(stat.value, 0, stat.baseValue)
+			emit_signal("OnStatChanged", self)
 			return stat.value
 
 	print("ERROR: Can't find stat type - ", statType)
 	return null
 
+func modify_stat_value_from_modifier(statModifierData:StatModifierData):
+	# iterate through char
+	for stat in stats:
+		if stat.type == statModifierData.type:
+			stat.baseValue = stat.baseValue + statModifierData.baseValue
+			stat.value = stat.value + statModifierData.value
+			stat.value = clamp(stat.value, 0, stat.baseValue)
+			emit_signal("OnStatChanged", self)
+			return stat.value
+
+	print("ERROR: Can't find stat type - ", statModifierData.type)
+	return null
+
 # ITEMS
+
+# For testing when player goes over, they get the item
 func add_item(itemToAdd):
 	items.append(itemToAdd)
+	itemToAdd.activate(self)
+	emit_signal("OnItemPicked", itemToAdd)
 
+# NOT Used Yet
 func remove_item(itemToRemove):
 	var matchingItems:Array = []
 	for item in items:
 		if item == itemToRemove:
 			matchingItems.append(itemToRemove)
+			itemToRemove.deactivate(self)
 
 	for item in matchingItems:
 		items.erase(item)
@@ -162,15 +184,13 @@ func take_damage(entity, dmg):
 		show_hit(entity, dmg)
 		yield(get_tree().create_timer(0.1), "timeout")
 		die()
-		emit_signal("OnHealthChanged", displayName, 0, maxHealth)
 		emit_signal("OnDeath")
 	else:
 		show_hit(entity, dmg)
 		Dungeon.emit_signal("OnAttack", entity, self, dmg)
-		emit_signal("OnHealthChanged", displayName, health, maxHealth)
 
 func die():
-	cell.room.enemy_died(self)
+	currentRoom.enemy_died(self)
 	if cell.entityObject!=null:
 		cell.entityObject.hide()
 	cell.clear_entity_on_death()
@@ -223,7 +243,7 @@ func show_damage_text(entity, dmg):
 	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	yield(get_tree().create_timer(0.35), "timeout")
 	damageText.visible = false
-	
+
 func update():
 	pass
 

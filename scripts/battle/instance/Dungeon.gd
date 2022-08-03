@@ -30,6 +30,7 @@ func create() -> void:
 	_init_path()
 	_init_data()
 	_init_enemies()
+	_init_items()
 	_init_player()
 
 func _init_rooms():
@@ -210,6 +211,12 @@ func _init_enemies():
 			room.generate_enemies(randi() % 3 + 1)
 			#room.generate_enemies(1)
 
+func _init_items():
+	if battleInstance.dontSpawnItems:
+		return
+
+	startRoom.generate_items(1)
+
 func _init_player():
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
@@ -273,6 +280,13 @@ func load_character(parentContainer, cell, characterData, entityType, groupName,
 	charObject.init(characterData, team)
 	charObject.move_to_cell(cell)
 	return charObject
+
+func load_item(parentContainer, cell, itemData, entityType, groupName):
+	var itemPrefab := load(str("res://", itemData.path))
+	var itemObject = Utils.create_scene(parentContainer, itemData.name, itemPrefab, groupName, cell)
+	cell.init_entity(itemObject, entityType)
+	itemObject.init(itemData, cell)
+	return itemObject
 
 func create_delay(timeToDelay):
 	yield(battleInstance.get_tree().create_timer(timeToDelay), "timeout")  

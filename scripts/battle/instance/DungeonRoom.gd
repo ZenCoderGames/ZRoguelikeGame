@@ -28,6 +28,8 @@ var isEndRoom:bool
 # Enemies
 var enemies:Array = []
 
+var items:Array = []
+
 var maxRows:int
 var maxCols:int
 var startX:int
@@ -101,6 +103,25 @@ func spawnEnemy():
 	var randomEnemyData:CharacterData = Dungeon.dataManager.get_random_enemy_data()
 	var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 	enemies.append(enemy)
+
+func generate_items(totalItemsToSpawn):
+	for i in totalItemsToSpawn:
+		spawnItem()
+
+func spawnItem():
+	# find free cells
+	var freeCells:Array = []
+	for cell in cells:
+		if cell.is_empty():
+			freeCells.append(cell)
+	
+	# choose random free cell
+	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
+
+	# spawn random enemy
+	var randomItemData:ItemData = Dungeon.dataManager.get_random_item_data()
+	var item:Node = Dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
+	items.append(item)
 
 func register_cell_connection(myCell):
 	if myCell.is_top_edge():
@@ -190,6 +211,16 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			entity.move_to_cell(cell)
 			return true
 		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
+			# Item
+			if cell.entityObject is Item:
+				entity.add_item(cell.entityObject)
+				cell.entityObject.picked()
+				items.erase(cell.entityObject)
+				currentCell.clear_entity()
+				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
+				entity.move_to_cell(cell)
+				return true
+			# Enemy
 			if entity.is_opposite_team(cell.entityObject):
 				entity.attack(cell.entityObject)
 				return true
