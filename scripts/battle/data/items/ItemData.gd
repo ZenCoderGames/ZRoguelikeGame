@@ -15,7 +15,7 @@ class_name ItemData
 		}"""
 
 var id:String
-var name:String
+var displayName:String
 var description:String
 var path:String
 var statDataList:Array
@@ -27,7 +27,7 @@ var type:int
 
 func _init(itemDataJS, actionDataMap):
 	id = itemDataJS["id"]
-	name = itemDataJS["name"]
+	displayName = itemDataJS["name"]
 	description = itemDataJS["description"]
 	path = itemDataJS["path"]
 	var itemType = itemDataJS["type"]

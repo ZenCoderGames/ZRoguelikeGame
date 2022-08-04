@@ -8,6 +8,7 @@ signal OnPlayerCreated(newPlayer)
 signal OnTurnCompleted()
 signal OnAttack(attacker, defender, damageValue)
 signal OnKill(attacker, defender)
+signal OnEnemyMovedAdjacentToPlayer(enemy)
 
 var rooms:Array = []
 const intersectionBuffer:int = 0
@@ -217,6 +218,11 @@ func _init_items():
 
 	startRoom.generate_items(1)
 
+	for room in rooms:
+		if !room.isStartRoom:
+			room.generate_items(randi() % 2)
+			#room.generate_enemies(1)
+
 func _init_player():
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
@@ -283,7 +289,7 @@ func load_character(parentContainer, cell, characterData, entityType, groupName,
 
 func load_item(parentContainer, cell, itemData, entityType, groupName):
 	var itemPrefab := load(str("res://", itemData.path))
-	var itemObject = Utils.create_scene(parentContainer, itemData.name, itemPrefab, groupName, cell)
+	var itemObject = Utils.create_scene(parentContainer, itemData.displayName, itemPrefab, groupName, cell)
 	cell.init_entity(itemObject, entityType)
 	itemObject.init(itemData, cell)
 	return itemObject

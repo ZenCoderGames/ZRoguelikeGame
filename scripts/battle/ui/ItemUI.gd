@@ -1,8 +1,14 @@
 extends Node
 
-onready var entityHealthBar:ColorRect = get_node("HealthBar")
-onready var entityHealthLabel:Label = get_node("HealthLabel")
+onready var nameLabel:Label = get_node("VBoxContainer/PanelContainer/NameLabel")
+onready var descLabel:Label = get_node("VBoxContainer/PanelContainer3/DescLabel")
+
+var item:Item
 
 func init(entityObj):
-	# TODO: Populate this list for enemy and items
-	pass
+	item = entityObj as Item
+	nameLabel.text = item.get_display_name()
+	descLabel.text = item.get_description()
+
+func has_entity(entity):
+	return item == entity

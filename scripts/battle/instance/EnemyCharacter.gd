@@ -10,3 +10,10 @@ func update():
 		if action.can_execute():
 			action.execute()
 			break
+
+func move_to_cell(newCell):
+	.move_to_cell(newCell)
+
+	if Dungeon.player!=null:
+		if(newCell.is_rowcol_adjacent(Dungeon.player.cell)):
+			Dungeon.emit_signal("OnEnemyMovedAdjacentToPlayer", self)

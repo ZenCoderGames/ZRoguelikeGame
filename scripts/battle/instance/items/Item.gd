@@ -22,3 +22,9 @@ func picked():
 	if cell.entityObject!=null:
 		cell.entityObject.hide()
 	cell.clear_entity()
+
+func get_display_name():
+	return data.displayName
+
+func get_description():
+	return data.description

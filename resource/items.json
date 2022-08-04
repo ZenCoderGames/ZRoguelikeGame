@@ -3,7 +3,7 @@
 		{
 			"id": "SWORD_00",
 			"name": "Basic Sword",
-			"description": "Just a simple sword",
+			"description": "Just a simple sword (+2 damage)",
 			"path": "entity/items/Item_BasicSword.tscn",
 			"type": "EQUIPABLE",
 			"stats": [
@@ -16,7 +16,7 @@
 		{
 			"id": "SWORD_01",
 			"name": "Heavy Sword",
-			"description": "A heavier more powerful sword",
+			"description": "A heavier more powerful sword (+4 damage)",
 			"path": "entity/items/Item_HeavySword.tscn",
 			"type": "EQUIPABLE",
 			"stats": [
@@ -29,7 +29,7 @@
 		{
 			"id": "ARMOR_00",
 			"name": "Cloth Armor",
-			"description": "Simple clothing to protect you",
+			"description": "Simple clothing to protect you (+1 armor)",
 			"path": "entity/items/Item_ClothArmor.tscn",
 			"type": "EQUIPABLE",
 			"stats": [
@@ -41,8 +41,8 @@
 		},
 		{
 			"id": "HEALTH_POTION_00",
-			"name": "Small Health Potion",
-			"description": "A tiny health potion",
+			"name": "Small Health Potion (Consumable)",
+			"description": "A tiny health potion (+10 health)",
 			"path": "entity/items/Item_SmallHealingPotion.tscn",
 			"type": "CONSUMABLE",
 			"statModifiers": [
@@ -54,8 +54,8 @@
 		},
 		{
 			"id": "HEALTH_UPGRADE_00",
-			"name": "Blessing of health",
-			"description": "A boost to base health",
+			"name": "Blessing of health (Perk)",
+			"description": "A boost to base health (+10 max health)",
 			"path": "entity/items/Item_HealthUpgrade.tscn",
 			"type": "CONSUMABLE",
 			"statModifiers": [

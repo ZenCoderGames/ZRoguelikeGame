@@ -319,6 +319,9 @@ func find_next_best_path_cell(currentCell):
 
 # HELPERS
 func get_cell(r:int, c:int):
+	if r<0 or c<0 or r>=maxRows or c>=maxCols:
+		return null
+		
 	return cells[r * maxCols + c]
 
 func get_safe_starting_cell():

@@ -19,6 +19,7 @@ var currentRoom = null
 var prevRoom = null
 
 signal OnCharacterMove(x, y)
+signal OnCharacterMoveToCell()
 signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
 signal OnDeath()
@@ -78,6 +79,7 @@ func move_to_cell(newCell):
 		prevRoom = currentRoom
 		emit_signal("OnCharacterRoomChanged", cell.room)
 	currentRoom = cell.room
+	emit_signal("OnCharacterMoveToCell")
 
 # STATS
 func get_stat_value(statType):
@@ -131,6 +133,7 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 	for stat in stats:
 		if stat.type == statModifierData.type:
 			stat.baseValue = stat.baseValue + statModifierData.baseValue
+			stat.value = stat.value + statModifierData.baseValue
 			stat.value = stat.value + statModifierData.value
 			stat.value = clamp(stat.value, 0, stat.baseValue)
 			emit_signal("OnStatChanged", self)

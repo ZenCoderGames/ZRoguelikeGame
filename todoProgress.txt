@@ -23,24 +23,25 @@ Roguelike Dev:
 (D)- Action system
 (D)- Stats
 (D)- Debug why damage happening twice
-(IP)- Items (Item Pickup UI)
+(D)- Items
+- Stat Display (Player Damage, Player/Enemy Armor, Player Items equipped)
 
 - Inventory
 - Ranged Scrolls
 
 - Encounter Generator
 
+- Level Ups
+
 - Targeting
 
 - Stamina
 
-- Typed pass
-- Better enemy composition across dungeon (use total pool) 
-- Game Feel (death, better damage number font)
+- Game Feel (death, better damage number font, camera shake)
 - Walls in rooms
 - History of actions
 
-- RPG Stats
+- Typed pass
 
 - Floors
 

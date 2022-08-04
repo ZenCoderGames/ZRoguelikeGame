@@ -52,7 +52,7 @@
 				"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
 			},
 			{
-				"disable": true,
+				"#disable": true,
 				"id": "GIANT_00",
 				"displayName": "Giant",
 				"path": "entity/Giant.tscn",

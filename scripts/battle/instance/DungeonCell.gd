@@ -161,11 +161,20 @@ func is_middle_of_top_edge():
 func is_middle_of_bot_edge():
 	return is_bot_edge() and col == room.maxCols/2
 
-func is_x_adjacent(cell):
-	return abs(pos.x - cell.pos.x) == Constants.STEP_X+1
+func is_x_adjacent(newCell):
+	return abs(pos.x - newCell.pos.x) == Constants.STEP_X+1
 
-func is_y_adjacent(cell):
-	return abs(pos.y - cell.pos.y) == Constants.STEP_Y+1
+func is_y_adjacent(newCell):
+	return abs(pos.y - newCell.pos.y) == Constants.STEP_Y+1
+
+func is_row_adjacent(newCell):
+	return abs(row - newCell.row) == 1
+
+func is_col_adjacent(newCell):
+	return abs(col - newCell.col) == 1
+
+func is_rowcol_adjacent(cell):
+	return is_row_adjacent(cell) or is_col_adjacent(cell)
 
 func is_x_identical(cell):
 	return abs(pos.x - cell.pos.x) == 0

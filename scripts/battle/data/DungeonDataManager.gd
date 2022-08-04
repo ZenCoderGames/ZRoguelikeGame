@@ -56,5 +56,4 @@ func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]
 
 func get_random_item_data():
-	return itemDataList[4]
-	#return itemDataList[randi() % itemDataList.size()]
+	return itemDataList[randi() % itemDataList.size()]
