@@ -1,5 +1,7 @@
 extends Node
 
+class_name ItemUI
+
 onready var nameLabel:Label = get_node("VBoxContainer/PanelContainer/NameLabel")
 onready var descLabel:Label = get_node("VBoxContainer/PanelContainer3/DescLabel")
 

@@ -24,6 +24,7 @@ signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
 signal OnDeath()
 signal OnItemPicked(item)
+signal OnItemEquipped(item)
 
 var originalColor:Color
 
@@ -149,6 +150,9 @@ func add_item(itemToAdd):
 	items.append(itemToAdd)
 	itemToAdd.activate(self)
 	emit_signal("OnItemPicked", itemToAdd)
+	var itemInstance = itemToAdd as Item
+	if !itemInstance.is_consumable():
+		emit_signal("OnItemEquipped", itemToAdd)
 
 # NOT Used Yet
 func remove_item(itemToRemove):

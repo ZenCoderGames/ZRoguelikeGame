@@ -24,7 +24,9 @@ Roguelike Dev:
 (D)- Stats
 (D)- Debug why damage happening twice
 (D)- Items
-- Stat Display (Player Damage, Player/Enemy Armor, Player Items equipped)
+(D)- Stat Display (Player Damage, Player/Enemy Armor, Player Items equipped)
+- Fix health bar UI issue
+- Fix restarting not resetting player
 
 - Inventory
 - Ranged Scrolls

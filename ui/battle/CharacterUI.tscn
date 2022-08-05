@@ -1,91 +1,100 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/battle/ui/CharacterUI.gd" type="Script" id=2]
+[ext_resource path="res://ui/battle/styles/InfoPanelStyleBox.tres" type="StyleBox" id=3]
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_top = 112.0
-margin_right = 300.0
-margin_bottom = 269.0
+margin_right = 200.0
+margin_bottom = 94.0
 script = ExtResource( 2 )
+playerTintColor = Color( 0.0823529, 0.270588, 0.309804, 1 )
+enemyTintColor = Color( 0.309804, 0.0862745, 0.105882, 1 )
 baseContainerFlashColor = Color( 0.843137, 0.596078, 0.596078, 1 )
 healthBarFlashColor = Color( 0.460938, 0.250275, 0.250275, 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 293.0
-margin_bottom = 150.0
+margin_right = 193.0
+margin_bottom = 87.0
+size_flags_vertical = 15
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-margin_right = 286.0
-margin_bottom = 45.0
+[node name="Name" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 186.0
+margin_bottom = 24.0
+custom_styles/panel = ExtResource( 3 )
 
-[node name="Bg" type="ColorRect" parent="VBoxContainer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 38.0
-color = Color( 0.462745, 0.282353, 0.282353, 1 )
+[node name="Bg" type="ColorRect" parent="VBoxContainer/Name"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
+color = Color( 0.156863, 0.14902, 0.14902, 1 )
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 38.0
+[node name="NameLabel" type="Label" parent="VBoxContainer/Name"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
 theme = ExtResource( 1 )
 text = "Enemy"
+align = 1
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 49.0
-margin_right = 286.0
-margin_bottom = 94.0
+[node name="Health" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 186.0
+margin_bottom = 52.0
+custom_styles/panel = ExtResource( 3 )
 
-[node name="Bg" type="ColorRect" parent="VBoxContainer/PanelContainer3"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 38.0
+[node name="Bg" type="ColorRect" parent="VBoxContainer/Health"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="InnerBg" type="ColorRect" parent="VBoxContainer/PanelContainer3"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 38.0
-color = Color( 0.180392, 0.188235, 0.184314, 1 )
+[node name="InnerBg" type="ColorRect" parent="VBoxContainer/Health"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
+color = Color( 0.12549, 0.14902, 0.137255, 1 )
 
-[node name="HealthBar" type="ColorRect" parent="VBoxContainer/PanelContainer3"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 38.0
-color = Color( 0.333333, 0.145098, 0.145098, 1 )
+[node name="HealthBar" type="ColorRect" parent="VBoxContainer/Health"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
+color = Color( 0.160784, 0.235294, 0.176471, 1 )
 
-[node name="HealthLabel" type="Label" parent="VBoxContainer/PanelContainer3"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 38.0
+[node name="HealthLabel" type="Label" parent="VBoxContainer/Health"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
 theme = ExtResource( 1 )
 text = "Health: 100"
+align = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 98.0
-margin_right = 286.0
-margin_bottom = 143.0
+[node name="Damage" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 56.0
+margin_right = 186.0
+margin_bottom = 80.0
+custom_styles/panel = ExtResource( 3 )
 
-[node name="Bg" type="ColorRect" parent="VBoxContainer/PanelContainer2"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 38.0
-color = Color( 0.203922, 0.156863, 0.156863, 1 )
+[node name="Bg" type="ColorRect" parent="VBoxContainer/Damage"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
+color = Color( 0.290196, 0.164706, 0.164706, 1 )
 
-[node name="DescLabel" type="Label" parent="VBoxContainer/PanelContainer2"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 279.0
-margin_bottom = 38.0
+[node name="DescLabel" type="Label" parent="VBoxContainer/Damage"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
 theme = ExtResource( 1 )
 text = "Damage: 2"
+align = 1

@@ -28,3 +28,9 @@ func get_display_name():
 
 func get_description():
 	return data.description
+
+func is_equippable():
+	return data.is_equippable()
+
+func is_consumable():
+	return data.is_consumable()

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/battle/styles/InfoPanelStyleBox.tres" type="StyleBox" id=2]
+[ext_resource path="res://scripts/battle/ui/EquippedItemUI.gd" type="Script" id=3]
+
+[node name="Items" type="PanelContainer"]
+margin_top = 84.0
+margin_right = 186.0
+margin_bottom = 108.0
+custom_styles/panel = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Bg" type="ColorRect" parent="."]
+self_modulate = Color( 0.164706, 0.615686, 0.72549, 1 )
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
+color = Color( 0.203922, 0.156863, 0.156863, 1 )
+
+[node name="DescLabel" type="Label" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 22.0
+theme = ExtResource( 1 )
+text = "Basic Sword"
+align = 1
+autowrap = true
