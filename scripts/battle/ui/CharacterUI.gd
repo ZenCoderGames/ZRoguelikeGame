@@ -21,6 +21,8 @@ export var healthBarFlashColor:Color
 var originalHealthBarColor:Color
 var character:Character
 
+var equippedItems:Dictionary = {}
+
 func _ready():
 	originalHealthBarColor = healthBar.self_modulate
 
@@ -30,6 +32,7 @@ func init(entityObj):
 	descLabel.text = str("Damage: ", character.get_damage())
 	character.connect("OnStatChanged", self, "_on_stat_changed")
 	character.connect("OnItemEquipped", self, "_on_item_equipped")
+	character.connect("OnItemUnEquipped", self, "_on_item_unequipped")
 	if character.team == Constants.TEAM.PLAYER:
 		nameBg.color = playerTintColor
 	elif character.team == Constants.TEAM.ENEMY:
@@ -48,7 +51,14 @@ func _on_item_equipped(item):
 	var newItemUI = EquippedItemUI.instance()
 	listContainer.add_child(newItemUI)
 	newItemUI.init(item)
-	_update_ui()
+	equippedItems[item] = newItemUI
+	_on_stat_changed(character)
+
+func _on_item_unequipped(item):
+	if equippedItems.has(item):
+		listContainer.remove_child(equippedItems[item])
+		equippedItems.erase(item)
+	_on_stat_changed(character)
 	
 func _update_ui():
 	healthLabel.text = str("Health: ", character.get_health(), "/", character.get_max_health())

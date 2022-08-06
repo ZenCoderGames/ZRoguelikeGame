@@ -6,6 +6,7 @@
 			"description": "Just a simple sword\n(+2 damage)",
 			"path": "entity/items/Item_BasicSword.tscn",
 			"type": "EQUIPABLE",
+			"slot": "WEAPON",
 			"stats": [
 				{
 					"type": "DAMAGE",
@@ -19,6 +20,7 @@
 			"description": "A heavier more powerful sword\n(+4 damage)",
 			"path": "entity/items/Item_HeavySword.tscn",
 			"type": "EQUIPABLE",
+			"slot": "WEAPON",
 			"stats": [
 				{
 					"type": "DAMAGE",
@@ -33,6 +35,7 @@
 			"description": "Simple clothing to protect you\n(+1 armor)",
 			"path": "entity/items/Item_ClothArmor.tscn",
 			"type": "EQUIPABLE",
+			"slot": "BODY",
 			"stats": [
 				{
 					"type": "ARMOR",
@@ -41,6 +44,7 @@
 			]
 		},
 		{
+			"#disable": true,
 			"id": "HEALTH_POTION_00",
 			"name": "Small Health Potion (Consumable)",
 			"description": "A tiny health potion\n(+10 health)",
@@ -54,6 +58,7 @@
 			]
 		},
 		{
+			"#disable": true,
 			"id": "HEALTH_UPGRADE_00",
 			"name": "Blessing of health (Perk)",
 			"description": "A boost to base health\n(+10 max health)",

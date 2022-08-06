@@ -21,6 +21,7 @@ var path:String
 var statDataList:Array
 var statModifierDataList:Array
 var actionDataList:Array
+var slot:int
 
 enum ITEM_TYPE { EQUIPABLE, CONSUMABLE }
 var type:int
@@ -37,6 +38,13 @@ func _init(itemDataJS, actionDataMap):
 		type = ITEM_TYPE.get(itemType)
 	else:
 		print("ERROR: Invalid Item Type - ", itemType)
+
+	if itemDataJS.has("slot"):
+		var slotType = itemDataJS["slot"]
+		if Constants.ITEM_EQUIP_SLOT.has(slotType):
+			slot = Constants.ITEM_EQUIP_SLOT.get(slotType)
+		else:
+			print("ERROR: Invalid Slot Type - ", slotType)
 
 	if itemDataJS.has("stats"):
 		var statDataJSList = itemDataJS["stats"]

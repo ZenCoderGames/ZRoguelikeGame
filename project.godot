@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Character",
 "language": "GDScript",
-"path": "res://scripts/battle/instance/Character.gd"
+"path": "res://scripts/battle/instance/characters/Character.gd"
 }, {
 "base": "Reference",
 "class": "CharacterData",
@@ -97,7 +97,12 @@ _global_script_classes=[ {
 "base": "Character",
 "class": "EnemyCharacter",
 "language": "GDScript",
-"path": "res://scripts/battle/instance/EnemyCharacter.gd"
+"path": "res://scripts/battle/instance/characters/EnemyCharacter.gd"
+}, {
+"base": "Reference",
+"class": "Equipment",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/characters/Equipment.gd"
 }, {
 "base": "Node",
 "class": "EquippedItemUI",
@@ -122,7 +127,7 @@ _global_script_classes=[ {
 "base": "Character",
 "class": "PlayerCharacter",
 "language": "GDScript",
-"path": "res://scripts/battle/instance/PlayerCharacter.gd"
+"path": "res://scripts/battle/instance/characters/PlayerCharacter.gd"
 }, {
 "base": "Reference",
 "class": "Stat",
@@ -163,6 +168,7 @@ _global_script_class_icons={
 "DungeonDataManager": "",
 "DungeonRoom": "",
 "EnemyCharacter": "",
+"Equipment": "",
 "EquippedItemUI": "",
 "Item": "",
 "ItemData": "",

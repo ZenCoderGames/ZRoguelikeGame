@@ -13,6 +13,9 @@ enum ENTITY_TYPE { NONE, STATIC, DYNAMIC }
 enum TEAM { NONE, PLAYER, ENEMY, NPC }
 enum RELATIVE_TEAM { ANY, ALLY, ENEMY }
 
+# PLAYER
+enum ITEM_EQUIP_SLOT { NONE, WEAPON, BODY }
+
 # GROUPS
 const pc: String = "pc"
 const room: String = "room"

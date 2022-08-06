@@ -124,3 +124,4 @@ func _clean_up():
 		infoObject.queue_free()
 
 	infoPanelObjects.clear()
+	detailsLabel.text = ""

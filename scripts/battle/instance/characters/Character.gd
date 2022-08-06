@@ -14,6 +14,8 @@ var isDead:bool = false
 var stats:Array = []
 var actions:Array = []
 var items:Array = []
+var equippedItems:Array = []
+var equippedSlots:Dictionary = {}
 
 var currentRoom = null
 var prevRoom = null
@@ -25,6 +27,7 @@ signal OnStatChanged(character)
 signal OnDeath()
 signal OnItemPicked(item)
 signal OnItemEquipped(item)
+signal OnItemUnEquipped(item)
 
 var originalColor:Color
 
@@ -50,6 +53,9 @@ func init(charData, teamVal):
 			actions.append(action)
 
 	actions.sort_custom(self, "sort_actions_by_priority")
+
+	equippedSlots[Constants.ITEM_EQUIP_SLOT.WEAPON] = null
+	equippedSlots[Constants.ITEM_EQUIP_SLOT.BODY] = null
 
 func sort_actions_by_priority(a, b):
 	return a.actionData.priority >= b.actionData.priority
@@ -90,7 +96,7 @@ func get_stat_value(statType):
 		if stat.type == statType:
 			statValue = statValue + stat.value
 	# iterate through items
-	for item in items:
+	for item in equippedItems:
 		for statData in item.data.statDataList:
 			if statData.type == statType:
 				statValue = statValue + statData.value
@@ -104,7 +110,7 @@ func get_stat_base_value(statType):
 		if stat.type == statType:
 			statBaseValue = statBaseValue + stat.baseValue
 	# iterate through items
-	for item in items:
+	for item in equippedItems:
 		for statData in item.data.statDataList:
 			if statData.type == statType:
 				statBaseValue = statBaseValue + statData.baseValue
@@ -148,22 +154,20 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 # For testing when player goes over, they get the item
 func add_item(itemToAdd):
 	items.append(itemToAdd)
-	itemToAdd.activate(self)
 	emit_signal("OnItemPicked", itemToAdd)
+
 	var itemInstance = itemToAdd as Item
-	if !itemInstance.is_consumable():
-		emit_signal("OnItemEquipped", itemToAdd)
+	if itemInstance.is_consumable():
+		itemToAdd.activate(self)
+	else:
+		var slotType:int = itemToAdd.data.slot
+		if equippedSlots[slotType] != null:
+			equippedItems.erase(equippedSlots[slotType])
+			emit_signal("OnItemUnEquipped", equippedSlots[slotType])
 
-# NOT Used Yet
-func remove_item(itemToRemove):
-	var matchingItems:Array = []
-	for item in items:
-		if item == itemToRemove:
-			matchingItems.append(itemToRemove)
-			itemToRemove.deactivate(self)
-
-	for item in matchingItems:
-		items.erase(item)
+		equippedItems.append(itemInstance)
+		equippedSlots[slotType] = itemInstance
+		emit_signal("OnItemEquipped", itemInstance)
 
 # COMBAT
 func attack(entity):
