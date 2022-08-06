@@ -21,25 +21,31 @@ onready var deathUI:Node = get_node("DeathUI")
 func _ready():
 	deathUI.visible = false
 	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_init")
-	playerUI = CharacterUI.instance()
-	playerPanel.add_child(playerUI)
+	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
 	
 func _on_dungeon_init():
-	deathUI.visible = false
+	_shared_init()
 	
 	Dungeon.connect("OnTurnCompleted", self, "_on_turn_taken")
 	Dungeon.connect("OnAttack", self, "_on_attack")
 	Dungeon.connect("OnKill", self, "_on_kill")
+
+func _on_dungeon_recreated():
+	_clean_up()
+	_shared_init()
+
+func _shared_init():
+	deathUI.visible = false
+	playerUI = CharacterUI.instance()
+	playerPanel.add_child(playerUI)
 	
-	#Dungeon.player.connect("OnStatChanged", self, "_on_player_stat_changed")
 	Dungeon.player.connect("OnDeath", self, "_on_player_death")
-	
 	Dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_move")
 	Dungeon.player.connect("OnNearbyEntityFound", self, "_on_entity_nearby")
 	Dungeon.player.connect("OnItemPicked", self, "_on_item_picked")
 	
 	playerUI.init(Dungeon.player)
+
 	
 func _on_turn_taken():
 	turnLabel.text = str("Turns: ", Dungeon.turnsTaken)
@@ -108,3 +114,13 @@ func _info_panel_has_entity(entity):
 			return true
 	
 	return false
+
+func _clean_up():
+	playerPanel.remove_child(playerUI)
+	playerUI.queue_free()
+
+	for infoObject in infoPanelObjects:
+		infoPanel.remove_child(infoObject)
+		infoObject.queue_free()
+
+	infoPanelObjects.clear()

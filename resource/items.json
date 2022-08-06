@@ -27,6 +27,7 @@
 			]
 		},
 		{
+			"disable": true,
 			"id": "ARMOR_00",
 			"name": "Cloth Armor",
 			"description": "Simple clothing to protect you\n(+1 armor)",

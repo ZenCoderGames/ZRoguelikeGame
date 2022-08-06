@@ -30,8 +30,9 @@ func init_items():
 	var itemDataJSList:Array = data["items"]
 	for itemDataJS in itemDataJSList:
 		var newItemData = ItemData.new(itemDataJS, actionDataMap)
-		itemDataMap[newItemData.id] = newItemData
-		itemDataList.append(newItemData)
+		if !newItemData.disable:
+			itemDataMap[newItemData.id] = newItemData
+			itemDataList.append(newItemData)
 
 func get_item_data(id):
 	return itemDataMap[id]

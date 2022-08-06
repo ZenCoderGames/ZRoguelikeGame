@@ -25,6 +25,8 @@ var actionDataList:Array
 enum ITEM_TYPE { EQUIPABLE, CONSUMABLE }
 var type:int
 
+var disable:bool
+
 func _init(itemDataJS, actionDataMap):
 	id = itemDataJS["id"]
 	displayName = itemDataJS["name"]
@@ -50,6 +52,9 @@ func _init(itemDataJS, actionDataMap):
 		var actionDataIdJSList = itemDataJS["actions"]
 		for actionDataIdJS in actionDataIdJSList:
 			actionDataList.append(actionDataMap[actionDataIdJS])
+			
+	if itemDataJS.has("disable"):
+		disable =  itemDataJS["disable"]
 
 func is_equippable():
 	return type == ITEM_TYPE.EQUIPABLE

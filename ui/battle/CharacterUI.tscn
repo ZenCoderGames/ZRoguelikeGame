@@ -17,7 +17,7 @@ healthBarFlashColor = Color( 0.460938, 0.250275, 0.250275, 1 )
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 193.0
-margin_bottom = 87.0
+margin_bottom = 91.0
 size_flags_vertical = 15
 
 [node name="Name" type="PanelContainer" parent="VBoxContainer"]
@@ -44,43 +44,42 @@ align = 1
 [node name="Health" type="PanelContainer" parent="VBoxContainer"]
 margin_top = 28.0
 margin_right = 186.0
-margin_bottom = 52.0
+margin_bottom = 56.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Bg" type="ColorRect" parent="VBoxContainer/Health"]
+visible = false
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 184.0
 margin_bottom = 22.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="InnerBg" type="ColorRect" parent="VBoxContainer/Health"]
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer/Health"]
+self_modulate = Color( 0.345098, 0.980392, 0.270588, 1 )
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 184.0
-margin_bottom = 22.0
-color = Color( 0.12549, 0.14902, 0.137255, 1 )
-
-[node name="HealthBar" type="ColorRect" parent="VBoxContainer/Health"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 184.0
-margin_bottom = 22.0
-color = Color( 0.160784, 0.235294, 0.176471, 1 )
+margin_bottom = 26.0
+rect_min_size = Vector2( 182, 24 )
+value = 75.0
+rounded = true
+percent_visible = false
 
 [node name="HealthLabel" type="Label" parent="VBoxContainer/Health"]
 margin_left = 2.0
-margin_top = 2.0
+margin_top = 4.0
 margin_right = 184.0
-margin_bottom = 22.0
+margin_bottom = 24.0
 theme = ExtResource( 1 )
 text = "Health: 100"
 align = 1
+valign = 1
 
 [node name="Damage" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 56.0
+margin_top = 60.0
 margin_right = 186.0
-margin_bottom = 80.0
+margin_bottom = 84.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Bg" type="ColorRect" parent="VBoxContainer/Damage"]

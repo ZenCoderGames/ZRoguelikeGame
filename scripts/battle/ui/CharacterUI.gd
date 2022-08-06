@@ -6,7 +6,7 @@ onready var baseContainer:PanelContainer = get_node(".")
 onready var listContainer:VBoxContainer = get_node("VBoxContainer")
 onready var nameBg:ColorRect = get_node("VBoxContainer/Name/Bg")
 onready var nameLabel:Label = get_node("VBoxContainer/Name/NameLabel")
-onready var healthBar:ColorRect = get_node("VBoxContainer/Health/HealthBar")
+onready var healthBar:ProgressBar = get_node("VBoxContainer/Health/HealthBar")
 onready var healthLabel:Label = get_node("VBoxContainer/Health/HealthLabel")
 onready var descLabel:Label = get_node("VBoxContainer/Damage/DescLabel")
 
@@ -18,13 +18,11 @@ export var enemyTintColor:Color
 export var baseContainerFlashColor:Color
 export var healthBarFlashColor:Color
 
-var originalHealthRect
 var originalHealthBarColor:Color
 var character:Character
 
 func _ready():
-	originalHealthRect = healthBar.rect_size
-	originalHealthBarColor = healthBar.color
+	originalHealthBarColor = healthBar.self_modulate
 
 func init(entityObj):
 	character = entityObj as Character
@@ -40,10 +38,10 @@ func init(entityObj):
 
 func _on_stat_changed(characterRef):
 	baseContainer.self_modulate = baseContainerFlashColor
-	healthBar.color = healthBarFlashColor
+	healthBar.self_modulate = healthBarFlashColor
 	yield(get_tree().create_timer(0.075), "timeout")
 	_update_ui()
-	healthBar.color = originalHealthBarColor
+	healthBar.self_modulate = originalHealthBarColor
 	baseContainer.self_modulate = Color.white
 	
 func _on_item_equipped(item):
@@ -55,7 +53,7 @@ func _on_item_equipped(item):
 func _update_ui():
 	healthLabel.text = str("Health: ", character.get_health(), "/", character.get_max_health())
 	var pctHealth:float = float(character.get_health())/float(character.get_max_health())
-	healthBar.rect_size = Vector2(pctHealth * originalHealthRect.x, originalHealthRect.y)
+	healthBar.value = pctHealth * 100
 	descLabel.text = str("Damage: ", character.get_damage())
 	
 func has_entity(entity):
