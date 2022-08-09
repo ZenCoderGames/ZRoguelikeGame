@@ -28,6 +28,8 @@ const items: String = "items"
 const INPUT_EXIT_GAME: String = "exit"
 const INPUT_RESET_DUNGEON: String = "reset_dungeon"
 
+const INPUT_TOGGLE_INVENTORY: String = "toggle_inventory"
+
 const INPUT_MOVE_LEFT: String = "move_left"
 const INPUT_MOVE_RIGHT: String = "move_right"
 const INPUT_MOVE_UP: String = "move_up"

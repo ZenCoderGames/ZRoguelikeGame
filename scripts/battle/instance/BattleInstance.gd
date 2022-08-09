@@ -23,6 +23,7 @@ export var debugEndRoomColor:Color
 
 signal OnDungeonInitialized()
 signal OnDungeonRecreated()
+signal OnToggleInventory()
 
 func _init():
 	Dungeon.init(self)
@@ -40,3 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		Dungeon.clean_up()
 		Dungeon.create()
 		emit_signal("OnDungeonRecreated")
+
+	# inventory
+	if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
+		emit_signal("OnToggleInventory")

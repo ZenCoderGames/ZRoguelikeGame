@@ -39,8 +39,8 @@ margin_right = 200.0
 margin_bottom = 150.0
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
-margin_left = 584.0
-margin_right = 793.0
+margin_left = 590.0
+margin_right = 800.0
 margin_bottom = 550.0
 alignment = 1
 

@@ -15,6 +15,9 @@ var infoPanelObjects:Array = []
 var registeredEnemies:Dictionary = {}
 const CharacterUI := preload("res://ui/battle/CharacterUI.tscn")
 const ItemUI := preload("res://ui/battle/ItemUI.tscn")
+# inventory UI
+const InventoryUI := preload("res://ui/battle/InventoryUI.tscn")
+var inventoryUI:InventoryUI = null
 # death UI
 onready var deathUI:Node = get_node("DeathUI")
 
@@ -22,6 +25,10 @@ func _ready():
 	deathUI.visible = false
 	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
+	Dungeon.battleInstance.connect("OnToggleInventory", self, "_on_toggle_inventory")
+
+	inventoryUI = InventoryUI.instance()
+	self.add_child(inventoryUI)
 	
 func _on_dungeon_init():
 	_shared_init()
@@ -38,6 +45,8 @@ func _shared_init():
 	deathUI.visible = false
 	playerUI = CharacterUI.instance()
 	playerPanel.add_child(playerUI)
+
+	inventoryUI.init(Dungeon.player)
 	
 	Dungeon.player.connect("OnDeath", self, "_on_player_death")
 	Dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_move")
@@ -115,13 +124,28 @@ func _info_panel_has_entity(entity):
 	
 	return false
 
+# INVENTORY PANEL
+var isInventoryOpen:bool = false
+func _on_toggle_inventory():
+	isInventoryOpen = !isInventoryOpen
+	if isInventoryOpen:
+		inventoryUI.show()
+	else:
+		inventoryUI.hide()
+
 func _clean_up():
 	playerPanel.remove_child(playerUI)
 	playerUI.queue_free()
 
 	for infoObject in infoPanelObjects:
+		if !weakref(infoObject).get_ref():
+			continue
+			
 		infoPanel.remove_child(infoObject)
 		infoObject.queue_free()
 
 	infoPanelObjects.clear()
 	detailsLabel.text = ""
+
+	isInventoryOpen = false
+	inventoryUI.clean_up()

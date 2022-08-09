@@ -156,18 +156,19 @@ func add_item(itemToAdd):
 	items.append(itemToAdd)
 	emit_signal("OnItemPicked", itemToAdd)
 
-	var itemInstance = itemToAdd as Item
-	if itemInstance.is_consumable():
-		itemToAdd.activate(self)
-	else:
-		var slotType:int = itemToAdd.data.slot
-		if equippedSlots[slotType] != null:
-			equippedItems.erase(equippedSlots[slotType])
-			emit_signal("OnItemUnEquipped", equippedSlots[slotType])
+func consume_item(item):
+	(item as Item).consume(self)
+	items.erase(item)
 
-		equippedItems.append(itemInstance)
-		equippedSlots[slotType] = itemInstance
-		emit_signal("OnItemEquipped", itemInstance)
+func equip_item(item):
+	var slotType:int = item.data.slot
+	if equippedSlots[slotType] != null:
+		equippedItems.erase(equippedSlots[slotType])
+		emit_signal("OnItemUnEquipped", equippedSlots[slotType])
+
+	equippedItems.append(item)
+	equippedSlots[slotType] = item
+	emit_signal("OnItemEquipped", item)
 
 # COMBAT
 func attack(entity):

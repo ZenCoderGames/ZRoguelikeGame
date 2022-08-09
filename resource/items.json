@@ -4,6 +4,7 @@
 			"id": "SWORD_00",
 			"name": "Basic Sword",
 			"description": "Just a simple sword\n(+2 damage)",
+			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's damage by +2",
 			"path": "entity/items/Item_BasicSword.tscn",
 			"type": "EQUIPABLE",
 			"slot": "WEAPON",
@@ -18,6 +19,7 @@
 			"id": "SWORD_01",
 			"name": "Heavy Sword",
 			"description": "A heavier more powerful sword\n(+4 damage)",
+			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +4",
 			"path": "entity/items/Item_HeavySword.tscn",
 			"type": "EQUIPABLE",
 			"slot": "WEAPON",
@@ -33,6 +35,7 @@
 			"id": "ARMOR_00",
 			"name": "Cloth Armor",
 			"description": "Simple clothing to protect you\n(+1 armor)",
+			"fullDescription": "A thin layer of cloth that can protect the player's bare skin.\nIncreases armor by +1",
 			"path": "entity/items/Item_ClothArmor.tscn",
 			"type": "EQUIPABLE",
 			"slot": "BODY",
@@ -46,8 +49,9 @@
 		{
 			"#disable": true,
 			"id": "HEALTH_POTION_00",
-			"name": "Small Health Potion (Consumable)",
+			"name": "Small Health Potion",
 			"description": "A tiny health potion\n(+10 health)",
+			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +10",
 			"path": "entity/items/Item_SmallHealingPotion.tscn",
 			"type": "CONSUMABLE",
 			"statModifiers": [
@@ -60,8 +64,9 @@
 		{
 			"#disable": true,
 			"id": "HEALTH_UPGRADE_00",
-			"name": "Blessing of health (Perk)",
+			"name": "Blessing of health",
 			"description": "A boost to base health\n(+10 max health)",
+			"fullDescription": "A blessing from a goddess to those who seek it.\nIncrease max health by +10",
 			"path": "entity/items/Item_HealthUpgrade.tscn",
 			"type": "CONSUMABLE",
 			"statModifiers": [

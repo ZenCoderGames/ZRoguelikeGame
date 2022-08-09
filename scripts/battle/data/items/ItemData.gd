@@ -17,6 +17,7 @@ class_name ItemData
 var id:String
 var displayName:String
 var description:String
+var fullDescription:String
 var path:String
 var statDataList:Array
 var statModifierDataList:Array
@@ -32,6 +33,7 @@ func _init(itemDataJS, actionDataMap):
 	id = itemDataJS["id"]
 	displayName = itemDataJS["name"]
 	description = itemDataJS["description"]
+	fullDescription = itemDataJS["fullDescription"]
 	path = itemDataJS["path"]
 	var itemType = itemDataJS["type"]
 	if ITEM_TYPE.has(itemType):

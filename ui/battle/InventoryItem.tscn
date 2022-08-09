@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="Button" type="Button"]
+margin_right = 190.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Badass Heavy Sword Of Doom"
+clip_text = true
