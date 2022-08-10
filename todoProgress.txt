@@ -26,9 +26,9 @@ Roguelike Dev:
 (D)- Items
 (D)- Stat Display (Player Damage, Player/Enemy Armor, Player Items equipped)
 (D)- Fix health bar UI issue
-- Fix restarting not resetting player
-
-- Inventory
+(D)- Fix restarting not resetting player
+(D)- Equipped Items and Swapping on pickup
+(D)- Inventory
 - Ranged Scrolls
 
 - Encounter Generator

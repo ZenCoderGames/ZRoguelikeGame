@@ -2,7 +2,7 @@ extends Node
 
 class_name InventoryUI
 
-onready var itemList:VBoxContainer = get_node("Content/HSplitContainer/ItemPanel/Bg/MarginContainer/ItemList")
+onready var itemList:VBoxContainer = get_node("Content/HSplitContainer/ItemPanel/Bg/MarginContainer/ItemList/VBoxContainer")
 const InventoryItem := preload("res://ui/battle/InventoryItem.tscn")
 
 onready var noContent:Node = get_node("NoContent")
@@ -82,6 +82,7 @@ func _on_equip_selected_item():
 func _on_consume_selected_item():
 	var selectedItem:Item = playerChar.items[selectedIdx]
 	playerChar.consume_item(selectedItem)
+	selectedIdx = 0
 	_refresh_ui()
 
 func _on_item_selected(idx):
