@@ -15,6 +15,9 @@ func consume(character):
 		for statModifier in data.statModifierDataList:
 			character.modify_stat_value_from_modifier(statModifier)
 
+func activate():
+	pass
+
 func picked():
 	if cell.entityObject!=null:
 		cell.entityObject.hide()

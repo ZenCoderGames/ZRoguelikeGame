@@ -27,6 +27,7 @@ func _ready():
 func init(character):
 	playerChar = character
 	playerChar.connect("OnItemPicked", self, "_on_item_picked_by_player")
+	playerChar.connect("OnSpellActivated", self, "_on_spell_activated")
 	
 func show():
 	selectedIdx = 0
@@ -38,6 +39,10 @@ func hide():
 	noContent.visible = false
 	
 func _on_item_picked_by_player(itemPicked):
+	selectedIdx = 0
+	_refresh_ui()
+
+func _on_spell_activated(spellItem):
 	selectedIdx = 0
 	_refresh_ui()
 	

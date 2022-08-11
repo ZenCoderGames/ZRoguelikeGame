@@ -33,6 +33,7 @@ signal OnItemEquipped(item)
 signal OnItemUnEquipped(item)
 signal OnSpellEquipped(item)
 signal OnSpellUnEquipped(item)
+signal OnSpellActivated(item)
 
 var originalColor:Color
 
@@ -182,6 +183,12 @@ func equip_item(item):
 		equippedItems.append(item)
 		equippedSlots[slotType] = item
 		emit_signal("OnItemEquipped", item)
+
+func activate_spell(spellItem):
+	spellItem.activate()
+	equippedSpells.erase(spellItem)
+	items.erase(spellItem)
+	emit_signal("OnSpellActivated", spellItem)
 
 # COMBAT
 func attack(entity):

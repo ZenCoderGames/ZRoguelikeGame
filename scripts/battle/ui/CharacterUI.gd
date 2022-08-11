@@ -38,6 +38,7 @@ func init(entityObj):
 	character.connect("OnItemUnEquipped", self, "_on_item_unequipped")
 	character.connect("OnSpellEquipped", self, "_on_spell_equipped")
 	character.connect("OnSpellUnEquipped", self, "_on_spell_unequipped")
+	character.connect("OnSpellActivated", self, "_on_spell_activated")
 	if character.team == Constants.TEAM.PLAYER:
 		nameBg.color = playerTintColor
 	elif character.team == Constants.TEAM.ENEMY:
@@ -83,9 +84,11 @@ func _on_spell_unequipped(spellItem):
 	if equippedSpells.size()==0:
 		spellContainer.visible = false
 	
-func _on_equip_spell_selected(spellItems):
-	#spellItem.activate()
-	pass
+func _on_equip_spell_selected(spellItem):
+	character.activate_spell(spellItem)
+
+func _on_spell_activated(spellItem):
+	_on_spell_unequipped(spellItem)
 
 func _update_ui():
 	healthLabel.text = str("Health: ", character.get_health(), "/", character.get_max_health())
