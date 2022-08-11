@@ -216,7 +216,10 @@ func _init_items():
 	if battleInstance.dontSpawnItems:
 		return
 
-	startRoom.generate_items(1)
+	if !battleInstance.debugSpawnItemInFirstRoom.empty():
+		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
+		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
+		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
 
 	for room in rooms:
 		if !room.isStartRoom:
@@ -240,6 +243,8 @@ func _on_turn_taken(x, y):
 		room.update_visibility()
 
 	player.cell.room.update_entities()
+
+	player.post_update()
 
 func clean_up():
 	for loadedScene in loadedScenes:

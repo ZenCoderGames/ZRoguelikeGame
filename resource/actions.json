@@ -34,7 +34,18 @@
 			"priority": 1,
 			"params": {
 				"damageMultiplier": 1,
-				"range": 1
+				"damageBonus": 0,
+				"fixedDamage": 0
+			}
+		},
+		{
+			"id": "FIND_TARGETS_IN_RANGE",
+			"type": "FIND_TARGETS",
+			"staminaCost": 0,
+			"priority": 2,
+			"params": {
+				"range": 1,
+				"maxTargets": 1
 			}
 		}
 	]

@@ -15,6 +15,7 @@ export var pauseAIMovement:bool
 export var pauseAIAttack:bool
 export var dontSpawnEnemies:bool
 export var dontSpawnItems:bool
+export var debugSpawnItemInFirstRoom:String
 export var setPlayerInvulnerable:bool
 export var debugShowAllRooms:bool
 export var debugStartRoomColor:Color

@@ -35,6 +35,9 @@ func is_equippable():
 func is_consumable():
 	return data.is_consumable()
 
+func is_spell():
+	return data.is_spell()
+
 func get_slot():
 	return data.slot
 

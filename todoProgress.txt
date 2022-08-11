@@ -29,13 +29,18 @@ Roguelike Dev:
 (D)- Fix restarting not resetting player
 (D)- Equipped Items and Swapping on pickup
 (D)- Inventory
-- Ranged Scrolls
 
-- Encounter Generator
+- Spell UI, equipping spells and activating spells
+- Spell Implementation (Lightning Bolt)
+- Spell Cooldown in turns
+- UnEquip button
+- Extra Ranged Scrolls (GroundPound, Revive, Vampiric, Barrier, Smoke bomb)
+
+- Dungeon Generator (Items/Enemies)
 
 - Level Ups
 
-- Targeting
+- Multi rooms
 
 - Stamina
 

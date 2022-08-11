@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="SpellButton" type="Button"]
+self_modulate = Color( 0.341176, 0.745098, 0.882353, 1 )
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "Lightning Bolt"
+clip_text = true

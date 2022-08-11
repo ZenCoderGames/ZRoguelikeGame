@@ -66,11 +66,16 @@ func _show_selected():
 	selectedItemButton.self_modulate = Color.orange
 	nameLabel.text = selectedItem.get_display_name() 
 	descLabel.text = selectedItem.get_full_description()
-	equipButton.visible = !playerChar.equippedItems.has(selectedItem) and !selectedItem.is_consumable()
+	if selectedItem.is_spell():
+		equipButton.visible = !playerChar.equippedSpells.has(selectedItem)
+	else:
+		equipButton.visible = !playerChar.equippedItems.has(selectedItem)
+	equippedUI.visible = (playerChar.equippedItems.has(selectedItem) or playerChar.equippedSpells.has(selectedItem)) and !selectedItem.is_consumable()
 	consumeButton.visible = selectedItem.is_consumable()
-	equippedUI.visible = playerChar.equippedItems.has(selectedItem) and !selectedItem.is_consumable()
 	if selectedItem.is_consumable():
 		typeLabel.text = "Consumable"
+	elif selectedItem.is_spell():
+		typeLabel.text = "Spell"
 	else:
 		typeLabel.text = selectedItem.get_slot_string()
 

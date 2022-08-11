@@ -31,22 +31,6 @@
 			]
 		},
 		{
-			"disable": true,
-			"id": "ARMOR_00",
-			"name": "Cloth Armor",
-			"description": "Simple clothing to protect you\n(+1 armor)",
-			"fullDescription": "A thin layer of cloth that can protect the player's bare skin.\nIncreases armor by +1",
-			"path": "entity/items/Item_ClothArmor.tscn",
-			"type": "EQUIPABLE",
-			"slot": "BODY",
-			"stats": [
-				{
-					"type": "ARMOR",
-					"value": 1
-				}
-			]
-		},
-		{
 			"#disable": true,
 			"id": "HEALTH_POTION_00",
 			"name": "Small Health Potion",
@@ -75,6 +59,19 @@
 					"baseValue": 10
 				}
 			]
+		},
+		{
+			"#disable": true,
+			"id": "SPELL_LIGHTNING_BOLT",
+			"name": "Lightning Bolt",
+			"description": "A Powerful Lightning Bolt",
+			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you.",
+			"path": "entity/items/Item_Spell_LightningBolt.tscn",
+			"type": "SPELL",
+			"subType": "SPELL_LIGHTNING_BOLT",
+			"params": {
+				"damage": 20
+			}
 		}
 	]
 }

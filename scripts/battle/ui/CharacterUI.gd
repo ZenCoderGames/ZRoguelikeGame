@@ -3,14 +3,16 @@ extends Node
 class_name CharacterUI
 
 onready var baseContainer:PanelContainer = get_node(".")
-onready var listContainer:VBoxContainer = get_node("VBoxContainer")
-onready var nameBg:ColorRect = get_node("VBoxContainer/Name/Bg")
-onready var nameLabel:Label = get_node("VBoxContainer/Name/NameLabel")
-onready var healthBar:ProgressBar = get_node("VBoxContainer/Health/HealthBar")
-onready var healthLabel:Label = get_node("VBoxContainer/Health/HealthLabel")
-onready var descLabel:Label = get_node("VBoxContainer/Damage/DescLabel")
-
+onready var listContainer:VBoxContainer = get_node("HSplitContainer/VBoxContainer")
+onready var nameBg:ColorRect = get_node("HSplitContainer/VBoxContainer/Name/Bg")
+onready var nameLabel:Label = get_node("HSplitContainer/VBoxContainer/Name/NameLabel")
+onready var healthBar:ProgressBar = get_node("HSplitContainer/VBoxContainer/Health/HealthBar")
+onready var healthLabel:Label = get_node("HSplitContainer/VBoxContainer/Health/HealthLabel")
+onready var descLabel:Label = get_node("HSplitContainer/VBoxContainer/Damage/DescLabel")
 const EquippedItemUI := preload("res://ui/battle/EquippedItemUI.tscn")
+
+onready var spellContainer:VBoxContainer = get_node("HSplitContainer/SpellContainer")
+const SpellButtonUI := preload("res://ui/battle/SpellButtonUI.tscn")
 
 export var playerTintColor:Color
 export var enemyTintColor:Color
@@ -22,6 +24,7 @@ var originalHealthBarColor:Color
 var character:Character
 
 var equippedItems:Dictionary = {}
+var equippedSpells:Dictionary = {}
 
 func _ready():
 	originalHealthBarColor = healthBar.self_modulate
@@ -33,6 +36,8 @@ func init(entityObj):
 	character.connect("OnStatChanged", self, "_on_stat_changed")
 	character.connect("OnItemEquipped", self, "_on_item_equipped")
 	character.connect("OnItemUnEquipped", self, "_on_item_unequipped")
+	character.connect("OnSpellEquipped", self, "_on_spell_equipped")
+	character.connect("OnSpellUnEquipped", self, "_on_spell_unequipped")
 	if character.team == Constants.TEAM.PLAYER:
 		nameBg.color = playerTintColor
 	elif character.team == Constants.TEAM.ENEMY:
@@ -59,7 +64,29 @@ func _on_item_unequipped(item):
 		listContainer.remove_child(equippedItems[item])
 		equippedItems.erase(item)
 	_on_stat_changed(character)
+
+func _on_spell_equipped(spellItem):
+	var newSpellUI = SpellButtonUI.instance()
+	spellContainer.add_child(newSpellUI)
+	newSpellUI.text = spellItem.get_display_name()
+	equippedSpells[spellItem] = newSpellUI
+
+	newSpellUI.connect("pressed", self, "_on_equip_spell_selected", [spellItem])
 	
+	spellContainer.visible = true
+
+func _on_spell_unequipped(spellItem):
+	if equippedSpells.has(spellItem):
+		spellContainer.remove_child(equippedSpells[spellItem])
+		equippedSpells.erase(spellItem)
+		
+	if equippedSpells.size()==0:
+		spellContainer.visible = false
+	
+func _on_equip_spell_selected(spellItems):
+	#spellItem.activate()
+	pass
+
 func _update_ui():
 	healthLabel.text = str("Health: ", character.get_health(), "/", character.get_max_health())
 	var pctHealth:float = float(character.get_health())/float(character.get_max_health())

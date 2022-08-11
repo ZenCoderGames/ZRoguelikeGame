@@ -123,6 +123,21 @@ func spawnItem():
 	var item:Node = Dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
 	items.append(item)
 
+func generate_item(itemId):
+	# find free cells
+	var freeCells:Array = []
+	for cell in cells:
+		if cell.is_empty():
+			freeCells.append(cell)
+	
+	# choose random free cell
+	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
+
+	# spawn random enemy
+	var randomItemData:ItemData = Dungeon.dataManager.get_item_data(itemId)
+	var item:Node = Dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
+	items.append(item)
+
 func register_cell_connection(myCell):
 	if myCell.is_top_edge():
 		topConnection = myCell

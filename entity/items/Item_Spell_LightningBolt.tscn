@@ -6,10 +6,10 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 24, 216, 24, 36 )
+region = Rect2( 24, 72, 24, 36 )
 
-[node name="Item_ClothArmor" type="Sprite"]
-self_modulate = Color( 0.113725, 0.658824, 0.686275, 1 )
+[node name="Item_LightningBolt" type="Sprite"]
+self_modulate = Color( 0.482353, 0.0823529, 0.435294, 1 )
 position = Vector2( 209, 69 )
 texture = SubResource( 1 )
 script = ExtResource( 2 )

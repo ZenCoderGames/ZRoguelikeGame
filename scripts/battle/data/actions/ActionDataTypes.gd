@@ -6,6 +6,8 @@ static func create(dataJS):
 		return ActionMoveData.new(dataJS)
 	elif actionType==ActionAttackData.ID:
 		return ActionAttackData.new(dataJS)
+	elif actionType==ActionFindTargetsData.ID:
+		return ActionFindTargetsData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

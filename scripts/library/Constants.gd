@@ -15,6 +15,7 @@ enum RELATIVE_TEAM { ANY, ALLY, ENEMY }
 
 # PLAYER
 enum ITEM_EQUIP_SLOT { NONE, WEAPON, BODY }
+const SPELL_MAX_SLOTS = 2
 
 # GROUPS
 const pc: String = "pc"

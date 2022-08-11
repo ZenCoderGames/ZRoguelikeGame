@@ -24,7 +24,7 @@ var statModifierDataList:Array
 var actionDataList:Array
 var slot:int
 
-enum ITEM_TYPE { EQUIPABLE, CONSUMABLE }
+enum ITEM_TYPE { EQUIPABLE, CONSUMABLE, SPELL }
 var type:int
 
 var disable:bool
@@ -71,3 +71,6 @@ func is_equippable():
 
 func is_consumable():
 	return type == ITEM_TYPE.CONSUMABLE
+
+func is_spell():
+	return type == ITEM_TYPE.SPELL

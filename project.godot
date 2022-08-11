@@ -35,6 +35,16 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/data/actions/ActionDataTypes.gd"
 }, {
 "base": "Action",
+"class": "ActionFindTargets",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/actions/ActionFindTargets.gd"
+}, {
+"base": "ActionData",
+"class": "ActionFindTargetsData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionFindTargetsData.gd"
+}, {
+"base": "Action",
 "class": "ActionMove",
 "language": "GDScript",
 "path": "res://scripts/battle/instance/actions/ActionMove.gd"
@@ -160,6 +170,8 @@ _global_script_class_icons={
 "ActionAttackData": "",
 "ActionData": "",
 "ActionDataTypes": "",
+"ActionFindTargets": "",
+"ActionFindTargetsData": "",
 "ActionMove": "",
 "ActionMoveData": "",
 "ActionTypes": "",

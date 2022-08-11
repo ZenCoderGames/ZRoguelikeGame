@@ -13,49 +13,56 @@ border_width_bottom = 4
 border_color = Color( 0.168627, 0.490196, 0.211765, 1 )
 
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 200.0
-margin_bottom = 94.0
+margin_right = 330.0
+margin_bottom = 98.0
 script = ExtResource( 2 )
 playerTintColor = Color( 0.0823529, 0.270588, 0.309804, 1 )
 enemyTintColor = Color( 0.309804, 0.0862745, 0.105882, 1 )
 baseContainerFlashColor = Color( 0.843137, 0.596078, 0.596078, 1 )
 healthBarFlashColor = Color( 0.460938, 0.250275, 0.250275, 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 193.0
+margin_right = 323.0
 margin_bottom = 91.0
-size_flags_vertical = 15
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Name" type="PanelContainer" parent="VBoxContainer"]
-margin_right = 186.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
+margin_right = 316.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name" type="PanelContainer" parent="HSplitContainer/VBoxContainer"]
+margin_right = 316.0
 margin_bottom = 24.0
 custom_styles/panel = ExtResource( 3 )
 
-[node name="Bg" type="ColorRect" parent="VBoxContainer/Name"]
+[node name="Bg" type="ColorRect" parent="HSplitContainer/VBoxContainer/Name"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 184.0
+margin_right = 314.0
 margin_bottom = 22.0
 color = Color( 0.156863, 0.14902, 0.14902, 1 )
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/Name"]
+[node name="NameLabel" type="Label" parent="HSplitContainer/VBoxContainer/Name"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 184.0
+margin_right = 314.0
 margin_bottom = 22.0
 theme = ExtResource( 1 )
 text = "Enemy"
 align = 1
 
-[node name="Health" type="PanelContainer" parent="VBoxContainer"]
+[node name="Health" type="PanelContainer" parent="HSplitContainer/VBoxContainer"]
 margin_top = 28.0
-margin_right = 186.0
+margin_right = 316.0
 margin_bottom = 56.0
 custom_styles/panel = ExtResource( 3 )
 
-[node name="Bg" type="ColorRect" parent="VBoxContainer/Health"]
+[node name="Bg" type="ColorRect" parent="HSplitContainer/VBoxContainer/Health"]
 visible = false
 margin_left = 2.0
 margin_top = 2.0
@@ -63,10 +70,10 @@ margin_right = 184.0
 margin_bottom = 22.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="HealthBar" type="ProgressBar" parent="VBoxContainer/Health"]
+[node name="HealthBar" type="ProgressBar" parent="HSplitContainer/VBoxContainer/Health"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 184.0
+margin_right = 314.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 182, 24 )
 custom_styles/fg = SubResource( 1 )
@@ -74,34 +81,63 @@ value = 75.0
 rounded = true
 percent_visible = false
 
-[node name="HealthLabel" type="Label" parent="VBoxContainer/Health"]
+[node name="HealthLabel" type="Label" parent="HSplitContainer/VBoxContainer/Health"]
 margin_left = 2.0
 margin_top = 4.0
-margin_right = 184.0
+margin_right = 314.0
 margin_bottom = 24.0
 theme = ExtResource( 1 )
 text = "Health: 100"
 align = 1
 valign = 1
 
-[node name="Damage" type="PanelContainer" parent="VBoxContainer"]
+[node name="Damage" type="PanelContainer" parent="HSplitContainer/VBoxContainer"]
 margin_top = 60.0
-margin_right = 186.0
+margin_right = 316.0
 margin_bottom = 84.0
 custom_styles/panel = ExtResource( 3 )
 
-[node name="Bg" type="ColorRect" parent="VBoxContainer/Damage"]
+[node name="Bg" type="ColorRect" parent="HSplitContainer/VBoxContainer/Damage"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 184.0
+margin_right = 314.0
 margin_bottom = 22.0
 color = Color( 0.290196, 0.164706, 0.164706, 1 )
 
-[node name="DescLabel" type="Label" parent="VBoxContainer/Damage"]
+[node name="DescLabel" type="Label" parent="HSplitContainer/VBoxContainer/Damage"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 184.0
+margin_right = 314.0
 margin_bottom = 22.0
 theme = ExtResource( 1 )
 text = "Damage: 2"
+align = 1
+
+[node name="SpellContainer" type="VBoxContainer" parent="HSplitContainer"]
+visible = false
+margin_left = 198.0
+margin_right = 316.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name" type="PanelContainer" parent="HSplitContainer/SpellContainer"]
+margin_right = 118.0
+margin_bottom = 24.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Bg" type="ColorRect" parent="HSplitContainer/SpellContainer/Name"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 116.0
+margin_bottom = 22.0
+color = Color( 0.156863, 0.14902, 0.14902, 1 )
+
+[node name="NameLabel" type="Label" parent="HSplitContainer/SpellContainer/Name"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 116.0
+margin_bottom = 22.0
+theme = ExtResource( 1 )
+text = "Spells"
 align = 1

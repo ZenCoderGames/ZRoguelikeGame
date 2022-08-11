@@ -16,9 +16,12 @@ var actions:Array = []
 var items:Array = []
 var equippedItems:Array = []
 var equippedSlots:Dictionary = {}
+var equippedSpells:Array = []
 
 var currentRoom = null
 var prevRoom = null
+
+var targetList:Array = []
 
 signal OnCharacterMove(x, y)
 signal OnCharacterMoveToCell()
@@ -28,6 +31,8 @@ signal OnDeath()
 signal OnItemPicked(item)
 signal OnItemEquipped(item)
 signal OnItemUnEquipped(item)
+signal OnSpellEquipped(item)
+signal OnSpellUnEquipped(item)
 
 var originalColor:Color
 
@@ -161,14 +166,22 @@ func consume_item(item):
 	items.erase(item)
 
 func equip_item(item):
-	var slotType:int = item.data.slot
-	if equippedSlots[slotType] != null:
-		equippedItems.erase(equippedSlots[slotType])
-		emit_signal("OnItemUnEquipped", equippedSlots[slotType])
+	if item.is_spell():
+		if equippedSpells.size() == Constants.SPELL_MAX_SLOTS:
+			emit_signal("OnSpellUnEquipped", equippedSpells[0])
+			equippedSpells.remove(0)
 
-	equippedItems.append(item)
-	equippedSlots[slotType] = item
-	emit_signal("OnItemEquipped", item)
+		equippedSpells.append(item)
+		emit_signal("OnSpellEquipped", item)
+	else:
+		var slotType:int = item.data.slot
+		if equippedSlots[slotType] != null:
+			equippedItems.erase(equippedSlots[slotType])
+			emit_signal("OnItemUnEquipped", equippedSlots[slotType])
+
+		equippedItems.append(item)
+		equippedSlots[slotType] = item
+		emit_signal("OnItemEquipped", item)
 
 # COMBAT
 func attack(entity):
@@ -258,6 +271,13 @@ func show_damage_text(entity, dmg):
 
 func update():
 	pass
+
+func post_update():
+	targetList = []
+
+# TARGETING
+func add_target(target):
+	targetList.append(target)
 
 # HELPERS
 func is_in_room(room):
