@@ -18,6 +18,25 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "GROUND_POUND",
+			"staminaCost": 2,
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 4
+					}
+				},
+				{
+					"type": "DO_DAMAGE_TO_TARGETS",
+					"params": {
+						"damage": 30
+					}
+				}
+			]
 		}
 	]
 }

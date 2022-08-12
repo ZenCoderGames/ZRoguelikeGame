@@ -12,5 +12,6 @@ func can_execute()->bool:
 	return character.has_targets()
 
 func execute():
-	var randomTarget = character.get_random_target()
-	randomTarget.take_damage(character, actionData.damage)
+	var targets = character.get_targets()
+	for target in targets:
+		target.take_damage(character, actionData.damage)

@@ -69,6 +69,16 @@
 			"path": "entity/items/Item_Spell_LightningBolt.tscn",
 			"type": "SPELL",
 			"spellId": "LIGHTNING_BOLT"
+		},
+		{
+			"#disable": true,
+			"id": "SPELL_GROUND_POUND",
+			"name": "Ground Pound",
+			"description": "Slam the ground and do damage to nearby enemies",
+			"fullDescription": "Slam the ground and do damage to nearby enemies",
+			"path": "entity/items/Item_Spell_LightningBolt.tscn",
+			"type": "SPELL",
+			"spellId": "GROUND_POUND"
 		}
 	]
 }
