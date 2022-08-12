@@ -245,6 +245,7 @@ func _on_turn_taken(x, y):
 	player.cell.room.update_entities()
 
 	player.post_update()
+	player.cell.room.post_update()
 
 func clean_up():
 	for loadedScene in loadedScenes:

@@ -4,11 +4,16 @@ class_name Item
 
 var data:ItemData
 var cell:DungeonCell
+var spell:Spell
 
 func init(itemData, myCell):
 	data = itemData
 	cell = myCell
 	self.position = Vector2(cell.pos.x, cell.pos.y)
+
+func init_on_picked_up(character):
+	if data.spellId != "":
+		spell = Spell.new(Dungeon.dataManager.get_spell_data(data.spellId), character)
 
 func consume(character):
 	if data.is_consumable():
@@ -16,7 +21,9 @@ func consume(character):
 			character.modify_stat_value_from_modifier(statModifier)
 
 func activate():
-	pass
+	if spell!=null:
+		if spell.can_execute():
+			spell.execute()
 
 func picked():
 	if cell.entityObject!=null:

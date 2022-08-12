@@ -29,20 +29,21 @@ Roguelike Dev:
 (D)- Fix restarting not resetting player
 (D)- Equipped Items and Swapping on pickup
 (D)- Inventory
-
-- Spell UI, equipping spells and activating spells
+(D)- Spell UI, equipping spells and activating spells
 - Spell Implementation (Lightning Bolt)
+
 - Spell Cooldown in turns
 - UnEquip button
-- Extra Ranged Scrolls (GroundPound, Revive, Vampiric, Barrier, Smoke bomb)
 
 - Dungeon Generator (Items/Enemies)
 
+- Stamina
+
+- Extra Ranged Scrolls (GroundPound, Revive, Vampiric, Barrier, Smoke bomb)
+
 - Level Ups
 
-- Multi rooms
-
-- Stamina
+- Multi levels
 
 - Game Feel (death, better damage number font, camera shake)
 - Walls in rooms

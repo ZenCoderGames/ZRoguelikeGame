@@ -68,10 +68,7 @@
 			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you.",
 			"path": "entity/items/Item_Spell_LightningBolt.tscn",
 			"type": "SPELL",
-			"subType": "SPELL_LIGHTNING_BOLT",
-			"params": {
-				"damage": 20
-			}
+			"spellId": "LIGHTNING_BOLT"
 		}
 	]
 }

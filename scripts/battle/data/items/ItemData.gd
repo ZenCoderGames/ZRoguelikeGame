@@ -27,6 +27,8 @@ var slot:int
 enum ITEM_TYPE { EQUIPABLE, CONSUMABLE, SPELL }
 var type:int
 
+var spellId:String
+
 var disable:bool
 
 func _init(itemDataJS, actionDataMap):
@@ -65,6 +67,9 @@ func _init(itemDataJS, actionDataMap):
 			
 	if itemDataJS.has("disable"):
 		disable =  itemDataJS["disable"]
+
+	if itemDataJS.has("spellId"):
+		spellId =  itemDataJS["spellId"]
 
 func is_equippable():
 	return type == ITEM_TYPE.EQUIPABLE

@@ -8,6 +8,8 @@ static func create(dataJS):
 		return ActionAttackData.new(dataJS)
 	elif actionType==ActionFindTargetsData.ID:
 		return ActionFindTargetsData.new(dataJS)
+	elif actionType==ActionDoDamageToTargetsData.ID:
+		return ActionDoDamageToTargetsData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

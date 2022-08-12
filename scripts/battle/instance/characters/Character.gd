@@ -161,6 +161,7 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 func add_item(itemToAdd):
 	items.append(itemToAdd)
 	emit_signal("OnItemPicked", itemToAdd)
+	itemToAdd.init_on_picked_up(self)
 
 func consume_item(item):
 	(item as Item).consume(self)
@@ -207,19 +208,18 @@ func attack(entity):
 		yield(get_tree().create_timer(0.075), "timeout")
 		entity.take_damage(self, get_stat_value(StatData.STAT_TYPE.DAMAGE))
 
-func take_damage(entity, dmg):
+func take_damage(attacker, dmg):
 	var health = modify_stat_value(StatData.STAT_TYPE.HEALTH, -dmg)
-	var maxHealth = get_stat_base_value(StatData.STAT_TYPE.HEALTH)
 	if health<=0:
 		isDead = true
-		Dungeon.emit_signal("OnKill", entity, self)
-		show_hit(entity, dmg)
+		Dungeon.emit_signal("OnKill", attacker, self)
+		show_hit(attacker, dmg)
 		yield(get_tree().create_timer(0.1), "timeout")
 		die()
 		emit_signal("OnDeath")
 	else:
-		show_hit(entity, dmg)
-		Dungeon.emit_signal("OnAttack", entity, self, dmg)
+		show_hit(attacker, dmg)
+		Dungeon.emit_signal("OnAttack", attacker, self, dmg)
 
 func die():
 	currentRoom.enemy_died(self)
@@ -285,6 +285,23 @@ func post_update():
 # TARGETING
 func add_target(target):
 	targetList.append(target)
+
+func has_targets():
+	return targetList.size()>0
+
+func get_random_target():
+	targetList.shuffle()
+
+	for target in targetList:
+		if target.isDead:
+			continue
+
+		return target
+
+	return null
+
+func get_targets():
+	return targetList
 
 # HELPERS
 func is_in_room(room):

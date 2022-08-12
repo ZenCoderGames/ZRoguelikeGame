@@ -47,6 +47,15 @@
 				"range": 1,
 				"maxTargets": 1
 			}
+		},
+		{
+			"id": "LIGHTNING_BOLT",
+			"type": "DO_DAMAGE_TO_TARGETS",
+			"staminaCost": 0,
+			"priority": 2,
+			"params": {
+				"damage": 30
+			}
 		}
 	]
 }

@@ -11,7 +11,7 @@ func can_execute()->bool:
 func execute():
 	var adjacentChars:Array = Dungeon.get_adjacent_characters(character, Constants.RELATIVE_TEAM.ENEMY, (actionData as ActionFindTargetsData).cellRange)
 	
-    for i in actionData.maxTargets:
-        if i>=adjacentChars.size():
-            break
-        character.add_target(adjacentChars[i])
+	for i in actionData.maxTargets:
+		if i>=adjacentChars.size():
+			break
+		character.add_target(adjacentChars[i])

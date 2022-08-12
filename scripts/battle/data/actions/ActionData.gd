@@ -17,8 +17,11 @@ var type:String
 var params:Dictionary
 
 func _init(dataJS):
-	id = dataJS["id"]
-	staminaCost = dataJS["staminaCost"]
-	priority = dataJS["priority"]
+	if dataJS.has("id"):
+		id = dataJS["id"]
+	if dataJS.has("staminaCost"):
+		staminaCost = dataJS["staminaCost"]
+	if dataJS.has("priority"):
+		priority = dataJS["priority"]
 	type = dataJS["type"]
 	params = dataJS["params"]

@@ -4,6 +4,7 @@ class_name DungeonDataManager
 var actionDataMap = {}
 var itemDataMap = {}
 var itemDataList = []
+var spellDataMap = {}
 
 var characterDataDict = {}
 var playerData:CharacterData
@@ -12,6 +13,7 @@ var enemyDataList = []
 
 func _init():
 	init_actions()
+	init_spells()
 	init_items()
 	init_characters()
 
@@ -58,3 +60,17 @@ func get_random_enemy_data():
 
 func get_random_item_data():
 	return itemDataList[randi() % itemDataList.size()]
+
+func init_spells():
+	var data = Utils.load_data_from_file("resource/spells.json")
+	var spellDataJSList:Array = data["spells"]
+	for spellDataJS in spellDataJSList:
+		var newSpellData:SpellData = SpellData.new(spellDataJS)
+		spellDataMap[newSpellData.id] = newSpellData
+
+func get_spell_data(spellId):
+	if spellDataMap.has(spellId):
+		return spellDataMap[spellId]
+
+	print("Invalid Spell Id: ", spellId)
+	return null

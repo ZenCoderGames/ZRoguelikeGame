@@ -332,6 +332,10 @@ func find_next_best_path_cell(currentCell):
 
 	return null
 
+func post_update():
+	for enemy in enemies:
+		enemy.post_update()
+
 # HELPERS
 func get_cell(r:int, c:int):
 	if r<0 or c<0 or r>=maxRows or c>=maxCols:

@@ -1,0 +1,23 @@
+{
+	"spells": [
+		{
+			"id": "LIGHTNING_BOLT",
+			"staminaCost": 2,
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 1
+					}
+				},
+				{
+					"type": "DO_DAMAGE_TO_TARGETS",
+					"params": {
+						"damage": 30
+					}
+				}
+			]
+		}
+	]
+}
