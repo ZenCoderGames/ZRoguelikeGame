@@ -30,16 +30,24 @@ Roguelike Dev:
 (D)- Equipped Items and Swapping on pickup
 (D)- Inventory
 (D)- Spell UI, equipping spells and activating spells
-- Spell Implementation (Lightning Bolt)
+(D)- Spell Implementation (Lightning Bolt/Ground Pound)
+(D)- Inventory
+(D)- Equipment
+(D)- UnEquip button
+- Bug with dissapearing when moving into dead char
+- Spells consume your turn
+- Color spells, items and consumables consistently
+
+- Event system
+
+- Extra Ranged Scrolls (Leap)
+- Passive Abilities (Vampiric, Barrier, Revive)
 
 - Spell Cooldown in turns
-- UnEquip button
 
 - Dungeon Generator (Items/Enemies)
 
 - Stamina
-
-- Extra Ranged Scrolls (GroundPound, Revive, Vampiric, Barrier, Smoke bomb)
 
 - Level Ups
 

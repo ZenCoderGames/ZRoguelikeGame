@@ -4,10 +4,11 @@ var id:String
 var displayName:String
 var path:String
 var statDataList:Array
-var actionDataList:Array
+var moveAction:ActionData
+var attackAction:ActionData
 var disable:bool
 
-func _init(dataJS, actionDataMap):
+func _init(dataJS):
 	id = dataJS["id"]
 	displayName = dataJS["displayName"]
 	path = dataJS["path"]
@@ -16,9 +17,7 @@ func _init(dataJS, actionDataMap):
 	for statDataJS in statDataJSList:
 		statDataList.append(StatData.new(statDataJS))
 
-	var actionDataJSList = dataJS["actions"]
-	for actionDataIdJS in actionDataJSList:
-		actionDataList.append(actionDataMap[actionDataIdJS])
-
+	moveAction = ActionDataTypes.create(dataJS["moveAction"])
+	attackAction = ActionDataTypes.create(dataJS["attackAction"])
 	if dataJS.has("disable"):
 		disable =  dataJS["disable"]

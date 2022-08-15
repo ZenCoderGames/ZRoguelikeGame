@@ -12,11 +12,13 @@ var cell
 var isDead:bool = false
 
 var stats:Array = []
-var actions:Array = []
-var items:Array = []
-var equippedItems:Array = []
-var equippedSlots:Dictionary = {}
-var equippedSpells:Array = []
+var moveAction:Action
+var attackAction:Action
+
+var status:CharacterStatus
+
+var inventory:Inventory
+var equipment:Equipment
 
 var currentRoom = null
 var prevRoom = null
@@ -28,12 +30,6 @@ signal OnCharacterMoveToCell()
 signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
 signal OnDeath()
-signal OnItemPicked(item)
-signal OnItemEquipped(item)
-signal OnItemUnEquipped(item)
-signal OnSpellEquipped(item)
-signal OnSpellUnEquipped(item)
-signal OnSpellActivated(item)
 
 var originalColor:Color
 
@@ -53,25 +49,14 @@ func init(charData, teamVal):
 			stats.append(stat)
 
 	# Actions
-	for actionData in charData.actionDataList:
-		var action = ActionTypes.create(actionData, self)
-		if action!=null:
-			actions.append(action)
+	moveAction = ActionTypes.create(charData.moveAction, self)
+	attackAction = ActionTypes.create(charData.attackAction, self)
 
-	actions.sort_custom(self, "sort_actions_by_priority")
+	# Status
+	status = CharacterStatus.new()
 
-	equippedSlots[Constants.ITEM_EQUIP_SLOT.WEAPON] = null
-	equippedSlots[Constants.ITEM_EQUIP_SLOT.BODY] = null
-
-func sort_actions_by_priority(a, b):
-	return a.actionData.priority >= b.actionData.priority
-
-func get_action(actionType):
-	for action in actions:
-		if action.actionData.type == actionType:
-			return action
-
-	return null
+	inventory = Inventory.new(self)
+	equipment = Equipment.new(self)
 
 # MOVEMENT
 func move(x, y):
@@ -102,10 +87,7 @@ func get_stat_value(statType):
 		if stat.type == statType:
 			statValue = statValue + stat.value
 	# iterate through items
-	for item in equippedItems:
-		for statData in item.data.statDataList:
-			if statData.type == statType:
-				statValue = statValue + statData.value
+	statValue = statValue + equipment.get_stat_bonus_from_equipped_items(statType)
 	
 	return statValue
 
@@ -116,18 +98,9 @@ func get_stat_base_value(statType):
 		if stat.type == statType:
 			statBaseValue = statBaseValue + stat.baseValue
 	# iterate through items
-	for item in equippedItems:
-		for statData in item.data.statDataList:
-			if statData.type == statType:
-				statBaseValue = statBaseValue + statData.baseValue
+	statBaseValue = statBaseValue + equipment.get_stat_base_bonus_from_equipped_items(statType)
 
 	return statBaseValue
-
-"""func modify_stat(statType, statModifier):
-	# iterate through char
-	for stat in stats:
-		if stat.type == statType:
-			statModifier.modify(stat)"""
 
 func modify_stat_value(statType, modifierValue):
 	# iterate through char
@@ -158,38 +131,8 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 # ITEMS
 
 # For testing when player goes over, they get the item
-func add_item(itemToAdd):
-	items.append(itemToAdd)
-	emit_signal("OnItemPicked", itemToAdd)
-	itemToAdd.init_on_picked_up(self)
-
-func consume_item(item):
-	(item as Item).consume(self)
-	items.erase(item)
-
-func equip_item(item):
-	if item.is_spell():
-		if equippedSpells.size() == Constants.SPELL_MAX_SLOTS:
-			emit_signal("OnSpellUnEquipped", equippedSpells[0])
-			equippedSpells.remove(0)
-
-		equippedSpells.append(item)
-		emit_signal("OnSpellEquipped", item)
-	else:
-		var slotType:int = item.data.slot
-		if equippedSlots[slotType] != null:
-			equippedItems.erase(equippedSlots[slotType])
-			emit_signal("OnItemUnEquipped", equippedSlots[slotType])
-
-		equippedItems.append(item)
-		equippedSlots[slotType] = item
-		emit_signal("OnItemEquipped", item)
-
-func activate_spell(spellItem):
-	spellItem.activate()
-	equippedSpells.erase(spellItem)
-	items.erase(spellItem)
-	emit_signal("OnSpellActivated", spellItem)
+func pick_item(itemToAdd):
+	inventory.add_item(itemToAdd)
 
 # COMBAT
 func attack(entity):
@@ -281,6 +224,7 @@ func update():
 
 func post_update():
 	targetList = []
+	status.update()
 
 # TARGETING
 func add_target(target):

@@ -10,6 +10,10 @@ static func create(dataJS):
 		return ActionFindTargetsData.new(dataJS)
 	elif actionType==ActionDoDamageToTargetsData.ID:
 		return ActionDoDamageToTargetsData.new(dataJS)
+	elif actionType==ActionSetStatusData.ID:
+		return ActionSetStatusData.new(dataJS)
+	elif actionType==ActionLifeDrainData.ID:
+		return ActionLifeDrainData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

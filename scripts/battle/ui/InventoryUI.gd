@@ -11,6 +11,7 @@ onready var nameLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/
 onready var typeLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/TypeContainer/TypeLabel")
 onready var descLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/DescContainer/DescLabel")
 onready var equipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton")
+onready var unequipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/UnequipButton")
 onready var consumeButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/ConsumeButton")
 onready var equippedUI:ColorRect = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquippedUI")
 
@@ -22,11 +23,12 @@ var selectedIdx:int
 func _ready():
 	hide()
 	equipButton.connect("pressed", self, "_on_equip_selected_item")
+	unequipButton.connect("pressed", self, "_on_unequip_selected_item")
 	consumeButton.connect("pressed", self, "_on_consume_selected_item")
 	
 func init(character):
 	playerChar = character
-	playerChar.connect("OnItemPicked", self, "_on_item_picked_by_player")
+	playerChar.inventory.connect("OnItemAdded", self, "_on_item_added_to_inventory")
 	playerChar.connect("OnSpellActivated", self, "_on_spell_activated")
 	
 func show():
@@ -38,7 +40,7 @@ func hide():
 	self.visible = false
 	noContent.visible = false
 	
-func _on_item_picked_by_player(itemPicked):
+func _on_item_added_to_inventory(itemPicked):
 	selectedIdx = 0
 	_refresh_ui()
 
@@ -50,7 +52,7 @@ func _refresh_ui():
 	clear_items()
 
 	var idx:int = 0
-	for item in playerChar.items:
+	for item in playerChar.inventory.items:
 		var itemButton:Button = InventoryItem.instance()
 		itemList.add_child(itemButton)
 		itemButton.text = item.get_display_name()
@@ -60,23 +62,29 @@ func _refresh_ui():
 		itemDict[itemButton] = item
 		idx = idx + 1
 
-	if playerChar.items.size()>0:
+	if playerChar.inventory.items.size()>0:
 		_show_selected()
 	else:
 		noContent.visible = true
 
 func _show_selected():
 	var selectedItemButton:Button = itemButtons[selectedIdx]
-	var selectedItem:Item = playerChar.items[selectedIdx]
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
 	selectedItemButton.self_modulate = Color.orange
 	nameLabel.text = selectedItem.get_display_name() 
 	descLabel.text = selectedItem.get_full_description()
+	consumeButton.visible = false
 	if selectedItem.is_spell():
-		equipButton.visible = !playerChar.equippedSpells.has(selectedItem)
+		equipButton.visible = !playerChar.equipment.equippedSpells.has(selectedItem)
+		unequipButton.visible = playerChar.equipment.equippedSpells.has(selectedItem)
+	elif selectedItem.is_consumable():
+		equipButton.visible = false
+		unequipButton.visible = false
+		consumeButton.visible = true
 	else:
-		equipButton.visible = !playerChar.equippedItems.has(selectedItem)
-	equippedUI.visible = (playerChar.equippedItems.has(selectedItem) or playerChar.equippedSpells.has(selectedItem)) and !selectedItem.is_consumable()
-	consumeButton.visible = selectedItem.is_consumable()
+		equipButton.visible = !playerChar.equipment.equippedItems.has(selectedItem)
+		unequipButton.visible = playerChar.equipment.equippedItems.has(selectedItem)
+	equippedUI.visible = (playerChar.equipment.equippedItems.has(selectedItem) or playerChar.equipment.equippedSpells.has(selectedItem)) and !selectedItem.is_consumable()
 	if selectedItem.is_consumable():
 		typeLabel.text = "Consumable"
 	elif selectedItem.is_spell():
@@ -85,13 +93,18 @@ func _show_selected():
 		typeLabel.text = selectedItem.get_slot_string()
 
 func _on_equip_selected_item():
-	var selectedItem:Item = playerChar.items[selectedIdx]
-	playerChar.equip_item(selectedItem)
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.equipment.equip_item(selectedItem)
+	_refresh_ui()
+
+func _on_unequip_selected_item():
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.equipment.unequip_item(selectedItem)
 	_refresh_ui()
 
 func _on_consume_selected_item():
-	var selectedItem:Item = playerChar.items[selectedIdx]
-	playerChar.consume_item(selectedItem)
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.inventory.consume_item(selectedItem)
 	selectedIdx = 0
 	_refresh_ui()
 

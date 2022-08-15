@@ -43,3 +43,6 @@ const INPUT_CAM_MOVE_LEFT: String = "cam_move_left"
 const INPUT_CAM_MOVE_RIGHT: String = "cam_move_right"
 const INPUT_CAM_MOVE_UP: String = "cam_move_up"
 const INPUT_CAM_MOVE_DOWN: String = "cam_move_down"
+
+# GAMEPLAY
+enum TRIGGER_CONDITION { ON_ATTACK, ON_HIT, ON_START_TURN, ON_END_TURN, ON_MOVE, ON_SPELL_ACTIVATE }

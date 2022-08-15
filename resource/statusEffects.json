@@ -1,0 +1,20 @@
+{
+	"statusEffects": [
+		{
+			"id": "BARRIER",
+			"instanceCount": 1,
+			"conditions": [
+				"ON_HIT"
+			],
+			"actions": [ 
+				{
+					"id": "INVULNERABLE",
+					"type": "SET_STATUS",
+					"params": {
+						"invulnerable": true
+					}
+				}
+			]
+		}
+	]
+}

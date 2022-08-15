@@ -31,6 +31,22 @@
 			]
 		},
 		{
+			"id": "SWORD_00",
+			"name": "Basic Sword",
+			"description": "Just a simple sword\n(+2 damage)",
+			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's damage by +2",
+			"path": "entity/items/Item_BasicSword.tscn",
+			"type": "EQUIPABLE",
+			"slot": "WEAPON",
+			"stats": [
+				{
+					"type": "DAMAGE",
+					"value": 1
+				}
+			],
+			"passiveId": "LIFESTEAL_SMALL"
+		},
+		{
 			"#disable": true,
 			"id": "HEALTH_POTION_00",
 			"name": "Small Health Potion",
@@ -44,6 +60,16 @@
 					"value": 10
 				}
 			]
+		},
+		{
+			"#disable": true,
+			"id": "BARRIER_POTION",
+			"name": "Barrier",
+			"description": "Gain 1 Instance of Barrier",
+			"fullDescription": "Gain 1 Instance of Barrier\nBarrier protects the player from any damage.",
+			"path": "entity/items/Item_Barrier.tscn",
+			"type": "CONSUMABLE",
+			"statusEffectId": "BARRIER"
 		},
 		{
 			"#disable": true,

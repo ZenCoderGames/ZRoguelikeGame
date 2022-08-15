@@ -5,6 +5,8 @@ extends Node
 var player:PlayerCharacter
 var disableInput:bool = true
 var playerMoveAction:ActionMove
+var inputDelay:float = 0.0
+var blockInputsFromInputDelay:bool
 
 func _ready():
 	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
@@ -17,7 +19,7 @@ func _register_player(playerRef):
 
 func _on_dungeon_init():
 	disableInput = false
-	playerMoveAction = player.get_action("MOVEMENT")
+	playerMoveAction = player.moveAction
 
 func _on_player_death():
 	disableInput = true
@@ -26,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		get_tree().quit()
 
-	if disableInput:
+	if disableInput || blockInputsFromInputDelay:
 		return
 
 	# movement
@@ -45,3 +47,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if player != null and !(x==0 and y==0):
 		if playerMoveAction.can_execute():
 			player.move(x, y)
+
+		blockInputsFromInputDelay = true
+		yield(get_tree().create_timer(inputDelay), "timeout")
+		blockInputsFromInputDelay = false
+

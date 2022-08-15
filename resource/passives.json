@@ -1,0 +1,19 @@
+{
+	"passives": [
+		{
+			"id": "LIFESTEAL_SMALL",
+			"conditions": [
+				"ON_ATTACK"
+			],
+			"actions": [
+				{
+					"id": "LIFESTEAL",
+					"type": "LIFE_DRAIN",
+					"params": {
+						"percent": 0.2
+					}
+				}
+			]
+		}
+	]
+}

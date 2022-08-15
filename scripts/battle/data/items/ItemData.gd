@@ -21,17 +21,18 @@ var fullDescription:String
 var path:String
 var statDataList:Array
 var statModifierDataList:Array
-var actionDataList:Array
 var slot:int
 
-enum ITEM_TYPE { EQUIPABLE, CONSUMABLE, SPELL }
+enum ITEM_TYPE { EQUIPABLE, CONSUMABLE, SPELL, PASSIVE }
 var type:int
 
 var spellId:String
+var passiveId:String
+var statusEffectId:String
 
 var disable:bool
 
-func _init(itemDataJS, actionDataMap):
+func _init(itemDataJS):
 	id = itemDataJS["id"]
 	displayName = itemDataJS["name"]
 	description = itemDataJS["description"]
@@ -59,17 +60,18 @@ func _init(itemDataJS, actionDataMap):
 		var statModifierDataJSList = itemDataJS["statModifiers"]
 		for statModifierDataJS in statModifierDataJSList:
 			statModifierDataList.append(StatModifierData.new(statModifierDataJS))
-	
-	if itemDataJS.has("actions"):
-		var actionDataIdJSList = itemDataJS["actions"]
-		for actionDataIdJS in actionDataIdJSList:
-			actionDataList.append(actionDataMap[actionDataIdJS])
 			
 	if itemDataJS.has("disable"):
 		disable =  itemDataJS["disable"]
 
 	if itemDataJS.has("spellId"):
 		spellId =  itemDataJS["spellId"]
+
+	if itemDataJS.has("passiveId"):
+		passiveId =  itemDataJS["passiveId"]
+
+	if itemDataJS.has("statusEffectId"):
+		statusEffectId =  itemDataJS["statusEffectId"]
 
 func is_equippable():
 	return type == ITEM_TYPE.EQUIPABLE

@@ -186,28 +186,12 @@ margin_right = 571.0
 margin_bottom = 160.0
 alignment = 1
 
-[node name="EquipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
-visible = false
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 262.0
-margin_right = 309.0
-margin_bottom = 20.0
-text = "Equip"
-
-[node name="ConsumeButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
-visible = false
-self_modulate = Color( 0.140805, 0.879176, 0.24886, 1 )
-margin_left = 249.0
-margin_right = 321.0
-margin_bottom = 20.0
-text = "Consume"
-
 [node name="EquippedUI" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 571.0
+margin_right = 501.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
-color = Color( 0.0705882, 0.262745, 0.0392157, 1 )
+color = Color( 0.227451, 0.243137, 0.0705882, 1 )
 
 [node name="NameLabel" type="Label" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquippedUI"]
 anchor_right = 1.0
@@ -216,6 +200,29 @@ theme = ExtResource( 1 )
 text = "Equipped"
 align = 1
 valign = 1
+
+[node name="EquipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
+margin_left = 262.0
+margin_right = 309.0
+margin_bottom = 20.0
+text = "Equip"
+
+[node name="UnequipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
+margin_left = 505.0
+margin_right = 571.0
+margin_bottom = 20.0
+text = "Unequip"
+
+[node name="ConsumeButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color( 0.140805, 0.879176, 0.24886, 1 )
+margin_left = 249.0
+margin_right = 321.0
+margin_bottom = 20.0
+text = "Consume"
 
 [node name="NoContent" type="MarginContainer" parent="."]
 visible = false

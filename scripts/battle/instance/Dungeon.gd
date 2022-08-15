@@ -205,7 +205,7 @@ func _init_enemies():
 	if battleInstance.dontSpawnEnemies:
 		return
 
-	startRoom.generate_enemies(1)
+	#startRoom.generate_enemies(1)
 	
 	for room in rooms:
 		if !room.isStartRoom:
@@ -218,8 +218,10 @@ func _init_items():
 
 	if !battleInstance.debugSpawnItemInFirstRoom.empty():
 		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
-		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
-		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
+		startRoom.generate_item("SWORD_01")
+		startRoom.generate_item("HEALTH_UPGRADE_00")
+	else:
+		startRoom.generate_items(1)
 
 	for room in rooms:
 		if !room.isStartRoom:
@@ -231,7 +233,11 @@ func _init_player():
 	player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
 	emit_signal("OnPlayerCreated", player)
 	_on_turn_taken(0, 0)
-	player.connect("OnCharacterMove", self, "_on_turn_taken") 
+	player.connect("OnCharacterMove", self, "_on_turn_taken")
+	player.equipment.connect("OnSpellActivated", self, "_on_player_spell_activated")
+
+func _on_player_spell_activated(item):
+	_on_turn_taken(0, 0)
 
 func _on_turn_taken(x, y):
 	player.update()

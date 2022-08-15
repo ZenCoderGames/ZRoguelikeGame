@@ -228,7 +228,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
 			# Item
 			if cell.entityObject is Item:
-				entity.add_item(cell.entityObject)
+				entity.pick_item(cell.entityObject)
 				cell.entityObject.picked()
 				items.erase(cell.entityObject)
 				currentCell.clear_entity()

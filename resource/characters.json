@@ -15,7 +15,19 @@
 						"value": 6
 					}
 				],
-				"actions": ["MOVE_INPUT", "MELEE_ATTACK"]
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "INPUT"
+					}
+				},
+				"attackAction": {
+					"id": "MELEE_ATTACK",
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
 			},
 			{
 				"id": "BARBARIAN",
@@ -31,7 +43,19 @@
 						"value": 3
 					}
 				],
-				"actions": ["MOVE_INPUT", "MELEE_ATTACK"]
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "INPUT"
+					}
+				},
+				"attackAction": {
+					"id": "MELEE_ATTACK",
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
 			}
 		],
 		"enemies": [
@@ -49,10 +73,22 @@
 						"value": 2
 					}
 				],
-				"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "PATHFIND_TO_TARGET"
+					}
+				},
+				"attackAction": {
+					"id": "MELEE_ATTACK",
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
 			},
 			{
-				"disable": true,
+				"#disable": true,
 				"id": "GIANT_00",
 				"displayName": "Giant",
 				"path": "entity/Giant.tscn",
@@ -63,10 +99,22 @@
 					},
 					{
 						"type": "DAMAGE",
-						"value": 4
+						"value": 2
 					}
 				],
-				"actions": ["MOVE_PATHFIND", "MELEE_ATTACK"]
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "PATHFIND_TO_TARGET"
+					}
+				},
+				"attackAction": {
+					"id": "MELEE_ATTACK",
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
 			}
 		]
 	}

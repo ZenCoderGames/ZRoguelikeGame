@@ -51,7 +51,7 @@ func _shared_init():
 	Dungeon.player.connect("OnDeath", self, "_on_player_death")
 	Dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_move")
 	Dungeon.player.connect("OnNearbyEntityFound", self, "_on_entity_nearby")
-	Dungeon.player.connect("OnItemPicked", self, "_on_item_picked")
+	Dungeon.player.inventory.connect("OnItemAdded", self, "_on_item_picked_by_player")
 	
 	playerUI.init(Dungeon.player)
 
@@ -72,7 +72,7 @@ func _on_kill(attacker, defender):
 	yield(get_tree().create_timer(1), "timeout")
 	detailsUI.visible = false
 	
-func _on_item_picked(item):
+func _on_item_picked_by_player(item):
 	detailsUI.visible = true
 	detailsLabel.text = str(item.data.displayName, " picked up ")
 	yield(get_tree().create_timer(1), "timeout")
