@@ -33,6 +33,14 @@ func picked():
 		cell.entityObject.hide()
 	cell.clear_entity()
 
+func on_equipped(character):
+	if !data.passiveId.empty():
+		character.add_passive(Dungeon.dataManager.get_passive_data(data.passiveId))
+	
+func on_unequipped(character):
+	if !data.passiveId.empty():
+		character.remove_passive(Dungeon.dataManager.get_passive_data(data.passiveId))
+
 func get_display_name():
 	return data.displayName
 

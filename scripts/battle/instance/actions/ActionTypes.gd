@@ -11,7 +11,7 @@ static func create(actionData:ActionData, parentChar):
 		return ActionDoDamageToTargets.new(actionData, parentChar)
 	elif actionData.type==ActionSetStatusData.ID:
 		return ActionSetStatus.new(actionData, parentChar)
-	elif actionData.type==ActionLifeDrain.ID:
+	elif actionData.type==ActionLifeDrainData.ID:
 		return ActionLifeDrain.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)

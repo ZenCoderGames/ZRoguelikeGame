@@ -39,6 +39,7 @@ Roguelike Dev:
 (D)- Barrier Immune message
 (IP)- Passives (Lifesteal)
 - Make DataManager global
+- Damage pipeline
 
 - Event system
 

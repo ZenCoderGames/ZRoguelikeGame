@@ -16,6 +16,15 @@ func _init(characterRef):
 	character = characterRef
 	equippedSlots[Constants.ITEM_EQUIP_SLOT.WEAPON] = null
 	equippedSlots[Constants.ITEM_EQUIP_SLOT.BODY] = null
+	character.inventory.connect("OnItemAdded", self, "_on_item_added")
+
+func _on_item_added(item:Item):
+	if item.is_gear():
+		var itemSlot:int = item.data.slot
+		if equippedSlots[itemSlot]==null:
+			equip_item(item)
+	elif item.is_spell() and equippedSpells.size() < Constants.SPELL_MAX_SLOTS:
+		equip_item(item)
 
 func get_stat_bonus_from_equipped_items(statType):
 	var statValue:int = 0
@@ -51,6 +60,7 @@ func equip_item(item):
 			emit_signal("OnItemUnEquipped", equippedSlots[slotType])
 		equippedItems.append(item)
 		equippedSlots[slotType] = item
+		item.on_equipped(character)
 		emit_signal("OnItemEquipped", item)
 
 func unequip_item(item):
@@ -61,6 +71,7 @@ func unequip_item(item):
 		var slotType:int = item.data.slot
 		if equippedSlots[slotType] != null:
 			equippedItems.erase(equippedSlots[slotType])
+			item.on_unequipped(character)
 			emit_signal("OnItemUnEquipped", equippedSlots[slotType])
 
 func activate_spell(spellItem):

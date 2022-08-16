@@ -26,6 +26,7 @@ var prevRoom = null
 var targetList:Array = []
 
 var statusEffectList:Array = []
+var passiveList:Array = []
 
 signal OnCharacterMove(x, y)
 signal OnCharacterMoveToCell()
@@ -33,7 +34,11 @@ signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
 signal OnDeath()
 
+signal OnPreAttack(defender, dmg)
+signal OnAttackConnect(defender, dmg)
+signal OnPostAttack(defender, dmg)
 signal OnHit(attacker, dmg)
+var successfulDamageThisFrame:int
 
 var originalColor:Color
 
@@ -153,13 +158,19 @@ func attack(entity):
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 5), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 
 		yield(get_tree().create_timer(0.075), "timeout")
-		entity.take_damage(self, get_stat_value(StatData.STAT_TYPE.DAMAGE))
+		var damageAmount:int = get_stat_value(StatData.STAT_TYPE.DAMAGE)
+		emit_signal("OnPreAttack", entity, damageAmount)
+		var damageDone = entity.take_damage(self, damageAmount)
+		if damageDone:
+			successfulDamageThisFrame = damageAmount
+			emit_signal("OnAttackConnect", entity, damageAmount)
+		emit_signal("OnPostAttack", entity, damageAmount)
 
 func take_damage(attacker, dmg):
 	if status.is_invulnerable():
 		emit_signal("OnHit", attacker, dmg)
 		show_blocked_text(attacker)
-		return
+		return false
 
 	var health = modify_stat_value(StatData.STAT_TYPE.HEALTH, -dmg)
 	emit_signal("OnHit", attacker, dmg)
@@ -173,6 +184,8 @@ func take_damage(attacker, dmg):
 	else:
 		show_hit(attacker, dmg)
 		Dungeon.emit_signal("OnAttack", attacker, self, dmg)
+
+	return true
 
 func die():
 	currentRoom.enemy_died(self)
@@ -247,13 +260,14 @@ func _create_damage_text_tween(entity):
 	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 
 func pre_update():
-	pass
+	successfulDamageThisFrame = 0
 
 func update():
 	pass
 
 func post_update():
 	targetList = []
+	successfulDamageThisFrame = 0
 
 # TARGETING
 func add_target(target):
@@ -282,6 +296,13 @@ func add_status_effect(statusEffectData:StatusEffectData):
 
 func remove_status_effect(statusEffect):
 	statusEffectList.erase(statusEffect)
+
+# PASSIVES
+func add_passive(passiveData:PassiveData):
+	passiveList.append(Passive.new(self, passiveData))
+
+func remove_passive(passiveData):
+	passiveList.erase(passiveData)
 
 # HELPERS
 func is_in_room(room):

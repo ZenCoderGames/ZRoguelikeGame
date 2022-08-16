@@ -185,6 +185,11 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/ui/ItemUI.gd"
 }, {
 "base": "Reference",
+"class": "Passive",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/characters/Passive.gd"
+}, {
+"base": "Reference",
 "class": "PassiveData",
 "language": "GDScript",
 "path": "res://scripts/battle/data/passives/PassiveData.gd"
@@ -270,6 +275,7 @@ _global_script_class_icons={
 "Item": "",
 "ItemData": "",
 "ItemUI": "",
+"Passive": "",
 "PassiveData": "",
 "PlayerCharacter": "",
 "Spell": "",

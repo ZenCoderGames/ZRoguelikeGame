@@ -6,7 +6,7 @@
 			"description": "Just a simple sword\n(+2 damage)",
 			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's damage by +2",
 			"path": "entity/items/gear/Gear_Tier1.tscn",
-			"type": "EQUIPABLE",
+			"type": "GEAR",
 			"slot": "WEAPON",
 			"stats": [
 				{
@@ -21,7 +21,7 @@
 			"description": "A heavier more powerful sword\n(+4 damage)",
 			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +4",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
-			"type": "EQUIPABLE",
+			"type": "GEAR",
 			"slot": "WEAPON",
 			"stats": [
 				{
@@ -31,12 +31,12 @@
 			]
 		},
 		{
-			"id": "SWORD_00",
-			"name": "Basic Sword",
-			"description": "Just a simple sword\n(+2 damage)",
-			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's damage by +2",
+			"id": "VAMPIRIC_SWORD",
+			"name": "Vampiric Sword",
+			"description": "A sword that leeches health back\n(+1 damage)\n[20% Lifesteal]",
+			"fullDescription": "A sword unearthed from the crypt of a vampire\nIncreases the player's damage by +1\nLeeches 20% of damage dealt by player",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
-			"type": "EQUIPABLE",
+			"type": "GEAR",
 			"slot": "WEAPON",
 			"stats": [
 				{

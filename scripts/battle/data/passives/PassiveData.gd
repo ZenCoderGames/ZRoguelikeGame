@@ -3,7 +3,7 @@ class_name PassiveData
 var id:String
 var triggerConditions:Array
 
-var actions:Array
+var timeline:Array
 
 func _init(dataJS):
     id = dataJS["id"]
@@ -15,6 +15,6 @@ func _init(dataJS):
         else:
             print("ERROR: Invalid Condition Type For PassiveData - ", conditionStr)
 
-    var actionsJSList = dataJS["actions"]
+    var actionsJSList = dataJS["timeline"]
     for actionJS in actionsJSList:
-        actions.append(ActionDataTypes.create(actionJS))
+        timeline.append(ActionDataTypes.create(actionJS))

@@ -3,14 +3,14 @@
 		{
 			"id": "LIFESTEAL_SMALL",
 			"conditions": [
-				"ON_ATTACK"
+				"ON_ATTACK_CONNECT"
 			],
-			"actions": [
+			"timeline": [
 				{
 					"id": "LIFESTEAL",
 					"type": "LIFE_DRAIN",
 					"params": {
-						"percent": 0.2
+						"flatAmount": 2
 					}
 				}
 			]

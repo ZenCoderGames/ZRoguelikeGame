@@ -6,8 +6,9 @@ func _init(actionData, parentChar).(actionData, parentChar):
 	pass
 
 func can_execute()->bool:
-	return true
+	return character.successfulDamageThisFrame>0
 
 func execute():
-	# TODO
-    pass
+    var lifeDrainData:ActionLifeDrainData = actionData as ActionLifeDrainData
+    character.modify_stat_value(StatData.STAT_TYPE.HEALTH, lifeDrainData.percent * character.successfulDamageThisFrame)
+    character.modify_stat_value(StatData.STAT_TYPE.HEALTH, lifeDrainData.flatAmount)
