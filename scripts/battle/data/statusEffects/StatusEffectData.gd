@@ -4,7 +4,8 @@ var id:String
 var instanceCount:int
 var triggerConditions:Array
 
-var actions:Array
+var startTimeline:Array
+var endTimeline:Array
 
 func _init(dataJS):
     id = dataJS["id"]
@@ -17,6 +18,10 @@ func _init(dataJS):
         else:
             print("ERROR: Invalid Condition Type For StatusEffectData - ", conditionStr)
 
-    var actionsJSList = dataJS["actions"]
+    var actionsJSList = dataJS["startTimeline"]
     for actionJS in actionsJSList:
-        actions.append(ActionDataTypes.create(actionJS))
+        startTimeline.append(ActionDataTypes.create(actionJS))
+
+    actionsJSList = dataJS["endTimeline"]
+    for actionJS in actionsJSList:
+        endTimeline.append(ActionDataTypes.create(actionJS))

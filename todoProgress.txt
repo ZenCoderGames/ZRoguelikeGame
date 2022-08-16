@@ -34,9 +34,11 @@ Roguelike Dev:
 (D)- Inventory
 (D)- Equipment
 (D)- UnEquip button
-- Bug with dissapearing when moving into dead char
-- Spells consume your turn
-- Color spells, items and consumables consistently
+(D)- Spells consume your turn
+(D)- Status Effects (Barrier)
+(D)- Barrier Immune message
+(IP)- Passives (Lifesteal)
+- Make DataManager global
 
 - Event system
 
@@ -59,7 +61,8 @@ Roguelike Dev:
 
 - Typed pass
 
-- Floors
+- Bug with dissapearing when moving into dead char
+- Color spells, items and consumables consistently
 
 -------------------------
 

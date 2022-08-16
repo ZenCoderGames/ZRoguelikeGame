@@ -19,6 +19,9 @@ func consume(character):
 	if data.is_consumable():
 		for statModifier in data.statModifierDataList:
 			character.modify_stat_value_from_modifier(statModifier)
+		if !data.statusEffectId.empty():
+			var statusEffectData:StatusEffectData = Dungeon.dataManager.get_status_effect_data(data.statusEffectId)
+			character.add_status_effect(statusEffectData)
 
 func activate():
 	if spell!=null:
@@ -39,8 +42,8 @@ func get_description():
 func get_full_description():
 	return data.fullDescription
 
-func is_equippable():
-	return data.is_equippable()
+func is_gear():
+	return data.is_gear()
 
 func is_consumable():
 	return data.is_consumable()

@@ -1,8 +1,6 @@
 # Dungeon.gd
 extends Node2D
 
-const Player := preload("res://entity/Player.tscn")
-
 # signals
 signal OnPlayerCreated(newPlayer)
 signal OnTurnCompleted()
@@ -205,7 +203,8 @@ func _init_enemies():
 	if battleInstance.dontSpawnEnemies:
 		return
 
-	#startRoom.generate_enemies(1)
+	if !battleInstance.debugSpawnEnemyInFirstRoom.empty():
+		startRoom.generate_enemy(battleInstance.debugSpawnEnemyInFirstRoom)
 	
 	for room in rooms:
 		if !room.isStartRoom:
@@ -218,15 +217,12 @@ func _init_items():
 
 	if !battleInstance.debugSpawnItemInFirstRoom.empty():
 		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
-		startRoom.generate_item("SWORD_01")
-		startRoom.generate_item("HEALTH_UPGRADE_00")
 	else:
 		startRoom.generate_items(1)
 
 	for room in rooms:
 		if !room.isStartRoom:
 			room.generate_items(randi() % 2)
-			#room.generate_enemies(1)
 
 func _init_player():
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
@@ -240,7 +236,11 @@ func _on_player_spell_activated(item):
 	_on_turn_taken(0, 0)
 
 func _on_turn_taken(x, y):
+	player.pre_update()
+	player.cell.room.pre_update_entities()
+
 	player.update()
+	player.cell.room.update_entities()
 
 	turnsTaken += 1
 	emit_signal("OnTurnCompleted")
@@ -248,10 +248,8 @@ func _on_turn_taken(x, y):
 	for room in rooms:
 		room.update_visibility()
 
-	player.cell.room.update_entities()
-
 	player.post_update()
-	player.cell.room.post_update()
+	player.cell.room.post_update_entities()
 
 func clean_up():
 	for loadedScene in loadedScenes:
@@ -297,6 +295,10 @@ func load_character(parentContainer, cell, characterData, entityType, groupName,
 	cell.init_entity(charObject, entityType)
 	charObject.init(characterData, team)
 	charObject.move_to_cell(cell)
+	if team == Constants.TEAM.PLAYER:
+		charObject.self_modulate = battleInstance.view.playerDamageColor
+	elif team == Constants.TEAM.ENEMY:
+		charObject.self_modulate = battleInstance.view.enemyDamageColor
 	return charObject
 
 func load_item(parentContainer, cell, itemData, entityType, groupName):
@@ -304,6 +306,12 @@ func load_item(parentContainer, cell, itemData, entityType, groupName):
 	var itemObject = Utils.create_scene(parentContainer, itemData.displayName, itemPrefab, groupName, cell)
 	cell.init_entity(itemObject, entityType)
 	itemObject.init(itemData, cell)
+	if itemData.is_gear():
+		itemObject.self_modulate = battleInstance.view.itemGearColor
+	if itemData.is_consumable():
+		itemObject.self_modulate = battleInstance.view.itemConsumableColor
+	if itemData.is_spell():
+		itemObject.self_modulate = battleInstance.view.itemSpellColor
 	return itemObject
 
 func create_delay(timeToDelay):

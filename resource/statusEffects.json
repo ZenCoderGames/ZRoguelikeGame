@@ -6,12 +6,19 @@
 			"conditions": [
 				"ON_HIT"
 			],
-			"actions": [ 
+			"startTimeline": [ 
 				{
-					"id": "INVULNERABLE",
 					"type": "SET_STATUS",
 					"params": {
-						"invulnerable": true
+						"invulnerable": 1
+					}
+				}
+			],
+			"endTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"invulnerable": -1
 					}
 				}
 			]

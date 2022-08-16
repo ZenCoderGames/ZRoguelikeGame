@@ -2,17 +2,15 @@ extends ActionData
 
 class_name ActionSetStatusData
 
-const ID:String = "STATUS"
+const ID:String = "SET_STATUS"
 
-var invulnerable:bool
-var rooted:bool
-var untargetable:bool
-var evasive:bool
-var uninterruptible:bool
-var immovable:bool
-var stunned:bool
-
-var numTurns:int = -1
+var invulnerable:int
+var rooted:int
+var untargetable:int
+var evasive:int
+var uninterruptible:int
+var immovable:int
+var stunned:int
 
 func _init(dataJS).(dataJS):
     if params.has("invulnerable"):
@@ -29,5 +27,3 @@ func _init(dataJS).(dataJS):
         immovable = params["immovable"]
     if params.has("stunned"):
         stunned = params["stunned"]
-    if params.has("numTurns"):
-        numTurns = params["numTurns"]

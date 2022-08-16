@@ -70,6 +70,9 @@ func init_characters():
 func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]
 
+func get_enemy_data(enemyId):
+	return characterDataDict[enemyId]
+
 func get_random_item_data():
 	return itemDataList[randi() % itemDataList.size()]
 

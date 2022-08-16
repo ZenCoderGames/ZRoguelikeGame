@@ -2,6 +2,7 @@ extends Node
 
 class_name BattleInstance
 
+onready var view:BattleView = $"%View"
 export var showWallColor:Color
 export var showFloorColor:Color
 export var dimWallColor:Color
@@ -14,6 +15,7 @@ export var timeBetweenMoves:float
 export var pauseAIMovement:bool
 export var pauseAIAttack:bool
 export var dontSpawnEnemies:bool
+export var debugSpawnEnemyInFirstRoom:String
 export var dontSpawnItems:bool
 export var debugSpawnItemInFirstRoom:String
 export var setPlayerInvulnerable:bool

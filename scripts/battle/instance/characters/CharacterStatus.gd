@@ -1,65 +1,56 @@
 class_name CharacterStatus
 
 var flags:Dictionary = {}
-var currentModifiers:Array
 
 enum FLAGS { INVULNERABLE, ROOTED, UNTARGETABLE, EVASIVE, UNINTERRUPTIBLE, IMMOVABLE, STUNNED }
 
-func update():
-    var modifiersToBeRemoved:Array = []
-    for modifier in currentModifiers:
-        modifier.update()
-        if modifier.is_done():
-            modifiersToBeRemoved.append(modifier)
+func _init():
+    flags[FLAGS.INVULNERABLE] = 0
+    flags[FLAGS.ROOTED] = 0
+    flags[FLAGS.UNTARGETABLE] = 0
+    flags[FLAGS.EVASIVE] = 0
+    flags[FLAGS.UNINTERRUPTIBLE] = 0
+    flags[FLAGS.IMMOVABLE] = 0
+    flags[FLAGS.STUNNED] = 0
 
-    for modifier in modifiersToBeRemoved:
-        currentModifiers.erase(modifier)
-
-func _does_modifier_exist(flagId):
-    for modifier in currentModifiers:
-        if modifier.id == flagId:
-            return true
-
-    return false
-
-func set_invulnerable(val, numTurns):
-    currentModifiers.append(CharacterStatusModifier.new(FLAGS.INVULNERABLE, numTurns))
+func set_invulnerable(val):
+    flags[FLAGS.INVULNERABLE] = flags[FLAGS.INVULNERABLE] + val
 
 func is_invulnerable():
-    return _does_modifier_exist(FLAGS.INVULNERABLE)
+    return flags[FLAGS.INVULNERABLE]>0
 
-func set_rooted(val, numTurns):
-    currentModifiers.append(CharacterStatusModifier.new(FLAGS.ROOTED, numTurns))
+func set_rooted(val):
+    flags[FLAGS.ROOTED] = flags[FLAGS.ROOTED] + val
 
 func is_rooted():
-    return _does_modifier_exist(FLAGS.ROOTED)
+    return flags[FLAGS.ROOTED]>0
 
-func set_untargetable(val, numTurns):
-    currentModifiers.append(CharacterStatusModifier.new(FLAGS.UNTARGETABLE, numTurns))
+func set_untargetable(val):
+    flags[FLAGS.UNTARGETABLE] = flags[FLAGS.UNTARGETABLE] + val
 
 func is_untargetable():
-    return _does_modifier_exist(FLAGS.UNTARGETABLE)
+    return flags[FLAGS.UNTARGETABLE]>0
 
-func set_evasive(val, numTurns):
-    currentModifiers.append(CharacterStatusModifier.new(FLAGS.EVASIVE, numTurns))
+func set_evasive(val):
+    flags[FLAGS.EVASIVE] = flags[FLAGS.EVASIVE] + val
 
 func is_evasive():
-    return _does_modifier_exist(FLAGS.EVASIVE)
+    return flags[FLAGS.EVASIVE]>0
 
-func set_uninterruptible(val, numTurns):
-    currentModifiers.append(CharacterStatusModifier.new(FLAGS.UNINTERRUPTIBLE, numTurns))
+func set_uninterruptible(val):
+    flags[FLAGS.UNINTERRUPTIBLE] = flags[FLAGS.UNINTERRUPTIBLE] + val
 
 func is_uninterruptible():
-    return _does_modifier_exist(FLAGS.UNINTERRUPTIBLE)
+    return flags[FLAGS.UNINTERRUPTIBLE]>0
 
-func set_immovable(val, numTurns):
-    currentModifiers.append(CharacterStatusModifier.new(FLAGS.IMMOVABLE, numTurns))
+func set_immovable(val):
+    flags[FLAGS.IMMOVABLE] = flags[FLAGS.IMMOVABLE] + val
 
 func is_immovable():
-    return _does_modifier_exist(FLAGS.IMMOVABLE)
+    return flags[FLAGS.IMMOVABLE]>0
 
-func set_stunned(val, numTurns):
-    currentModifiers.append(CharacterStatusModifier.new(FLAGS.STUNNED, numTurns))
+func set_stunned(val):
+    flags[FLAGS.STUNNED] = flags[FLAGS.STUNNED] + val
 
 func is_stunned():
-    return _does_modifier_exist(FLAGS.STUNNED)
+    return flags[FLAGS.STUNNED]>0

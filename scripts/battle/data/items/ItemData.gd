@@ -23,7 +23,7 @@ var statDataList:Array
 var statModifierDataList:Array
 var slot:int
 
-enum ITEM_TYPE { EQUIPABLE, CONSUMABLE, SPELL, PASSIVE }
+enum ITEM_TYPE { GEAR, CONSUMABLE, SPELL }
 var type:int
 
 var spellId:String
@@ -73,8 +73,8 @@ func _init(itemDataJS):
 	if itemDataJS.has("statusEffectId"):
 		statusEffectId =  itemDataJS["statusEffectId"]
 
-func is_equippable():
-	return type == ITEM_TYPE.EQUIPABLE
+func is_gear():
+	return type == ITEM_TYPE.GEAR
 
 func is_consumable():
 	return type == ITEM_TYPE.CONSUMABLE

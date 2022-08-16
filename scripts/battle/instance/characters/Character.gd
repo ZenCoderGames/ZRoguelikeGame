@@ -25,11 +25,15 @@ var prevRoom = null
 
 var targetList:Array = []
 
+var statusEffectList:Array = []
+
 signal OnCharacterMove(x, y)
 signal OnCharacterMoveToCell()
 signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
 signal OnDeath()
+
+signal OnHit(attacker, dmg)
 
 var originalColor:Color
 
@@ -38,9 +42,9 @@ func init(charData, teamVal):
 	team = teamVal
 	originalColor = self.self_modulate
 	if team==Constants.TEAM.ENEMY:
-		damageText.self_modulate = Dungeon.battleInstance.playerDamageColor
+		damageText.self_modulate = Dungeon.battleInstance.view.playerDamageColor
 	else:
-		damageText.self_modulate = Dungeon.battleInstance.enemyDamageColor
+		damageText.self_modulate = Dungeon.battleInstance.view.enemyDamageColor
 
 	# Stats
 	for statData in charData.statDataList:
@@ -152,7 +156,13 @@ func attack(entity):
 		entity.take_damage(self, get_stat_value(StatData.STAT_TYPE.DAMAGE))
 
 func take_damage(attacker, dmg):
+	if status.is_invulnerable():
+		emit_signal("OnHit", attacker, dmg)
+		show_blocked_text(attacker)
+		return
+
 	var health = modify_stat_value(StatData.STAT_TYPE.HEALTH, -dmg)
+	emit_signal("OnHit", attacker, dmg)
 	if health<=0:
 		isDead = true
 		Dungeon.emit_signal("OnKill", attacker, self)
@@ -195,10 +205,29 @@ func show_hit_flash():
 func show_damage_text(entity, dmg):
 	if entity==null:
 		return
-		
+	
+	"""if(entity.team == Constants.TEAM.ENEMY):
+		damageText.modulate = Dungeon.battleInstance.view.playerDamageColor
+	else:
+		damageText.modulate = Dungeon.battleInstance.view.enemyDamageColor"""
 	damageText.visible = true
 	damageText.text = str(dmg)
+	_create_damage_text_tween(entity)
+	yield(get_tree().create_timer(0.35), "timeout")
+	damageText.visible = false
 
+func show_blocked_text(entity):
+	"""if(entity.team == Constants.TEAM.PLAYER):
+		damageText.modulate = Dungeon.battleInstance.view.playerDamageColor
+	else:
+		damageText.modulate = Dungeon.battleInstance.view.enemyDamageColor"""
+	damageText.visible = true
+	damageText.text = "Immune"
+	_create_damage_text_tween(entity)
+	yield(get_tree().create_timer(0.5), "timeout")
+	damageText.visible = false
+
+func _create_damage_text_tween(entity):
 	var dirn:int = dirn_to_character(entity)
 	# damage text
 	var startPos:Vector2 = Vector2(0,-30)
@@ -216,15 +245,15 @@ func show_damage_text(entity, dmg):
 		startPos = Vector2(0, 0)
 		endPos = Vector2(10, 20)
 	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
-	yield(get_tree().create_timer(0.35), "timeout")
-	damageText.visible = false
+
+func pre_update():
+	pass
 
 func update():
 	pass
 
 func post_update():
 	targetList = []
-	status.update()
 
 # TARGETING
 func add_target(target):
@@ -246,6 +275,13 @@ func get_random_target():
 
 func get_targets():
 	return targetList
+
+# STATUS EFFECTS
+func add_status_effect(statusEffectData:StatusEffectData):
+	statusEffectList.append(StatusEffect.new(self, statusEffectData))
+
+func remove_status_effect(statusEffect):
+	statusEffectList.erase(statusEffect)
 
 # HELPERS
 func is_in_room(room):

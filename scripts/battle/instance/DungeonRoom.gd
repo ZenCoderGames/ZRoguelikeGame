@@ -3,7 +3,6 @@ class_name DungeonRoom
 # Room.gd
 const Floor := preload("res://entity/Floor.tscn")
 const Wall := preload("res://entity/Wall.tscn")
-const Dwarf := preload("res://entity/Dwarf.tscn")
 
 var cells:Array = []
 
@@ -87,9 +86,9 @@ func _create_wall(r, c):
 		
 func generate_enemies(totalEnemiesToSpawn):
 	for i in totalEnemiesToSpawn:
-		spawnEnemy()
+		spawn_random_enemy()
 
-func spawnEnemy():
+func spawn_random_enemy():
 	# find free cells
 	var freeCells:Array = []
 	for cell in cells:
@@ -101,6 +100,21 @@ func spawnEnemy():
 
 	# spawn random enemy
 	var randomEnemyData:CharacterData = Dungeon.dataManager.get_random_enemy_data()
+	var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
+	enemies.append(enemy)
+
+func generate_enemy(enemyId):
+	# find free cells
+	var freeCells:Array = []
+	for cell in cells:
+		if cell.is_empty() and cell.is_within_room_buffered(3):
+			freeCells.append(cell)
+	
+	# choose random free cell
+	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
+
+	# spawn random enemy
+	var randomEnemyData:CharacterData = Dungeon.dataManager.get_enemy_data(enemyId)
 	var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 	enemies.append(enemy)
 
@@ -167,11 +181,11 @@ func update_visibility():
 	# VISIBILITY
 	if Dungeon.battleInstance.debugShowAllRooms:
 		if isStartRoom:
-			_show_debug(Dungeon.battleInstance.debugStartRoomColor)
+			_show_debug(Dungeon.battleInstance.view.debugStartRoomColor)
 		elif isEndRoom:
-			_show_debug(Dungeon.battleInstance.debugEndRoomColor)
+			_show_debug(Dungeon.battleInstance.view.debugEndRoomColor)
 		elif isCriticalPathRoom:
-			_show_debug(Dungeon.battleInstance.debugCriticalPathRoomColor)
+			_show_debug(Dungeon.battleInstance.view.debugCriticalPathRoomColor)
 	else:	
 		var isPlayerCurrent:bool = Dungeon.player.is_in_room(self)
 		var isPlayerPrevious:bool = Dungeon.player.is_prev_room(self)
@@ -332,7 +346,11 @@ func find_next_best_path_cell(currentCell):
 
 	return null
 
-func post_update():
+func pre_update_entities():
+	for enemy in enemies:
+		enemy.post_update()
+
+func post_update_entities():
 	for enemy in enemies:
 		enemy.post_update()
 

@@ -5,7 +5,7 @@
 			"name": "Basic Sword",
 			"description": "Just a simple sword\n(+2 damage)",
 			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's damage by +2",
-			"path": "entity/items/Item_BasicSword.tscn",
+			"path": "entity/items/gear/Gear_Tier1.tscn",
 			"type": "EQUIPABLE",
 			"slot": "WEAPON",
 			"stats": [
@@ -20,7 +20,7 @@
 			"name": "Heavy Sword",
 			"description": "A heavier more powerful sword\n(+4 damage)",
 			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +4",
-			"path": "entity/items/Item_HeavySword.tscn",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "EQUIPABLE",
 			"slot": "WEAPON",
 			"stats": [
@@ -35,7 +35,7 @@
 			"name": "Basic Sword",
 			"description": "Just a simple sword\n(+2 damage)",
 			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's damage by +2",
-			"path": "entity/items/Item_BasicSword.tscn",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "EQUIPABLE",
 			"slot": "WEAPON",
 			"stats": [
@@ -52,7 +52,7 @@
 			"name": "Small Health Potion",
 			"description": "A tiny health potion\n(+10 health)",
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +10",
-			"path": "entity/items/Item_SmallHealingPotion.tscn",
+			"path": "entity/items/consumables/Consumable_Tier1.tscn",
 			"type": "CONSUMABLE",
 			"statModifiers": [
 				{
@@ -63,11 +63,11 @@
 		},
 		{
 			"#disable": true,
-			"id": "BARRIER_POTION",
+			"id": "BARRIER",
 			"name": "Barrier",
 			"description": "Gain 1 Instance of Barrier",
 			"fullDescription": "Gain 1 Instance of Barrier\nBarrier protects the player from any damage.",
-			"path": "entity/items/Item_Barrier.tscn",
+			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
 			"statusEffectId": "BARRIER"
 		},
@@ -77,7 +77,7 @@
 			"name": "Blessing of health",
 			"description": "A boost to base health\n(+10 max health)",
 			"fullDescription": "A blessing from a goddess to those who seek it.\nIncrease max health by +10",
-			"path": "entity/items/Item_HealthUpgrade.tscn",
+			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
 			"statModifiers": [
 				{
@@ -92,7 +92,7 @@
 			"name": "Lightning Bolt",
 			"description": "A Powerful Lightning Bolt",
 			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you.",
-			"path": "entity/items/Item_Spell_LightningBolt.tscn",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"spellId": "LIGHTNING_BOLT"
 		},
@@ -102,7 +102,7 @@
 			"name": "Ground Pound",
 			"description": "Slam the ground and do damage to nearby enemies",
 			"fullDescription": "Slam the ground and do damage to nearby enemies",
-			"path": "entity/items/Item_Spell_LightningBolt.tscn",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"spellId": "GROUND_POUND"
 		}
