@@ -299,10 +299,12 @@ func remove_status_effect(statusEffect):
 
 # PASSIVES
 func add_passive(passiveData:PassiveData):
-	passiveList.append(Passive.new(self, passiveData))
+	var passive:Passive = Passive.new(self, passiveData)
+	passiveList.append(passive)
+	return passive
 
-func remove_passive(passiveData):
-	passiveList.erase(passiveData)
+func remove_passive(passive:Passive):
+	passiveList.erase(passive)
 
 # HELPERS
 func is_in_room(room):
