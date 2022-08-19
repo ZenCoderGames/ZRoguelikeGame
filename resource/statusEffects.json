@@ -3,8 +3,8 @@
 		{
 			"id": "BARRIER",
 			"instanceCount": 1,
-			"conditions": [
-				"ON_HIT"
+			"endConditions": [
+				"ON_BLOCKED_HIT"
 			],
 			"startTimeline": [ 
 				{

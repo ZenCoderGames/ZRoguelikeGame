@@ -34,10 +34,8 @@ signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
 signal OnDeath()
 
-signal OnPreAttack(defender, dmg)
-signal OnAttackConnect(defender, dmg)
-signal OnPostAttack(defender, dmg)
-signal OnHit(attacker, dmg)
+signal OnPreAttack(defender)
+signal OnPostAttack(defender)
 var successfulDamageThisFrame:int
 
 var originalColor:Color
@@ -158,40 +156,27 @@ func attack(entity):
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 5), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 
 		yield(get_tree().create_timer(0.075), "timeout")
+
+
+		emit_signal("OnPreAttack", entity)
+
 		var damageAmount:int = get_stat_value(StatData.STAT_TYPE.DAMAGE)
-		emit_signal("OnPreAttack", entity, damageAmount)
-		var damageDone = entity.take_damage(self, damageAmount)
-		if damageDone:
-			successfulDamageThisFrame = damageAmount
-			emit_signal("OnAttackConnect", entity, damageAmount)
-		emit_signal("OnPostAttack", entity, damageAmount)
+		successfulDamageThisFrame = Dungeon.battleInstance.hitResolutionManager.do_hit(self, entity, damageAmount)
+		emit_signal("OnPostAttack", entity)
 
-func take_damage(attacker, dmg):
-	if status.is_invulnerable():
-		emit_signal("OnHit", attacker, dmg)
-		show_blocked_text(attacker)
-		return false
+func on_blocked_hit(attacker):
+	show_blocked_text(self)
 
-	var health = modify_stat_value(StatData.STAT_TYPE.HEALTH, -dmg)
-	emit_signal("OnHit", attacker, dmg)
-	if health<=0:
-		isDead = true
-		Dungeon.emit_signal("OnKill", attacker, self)
-		show_hit(attacker, dmg)
-		yield(get_tree().create_timer(0.1), "timeout")
-		die()
-		emit_signal("OnDeath")
-	else:
-		show_hit(attacker, dmg)
-		Dungeon.emit_signal("OnAttack", attacker, self, dmg)
-
-	return true
+func show_damage_from_hit(attacker, dmg):
+	show_hit(attacker, dmg)
 
 func die():
+	isDead = true
 	currentRoom.enemy_died(self)
 	if cell.entityObject!=null:
 		cell.entityObject.hide()
 	cell.clear_entity_on_death()
+	emit_signal("OnDeath")
 
 func show_hit(entity, dmg):
 	# shove

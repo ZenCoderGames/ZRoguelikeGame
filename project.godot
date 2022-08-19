@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "BattleInstance",
 "language": "GDScript",
-"path": "res://scripts/battle/instance/BattleInstance.gd"
+"path": "res://scripts/battle/BattleInstance.gd"
 }, {
 "base": "Node",
 "class": "BattleUI",
@@ -102,7 +102,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "BattleView",
 "language": "GDScript",
-"path": "res://scripts/battle/instance/BattleView.gd"
+"path": "res://scripts/battle/BattleView.gd"
 }, {
 "base": "Node",
 "class": "Character",
@@ -132,7 +132,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "DungeonCell",
 "language": "GDScript",
-"path": "res://scripts/battle/instance/DungeonCell.gd"
+"path": "res://scripts/battle/instance/rooms/DungeonCell.gd"
 }, {
 "base": "Reference",
 "class": "DungeonDataManager",
@@ -142,7 +142,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "DungeonRoom",
 "language": "GDScript",
-"path": "res://scripts/battle/instance/DungeonRoom.gd"
+"path": "res://scripts/battle/instance/rooms/DungeonRoom.gd"
 }, {
 "base": "Character",
 "class": "EnemyCharacter",
@@ -158,6 +158,11 @@ _global_script_classes=[ {
 "class": "EquippedItemUI",
 "language": "GDScript",
 "path": "res://scripts/battle/ui/EquippedItemUI.gd"
+}, {
+"base": "Node",
+"class": "HitResolutionManager",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/HitResolutionManager.gd"
 }, {
 "base": "Reference",
 "class": "Inventory",
@@ -270,6 +275,7 @@ _global_script_class_icons={
 "EnemyCharacter": "",
 "Equipment": "",
 "EquippedItemUI": "",
+"HitResolutionManager": "",
 "Inventory": "",
 "InventoryUI": "",
 "Item": "",
@@ -299,7 +305,7 @@ config/icon="res://resource/icon.png"
 
 Constants="*res://scripts/library/Constants.gd"
 Utils="*res://scripts/library/Utils.gd"
-Dungeon="*res://scripts/battle/instance/Dungeon.gd"
+Dungeon="*res://scripts/battle/Dungeon.gd"
 
 [display]
 

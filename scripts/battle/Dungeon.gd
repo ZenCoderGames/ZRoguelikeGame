@@ -4,8 +4,6 @@ extends Node2D
 # signals
 signal OnPlayerCreated(newPlayer)
 signal OnTurnCompleted()
-signal OnAttack(attacker, defender, damageValue)
-signal OnKill(attacker, defender)
 signal OnEnemyMovedAdjacentToPlayer(enemy)
 
 var rooms:Array = []

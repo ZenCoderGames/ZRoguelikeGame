@@ -11,7 +11,7 @@ func _init(dataJS):
     id = dataJS["id"]
     instanceCount = dataJS["instanceCount"]
 
-    var conditionsJSList = dataJS["conditions"]
+    var conditionsJSList = dataJS["endConditions"]
     for conditionStr in conditionsJSList:
         if Constants.TRIGGER_CONDITION.has(conditionStr):
             triggerConditions.append(Constants.TRIGGER_CONDITION.get(conditionStr))

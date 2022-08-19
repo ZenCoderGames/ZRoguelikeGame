@@ -37,14 +37,12 @@ Roguelike Dev:
 (D)- Spells consume your turn
 (D)- Status Effects (Barrier)
 (D)- Barrier Immune message
-(IP)- Passives (Lifesteal)
-- Make DataManager global
-- Damage pipeline
-
-- Event system
+(D)- Passives (Lifesteal)
+(IP)- Damage pipeline (Continue on HitResolutionManager and show after calcs)
+- Global Event system
 
 - Extra Ranged Scrolls (Leap)
-- Passive Abilities (Vampiric, Barrier, Revive)
+- Passive Abilities (Revive)
 
 - Spell Cooldown in turns
 

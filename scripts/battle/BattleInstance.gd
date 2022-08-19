@@ -3,6 +3,8 @@ extends Node
 class_name BattleInstance
 
 onready var view:BattleView = $"%View"
+onready var hitResolutionManager:HitResolutionManager = $"%HitResolutionManager"
+
 export var showWallColor:Color
 export var showFloorColor:Color
 export var dimWallColor:Color

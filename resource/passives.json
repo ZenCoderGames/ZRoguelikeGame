@@ -3,7 +3,7 @@
 		{
 			"id": "LIFESTEAL_SMALL",
 			"conditions": [
-				"ON_ATTACK_CONNECT"
+				"ON_POST_HIT"
 			],
 			"timeline": [
 				{

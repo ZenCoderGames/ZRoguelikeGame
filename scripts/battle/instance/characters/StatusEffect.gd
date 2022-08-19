@@ -19,12 +19,13 @@ func _init(parentChar, statusEffectData:StatusEffectData):
 	for action in timelineActions:
 		action.execute()
 
-	if data.triggerConditions.has(Constants.TRIGGER_CONDITION.ON_HIT):
-		character.connect("OnHit", self, "_on_character_hit")
+	if data.triggerConditions.has(Constants.TRIGGER_CONDITION.ON_BLOCKED_HIT):
+		Dungeon.battleInstance.hitResolutionManager.connect("OnBlockedHit", self, "_on_character_blocked_hit")
 
-func _on_character_hit(attacker, dmg):
-	instanceCount = instanceCount - 1
-	_check_for_completion()
+func _on_character_blocked_hit(attacker, defender, dmg):
+	if character==defender:
+		instanceCount = instanceCount - 1
+		_check_for_completion()
 
 func _check_for_completion():
 	if instanceCount==0:

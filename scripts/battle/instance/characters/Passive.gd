@@ -13,11 +13,12 @@ func _init(parentChar, passiveData:PassiveData):
 		if(action!=null):
 			timelineActions.append(action)
 
-	if data.triggerConditions.has(Constants.TRIGGER_CONDITION.ON_ATTACK_CONNECT):
-		character.connect("OnAttackConnect", self, "_on_character_attack_connect")
+	if data.triggerConditions.has(Constants.TRIGGER_CONDITION.ON_POST_HIT):
+		Dungeon.battleInstance.hitResolutionManager.connect("OnPostHit", self, "_on_character_post_hit")
 
-func _on_character_attack_connect(defender, dmg):
-	_trigger_timeline()
+func _on_character_post_hit(attacker, defender, damage):
+	if character==attacker:
+		_trigger_timeline()
 
 func _trigger_timeline():
 	for action in timelineActions:
