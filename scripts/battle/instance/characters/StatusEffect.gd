@@ -10,22 +10,30 @@ func _init(parentChar, statusEffectData:StatusEffectData):
 	data = statusEffectData
 	instanceCount = data.instanceCount
 
-	var timelineActions:Array = []
 	for actionData in data.startTimeline:
 		var action:Action = ActionTypes.create(actionData, character)
 		if(action!=null):
-			timelineActions.append(action)
+			action.execute()
 
-	for action in timelineActions:
-		action.execute()
+	CombatEventManager.register_for_conditional_events(data.triggerConditions, self, character)
 
-	if data.triggerConditions.has(Constants.TRIGGER_CONDITION.ON_BLOCKED_HIT):
-		Dungeon.battleInstance.hitResolutionManager.connect("OnBlockedHit", self, "_on_character_blocked_hit")
+func activate_on_character_move(x, y):
+	activate()
 
-func _on_character_blocked_hit(attacker, defender, dmg):
+func activate_on_target_or_item(targetOrSpell):
+	activate()
+
+func activate_on_attacker(attacker, defender, data):
+	if character==attacker:
+		activate()
+
+func activate_on_defender(attacker, defender, data):
 	if character==defender:
-		instanceCount = instanceCount - 1
-		_check_for_completion()
+		activate()	
+
+func activate():
+	instanceCount = instanceCount - 1
+	_check_for_completion()
 
 func _check_for_completion():
 	if instanceCount==0:
@@ -34,11 +42,7 @@ func _check_for_completion():
 func _clean_up():
 	character.remove_status_effect(self)
 
-	var timelineActions:Array = []
 	for actionData in data.endTimeline:
 		var action:Action = ActionTypes.create(actionData, character)
 		if(action!=null):
-			timelineActions.append(action)
-
-	for action in timelineActions:
-		action.execute()
+			action.execute()

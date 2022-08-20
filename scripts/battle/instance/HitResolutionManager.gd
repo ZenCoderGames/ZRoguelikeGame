@@ -1,10 +1,8 @@
 extends Node
 
-class_name HitResolutionManager
-
-signal OnAttack(attacker, defender, dmg)
 signal OnPreHit(sourceChar, defender, dmg)
 signal OnBlockedHit(sourceChar, defender, dmg)
+signal OnTakeHit(sourceChar, defender, dmg)
 signal OnPostHit(sourceChar, defender, dmg)
 signal OnKill(sourceChar, defender)
 
@@ -27,6 +25,7 @@ func do_hit(sourceChar, targetChar, damage):
 		emit_signal("OnKill", sourceChar, targetChar)
 		targetChar.die()
 	else:
+		emit_signal("OnTakeHit", sourceChar, targetChar, finalDamage)
 		emit_signal("OnPostHit", sourceChar, targetChar, finalDamage)
 
 	return finalDamage

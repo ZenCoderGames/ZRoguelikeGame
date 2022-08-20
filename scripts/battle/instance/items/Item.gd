@@ -26,8 +26,8 @@ func consume(character):
 
 func activate():
 	if spell!=null:
-		if spell.can_execute():
-			spell.execute()
+		if spell.can_activate():
+			spell.activate()
 
 func picked():
 	if cell.entityObject!=null:

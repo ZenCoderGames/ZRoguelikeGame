@@ -33,9 +33,9 @@ func _ready():
 func _on_dungeon_init():
 	_shared_init()
 	
-	Dungeon.connect("OnTurnCompleted", self, "_on_turn_taken")
-	Dungeon.battleInstance.hitResolutionManager.connect("OnAttack", self, "_on_attack")
-	Dungeon.battleInstance.hitResolutionManager.connect("OnKill", self, "_on_kill")
+	Dungeon.connect("OnEndTurn", self, "_on_turn_taken")
+	HitResolutionManager.connect("OnPostHit", self, "_on_attack")
+	HitResolutionManager.connect("OnKill", self, "_on_kill")
 
 func _on_dungeon_recreated():
 	_clean_up()

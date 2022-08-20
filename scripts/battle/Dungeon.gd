@@ -3,7 +3,8 @@ extends Node2D
 
 # signals
 signal OnPlayerCreated(newPlayer)
-signal OnTurnCompleted()
+signal OnStartTurn()
+signal OnEndTurn()
 signal OnEnemyMovedAdjacentToPlayer(enemy)
 
 var rooms:Array = []
@@ -234,6 +235,7 @@ func _on_player_spell_activated(item):
 	_on_turn_taken(0, 0)
 
 func _on_turn_taken(x, y):
+	emit_signal("OnStartTurn")
 	player.pre_update()
 	player.cell.room.pre_update_entities()
 
@@ -241,7 +243,7 @@ func _on_turn_taken(x, y):
 	player.cell.room.update_entities()
 
 	turnsTaken += 1
-	emit_signal("OnTurnCompleted")
+	emit_signal("OnEndTurn")
 
 	for room in rooms:
 		room.update_visibility()

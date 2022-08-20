@@ -13,13 +13,22 @@ func _init(parentChar, passiveData:PassiveData):
 		if(action!=null):
 			timelineActions.append(action)
 
-	if data.triggerConditions.has(Constants.TRIGGER_CONDITION.ON_POST_HIT):
-		Dungeon.battleInstance.hitResolutionManager.connect("OnPostHit", self, "_on_character_post_hit")
+	CombatEventManager.register_for_conditional_events(data.triggerConditions, self, character)
 
-func _on_character_post_hit(attacker, defender, damage):
+func activate_on_character_move(x, y):
+	activate()
+
+func activate_on_target_or_item(targetOrSpell):
+	activate()
+
+func activate_on_attacker(attacker, defender, data):
 	if character==attacker:
-		_trigger_timeline()
+		activate()
 
-func _trigger_timeline():
+func activate_on_defender(attacker, defender, data):
+	if character==defender:
+		activate()
+
+func activate():
 	for action in timelineActions:
 		action.execute()

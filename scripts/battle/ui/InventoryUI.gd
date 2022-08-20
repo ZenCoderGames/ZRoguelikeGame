@@ -29,7 +29,7 @@ func _ready():
 func init(character):
 	playerChar = character
 	playerChar.inventory.connect("OnItemAdded", self, "_on_item_added_to_inventory")
-	playerChar.connect("OnSpellActivated", self, "_on_spell_activated")
+	playerChar.equipment.connect("OnSpellActivated", self, "_on_spell_activated")
 	
 func show():
 	selectedIdx = 0

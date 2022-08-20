@@ -159,11 +159,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/battle/ui/EquippedItemUI.gd"
 }, {
-"base": "Node",
-"class": "HitResolutionManager",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/HitResolutionManager.gd"
-}, {
 "base": "Reference",
 "class": "Inventory",
 "language": "GDScript",
@@ -275,7 +270,6 @@ _global_script_class_icons={
 "EnemyCharacter": "",
 "Equipment": "",
 "EquippedItemUI": "",
-"HitResolutionManager": "",
 "Inventory": "",
 "InventoryUI": "",
 "Item": "",
@@ -306,6 +300,8 @@ config/icon="res://resource/icon.png"
 Constants="*res://scripts/library/Constants.gd"
 Utils="*res://scripts/library/Utils.gd"
 Dungeon="*res://scripts/battle/Dungeon.gd"
+HitResolutionManager="*res://scripts/battle/instance/HitResolutionManager.gd"
+CombatEventManager="*res://scripts/battle/instance/CombatEventManager.gd"
 
 [display]
 

@@ -11,9 +11,9 @@ func _init(spellDataDef, character):
 			timelineActions.append(action)
 
 # add mana or stamina here
-func can_execute():
+func can_activate():
 	return true
 
-func execute():
+func activate():
 	for action in timelineActions:
 		action.execute()

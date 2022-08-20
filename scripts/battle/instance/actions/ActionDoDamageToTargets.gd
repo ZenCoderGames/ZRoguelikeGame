@@ -14,4 +14,4 @@ func can_execute()->bool:
 func execute():
 	var targets = character.get_targets()
 	for target in targets:
-		Dungeon.battleInstance.hitResolutionManager.do_hit(character, target, actionData.damage)
+		HitResolutionManager.do_hit(character, target, actionData.damage)

@@ -148,7 +148,7 @@ func generate_item(itemId):
 	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
 	# spawn random enemy
-	var randomItemData:ItemData = Dungeon.dataManager.get_item_data(itemId)
+	var randomItemData = Dungeon.dataManager.get_item_data(itemId)
 	var item:Node = Dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
 	items.append(item)
 

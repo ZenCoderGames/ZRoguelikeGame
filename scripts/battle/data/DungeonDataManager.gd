@@ -49,7 +49,11 @@ func init_items():
 			itemDataList.append(newItemData)
 
 func get_item_data(id):
-	return itemDataMap[id]
+	if itemDataMap.has(id):
+		return itemDataMap[id]
+		
+	print("Invalid Item ID:", id)
+	return null
 
 func init_characters():
 	var data = Utils.load_data_from_file("resource/characters.json")

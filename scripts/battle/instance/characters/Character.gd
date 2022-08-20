@@ -159,9 +159,8 @@ func attack(entity):
 
 
 		emit_signal("OnPreAttack", entity)
-
 		var damageAmount:int = get_stat_value(StatData.STAT_TYPE.DAMAGE)
-		successfulDamageThisFrame = Dungeon.battleInstance.hitResolutionManager.do_hit(self, entity, damageAmount)
+		successfulDamageThisFrame = HitResolutionManager.do_hit(self, entity, damageAmount)
 		emit_signal("OnPostAttack", entity)
 
 func on_blocked_hit(attacker):
