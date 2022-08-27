@@ -3,6 +3,7 @@ extends Node
 class_name BattleInstance
 
 onready var view:BattleView = $"%View"
+onready var mainMenuUI:MainMenuUI = $"%MainMenuUI"
 
 export var showWallColor:Color
 export var showFloorColor:Color
@@ -28,6 +29,10 @@ export var debugEndRoomColor:Color
 signal OnDungeonInitialized()
 signal OnDungeonRecreated()
 signal OnToggleInventory()
+signal OnMainMenuOn()
+signal OnMainMenuOff()
+
+var onGameOver:bool
 
 func _init():
 	Dungeon.init(self)
@@ -38,14 +43,36 @@ func _ready():
 	emit_signal("OnDungeonInitialized")
 
 func _create_dungeon():
+	_shared_dungeon_init()
+
+func restart_dungeon():
+	Dungeon.clean_up()
+	_toggle_main_menu()
+	_shared_dungeon_init()
+	emit_signal("OnDungeonRecreated")
+
+func _shared_dungeon_init():
 	Dungeon.create()
+	onGameOver = false
+	Dungeon.player.connect("OnDeath", self, "_on_game_over")
+
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(Constants.INPUT_RESET_DUNGEON):
-		Dungeon.clean_up()
-		Dungeon.create()
-		emit_signal("OnDungeonRecreated")
+	if onGameOver:
+		return
 
-	# inventory
 	if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
 		emit_signal("OnToggleInventory")
+
+	if event.is_action_pressed(Constants.INPUT_TOGGLE_MAIN_MENU):
+		_toggle_main_menu()
+
+func _toggle_main_menu():
+	mainMenuUI.visible = !mainMenuUI.visible
+	if mainMenuUI.visible:
+		emit_signal("OnMainMenuOn")
+	else:
+		emit_signal("OnMainMenuOff")
+
+func _on_game_over():
+	onGameOver = true

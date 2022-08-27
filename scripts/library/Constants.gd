@@ -27,7 +27,7 @@ const items: String = "items"
 
 # INPUTS
 const INPUT_EXIT_GAME: String = "exit"
-const INPUT_RESET_DUNGEON: String = "reset_dungeon"
+const INPUT_TOGGLE_MAIN_MENU: String = "toggle_main_menu"
 
 const INPUT_TOGGLE_INVENTORY: String = "toggle_inventory"
 

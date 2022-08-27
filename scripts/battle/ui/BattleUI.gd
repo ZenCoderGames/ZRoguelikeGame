@@ -18,11 +18,8 @@ const ItemUI := preload("res://ui/battle/ItemUI.tscn")
 # inventory UI
 const InventoryUI := preload("res://ui/battle/InventoryUI.tscn")
 var inventoryUI:InventoryUI = null
-# death UI
-onready var deathUI:Node = get_node("DeathUI")
 
 func _ready():
-	deathUI.visible = false
 	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
 	Dungeon.battleInstance.connect("OnToggleInventory", self, "_on_toggle_inventory")
@@ -42,13 +39,11 @@ func _on_dungeon_recreated():
 	_shared_init()
 
 func _shared_init():
-	deathUI.visible = false
 	playerUI = CharacterUI.instance()
 	playerPanel.add_child(playerUI)
 
 	inventoryUI.init(Dungeon.player)
 	
-	Dungeon.player.connect("OnDeath", self, "_on_player_death")
 	Dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_move")
 	Dungeon.player.connect("OnNearbyEntityFound", self, "_on_entity_nearby")
 	Dungeon.player.inventory.connect("OnItemAdded", self, "_on_item_picked_by_player")
@@ -77,9 +72,6 @@ func _on_item_picked_by_player(item):
 	detailsLabel.text = str(item.data.displayName, " picked up ")
 	yield(get_tree().create_timer(1), "timeout")
 	detailsUI.visible = false
-
-func _on_player_death():
-	deathUI.visible = true
 	
 # INFO PANEL
 func _on_player_move():

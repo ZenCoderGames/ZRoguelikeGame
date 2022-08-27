@@ -12,6 +12,8 @@ func _ready():
 	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
 	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_init")
+	Dungeon.battleInstance.connect("OnMainMenuOn", self, "on_main_menu_on")
+	Dungeon.battleInstance.connect("OnMainMenuOff", self, "on_main_menu_off")
 	
 func _register_player(playerRef):
 	player = playerRef
@@ -23,6 +25,12 @@ func _on_dungeon_init():
 
 func _on_player_death():
 	disableInput = true
+
+func on_main_menu_on():
+	disableInput = true
+
+func on_main_menu_off():
+	disableInput = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
