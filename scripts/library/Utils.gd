@@ -79,3 +79,9 @@ func is_adjacent(char1, char2, numTiles)->bool:
 	var rowDiff = abs(char1.cell.row - char2.cell.row)
 
 	return (colDiff==1 and rowDiff==0) or (colDiff==0 and rowDiff==1)
+
+func get_data_from_json(jsonData, key, defaultVal):
+	if jsonData.has(key):
+		return jsonData[key]
+	else:
+		return defaultVal

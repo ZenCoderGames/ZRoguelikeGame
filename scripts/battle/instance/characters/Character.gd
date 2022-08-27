@@ -24,6 +24,8 @@ var currentRoom = null
 var prevRoom = null
 
 var targetList:Array = []
+var lastHitTarget:Character
+var lastKilledTarget:Character
 
 var statusEffectList:Array = []
 var passiveList:Array = []
@@ -37,6 +39,11 @@ signal OnDeath()
 signal OnPreAttack(defender)
 signal OnPostAttack(defender)
 var successfulDamageThisFrame:int
+
+signal OnPassiveAdded(character, passive)
+signal OnPassiveRemoved(character, passive)
+signal OnStatusEffectAdded(character, statusEffect)
+signal OnStatusEffectRemoved(character, statusEffect)
 
 var originalColor:Color
 
@@ -276,19 +283,25 @@ func get_targets():
 
 # STATUS EFFECTS
 func add_status_effect(statusEffectData:StatusEffectData):
-	statusEffectList.append(StatusEffect.new(self, statusEffectData))
+	var statusEffect = StatusEffect.new(self, statusEffectData)
+	statusEffectList.append(statusEffect)
+	emit_signal("OnStatusEffectAdded", self, statusEffect)
+	return statusEffect
 
 func remove_status_effect(statusEffect):
 	statusEffectList.erase(statusEffect)
+	emit_signal("OnStatusEffectRemoved", self, statusEffect)
 
 # PASSIVES
 func add_passive(passiveData:PassiveData):
 	var passive:Passive = Passive.new(self, passiveData)
 	passiveList.append(passive)
+	emit_signal("OnPassiveAdded", self, passive)
 	return passive
 
 func remove_passive(passive:Passive):
 	passiveList.erase(passive)
+	emit_signal("OnPassiveRemoved", self, passive)
 
 # HELPERS
 func is_in_room(room):

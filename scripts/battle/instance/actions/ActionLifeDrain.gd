@@ -10,5 +10,15 @@ func can_execute()->bool:
 
 func execute():
 	var lifeDrainData:ActionLifeDrainData = actionData as ActionLifeDrainData
-	character.modify_stat_value(StatData.STAT_TYPE.HEALTH, lifeDrainData.percent * character.successfulDamageThisFrame)
-	character.modify_stat_value(StatData.STAT_TYPE.HEALTH, lifeDrainData.flatAmount)
+	var lifeLeeched:int = 0
+	if lifeDrainData.percent>0:
+		lifeLeeched = lifeDrainData.percent * character.successfulDamageThisFrame
+	else:
+		lifeLeeched = lifeDrainData.flatAmount
+
+	character.modify_stat_value(StatData.STAT_TYPE.HEALTH, lifeLeeched)
+
+	var targets = character.get_targets()
+	for target in targets:
+		if !target.isDead:
+			HitResolutionManager.do_hit(character, target, lifeLeeched, false)

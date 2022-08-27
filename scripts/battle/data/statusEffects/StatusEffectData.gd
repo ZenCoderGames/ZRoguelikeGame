@@ -1,6 +1,8 @@
 class_name StatusEffectData
 
 var id:String
+var name:String
+var description:String
 var instanceCount:int
 var triggerConditions:Array
 
@@ -9,6 +11,9 @@ var endTimeline:Array
 
 func _init(dataJS):
     id = dataJS["id"]
+    name = dataJS["name"]
+    description = dataJS["description"]
+
     instanceCount = dataJS["instanceCount"]
 
     var conditionsJSList = dataJS["endConditions"]
@@ -25,3 +30,9 @@ func _init(dataJS):
     actionsJSList = dataJS["endTimeline"]
     for actionJS in actionsJSList:
         endTimeline.append(ActionDataTypes.create(actionJS))
+
+func get_display_name():
+    return name
+
+func get_description():
+    return description

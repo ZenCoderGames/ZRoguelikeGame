@@ -1,11 +1,22 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resource/fonts/montreal/Montreal-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+font_data = ExtResource( 1 )
 
 [node name="SpellButton" type="Button"]
-self_modulate = Color( 0.341176, 0.745098, 0.882353, 1 )
+self_modulate = Color( 0.803922, 0.623529, 0.894118, 1 )
 margin_top = 28.0
 margin_right = 100.0
 margin_bottom = 48.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "Lightning Bolt"
-clip_text = true

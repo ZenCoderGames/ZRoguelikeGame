@@ -13,17 +13,10 @@ var immovable:int
 var stunned:int
 
 func _init(dataJS).(dataJS):
-    if params.has("invulnerable"):
-	    invulnerable = params["invulnerable"]
-    if params.has("rooted"):
-        rooted = params["rooted"]
-    if params.has("untargetable"):
-        untargetable = params["untargetable"]
-    if params.has("evasive"):
-        evasive = params["evasive"]
-    if params.has("uninterruptible"):
-        uninterruptible = params["uninterruptible"]
-    if params.has("immovable"):
-        immovable = params["immovable"]
-    if params.has("stunned"):
-        stunned = params["stunned"]
+    invulnerable = Utils.get_data_from_json(params, "invulnerable", false)
+    rooted = Utils.get_data_from_json(params, "rooted", false)
+    untargetable = Utils.get_data_from_json(params, "untargetable", false)
+    evasive = Utils.get_data_from_json(params, "evasive", false)
+    uninterruptible = Utils.get_data_from_json(params, "uninterruptible", false)
+    immovable = Utils.get_data_from_json(params, "immovable", false)
+    stunned = Utils.get_data_from_json(params, "stunned", false)

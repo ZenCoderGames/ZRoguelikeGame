@@ -8,7 +8,5 @@ var percent:float
 var flatAmount:int
 
 func _init(dataJS).(dataJS):
-	if params.has("percent"):
-		percent = params["percent"]
-	if params.has("flatAmount"):
-		flatAmount = params["flatAmount"]
+	percent = Utils.get_data_from_json(params, "percent", 0)
+	flatAmount = Utils.get_data_from_json(params, "flatAmount", 0)

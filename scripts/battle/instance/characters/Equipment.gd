@@ -57,6 +57,7 @@ func equip_item(item):
 		var slotType:int = item.data.slot
 		if equippedSlots[slotType] != null:
 			equippedItems.erase(equippedSlots[slotType])
+			equippedSlots[slotType].on_unequipped(character)
 			emit_signal("OnItemUnEquipped", equippedSlots[slotType])
 		equippedItems.append(item)
 		equippedSlots[slotType] = item

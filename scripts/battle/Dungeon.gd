@@ -216,6 +216,7 @@ func _init_items():
 
 	if !battleInstance.debugSpawnItemInFirstRoom.empty():
 		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
+		startRoom.generate_item("PRISMATIC_SHIELD")
 	else:
 		startRoom.generate_items(1)
 

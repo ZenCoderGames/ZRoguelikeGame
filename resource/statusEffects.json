@@ -2,6 +2,8 @@
 	"statusEffects": [
 		{
 			"id": "BARRIER",
+			"name": "Barrier",
+			"description": "Blocks 1 Instance Of Damage",
 			"instanceCount": 1,
 			"endConditions": [
 				"ON_BLOCKED_HIT"

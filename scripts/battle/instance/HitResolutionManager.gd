@@ -9,23 +9,29 @@ signal OnKill(sourceChar, defender)
 func _init():
 	pass
 
-func do_hit(sourceChar, targetChar, damage):
+func do_hit(sourceChar, targetChar, damage, generateHits=true):
 	var finalDamage:int = damage
-	emit_signal("OnPreHit", sourceChar, targetChar, damage)
+	if generateHits:
+		emit_signal("OnPreHit", sourceChar, targetChar, damage)
+		sourceChar.lastHitTarget = targetChar
 
 	if targetChar.status.is_invulnerable():
-		targetChar.on_blocked_hit(sourceChar)
-		emit_signal("OnBlockedHit", sourceChar, targetChar, finalDamage)
+		if generateHits:
+			targetChar.on_blocked_hit(sourceChar)
+			emit_signal("OnBlockedHit", sourceChar, targetChar, finalDamage)
 		return 0
 
-	targetChar.show_damage_from_hit(sourceChar, damage)
+	if generateHits:
+		targetChar.show_damage_from_hit(sourceChar, damage)
 
 	var targetHealth:int = targetChar.modify_stat_value(StatData.STAT_TYPE.HEALTH, -damage)
 	if targetHealth<=0:
-		emit_signal("OnKill", sourceChar, targetChar)
 		targetChar.die()
+		sourceChar.lastKilledTarget = targetChar
+		emit_signal("OnKill", sourceChar, targetChar, finalDamage)
 	else:
-		emit_signal("OnTakeHit", sourceChar, targetChar, finalDamage)
-		emit_signal("OnPostHit", sourceChar, targetChar, finalDamage)
+		if generateHits:
+			emit_signal("OnTakeHit", sourceChar, targetChar, finalDamage)
+			emit_signal("OnPostHit", sourceChar, targetChar, finalDamage)
 
 	return finalDamage

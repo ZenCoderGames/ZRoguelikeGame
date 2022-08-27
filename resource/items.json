@@ -16,7 +16,7 @@
 			]
 		},
 		{
-			"id": "SWORD_01",
+			"id": "HEAVY_SWORD",
 			"name": "Heavy Sword",
 			"description": "A heavier more powerful sword\n(+4 damage)",
 			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +4",
@@ -31,20 +31,14 @@
 			]
 		},
 		{
-			"id": "VAMPIRIC_SWORD",
-			"name": "Vampiric Sword",
-			"description": "A sword that leeches health back\n(+1 damage)\n[20% Lifesteal]",
-			"fullDescription": "A sword unearthed from the crypt of a vampire\nIncreases the player's damage by +1\nLeeches 20% of damage dealt by player",
+			"id": "NECRO_STAFF",
+			"name": "Necro Staff",
+			"description": "A staff that leeches health back on kill\n[Regen +8 Health]",
+			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +8 health on kill",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "GEAR",
 			"slot": "WEAPON",
-			"stats": [
-				{
-					"type": "DAMAGE",
-					"value": 1
-				}
-			],
-			"passiveId": "LIFESTEAL_SMALL"
+			"passiveId": "LIFESTEAL_ON_KILL"
 		},
 		{
 			"#disable": true,
@@ -63,10 +57,10 @@
 		},
 		{
 			"#disable": true,
-			"id": "BARRIER",
-			"name": "Barrier",
-			"description": "Gain 1 Instance of Barrier",
-			"fullDescription": "Gain 1 Instance of Barrier\nBarrier protects the player from any damage.",
+			"id": "PRISMATIC_SHIELD",
+			"name": "Prismatic Shield",
+			"description": "Block 1 Instance of Any Damage",
+			"fullDescription": "Block 1 Instance of Any Damage",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
 			"statusEffectId": "BARRIER"

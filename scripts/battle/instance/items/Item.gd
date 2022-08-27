@@ -24,6 +24,12 @@ func consume(character):
 			var statusEffectData:StatusEffectData = Dungeon.dataManager.get_status_effect_data(data.statusEffectId)
 			character.add_status_effect(statusEffectData)
 
+func can_activate()->bool:
+	if spell!=null:
+		return spell.can_activate()
+
+	return true
+
 func activate():
 	if spell!=null:
 		if spell.can_activate():

@@ -3,16 +3,21 @@ extends Node
 class_name CharacterUI
 
 onready var baseContainer:PanelContainer = get_node(".")
-onready var listContainer:VBoxContainer = get_node("HSplitContainer/VBoxContainer")
-onready var nameBg:ColorRect = get_node("HSplitContainer/VBoxContainer/Name/Bg")
-onready var nameLabel:Label = get_node("HSplitContainer/VBoxContainer/Name/NameLabel")
-onready var healthBar:ProgressBar = get_node("HSplitContainer/VBoxContainer/Health/HealthBar")
-onready var healthLabel:Label = get_node("HSplitContainer/VBoxContainer/Health/HealthLabel")
-onready var descLabel:Label = get_node("HSplitContainer/VBoxContainer/Damage/DescLabel")
+onready var listContainer:VBoxContainer = get_node("HSplitContainer/Base")
+onready var nameBg:ColorRect = get_node("HSplitContainer/Base/Name/Bg")
+onready var nameLabel:Label = get_node("HSplitContainer/Base/Name/NameLabel")
+onready var healthBar:ProgressBar = get_node("HSplitContainer/Base/Health/HealthBar")
+onready var healthLabel:Label = get_node("HSplitContainer/Base/Health/HealthLabel")
+onready var descLabel:Label = get_node("HSplitContainer/Base/Damage/DescLabel")
 const EquippedItemUI := preload("res://ui/battle/EquippedItemUI.tscn")
 
-onready var spellContainer:VBoxContainer = get_node("HSplitContainer/SpellContainer")
+onready var nonBaseContainer:HSplitContainer = get_node("HSplitContainer/NonBase")
+
+onready var spellContainer:VBoxContainer = get_node("HSplitContainer/NonBase/SpellContainer")
 const SpellButtonUI := preload("res://ui/battle/SpellButtonUI.tscn")
+
+onready var effectContainer:VBoxContainer = get_node("HSplitContainer/NonBase/EffectContainer")
+const EffectItemUI := preload("res://ui/battle/EffectItemUI.tscn")
 
 export var playerTintColor:Color
 export var enemyTintColor:Color
@@ -25,6 +30,7 @@ var character:Character
 
 var equippedItems:Dictionary = {}
 var equippedSpells:Dictionary = {}
+var equippedEffects:Dictionary = {}
 
 func _ready():
 	originalHealthBarColor = healthBar.self_modulate
@@ -34,6 +40,10 @@ func init(entityObj):
 	nameLabel.text = character.displayName
 	descLabel.text = str("Damage: ", character.get_damage())
 	character.connect("OnStatChanged", self, "_on_stat_changed")
+	character.connect("OnPassiveAdded", self, "on_passive_added")
+	character.connect("OnPassiveRemoved", self, "on_passive_removed")
+	character.connect("OnStatusEffectAdded", self, "on_status_effect_added")
+	character.connect("OnStatusEffectRemoved", self, "on_status_effect_removed")
 	character.equipment.connect("OnItemEquipped", self, "_on_item_equipped")
 	character.equipment.connect("OnItemUnEquipped", self, "_on_item_unequipped")
 	character.equipment.connect("OnSpellEquipped", self, "_on_spell_equipped")
@@ -43,16 +53,23 @@ func init(entityObj):
 		nameBg.color = playerTintColor
 	elif character.team == Constants.TEAM.ENEMY:
 		nameBg.color = enemyTintColor
-	_update_ui()
+	_update_base_ui()
 
 func _on_stat_changed(characterRef):
 	baseContainer.self_modulate = baseContainerFlashColor
 	healthBar.self_modulate = healthBarFlashColor
 	yield(get_tree().create_timer(0.075), "timeout")
-	_update_ui()
+	_update_base_ui()
 	healthBar.self_modulate = originalHealthBarColor
 	baseContainer.self_modulate = Color.white
 	
+func _update_base_ui():
+	healthLabel.text = str("Health: ", character.get_health(), "/", character.get_max_health())
+	var pctHealth:float = float(character.get_health())/float(character.get_max_health())
+	healthBar.value = pctHealth * 100
+	descLabel.text = str("Damage: ", character.get_damage())
+	
+# ITEMS
 func _on_item_equipped(item):
 	var newItemUI = EquippedItemUI.instance()
 	listContainer.add_child(newItemUI)
@@ -66,6 +83,7 @@ func _on_item_unequipped(item):
 		equippedItems.erase(item)
 	_on_stat_changed(character)
 
+# SPELLS
 func _on_spell_equipped(spellItem):
 	var newSpellUI = SpellButtonUI.instance()
 	spellContainer.add_child(newSpellUI)
@@ -75,6 +93,7 @@ func _on_spell_equipped(spellItem):
 	newSpellUI.connect("pressed", self, "_on_equip_spell_selected", [spellItem])
 	
 	spellContainer.visible = true
+	_update_non_base_ui()
 
 func _on_spell_unequipped(spellItem):
 	if equippedSpells.has(spellItem):
@@ -83,18 +102,57 @@ func _on_spell_unequipped(spellItem):
 		
 	if equippedSpells.size()==0:
 		spellContainer.visible = false
-	
+		
+	_update_non_base_ui()
+
 func _on_equip_spell_selected(spellItem):
-	character.equipment.activate_spell(spellItem)
+	if spellItem.can_activate():
+		character.equipment.activate_spell(spellItem)
 
 func _on_spell_activated(spellItem):
 	_on_spell_unequipped(spellItem)
 
-func _update_ui():
-	healthLabel.text = str("Health: ", character.get_health(), "/", character.get_max_health())
-	var pctHealth:float = float(character.get_health())/float(character.get_max_health())
-	healthBar.value = pctHealth * 100
-	descLabel.text = str("Damage: ", character.get_damage())
+# EFFECTS
+func on_passive_added(character, passive):
+	var newEffectUI = EffectItemUI.instance()
+	effectContainer.add_child(newEffectUI)
+	newEffectUI.get_child(0).text = passive.data.get_display_name()
+	equippedEffects[passive] = newEffectUI
+
+	effectContainer.visible = true
+	_update_non_base_ui()
+
+func on_passive_removed(character, passive):
+	if equippedEffects.has(passive):
+		effectContainer.remove_child(equippedEffects[passive])
+		equippedEffects.erase(passive)
+		
+	if equippedEffects.size()==0:
+		effectContainer.visible = false
+		
+	_update_non_base_ui()
+
+func on_status_effect_added(character, statusEffect):
+	var newEffectUI = EffectItemUI.instance()
+	effectContainer.add_child(newEffectUI)
+	newEffectUI.get_node("NameLabel").text = statusEffect.data.get_display_name()
+	equippedEffects[statusEffect] = newEffectUI
+
+	effectContainer.visible = true
+	_update_non_base_ui()
+
+func on_status_effect_removed(character, statusEffect):
+	if equippedEffects.has(statusEffect):
+		effectContainer.remove_child(equippedEffects[statusEffect])
+		equippedEffects.erase(statusEffect)
+		
+	if equippedEffects.size()==0:
+		effectContainer.visible = false
+		
+	_update_non_base_ui()
+
+func _update_non_base_ui():
+	nonBaseContainer.visible = equippedSpells.size()>0 or equippedEffects.size()>0
 	
 func has_entity(entity):
 	return character == entity

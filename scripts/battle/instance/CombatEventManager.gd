@@ -25,3 +25,4 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 		parentCharacter.connect("OnparentCharacterMove", object, "activate_on_parentCharacter_move")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPELL_ACTIVATE):
 		parentCharacter.equipment.connect("OnSpellActivated", object, "activate_on_target_or_item")
+

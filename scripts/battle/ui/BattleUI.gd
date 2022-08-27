@@ -2,7 +2,7 @@ extends Node
 
 class_name BattleUI
 
-onready var turnLabel:Label = get_node("TurnLabel")
+onready var turnLabel:Label = get_node("TurnContainer/TurnLabel")
 # details
 onready var detailsUI:Node = get_node("DetailsUI")
 onready var detailsLabel:Label = get_node("DetailsUI/DetailsLabel")
