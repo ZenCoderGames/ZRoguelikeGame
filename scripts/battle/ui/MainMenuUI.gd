@@ -9,6 +9,8 @@ onready var settingsButton:Button = $"%SettingsButton"
 
 onready var deathUI:Node = $"%DeathUI"
 
+signal OnNewGamePressed()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	newGameButton.connect("button_up", self, "on_new_game")
@@ -31,7 +33,7 @@ func _shared_init():
 	Dungeon.player.connect("OnDeath", self, "_on_game_over")
 
 func on_new_game():
-	Dungeon.battleInstance.restart_dungeon()
+	emit_signal("OnNewGamePressed")
 	
 func on_save_game():
 	pass

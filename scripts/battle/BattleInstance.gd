@@ -32,30 +32,37 @@ signal OnToggleInventory()
 signal OnMainMenuOn()
 signal OnMainMenuOff()
 
+var firstTimeDungeon:bool = false
 var onGameOver:bool
 
 func _init():
 	Dungeon.init(self)
 
 func _ready():
-	yield(get_tree(),"idle_frame")
-	_create_dungeon()
-	emit_signal("OnDungeonInitialized")
+	mainMenuUI.visible = true
+	mainMenuUI.connect("OnNewGamePressed", self, "_on_new_game")
+
+func _on_new_game():
+	if !firstTimeDungeon:
+		_create_dungeon()
+	else:
+		restart_dungeon()
 
 func _create_dungeon():
 	_shared_dungeon_init()
+	firstTimeDungeon = true
+	emit_signal("OnDungeonInitialized")
 
 func restart_dungeon():
 	Dungeon.clean_up()
-	_toggle_main_menu()
 	_shared_dungeon_init()
 	emit_signal("OnDungeonRecreated")
 
 func _shared_dungeon_init():
 	Dungeon.create()
 	onGameOver = false
+	_toggle_main_menu()
 	Dungeon.player.connect("OnDeath", self, "_on_game_over")
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if onGameOver:

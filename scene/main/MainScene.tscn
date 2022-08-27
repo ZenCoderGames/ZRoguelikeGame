@@ -82,4 +82,3 @@ script = SubResource( 1 )
 
 [node name="MainMenuUI" parent="CanvasLayer" instance=ExtResource( 8 )]
 unique_name_in_owner = true
-visible = false
