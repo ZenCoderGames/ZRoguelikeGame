@@ -85,3 +85,9 @@ func get_data_from_json(jsonData, key, defaultVal):
 		return jsonData[key]
 	else:
 		return defaultVal
+
+func duplicate_array(arrayRef:Array)->Array:
+	var newArray = []
+	for item in arrayRef:
+		newArray.append(item)
+	return newArray

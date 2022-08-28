@@ -94,14 +94,20 @@ func spawn_random_enemy():
 	for cell in cells:
 		if cell.is_empty() and cell.is_within_room_buffered(3):
 			freeCells.append(cell)
-	
-	# choose random free cell
-	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
-	# spawn random enemy
-	var randomEnemyData:CharacterData = Dungeon.dataManager.get_random_enemy_data()
-	var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
-	enemies.append(enemy)
+	# choose random free cell
+	if freeCells.size()>0:
+		randomize()
+		freeCells.shuffle()
+		var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
+
+		# spawn random enemy
+		var randomEnemyData:CharacterData = Dungeon.dataManager.get_random_enemy_data()
+		var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
+		enemies.append(enemy)
+		return true
+	else:
+		return false
 
 func generate_enemy(enemyId):
 	# find free cells
@@ -110,13 +116,19 @@ func generate_enemy(enemyId):
 		if cell.is_empty() and cell.is_within_room_buffered(3):
 			freeCells.append(cell)
 	
-	# choose random free cell
-	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
+	if freeCells.size()>0:
+		# choose random free cell
+		randomize()
+		freeCells.shuffle()
+		var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
-	# spawn random enemy
-	var randomEnemyData:CharacterData = Dungeon.dataManager.get_enemy_data(enemyId)
-	var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
-	enemies.append(enemy)
+		# spawn random enemy
+		var randomEnemyData:CharacterData = Dungeon.dataManager.get_enemy_data(enemyId)
+		var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
+		enemies.append(enemy)
+		return true
+	else:
+		return false
 
 func generate_items(totalItemsToSpawn):
 	for i in totalItemsToSpawn:

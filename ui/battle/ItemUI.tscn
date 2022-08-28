@@ -20,7 +20,8 @@ margin_right = 186.0
 margin_bottom = 70.0
 custom_styles/panel = ExtResource( 3 )
 
-[node name="Bg" type="ColorRect" parent="VBoxContainer/PanelContainer"]
+[node name="NameBg" type="ColorRect" parent="VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 184.0
@@ -28,6 +29,7 @@ margin_bottom = 68.0
 color = Color( 0.117647, 0.384314, 0.376471, 1 )
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 184.0
@@ -49,9 +51,10 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 184.0
 margin_bottom = 68.0
-color = Color( 0.12549, 0.192157, 0.207843, 1 )
+color = Color( 0.14902, 0.152941, 0.152941, 1 )
 
 [node name="DescLabel" type="Label" parent="VBoxContainer/PanelContainer3"]
+unique_name_in_owner = true
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 184.0

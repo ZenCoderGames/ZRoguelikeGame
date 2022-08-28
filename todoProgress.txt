@@ -38,30 +38,35 @@ Roguelike Dev:
 (D)- Status Effects (Barrier)
 (D)- Barrier Immune message
 (D)- Passives (Lifesteal)
-(IP)- Damage pipeline (Continue on HitResolutionManager and show after calcs)
-- Global Event system
-
-- Extra Ranged Scrolls (Leap)
-- Passive Abilities (Revive)
-
-- Spell Cooldown in turns
+(D)- Damage pipeline (Continue on HitResolutionManager and show after calcs)
+(D)- Global Event system
+(D)- Color spells, items and consumables consistently
+(D)- Show Passives
+(D)- Start Menu (New Game, Save, Load, Options)
+- Saving and Loading
 
 - Dungeon Generator (Items/Enemies)
-
-- Stamina
-
-- Level Ups
-
+- Walls in rooms
+- Doors
 - Multi levels
 
 - Game Feel (death, better damage number font, camera shake)
-- Walls in rooms
+
+- Stamina
+
+- More Extra Ranged Scrolls (Leap, Stun)
+- More Passive Abilities (Critical, Revive)
+- More Weapons (Ranged)
+
+- Level Ups
+
+- Spell Cooldown in turns
+
 - History of actions
 
 - Typed pass
 
 - Bug with dissapearing when moving into dead char
-- Color spells, items and consumables consistently
 
 -------------------------
 
@@ -79,3 +84,5 @@ Roguelike Dev:
 - real power fantasy
 - ceremony for big moments
 - tools are powerful but have limitations
+
+---------------

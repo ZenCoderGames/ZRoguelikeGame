@@ -205,10 +205,31 @@ func _init_enemies():
 	if !battleInstance.debugSpawnEnemyInFirstRoom.empty():
 		startRoom.generate_enemy(battleInstance.debugSpawnEnemyInFirstRoom)
 	
+	var minCostPerRoom:int = 5
+	var extraCostForSingleRoom:int = 5
+	var scalingCostPerRoom:int = 20
+	var numCriticalPathRooms = reverse_path.size();
 	for room in rooms:
-		if !room.isStartRoom:
-			room.generate_enemies(randi() % 3 + 1)
-			#room.generate_enemies(1)
+		if room.isStartRoom:
+			continue
+
+		var encounterCost = minCostPerRoom + int(float(costFromStart[room])/float(numCriticalPathRooms) * float(scalingCostPerRoom))
+		if room.connections.size()==1:
+			encounterCost = encounterCost + extraCostForSingleRoom
+		
+		var currentCost:int = 0
+		var enemyDataList:Array = Utils.duplicate_array(dataManager.enemyDataList)
+		while(currentCost<encounterCost):
+			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]
+			if currentCost + enemyData.cost<=encounterCost:
+				if room.generate_enemy(enemyData.id):
+					currentCost = currentCost + enemyData.cost
+				else:
+					break
+			else:
+				enemyDataList.erase(enemyData)
+				if enemyDataList.size()==0:
+					break
 
 func _init_items():
 	if battleInstance.dontSpawnItems:

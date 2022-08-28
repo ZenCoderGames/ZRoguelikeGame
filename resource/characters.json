@@ -58,9 +58,10 @@
 		],
 		"enemies": [
 			{
-				"id": "DWARF_00",
+				"id": "DWARF",
 				"displayName": "Dwarf",
 				"path": "entity/characters/Dwarf.tscn",
+				"cost": 5,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -86,9 +87,10 @@
 			},
 			{
 				"#disable": true,
-				"id": "GIANT_00",
+				"id": "GIANT",
 				"displayName": "Giant",
 				"path": "entity/characters/Giant.tscn",
+				"cost": 10,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -96,7 +98,65 @@
 					},
 					{
 						"type": "DAMAGE",
+						"value": 4
+					}
+				],
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "PATHFIND_TO_TARGET"
+					}
+				},
+				"attackAction": {
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
+			},
+			{
+				"#disable": true,
+				"id": "RAT",
+				"displayName": "Rat",
+				"path": "entity/characters/Rat.tscn",
+				"cost": 2,
+				"stats": [
+					{
+						"type": "HEALTH",
 						"value": 2
+					},
+					{
+						"type": "DAMAGE",
+						"value": 2
+					}
+				],
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "PATHFIND_TO_TARGET"
+					}
+				},
+				"attackAction": {
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
+			},
+			{
+				"#disable": true,
+				"id": "SERPENT",
+				"displayName": "Serpent",
+				"path": "entity/characters/Serpent.tscn",
+				"cost": 5,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 8
+					},
+					{
+						"type": "DAMAGE",
+						"value": 8
 					}
 				],
 				"moveAction": {

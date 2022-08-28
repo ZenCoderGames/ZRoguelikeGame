@@ -7,5 +7,5 @@ const ID:String = "DO_DAMAGE_TO_TARGETS"
 var damage:int
 
 func _init(dataJS).(dataJS):
-	damage = dataJS["params"]["damage"]
+	damage = Utils.get_data_from_json(dataJS["params"], "damage", 0)
 	

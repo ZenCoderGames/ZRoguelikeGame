@@ -7,4 +7,4 @@ const ID:String = "ATTACK"
 var damageMultiplier:float
 
 func _init(dataJS).(dataJS):
-	damageMultiplier = dataJS["params"]["damageMultiplier"]
+	damageMultiplier = Utils.get_data_from_json(dataJS["params"], "damageMultiplier", 1)
