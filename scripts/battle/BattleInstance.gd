@@ -5,12 +5,6 @@ class_name BattleInstance
 onready var view:BattleView = $"%View"
 onready var mainMenuUI:MainMenuUI = $"%MainMenuUI"
 
-export var showWallColor:Color
-export var showFloorColor:Color
-export var dimWallColor:Color
-export var dimFloorColor:Color
-export var playerDamageColor:Color
-export var enemyDamageColor:Color
 export var timeBetweenMoves:float
 
 # DEBUG
@@ -22,9 +16,6 @@ export var dontSpawnItems:bool
 export var debugSpawnItemInFirstRoom:String
 export var setPlayerInvulnerable:bool
 export var debugShowAllRooms:bool
-export var debugStartRoomColor:Color
-export var debugCriticalPathRoomColor:Color
-export var debugEndRoomColor:Color
 
 signal OnDungeonInitialized()
 signal OnDungeonRecreated()
@@ -35,8 +26,11 @@ signal OnMainMenuOff()
 var firstTimeDungeon:bool = false
 var onGameOver:bool
 
+var dungeonDataList:Array
+
 func _init():
-	Dungeon.init(self)
+	_init_dungeon_data()
+	Dungeon.init(self, dungeonDataList[0])
 
 func _ready():
 	mainMenuUI.visible = true
@@ -83,3 +77,11 @@ func _toggle_main_menu():
 
 func _on_game_over():
 	onGameOver = true
+
+# DUNGEONS
+func _init_dungeon_data():
+	var data = Utils.load_data_from_file("resource/dungeons.json")
+	var dungeonDataJSList:Array = data["dungeons"]
+	for dungeonDataJS in dungeonDataJSList:
+		var newDungeonData = DungeonData.new(dungeonDataJS)
+		dungeonDataList.append(newDungeonData)

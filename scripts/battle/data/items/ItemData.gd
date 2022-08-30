@@ -26,6 +26,8 @@ var slot:int
 enum ITEM_TYPE { GEAR, CONSUMABLE, SPELL }
 var type:int
 
+var tier:int
+
 var spellId:String
 var passiveId:String
 var statusEffectId:String
@@ -38,6 +40,8 @@ func _init(itemDataJS):
 	description = itemDataJS["description"]
 	fullDescription = itemDataJS["fullDescription"]
 	path = itemDataJS["path"]
+	tier = itemDataJS["tier"]
+
 	var itemType = itemDataJS["type"]
 	if ITEM_TYPE.has(itemType):
 		type = ITEM_TYPE.get(itemType)
@@ -61,17 +65,10 @@ func _init(itemDataJS):
 		for statModifierDataJS in statModifierDataJSList:
 			statModifierDataList.append(StatModifierData.new(statModifierDataJS))
 			
-	if itemDataJS.has("disable"):
-		disable =  itemDataJS["disable"]
-
-	if itemDataJS.has("spellId"):
-		spellId =  itemDataJS["spellId"]
-
-	if itemDataJS.has("passiveId"):
-		passiveId =  itemDataJS["passiveId"]
-
-	if itemDataJS.has("statusEffectId"):
-		statusEffectId =  itemDataJS["statusEffectId"]
+	disable = Utils.get_data_from_json(itemDataJS, "disable", false)
+	spellId = Utils.get_data_from_json(itemDataJS, "spellId", "")
+	passiveId = Utils.get_data_from_json(itemDataJS, "passiveId", "")
+	statusEffectId = Utils.get_data_from_json(itemDataJS, "statusEffectId", "")
 
 func is_gear():
 	return type == ITEM_TYPE.GEAR

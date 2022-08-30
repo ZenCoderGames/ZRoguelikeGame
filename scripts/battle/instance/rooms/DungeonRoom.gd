@@ -118,7 +118,6 @@ func generate_enemy(enemyId):
 	
 	if freeCells.size()>0:
 		# choose random free cell
-		randomize()
 		freeCells.shuffle()
 		var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 

@@ -152,7 +152,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 8
+						"value": 10
 					},
 					{
 						"type": "DAMAGE",

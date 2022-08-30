@@ -18,9 +18,11 @@ var loadedScenes:Array = []
 var battleInstance:BattleInstance
 
 var dataManager:DungeonDataManager
+var dungeonData:DungeonData
 
-func init(battleInst:BattleInstance):
+func init(battleInst:BattleInstance, dungeonDataRef:DungeonData):
 	battleInstance = battleInst
+	dungeonData = dungeonDataRef
 
 func create() -> void:
 	_init_rooms()
@@ -35,11 +37,11 @@ func _init_rooms():
 	rooms = []
 	
 	# Dungeon Size
-	var numRooms := 10
-	var roomMinRows := 9
-	var roomMaxRows := 14
-	var roomMinCols := 9
-	var roomMaxCols := 14
+	var numRooms := dungeonData.numRooms
+	var roomMinRows := dungeonData.roomMinRows
+	var roomMaxRows := dungeonData.roomMaxRows
+	var roomMinCols := dungeonData.roomMinCols
+	var roomMaxCols := dungeonData.roomMaxCols
 	
 	# Choose a leaning direction for less sprawled paths
 	var xDirn = 1 if randi() % 100 < 50 else -1
@@ -206,14 +208,15 @@ func _init_enemies():
 		startRoom.generate_enemy(battleInstance.debugSpawnEnemyInFirstRoom)
 	
 	var minCostPerRoom:int = 5
-	var extraCostForSingleRoom:int = 5
-	var scalingCostPerRoom:int = 20
+	var extraCostForSingleRoom:int = 10
+	var scalingCostPerRoom:int = 5
 	var numCriticalPathRooms = reverse_path.size();
 	for room in rooms:
 		if room.isStartRoom:
 			continue
 
 		var encounterCost = minCostPerRoom + int(float(costFromStart[room])/float(numCriticalPathRooms) * float(scalingCostPerRoom))
+		# single rooms
 		if room.connections.size()==1:
 			encounterCost = encounterCost + extraCostForSingleRoom
 		
@@ -238,12 +241,29 @@ func _init_items():
 	if !battleInstance.debugSpawnItemInFirstRoom.empty():
 		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
 		startRoom.generate_item("PRISMATIC_SHIELD")
-	else:
-		startRoom.generate_items(1)
 
+	var itemDataList:Array = Utils.duplicate_array(dataManager.itemDataList)
+	itemDataList.shuffle()
+
+	print(itemDataList.size())
 	for room in rooms:
+		# single rooms
+		if !room.isStartRoom and room.connections.size()==1:
+			for itemData in itemDataList:
+				if itemData.tier >= 2:
+					room.generate_item(itemData.id)
+					itemDataList.erase(itemData)
+					break
+		else:
+			for itemData in itemDataList:
+				if itemData.tier < 2:
+					room.generate_item(itemData.id)
+					itemDataList.erase(itemData)
+					break
+
+	"""for room in rooms:
 		if !room.isStartRoom:
-			room.generate_items(randi() % 2)
+			room.generate_items(randi() % 2)"""
 
 func _init_player():
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()

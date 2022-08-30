@@ -8,6 +8,7 @@
 			"path": "entity/items/gear/Gear_Tier1.tscn",
 			"type": "GEAR",
 			"slot": "WEAPON",
+			"tier": 0,
 			"stats": [
 				{
 					"type": "DAMAGE",
@@ -23,6 +24,7 @@
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "GEAR",
 			"slot": "WEAPON",
+			"tier": 1,
 			"stats": [
 				{
 					"type": "DAMAGE",
@@ -33,11 +35,12 @@
 		{
 			"id": "NECRO_STAFF",
 			"name": "Necro Staff",
-			"description": "A staff that leeches health back on kill\n[Regen +8 Health]",
-			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +8 health on kill",
+			"description": "A staff that leeches health back on kill\n[Regen +6 Health]",
+			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +6 health on kill",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "GEAR",
 			"slot": "WEAPON",
+			"tier": 2,
 			"passiveId": "LIFESTEAL_ON_KILL"
 		},
 		{
@@ -48,6 +51,7 @@
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +10",
 			"path": "entity/items/consumables/Consumable_Tier1.tscn",
 			"type": "CONSUMABLE",
+			"tier": 0,
 			"statModifiers": [
 				{
 					"type": "HEALTH",
@@ -63,6 +67,7 @@
 			"fullDescription": "Block 1 Instance of Any Damage",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
+			"tier": 0,
 			"statusEffectId": "BARRIER"
 		},
 		{
@@ -73,6 +78,7 @@
 			"fullDescription": "A blessing from a goddess to those who seek it.\nIncrease max health by +10",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
+			"tier": 2,
 			"statModifiers": [
 				{
 					"type": "HEALTH",
@@ -85,9 +91,10 @@
 			"id": "SPELL_LIGHTNING_BOLT",
 			"name": "Lightning Bolt",
 			"description": "A Powerful Lightning Bolt",
-			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you.",
+			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you for 25 damage",
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
+			"tier": 2,
 			"spellId": "LIGHTNING_BOLT"
 		},
 		{
@@ -95,9 +102,10 @@
 			"id": "SPELL_GROUND_POUND",
 			"name": "Ground Pound",
 			"description": "Slam the ground and do damage to nearby enemies",
-			"fullDescription": "Slam the ground and do damage to nearby enemies",
+			"fullDescription": "Slam the ground and do 15 damage to nearby enemies",
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
+			"tier": 2,
 			"spellId": "GROUND_POUND"
 		}
 	]

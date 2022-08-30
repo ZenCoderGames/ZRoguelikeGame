@@ -32,17 +32,7 @@ func _ready():
 
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource( 4 )
-showWallColor = Color( 0.396078, 0.262745, 0.121569, 1 )
-showFloorColor = Color( 0.290196, 0.254902, 0.188235, 1 )
-dimWallColor = Color( 0.219608, 0.192157, 0.192157, 1 )
-dimFloorColor = Color( 0.176471, 0.176471, 0.176471, 1 )
-playerDamageColor = Color( 0.0823529, 0.666667, 0.760784, 1 )
-enemyDamageColor = Color( 0.862745, 0.341176, 0.341176, 1 )
 timeBetweenMoves = 0.2
-debugShowAllRooms = true
-debugStartRoomColor = Color( 0.0980392, 0.6, 0.105882, 1 )
-debugCriticalPathRoomColor = Color( 0.576471, 0.337255, 0.12549, 1 )
-debugEndRoomColor = Color( 0.792157, 0.270588, 0.270588, 1 )
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource( 3 )

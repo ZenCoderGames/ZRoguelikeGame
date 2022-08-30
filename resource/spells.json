@@ -13,7 +13,7 @@
 				{
 					"type": "DO_DAMAGE_TO_TARGETS",
 					"params": {
-						"damage": 30
+						"damage": 25
 					}
 				}
 			]
@@ -31,7 +31,7 @@
 				{
 					"type": "DO_DAMAGE_TO_TARGETS",
 					"params": {
-						"damage": 30
+						"damage": 15
 					}
 				}
 			]

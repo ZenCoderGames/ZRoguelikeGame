@@ -129,7 +129,7 @@ func is_edge_of_room():
 	return row==0 || col==0 || row==room.maxRows-1 || col==room.maxCols-1
 
 func is_within_room_buffered(buffer:int):
-	return row>=buffer && col>=buffer && row<=room.maxRows-1-buffer && col==room.maxCols-1-buffer
+	return row>=buffer && col>=buffer && row<=room.maxRows-1-buffer && col<=room.maxCols-1-buffer
 
 func is_left_edge():
 	return col==0
