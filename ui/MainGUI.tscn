@@ -34,18 +34,41 @@ margin_right = 800.0
 margin_bottom = 550.0
 alignment = 1
 
-[node name="TurnContainer" type="PanelContainer" parent="."]
-self_modulate = Color( 0.0784314, 0.764706, 0.717647, 1 )
+[node name="BattleProgressPanel" type="VBoxContainer" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -104.0
+margin_left = -121.0
+margin_right = -1.0
+margin_bottom = 68.0
+custom_constants/separation = 0
+
+[node name="LevelContainer" type="PanelContainer" parent="BattleProgressPanel"]
+self_modulate = Color( 0.992157, 0.937255, 0.486275, 1 )
+margin_right = 120.0
 margin_bottom = 34.0
 grow_horizontal = 0
 
-[node name="TurnLabel" type="Label" parent="TurnContainer"]
+[node name="LevelLabel" type="Label" parent="BattleProgressPanel/LevelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 97.0
+margin_right = 113.0
+margin_bottom = 27.0
+theme = ExtResource( 1 )
+text = "Level: 1"
+align = 1
+valign = 1
+
+[node name="TurnContainer" type="PanelContainer" parent="BattleProgressPanel"]
+self_modulate = Color( 0.52549, 1, 0.968627, 1 )
+margin_top = 34.0
+margin_right = 120.0
+margin_bottom = 68.0
+grow_horizontal = 0
+
+[node name="TurnLabel" type="Label" parent="BattleProgressPanel/TurnContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 113.0
 margin_bottom = 27.0
 theme = ExtResource( 1 )
 text = "Turn: 0"

@@ -1,5 +1,11 @@
 extends Node
 
+# PRELOADS
+const Floor := preload("res://entity/Floor.tscn")
+const Wall := preload("res://entity/Wall.tscn")
+const Exit := preload("res://entity/Exit.tscn")
+const End := preload("res://entity/End.tscn")
+
 # GENERAL
 enum DIRN_TYPE { LEFT, RIGHT, UP, DOWN }
 
@@ -7,7 +13,7 @@ enum DIRN_TYPE { LEFT, RIGHT, UP, DOWN }
 const STEP_X: int = 26
 const STEP_Y: int = 34
 
-enum CELL_TYPE { NONE, FLOOR, CONNECTOR }
+enum CELL_TYPE { NONE, FLOOR, CONNECTOR, EXIT, END }
 enum ENTITY_TYPE { NONE, STATIC, DYNAMIC }
 
 enum TEAM { NONE, PLAYER, ENEMY, NPC }
@@ -22,6 +28,7 @@ const pc: String = "pc"
 const room: String = "room"
 const room_floor: String = "floor"
 const room_wall: String = "wall"
+const room_exit: String = "exit"
 const enemies: String = "enemies"
 const items: String = "items"
 

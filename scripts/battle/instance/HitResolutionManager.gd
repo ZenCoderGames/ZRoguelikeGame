@@ -4,7 +4,7 @@ signal OnPreHit(sourceChar, defender, dmg)
 signal OnBlockedHit(sourceChar, defender, dmg)
 signal OnTakeHit(sourceChar, defender, dmg)
 signal OnPostHit(sourceChar, defender, dmg)
-signal OnKill(sourceChar, defender)
+signal OnKill(sourceChar, defender, dmg)
 
 func _init():
 	pass

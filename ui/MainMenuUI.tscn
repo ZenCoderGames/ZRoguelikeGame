@@ -17,7 +17,6 @@ size_flags_vertical = 3
 
 [node name="DeathUI" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 margin_top = 100.0
 margin_right = 801.0
 margin_bottom = 442.0

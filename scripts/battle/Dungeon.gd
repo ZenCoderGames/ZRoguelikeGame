@@ -10,7 +10,7 @@ signal OnEnemyMovedAdjacentToPlayer(enemy)
 var rooms:Array = []
 const intersectionBuffer:int = 0
 
-var player:Character = null
+var player:PlayerCharacter = null
 var turnsTaken:int = 0
 
 var loadedScenes:Array = []
@@ -179,7 +179,7 @@ func _init_path():
 		if costFromStart[room] > furthestCost:
 			furthestCost = costFromStart[room]
 			furthestRoom = room
-	furthestRoom.isEndRoom = true
+	furthestRoom.set_as_end_room()
 	# find path
 	reverse_path.append(furthestRoom)
 	var room = furthestRoom

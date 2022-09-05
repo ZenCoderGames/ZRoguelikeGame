@@ -9,7 +9,6 @@ func _init():
 	
 func _ready():
 	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
-	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	
 func _register_player(playerRef):
 	player = playerRef

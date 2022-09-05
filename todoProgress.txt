@@ -43,22 +43,26 @@ Roguelike Dev:
 (D)- Color spells, items and consumables consistently
 (D)- Show Passives
 (D)- Start Menu (New Game, Save, Load, Options)
-- Saving and Loading
+(D)- Dungeon Generator (Items/Enemies)
 
-- Dungeon Generator (Items/Enemies)
-- Walls in rooms
-- Doors
+- Health Bars not disappearing
+
 - Multi levels
 
+- Level Ups (Increase stats)
+
+- Walls in rooms
+- Doors
+
 - Game Feel (death, better damage number font, camera shake)
+
+- Saving and Loading
 
 - Stamina
 
 - More Extra Ranged Scrolls (Leap, Stun)
 - More Passive Abilities (Critical, Revive)
 - More Weapons (Ranged)
-
-- Level Ups
 
 - Spell Cooldown in turns
 

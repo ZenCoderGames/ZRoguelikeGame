@@ -395,5 +395,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_clear_color=Color( 0.101961, 0.113725, 0.113725, 1 )
+environment/default_clear_color=Color( 0.145098, 0.156863, 0.156863, 1 )
 environment/default_environment="res://resource/default_env.tres"

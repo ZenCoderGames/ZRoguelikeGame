@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/battle/DungeonCamera.gd" type="Script" id=1]
 [ext_resource path="res://ui/MainGUI.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://scripts/battle/instance/HitResolutionManager.gd" type="Script" id=6]
 [ext_resource path="res://scripts/battle/instance/CombatEventManager.gd" type="Script" id=7]
 [ext_resource path="res://ui/MainMenuUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://resource/fonts/connection/ConnectionBold.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://resource/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -28,11 +30,21 @@ func _ready():
 #	pass
 "
 
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 10 )
+
 [node name="MainScene" type="Node"]
 
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource( 4 )
 timeBetweenMoves = 0.2
+dontSpawnEnemies = true
+debugShowAllRooms = true
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource( 3 )
@@ -73,3 +85,41 @@ script = SubResource( 1 )
 
 [node name="MainMenuUI" parent="CanvasLayer" instance=ExtResource( 8 )]
 unique_name_in_owner = true
+
+[node name="ScreenFade" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color( 0.301961, 0.298039, 0.298039, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VictoryUI" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+self_modulate = Color( 0.380392, 0.301961, 0.301961, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="CanvasLayer/VictoryUI"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 793.0
+margin_bottom = 593.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "YOU WIN !"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/VictoryUI"]
+margin_left = 7.0
+margin_top = 556.0
+margin_right = 793.0
+margin_bottom = 593.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_fonts/font = SubResource( 3 )
+text = "You have beaten the Dungeon of Zenkonia"
+align = 1
+valign = 2
+autowrap = true

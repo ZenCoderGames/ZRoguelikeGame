@@ -1,8 +1,6 @@
 class_name DungeonRoom
 
 # Room.gd
-const Floor := preload("res://entity/Floor.tscn")
-const Wall := preload("res://entity/Wall.tscn")
 
 var cells:Array = []
 
@@ -60,7 +58,7 @@ func populate():
 		var r:int = i/maxCols
 		var c:int = i%maxCols
 		var cell:DungeonCell = get_cell(r, c)
-		var floorObj:Node = Utils.create_scene(loadedScenes, str(r) + "_" + str(c), Floor, Constants.room_floor, cell)
+		var floorObj:Node = Utils.create_scene(loadedScenes, str(r) + "_" + str(c), Constants.Floor, Constants.room_floor, cell)
 		cells[i].init_cell(floorObj, Constants.CELL_TYPE.FLOOR)
 
 	_init_walls()
@@ -81,7 +79,7 @@ func _init_walls():
 
 func _create_wall(r, c):
 	var cell:DungeonCell = get_cell(r, c)
-	var wall:Node = Utils.create_scene(loadedScenes, "wall", Wall, Constants.room_floor, cell)
+	var wall:Node = Utils.create_scene(loadedScenes, "wall", Constants.Wall, Constants.room_floor, cell)
 	cell.init_entity(wall, Constants.ENTITY_TYPE.STATIC)
 		
 func generate_enemies(totalEnemiesToSpawn):
@@ -329,7 +327,7 @@ func _find_valid_neighboring_cells(cell, onlyEmpty:bool = false):
 		validCells.append(get_cell(cell.row, cell.col-1))
 
 	for validCell in validCells:
-		if validCell!=null and !validCell.is_obstacle() and validCell.room == cell.room:
+		if validCell!=null and validCell.room == cell.room and !validCell.is_obstacle() and !validCell.is_exit() and !validCell.is_end():
 			if !onlyEmpty or validCell.is_empty():
 				validNeighborCells.append(validCell)
 
@@ -356,6 +354,26 @@ func find_next_best_path_cell(currentCell):
 		return shortestNodeToStart[currentCell]"""
 
 	return null
+
+func set_as_end_room():
+	isEndRoom = true
+
+	# find free cells
+	var freeCells:Array = []
+	for cell in cells:
+		if cell.is_empty():
+			freeCells.append(cell)
+	
+	# choose random free cell
+	var exitCell:DungeonCell = freeCells[randi() % freeCells.size()]
+
+	var exitObj:Node = null
+	if Dungeon.battleInstance.is_last_level():
+		exitObj = Utils.create_scene(loadedScenes, "end", Constants.End, Constants.room_exit, exitCell)
+		exitCell.init_cell(exitObj, Constants.CELL_TYPE.END)
+	else:
+		exitObj = Utils.create_scene(loadedScenes, "exit", Constants.Exit, Constants.room_exit, exitCell)
+		exitCell.init_cell(exitObj, Constants.CELL_TYPE.EXIT)
 
 func pre_update_entities():
 	for enemy in enemies:

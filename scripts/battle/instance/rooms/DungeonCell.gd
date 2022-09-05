@@ -22,7 +22,8 @@ func _init(roomRef, r:int, c:int):
 # CELL TYPE
 func init_cell(obj:Node, cellTypeEnum:int):
 	floorObject = obj
-	floorObject.get_child(0).text = ""
+	if floorObject.get_child(0)!=null:
+		floorObject.get_child(0).text = ""
 	set_cell_type(cellTypeEnum)
 
 func set_cell_type(newCellType:int):
@@ -124,6 +125,12 @@ func showDebug(colorVal):
 # HELPERS
 func is_obstacle():
 	return entityType == Constants.ENTITY_TYPE.STATIC
+
+func is_exit():
+	return cellType == Constants.CELL_TYPE.EXIT
+
+func is_end():
+	return cellType == Constants.CELL_TYPE.END
 
 func is_edge_of_room():
 	return row==0 || col==0 || row==room.maxRows-1 || col==room.maxCols-1

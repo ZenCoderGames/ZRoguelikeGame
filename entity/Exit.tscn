@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resource/curses_vector_24x36.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 360, 360, 24, 36 )
+
+[node name="Exit" type="Sprite"]
+modulate = Color( 0.101961, 0.596078, 0.121569, 1 )
+position = Vector2( 208, 169 )
+texture = SubResource( 1 )

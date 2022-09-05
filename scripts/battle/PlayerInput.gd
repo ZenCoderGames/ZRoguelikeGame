@@ -11,7 +11,6 @@ var blockInputsFromInputDelay:bool
 func _ready():
 	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
 	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_init")
 	Dungeon.battleInstance.connect("OnMainMenuOn", self, "on_main_menu_on")
 	Dungeon.battleInstance.connect("OnMainMenuOff", self, "on_main_menu_off")
 	

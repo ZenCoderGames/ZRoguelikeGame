@@ -3,6 +3,8 @@ extends Character
 class_name PlayerCharacter
 
 signal OnNearbyEntityFound(entity)
+signal OnPlayerReachedExit()
+signal OnPlayerReachedEnd()
 
 func init(charData, teamVal):
 	.init(charData, teamVal)
@@ -24,6 +26,11 @@ func move_to_cell(newCell):
 	.move_to_cell(newCell)
 
 	check_for_nearby_entities()
+
+	if newCell.is_exit():
+		emit_signal("OnPlayerReachedExit")
+	elif newCell.is_end():
+		emit_signal("OnPlayerReachedEnd")
 	
 func on_enemy_moved_adjacent(enemy):
 	check_for_nearby_entities()

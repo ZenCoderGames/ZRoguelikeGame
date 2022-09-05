@@ -2,7 +2,8 @@ extends Node
 
 class_name BattleUI
 
-onready var turnLabel:Label = get_node("TurnContainer/TurnLabel")
+onready var levelLabel:Label = get_node("BattleProgressPanel/LevelContainer/LevelLabel")
+onready var turnLabel:Label = get_node("BattleProgressPanel/TurnContainer/TurnLabel")
 # details
 onready var detailsUI:Node = get_node("DetailsUI")
 onready var detailsLabel:Label = get_node("DetailsUI/DetailsLabel")
@@ -49,15 +50,15 @@ func _shared_init():
 	Dungeon.player.inventory.connect("OnItemAdded", self, "_on_item_picked_by_player")
 	
 	playerUI.init(Dungeon.player)
+	levelLabel.text = str("Level: ", Dungeon.battleInstance.get_current_level(), "/", Dungeon.battleInstance.get_max_levels())
 
-	
 func _on_turn_taken():
 	turnLabel.text = str("Turns: ", Dungeon.turnsTaken)
 	
 func _on_attack(attacker, defender, damage):
 	detailsLabel.text = str(attacker.displayName, " attacked ", defender.displayName, " for ", damage, " damage")
 	
-func _on_kill(attacker, defender):
+func _on_kill(attacker, defender, finalDmg):
 	# Info panel
 	_info_panel_handle_death(defender)
 	
