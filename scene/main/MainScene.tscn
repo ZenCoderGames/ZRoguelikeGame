@@ -93,6 +93,7 @@ anchor_bottom = 1.0
 
 [node name="VictoryUI" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 self_modulate = Color( 0.380392, 0.301961, 0.301961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
