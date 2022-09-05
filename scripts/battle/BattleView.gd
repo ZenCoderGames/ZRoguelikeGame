@@ -4,8 +4,12 @@ class_name BattleView
 
 export var showWallColor:Color
 export var showFloorColor:Color
+export var showExitColor:Color
+export var showEndColor:Color
 export var dimWallColor:Color
 export var dimFloorColor:Color
+export var dimExitColor:Color
+export var dimEndColor:Color
 export var playerDamageColor:Color
 export var enemyDamageColor:Color
 export var itemGearColor:Color

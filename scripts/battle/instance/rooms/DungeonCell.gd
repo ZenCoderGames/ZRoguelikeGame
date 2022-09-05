@@ -87,7 +87,12 @@ func show():
 		entityObject.show()
 
 	# color
-	floorObject.modulate = Dungeon.battleInstance.view.showFloorColor
+	if is_exit():
+		floorObject.modulate = Dungeon.battleInstance.view.showExitColor
+	elif is_end():
+		floorObject.modulate = Dungeon.battleInstance.view.showEndColor
+	else:
+		floorObject.modulate = Dungeon.battleInstance.view.showFloorColor
 	if entityObject!=null:
 		if is_entity_type(Constants.ENTITY_TYPE.STATIC):
 			entityObject.modulate = Dungeon.battleInstance.view.showWallColor
@@ -104,7 +109,12 @@ func dim():
 		entityObject.hide()
 		
 	# color
-	floorObject.modulate = Dungeon.battleInstance.view.dimFloorColor
+	if is_exit():
+		floorObject.modulate = Dungeon.battleInstance.view.dimExitColor
+	elif is_end():
+		floorObject.modulate = Dungeon.battleInstance.view.dimEndColor
+	else:
+		floorObject.modulate = Dungeon.battleInstance.view.dimFloorColor
 	if entityObject!=null:
 		if is_entity_type(Constants.ENTITY_TYPE.STATIC):
 			entityObject.show()
