@@ -43,6 +43,7 @@ font_data = ExtResource( 10 )
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource( 4 )
 timeBetweenMoves = 0.2
+dontSpawnEnemies = true
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource( 3 )

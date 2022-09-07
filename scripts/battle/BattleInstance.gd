@@ -53,13 +53,14 @@ func _create_dungeon():
 
 func recreate_dungeon(newDungeonIdx):
 	currentDungeonIdx = newDungeonIdx
-	Dungeon.init(self, dungeonDataList[currentDungeonIdx])
-	Dungeon.clean_up()
-	_shared_dungeon_init()
-	emit_signal("OnDungeonRecreated")
+	Dungeon.clean_up(newDungeonIdx==0)
+	Dungeon.init(self, dungeonDataList[newDungeonIdx])
+	_shared_dungeon_init(newDungeonIdx==0)
+	if newDungeonIdx==0:
+		emit_signal("OnDungeonRecreated")
 
-func _shared_dungeon_init():
-	Dungeon.create()
+func _shared_dungeon_init(recreatePlayer:bool=true):
+	Dungeon.create(recreatePlayer)
 	onGameOver = false
 	_toggle_main_menu()
 	Dungeon.player.connect("OnDeath", self, "_on_game_over")

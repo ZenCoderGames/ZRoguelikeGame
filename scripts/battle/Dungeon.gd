@@ -11,7 +11,7 @@ var rooms:Array = []
 const intersectionBuffer:int = 0
 
 var player:PlayerCharacter = null
-var turnsTaken:int = 0
+var turnsTaken:int = -1
 
 var loadedScenes:Array = []
 
@@ -24,14 +24,14 @@ func init(battleInst:BattleInstance, dungeonDataRef:DungeonData):
 	battleInstance = battleInst
 	dungeonData = dungeonDataRef
 
-func create() -> void:
+func create(recreatePlayer:bool) -> void:
 	_init_rooms()
 	_init_connections()
 	_init_path()
 	_init_data()
 	_init_enemies()
 	_init_items()
-	_init_player()
+	_init_player(recreatePlayer)
 
 func _init_rooms():
 	rooms = []
@@ -265,13 +265,18 @@ func _init_items():
 		if !room.isStartRoom:
 			room.generate_items(randi() % 2)"""
 
-func _init_player():
+func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
-	player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
-	emit_signal("OnPlayerCreated", player)
+	if recreatePlayer:
+		player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
+		emit_signal("OnPlayerCreated", player)
+		player.connect("OnCharacterMove", self, "_on_turn_taken")
+		player.equipment.connect("OnSpellActivated", self, "_on_player_spell_activated")
+	else:
+		player.move_to_cell(cell)
+		turnsTaken = turnsTaken - 1
+		
 	_on_turn_taken(0, 0)
-	player.connect("OnCharacterMove", self, "_on_turn_taken")
-	player.equipment.connect("OnSpellActivated", self, "_on_player_spell_activated")
 
 func _on_player_spell_activated(item):
 	_on_turn_taken(0, 0)
@@ -293,18 +298,20 @@ func _on_turn_taken(x, y):
 	player.post_update()
 	player.cell.room.post_update_entities()
 
-func clean_up():
-	for loadedScene in loadedScenes:
-		loadedScene.queue_free()
-	loadedScenes.clear()
-	
-	player = null
+func add_to_dungeon_scenes(scene):
+	loadedScenes.append(scene)
+
+func clean_up(fullRefreshDungeon:bool=true):
+	if fullRefreshDungeon:
+		for loadedScene in loadedScenes:
+			loadedScene.queue_free()
+		loadedScenes.clear()
 	
 	for room in rooms:
 		room.clean_up()
 	rooms.clear()
 	
-	turnsTaken = 0
+	turnsTaken = -1
 
 # HELPERS
 func is_intersecting_with_any_room(testRoom):

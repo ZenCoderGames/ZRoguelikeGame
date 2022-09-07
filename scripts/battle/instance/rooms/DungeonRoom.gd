@@ -251,9 +251,12 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
 			# Item
 			if cell.entityObject is Item:
-				entity.pick_item(cell.entityObject)
-				cell.entityObject.picked()
-				items.erase(cell.entityObject)
+				var item = cell.entityObject
+				entity.pick_item(item)
+				Dungeon.add_to_dungeon_scenes(item)
+				loadedScenes.erase(item)
+				item.picked()
+				items.erase(item)
 				currentCell.clear_entity()
 				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
 				entity.move_to_cell(cell)
@@ -369,7 +372,7 @@ func set_as_end_room():
 
 	var exitObj:Node = null
 	if Dungeon.battleInstance.is_last_level():
-		exitObj = Utils.create_scene(loadedScenes, "end", Constants.End, Constants.room_exit, exitCell)
+		exitObj = Utils.create_scene(loadedScenes, "end", Constants.End, Constants.room_end, exitCell)
 		exitCell.init_cell(exitObj, Constants.CELL_TYPE.END)
 	else:
 		exitObj = Utils.create_scene(loadedScenes, "exit", Constants.Exit, Constants.room_exit, exitCell)

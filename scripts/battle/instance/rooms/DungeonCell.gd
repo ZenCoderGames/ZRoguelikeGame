@@ -21,8 +21,10 @@ func _init(roomRef, r:int, c:int):
 
 # CELL TYPE
 func init_cell(obj:Node, cellTypeEnum:int):
+	if floorObject!=null:
+		room.clean_up_loaded_scene(floorObject)
 	floorObject = obj
-	if floorObject.get_child(0)!=null:
+	if floorObject.get_child_count()>0:
 		floorObject.get_child(0).text = ""
 	set_cell_type(cellTypeEnum)
 
@@ -33,8 +35,9 @@ func is_cell_type(type:int):
 	return cellType == type
 	
 func show_debug_path_cell(cost:int):
-	floorObject.get_child(0).visible = true
-	floorObject.get_child(0).text = str(cost)
+	if floorObject.get_child_count()>0:
+		floorObject.get_child(0).visible = true
+		floorObject.get_child(0).text = str(cost)
 
 func is_connection():
 	return is_cell_type(Constants.CELL_TYPE.CONNECTOR)
