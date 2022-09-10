@@ -14,24 +14,30 @@ var player:PlayerCharacter = null
 var turnsTaken:int = -1
 
 var loadedScenes:Array = []
+var itemSpawnedMap:Dictionary = {}
 
 var battleInstance:BattleInstance
 
 var dataManager:DungeonDataManager
 var dungeonData:DungeonData
 
+var isDungeonFinished:bool
+
 func init(battleInst:BattleInstance, dungeonDataRef:DungeonData):
 	battleInstance = battleInst
 	dungeonData = dungeonDataRef
+	_init_data()
+	isDungeonFinished = false
 
 func create(recreatePlayer:bool) -> void:
 	_init_rooms()
 	_init_connections()
 	_init_path()
-	_init_data()
-	_init_enemies()
 	_init_items()
 	_init_player(recreatePlayer)
+	_init_enemies()
+		
+	_on_turn_taken(0, 0)
 
 func _init_rooms():
 	rooms = []
@@ -198,7 +204,8 @@ func _init_path():
 	reverse_path.append(startRoom)
 
 func _init_data():
-	dataManager = DungeonDataManager.new()
+	if dataManager==null:
+		dataManager = DungeonDataManager.new()
 
 func _init_enemies():
 	if battleInstance.dontSpawnEnemies:
@@ -208,8 +215,8 @@ func _init_enemies():
 		startRoom.generate_enemy(battleInstance.debugSpawnEnemyInFirstRoom)
 	
 	var minCostPerRoom:int = 5
-	var extraCostForSingleRoom:int = 10
-	var scalingCostPerRoom:int = 5
+	var extraCostForSingleRoom:int = 5
+	var scalingCostPerRoom:int = 3
 	var numCriticalPathRooms = reverse_path.size();
 	for room in rooms:
 		if room.isStartRoom:
@@ -240,30 +247,69 @@ func _init_items():
 
 	if !battleInstance.debugSpawnItemInFirstRoom.empty():
 		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
-		startRoom.generate_item("PRISMATIC_SHIELD")
 
-	var itemDataList:Array = Utils.duplicate_array(dataManager.itemDataList)
+	var itemDataList = Utils.duplicate_array(dataManager.itemDataList)
 	itemDataList.shuffle()
 
-	print(itemDataList.size())
-	for room in rooms:
-		# single rooms
-		if !room.isStartRoom and room.connections.size()==1:
-			for itemData in itemDataList:
-				if itemData.tier >= 2:
-					room.generate_item(itemData.id)
-					itemDataList.erase(itemData)
-					break
-		else:
-			for itemData in itemDataList:
-				if itemData.tier < 2:
-					room.generate_item(itemData.id)
-					itemDataList.erase(itemData)
-					break
+	var numItems:int = dungeonData.itemCountMin + randi() % (dungeonData.itemCountMax - dungeonData.itemCountMin)
+	var maxItemsReached:bool = false
+	var roomVisitedMap:Dictionary = {}
 
-	"""for room in rooms:
-		if !room.isStartRoom:
-			room.generate_items(randi() % 2)"""
+	# Single rooms only
+	for room in rooms:
+		if roomVisitedMap.has(room):
+			continue
+
+		if room.isStartRoom or room.connections.size()>1:
+			continue
+
+		for itemData in itemDataList:
+			if itemData.tier > dungeonData.itemHeighestTier:
+				continue
+
+			if itemSpawnedMap.has(itemData.id) and itemSpawnedMap[itemData.id]>itemData.maxCount:
+				continue
+			
+			if itemData.tier>=1:
+				roomVisitedMap[room] = true
+				_spawn_item(room, itemData)
+				numItems = numItems - 1
+				if numItems==0:
+					maxItemsReached = true
+				break
+
+		if maxItemsReached:
+			break
+
+	# If there are still remaining items to be populated
+	if !maxItemsReached:
+		for room in rooms:
+			if roomVisitedMap.has(room):
+				continue
+	
+			for itemData in itemDataList:
+				if itemData.tier > dungeonData.itemHeighestTier:
+					continue
+
+				if itemSpawnedMap.has(itemData.id) and itemSpawnedMap[itemData.id]>itemData.maxCount:
+					continue
+				
+				if itemData.tier <= dungeonData.itemHeighestTier:
+					_spawn_item(room, itemData)
+					numItems = numItems - 1
+					if numItems==0:
+						maxItemsReached = true
+					break
+	
+			if maxItemsReached:
+				break
+
+func _spawn_item(room, itemData):
+	room.generate_item(itemData.id)
+	if itemSpawnedMap.has(itemData.id):
+		itemSpawnedMap[itemData.id] = itemSpawnedMap[itemData.id] + 1
+	else:
+		itemSpawnedMap[itemData.id] = 1
 
 func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
@@ -275,13 +321,14 @@ func _init_player(recreatePlayer:bool):
 	else:
 		player.move_to_cell(cell)
 		turnsTaken = turnsTaken - 1
-		
-	_on_turn_taken(0, 0)
 
 func _on_player_spell_activated(item):
 	_on_turn_taken(0, 0)
 
 func _on_turn_taken(x, y):
+	if isDungeonFinished:
+		return
+
 	emit_signal("OnStartTurn")
 	player.pre_update()
 	player.cell.room.pre_update_entities()
@@ -304,8 +351,10 @@ func add_to_dungeon_scenes(scene):
 func clean_up(fullRefreshDungeon:bool=true):
 	if fullRefreshDungeon:
 		for loadedScene in loadedScenes:
-			loadedScene.queue_free()
+			loadedScene.free()
 		loadedScenes.clear()
+		
+		player = null
 	
 	for room in rooms:
 		room.clean_up()

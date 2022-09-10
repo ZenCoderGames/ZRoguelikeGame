@@ -1,32 +1,44 @@
 {
 	"dungeons": [
 		{
-			"numRooms": 3,
+			"numRooms": 6,
 			"roomMinRows": 8,
 			"roomMaxRows": 12,
 			"roomMinCols": 8,
-			"roomMaxCols": 12
+			"roomMaxCols": 12,
+			"itemCountMin": 2,
+			"itemCountMax": 4,
+			"itemHeighestTier": 2
 		},
 		{
-			"numRooms": 9,
+			"numRooms": 8,
 			"roomMinRows": 8,
 			"roomMaxRows": 12,
 			"roomMinCols": 8,
-			"roomMaxCols": 12
+			"roomMaxCols": 12,
+			"itemCountMin": 3,
+			"itemCountMax": 5,
+			"itemHeighestTier": 3
 		},
 		{
 			"numRooms": 10,
 			"roomMinRows": 9,
 			"roomMaxRows": 14,
 			"roomMinCols": 9,
-			"roomMaxCols": 14
+			"roomMaxCols": 14,
+			"itemCountMin": 4,
+			"itemCountMax": 7,
+			"itemHeighestTier": 4
 		},
 		{
-			"numRooms": 10,
+			"numRooms": 12,
 			"roomMinRows": 9,
 			"roomMaxRows": 14,
 			"roomMinCols": 9,
-			"roomMaxCols": 14
+			"roomMaxCols": 14,
+			"itemCountMin": 3,
+			"itemCountMax": 5,
+			"itemHeighestTier": 5
 		}
 	]
 }

@@ -90,10 +90,13 @@ func _toggle_main_menu():
 
 func _on_game_over():
 	onGameOver = true
+	Dungeon.isDungeonFinished = true
 
 func _on_dungeon_completed():
 	screenFade.visible = true
 	_toggle_main_menu()
+
+	Dungeon.isDungeonFinished = true
 	
 	yield(get_tree().create_timer(0.2), "timeout")
 
@@ -104,6 +107,7 @@ func _on_dungeon_completed():
 func _on_game_end():
 	_toggle_main_menu()
 	victoryUI.visible = true
+	Dungeon.isDungeonFinished = true
 
 # DUNGEONS
 func _init_dungeon_data():

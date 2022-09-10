@@ -44,29 +44,27 @@ Roguelike Dev:
 (D)- Show Passives
 (D)- Start Menu (New Game, Save, Load, Options)
 (D)- Dungeon Generator (Items/Enemies)
-
-- Health Bars not disappearing
-
-- Multi levels
+(D)- Health Bars not disappearing
+(D)- Multi levels
+(D)- Bugs with rooms showing
+(D)- Player not persisting across levels
+(D)- Item generation spanning across levels
 
 - Level Ups (Increase stats)
 
 - Walls in rooms
-- Doors
+- Doors and locking
+- Can't escape melee range
+
+- Stamina
 
 - Game Feel (death, better damage number font, camera shake)
 
 - Saving and Loading
 
-- Stamina
-
 - More Extra Ranged Scrolls (Leap, Stun)
 - More Passive Abilities (Critical, Revive)
 - More Weapons (Ranged)
-
-- Spell Cooldown in turns
-
-- History of actions
 
 - Typed pass
 

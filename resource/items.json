@@ -9,6 +9,7 @@
 			"type": "GEAR",
 			"slot": "WEAPON",
 			"tier": 0,
+			"maxCount": 1,
 			"stats": [
 				{
 					"type": "DAMAGE",
@@ -25,6 +26,7 @@
 			"type": "GEAR",
 			"slot": "WEAPON",
 			"tier": 1,
+			"maxCount": 1,
 			"stats": [
 				{
 					"type": "DAMAGE",
@@ -41,6 +43,7 @@
 			"type": "GEAR",
 			"slot": "WEAPON",
 			"tier": 2,
+			"maxCount": 1,
 			"passiveId": "LIFESTEAL_ON_KILL"
 		},
 		{
@@ -52,6 +55,7 @@
 			"path": "entity/items/consumables/Consumable_Tier1.tscn",
 			"type": "CONSUMABLE",
 			"tier": 0,
+			"maxCount": 3,
 			"statModifiers": [
 				{
 					"type": "HEALTH",
@@ -68,6 +72,7 @@
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
 			"tier": 0,
+			"maxCount": 3,
 			"statusEffectId": "BARRIER"
 		},
 		{
@@ -79,6 +84,7 @@
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
 			"tier": 2,
+			"maxCount": 2,
 			"statModifiers": [
 				{
 					"type": "HEALTH",
@@ -95,6 +101,7 @@
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,
+			"maxCount": 3,
 			"spellId": "LIGHTNING_BOLT"
 		},
 		{
@@ -106,6 +113,7 @@
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,
+			"maxCount": 2,
 			"spellId": "GROUND_POUND"
 		}
 	]

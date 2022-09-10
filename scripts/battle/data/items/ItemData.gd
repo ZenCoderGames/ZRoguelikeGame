@@ -32,6 +32,8 @@ var spellId:String
 var passiveId:String
 var statusEffectId:String
 
+var maxCount:int
+
 var disable:bool
 
 func _init(itemDataJS):
@@ -41,6 +43,7 @@ func _init(itemDataJS):
 	fullDescription = itemDataJS["fullDescription"]
 	path = itemDataJS["path"]
 	tier = itemDataJS["tier"]
+	maxCount =  Utils.get_data_from_json(itemDataJS, "maxCount", 1)
 
 	var itemType = itemDataJS["type"]
 	if ITEM_TYPE.has(itemType):
