@@ -267,7 +267,7 @@ func _init_items():
 			if itemData.tier > dungeonData.itemHeighestTier:
 				continue
 
-			if itemSpawnedMap.has(itemData.id) and itemSpawnedMap[itemData.id]>itemData.maxCount:
+			if itemSpawnedMap.has(itemData.id) and itemSpawnedMap[itemData.id]>=itemData.maxCount:
 				continue
 			
 			if itemData.tier>=1:
@@ -291,7 +291,7 @@ func _init_items():
 				if itemData.tier > dungeonData.itemHeighestTier:
 					continue
 
-				if itemSpawnedMap.has(itemData.id) and itemSpawnedMap[itemData.id]>itemData.maxCount:
+				if itemSpawnedMap.has(itemData.id) and itemSpawnedMap[itemData.id]>=itemData.maxCount:
 					continue
 				
 				if itemData.tier <= dungeonData.itemHeighestTier:

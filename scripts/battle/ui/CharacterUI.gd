@@ -58,7 +58,8 @@ func init(entityObj):
 func _on_stat_changed(characterRef):
 	baseContainer.self_modulate = baseContainerFlashColor
 	healthBar.self_modulate = healthBarFlashColor
-	yield(get_tree().create_timer(0.075), "timeout")
+	if get_tree()!=null:
+		yield(get_tree().create_timer(0.075), "timeout")
 	_update_base_ui()
 	healthBar.self_modulate = originalHealthBarColor
 	baseContainer.self_modulate = Color.white
