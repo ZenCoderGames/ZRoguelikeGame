@@ -1,0 +1,14 @@
+{
+	"complexStats": [
+		{
+			"statType": "VITALITY",
+			"linkedStatType": "HEALTH",
+			"linkedStatMultiplier": 3
+		},
+		{
+			"statType": "STRENGTH",
+			"linkedStatType": "DAMAGE",
+			"linkedStatMultiplier": 2
+		}
+	]
+}

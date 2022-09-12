@@ -98,7 +98,7 @@ func _on_dungeon_completed():
 
 	Dungeon.isDungeonFinished = true
 	
-	yield(get_tree().create_timer(0.2), "timeout")
+	yield(get_tree().create_timer(0.05), "timeout")
 
 	currentDungeonIdx = currentDungeonIdx+1
 	if currentDungeonIdx<dungeonDataList.size():

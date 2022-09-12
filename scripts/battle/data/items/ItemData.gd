@@ -61,7 +61,9 @@ func _init(itemDataJS):
 	if itemDataJS.has("stats"):
 		var statDataJSList = itemDataJS["stats"]
 		for statDataJS in statDataJSList:
-			statDataList.append(StatData.new(statDataJS))
+			var statData:StatData = StatData.new()
+			statData.init_from_json(statDataJS)
+			statDataList.append(statData)
 
 	if itemDataJS.has("statModifiers"):
 		var statModifierDataJSList = itemDataJS["statModifiers"]

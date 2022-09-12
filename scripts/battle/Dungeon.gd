@@ -318,9 +318,9 @@ func _init_player(recreatePlayer:bool):
 		emit_signal("OnPlayerCreated", player)
 		player.connect("OnCharacterMove", self, "_on_turn_taken")
 		player.equipment.connect("OnSpellActivated", self, "_on_player_spell_activated")
+		turnsTaken = turnsTaken - 1
 	else:
 		player.move_to_cell(cell)
-		turnsTaken = turnsTaken - 1
 
 func _on_player_spell_activated(item):
 	_on_turn_taken(0, 0)

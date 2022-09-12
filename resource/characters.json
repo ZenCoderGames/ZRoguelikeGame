@@ -7,12 +7,12 @@
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
-						"type": "HEALTH",
-						"value": 20
+						"type": "VITALITY",
+						"value": 6
 					},
 					{
-						"type": "DAMAGE",
-						"value": 6
+						"type": "STRENGTH",
+						"value": 3
 					}
 				],
 				"moveAction": {
@@ -34,12 +34,12 @@
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
-						"type": "HEALTH",
-						"value": 30
+						"type": "VITALITY",
+						"value": 8
 					},
 					{
-						"type": "DAMAGE",
-						"value": 3
+						"type": "STRENGTH",
+						"value": 2
 					}
 				],
 				"moveAction": {

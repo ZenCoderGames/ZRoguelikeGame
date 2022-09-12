@@ -1,6 +1,7 @@
 # Tracks all the data in the game
 class_name DungeonDataManager
 
+var complexStatDataMap = {}
 var statusEffectDataMap = {}
 var passiveDataMap = {}
 var itemDataMap = {}
@@ -13,6 +14,7 @@ var heroDataList = []
 var enemyDataList = []
 
 func _init():
+	init_complex_stats()
 	init_status_effects()
 	init_passives()
 	init_spells()
@@ -69,7 +71,7 @@ func init_characters():
 			enemyDataList.append(newCharData)
 		characterDataDict[newCharData.id] = newCharData
 		
-	playerData = heroDataList[0]
+	playerData = characterDataDict["KNIGHT"]
 
 func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]
@@ -92,4 +94,21 @@ func get_spell_data(spellId):
 		return spellDataMap[spellId]
 
 	print("Invalid Spell Id: ", spellId)
+	return null
+
+func init_complex_stats():
+	var data = Utils.load_data_from_file("resource/complexStats.json")
+	var complexStatsJSList:Array = data["complexStats"]
+	for complexStatDataJS in complexStatsJSList:
+		var complexStatData:ComplexStatData = ComplexStatData.new(complexStatDataJS)
+		complexStatDataMap[complexStatData.statType] = complexStatData
+
+func is_complex_stat_data(statType):
+	return complexStatDataMap.has(statType)
+
+func get_complex_stat_data(statType):
+	if complexStatDataMap.has(statType):
+		return complexStatDataMap[statType]
+
+	print("Invalid Complex Stat Data: ", statType)
 	return null

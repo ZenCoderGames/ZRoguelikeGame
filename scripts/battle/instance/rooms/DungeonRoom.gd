@@ -148,8 +148,12 @@ func spawnItem():
 
 func generate_item(itemId):
 	# find free cells
+	var playerCell = get_safe_starting_cell()
 	var freeCells:Array = []
 	for cell in cells:
+		if cell == playerCell:
+			continue
+
 		if cell.is_empty():
 			freeCells.append(cell)
 	

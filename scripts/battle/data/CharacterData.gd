@@ -17,7 +17,9 @@ func _init(dataJS):
 	
 	var statDataJSList = dataJS["stats"]
 	for statDataJS in statDataJSList:
-		statDataList.append(StatData.new(statDataJS))
+		var statData:StatData = StatData.new()
+		statData.init_from_json(statDataJS)
+		statDataList.append(statData)
 
 	moveAction = ActionDataTypes.create(dataJS["moveAction"])
 	attackAction = ActionDataTypes.create(dataJS["attackAction"])

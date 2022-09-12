@@ -12,6 +12,7 @@ var cell
 var isDead:bool = false
 
 var stats:Array = []
+var statDict:Dictionary = {}
 var moveAction:Action
 var attackAction:Action
 
@@ -61,6 +62,10 @@ func init(charData, teamVal):
 		var stat = Stat.new(statData)
 		if stat!=null:
 			stats.append(stat)
+			statDict[statData.type] = stat
+			if Dungeon.dataManager.is_complex_stat_data(statData.type):
+				var complexStatData:ComplexStatData = Dungeon.dataManager.get_complex_stat_data(statData.type)
+				_create_linked_stat(complexStatData.linkedStatType, statData.type, complexStatData.linkedStatMultiplier)
 
 	# Actions
 	moveAction = ActionTypes.create(charData.moveAction, self)
@@ -99,7 +104,7 @@ func get_stat_value(statType):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			statValue = statValue + stat.value
+			statValue = statValue + stat.get_value()
 	# iterate through items
 	statValue = statValue + equipment.get_stat_bonus_from_equipped_items(statType)
 	
@@ -110,7 +115,7 @@ func get_stat_base_value(statType):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			statBaseValue = statBaseValue + stat.baseValue
+			statBaseValue = statBaseValue + stat.get_base_value()
 	# iterate through items
 	statBaseValue = statBaseValue + equipment.get_stat_base_bonus_from_equipped_items(statType)
 
@@ -120,10 +125,9 @@ func modify_stat_value(statType, modifierValue):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			stat.value = stat.value + modifierValue
-			stat.value = clamp(stat.value, 0, stat.baseValue)
+			stat.modify_value(stat.get_value() + modifierValue)
 			emit_signal("OnStatChanged", self)
-			return stat.value
+			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statType)
 	return null
@@ -132,12 +136,10 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statModifierData.type:
-			stat.baseValue = stat.baseValue + statModifierData.baseValue
-			stat.value = stat.value + statModifierData.baseValue
-			stat.value = stat.value + statModifierData.value
-			stat.value = clamp(stat.value, 0, stat.baseValue)
+			stat.modify_base_value(stat.get_base_value() + statModifierData.baseValue)
+			stat.modify_value(stat.get_value() + statModifierData.baseValue)
 			emit_signal("OnStatChanged", self)
-			return stat.value
+			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statModifierData.type)
 	return null
@@ -340,3 +342,11 @@ func get_damage():
 
 func get_armor():
 	return get_stat_value(StatData.STAT_TYPE.ARMOR)
+
+func _create_linked_stat(type:int, linkedStatType:int, linkedStatMultiplier:float):
+	var newStatData:StatData = StatData.new()
+	newStatData.init_from_code(type, 0)
+	var newStat:Stat = Stat.new(newStatData)
+	newStat.add_link_to_stat(statDict[linkedStatType], linkedStatMultiplier)
+	stats.append(newStat)
+	statDict[newStatData.type] = newStat
