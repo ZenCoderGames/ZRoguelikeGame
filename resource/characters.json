@@ -62,6 +62,7 @@
 				"displayName": "Dwarf",
 				"path": "entity/characters/Dwarf.tscn",
 				"cost": 5,
+				"xp": 10,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -91,6 +92,7 @@
 				"displayName": "Giant",
 				"path": "entity/characters/Giant.tscn",
 				"cost": 10,
+				"xp": 20,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -120,6 +122,7 @@
 				"displayName": "Rat",
 				"path": "entity/characters/Rat.tscn",
 				"cost": 2,
+				"xp": 3,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -149,6 +152,7 @@
 				"displayName": "Serpent",
 				"path": "entity/characters/Serpent.tscn",
 				"cost": 5,
+				"xp": 8,
 				"stats": [
 					{
 						"type": "HEALTH",

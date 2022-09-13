@@ -6,6 +6,9 @@ onready var baseContainer:PanelContainer = get_node(".")
 onready var listContainer:VBoxContainer = get_node("HSplitContainer/Base")
 onready var nameBg:ColorRect = get_node("HSplitContainer/Base/Name/Bg")
 onready var nameLabel:Label = get_node("HSplitContainer/Base/Name/NameLabel")
+onready var xpUI:PanelContainer = get_node("HSplitContainer/Base/XP")
+onready var xpBar:ProgressBar = get_node("HSplitContainer/Base/XP/XPBar")
+onready var xpLabel:Label = get_node("HSplitContainer/Base/XP/XPLabel")
 onready var healthBar:ProgressBar = get_node("HSplitContainer/Base/Health/HealthBar")
 onready var healthLabel:Label = get_node("HSplitContainer/Base/Health/HealthLabel")
 onready var descLabel:Label = get_node("HSplitContainer/Base/Damage/DescLabel")
@@ -32,6 +35,8 @@ var equippedItems:Dictionary = {}
 var equippedSpells:Dictionary = {}
 var equippedEffects:Dictionary = {}
 
+var isPlayer:bool
+
 func _ready():
 	originalHealthBarColor = healthBar.self_modulate
 
@@ -51,8 +56,13 @@ func init(entityObj):
 	character.equipment.connect("OnSpellActivated", self, "_on_spell_activated")
 	if character.team == Constants.TEAM.PLAYER:
 		nameBg.color = playerTintColor
+		isPlayer = true
+		xpUI.visible = true
+		var playerChar:PlayerCharacter = character as PlayerCharacter
+		playerChar.connect("OnXPGained", self, "_update_base_ui")
 	elif character.team == Constants.TEAM.ENEMY:
 		nameBg.color = enemyTintColor
+		xpUI.visible = false
 	_update_base_ui()
 
 func _on_stat_changed(characterRef):
@@ -69,6 +79,15 @@ func _update_base_ui():
 	var pctHealth:float = float(character.get_health())/float(character.get_max_health())
 	healthBar.value = pctHealth * 100
 	descLabel.text = str("Damage: ", character.get_damage())
+	if isPlayer:
+		var playerChar:PlayerCharacter = character as PlayerCharacter
+		nameLabel.text = str(character.displayName, " (Lvl ", playerChar.get_level()+1, ")")
+		if playerChar.is_at_max_level():
+			xpLabel.text = "Max Level"
+		else:
+			xpLabel.text = str("Xp: ", playerChar.get_xp_from_current_level(), "/", playerChar.get_xp_to_level_xp())
+		var pctXP:float = float(playerChar.get_xp_from_current_level())/float(playerChar.get_xp_to_level_xp())
+		xpBar.value = pctXP * 100
 	
 # ITEMS
 func _on_item_equipped(item):

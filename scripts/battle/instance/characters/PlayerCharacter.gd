@@ -5,11 +5,17 @@ class_name PlayerCharacter
 signal OnNearbyEntityFound(entity)
 signal OnPlayerReachedExit()
 signal OnPlayerReachedEnd()
+signal OnXPGained()
+
+var levelXpList:Array = [0, 10, 25, 50, 100, 200, 400, 800, 1600]
+var xp:int = 0
+var currentLevel:int = 0
 
 func init(charData, teamVal):
 	.init(charData, teamVal)
 
 	Dungeon.connect("OnEnemyMovedAdjacentToPlayer", self, "on_enemy_moved_adjacent")
+	HitResolutionManager.connect("OnKill", self, "_on_kill")
 
 func update():
 	.update()
@@ -45,3 +51,33 @@ func notify_if_nearby_entity(r:int, c:int):
 	var cell = currentRoom.get_cell(r, c)
 	if cell!=null and cell.has_entity() and cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC):
 		emit_signal("OnNearbyEntityFound", cell.entityObject)
+
+func _on_kill(attacker, defender, _finalDmg):
+	if attacker == self:
+		_gain_xp(defender.charData.xp)
+
+func _gain_xp(val:int):
+	xp = xp + val
+	currentLevel = -1
+	for levelXp in levelXpList:
+		if xp>levelXp:
+			currentLevel = currentLevel + 1
+	emit_signal("OnXPGained")
+
+func get_xp():
+	return xp
+
+func get_level():
+	return currentLevel
+
+func get_xp_from_current_level():
+	return xp - levelXpList[currentLevel]
+
+func get_xp_to_level_xp():
+	var nextLevel:int = currentLevel
+	if currentLevel<levelXpList.size()-1:
+		nextLevel = currentLevel + 1
+	return levelXpList[nextLevel] - levelXpList[currentLevel]
+
+func is_at_max_level():
+	return currentLevel == levelXpList.size()-1

@@ -5,6 +5,7 @@ class_name Character
 
 onready var damageText:Label = get_node("DamageText")
 
+var charData:CharacterData
 var displayName: String = ""
 var team: int = 0
 var stamina: int = 0
@@ -48,7 +49,8 @@ signal OnStatusEffectRemoved(character, statusEffect)
 
 var originalColor:Color
 
-func init(charData, teamVal):
+func init(charDataVal, teamVal):
+	charData = charDataVal
 	displayName = charData.displayName
 	team = teamVal
 	originalColor = self.self_modulate

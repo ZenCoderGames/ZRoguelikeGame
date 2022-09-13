@@ -4,6 +4,7 @@ var id:String
 var displayName:String
 var path:String
 var cost:int
+var xp:int
 var statDataList:Array
 var moveAction:ActionData
 var attackAction:ActionData
@@ -14,6 +15,7 @@ func _init(dataJS):
 	displayName = dataJS["displayName"]
 	path = dataJS["path"]
 	cost =  Utils.get_data_from_json(dataJS, "cost", 0)
+	xp =  Utils.get_data_from_json(dataJS, "xp", 0)
 	
 	var statDataJSList = dataJS["stats"]
 	for statDataJS in statDataJSList:
