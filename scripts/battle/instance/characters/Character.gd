@@ -123,6 +123,17 @@ func get_stat_base_value(statType):
 
 	return statBaseValue
 
+func modify_absolute_stat_value(statType, modifierValue):
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			stat.modify_absolute_value(stat.get_value() + modifierValue)
+			emit_signal("OnStatChanged", self)
+			return stat.get_value()
+
+	print("ERROR: Can't find stat type - ", statType)
+	return null
+
 func modify_stat_value(statType, modifierValue):
 	# iterate through char
 	for stat in stats:
@@ -144,6 +155,17 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statModifierData.type)
+	return null
+
+func refresh_linked_stat_value(statType):
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			stat.update_from_modified_linked_stat()
+			emit_signal("OnStatChanged", self)
+			return stat.get_value()
+
+	print("ERROR: Can't find stat type - ", statType)
 	return null
 
 # ITEMS

@@ -15,6 +15,7 @@ func _init(statData):
 func add_link_to_stat(stat:Stat, statMultiplier:float):
 	linkedStat = stat
 	linkedStatMultiplier = statMultiplier
+	baseValue = get_base_value()
 	value = get_base_value()
 
 func get_value():
@@ -27,9 +28,21 @@ func get_base_value():
 	return baseValue
 
 func modify_value(newValue:float):
-	value = clamp(newValue, 0, get_base_value())
+	value = clamp(newValue, 0, baseValue)
 	return value
 
 func modify_base_value(newBaseValue:float):
 	baseValue = newBaseValue
 	return baseValue
+	
+func modify_absolute_value(newValue:float):
+	baseValue = newValue
+	value = newValue
+	return newValue
+
+func update_from_modified_linked_stat():
+	var prevBaseValue:int = baseValue
+	var newBaseValue:int = get_base_value()
+	var diff:int = newBaseValue - prevBaseValue
+	baseValue = newBaseValue
+	value = value + diff

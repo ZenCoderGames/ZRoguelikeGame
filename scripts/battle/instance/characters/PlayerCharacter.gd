@@ -6,8 +6,9 @@ signal OnNearbyEntityFound(entity)
 signal OnPlayerReachedExit()
 signal OnPlayerReachedEnd()
 signal OnXPGained()
+signal OnLevelUp()
 
-var levelXpList:Array = [0, 10, 25, 50, 100, 200, 400, 800, 1600]
+var levelXpList:Array = [0, 2, 25, 50, 100, 200, 400, 800, 1600]
 var xp:int = 0
 var currentLevel:int = 0
 
@@ -58,11 +59,21 @@ func _on_kill(attacker, defender, _finalDmg):
 
 func _gain_xp(val:int):
 	xp = xp + val
+	var prevLevel = currentLevel
 	currentLevel = -1
 	for levelXp in levelXpList:
 		if xp>levelXp:
 			currentLevel = currentLevel + 1
+	if prevLevel<currentLevel:
+		_level_up()
 	emit_signal("OnXPGained")
+
+func _level_up():
+	modify_absolute_stat_value(StatData.STAT_TYPE.VITALITY, 1)
+	modify_absolute_stat_value(StatData.STAT_TYPE.STRENGTH, 1)
+	refresh_linked_stat_value(StatData.STAT_TYPE.HEALTH)
+	refresh_linked_stat_value(StatData.STAT_TYPE.DAMAGE)
+	emit_signal("OnLevelUp")
 
 func get_xp():
 	return xp
