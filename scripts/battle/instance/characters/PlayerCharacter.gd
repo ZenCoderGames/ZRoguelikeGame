@@ -73,6 +73,7 @@ func _level_up():
 	modify_absolute_stat_value(StatData.STAT_TYPE.STRENGTH, 1)
 	refresh_linked_stat_value(StatData.STAT_TYPE.HEALTH)
 	refresh_linked_stat_value(StatData.STAT_TYPE.DAMAGE)
+	reset_stat_value(StatData.STAT_TYPE.HEALTH)
 	emit_signal("OnLevelUp")
 
 func get_xp():

@@ -168,6 +168,17 @@ func refresh_linked_stat_value(statType):
 	print("ERROR: Can't find stat type - ", statType)
 	return null
 
+func reset_stat_value(statType):
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			stat.reset_value()
+			emit_signal("OnStatChanged", self)
+			return stat.get_value()
+
+	print("ERROR: Can't find stat type - ", statType)
+	return null
+
 # ITEMS
 
 # For testing when player goes over, they get the item

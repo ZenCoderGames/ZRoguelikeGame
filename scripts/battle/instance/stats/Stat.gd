@@ -40,6 +40,9 @@ func modify_absolute_value(newValue:float):
 	value = newValue
 	return newValue
 
+func reset_value():
+	value = baseValue
+
 func update_from_modified_linked_stat():
 	var prevBaseValue:int = baseValue
 	var newBaseValue:int = get_base_value()
