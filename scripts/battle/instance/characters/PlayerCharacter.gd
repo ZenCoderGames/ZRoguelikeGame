@@ -8,7 +8,7 @@ signal OnPlayerReachedEnd()
 signal OnXPGained()
 signal OnLevelUp()
 
-var levelXpList:Array = [0, 2, 25, 50, 100, 200, 400, 800, 1600]
+var levelXpList:Array = [0, 10, 25, 50, 100, 200, 400, 800, 1600]
 var xp:int = 0
 var currentLevel:int = 0
 

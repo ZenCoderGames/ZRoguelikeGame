@@ -82,11 +82,14 @@ func _update_base_ui():
 	if isPlayer:
 		var playerChar:PlayerCharacter = character as PlayerCharacter
 		nameLabel.text = str(character.displayName, " (Lvl ", playerChar.get_level()+1, ")")
+		var xpToLevelUp:float = float(playerChar.get_xp_to_level_xp())
 		if playerChar.is_at_max_level():
 			xpLabel.text = "Max Level"
 		else:
 			xpLabel.text = str("Xp: ", playerChar.get_xp_from_current_level(), "/", playerChar.get_xp_to_level_xp())
-		var pctXP:float = float(playerChar.get_xp_from_current_level())/float(playerChar.get_xp_to_level_xp())
+		var pctXP:float = 1
+		if xpToLevelUp>0:
+			pctXP = float(playerChar.get_xp_from_current_level())/xpToLevelUp
 		xpBar.value = pctXP * 100
 	
 # ITEMS

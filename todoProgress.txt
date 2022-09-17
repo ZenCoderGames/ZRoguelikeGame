@@ -49,16 +49,19 @@ Roguelike Dev:
 (D)- Bugs with rooms showing
 (D)- Player not persisting across levels
 (D)- Item generation spanning across levels
+(D)- ComplexStats
+(D)- Experience
+(D)- Level Ups (Increase stats)
+- 2nd Class and Selection
 
-- Level Ups (Increase stats)
-
-- Walls in rooms
 - Doors and locking
 - Can't escape melee range
 
+- Walls in rooms
+
 - Stamina
 
-- Game Feel (death, better damage number font, camera shake)
+- Game Feel (level up, death, better damage number font, camera shake)
 
 - Saving and Loading
 
