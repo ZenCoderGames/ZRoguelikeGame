@@ -12,6 +12,9 @@ var levelXpList:Array = [0, 10, 25, 50, 100, 200, 400, 800, 1600]
 var xp:int = 0
 var currentLevel:int = 0
 
+onready var levelUpAnim:Node = $"%LevelUpAnimation"
+onready var levelUpLabel:Node = $"%LevelUpLabel"
+
 func init(charData, teamVal):
 	.init(charData, teamVal)
 
@@ -73,8 +76,17 @@ func _level_up():
 	modify_absolute_stat_value(StatData.STAT_TYPE.STRENGTH, 1)
 	refresh_linked_stat_value(StatData.STAT_TYPE.HEALTH)
 	refresh_linked_stat_value(StatData.STAT_TYPE.DAMAGE)
-	reset_stat_value(StatData.STAT_TYPE.HEALTH)
+	#reset_stat_value(StatData.STAT_TYPE.HEALTH)
 	emit_signal("OnLevelUp")
+	
+	levelUpAnim.visible = true
+	self.self_modulate = Dungeon.battleInstance.view.playerLevelUpColor
+	yield(get_tree().create_timer(0.2), "timeout")
+	levelUpAnim.visible = false
+	levelUpLabel.visible = true
+	yield(get_tree().create_timer(0.25), "timeout")
+	levelUpLabel.visible = false
+	self.self_modulate = Dungeon.battleInstance.view.playerDamageColor
 
 func get_xp():
 	return xp

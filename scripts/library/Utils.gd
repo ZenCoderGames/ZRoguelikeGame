@@ -14,6 +14,16 @@ func create_scene(container:Array, name : String, prefab: PackedScene, group: St
 	return new_scene
 
 # GENERAL
+func create_tween_float(node, fieldName, startPose, endPose, duration, transType, easeType):
+	var tween = Tween.new()
+	add_child(tween)
+	tween.interpolate_property(
+		node, fieldName, 
+		startPose, endPose, duration,
+		transType, easeType)
+	tween.start()
+	return tween
+
 func create_tween_vector2(node, fieldName, startPose, endPose, duration, transType, easeType):
 	var tween = Tween.new()
 	add_child(tween)

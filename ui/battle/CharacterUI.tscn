@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/battle/ui/CharacterUI.gd" type="Script" id=2]
@@ -11,6 +11,10 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color( 0.239216, 0.533333, 0.635294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.611765, 0.533333, 0.121569, 1 )
+border_color = Color( 0.933333, 0.933333, 0.0862745, 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.145098, 0.376471, 0.137255, 1 )
@@ -33,17 +37,18 @@ healthBarFlashColor = Color( 0.460938, 0.250275, 0.250275, 1 )
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 215.0
-margin_bottom = 91.0
+margin_bottom = 123.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Base" type="VBoxContainer" parent="HSplitContainer"]
 margin_right = 208.0
-margin_bottom = 84.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Name" type="PanelContainer" parent="HSplitContainer/Base"]
+self_modulate = Color( 0.929688, 0.809107, 0.0217896, 1 )
 margin_right = 208.0
 margin_bottom = 24.0
 custom_styles/panel = ExtResource( 3 )
@@ -65,16 +70,15 @@ text = "Enemy (Lvl 1)"
 align = 1
 
 [node name="XP" type="PanelContainer" parent="HSplitContainer/Base"]
-visible = false
 margin_top = 28.0
-margin_right = 316.0
+margin_right = 208.0
 margin_bottom = 56.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="XPBar" type="ProgressBar" parent="HSplitContainer/Base/XP"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 314.0
+margin_right = 206.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 182, 24 )
 custom_styles/fg = SubResource( 2 )
@@ -82,20 +86,32 @@ value = 75.0
 rounded = true
 percent_visible = false
 
+[node name="LevelUpBar" type="ProgressBar" parent="HSplitContainer/Base/XP"]
+visible = false
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 206.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 182, 24 )
+custom_styles/fg = SubResource( 3 )
+value = 100.0
+rounded = true
+percent_visible = false
+
 [node name="XPLabel" type="Label" parent="HSplitContainer/Base/XP"]
 margin_left = 2.0
 margin_top = 4.0
-margin_right = 314.0
+margin_right = 206.0
 margin_bottom = 24.0
 theme = ExtResource( 1 )
-text = "Exp: 35/100"
+text = "LEVEL UP!"
 align = 1
 valign = 1
 
 [node name="Health" type="PanelContainer" parent="HSplitContainer/Base"]
-margin_top = 28.0
+margin_top = 60.0
 margin_right = 208.0
-margin_bottom = 56.0
+margin_bottom = 88.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="HealthBar" type="ProgressBar" parent="HSplitContainer/Base/Health"]
@@ -120,9 +136,9 @@ align = 1
 valign = 1
 
 [node name="Damage" type="PanelContainer" parent="HSplitContainer/Base"]
-margin_top = 60.0
+margin_top = 92.0
 margin_right = 208.0
-margin_bottom = 84.0
+margin_bottom = 116.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Bg" type="ColorRect" parent="HSplitContainer/Base/Damage"]

@@ -11,6 +11,7 @@ export var dimFloorColor:Color
 export var dimExitColor:Color
 export var dimEndColor:Color
 export var playerDamageColor:Color
+export var playerLevelUpColor:Color
 export var enemyDamageColor:Color
 export var itemGearColor:Color
 export var itemConsumableColor:Color

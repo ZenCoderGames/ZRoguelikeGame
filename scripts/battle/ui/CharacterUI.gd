@@ -8,6 +8,7 @@ onready var nameBg:ColorRect = get_node("HSplitContainer/Base/Name/Bg")
 onready var nameLabel:Label = get_node("HSplitContainer/Base/Name/NameLabel")
 onready var xpUI:PanelContainer = get_node("HSplitContainer/Base/XP")
 onready var xpBar:ProgressBar = get_node("HSplitContainer/Base/XP/XPBar")
+onready var levelUpBar:ProgressBar = get_node("HSplitContainer/Base/XP/LevelUpBar")
 onready var xpLabel:Label = get_node("HSplitContainer/Base/XP/XPLabel")
 onready var healthBar:ProgressBar = get_node("HSplitContainer/Base/Health/HealthBar")
 onready var healthLabel:Label = get_node("HSplitContainer/Base/Health/HealthLabel")
@@ -37,6 +38,8 @@ var equippedEffects:Dictionary = {}
 
 var isPlayer:bool
 
+var xpTween:Tween = null
+
 func _ready():
 	originalHealthBarColor = healthBar.self_modulate
 
@@ -60,6 +63,7 @@ func init(entityObj):
 		xpUI.visible = true
 		var playerChar:PlayerCharacter = character as PlayerCharacter
 		playerChar.connect("OnXPGained", self, "_update_base_ui")
+		playerChar.connect("OnLevelUp", self, "_show_level_up")
 	elif character.team == Constants.TEAM.ENEMY:
 		nameBg.color = enemyTintColor
 		xpUI.visible = false
@@ -75,6 +79,8 @@ func _on_stat_changed(characterRef):
 	baseContainer.self_modulate = Color.white
 	
 func _update_base_ui():
+	if inLevelUpSequence:
+		return
 	healthLabel.text = str("Health: ", character.get_health(), "/", character.get_max_health())
 	var pctHealth:float = float(character.get_health())/float(character.get_max_health())
 	healthBar.value = pctHealth * 100
@@ -90,8 +96,22 @@ func _update_base_ui():
 		var pctXP:float = 1
 		if xpToLevelUp>0:
 			pctXP = float(playerChar.get_xp_from_current_level())/xpToLevelUp
-		xpBar.value = pctXP * 100
+		#xpBar.value = pctXP * 100
+		xpTween = Utils.create_tween_float(xpBar, "value", xpBar.value, pctXP * 100, 0.25, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 	
+var inLevelUpSequence:bool
+func _show_level_up():
+	inLevelUpSequence = true
+	if xpTween!=null:
+		xpTween.stop_all()
+	levelUpBar.visible = true
+	xpLabel.text = "Level Up!"
+	if get_tree()!=null:
+		yield(get_tree().create_timer(1.0), "timeout") 
+	levelUpBar.visible = false
+	inLevelUpSequence = false
+	_update_base_ui()
+
 # ITEMS
 func _on_item_equipped(item):
 	var newItemUI = EquippedItemUI.instance()

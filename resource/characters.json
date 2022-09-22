@@ -12,7 +12,7 @@
 					},
 					{
 						"type": "STRENGTH",
-						"value": 3
+						"value": 4
 					}
 				],
 				"moveAction": {
@@ -40,6 +40,33 @@
 					{
 						"type": "STRENGTH",
 						"value": 2
+					}
+				],
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "INPUT"
+					}
+				},
+				"attackAction": {
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
+			},
+			{
+				"id": "ASSASSIN",
+				"displayName": "You",
+				"path": "entity/characters/Player.tscn",
+				"stats": [
+					{
+						"type": "VITALITY",
+						"value": 3
+					},
+					{
+						"type": "STRENGTH",
+						"value": 6
 					}
 				],
 				"moveAction": {

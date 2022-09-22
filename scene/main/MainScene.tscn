@@ -59,6 +59,7 @@ dimFloorColor = Color( 0.176471, 0.176471, 0.176471, 1 )
 dimExitColor = Color( 0.086441, 0.214844, 0.103336, 1 )
 dimEndColor = Color( 0.241572, 0.246094, 0.104782, 1 )
 playerDamageColor = Color( 0.0823529, 0.666667, 0.760784, 1 )
+playerLevelUpColor = Color( 0.803922, 0.882353, 0.0980392, 1 )
 enemyDamageColor = Color( 0.72549, 0.223529, 0.223529, 1 )
 itemGearColor = Color( 0.368627, 0.603922, 0.184314, 1 )
 itemConsumableColor = Color( 0.203922, 0.466667, 0.74902, 1 )
@@ -97,7 +98,6 @@ anchor_bottom = 1.0
 
 [node name="VictoryUI" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
 self_modulate = Color( 0.380392, 0.301961, 0.301961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -122,7 +122,7 @@ margin_bottom = 593.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 custom_fonts/font = SubResource( 3 )
-text = "You have beaten the Dungeon of Zenkonia"
+text = "You have beaten the Dungeon of Zekonia"
 align = 1
 valign = 2
 autowrap = true
