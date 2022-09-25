@@ -65,7 +65,7 @@ func _gain_xp(val:int):
 	var prevLevel = currentLevel
 	currentLevel = -1
 	for levelXp in levelXpList:
-		if xp>levelXp:
+		if xp>=levelXp:
 			currentLevel = currentLevel + 1
 	if prevLevel<currentLevel:
 		_level_up()

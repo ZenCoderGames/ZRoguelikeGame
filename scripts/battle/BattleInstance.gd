@@ -36,9 +36,14 @@ func _init():
 	_init_dungeon_data()
 	Dungeon.init(self, dungeonDataList[currentDungeonIdx])
 
+	GameEventManager.connect("OnCharacterSelected", self, "_on_character_chosen")
+
 func _ready():
 	mainMenuUI.visible = true
-	mainMenuUI.connect("OnNewGamePressed", self, "_on_new_game")
+	GameEventManager.connect("OnReadyToBattle", self, "_on_new_game")
+
+func _on_character_chosen(charData):
+	Dungeon.dataManager.on_character_chosen(charData)
 
 func _on_new_game():
 	if !firstTimeDungeon:
@@ -84,6 +89,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _toggle_main_menu():
 	mainMenuUI.visible = !mainMenuUI.visible
 	if mainMenuUI.visible:
+		mainMenuUI.show_menu()
 		emit_signal("OnMainMenuOn")
 	else:
 		emit_signal("OnMainMenuOff")
@@ -108,6 +114,11 @@ func _on_game_end():
 	_toggle_main_menu()
 	victoryUI.visible = true
 	Dungeon.isDungeonFinished = true
+
+func back_to_menu_from_victory():
+	_toggle_main_menu()
+	victoryUI.visible = false
+	Dungeon.isDungeonFinished = false
 
 # DUNGEONS
 func _init_dungeon_data():

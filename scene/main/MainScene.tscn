@@ -1,12 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/battle/DungeonCamera.gd" type="Script" id=1]
 [ext_resource path="res://ui/MainGUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/battle/PlayerInput.gd" type="Script" id=3]
 [ext_resource path="res://scripts/battle/BattleInstance.gd" type="Script" id=4]
 [ext_resource path="res://scripts/battle/BattleView.gd" type="Script" id=5]
-[ext_resource path="res://scripts/battle/instance/HitResolutionManager.gd" type="Script" id=6]
-[ext_resource path="res://scripts/battle/instance/CombatEventManager.gd" type="Script" id=7]
 [ext_resource path="res://ui/MainMenuUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://resource/fonts/connection/ConnectionBold.otf" type="DynamicFontData" id=9]
 [ext_resource path="res://resource/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" type="DynamicFontData" id=10]
@@ -68,13 +66,6 @@ debugStartRoomColor = Color( 0.0980392, 0.6, 0.105882, 1 )
 debugCriticalPathRoomColor = Color( 0.576471, 0.337255, 0.12549, 1 )
 debugEndRoomColor = Color( 0.792157, 0.270588, 0.270588, 1 )
 
-[node name="HitResolutionManager" type="Node" parent="Battle"]
-unique_name_in_owner = true
-script = ExtResource( 6 )
-
-[node name="CombatEventManager" type="Node" parent="Battle"]
-script = ExtResource( 7 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 400, 300 )
 current = true
@@ -98,6 +89,7 @@ anchor_bottom = 1.0
 
 [node name="VictoryUI" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 self_modulate = Color( 0.380392, 0.301961, 0.301961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -116,13 +108,26 @@ valign = 1
 
 [node name="Label2" type="Label" parent="CanvasLayer/VictoryUI"]
 margin_left = 7.0
-margin_top = 556.0
+margin_top = 7.0
 margin_right = 793.0
-margin_bottom = 593.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 0, 100 )
 size_flags_horizontal = 3
-size_flags_vertical = 8
+size_flags_vertical = 0
 custom_fonts/font = SubResource( 3 )
 text = "You have beaten the Dungeon of Zekonia"
 align = 1
-valign = 2
+valign = 1
 autowrap = true
+
+[node name="BackToMenu" type="Button" parent="CanvasLayer/VictoryUI"]
+margin_left = 350.0
+margin_top = 573.0
+margin_right = 449.0
+margin_bottom = 593.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Back to Menu"
+icon_align = 1
+
+[connection signal="button_up" from="CanvasLayer/VictoryUI/BackToMenu" to="Battle" method="back_to_menu_from_victory"]

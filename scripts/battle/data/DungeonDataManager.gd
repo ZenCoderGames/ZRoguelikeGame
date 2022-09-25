@@ -21,6 +21,9 @@ func _init():
 	init_items()
 	init_characters()
 
+func on_character_chosen(charData):
+	playerData = charData
+
 func init_status_effects():
 	var data = Utils.load_data_from_file("resource/statusEffects.json")
 	var statusEffectDataJSList:Array = data["statusEffects"]

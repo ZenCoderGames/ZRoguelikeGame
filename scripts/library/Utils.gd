@@ -101,3 +101,15 @@ func duplicate_array(arrayRef:Array)->Array:
 	for item in arrayRef:
 		newArray.append(item)
 	return newArray
+
+func convert_to_camel_case(string:String):
+	var result = PoolStringArray()
+	var i:int = 0
+	for ch in string:
+		if i==0:
+			result.append(ch.to_upper())
+		else:
+			result.append(ch.to_lower())
+		i = i + 1
+
+	return result.join('')

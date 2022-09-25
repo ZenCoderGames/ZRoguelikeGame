@@ -16,3 +16,6 @@ func init_from_json(statDataJS):
 func init_from_code(statType, statValue):
 	type = statType
 	value = statValue
+
+func get_stat_name():
+	return STAT_TYPE.keys()[type]

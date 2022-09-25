@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resource/fonts/montreal/Montreal-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/menu/CharacterSelectItemUI.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="CharacterSelectItemUI" type="PanelContainer"]
 self_modulate = Color( 0.847059, 0.65098, 0.556863, 1 )
 margin_left = 225.0
 margin_right = 339.0
 margin_bottom = 163.0
+script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
@@ -30,7 +32,8 @@ margin_right = 93.0
 margin_bottom = 118.0
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="CharNameLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 self_modulate = Color( 0.819608, 0.580392, 0.0509804, 1 )
 margin_top = 27.0
 margin_right = 86.0
@@ -40,7 +43,8 @@ text = "Knight"
 align = 1
 valign = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="DescLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 52.0
 margin_right = 86.0
 margin_bottom = 83.0
@@ -49,7 +53,8 @@ Strength: 3"
 align = 1
 valign = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="ChooseButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
 self_modulate = Color( 0.129412, 0.839216, 0.160784, 1 )
 margin_top = 129.0
 margin_right = 100.0

@@ -114,6 +114,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/battle/data/CharacterData.gd"
 }, {
+"base": "PanelContainer",
+"class": "CharacterSelectItemUI",
+"language": "GDScript",
+"path": "res://scripts/menu/CharacterSelectItemUI.gd"
+}, {
+"base": "Panel",
+"class": "CharacterSelectUI",
+"language": "GDScript",
+"path": "res://scripts/menu/CharacterSelectUI.gd"
+}, {
 "base": "Reference",
 "class": "CharacterStatus",
 "language": "GDScript",
@@ -276,6 +286,8 @@ _global_script_class_icons={
 "BattleView": "",
 "Character": "",
 "CharacterData": "",
+"CharacterSelectItemUI": "",
+"CharacterSelectUI": "",
 "CharacterStatus": "",
 "CharacterUI": "",
 "ComplexStatData": "",
@@ -320,6 +332,7 @@ Utils="*res://scripts/library/Utils.gd"
 Dungeon="*res://scripts/battle/Dungeon.gd"
 HitResolutionManager="*res://scripts/battle/instance/HitResolutionManager.gd"
 CombatEventManager="*res://scripts/battle/instance/CombatEventManager.gd"
+GameEventManager="*res://scripts/GameEventManager.gd"
 
 [display]
 

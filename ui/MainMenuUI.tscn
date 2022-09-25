@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/battle/ui/MainMenuUI.gd" type="Script" id=1]
 [ext_resource path="res://themes/guiTheme.tres" type="Theme" id=2]
-[ext_resource path="res://ui/characterSelect/CharacterSelectItemUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/characterSelect/CharacterSelectUI.tscn" type="PackedScene" id=3]
 
 [node name="MainMenuUI" type="Control"]
 anchor_right = 1.0
@@ -41,6 +41,7 @@ align = 1
 valign = 1
 
 [node name="MenuUI" type="PanelContainer" parent="."]
+unique_name_in_owner = true
 self_modulate = Color( 1, 0.839216, 0.729412, 1 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -70,7 +71,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 279.0
 margin_bottom = 21.0
-text = "Dungeon of ZEKONIA"
+text = "Dungeons of ZEKONIA"
 align = 1
 valign = 1
 uppercase = true
@@ -110,42 +111,4 @@ margin_bottom = 124.0
 disabled = true
 text = "Settings"
 
-[node name="CharacterSelectUI" type="Panel" parent="."]
-visible = false
-self_modulate = Color( 0.258824, 0.227451, 0.227451, 0.545098 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="CharacterSelectUI"]
-margin_left = 146.0
-margin_top = 75.0
-margin_right = 402.0
-margin_bottom = 174.0
-rect_scale = Vector2( 2, 2 )
-theme = ExtResource( 2 )
-text = "CLASS SELECT"
-align = 1
-valign = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CharacterSelectUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -400.0
-margin_top = -81.5
-margin_right = 400.0
-margin_bottom = 81.5
-alignment = 1
-
-[node name="PanelContainer" parent="CharacterSelectUI/HBoxContainer" instance=ExtResource( 3 )]
-
-[node name="PanelContainer2" parent="CharacterSelectUI/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 343.0
-margin_right = 457.0
-
-[node name="PanelContainer3" parent="CharacterSelectUI/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 461.0
-margin_right = 575.0
+[node name="CharacterSelectUI" parent="." instance=ExtResource( 3 )]

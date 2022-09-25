@@ -7,9 +7,9 @@ onready var saveGameButton:Button = $"%SaveGameButton"
 onready var loadGameButton:Button = $"%LoadGameButton"
 onready var settingsButton:Button = $"%SettingsButton"
 
+onready var characterSelectUI:CharacterSelectUI = $"%CharacterSelectUI"
+onready var baseMenuUI:Node = $"%MenuUI"
 onready var deathUI:Node = $"%DeathUI"
-
-signal OnNewGamePressed()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +21,10 @@ func _ready():
 	
 	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
+	GameEventManager.connect("OnCharacterSelected", self, "_on_character_chosen")
+
+func _on_character_chosen(charData):
+	baseMenuUI.visible = false
 	
 func _on_dungeon_init():
 	_shared_init()
@@ -32,8 +36,15 @@ func _on_dungeon_recreated():
 func _shared_init():
 	Dungeon.player.connect("OnDeath", self, "_on_game_over")
 
+func show_menu():
+	baseMenuUI.visible = true
+	characterSelectUI.visible = false
+
 func on_new_game():
-	emit_signal("OnNewGamePressed")
+	baseMenuUI.visible = false
+	characterSelectUI.visible = true
+	characterSelectUI.init_from_data()
+	#GameEventManager.ready_to_battle()
 	
 func on_save_game():
 	pass
@@ -46,7 +57,10 @@ func on_settings():
 
 func _on_game_over():
 	get_node(".").visible = true
+	baseMenuUI.visible = true
 	deathUI.visible = true
+	characterSelectUI.visible = false
 
 func _clean_up():
 	deathUI.visible = false
+	characterSelectUI.visible = false
