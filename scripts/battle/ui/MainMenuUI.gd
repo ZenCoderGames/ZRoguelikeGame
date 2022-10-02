@@ -27,6 +27,7 @@ func _on_character_chosen(charData):
 	baseMenuUI.visible = false
 	
 func _on_dungeon_init():
+	_clean_up()
 	_shared_init()
 
 func _on_dungeon_recreated():
@@ -41,6 +42,7 @@ func show_menu():
 	characterSelectUI.visible = false
 
 func on_new_game():
+	_clean_up()
 	baseMenuUI.visible = false
 	characterSelectUI.visible = true
 	characterSelectUI.init_from_data()

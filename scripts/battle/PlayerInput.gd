@@ -37,6 +37,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if disableInput || blockInputsFromInputDelay:
 		return
+	
+	if player.isDead:
+		return
 
 	# movement
 	var x:int = 0

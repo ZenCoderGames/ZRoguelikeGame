@@ -37,8 +37,8 @@
 		{
 			"id": "NECRO_STAFF",
 			"name": "Necro Staff",
-			"description": "A staff that leeches health back on kill\n[Regen +6 Health]",
-			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +6 health on kill",
+			"description": "A staff that leeches health back on kill\n[Regen +4 Health]",
+			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +4 health on kill",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "GEAR",
 			"slot": "WEAPON",

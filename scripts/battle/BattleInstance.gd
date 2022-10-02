@@ -111,9 +111,10 @@ func _on_dungeon_completed():
 		recreate_dungeon(currentDungeonIdx)
 
 func _on_game_end():
-	_toggle_main_menu()
 	victoryUI.visible = true
 	Dungeon.isDungeonFinished = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	_toggle_main_menu()
 
 func back_to_menu_from_victory():
 	_toggle_main_menu()
