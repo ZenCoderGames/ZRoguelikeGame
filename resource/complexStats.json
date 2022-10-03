@@ -3,7 +3,7 @@
 		{
 			"statType": "VITALITY",
 			"linkedStatType": "HEALTH",
-			"linkedStatMultiplier": 3
+			"linkedStatMultiplier": 2
 		},
 		{
 			"statType": "STRENGTH",

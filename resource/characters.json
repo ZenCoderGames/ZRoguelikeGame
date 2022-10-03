@@ -85,9 +85,10 @@
 		],
 		"enemies": [
 			{
-				"id": "DWARF",
-				"displayName": "Dwarf",
+				"id": "SKELETON",
+				"displayName": "Skeleton",
 				"path": "entity/characters/Dwarf.tscn",
+				"difficulty": 1,
 				"cost": 5,
 				"xp": 10,
 				"stats": [
@@ -118,6 +119,7 @@
 				"id": "GIANT",
 				"displayName": "Giant",
 				"path": "entity/characters/Giant.tscn",
+				"difficulty": 2,
 				"cost": 10,
 				"xp": 20,
 				"stats": [
@@ -148,6 +150,7 @@
 				"id": "RAT",
 				"displayName": "Rat",
 				"path": "entity/characters/Rat.tscn",
+				"difficulty": 1,
 				"cost": 2,
 				"xp": 3,
 				"stats": [
@@ -178,6 +181,7 @@
 				"id": "SERPENT",
 				"displayName": "Serpent",
 				"path": "entity/characters/Serpent.tscn",
+				"difficulty": 2,
 				"cost": 5,
 				"xp": 8,
 				"stats": [
@@ -188,6 +192,68 @@
 					{
 						"type": "DAMAGE",
 						"value": 8
+					}
+				],
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "PATHFIND_TO_TARGET"
+					}
+				},
+				"attackAction": {
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
+			},
+			{
+				"#disable": true,
+				"id": "AUTOMATON",
+				"displayName": "Automaton",
+				"path": "entity/characters/Automaton.tscn",
+				"difficulty": 3,
+				"cost": 7,
+				"xp": 15,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 20
+					},
+					{
+						"type": "DAMAGE",
+						"value": 6
+					}
+				],
+				"moveAction": {
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "PATHFIND_TO_TARGET"
+					}
+				},
+				"attackAction": {
+					"type": "ATTACK",
+					"params": {
+						"damageMultiplier": 1
+					}
+				}
+			},
+			{
+				"#disable": true,
+				"id": "DRAGON",
+				"displayName": "Dragon",
+				"path": "entity/characters/Dragon.tscn",
+				"difficulty": 4,
+				"cost": 10,
+				"xp": 30,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 50
+					},
+					{
+						"type": "DAMAGE",
+						"value": 10
 					}
 				],
 				"moveAction": {

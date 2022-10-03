@@ -8,7 +8,8 @@
 			"roomMaxCols": 12,
 			"itemCountMin": 2,
 			"itemCountMax": 4,
-			"itemHeighestTier": 2
+			"itemHeighestTier": 2,
+			"enemyDifficultyHighestTier": 1
 		},
 		{
 			"numRooms": 6,
@@ -18,7 +19,8 @@
 			"roomMaxCols": 12,
 			"itemCountMin": 3,
 			"itemCountMax": 4,
-			"itemHeighestTier": 3
+			"itemHeighestTier": 3,
+			"enemyDifficultyHighestTier": 2
 		},
 		{
 			"numRooms": 7,
@@ -28,7 +30,8 @@
 			"roomMaxCols": 14,
 			"itemCountMin": 3,
 			"itemCountMax": 5,
-			"itemHeighestTier": 4
+			"itemHeighestTier": 4,
+			"enemyDifficultyHighestTier": 3
 		},
 		{
 			"numRooms": 8,
@@ -38,7 +41,8 @@
 			"roomMaxCols": 14,
 			"itemCountMin": 3,
 			"itemCountMax": 6,
-			"itemHeighestTier": 5
+			"itemHeighestTier": 5,
+			"enemyDifficultyHighestTier": 4
 		}
 	]
 }

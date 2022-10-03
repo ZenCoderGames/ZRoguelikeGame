@@ -229,6 +229,14 @@ func _init_enemies():
 		
 		var currentCost:int = 0
 		var enemyDataList:Array = Utils.duplicate_array(dataManager.enemyDataList)
+		var itemsToRemove:Array = []
+		for enemyData in enemyDataList:
+			if enemyData.difficulty > dungeonData.enemyDifficultyHighestTier:
+				itemsToRemove.append(enemyData)
+
+		for items in itemsToRemove:
+			enemyDataList.erase(items)
+
 		while(currentCost<encounterCost):
 			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]
 			if currentCost + enemyData.cost<=encounterCost:

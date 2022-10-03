@@ -3,6 +3,7 @@ class_name CharacterData
 var id:String
 var displayName:String
 var path:String
+var difficulty:int
 var cost:int
 var xp:int
 var statDataList:Array
@@ -14,6 +15,7 @@ func _init(dataJS):
 	id = dataJS["id"]
 	displayName = dataJS["displayName"]
 	path = dataJS["path"]
+	difficulty = Utils.get_data_from_json(dataJS, "difficulty", 1)
 	cost =  Utils.get_data_from_json(dataJS, "cost", 0)
 	xp =  Utils.get_data_from_json(dataJS, "xp", 0)
 	

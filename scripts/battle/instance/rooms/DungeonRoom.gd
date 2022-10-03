@@ -25,6 +25,10 @@ var isEndRoom:bool
 # Enemies
 var enemies:Array = []
 
+# Doors
+var doors:Array = [] 
+
+# Items
 var items:Array = []
 
 var maxRows:int
@@ -200,12 +204,13 @@ func update_visibility():
 		elif isCriticalPathRoom:
 			_show_debug(Dungeon.battleInstance.view.debugCriticalPathRoomColor)
 	else:	
-		var isPlayerCurrent:bool = Dungeon.player.is_in_room(self)
-		var isPlayerPrevious:bool = Dungeon.player.is_prev_room(self)
-		if isPlayerCurrent:
+		var isPlayerCurrentRoom:bool = Dungeon.player.is_in_room(self)
+		var isPlayerPreviousRoom:bool = Dungeon.player.is_prev_room(self)
+		if isPlayerCurrentRoom:
 			_show()
 			wasRoomVisited = true
-		elif isPlayerPrevious:
+			_check_for_doors()
+		elif isPlayerPreviousRoom:
 			_dim()
 		elif wasRoomVisited:
 			_dim()
@@ -240,6 +245,25 @@ func _hide():
 func _show_debug(colorVal):
 	for cell in cells:
 		cell.showDebug(colorVal)
+
+# DOORS
+func _check_for_doors():
+	if doors.empty():
+		if enemies.size()>0 and !connections.has(Dungeon.player.cell):	
+			_create_doors()
+
+func _create_doors():
+	for connection in connections:
+		var doorObj = Utils.create_scene(loadedScenes, "door", Constants.Door, Constants.room_door, connection)
+		connection.init_entity(doorObj, Constants.ENTITY_TYPE.STATIC)
+		doors.append(doorObj)
+		if connection == topConnection or connection == botConnection:
+			doorObj.rotate(deg2rad(90))
+
+func _destroy_doors():
+	for connection in connections:
+		connection.unload_entity()
+	doors.clear()
 
 # ENTITY
 func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
@@ -282,6 +306,8 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 
 func enemy_died(entity):
 	enemies.remove(enemies.find(entity))
+	if enemies.empty():
+		_destroy_doors()
 
 # DJIKSTRA MAP
 var shortestNodeToStart = {}

@@ -5,6 +5,7 @@ const Floor := preload("res://entity/Floor.tscn")
 const Wall := preload("res://entity/Wall.tscn")
 const Exit := preload("res://entity/Exit.tscn")
 const End := preload("res://entity/End.tscn")
+const Door := preload("res://entity/Door.tscn")
 
 # GENERAL
 enum DIRN_TYPE { LEFT, RIGHT, UP, DOWN }
@@ -30,6 +31,7 @@ const room_floor: String = "floor"
 const room_wall: String = "wall"
 const room_exit: String = "exit"
 const room_end: String = "end"
+const room_door: String = "door"
 const enemies: String = "enemies"
 const items: String = "items"
 
