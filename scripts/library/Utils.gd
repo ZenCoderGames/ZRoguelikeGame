@@ -113,3 +113,6 @@ func convert_to_camel_case(string:String):
 		i = i + 1
 
 	return result.join('')
+
+func random_chance(chance:float):
+	return randf() < chance/100

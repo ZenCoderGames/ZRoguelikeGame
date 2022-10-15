@@ -33,6 +33,7 @@ func create(recreatePlayer:bool) -> void:
 	_init_rooms()
 	_init_connections()
 	_init_path()
+	_init_obstacles()
 	_init_items()
 	_init_player(recreatePlayer)
 	_init_enemies()
@@ -249,6 +250,16 @@ func _init_enemies():
 				if enemyDataList.size()==0:
 					break
 
+func _init_obstacles():
+	if battleInstance.dontSpawnObstacles:
+		return
+
+	for room in rooms:
+		if room.isStartRoom:
+			continue
+
+		room.generate_obstacles(battleInstance.obstaclePercent, dungeonData.minObstacles, dungeonData.maxObstacles)
+
 func _init_items():
 	if battleInstance.dontSpawnItems:
 		return
@@ -259,7 +270,7 @@ func _init_items():
 	var itemDataList = Utils.duplicate_array(dataManager.itemDataList)
 	itemDataList.shuffle()
 
-	var numItems:int = dungeonData.itemCountMin + randi() % (dungeonData.itemCountMax - dungeonData.itemCountMin)
+	var numItems:int = dungeonData.itemCountMin + randi() % (dungeonData.itemCountMax - dungeonData.itemCountMin + 1)
 	var maxItemsReached:bool = false
 	var roomVisitedMap:Dictionary = {}
 

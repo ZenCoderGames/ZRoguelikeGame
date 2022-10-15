@@ -81,6 +81,26 @@ func _init_walls():
 			if cell.is_bot_edge() and !cell.is_corner():
 				wallCellsBot.append(cell)
 
+func generate_obstacles(obstacleChance:float, minObstacles:int, maxObstacles:int):
+	if Utils.random_chance(obstacleChance):
+		return
+
+	var numObstacles:int = minObstacles + randi() % (maxObstacles-minObstacles)
+
+	var freeCells:Array = []
+	for cell in cells:
+		if cell.is_empty() and cell.is_within_room_buffered_specific(maxRows/2-1, maxCols/2-1):
+			freeCells.append(cell)
+			numObstacles = numObstacles - 1
+			if numObstacles==0:
+				break
+
+	if freeCells.size()>0:
+		randomize()
+		freeCells.shuffle()
+		for cell in freeCells:
+			_create_wall(cell.row, cell.col)
+
 func _create_wall(r, c):
 	var cell:DungeonCell = get_cell(r, c)
 	var wall:Node = Utils.create_scene(loadedScenes, "wall", Constants.Wall, Constants.room_floor, cell)

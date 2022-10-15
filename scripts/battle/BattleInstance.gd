@@ -8,12 +8,14 @@ onready var screenFade:Panel = $"%ScreenFade"
 onready var victoryUI:PanelContainer = $"%VictoryUI"
 
 export var timeBetweenMoves:float
+export var obstaclePercent:float
 
 # DEBUG
 export var pauseAIMovement:bool
 export var pauseAIAttack:bool
 export var dontSpawnEnemies:bool
 export var debugSpawnEnemyInFirstRoom:String
+export var dontSpawnObstacles:bool
 export var dontSpawnItems:bool
 export var debugSpawnItemInFirstRoom:String
 export var setPlayerInvulnerable:bool
