@@ -54,9 +54,8 @@ Roguelike Dev:
 (D)- Level Ups (Increase stats)
 (D)- Global Event Manager
 (D)- Basic Classes and Selection
-(D) Doors and locking
-
-- Walls in rooms
+(D)- Doors and locking
+(D)- Walls in rooms
 
 - Stamina
 
@@ -65,11 +64,11 @@ Roguelike Dev:
 - Saving and Loading
 
 - Prevent doing damage once you enter space (esp for enemies)
-- Can't escape melee range
 
 - More Extra Ranged Scrolls (Leap, Stun)
 - More Passive Abilities (Critical, Revive)
 - More Weapons (Ranged)
+- More Items (Armor, Dual Blades)
 
 - Typed pass
 
@@ -86,6 +85,6 @@ Roguelike Dev:
 
 - real power fantasy
 - ceremony for big moments
-- tools are powerful but have limitations
+- player tools are powerful but have limitations
 
 ---------------

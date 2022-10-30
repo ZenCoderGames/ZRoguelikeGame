@@ -258,7 +258,7 @@ func _init_obstacles():
 		if room.isStartRoom:
 			continue
 
-		room.generate_obstacles(battleInstance.obstaclePercent, dungeonData.minObstacles, dungeonData.maxObstacles)
+		room.generate_obstacles(dungeonData.obstacleChance, dungeonData.minObstacles, dungeonData.maxObstacles)
 
 func _init_items():
 	if battleInstance.dontSpawnItems:

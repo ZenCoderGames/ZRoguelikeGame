@@ -8,7 +8,6 @@ onready var screenFade:Panel = $"%ScreenFade"
 onready var victoryUI:PanelContainer = $"%VictoryUI"
 
 export var timeBetweenMoves:float
-export var obstaclePercent:float
 
 # DEBUG
 export var pauseAIMovement:bool

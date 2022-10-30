@@ -7,6 +7,7 @@ var roomMinRows:int
 var roomMaxRows:int
 var roomMinCols:int
 var roomMaxCols:int
+var obstacleChance:float
 var minObstacles:int
 var maxObstacles:int
 var itemCountMin:int
@@ -20,6 +21,7 @@ func _init(dataJS):
 	roomMaxRows = Utils.get_data_from_json(dataJS, "roomMaxRows", 5)
 	roomMinCols = Utils.get_data_from_json(dataJS, "roomMinCols", 3)
 	roomMaxCols = Utils.get_data_from_json(dataJS, "roomMaxCols", 5)
+	obstacleChance = Utils.get_data_from_json(dataJS, "obstacleChance", 0)
 	minObstacles = Utils.get_data_from_json(dataJS, "minObstacles", 0)
 	maxObstacles = Utils.get_data_from_json(dataJS, "maxObstacles", 0)
 	itemCountMin = Utils.get_data_from_json(dataJS, "itemCountMin", 2)

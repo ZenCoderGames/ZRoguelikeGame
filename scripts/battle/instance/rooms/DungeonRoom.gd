@@ -85,7 +85,7 @@ func generate_obstacles(obstacleChance:float, minObstacles:int, maxObstacles:int
 	if Utils.random_chance(obstacleChance):
 		return
 
-	var numObstacles:int = minObstacles + randi() % (maxObstacles-minObstacles)
+	var numObstacles:int = minObstacles + randi() % (maxObstacles-minObstacles+1)
 
 	var freeCells:Array = []
 	for cell in cells:
