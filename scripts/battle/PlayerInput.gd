@@ -6,13 +6,15 @@ var player:PlayerCharacter
 var disableInput:bool = true
 var playerMoveAction:ActionMove
 var inputDelay:float = 0.0
-var blockInputsFromInputDelay:bool
+var blockInputsForTurn:bool
 
 func _ready():
 	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
 	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	Dungeon.battleInstance.connect("OnMainMenuOn", self, "on_main_menu_on")
 	Dungeon.battleInstance.connect("OnMainMenuOff", self, "on_main_menu_off")
+	Dungeon.connect("OnPlayerTurnCompleted", self, "_on_player_turn_completed")
+	Dungeon.connect("OnEndTurn", self, "_on_end_turn") 
 	
 func _register_player(playerRef):
 	player = playerRef
@@ -24,6 +26,7 @@ func _on_dungeon_init():
 
 func _on_player_death():
 	disableInput = true
+	player.disconnect("OnDeath", self, "_on_player_death")
 
 func on_main_menu_on():
 	disableInput = true
@@ -35,7 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		get_tree().quit()
 
-	if disableInput || blockInputsFromInputDelay:
+	if disableInput || blockInputsForTurn:
 		return
 	
 	if player.isDead:
@@ -58,7 +61,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if playerMoveAction.can_execute():
 			player.move(x, y)
 
-		blockInputsFromInputDelay = true
-		yield(get_tree().create_timer(inputDelay), "timeout")
-		blockInputsFromInputDelay = false
-
+func _on_player_turn_completed():
+	blockInputsForTurn = true
+	
+func _on_end_turn():
+	blockInputsForTurn = false

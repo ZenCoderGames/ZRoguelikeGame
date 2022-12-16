@@ -47,6 +47,8 @@ signal OnPassiveRemoved(character, passive)
 signal OnStatusEffectAdded(character, statusEffect)
 signal OnStatusEffectRemoved(character, statusEffect)
 
+signal OnTurnCompleted()
+
 var originalColor:Color
 
 func init(charDataVal, teamVal):
@@ -201,7 +203,6 @@ func attack(entity):
 
 		yield(get_tree().create_timer(0.075), "timeout")
 
-
 		emit_signal("OnPreAttack", entity)
 		var damageAmount:int = get_stat_value(StatData.STAT_TYPE.DAMAGE)
 		successfulDamageThisFrame = HitResolutionManager.do_hit(self, entity, damageAmount)
@@ -318,6 +319,10 @@ func get_random_target():
 func get_targets():
 	return targetList
 
+# SPELLS
+func on_spell_activated(spellItem):
+	on_turn_completed()
+
 # STATUS EFFECTS
 func add_status_effect(statusEffectData:StatusEffectData):
 	var statusEffect = StatusEffect.new(self, statusEffectData)
@@ -339,6 +344,10 @@ func add_passive(passiveData:PassiveData):
 func remove_passive(passive:Passive):
 	passiveList.erase(passive)
 	emit_signal("OnPassiveRemoved", self, passive)
+
+# TURNS
+func on_turn_completed():
+	emit_signal("OnTurnCompleted")
 
 # HELPERS
 func is_in_room(room):

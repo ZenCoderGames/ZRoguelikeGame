@@ -41,6 +41,8 @@ var loadedScenes:Array = []
 var wasRoomVisited:bool = false
 
 var roomId:int = -1
+var _processedEnemyIdx:int = -1
+var _prevProcessedEnemy:Character = null
 
 func _init(id, mR, mC, sX, sY):
 	roomId = id
@@ -236,18 +238,6 @@ func update_visibility():
 			_dim()
 		else:
 			_hide()
-	
-func update_entities():
-	if Dungeon.player.cell.is_connection():
-		return
-
-	if enemies.size()>0:
-		yield(Dungeon.battleInstance.get_tree().create_timer(Dungeon.battleInstance.timeBetweenMoves), "timeout")
-	
-	# ENEMIES
-	for enemy in enemies:
-		if !enemy.isDead:
-			enemy.update()
 
 # VISIBILITY
 func _show():
@@ -256,7 +246,8 @@ func _show():
 
 func _dim():
 	for cell in cells:
-		cell.dim()
+		if cell != Dungeon.player.cell:
+			cell.dim()
 
 func _hide():
 	for cell in cells:
@@ -279,11 +270,15 @@ func _create_doors():
 		doors.append(doorObj)
 		if connection == topConnection or connection == botConnection:
 			doorObj.rotate(deg2rad(90))
+	
+	CombatEventManager.on_room_combat_started(self)
 
 func _destroy_doors():
 	for connection in connections:
 		connection.unload_entity()
 	doors.clear()
+
+	CombatEventManager.on_room_combat_ended(self)
 
 # ENTITY
 func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
@@ -321,7 +316,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			currentCell.connectedCell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
 			currentCell.clear_entity()
 			return true
-	
+
 	return false
 
 func enemy_died(entity):
@@ -430,7 +425,35 @@ func set_as_end_room():
 
 func pre_update_entities():
 	for enemy in enemies:
-		enemy.post_update()
+		enemy.pre_update()
+
+func update_entities():
+	if Dungeon.player.cell.is_connection() or enemies.size()==0:
+		CombatEventManager.on_all_enemy_turn_completed(self)
+		return
+
+	_processedEnemyIdx = -1
+	_prevProcessedEnemy = null
+	_update_next_enemy()
+
+func _update_next_enemy():
+	_processedEnemyIdx = _processedEnemyIdx + 1
+	# Check for end of enemy list
+	if enemies==null or _processedEnemyIdx>=enemies.size():
+		CombatEventManager.on_all_enemy_turn_completed(self)
+		return
+
+	if _prevProcessedEnemy!=null:
+		_prevProcessedEnemy.disconnect("OnTurnCompleted", self, "_update_next_enemy")
+
+	var nextEnemy:Character = enemies[_processedEnemyIdx]
+	if nextEnemy.isDead:
+		_update_next_enemy()
+	else:
+		_prevProcessedEnemy = nextEnemy
+		nextEnemy.connect("OnTurnCompleted", self, "_update_next_enemy")
+		yield(Dungeon.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES), "timeout")
+		nextEnemy.update()
 
 func post_update_entities():
 	for enemy in enemies:
@@ -444,6 +467,16 @@ func get_cell(r:int, c:int):
 	return cells[r * maxCols + c]
 
 func get_safe_starting_cell():
+	var freeCells:Array = []
+	for cell in cells:
+		if cell.is_empty() and cell.is_within_room_buffered(3):
+			freeCells.append(cell)
+	
+	if freeCells.size()>0:
+		# choose random free cell
+		freeCells.shuffle()
+		return freeCells[randi() % freeCells.size()]
+
 	return get_cell(maxRows/2, maxCols/2)
 
 func get_world_position(r: int, c: int) -> Vector2:

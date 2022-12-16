@@ -56,20 +56,28 @@ Roguelike Dev:
 (D)- Basic Classes and Selection
 (D)- Doors and locking
 (D)- Walls in rooms
+(D)- Exit room doesn't open till all enemies are dead
+(D)- Camera on enter/exit combat
+(D)- Better simple death
+(D)- Better simple turn sequencing
 
-- Stamina
+- Balancing pass (Constrain item pool, Nerf healing (weapon/items), damage nerf)
 
 - Game Feel (level up, death, better damage number font, camera shake)
 
+- Blocked from moving once combat starts (Option)
+
 - Saving and Loading
 
-- Prevent doing damage once you enter space (esp for enemies)
+- Prevent doing damage once you enter space (esp for enemies) ?
+- Enemy leveling ?
 
 - More Extra Ranged Scrolls (Leap, Stun)
 - More Passive Abilities (Critical, Revive)
 - More Weapons (Ranged)
 - More Items (Armor, Dual Blades)
 
+- Enemy line of sight
 - Typed pass
 
 -------------------------

@@ -80,3 +80,4 @@ func activate_spell(spellItem):
 	equippedSpells.erase(spellItem)
 	character.inventory.remove_item(spellItem)
 	emit_signal("OnSpellActivated", spellItem)
+	character.on_spell_activated(spellItem)

@@ -6,6 +6,10 @@ signal OnPlayerCreated(newPlayer)
 signal OnStartTurn()
 signal OnEndTurn()
 signal OnEnemyMovedAdjacentToPlayer(enemy)
+signal OnRoomCombatStarted(room)
+signal OnRoomCombatEnded(room)
+signal OnPlayerTurnCompleted()
+signal OnAllEnemyTurnsCompleted()
 
 var rooms:Array = []
 const intersectionBuffer:int = 0
@@ -38,7 +42,10 @@ func create(recreatePlayer:bool) -> void:
 	_init_player(recreatePlayer)
 	_init_enemies()
 		
-	_on_turn_taken(0, 0)
+	player.connect("OnTurnCompleted", self, "_on_player_turn_completed")
+	connect("OnAllEnemyTurnsCompleted", self, "_end_turn")
+	_init_turns()
+	_start_turn()
 
 func _init_rooms():
 	rooms = []
@@ -183,9 +190,12 @@ func _init_path():
 	# find the furthest room
 	var furthestCost:int = 0
 	for room in rooms:
-		if costFromStart[room] > furthestCost:
-			furthestCost = costFromStart[room]
-			furthestRoom = room
+		if costFromStart.has(room):
+			if costFromStart[room] > furthestCost:
+				furthestCost = costFromStart[room]
+				furthestRoom = room
+		else:
+			print("ERROR: room not in CostFromStart")
 	furthestRoom.set_as_end_room()
 	# find path
 	reverse_path.append(furthestRoom)
@@ -335,34 +345,53 @@ func _init_player(recreatePlayer:bool):
 	if recreatePlayer:
 		player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
 		emit_signal("OnPlayerCreated", player)
-		player.connect("OnCharacterMove", self, "_on_turn_taken")
-		player.equipment.connect("OnSpellActivated", self, "_on_player_spell_activated")
 		turnsTaken = turnsTaken - 1
 	else:
 		player.move_to_cell(cell)
 
-func _on_player_spell_activated(item):
-	_on_turn_taken(0, 0)
+# TURN LOGIC
+func _init_turns():
+	player.pre_update()
+	player.cell.room.pre_update_entities()
+	player.update()
+	for room in rooms:
+		room.update_visibility()
+	turnsTaken = 0
+	emit_signal("OnEndTurn")
 
-func _on_turn_taken(x, y):
+func _start_turn():
 	if isDungeonFinished:
 		return
 
 	emit_signal("OnStartTurn")
+
+	# Pre Update
 	player.pre_update()
 	player.cell.room.pre_update_entities()
 
+	# Wait for Player Turn
+
+func _on_player_turn_completed():
 	player.update()
+
+	emit_signal("OnPlayerTurnCompleted")
+
+	# Wait for Enemy Turns
 	player.cell.room.update_entities()
 
+func _end_turn():
 	turnsTaken += 1
-	emit_signal("OnEndTurn")
 
+	# Post Update
+	player.post_update()
+	player.cell.room.post_update_entities()
 	for room in rooms:
 		room.update_visibility()
 
-	player.post_update()
-	player.cell.room.post_update_entities()
+	emit_signal("OnEndTurn")
+
+	if !player.isDead:
+		_start_turn()
 
 func add_to_dungeon_scenes(scene):
 	loadedScenes.append(scene)

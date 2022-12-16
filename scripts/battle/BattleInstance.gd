@@ -22,6 +22,7 @@ export var debugShowAllRooms:bool
 
 signal OnDungeonInitialized()
 signal OnDungeonRecreated()
+signal OnGameOver()
 signal OnToggleInventory()
 signal OnMainMenuOn()
 signal OnMainMenuOff()
@@ -98,6 +99,7 @@ func _toggle_main_menu():
 func _on_game_over():
 	onGameOver = true
 	Dungeon.isDungeonFinished = true
+	emit_signal("OnGameOver")
 
 func _on_dungeon_completed():
 	screenFade.visible = true

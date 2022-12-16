@@ -26,3 +26,11 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPELL_ACTIVATE):
 		parentCharacter.equipment.connect("OnSpellActivated", object, "activate_on_target_or_item")
 
+func on_room_combat_started(room):
+	Dungeon.emit_signal("OnRoomCombatStarted", room)
+
+func on_room_combat_ended(room):
+	Dungeon.emit_signal("OnRoomCombatEnded", room)
+
+func on_all_enemy_turn_completed(room):
+	Dungeon.emit_signal("OnAllEnemyTurnsCompleted")

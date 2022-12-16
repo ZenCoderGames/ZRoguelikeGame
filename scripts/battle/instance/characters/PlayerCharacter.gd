@@ -8,7 +8,7 @@ signal OnPlayerReachedEnd()
 signal OnXPGained()
 signal OnLevelUp()
 
-var levelXpList:Array = [0, 10, 25, 50, 100, 200, 400, 800, 1600]
+var levelXpList:Array = [0, 20, 40, 70, 110, 160, 220, 290, 380]
 var xp:int = 0
 var currentLevel:int = 0
 
@@ -31,6 +31,11 @@ func take_damage(entity, dmg):
 		return
 	
 	.take_damage(entity, dmg)
+
+func move(x, y):
+	.move(x, y)
+
+	on_turn_completed()
 
 func move_to_cell(newCell):
 	.move_to_cell(newCell)
@@ -76,7 +81,6 @@ func _level_up():
 	modify_absolute_stat_value(StatData.STAT_TYPE.STRENGTH, 1)
 	refresh_linked_stat_value(StatData.STAT_TYPE.HEALTH)
 	refresh_linked_stat_value(StatData.STAT_TYPE.DAMAGE)
-	#reset_stat_value(StatData.STAT_TYPE.HEALTH)
 	emit_signal("OnLevelUp")
 	
 	levelUpAnim.visible = true
