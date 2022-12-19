@@ -1,7 +1,7 @@
 class_name StatModifierData
 
 var type:int
-var baseValue:int
+var value:int
 
 func _init(statModDataJS):
 	var statType = statModDataJS["type"]
@@ -10,5 +10,5 @@ func _init(statModDataJS):
 	else:
 		print("ERROR: Invalid Stat Modifier Type - ", statType)
 	
-	if statModDataJS.has("baseValue"):
-		baseValue = statModDataJS["baseValue"]
+	if statModDataJS.has("value"):
+		value = statModDataJS["value"]

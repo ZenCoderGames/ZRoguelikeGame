@@ -41,7 +41,8 @@ font_data = ExtResource( 10 )
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource( 4 )
 timeBetweenMoves = 0.2
-debugSpawnItemInFirstRoom = "SWORD_00"
+debugSpawnEnemyInFirstRoom = "RAT"
+debugSpawnItemInFirstRoom = "HEALTH_UPGRADE_00"
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource( 3 )

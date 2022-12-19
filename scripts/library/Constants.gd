@@ -45,6 +45,7 @@ const INPUT_MOVE_LEFT: String = "move_left"
 const INPUT_MOVE_RIGHT: String = "move_right"
 const INPUT_MOVE_UP: String = "move_up"
 const INPUT_MOVE_DOWN: String = "move_down"
+const INPUT_SKIP_TURN: String = "skip_turn"
 
 const INPUT_CAM_ZOOM_OUT: String = "cam_zoom_out"
 const INPUT_CAM_ZOOM_IN: String = "cam_zoom_in"

@@ -55,6 +55,7 @@ position = Vector2( -5, -6 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 5 )
 animation = "levelUpLoop"
+frame = 2
 playing = true
 
 [node name="LevelUpLabel" type="Label" parent="."]

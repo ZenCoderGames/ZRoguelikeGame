@@ -27,15 +27,15 @@ func get_base_value():
 
 	return baseValue
 
-func modify_value(newValue:float):
+func modify_value(newValue:int):
 	value = clamp(newValue, 0, baseValue)
 	return value
 
-func modify_base_value(newBaseValue:float):
+func modify_base_value(newBaseValue:int):
 	baseValue = newBaseValue
 	return baseValue
 	
-func modify_absolute_value(newValue:float):
+func modify_absolute_value(newValue:int):
 	baseValue = newValue
 	value = newValue
 	return newValue

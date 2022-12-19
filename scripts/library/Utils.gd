@@ -87,7 +87,7 @@ func is_relative_team(char1, char2, relativeTeamType:int):
 
 	return false
 
-func is_adjacent(char1, char2, numTiles:int=1)->bool:
+func is_adjacent(char1, char2, _numTiles:int=1)->bool:
 	var colDiff = abs(char1.cell.col - char2.cell.col)
 	var rowDiff = abs(char1.cell.row - char2.cell.row)
 

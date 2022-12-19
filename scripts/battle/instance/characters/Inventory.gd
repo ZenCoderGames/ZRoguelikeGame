@@ -14,6 +14,9 @@ func add_item(itemToAdd):
 	emit_signal("OnItemAdded", itemToAdd)
 	itemToAdd.init_on_picked_up(character)
 
+	if itemToAdd.is_consumable():
+		consume_item(itemToAdd)
+
 func consume_item(item):
 	item.consume(character)
 	items.erase(item)

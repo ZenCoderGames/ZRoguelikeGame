@@ -157,8 +157,10 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statModifierData.type:
-			stat.modify_base_value(stat.get_base_value() + statModifierData.baseValue)
-			stat.modify_value(stat.get_value() + statModifierData.baseValue)
+			if Dungeon.dataManager.is_complex_stat_data(statModifierData.type):
+				stat.modify_base_value(stat.get_base_value() + statModifierData.value)
+			
+			stat.modify_value(stat.get_value() + statModifierData.value)
 			emit_signal("OnStatChanged", self)
 			return stat.get_value()
 

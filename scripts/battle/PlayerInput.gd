@@ -44,6 +44,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if player.isDead:
 		return
 
+	# skip turn
+	if event.is_action_pressed(Constants.INPUT_SKIP_TURN):
+		player.on_turn_completed()
+		return
+
 	# movement
 	var x:int = 0
 	var y:int = 0

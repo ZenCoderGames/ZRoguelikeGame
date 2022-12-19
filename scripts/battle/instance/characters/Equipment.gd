@@ -33,6 +33,11 @@ func get_stat_bonus_from_equipped_items(statType):
 		for statData in item.data.statDataList:
 			if statData.type == statType:
 				statValue = statValue + statData.value
+			else:
+				if Dungeon.dataManager.is_complex_stat_data(statData.type):
+					var complexStatData:ComplexStatData = Dungeon.dataManager.get_complex_stat_data(statData.type)
+					if complexStatData.linkedStatType == statType:
+						statValue = statValue + statData.value * complexStatData.linkedStatMultiplier
 	
 	return statValue
 
