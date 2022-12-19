@@ -100,10 +100,11 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 		emit_signal("OnCharacterRoomChanged", cell.room)
 	currentRoom = cell.room
 
+	emit_signal("OnCharacterMoveToCell")
+
 	Utils.create_tween_vector2(self, "position", self.position, Vector2(cell.pos.x, cell.pos.y), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 	yield(get_tree().create_timer(0.05), "timeout")
 
-	emit_signal("OnCharacterMoveToCell")
 	if triggerTurnCompleteEvent:
 		on_turn_completed()
 
@@ -196,15 +197,16 @@ func pick_item(itemToAdd):
 func attack(entity):
 	if entity.is_class(self.get_class()):
 		# shove towards
+		var SHOVE_AMOUNT:float = 7
 		var dirn:int = dirn_to_character(entity)
 		if dirn==Constants.DIRN_TYPE.LEFT:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(5, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(SHOVE_AMOUNT, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.RIGHT:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-5, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-SHOVE_AMOUNT, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.DOWN:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -5), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.UP:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 5), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 
 		yield(get_tree().create_timer(0.075), "timeout")
 
@@ -255,7 +257,6 @@ func show_hit(entity, dmg):
 	
 	show_hit_flash()
 	show_damage_text(entity, dmg)
-	#Utils.do_hit_pause()
 
 func show_hit_flash():
 	self.self_modulate = Color.white
@@ -305,6 +306,7 @@ func _create_damage_text_tween(entity):
 		startPos = Vector2(0, 0)
 		endPos = Vector2(0, 10)
 	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	#Utils.create_tween_vector2(damageText, "rect_size", Vector2(20,20), Vector2(40,40), 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 
 func pre_update():
 	successfulDamageThisFrame = 0
