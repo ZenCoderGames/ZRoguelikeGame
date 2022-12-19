@@ -34,3 +34,6 @@ func on_room_combat_ended(room):
 
 func on_all_enemy_turn_completed(room):
 	Dungeon.emit_signal("OnAllEnemyTurnsCompleted")
+
+func on_any_attack(isKillingBlow):
+	Dungeon.emit_signal("OnAnyAttack", isKillingBlow)

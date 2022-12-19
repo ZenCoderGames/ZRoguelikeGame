@@ -7,7 +7,7 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 72, 252, 24, 36 )
+region = Rect2( 72, 180, 24, 36 )
 
 [node name="Serpent" type="Sprite"]
 self_modulate = Color( 0.643137, 0.239216, 0.278431, 1 )

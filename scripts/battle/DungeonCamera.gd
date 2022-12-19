@@ -6,14 +6,29 @@ var player
 
 const ZOOM_ON_COMBAT:float = 0.45
 
-func _init():
-	pass
-	
+onready var noise = OpenSimplexNoise.new()
+var noise_y = 0
+
+export var decay = 0.8  # How quickly the shaking stops [0, 1].
+export var max_offset = Vector2(100, 75)  # Maximum hor/ver shake in pixels.
+export var max_roll = 0.1  # Maximum rotation in radians (use sparingly).
+export (NodePath) var target  # Assign the node this camera will follow.
+
+var trauma = 0.0  # Current shake strength.
+var trauma_power = 2  # Trauma exponent. Use [2, 3].
+
 func _ready():
+	# camera shake
+	randomize()
+	noise.seed = randi()
+	noise.period = 4
+	noise.octaves = 2
+
 	Dungeon.connect("OnPlayerCreated", self, "_register_player")
 	Dungeon.connect("OnRoomCombatStarted", self, "_on_room_combat_started")
 	Dungeon.connect("OnRoomCombatEnded", self, "_on_room_combat_ended")
 	Dungeon.battleInstance.connect("OnGameOver", self, "_on_game_over")
+	Dungeon.connect("OnAnyAttack", self, "_on_any_attack")
 	
 func _register_player(playerRef):
 	player = playerRef
@@ -28,18 +43,42 @@ func _on_room_combat_started(room):
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x-ZOOM_ON_COMBAT, self.zoom.y-ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_room_combat_ended(room):
+	yield(Dungeon.battleInstance.get_tree().create_timer(0.25), "timeout")
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_game_over():
 	yield(Dungeon.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME), "timeout")
-	
+
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
-# DEBUG
+# CAMERA SHAKE
+func _on_any_attack(isKillingBlow):
+	if isKillingBlow:
+		add_trauma(Constants.CAMERA_SHAKE_KILL_TRAUMA)
+	else:
+		add_trauma(Constants.CAMERA_SHAKE_DEFAULT_TRAUMA)
+
+func add_trauma(amount):
+	trauma = min(trauma + amount, 1.0)
+
+func shake():
+	noise_y += 1
+	self.rotation = max_roll * trauma * noise.get_noise_2d(noise.seed, noise_y)
+	self.offset.x = max_offset.x * trauma * noise.get_noise_2d(noise.seed*2, noise_y)
+	self.offset.y = max_offset.y * trauma * noise.get_noise_2d(noise.seed*3, noise_y)
+
 func _process(delta):
+	# DEBUG
 	_zoom_input()
 	_move_input()
 
+	if target:
+		global_position = get_node(target).global_position
+	if trauma>0:
+		trauma = max(trauma - decay * delta, 0)
+		shake()
+
+# DEBUG
 func _zoom_input():
 	var zoom:float = 0
 	

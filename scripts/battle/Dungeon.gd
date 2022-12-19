@@ -10,6 +10,7 @@ signal OnRoomCombatStarted(room)
 signal OnRoomCombatEnded(room)
 signal OnPlayerTurnCompleted()
 signal OnAllEnemyTurnsCompleted()
+signal OnAnyAttack(isKillingBlow)
 
 var rooms:Array = []
 const intersectionBuffer:int = 0

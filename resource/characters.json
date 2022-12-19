@@ -87,7 +87,7 @@
 			{
 				"id": "SKELETON",
 				"displayName": "Skeleton",
-				"path": "entity/characters/Dwarf.tscn",
+				"path": "entity/characters/Skeleton.tscn",
 				"difficulty": 1,
 				"cost": 5,
 				"xp": 10,

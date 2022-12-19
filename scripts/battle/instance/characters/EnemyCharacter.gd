@@ -22,11 +22,11 @@ func update():
 		attackAction.execute()
 	elif moveAction.can_execute():
 		moveAction.execute()
-	
-	on_turn_completed()
+	else:
+		on_turn_completed()
 
-func move_to_cell(newCell):
-	.move_to_cell(newCell)
+func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
+	.move_to_cell(newCell, triggerTurnCompleteEvent)
 
 	if Dungeon.player!=null:
 		if(newCell.is_rowcol_adjacent(Dungeon.player.cell)):

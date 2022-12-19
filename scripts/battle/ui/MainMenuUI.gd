@@ -58,6 +58,8 @@ func on_settings():
 	pass
 
 func _on_game_over():
+	yield(Dungeon.battleInstance.get_tree().create_timer(Constants.SHOW_DEATH_UI_TIME), "timeout")
+	
 	get_node(".").visible = true
 	deathUI.visible = true
 	baseMenuUI.visible = false

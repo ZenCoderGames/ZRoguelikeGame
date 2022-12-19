@@ -32,13 +32,8 @@ func take_damage(entity, dmg):
 	
 	.take_damage(entity, dmg)
 
-func move(x, y):
-	.move(x, y)
-
-	on_turn_completed()
-
-func move_to_cell(newCell):
-	.move_to_cell(newCell)
+func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
+	.move_to_cell(newCell, triggerTurnCompleteEvent)
 
 	check_for_nearby_entities()
 

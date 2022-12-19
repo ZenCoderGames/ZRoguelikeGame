@@ -289,7 +289,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 		if(!cell.has_entity()):
 			currentCell.clear_entity()
 			cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
-			entity.move_to_cell(cell)
+			entity.move_to_cell(cell, true)
 			return true
 		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
 			# Item
@@ -302,7 +302,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 				items.erase(item)
 				currentCell.clear_entity()
 				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
-				entity.move_to_cell(cell)
+				entity.move_to_cell(cell, true)
 				return true
 			# Enemy
 			if entity.is_opposite_team(cell.entityObject):
@@ -315,6 +315,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			entity.move_to_cell(currentCell.connectedCell)
 			currentCell.connectedCell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
 			currentCell.clear_entity()
+			entity.on_turn_completed()
 			return true
 
 	return false

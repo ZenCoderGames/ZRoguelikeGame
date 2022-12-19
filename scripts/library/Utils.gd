@@ -32,6 +32,7 @@ func create_tween_vector2(node, fieldName, startPose, endPose, duration, transTy
 		startPose, endPose, duration,
 		transType, easeType)
 	tween.start()
+	return tween
 
 func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, transType, easeType):
 	var tween = Tween.new()
@@ -51,6 +52,8 @@ func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, 
 		endPose, startPose, duration,
 		transType, easeType)
 	return_tween.start()
+
+	return return_tween
 
 func load_data_from_file(relativePath:String) -> JSON:
 	var data_file = File.new()
@@ -116,3 +119,8 @@ func convert_to_camel_case(string:String):
 
 func random_chance(chance:float):
 	return randf() < chance/100
+
+func freeze_frame(time_scale, duration):
+	Engine.time_scale = time_scale
+	yield(Dungeon.battleInstance.get_tree().create_timer(time_scale * duration), "timeout")
+	Engine.time_scale = 1.0

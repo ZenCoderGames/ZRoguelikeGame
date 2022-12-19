@@ -93,14 +93,19 @@ func move(x, y):
 	if success:
 		emit_signal("OnCharacterMove", x, y)
 
-func move_to_cell(newCell):
+func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 	cell = newCell
-	self.position = Vector2(cell.pos.x, cell.pos.y)
 	if currentRoom != cell.room:
 		prevRoom = currentRoom
 		emit_signal("OnCharacterRoomChanged", cell.room)
 	currentRoom = cell.room
+
+	Utils.create_tween_vector2(self, "position", self.position, Vector2(cell.pos.x, cell.pos.y), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+	yield(get_tree().create_timer(0.05), "timeout")
+
 	emit_signal("OnCharacterMoveToCell")
+	if triggerTurnCompleteEvent:
+		on_turn_completed()
 
 # STATS
 func get_stat_value(statType):
@@ -206,7 +211,17 @@ func attack(entity):
 		emit_signal("OnPreAttack", entity)
 		var damageAmount:int = get_stat_value(StatData.STAT_TYPE.DAMAGE)
 		successfulDamageThisFrame = HitResolutionManager.do_hit(self, entity, damageAmount)
+		
+		# Feels
+		if entity.isDead:
+			Utils.freeze_frame(Constants.HIT_PAUSE_KILL_AMOUNT, Constants.HIT_PAUSE_KILL_DURATION)
+		else:
+			Utils.freeze_frame(Constants.HIT_PAUSE_DEFAULT_AMOUNT, Constants.HIT_PAUSE_DEFAULT_DURATION)
+		CombatEventManager.on_any_attack(entity.isDead)
+
 		emit_signal("OnPostAttack", entity)
+
+	on_turn_completed()
 
 func on_blocked_hit(attacker):
 	show_blocked_text(self)
@@ -217,10 +232,13 @@ func show_damage_from_hit(attacker, dmg):
 func die():
 	isDead = true
 	currentRoom.enemy_died(self)
+	emit_signal("OnDeath")
+
+	yield(get_tree().create_timer(0.1), "timeout")
+
 	if cell.entityObject!=null:
 		cell.entityObject.hide()
 	cell.clear_entity_on_death()
-	emit_signal("OnDeath")
 
 func show_hit(entity, dmg):
 	# shove
@@ -241,7 +259,7 @@ func show_hit(entity, dmg):
 
 func show_hit_flash():
 	self.self_modulate = Color.white
-	yield(get_tree().create_timer(0.2), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
 	self.self_modulate = originalColor
 	
 func show_damage_text(entity, dmg):
@@ -276,17 +294,17 @@ func _create_damage_text_tween(entity):
 	var endPos:Vector2 = Vector2(10,-60)
 	if dirn==Constants.DIRN_TYPE.RIGHT:
 		startPos = Vector2(0, -5)
-		endPos = Vector2(20, -3)
+		endPos = Vector2(10, -3)
 	elif dirn==Constants.DIRN_TYPE.LEFT:
-		startPos = Vector2(-30, 0)
-		endPos = Vector2(-40, 0)
+		startPos = Vector2(-20, 0)
+		endPos = Vector2(-30, 0)
 	elif dirn==Constants.DIRN_TYPE.UP:
-		startPos = Vector2(0, -30)
-		endPos = Vector2(0,-40)
+		startPos = Vector2(0, -20)
+		endPos = Vector2(0,-30)
 	elif dirn==Constants.DIRN_TYPE.DOWN:
 		startPos = Vector2(0, 0)
-		endPos = Vector2(10, 20)
-	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+		endPos = Vector2(0, 10)
+	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 
 func pre_update():
 	successfulDamageThisFrame = 0

@@ -3,12 +3,12 @@
 		{
 			"statType": "VITALITY",
 			"linkedStatType": "HEALTH",
-			"linkedStatMultiplier": 2
+			"linkedStatMultiplier": 1
 		},
 		{
 			"statType": "STRENGTH",
 			"linkedStatType": "DAMAGE",
-			"linkedStatMultiplier": 2
+			"linkedStatMultiplier": 1
 		}
 	]
 }
