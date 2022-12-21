@@ -11,8 +11,8 @@ const Door := preload("res://entity/Door.tscn")
 enum DIRN_TYPE { LEFT, RIGHT, UP, DOWN }
 
 # DUNGEON ROOM
-const STEP_X: int = 26
-const STEP_Y: int = 34
+const STEP_X: int = 36
+const STEP_Y: int = 36
 
 enum CELL_TYPE { NONE, FLOOR, CONNECTOR, EXIT, END }
 enum ENTITY_TYPE { NONE, STATIC, DYNAMIC }

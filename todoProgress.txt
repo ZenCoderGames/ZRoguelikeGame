@@ -60,16 +60,17 @@ Roguelike Dev:
 (D)- Camera on enter/exit combat
 (D)- Better simple death
 (D)- Better simple turn sequencing
+(D)- H to skip turn
 
 - Balancing pass (Constrain item pool, Nerf healing (weapon/items), damage nerf)
 
-- Game Feel (level up, death, better damage number font, camera shake)
+- Bug with costFromStart
+- Rewrite stat/complex stat system into stat and derived stats
 
-- Blocked from moving once combat starts (Option)
+- Game Feel (level up, death, better damage number font)
 
 - Saving and Loading
 
-- Prevent doing damage once you enter space (esp for enemies) ?
 - Enemy leveling ?
 
 - More Extra Ranged Scrolls (Leap, Stun)

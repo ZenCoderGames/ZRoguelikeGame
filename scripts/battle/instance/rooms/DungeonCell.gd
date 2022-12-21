@@ -46,7 +46,7 @@ func is_connection():
 func init_entity(obj:Node, type:int):
 	entityObject = obj
 	set_entity_type(type)
-	floorObject.hide()
+	#floorObject.hide()
 	
 func set_entity_type(newEntityType:int):
 	entityType = newEntityType
@@ -86,7 +86,7 @@ func has_connection():
 func show():
 	floorObject.show()
 	if entityObject!=null:
-		floorObject.hide()
+		#floorObject.hide()
 		entityObject.show()
 
 	# color
@@ -108,7 +108,7 @@ func hide():
 func dim():
 	floorObject.show()
 	if entityObject!=null:
-		floorObject.hide()
+		#floorObject.hide()
 		entityObject.hide()
 		
 	# color
@@ -126,7 +126,7 @@ func dim():
 func showDebug(colorVal):
 	floorObject.show()
 	if entityObject!=null:
-		floorObject.hide()
+		#floorObject.hide()
 		entityObject.show()
 		
 	# color

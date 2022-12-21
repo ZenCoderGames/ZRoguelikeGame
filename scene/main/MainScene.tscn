@@ -41,8 +41,7 @@ font_data = ExtResource( 10 )
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource( 4 )
 timeBetweenMoves = 0.2
-debugSpawnEnemyInFirstRoom = "RAT"
-debugSpawnItemInFirstRoom = "HEALTH_UPGRADE_00"
+debugSpawnEnemyInFirstRoom = "SKELETON"
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource( 3 )
@@ -50,12 +49,12 @@ script = ExtResource( 3 )
 [node name="View" type="Node" parent="Battle"]
 unique_name_in_owner = true
 script = ExtResource( 5 )
-showWallColor = Color( 0.396078, 0.262745, 0.121569, 1 )
-showFloorColor = Color( 0.290196, 0.254902, 0.188235, 1 )
+showWallColor = Color( 0.843137, 0.843137, 0.843137, 1 )
+showFloorColor = Color( 1, 1, 1, 1 )
 showExitColor = Color( 0.0823529, 0.529412, 0.141176, 1 )
 showEndColor = Color( 0.603922, 0.619608, 0.129412, 1 )
-dimWallColor = Color( 0.219608, 0.192157, 0.192157, 1 )
-dimFloorColor = Color( 0.176471, 0.176471, 0.176471, 1 )
+dimWallColor = Color( 0.529412, 0.529412, 0.529412, 1 )
+dimFloorColor = Color( 0.529412, 0.529412, 0.529412, 1 )
 dimExitColor = Color( 0.086441, 0.214844, 0.103336, 1 )
 dimEndColor = Color( 0.241572, 0.246094, 0.104782, 1 )
 playerDamageColor = Color( 0.0823529, 0.666667, 0.760784, 1 )
@@ -71,7 +70,7 @@ debugEndRoomColor = Color( 0.792157, 0.270588, 0.270588, 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 400, 300 )
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 1.2, 1.2 )
 script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
