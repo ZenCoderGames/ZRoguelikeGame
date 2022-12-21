@@ -12,7 +12,7 @@
 					},
 					{
 						"type": "STRENGTH",
-						"value": 5
+						"value": 3
 					}
 				],
 				"moveAction": {
@@ -39,7 +39,7 @@
 					},
 					{
 						"type": "STRENGTH",
-						"value": 3
+						"value": 1
 					}
 				],
 				"moveAction": {

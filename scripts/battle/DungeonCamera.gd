@@ -4,7 +4,7 @@ class_name DungeonCamera
 
 var player
 
-const ZOOM_ON_COMBAT:float = 0.45
+const ZOOM_ON_COMBAT:float = 0.0
 
 onready var noise = OpenSimplexNoise.new()
 var noise_y = 0

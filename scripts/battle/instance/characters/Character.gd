@@ -48,6 +48,7 @@ signal OnStatusEffectAdded(character, statusEffect)
 signal OnStatusEffectRemoved(character, statusEffect)
 
 signal OnTurnCompleted()
+signal OnInitialized()
 
 var originalColor:Color
 
@@ -55,11 +56,12 @@ func init(charDataVal, teamVal):
 	charData = charDataVal
 	displayName = charData.displayName
 	team = teamVal
-	originalColor = self.self_modulate
-	if team==Constants.TEAM.ENEMY:
-		damageText.self_modulate = Dungeon.battleInstance.view.playerDamageColor
-	else:
+	if team == Constants.TEAM.PLAYER:
+		originalColor = Dungeon.battleInstance.view.playerDamageColor
 		damageText.self_modulate = Dungeon.battleInstance.view.enemyDamageColor
+	elif team == Constants.TEAM.ENEMY:
+		originalColor = Dungeon.battleInstance.view.enemyDamageColor
+		damageText.self_modulate = Dungeon.battleInstance.view.playerDamageColor
 
 	# Stats
 	for statData in charData.statDataList:
@@ -80,6 +82,8 @@ func init(charDataVal, teamVal):
 
 	inventory = Inventory.new(self)
 	equipment = Equipment.new(self)
+
+	emit_signal("OnInitialized")
 
 # MOVEMENT
 func move(x, y):
@@ -258,7 +262,7 @@ func show_hit(entity, dmg):
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 	
 	show_hit_flash()
-	show_damage_text(entity, dmg)
+	#show_damage_text(entity, dmg)
 
 func show_hit_flash():
 	self.self_modulate = Color.white

@@ -88,10 +88,11 @@ func _on_entity_nearby(entity):
 		return
 		
 	if entity is Character:
-		var newCharUI = CharacterUI.instance()
-		infoPanel.add_child(newCharUI)
-		infoPanelObjects.append(newCharUI)
-		newCharUI.init(entity)
+		pass
+		#var newCharUI = CharacterUI.instance()
+		#infoPanel.add_child(newCharUI)
+		#infoPanelObjects.append(newCharUI)
+		#newCharUI.init(entity)
 	elif entity is Item:
 		var newItemUI = ItemUI.instance()
 		infoPanel.add_child(newItemUI)

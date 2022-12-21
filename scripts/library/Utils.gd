@@ -34,7 +34,10 @@ func create_tween_vector2(node, fieldName, startPose, endPose, duration, transTy
 	tween.start()
 	return tween
 
-func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, transType, easeType):
+func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, transType, easeType, delayDuration:float=-1):
+	if delayDuration==-1:
+		delayDuration = duration
+
 	var tween = Tween.new()
 	add_child(tween)
 	tween.interpolate_property(
