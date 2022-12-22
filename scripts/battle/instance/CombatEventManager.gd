@@ -37,3 +37,9 @@ func on_all_enemy_turn_completed(room):
 
 func on_any_attack(isKillingBlow):
 	Dungeon.emit_signal("OnAnyAttack", isKillingBlow)
+
+func on_show_info(title:String, content:String):
+	Dungeon.battleInstance.emit_signal("OnShowInfo", title, content)
+
+func on_hide_info():
+	Dungeon.battleInstance.emit_signal("OnHideInfo")

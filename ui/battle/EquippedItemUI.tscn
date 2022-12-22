@@ -12,11 +12,11 @@ custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Bg" type="ColorRect" parent="."]
-self_modulate = Color( 0.164706, 0.615686, 0.72549, 1 )
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 184.0
 margin_bottom = 22.0
+mouse_filter = 2
 color = Color( 0.203922, 0.156863, 0.156863, 1 )
 
 [node name="DescLabel" type="Label" parent="."]
@@ -27,4 +27,6 @@ margin_bottom = 22.0
 theme = ExtResource( 1 )
 text = "Basic Sword"
 align = 1
-autowrap = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_Items_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Items_mouse_exited"]

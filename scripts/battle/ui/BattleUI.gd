@@ -19,14 +19,23 @@ const ItemUI := preload("res://ui/battle/ItemUI.tscn")
 # inventory UI
 const InventoryUI := preload("res://ui/battle/InventoryUI.tscn")
 var inventoryUI:InventoryUI = null
+# info UI
+const InfoUI := preload("res://ui/battle/InfoUI.tscn")
+var infoUI:InfoUI = null
 
 func _ready():
 	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
 	Dungeon.battleInstance.connect("OnToggleInventory", self, "_on_toggle_inventory")
+	Dungeon.battleInstance.connect("OnShowInfo", self, "_on_show_info")
+	Dungeon.battleInstance.connect("OnHideInfo", self, "_on_hide_info")
 
 	inventoryUI = InventoryUI.instance()
 	self.add_child(inventoryUI)
+	
+	infoUI = InfoUI.instance()
+	self.add_child(infoUI)
+	infoUI.hide()
 	
 func _on_dungeon_init():
 	_shared_init()
@@ -143,3 +152,10 @@ func _clean_up():
 
 	isInventoryOpen = false
 	inventoryUI.clean_up()
+
+# INFO UI
+func _on_show_info(title:String, content:String):
+	infoUI.showUI(title, content)
+	
+func _on_hide_info():
+	infoUI.hideUI()

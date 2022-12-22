@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resource/fonts/montreal/Montreal-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/battle/ui/SpellItemUI.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 14
@@ -20,3 +21,7 @@ custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Lightning Bolt"
+script = ExtResource( 2 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

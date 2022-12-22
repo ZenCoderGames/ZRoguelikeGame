@@ -61,6 +61,11 @@ Roguelike Dev:
 (D)- Better simple death
 (D)- Better simple turn sequencing
 (D)- H to skip turn
+(D)- New UI on characters
+(D)- Fix bug with items not showing stat updates immediately
+(D)- Remove deprecated UI (Character UI, Damage Numbers)
+- Click on enemy to see properties
+- Better doors, death, exit sprites
 
 - Balancing pass (Constrain item pool, Nerf healing (weapon/items), damage nerf)
 

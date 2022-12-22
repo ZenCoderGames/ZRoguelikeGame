@@ -85,6 +85,9 @@ func init(charDataVal, teamVal):
 
 	emit_signal("OnInitialized")
 
+	equipment.connect("OnItemEquipped", self, "_on_item_equipped")
+	equipment.connect("OnItemUnEquipped", self, "_on_item_unequipped")
+
 # MOVEMENT
 func move(x, y):
 	if x==0 and y==0:
@@ -140,7 +143,7 @@ func modify_absolute_stat_value(statType, modifierValue):
 	for stat in stats:
 		if stat.type == statType:
 			stat.modify_absolute_value(stat.get_value() + modifierValue)
-			emit_signal("OnStatChanged", self)
+			on_stats_changed()
 			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statType)
@@ -151,7 +154,7 @@ func modify_stat_value(statType, modifierValue):
 	for stat in stats:
 		if stat.type == statType:
 			stat.modify_value(stat.get_value() + modifierValue)
-			emit_signal("OnStatChanged", self)
+			on_stats_changed()
 			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statType)
@@ -165,7 +168,7 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 				stat.modify_base_value(stat.get_base_value() + statModifierData.value)
 			
 			stat.modify_value(stat.get_value() + statModifierData.value)
-			emit_signal("OnStatChanged", self)
+			on_stats_changed()
 			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statModifierData.type)
@@ -176,7 +179,7 @@ func refresh_linked_stat_value(statType):
 	for stat in stats:
 		if stat.type == statType:
 			stat.update_from_modified_linked_stat()
-			emit_signal("OnStatChanged", self)
+			on_stats_changed()
 			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statType)
@@ -187,17 +190,26 @@ func reset_stat_value(statType):
 	for stat in stats:
 		if stat.type == statType:
 			stat.reset_value()
-			emit_signal("OnStatChanged", self)
+			on_stats_changed()
 			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statType)
 	return null
+
+func on_stats_changed():
+	emit_signal("OnStatChanged", self)
 
 # ITEMS
 
 # For testing when player goes over, they get the item
 func pick_item(itemToAdd):
 	inventory.add_item(itemToAdd)
+
+func _on_item_equipped(item):
+	on_stats_changed()
+
+func _on_item_unequipped(item):
+	on_stats_changed()
 
 # COMBAT
 func attack(entity):
@@ -354,22 +366,26 @@ func add_status_effect(statusEffectData:StatusEffectData):
 	var statusEffect = StatusEffect.new(self, statusEffectData)
 	statusEffectList.append(statusEffect)
 	emit_signal("OnStatusEffectAdded", self, statusEffect)
+	on_stats_changed()
 	return statusEffect
 
 func remove_status_effect(statusEffect):
 	statusEffectList.erase(statusEffect)
 	emit_signal("OnStatusEffectRemoved", self, statusEffect)
+	on_stats_changed()
 
 # PASSIVES
 func add_passive(passiveData:PassiveData):
 	var passive:Passive = Passive.new(self, passiveData)
 	passiveList.append(passive)
 	emit_signal("OnPassiveAdded", self, passive)
+	on_stats_changed()
 	return passive
 
 func remove_passive(passive:Passive):
 	passiveList.erase(passive)
 	emit_signal("OnPassiveRemoved", self, passive)
+	on_stats_changed()
 
 # TURNS
 func on_turn_completed():

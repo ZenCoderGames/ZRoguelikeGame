@@ -3,8 +3,8 @@
 		{
 			"id": "SWORD_00",
 			"name": "Basic Sword",
-			"description": "Just a simple sword\n(+2 damage)",
-			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's damage by +2",
+			"description": "(+1 Strength)",
+			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's Strength by 1",
 			"path": "entity/items/gear/Gear_Tier1.tscn",
 			"type": "GEAR",
 			"slot": "WEAPON",

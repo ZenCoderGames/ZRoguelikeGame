@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/battle/ui/CharacterUI.gd" type="Script" id=2]
@@ -16,17 +16,10 @@ border_color = Color( 0.239216, 0.533333, 0.635294, 1 )
 bg_color = Color( 0.611765, 0.533333, 0.121569, 1 )
 border_color = Color( 0.933333, 0.933333, 0.0862745, 1 )
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.145098, 0.376471, 0.137255, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.168627, 0.490196, 0.211765, 1 )
-
 [node name="PanelContainer" type="PanelContainer"]
-margin_right = 222.0
-margin_bottom = 98.0
+self_modulate = Color( 0.337255, 0.882353, 0.756863, 1 )
+margin_right = 212.0
+margin_bottom = 70.0
 script = ExtResource( 2 )
 playerTintColor = Color( 0.0823529, 0.270588, 0.309804, 1 )
 enemyTintColor = Color( 0.309804, 0.0862745, 0.105882, 1 )
@@ -36,49 +29,26 @@ healthBarFlashColor = Color( 0.460938, 0.250275, 0.250275, 1 )
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 215.0
-margin_bottom = 91.0
+margin_right = 205.0
+margin_bottom = 63.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Base" type="VBoxContainer" parent="HSplitContainer"]
-margin_right = 208.0
-margin_bottom = 84.0
+margin_right = 186.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Name" type="PanelContainer" parent="HSplitContainer/Base"]
-self_modulate = Color( 0.929688, 0.809107, 0.0217896, 1 )
-margin_right = 208.0
-margin_bottom = 24.0
-custom_styles/panel = ExtResource( 3 )
-
-[node name="Bg" type="ColorRect" parent="HSplitContainer/Base/Name"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 206.0
-margin_bottom = 22.0
-color = Color( 0.156863, 0.14902, 0.14902, 1 )
-
-[node name="NameLabel" type="Label" parent="HSplitContainer/Base/Name"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 206.0
-margin_bottom = 22.0
-theme = ExtResource( 1 )
-text = "Enemy (Lvl 1)"
-align = 1
-
 [node name="XP" type="PanelContainer" parent="HSplitContainer/Base"]
-margin_top = 28.0
-margin_right = 208.0
-margin_bottom = 56.0
+margin_right = 186.0
+margin_bottom = 28.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="XPBar" type="ProgressBar" parent="HSplitContainer/Base/XP"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 206.0
+margin_right = 184.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 182, 24 )
 custom_styles/fg = SubResource( 2 )
@@ -101,76 +71,47 @@ percent_visible = false
 [node name="XPLabel" type="Label" parent="HSplitContainer/Base/XP"]
 margin_left = 2.0
 margin_top = 4.0
-margin_right = 206.0
+margin_right = 184.0
 margin_bottom = 24.0
 theme = ExtResource( 1 )
 text = "LEVEL UP!"
 align = 1
 valign = 1
 
-[node name="Health" type="PanelContainer" parent="HSplitContainer/Base"]
-visible = false
-margin_top = 60.0
-margin_right = 208.0
-margin_bottom = 88.0
+[node name="Name" type="PanelContainer" parent="HSplitContainer/Base"]
+self_modulate = Color( 0.929688, 0.809107, 0.0217896, 1 )
+margin_top = 32.0
+margin_right = 186.0
+margin_bottom = 56.0
 custom_styles/panel = ExtResource( 3 )
 
-[node name="HealthBar" type="ProgressBar" parent="HSplitContainer/Base/Health"]
+[node name="Bg" type="ColorRect" parent="HSplitContainer/Base/Name"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 206.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 182, 24 )
-custom_styles/fg = SubResource( 1 )
-value = 75.0
-rounded = true
-percent_visible = false
-
-[node name="HealthLabel" type="Label" parent="HSplitContainer/Base/Health"]
-margin_left = 2.0
-margin_top = 4.0
-margin_right = 206.0
-margin_bottom = 24.0
-theme = ExtResource( 1 )
-text = "Health: 30/100"
-align = 1
-valign = 1
-
-[node name="Damage" type="PanelContainer" parent="HSplitContainer/Base"]
-visible = false
-margin_top = 60.0
-margin_right = 208.0
-margin_bottom = 84.0
-custom_styles/panel = ExtResource( 3 )
-
-[node name="Bg" type="ColorRect" parent="HSplitContainer/Base/Damage"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 206.0
+margin_right = 184.0
 margin_bottom = 22.0
-color = Color( 0.290196, 0.164706, 0.164706, 1 )
+color = Color( 0.156863, 0.14902, 0.14902, 1 )
 
-[node name="DescLabel" type="Label" parent="HSplitContainer/Base/Damage"]
+[node name="NameLabel" type="Label" parent="HSplitContainer/Base/Name"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 206.0
+margin_right = 184.0
 margin_bottom = 22.0
 theme = ExtResource( 1 )
-text = "Damage: 2"
+text = "Equipped Items"
 align = 1
 
 [node name="NonBase" type="HSplitContainer" parent="HSplitContainer"]
-visible = false
-margin_left = 146.0
-margin_right = 208.0
-margin_bottom = 84.0
+margin_left = 198.0
+margin_right = 198.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SpellContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
 visible = false
 margin_right = 120.0
-margin_bottom = 84.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -181,7 +122,6 @@ margin_bottom = 24.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Bg" type="ColorRect" parent="HSplitContainer/NonBase/SpellContainer/Name"]
-self_modulate = Color( 0.862745, 0.376471, 1, 1 )
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 118.0
@@ -200,7 +140,7 @@ align = 1
 [node name="EffectContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
 visible = false
 margin_right = 120.0
-margin_bottom = 84.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -211,7 +151,6 @@ margin_bottom = 24.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Bg" type="ColorRect" parent="HSplitContainer/NonBase/EffectContainer/Name"]
-self_modulate = Color( 1, 0.709804, 0.0196078, 1 )
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 118.0

@@ -169,6 +169,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/battle/instance/rooms/DungeonRoom.gd"
 }, {
+"base": "PanelContainer",
+"class": "EffectItemUI",
+"language": "GDScript",
+"path": "res://scripts/battle/ui/EffectItemUI.gd"
+}, {
 "base": "Character",
 "class": "EnemyCharacter",
 "language": "GDScript",
@@ -183,6 +188,11 @@ _global_script_classes=[ {
 "class": "EquippedItemUI",
 "language": "GDScript",
 "path": "res://scripts/battle/ui/EquippedItemUI.gd"
+}, {
+"base": "MarginContainer",
+"class": "InfoUI",
+"language": "GDScript",
+"path": "res://scripts/battle/ui/InfoUI.gd"
 }, {
 "base": "Reference",
 "class": "Inventory",
@@ -238,6 +248,11 @@ _global_script_classes=[ {
 "class": "SpellData",
 "language": "GDScript",
 "path": "res://scripts/battle/data/spells/SpellData.gd"
+}, {
+"base": "Button",
+"class": "SpellItemUI",
+"language": "GDScript",
+"path": "res://scripts/battle/ui/SpellItemUI.gd"
 }, {
 "base": "Reference",
 "class": "Stat",
@@ -302,9 +317,11 @@ _global_script_class_icons={
 "DungeonData": "",
 "DungeonDataManager": "",
 "DungeonRoom": "",
+"EffectItemUI": "",
 "EnemyCharacter": "",
 "Equipment": "",
 "EquippedItemUI": "",
+"InfoUI": "",
 "Inventory": "",
 "InventoryUI": "",
 "Item": "",
@@ -316,6 +333,7 @@ _global_script_class_icons={
 "PlayerCharacter": "",
 "Spell": "",
 "SpellData": "",
+"SpellItemUI": "",
 "Stat": "",
 "StatData": "",
 "StatModifier": "",

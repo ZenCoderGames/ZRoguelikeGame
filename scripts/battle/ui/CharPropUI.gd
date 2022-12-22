@@ -47,3 +47,9 @@ func animate_panel(panel, label, newVal):
 	Utils.create_return_tween_vector2(panel, "scale", startScale, endScale, 0.15, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR, 0.5)
 	yield(get_tree().create_timer(0.1), "timeout")
 	label.text = str(newVal)
+
+func _on_Area2D_mouse_entered():
+	print("enter")
+	
+func _on_Area2D_mouse_exited():
+	print("exit")

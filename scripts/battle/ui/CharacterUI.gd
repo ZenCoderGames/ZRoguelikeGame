@@ -10,9 +10,6 @@ onready var xpUI:PanelContainer = get_node("HSplitContainer/Base/XP")
 onready var xpBar:ProgressBar = get_node("HSplitContainer/Base/XP/XPBar")
 onready var levelUpBar:ProgressBar = get_node("HSplitContainer/Base/XP/LevelUpBar")
 onready var xpLabel:Label = get_node("HSplitContainer/Base/XP/XPLabel")
-onready var healthBar:ProgressBar = get_node("HSplitContainer/Base/Health/HealthBar")
-onready var healthLabel:Label = get_node("HSplitContainer/Base/Health/HealthLabel")
-onready var descLabel:Label = get_node("HSplitContainer/Base/Damage/DescLabel")
 const EquippedItemUI := preload("res://ui/battle/EquippedItemUI.tscn")
 
 onready var nonBaseContainer:HSplitContainer = get_node("HSplitContainer/NonBase")
@@ -40,13 +37,9 @@ var isPlayer:bool
 
 var xpTween:Tween = null
 
-func _ready():
-	originalHealthBarColor = healthBar.self_modulate
-
 func init(entityObj):
 	character = entityObj as Character
-	nameLabel.text = character.displayName
-	descLabel.text = str("Damage: ", character.get_damage())
+	#nameLabel.text = character.displayName
 	character.connect("OnStatChanged", self, "_on_stat_changed")
 	character.connect("OnPassiveAdded", self, "on_passive_added")
 	character.connect("OnPassiveRemoved", self, "on_passive_removed")
@@ -68,26 +61,14 @@ func init(entityObj):
 		nameBg.color = enemyTintColor
 		xpUI.visible = false
 	_update_base_ui()
-
-func _on_stat_changed(characterRef):
-	baseContainer.self_modulate = baseContainerFlashColor
-	healthBar.self_modulate = healthBarFlashColor
-	if get_tree()!=null:
-		yield(get_tree().create_timer(0.075), "timeout")
-	_update_base_ui()
-	healthBar.self_modulate = originalHealthBarColor
-	baseContainer.self_modulate = Color.white
 	
 func _update_base_ui():
 	if inLevelUpSequence:
 		return
-	healthLabel.text = str("Health: ", character.get_health(), "/", character.get_max_health())
-	var pctHealth:float = float(character.get_health())/float(character.get_max_health())
-	healthBar.value = pctHealth * 100
-	descLabel.text = str("Damage: ", character.get_damage())
+
 	if isPlayer:
 		var playerChar:PlayerCharacter = character as PlayerCharacter
-		nameLabel.text = str(character.displayName, " (Lvl ", playerChar.get_level()+1, ")")
+		#nameLabel.text = str(character.displayName, " (Lvl ", playerChar.get_level()+1, ")")
 		var xpToLevelUp:float = float(playerChar.get_xp_to_level_xp())
 		if playerChar.is_at_max_level():
 			xpLabel.text = "Max Level"
@@ -118,19 +99,17 @@ func _on_item_equipped(item):
 	listContainer.add_child(newItemUI)
 	newItemUI.init(item)
 	equippedItems[item] = newItemUI
-	_on_stat_changed(character)
 
 func _on_item_unequipped(item):
 	if equippedItems.has(item):
 		listContainer.remove_child(equippedItems[item])
 		equippedItems.erase(item)
-	_on_stat_changed(character)
 
 # SPELLS
 func _on_spell_equipped(spellItem):
-	var newSpellUI = SpellButtonUI.instance()
+	var newSpellUI:SpellItemUI = SpellButtonUI.instance()
 	spellContainer.add_child(newSpellUI)
-	newSpellUI.text = spellItem.get_display_name()
+	newSpellUI.init(spellItem)
 	equippedSpells[spellItem] = newSpellUI
 
 	newSpellUI.connect("pressed", self, "_on_equip_spell_selected", [spellItem])
@@ -157,9 +136,9 @@ func _on_spell_activated(spellItem):
 
 # EFFECTS
 func on_passive_added(character, passive):
-	var newEffectUI = EffectItemUI.instance()
+	var newEffectUI:EffectItemUI = EffectItemUI.instance()
 	effectContainer.add_child(newEffectUI)
-	newEffectUI.get_child(0).text = passive.data.get_display_name()
+	newEffectUI.init(passive.data)
 	equippedEffects[passive] = newEffectUI
 
 	effectContainer.visible = true
@@ -178,7 +157,7 @@ func on_passive_removed(character, passive):
 func on_status_effect_added(character, statusEffect):
 	var newEffectUI = EffectItemUI.instance()
 	effectContainer.add_child(newEffectUI)
-	newEffectUI.get_node("NameLabel").text = statusEffect.data.get_display_name()
+	newEffectUI.init(statusEffect.data)
 	equippedEffects[statusEffect] = newEffectUI
 
 	effectContainer.visible = true

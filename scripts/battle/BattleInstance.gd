@@ -24,6 +24,8 @@ signal OnDungeonInitialized()
 signal OnDungeonRecreated()
 signal OnGameOver()
 signal OnToggleInventory()
+signal OnShowInfo(title, content)
+signal OnHideInfo()
 signal OnMainMenuOn()
 signal OnMainMenuOff()
 
