@@ -42,7 +42,7 @@ font_data = ExtResource( 10 )
 script = ExtResource( 4 )
 timeBetweenMoves = 0.2
 debugSpawnEnemyInFirstRoom = "SKELETON"
-debugSpawnItemInFirstRoom = "SPELL_LIGHTNING_BOLT"
+debugSpawnItemInFirstRoom = "PRISMATIC_SHIELD"
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource( 3 )
@@ -78,9 +78,11 @@ script = ExtResource( 1 )
 script = SubResource( 1 )
 
 [node name="BattleUI" parent="CanvasLayer" instance=ExtResource( 2 )]
+mouse_filter = 2
 
 [node name="MainMenuUI" parent="CanvasLayer" instance=ExtResource( 8 )]
 unique_name_in_owner = true
+mouse_filter = 2
 
 [node name="ScreenFade" type="Panel" parent="CanvasLayer"]
 unique_name_in_owner = true

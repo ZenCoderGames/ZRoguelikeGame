@@ -64,7 +64,10 @@ Roguelike Dev:
 (D)- New UI on characters
 (D)- Fix bug with items not showing stat updates immediately
 (D)- Remove deprecated UI (Character UI, Damage Numbers)
-- Click on enemy to see properties
+(D)- Click on enemy to see properties
+
+- Class Properties: Knight (fills bar every attack, Can activate to get barrier)
+
 - Better doors, death, exit sprites
 
 - Balancing pass (Constrain item pool, Nerf healing (weapon/items), damage nerf)

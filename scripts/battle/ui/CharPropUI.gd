@@ -48,8 +48,8 @@ func animate_panel(panel, label, newVal):
 	yield(get_tree().create_timer(0.1), "timeout")
 	label.text = str(newVal)
 
-func _on_Area2D_mouse_entered():
-	print("enter")
-	
-func _on_Area2D_mouse_exited():
-	print("exit")
+func on_mouse_entered():
+	CombatEventManager.on_show_info(parentCharacter.charData.get_display_name(), parentCharacter.charData.get_description())
+
+func on_mouse_exited():
+	CombatEventManager.on_hide_info()

@@ -2,6 +2,7 @@ class_name CharacterData
 
 var id:String
 var displayName:String
+var description:String
 var path:String
 var difficulty:int
 var cost:int
@@ -14,6 +15,7 @@ var disable:bool
 func _init(dataJS):
 	id = dataJS["id"]
 	displayName = dataJS["displayName"]
+	description = Utils.get_data_from_json(dataJS, "description", "")
 	path = dataJS["path"]
 	difficulty = Utils.get_data_from_json(dataJS, "difficulty", 1)
 	cost =  Utils.get_data_from_json(dataJS, "cost", 0)
@@ -29,3 +31,8 @@ func _init(dataJS):
 	attackAction = ActionDataTypes.create(dataJS["attackAction"])
 	disable =  Utils.get_data_from_json(dataJS, "disable", false)
 
+func get_display_name():
+	return displayName
+
+func get_description():
+	return description

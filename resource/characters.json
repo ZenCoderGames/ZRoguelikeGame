@@ -3,7 +3,8 @@
 		"heroes": [
 			{
 				"id": "KNIGHT",
-				"displayName": "You",
+				"displayName": "You (Knight)",
+				"description": "Knights gain a barrier every 5th attack. Refreshes at the start of each combat.",
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
@@ -87,6 +88,7 @@
 			{
 				"id": "SKELETON",
 				"displayName": "Skeleton",
+				"description": "No special properties",
 				"path": "entity/characters/Skeleton.tscn",
 				"difficulty": 1,
 				"cost": 5,
@@ -118,6 +120,7 @@
 				"#disable": true,
 				"id": "GIANT",
 				"displayName": "Giant",
+				"description": "This creature will heal every turn",
 				"path": "entity/characters/Giant.tscn",
 				"difficulty": 2,
 				"cost": 10,
@@ -149,6 +152,7 @@
 				"#disable": true,
 				"id": "RAT",
 				"displayName": "Rat",
+				"description": "No special properties",
 				"path": "entity/characters/Rat.tscn",
 				"difficulty": 1,
 				"cost": 2,
@@ -180,6 +184,7 @@
 				"#disable": true,
 				"id": "SERPENT",
 				"displayName": "Serpent",
+				"description": "These venomous fiends deal poison damage on hit",
 				"path": "entity/characters/Serpent.tscn",
 				"difficulty": 2,
 				"cost": 5,
@@ -211,6 +216,7 @@
 				"#disable": true,
 				"id": "AUTOMATON",
 				"displayName": "Automaton",
+				"description": "This creature is immune to elemental or status effects",
 				"path": "entity/characters/Automaton.tscn",
 				"difficulty": 3,
 				"cost": 7,
@@ -242,6 +248,7 @@
 				"#disable": true,
 				"id": "DRAGON",
 				"displayName": "Dragon",
+				"description": "The dragon will breathe fire on its victims",
 				"path": "entity/characters/Dragon.tscn",
 				"difficulty": 4,
 				"cost": 10,

@@ -3,7 +3,6 @@
 [ext_resource path="res://resource/FiraCode-Regular.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=2]
-size = 32
 outline_size = 2
 outline_color = Color( 0.00784314, 0.00392157, 0.00392157, 1 )
 font_data = ExtResource( 1 )
@@ -18,3 +17,4 @@ margin_bottom = -5.0
 custom_fonts/font = SubResource( 2 )
 text = "10"
 align = 1
+valign = 1

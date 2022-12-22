@@ -54,7 +54,7 @@ func init(entityObj):
 		nameBg.color = playerTintColor
 		isPlayer = true
 		xpUI.visible = true
-		var playerChar:PlayerCharacter = character as PlayerCharacter
+		var playerChar = character
 		playerChar.connect("OnXPGained", self, "_update_base_ui")
 		playerChar.connect("OnLevelUp", self, "_show_level_up")
 	elif character.team == Constants.TEAM.ENEMY:
@@ -67,7 +67,7 @@ func _update_base_ui():
 		return
 
 	if isPlayer:
-		var playerChar:PlayerCharacter = character as PlayerCharacter
+		var playerChar = character
 		#nameLabel.text = str(character.displayName, " (Lvl ", playerChar.get_level()+1, ")")
 		var xpToLevelUp:float = float(playerChar.get_xp_to_level_xp())
 		if playerChar.is_at_max_level():
