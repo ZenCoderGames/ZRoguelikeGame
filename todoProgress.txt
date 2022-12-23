@@ -69,13 +69,16 @@ Roguelike Dev:
 - Class Properties: Knight (fills bar every attack, Can activate to get barrier)
 
 - Better doors, death, exit sprites
+- Figure out Leveling again
 
 - Balancing pass (Constrain item pool, Nerf healing (weapon/items), damage nerf)
 
 - Bug with costFromStart
 - Rewrite stat/complex stat system into stat and derived stats
 
-- Game Feel (level up, death, better damage number font)
+- Get rid of Move/Attack Actions in character data
+
+- Game Feel (level up, death)
 
 - Saving and Loading
 

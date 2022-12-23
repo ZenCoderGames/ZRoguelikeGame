@@ -15,6 +15,16 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/instance/actions/Action.gd"
 }, {
 "base": "Action",
+"class": "ActionApplyStatusEffect",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/actions/ActionApplyStatusEffect.gd"
+}, {
+"base": "ActionData",
+"class": "ActionApplyStatusEffectData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionApplyStatusEffectData.gd"
+}, {
+"base": "Action",
 "class": "ActionAttack",
 "language": "GDScript",
 "path": "res://scripts/battle/instance/actions/ActionAttack.gd"
@@ -239,6 +249,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/battle/instance/characters/PlayerCharacter.gd"
 }, {
+"base": "Control",
+"class": "PlayerSpecialAbilityUI",
+"language": "GDScript",
+"path": "res://scripts/battle/ui/PlayerSpecialAbilityUI.gd"
+}, {
+"base": "Reference",
+"class": "Special",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/characters/Special.gd"
+}, {
+"base": "Reference",
+"class": "SpecialData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/specials/SpecialData.gd"
+}, {
 "base": "Reference",
 "class": "Spell",
 "language": "GDScript",
@@ -286,6 +311,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Action": "",
+"ActionApplyStatusEffect": "",
+"ActionApplyStatusEffectData": "",
 "ActionAttack": "",
 "ActionAttackData": "",
 "ActionData": "",
@@ -331,6 +358,9 @@ _global_script_class_icons={
 "Passive": "",
 "PassiveData": "",
 "PlayerCharacter": "",
+"PlayerSpecialAbilityUI": "",
+"Special": "",
+"SpecialData": "",
 "Spell": "",
 "SpellData": "",
 "SpellItemUI": "",

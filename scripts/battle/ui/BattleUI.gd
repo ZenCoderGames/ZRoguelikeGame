@@ -7,9 +7,11 @@ onready var turnLabel:Label = get_node("BattleProgressPanel/TurnContainer/TurnLa
 # details
 onready var detailsUI:Node = get_node("DetailsUI")
 onready var detailsLabel:Label = get_node("DetailsUI/DetailsLabel")
-# player health
+# player xp/equipment
 onready var playerPanel:Node = get_node("PlayerPanel")
 var playerUI:CharacterUI
+# player ability
+onready var playerSpecialUI:Node = get_node("PlayerAbilityPanel")
 # info panel
 onready var infoPanel:Node = get_node("InfoPanel")
 var infoPanelObjects:Array = []
@@ -60,6 +62,7 @@ func _shared_init():
 	
 	playerUI.init(Dungeon.player)
 	levelLabel.text = str("Level: ", Dungeon.battleInstance.get_current_level(), "/", Dungeon.battleInstance.get_max_levels())
+	playerSpecialUI.visible = true
 
 func _on_turn_taken():
 	turnLabel.text = str("Turns: ", Dungeon.turnsTaken)
@@ -152,6 +155,8 @@ func _clean_up():
 
 	isInventoryOpen = false
 	inventoryUI.clean_up()
+
+	playerSpecialUI.visible = false
 
 # INFO UI
 func _on_show_info(title:String, content:String):

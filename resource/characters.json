@@ -27,6 +27,21 @@
 					"params": {
 						"damageMultiplier": 1
 					}
+				},
+				"special": {
+					"id": "KNIGHT_SPECIAL",
+					"description": "4 successful attacks charges up the ability. On use, grants the player a [Barrier]",
+					"conditions": ["ON_POST_HIT"],
+					"count": 4,
+					"timeline": [
+						{
+							"type": "APPLY_STATUS_EFFECT",
+							"params": {
+								"statusEffectId": "BARRIER",
+								"target": "SELF"
+							}
+						}
+					]
 				}
 			},
 			{
@@ -54,6 +69,21 @@
 					"params": {
 						"damageMultiplier": 1
 					}
+				},
+				"special": {
+					"id": "KNIGHT_SPECIAL",
+					"description": "5 successful attacks charges up the ability. On use, grants the player a [Barrier]",
+					"conditions": ["ON_POST_HIT"],
+					"count": 5,
+					"timeline": [
+						{
+							"type": "APPLY_STATUS_EFFECT",
+							"params": {
+								"statusEffectId": "BARRIER",
+								"target": "SELF"
+							}
+						}
+					]
 				}
 			},
 			{
@@ -81,6 +111,21 @@
 					"params": {
 						"damageMultiplier": 1
 					}
+				},
+				"special": {
+					"id": "KNIGHT_SPECIAL",
+					"description": "5 successful attacks charges up the ability. On use, grants the player a [Barrier]",
+					"conditions": ["ON_POST_HIT"],
+					"count": 5,
+					"timeline": [
+						{
+							"type": "APPLY_STATUS_EFFECT",
+							"params": {
+								"statusEffectId": "BARRIER",
+								"target": "SELF"
+							}
+						}
+					]
 				}
 			}
 		],

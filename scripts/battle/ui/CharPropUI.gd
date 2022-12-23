@@ -43,10 +43,13 @@ func update_health(val:int):
 
 func animate_panel(panel, label, newVal):
 	var startScale:Vector2 = Vector2(0.5, 0.5)
-	var endScale:Vector2 = Vector2(0.75, 0.75)
+	var endScale:Vector2 = Vector2(0.8, 0.8)
 	Utils.create_return_tween_vector2(panel, "scale", startScale, endScale, 0.15, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR, 0.5)
-	yield(get_tree().create_timer(0.1), "timeout")
+	yield(get_tree().create_timer(0.15), "timeout")
+	#label.color = Color.green
 	label.text = str(newVal)
+	yield(get_tree().create_timer(0.5), "timeout")
+	#label.color = Color.white
 
 func on_mouse_entered():
 	CombatEventManager.on_show_info(parentCharacter.charData.get_display_name(), parentCharacter.charData.get_description())

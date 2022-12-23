@@ -453,7 +453,10 @@ func _update_next_enemy():
 	else:
 		_prevProcessedEnemy = nextEnemy
 		nextEnemy.connect("OnTurnCompleted", self, "_update_next_enemy")
-		yield(Dungeon.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES), "timeout")
+		if Utils.is_adjacent(nextEnemy, Dungeon.player):
+			yield(Dungeon.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES_ADJACENT_TO_PLAYER), "timeout")
+		else:
+			yield(Dungeon.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES), "timeout")
 		nextEnemy.update()
 
 func post_update_entities():

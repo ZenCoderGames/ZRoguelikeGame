@@ -29,9 +29,9 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 		targetChar.die()
 		sourceChar.lastKilledTarget = targetChar
 		emit_signal("OnKill", sourceChar, targetChar, finalDamage)
-	else:
-		if generateHits:
-			emit_signal("OnTakeHit", sourceChar, targetChar, finalDamage)
-			emit_signal("OnPostHit", sourceChar, targetChar, finalDamage)
+		
+	if generateHits:
+		emit_signal("OnTakeHit", sourceChar, targetChar, finalDamage)
+		emit_signal("OnPostHit", sourceChar, targetChar, finalDamage)
 
 	return finalDamage

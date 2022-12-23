@@ -38,7 +38,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		get_tree().quit()
 
-	if disableInput || blockInputsForTurn:
+	if disableInput:
+		return
+
+	if blockInputsForTurn:
 		return
 	
 	if player.isDead:

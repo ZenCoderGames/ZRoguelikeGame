@@ -11,6 +11,10 @@ signal OnRoomCombatEnded(room)
 signal OnPlayerTurnCompleted()
 signal OnAllEnemyTurnsCompleted()
 signal OnAnyAttack(isKillingBlow)
+signal OnPlayerSpecialAbilityProgress(percent)
+signal OnPlayerSpecialAbilityReady()
+signal OnPlayerSpecialAbilityPressed()
+signal OnPlayerSpecialAbilityReset()
 
 var rooms:Array = []
 const intersectionBuffer:int = 0

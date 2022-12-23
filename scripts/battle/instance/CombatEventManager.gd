@@ -43,3 +43,15 @@ func on_show_info(title:String, content:String):
 
 func on_hide_info():
 	Dungeon.battleInstance.emit_signal("OnHideInfo")
+
+func on_player_special_ability_progress(percent:float):
+	Dungeon.emit_signal("OnPlayerSpecialAbilityProgress", percent)
+
+func on_player_special_ability_ready():
+	Dungeon.emit_signal("OnPlayerSpecialAbilityReady")
+
+func on_player_special_ability_pressed():
+	Dungeon.emit_signal("OnPlayerSpecialAbilityPressed")
+
+func on_player_special_ability_reset():
+	Dungeon.emit_signal("OnPlayerSpecialAbilityReset")

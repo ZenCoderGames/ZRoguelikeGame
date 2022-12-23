@@ -11,6 +11,7 @@ var statDataList:Array
 var moveAction:ActionData
 var attackAction:ActionData
 var disable:bool
+var special:SpecialData
 
 func _init(dataJS):
 	id = dataJS["id"]
@@ -30,6 +31,9 @@ func _init(dataJS):
 	moveAction = ActionDataTypes.create(dataJS["moveAction"])
 	attackAction = ActionDataTypes.create(dataJS["attackAction"])
 	disable =  Utils.get_data_from_json(dataJS, "disable", false)
+
+	if dataJS.has("special"):
+		special = SpecialData.new(dataJS["special"])
 
 func get_display_name():
 	return displayName
