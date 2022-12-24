@@ -65,8 +65,9 @@ Roguelike Dev:
 (D)- Fix bug with items not showing stat updates immediately
 (D)- Remove deprecated UI (Character UI, Damage Numbers)
 (D)- Click on enemy to see properties
-
-- Class Properties: Knight (fills bar every attack, Can activate to get barrier)
+(D)- Class Properties: Knight (fills bar every attack, Can activate to get barrier)
+- Camera fix for when near edges of room
+- Class Property: Barbarian (on hit fill bar, can activate to do X)
 
 - Better doors, death, exit sprites
 - Figure out Leveling again

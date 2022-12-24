@@ -8,11 +8,11 @@
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
-						"type": "VITALITY",
-						"value": 8
+						"type": "HEALTH",
+						"value": 7
 					},
 					{
-						"type": "STRENGTH",
+						"type": "DAMAGE",
 						"value": 3
 					}
 				],
@@ -55,7 +55,7 @@
 					},
 					{
 						"type": "STRENGTH",
-						"value": 1
+						"value": 2
 					}
 				],
 				"moveAction": {
@@ -71,16 +71,22 @@
 					}
 				},
 				"special": {
-					"id": "KNIGHT_SPECIAL",
-					"description": "5 successful attacks charges up the ability. On use, grants the player a [Barrier]",
-					"conditions": ["ON_POST_HIT"],
+					"id": "BARBARIAN_SPECIAL",
+					"description": "5 successful hits taken by the player charges up the ability. On use, Slam the ground and do 5 damage to nearby enemies",
+					"conditions": ["ON_TAKE_HIT"],
 					"count": 5,
 					"timeline": [
 						{
-							"type": "APPLY_STATUS_EFFECT",
+							"type": "FIND_TARGETS",
 							"params": {
-								"statusEffectId": "BARRIER",
-								"target": "SELF"
+								"range": 1,
+								"maxTargets": 4
+							}
+						},
+						{
+							"type": "DO_DAMAGE_TO_TARGETS",
+							"params": {
+								"damage": 5
 							}
 						}
 					]

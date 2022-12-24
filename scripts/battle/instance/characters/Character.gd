@@ -166,12 +166,26 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 		if stat.type == statModifierData.type:
 			if Dungeon.dataManager.is_complex_stat_data(statModifierData.type):
 				stat.modify_base_value(stat.get_base_value() + statModifierData.value)
+				var complexStatData:ComplexStatData = Dungeon.dataManager.get_complex_stat_data(statModifierData.type)
+				refresh_linked_stat_value(complexStatData.linkedStatType)
 			
-			stat.modify_value(stat.get_value() + statModifierData.value)
+			if statModifierData.value!=0:
+				stat.modify_value(stat.get_value() + statModifierData.value)
+			elif statModifierData.baseValue!=0:
+				stat.modify_base_value(stat.get_base_value() + statModifierData.baseValue)
+				stat.modify_value(stat.get_value() + statModifierData.baseValue)
+
 			on_stats_changed()
 			return stat.get_value()
 
 	print("ERROR: Can't find stat type - ", statModifierData.type)
+	return null
+
+func get_stat(statType):
+	for stat in stats:
+		if stat.type == statType:
+			return stat
+
 	return null
 
 func refresh_linked_stat_value(statType):

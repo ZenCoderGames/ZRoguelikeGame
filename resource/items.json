@@ -87,8 +87,8 @@
 			"maxCount": 1,
 			"statModifiers": [
 				{
-					"type": "VITALITY",
-					"value": 2
+					"type": "HEALTH",
+					"baseValue": 2
 				}
 			]
 		},
