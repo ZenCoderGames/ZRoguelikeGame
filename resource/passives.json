@@ -1,7 +1,7 @@
 {
 	"passives": [
 		{
-			"id": "LIFESTEAL_ON_KILL",
+			"id": "LIFESTEAL_ON_KILL_01",
 			"name": "Lifesteal",
 			"description": "Lifesteal On Hit",
 			"conditions": [
@@ -18,7 +18,7 @@
 					"id": "LIFESTEAL",
 					"type": "LIFE_DRAIN",
 					"params": {
-						"flatAmount": 4
+						"flatAmount": 1
 					}
 				}
 			]

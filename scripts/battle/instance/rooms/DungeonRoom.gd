@@ -161,7 +161,7 @@ func spawnItem():
 	# find free cells
 	var freeCells:Array = []
 	for cell in cells:
-		if cell.is_empty():
+		if cell.is_empty() and cell.is_within_room_buffered(2):
 			freeCells.append(cell)
 	
 	# choose random free cell

@@ -37,14 +37,14 @@
 		{
 			"id": "NECRO_STAFF",
 			"name": "Necro Staff",
-			"description": "A staff that leeches health back on kill\n[Regen +4 Health]",
-			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +4 health on kill",
+			"description": "A staff that leeches health back on kill\n[Regen +1 Health]",
+			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +1 health on kill",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "GEAR",
 			"slot": "WEAPON",
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "LIFESTEAL_ON_KILL"
+			"passiveId": "LIFESTEAL_ON_KILL_01"
 		},
 		{
 			"#disable": true,
@@ -79,8 +79,8 @@
 			"#disable": true,
 			"id": "HEALTH_UPGRADE_00",
 			"name": "Blessing of health",
-			"description": "A boost to base health\n(+4 Vitality)",
-			"fullDescription": "A blessing from a goddess to those who seek it.\nIncrease Vitality by +4",
+			"description": "A boost to base health\n(+2 Vitality)",
+			"fullDescription": "A blessing from a goddess to those who seek it.\nIncrease Vitality by +2",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
 			"tier": 2,
@@ -88,7 +88,7 @@
 			"statModifiers": [
 				{
 					"type": "VITALITY",
-					"value": 4
+					"value": 2
 				}
 			]
 		},
@@ -97,7 +97,7 @@
 			"id": "SPELL_LIGHTNING_BOLT",
 			"name": "Lightning Bolt",
 			"description": "A Powerful Lightning Bolt",
-			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you for 25 damage",
+			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you for 10 damage",
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,
@@ -109,7 +109,7 @@
 			"id": "SPELL_GROUND_POUND",
 			"name": "Ground Pound",
 			"description": "Slam the ground and do damage to nearby enemies",
-			"fullDescription": "Slam the ground and do 15 damage to nearby enemies",
+			"fullDescription": "Slam the ground and do 5 damage to nearby enemies",
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,

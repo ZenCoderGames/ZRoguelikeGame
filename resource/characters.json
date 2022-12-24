@@ -141,7 +141,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 10
+						"value": 6
 					},
 					{
 						"type": "DAMAGE",
@@ -173,11 +173,11 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 30
+						"value": 25
 					},
 					{
 						"type": "DAMAGE",
-						"value": 4
+						"value": 3
 					}
 				],
 				"moveAction": {
@@ -205,11 +205,11 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 2
+						"value": 3
 					},
 					{
 						"type": "DAMAGE",
-						"value": 2
+						"value": 1
 					}
 				],
 				"moveAction": {

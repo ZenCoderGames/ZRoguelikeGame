@@ -9,8 +9,8 @@
 			"obstacleChance": 0.75,
 			"minObstacles": 4,
 			"maxObstacles": 6,
-			"itemCountMin": 2,
-			"itemCountMax": 4,
+			"itemCountMin": 3,
+			"itemCountMax": 5,
 			"itemHeighestTier": 2,
 			"enemyDifficultyHighestTier": 1
 		},
