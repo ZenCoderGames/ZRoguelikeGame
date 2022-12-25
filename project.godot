@@ -15,6 +15,16 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/instance/actions/Action.gd"
 }, {
 "base": "Action",
+"class": "ActionAddStatModifier",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/actions/ActionAddStatModifier.gd"
+}, {
+"base": "ActionData",
+"class": "ActionAddStatModifierData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionAddStatModifierData.gd"
+}, {
+"base": "Action",
 "class": "ActionApplyStatusEffect",
 "language": "GDScript",
 "path": "res://scripts/battle/instance/actions/ActionApplyStatusEffect.gd"
@@ -311,6 +321,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Action": "",
+"ActionAddStatModifier": "",
+"ActionAddStatModifierData": "",
 "ActionApplyStatusEffect": "",
 "ActionApplyStatusEffectData": "",
 "ActionAttack": "",

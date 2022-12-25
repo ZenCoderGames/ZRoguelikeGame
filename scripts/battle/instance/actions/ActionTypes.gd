@@ -15,6 +15,8 @@ static func create(actionData:ActionData, parentChar):
 		return ActionLifeDrain.new(actionData, parentChar)
 	elif actionData.type==ActionApplyStatusEffectData.ID:
 		return ActionApplyStatusEffect.new(actionData, parentChar)
+	elif actionData.type==ActionAddStatModifierData.ID:
+		return ActionAddStatModifier.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)
 	return null
