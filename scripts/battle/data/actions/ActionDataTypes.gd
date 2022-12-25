@@ -14,6 +14,8 @@ static func create(dataJS):
 		return ActionSetStatusData.new(dataJS)
 	elif actionType==ActionLifeDrainData.ID:
 		return ActionLifeDrainData.new(dataJS)
+	elif actionType==ActionLifeStealData.ID:
+		return ActionLifeStealData.new(dataJS)
 	elif actionType==ActionApplyStatusEffectData.ID:
 		return ActionApplyStatusEffectData.new(dataJS)
 	elif actionType==ActionAddStatModifierData.ID:

@@ -13,6 +13,9 @@ var playerData:CharacterData
 var heroDataList = []
 var enemyDataList = []
 
+var customEncounterDataDict = {}
+var customEncounterDataList = []
+
 func _init():
 	init_complex_stats()
 	init_status_effects()
@@ -20,6 +23,7 @@ func _init():
 	init_spells()
 	init_items()
 	init_characters()
+	init_encounters()
 
 func on_character_chosen(charData):
 	playerData = charData
@@ -114,4 +118,19 @@ func get_complex_stat_data(statType):
 		return complexStatDataMap[statType]
 
 	print("Invalid Complex Stat Data: ", statType)
+	return null
+
+func init_encounters():
+	var data = Utils.load_data_from_file("resource/encounters.json")
+	var encounterJSList:Array = data["custom"]
+	for encounterJS in encounterJSList:
+		var newCustomEncounter = CustomEncounterData.new(encounterJS)
+		customEncounterDataDict[newCustomEncounter.id] = newCustomEncounter
+		customEncounterDataList.append(newCustomEncounter)
+
+func get_custom_encounter(encounterId):
+	if customEncounterDataDict.has(encounterId):
+		return customEncounterDataDict[encounterId]
+
+	print("Invalid Custom Encounter Data: ", encounterId)
 	return null

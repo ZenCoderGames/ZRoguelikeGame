@@ -37,11 +37,22 @@ func _increment():
 	currentCount = currentCount + 1
 	CombatEventManager.on_player_special_ability_progress((float(currentCount))/(float(data.count)))
 	if currentCount==data.count:
-		_make_available()
+		_try_to_make_available()
 
-func _make_available():
-	isAvailable = true
-	CombatEventManager.on_player_special_ability_ready()
+func _try_to_make_available():
+	if _is_execute_condition_met():
+		isAvailable = true
+		CombatEventManager.on_player_special_ability_ready()
+
+func _is_execute_condition_met():
+	if data.executeCondition == SpecialData.EXECUTE_CONDITION.NONE:
+		return true
+
+	if data.executeCondition == SpecialData.EXECUTE_CONDITION.NEARBY_ENEMY:
+		var adjacentChars:Array = Dungeon.get_adjacent_characters(character, Constants.RELATIVE_TEAM.ENEMY, 1)
+		return adjacentChars.size()>0
+
+	return false
 
 func _activate():
 	for action in timelineActions:

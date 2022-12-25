@@ -21,16 +21,16 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 			emit_signal("OnBlockedHit", sourceChar, targetChar, finalDamage)
 		return 0
 
-	if generateHits:
-		targetChar.show_damage_from_hit(sourceChar, damage)
-
-	var targetHealth:int = targetChar.modify_stat_value(StatData.STAT_TYPE.HEALTH, -damage)
+	var prevHealth:int = targetChar.get_health()
+	var targetHealth:int = targetChar.take_damage(sourceChar, damage)
 	if targetHealth<=0:
 		targetChar.die()
 		sourceChar.lastKilledTarget = targetChar
 		emit_signal("OnKill", sourceChar, targetChar, finalDamage)
 		
 	if generateHits:
+		if targetHealth<prevHealth:
+			targetChar.show_damage_from_hit(sourceChar, damage)
 		emit_signal("OnTakeHit", sourceChar, targetChar, finalDamage)
 		emit_signal("OnPostHit", sourceChar, targetChar, finalDamage)
 

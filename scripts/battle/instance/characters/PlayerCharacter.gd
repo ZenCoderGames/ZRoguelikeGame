@@ -30,11 +30,13 @@ func update():
 
 	cell.room.update_path_map()
 
-func take_damage(entity, dmg):
+func take_damage(damageSource, damage):
 	if Dungeon.battleInstance.setPlayerInvulnerable:
-		return
+		return false
 	
-	.take_damage(entity, dmg)
+	.take_damage(damageSource, damage)
+
+	return get_health()
 
 func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 	.move_to_cell(newCell, triggerTurnCompleteEvent)

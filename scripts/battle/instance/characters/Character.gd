@@ -257,6 +257,10 @@ func attack(entity):
 
 	on_turn_completed()
 
+func take_damage(damageSource, damage):
+	modify_stat_value(StatData.STAT_TYPE.HEALTH, -damage)
+	return get_health()
+
 func on_blocked_hit(attacker):
 	show_blocked_text(self)
 

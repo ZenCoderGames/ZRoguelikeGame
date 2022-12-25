@@ -107,7 +107,13 @@ func _create_wall(r, c):
 	var cell:DungeonCell = get_cell(r, c)
 	var wall:Node = Utils.create_scene(loadedScenes, "wall", Constants.Wall, Constants.room_floor, cell)
 	cell.init_entity(wall, Constants.ENTITY_TYPE.STATIC)
-		
+
+func generate_enemy_custom_encounter(encounterId):
+	var customEncounterData:CustomEncounterData = Dungeon.dataManager.get_custom_encounter(encounterId)
+	for enemySpawnData in customEncounterData.enemySpawnDataList:
+		for i in enemySpawnData.count:
+			generate_enemy(enemySpawnData.type)
+
 func generate_enemies(totalEnemiesToSpawn):
 	for i in totalEnemiesToSpawn:
 		spawn_random_enemy()
@@ -259,6 +265,9 @@ func _show_debug(colorVal):
 
 # DOORS
 func _check_for_doors():
+	if Dungeon.battleInstance.doorsStayOpenDuringBattle:
+		return
+
 	if doors.empty():
 		if enemies.size()>0 and !connections.has(Dungeon.player.cell):	
 			_create_doors()

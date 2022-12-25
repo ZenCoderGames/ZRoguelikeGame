@@ -85,6 +85,16 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/data/actions/ActionLifeDrainData.gd"
 }, {
 "base": "Action",
+"class": "ActionLifeSteal",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/actions/ActionLifeSteal.gd"
+}, {
+"base": "ActionData",
+"class": "ActionLifeStealData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionLifeStealData.gd"
+}, {
+"base": "Action",
 "class": "ActionMove",
 "language": "GDScript",
 "path": "res://scripts/battle/instance/actions/ActionMove.gd"
@@ -164,6 +174,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/battle/data/stats/ComplexStatData.gd"
 }, {
+"base": "Reference",
+"class": "CustomEncounterData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/encounters/CustomEncounterData.gd"
+}, {
 "base": "Camera2D",
 "class": "DungeonCamera",
 "language": "GDScript",
@@ -198,6 +213,11 @@ _global_script_classes=[ {
 "class": "EnemyCharacter",
 "language": "GDScript",
 "path": "res://scripts/battle/instance/characters/EnemyCharacter.gd"
+}, {
+"base": "Reference",
+"class": "EnemySpawnData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/encounters/EnemySpawnData.gd"
 }, {
 "base": "Reference",
 "class": "Equipment",
@@ -335,6 +355,8 @@ _global_script_class_icons={
 "ActionFindTargetsData": "",
 "ActionLifeDrain": "",
 "ActionLifeDrainData": "",
+"ActionLifeSteal": "",
+"ActionLifeStealData": "",
 "ActionMove": "",
 "ActionMoveData": "",
 "ActionSetStatus": "",
@@ -351,6 +373,7 @@ _global_script_class_icons={
 "CharacterStatus": "",
 "CharacterUI": "",
 "ComplexStatData": "",
+"CustomEncounterData": "",
 "DungeonCamera": "",
 "DungeonCell": "",
 "DungeonData": "",
@@ -358,6 +381,7 @@ _global_script_class_icons={
 "DungeonRoom": "",
 "EffectItemUI": "",
 "EnemyCharacter": "",
+"EnemySpawnData": "",
 "Equipment": "",
 "EquippedItemUI": "",
 "InfoUI": "",

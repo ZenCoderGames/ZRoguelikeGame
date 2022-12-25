@@ -15,8 +15,7 @@
 					}
 				},
 				{
-					"id": "LIFESTEAL",
-					"type": "LIFE_DRAIN",
+					"type": "LIFESTEAL",
 					"params": {
 						"flatAmount": 1
 					}

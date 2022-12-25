@@ -10,10 +10,11 @@ onready var victoryUI:PanelContainer = $"%VictoryUI"
 export var timeBetweenMoves:float
 
 # DEBUG
+export var doorsStayOpenDuringBattle:bool
 export var pauseAIMovement:bool
 export var pauseAIAttack:bool
 export var dontSpawnEnemies:bool
-export var debugSpawnEnemyInFirstRoom:String
+export var debugSpawnEnemyEncounter:String
 export var dontSpawnObstacles:bool
 export var dontSpawnItems:bool
 export var debugSpawnItemInFirstRoom:String

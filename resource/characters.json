@@ -3,8 +3,8 @@
 		"heroes": [
 			{
 				"id": "KNIGHT",
-				"displayName": "You (Knight)",
-				"description": "Knights gain a barrier every 5th attack. Refreshes at the start of each combat.",
+				"displayName": "You",
+				"description": "Knight",
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
@@ -33,6 +33,7 @@
 					"description": "4 successful attacks charges up the ability. \nOn use, grants the player a [Barrier]",
 					"conditions": ["ON_POST_HIT"],
 					"count": 4,
+					"executeCondition": "NONE",
 					"timeline": [
 						{
 							"type": "APPLY_STATUS_EFFECT",
@@ -47,6 +48,7 @@
 			{
 				"id": "BARBARIAN",
 				"displayName": "You",
+				"description": "Barbarian",
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
@@ -72,19 +74,22 @@
 				},
 				"special": {
 					"id": "BARBARIAN_SPECIAL",
-					"description": "4 successful hits taken by the player charges up the ability. \nOn use, Slam the ground and do 5 damage to nearby enemies",
+					"description": "4 successful hits taken by the player charges up the ability. \nOn use, Drain 2 life from each nearby enemy",
 					"conditions": ["ON_TAKE_HIT"],
 					"count": 4,
+					"executeCondition": "NEARBY_ENEMY",
 					"timeline": [
 						{
-							"type": "ADD_STAT_MODIFIER",
+							"type": "FIND_TARGETS",
 							"params": {
-								"statModifiers": [
-									{
-										"type": "HEALTH",
-										"value": 2
-									}
-								]
+								"range": 1,
+								"maxTargets": 4
+							}
+						},
+						{
+							"type": "LIFEDRAIN",
+							"params": {
+								"flatAmount": 2
 							}
 						}
 					]
@@ -121,6 +126,7 @@
 					"description": "5 successful attacks charges up the ability. On use, grants the player a [Barrier]",
 					"conditions": ["ON_POST_HIT"],
 					"count": 5,
+					"executeCondition": "NONE",
 					"timeline": [
 						{
 							"type": "APPLY_STATUS_EFFECT",

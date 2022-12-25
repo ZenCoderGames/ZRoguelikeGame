@@ -227,8 +227,8 @@ func _init_enemies():
 	if battleInstance.dontSpawnEnemies:
 		return
 
-	if !battleInstance.debugSpawnEnemyInFirstRoom.empty():
-		startRoom.generate_enemy(battleInstance.debugSpawnEnemyInFirstRoom)
+	if !battleInstance.debugSpawnEnemyEncounter.empty():
+		startRoom.generate_enemy_custom_encounter(battleInstance.debugSpawnEnemyEncounter)
 	
 	var minCostPerRoom:int = 5
 	var extraCostForSingleRoom:int = 5

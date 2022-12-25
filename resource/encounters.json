@@ -1,0 +1,35 @@
+{
+	"custom": [
+		{
+			"id": "TEST_ENC_SINGLE",
+			"enemies": [
+				{
+					"type": "RAT",
+					"count": 1
+				}
+			]
+		},
+		{
+			"id": "TEST_ENC_MULTIPLE",
+			"enemies": [
+				{
+					"type": "RAT",
+					"count": 3
+				}
+			]
+		},
+		{
+			"id": "TEST_ENC_01",
+			"enemies": [
+				{
+					"type": "RAT",
+					"count": 4
+				},
+				{
+					"type": "SKELETON",
+					"count": 1
+				}
+			]
+		}
+	]
+}

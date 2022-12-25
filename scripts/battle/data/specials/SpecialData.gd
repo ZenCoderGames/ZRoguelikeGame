@@ -26,6 +26,9 @@ var count:int
 var itemsGranted:Array
 var timeline:Array
 
+enum EXECUTE_CONDITION { NONE, NEARBY_ENEMY }
+var executeCondition:int
+
 func _init(dataJS):
 	id = dataJS["id"]
 	description = dataJS["description"]
@@ -41,3 +44,5 @@ func _init(dataJS):
 	var actionsJSList = dataJS["timeline"]
 	for actionJS in actionsJSList:
 		timeline.append(ActionDataTypes.create(actionJS))
+
+	executeCondition = EXECUTE_CONDITION.get(dataJS["executeCondition"])

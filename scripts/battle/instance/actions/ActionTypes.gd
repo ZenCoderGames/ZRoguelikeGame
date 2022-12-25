@@ -13,6 +13,8 @@ static func create(actionData:ActionData, parentChar):
 		return ActionSetStatus.new(actionData, parentChar)
 	elif actionData.type==ActionLifeDrainData.ID:
 		return ActionLifeDrain.new(actionData, parentChar)
+	elif actionData.type==ActionLifeStealData.ID:
+		return ActionLifeSteal.new(actionData, parentChar)
 	elif actionData.type==ActionApplyStatusEffectData.ID:
 		return ActionApplyStatusEffect.new(actionData, parentChar)
 	elif actionData.type==ActionAddStatModifierData.ID:
