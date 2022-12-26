@@ -30,15 +30,15 @@
 				},
 				"special": {
 					"id": "KNIGHT_SPECIAL",
-					"description": "4 successful attacks charges up the ability. \nOn use, grants the player a [Barrier]",
+					"description": "3 successful attacks charges up the ability. \nOn use, grants the player [Protection]",
 					"conditions": ["ON_POST_HIT"],
-					"count": 4,
+					"count": 3,
 					"executeCondition": "NONE",
 					"timeline": [
 						{
 							"type": "APPLY_STATUS_EFFECT",
 							"params": {
-								"statusEffectId": "BARRIER",
+								"statusEffectId": "PROTECTION",
 								"target": "SELF"
 							}
 						}

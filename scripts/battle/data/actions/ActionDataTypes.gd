@@ -20,6 +20,8 @@ static func create(dataJS):
 		return ActionApplyStatusEffectData.new(dataJS)
 	elif actionType==ActionAddStatModifierData.ID:
 		return ActionAddStatModifierData.new(dataJS)
+	elif actionType==ActionModifyVisualData.ID:
+		return ActionModifyVisualData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

@@ -309,6 +309,9 @@ func show_hit(entity, dmg):
 func show_hit_flash():
 	self.self_modulate = Color.white
 	yield(get_tree().create_timer(0.1), "timeout")
+	reset_color()
+
+func reset_color():
 	self.self_modulate = originalColor
 	
 func show_damage_text(entity, dmg):

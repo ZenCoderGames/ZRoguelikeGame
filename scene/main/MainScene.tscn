@@ -42,7 +42,6 @@ font_data = ExtResource( 10 )
 script = ExtResource( 4 )
 doorsStayOpenDuringBattle = true
 debugSpawnEnemyEncounter = "TEST_ENC_01"
-setPlayerInvulnerable = true
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource( 3 )
@@ -59,7 +58,7 @@ dimFloorColor = Color( 0.529412, 0.529412, 0.529412, 1 )
 dimExitColor = Color( 0.086441, 0.214844, 0.103336, 1 )
 dimEndColor = Color( 0.241572, 0.246094, 0.104782, 1 )
 playerDamageColor = Color( 0.0823529, 0.666667, 0.760784, 1 )
-playerStealthColor = Color( 0.0823529, 0.666667, 0.760784, 0.321569 )
+playerStealthColor = Color( 0.239216, 0.290196, 0.298039, 0.352941 )
 playerLevelUpColor = Color( 0.803922, 0.882353, 0.0980392, 1 )
 enemyDamageColor = Color( 0.72549, 0.376471, 0.223529, 1 )
 itemGearColor = Color( 0.368627, 0.603922, 0.184314, 1 )

@@ -377,7 +377,7 @@ func update_path_map():
 		cellsToVisit.remove(0)
 
 	# DEBUG DRAW
-	var showDebug:bool = true
+	var showDebug:bool = false
 	if showDebug:
 		for cell in cells:
 			if costFromStart.has(cell):

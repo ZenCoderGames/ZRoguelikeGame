@@ -26,10 +26,35 @@
 			]
 		},
 		{
+			"id": "PROTECTION",
+			"name": "Protection",
+			"description": "Blocks All Instance Of Damage For 1 Turn",
+			"instanceCount": 1,
+			"endConditions": [
+				"ON_END_TURN"
+			],
+			"startTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"invulnerable": 1
+					}
+				}
+			],
+			"endTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"invulnerable": -1
+					}
+				}
+			]
+		},
+		{
 			"id": "STEALTH",
 			"name": "Stealth",
 			"description": "Makes the player undetected for 2 turns. Next hit out of stealth does 2x damage.",
-			"instanceCount": 2,
+			"instanceCount": 3,
 			"endConditions": [
 				"ON_END_TURN"
 			],
@@ -53,6 +78,12 @@
 							}
 						]
 					}
+				},
+				{
+					"type": "MODIFY_VISUAL",
+					"params": {
+						"tintColor": "#5a3d4a4c"
+					}
 				}
 			],
 			"endTimeline": [ 
@@ -71,6 +102,12 @@
 								"value": -2
 							}
 						]
+					}
+				},
+				{
+					"type": "MODIFY_VISUAL",
+					"params": {
+						"resetToOriginalTint": true
 					}
 				}
 			]

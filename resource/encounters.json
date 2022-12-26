@@ -23,7 +23,7 @@
 			"enemies": [
 				{
 					"type": "RAT",
-					"count": 4
+					"count": 6
 				},
 				{
 					"type": "SKELETON",

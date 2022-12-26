@@ -95,6 +95,16 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/data/actions/ActionLifeStealData.gd"
 }, {
 "base": "Action",
+"class": "ActionModifyVisual",
+"language": "GDScript",
+"path": "res://scripts/battle/instance/actions/ActionModifyVisual.gd"
+}, {
+"base": "ActionData",
+"class": "ActionModifyVisualData",
+"language": "GDScript",
+"path": "res://scripts/battle/data/actions/ActionModifyVisualData.gd"
+}, {
+"base": "Action",
 "class": "ActionMove",
 "language": "GDScript",
 "path": "res://scripts/battle/instance/actions/ActionMove.gd"
@@ -362,6 +372,8 @@ _global_script_class_icons={
 "ActionLifeDrainData": "",
 "ActionLifeSteal": "",
 "ActionLifeStealData": "",
+"ActionModifyVisual": "",
+"ActionModifyVisualData": "",
 "ActionMove": "",
 "ActionMoveData": "",
 "ActionSetStatus": "",
