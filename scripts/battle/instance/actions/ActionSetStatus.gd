@@ -24,3 +24,5 @@ func execute():
         character.status.set_immovable(actionSetStatusData.immovable)
     if actionSetStatusData.stunned:
         character.status.set_stunned(actionSetStatusData.stunned)
+    if actionSetStatusData.invisible:
+        character.status.set_invisible(actionSetStatusData.invisible)

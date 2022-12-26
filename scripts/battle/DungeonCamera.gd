@@ -32,12 +32,16 @@ func _ready():
 	
 func _register_player(playerRef):
 	player = playerRef
-	player.connect("OnCharacterRoomChanged", self, "_update_camera")
+	#player.connect("OnCharacterRoomChanged", self, "_update_camera_to_room")
+	player.connect("OnCharacterMoveToCell", self, "_update_camera_to_player")
 	self.position = player.cell.pos
-	_update_camera(player.cell.room)
+	_update_camera_to_player()
 
-func _update_camera(newRoom):
+func _update_camera_to_room(newRoom):
 	Utils.create_tween_vector2(self, "position", self.position, newRoom.get_center(), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+
+func _update_camera_to_player():
+	Utils.create_tween_vector2(self, "position", self.position, player.cell.pos, 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_room_combat_started(room):
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x-ZOOM_ON_COMBAT, self.zoom.y-ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

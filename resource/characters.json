@@ -106,7 +106,7 @@
 					},
 					{
 						"type": "STRENGTH",
-						"value": 7
+						"value": 5
 					}
 				],
 				"moveAction": {
@@ -122,16 +122,16 @@
 					}
 				},
 				"special": {
-					"id": "KNIGHT_SPECIAL",
-					"description": "5 successful attacks charges up the ability. On use, grants the player a [Barrier]",
-					"conditions": ["ON_POST_HIT"],
-					"count": 5,
+					"id": "ASSASSIN_SPECIAL",
+					"description": "2 successful kills charges up the ability. \nOn use, grants the player [Stealth] for 2 turns",
+					"conditions": ["ON_KILL"],
+					"count": 1,
 					"executeCondition": "NONE",
 					"timeline": [
 						{
 							"type": "APPLY_STATUS_EFFECT",
 							"params": {
-								"statusEffectId": "BARRIER",
+								"statusEffectId": "STEALTH",
 								"target": "SELF"
 							}
 						}

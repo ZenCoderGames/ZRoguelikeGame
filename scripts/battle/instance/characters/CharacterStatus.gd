@@ -2,7 +2,7 @@ class_name CharacterStatus
 
 var flags:Dictionary = {}
 
-enum FLAGS { INVULNERABLE, ROOTED, UNTARGETABLE, EVASIVE, UNINTERRUPTIBLE, IMMOVABLE, STUNNED }
+enum FLAGS { INVULNERABLE, ROOTED, UNTARGETABLE, EVASIVE, UNINTERRUPTIBLE, IMMOVABLE, STUNNED, INVISIBLE }
 
 func _init():
     flags[FLAGS.INVULNERABLE] = 0
@@ -12,6 +12,7 @@ func _init():
     flags[FLAGS.UNINTERRUPTIBLE] = 0
     flags[FLAGS.IMMOVABLE] = 0
     flags[FLAGS.STUNNED] = 0
+    flags[FLAGS.INVISIBLE] = 0
 
 func set_invulnerable(val):
     flags[FLAGS.INVULNERABLE] = flags[FLAGS.INVULNERABLE] + val
@@ -54,3 +55,9 @@ func set_stunned(val):
 
 func is_stunned():
     return flags[FLAGS.STUNNED]>0
+
+func set_invisible(val):
+    flags[FLAGS.INVISIBLE] = flags[FLAGS.INVISIBLE] + val
+
+func is_invisible():
+    return flags[FLAGS.INVISIBLE]>0

@@ -234,10 +234,18 @@ func update_visibility():
 	else:	
 		var isPlayerCurrentRoom:bool = Dungeon.player.is_in_room(self)
 		var isPlayerPreviousRoom:bool = Dungeon.player.is_prev_room(self)
-		if isPlayerCurrentRoom:
+		var isAdjancentRoom:bool = false
+		var playerCell:DungeonCell = Dungeon.player.cell
+		if playerCell.is_connection():
+			for connectionCell in connections:
+				if playerCell.connectedCell == connectionCell:
+					isAdjancentRoom = true
+
+		if isPlayerCurrentRoom or isAdjancentRoom:
 			_show()
+			if !wasRoomVisited:
+				_check_for_doors()
 			wasRoomVisited = true
-			_check_for_doors()
 		elif isPlayerPreviousRoom:
 			_dim()
 		elif wasRoomVisited:
@@ -265,6 +273,8 @@ func _show_debug(colorVal):
 
 # DOORS
 func _check_for_doors():
+	CombatEventManager.on_room_combat_started(self)
+
 	if Dungeon.battleInstance.doorsStayOpenDuringBattle:
 		return
 
@@ -279,8 +289,6 @@ func _create_doors():
 		doors.append(doorObj)
 		if connection == topConnection or connection == botConnection:
 			doorObj.rotate(deg2rad(90))
-	
-	CombatEventManager.on_room_combat_started(self)
 
 func _destroy_doors():
 	for connection in connections:
@@ -333,6 +341,9 @@ func enemy_died(entity):
 	enemies.remove(enemies.find(entity))
 	if enemies.empty():
 		_destroy_doors()
+	else:
+		for enemy in enemies:
+			(enemy as EnemyCharacter).on_ally_has_died()
 
 # DJIKSTRA MAP
 var shortestNodeToStart = {}
@@ -352,7 +363,7 @@ func update_path_map():
 	# do path calculations
 	while cellsToVisit.size()>0:
 		var currentCell:DungeonCell = cellsToVisit[0]
-		var neighbors:Array = _find_valid_neighboring_cells(currentCell)
+		var neighbors:Array = _find_valid_neighboring_cells(currentCell, false)
 		for cell in neighbors:
 			if visitedCells.has(cell):
 				continue
@@ -366,7 +377,7 @@ func update_path_map():
 		cellsToVisit.remove(0)
 
 	# DEBUG DRAW
-	var showDebug:bool = false
+	var showDebug:bool = true
 	if showDebug:
 		for cell in cells:
 			if costFromStart.has(cell):
@@ -391,19 +402,32 @@ func _find_valid_neighboring_cells(cell, onlyEmpty:bool = false):
 
 	return validNeighborCells
 
-func find_next_best_path_cell(currentCell):
+func _get_path_cost_for_cell(enemyChar:EnemyCharacter, cell:DungeonCell):
+	if !costFromStart.has(cell):
+		return 100
+	var pathCost:int = costFromStart[cell]
+	if enemyChar.lastVisitedCellsSincePlayerMoved.has(cell):
+		pathCost = pathCost + 3
+	return pathCost
+
+func find_next_best_path_cell(character):
+	var currentCell:DungeonCell = character.cell
 	var neighbors:Array = _find_valid_neighboring_cells(currentCell, true)
 	if neighbors.size()>0:
-		var lowestCost:int = costFromStart[neighbors[0]]
+		var lowestCost:int = _get_path_cost_for_cell(character as EnemyCharacter, neighbors[0])
 		var lowestNeighbor = neighbors[0]
 		for cell in neighbors:
-			if costFromStart[cell] < lowestCost:
-				lowestCost = costFromStart[cell]
+			var pathCostOfCell:int = _get_path_cost_for_cell(character as EnemyCharacter, cell)
+			if pathCostOfCell < lowestCost:
+				lowestCost = _get_path_cost_for_cell(character as EnemyCharacter, cell)
 				lowestNeighbor = cell
 			# if the costs are the same, choose the closest to the player
-			elif costFromStart[cell] == lowestCost and\
+			elif pathCostOfCell == lowestCost and\
 				Dungeon.player.cell.pos.distance_to(cell.pos)<Dungeon.player.cell.pos.distance_to(lowestNeighbor.pos):
 				lowestNeighbor = cell
+
+		#if lowestCost>costFromStart[currentCell]:
+		#	return currentCell
 				
 		return lowestNeighbor
 
@@ -466,7 +490,9 @@ func _update_next_enemy():
 			yield(Dungeon.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES_ADJACENT_TO_PLAYER), "timeout")
 		else:
 			yield(Dungeon.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES), "timeout")
-		nextEnemy.update()
+		
+		if nextEnemy!=null:
+			nextEnemy.update()
 
 func post_update_entities():
 	for enemy in enemies:

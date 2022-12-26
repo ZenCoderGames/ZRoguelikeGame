@@ -4,9 +4,12 @@ class_name EnemyCharacter
 
 var USE_SIMPLE_LOS:bool
 var _hasSeenPlayer:bool
+var lastVisitedCellsSincePlayerMoved:Array
 
 func init(charDataVal, teamVal):
 	.init(charDataVal, teamVal)
+
+	Dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_moved")
 
 func update():
 	.update()
@@ -17,6 +20,10 @@ func update():
 				_hasSeenPlayer = true
 			else:
 				return
+
+	if Dungeon.player.status.is_invisible():
+		on_turn_completed()
+		return
 
 	if attackAction.can_execute():
 		attackAction.execute()
@@ -31,6 +38,15 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 	if Dungeon.player!=null:
 		if(newCell.is_rowcol_adjacent(Dungeon.player.cell)):
 			Dungeon.emit_signal("OnEnemyMovedAdjacentToPlayer", self)
+		
+		if !lastVisitedCellsSincePlayerMoved.has(newCell):
+			lastVisitedCellsSincePlayerMoved.append(newCell)
+
+func on_ally_has_died():
+	lastVisitedCellsSincePlayerMoved.clear()
+
+func _on_player_moved():
+	lastVisitedCellsSincePlayerMoved.clear()
 
 func _is_player_in_los():
 	if _los_check_in_dirn(0, 1) or\

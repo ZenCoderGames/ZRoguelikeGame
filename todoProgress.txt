@@ -66,20 +66,25 @@ Roguelike Dev:
 (D)- Remove deprecated UI (Character UI, Damage Numbers)
 (D)- Click on enemy to see properties
 (D)- Class Properties: Knight (fills bar every attack, Can activate to get barrier)
-- Camera fix for when near edges of room
-- Class Property: Barbarian (on hit fill bar, can activate to do X)
+(D)- Camera fix for when near edges of room
+(D)- Class Specials
+- Bug with enemy pathing
+
+- Better Yield
+
+- Game Feel (death)
 
 - Better doors, death, exit sprites
 - Figure out Leveling again
 
-- Balancing pass (Constrain item pool, Nerf healing (weapon/items), damage nerf)
+- Balancing pass
 
 - Bug with costFromStart
 - Rewrite stat/complex stat system into stat and derived stats
 
 - Get rid of Move/Attack Actions in character data
 
-- Game Feel (level up, death)
+- Game Feel (level up)
 
 - Saving and Loading
 

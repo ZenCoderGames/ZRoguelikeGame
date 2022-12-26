@@ -4,6 +4,8 @@ var character
 var data:StatusEffectData
 
 var instanceCount:int
+var _combatEventReceiver:CombatEventReceiver
+var _forceCompleteCombatEventReceiver:CombatEventReceiver
 
 func _init(parentChar, statusEffectData:StatusEffectData):
 	character = parentChar
@@ -15,21 +17,15 @@ func _init(parentChar, statusEffectData:StatusEffectData):
 		if(action!=null):
 			action.execute()
 
-	CombatEventManager.register_for_conditional_events(data.triggerConditions, self, character)
+	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, character, funcref(self, "on_event_triggered"))
+	if data.forceCompleteTriggerConditions.size()>0:
+		_forceCompleteCombatEventReceiver = CombatEventReceiver.new(data.forceCompleteTriggerConditions, character, funcref(self, "on_force_complete_event_triggered"))
 
-func activate_on_character_move(x, y):
+func on_event_triggered():
 	activate()
-
-func activate_on_target_or_item(targetOrSpell):
-	activate()
-
-func activate_on_attacker(attacker, defender, data):
-	if character==attacker:
-		activate()
-
-func activate_on_defender(attacker, defender, data):
-	if character==defender:
-		activate()	
+	
+func on_force_complete_event_triggered():
+	_force_complete()
 
 func activate():
 	instanceCount = instanceCount - 1
@@ -38,6 +34,10 @@ func activate():
 func _check_for_completion():
 	if instanceCount==0:
 		_clean_up()
+
+func _force_complete():
+	instanceCount = 0
+	_clean_up()
 
 func _clean_up():
 	character.remove_status_effect(self)

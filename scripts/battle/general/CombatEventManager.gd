@@ -2,9 +2,9 @@ extends Node
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):
-		parentCharacter.connect("OnPreAttack", object, "_on_parentCharacter_attack")
+		parentCharacter.connect("OnPreAttack", object, "activate_on_parentCharacter_attack")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_POST_ATTACK):
-		parentCharacter.connect("OnPostAttack", object, "_on_parentCharacter_attack")
+		parentCharacter.connect("OnPostAttack", object, "activate_on_parentCharacter_attack")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_HIT):
 		HitResolutionManager.connect("OnPreHit", object, "activate_on_attacker")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_POST_HIT):
@@ -22,7 +22,7 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_END_TURN):
 		Dungeon.connect("OnEndTurn", object, "activate")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_MOVE):
-		parentCharacter.connect("OnparentCharacterMove", object, "activate_on_parentCharacter_move")
+		parentCharacter.connect("OnCharacterMoveToCell", object, "activate_on_parentCharacter_move")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPELL_ACTIVATE):
 		parentCharacter.equipment.connect("OnSpellActivated", object, "activate_on_target_or_item")
 

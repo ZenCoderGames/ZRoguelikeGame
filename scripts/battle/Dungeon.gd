@@ -358,7 +358,7 @@ func _init_player(recreatePlayer:bool):
 func _init_turns():
 	player.pre_update()
 	player.cell.room.pre_update_entities()
-	player.update()
+	#player.update()
 	for room in rooms:
 		room.update_visibility()
 	turnsTaken = 0

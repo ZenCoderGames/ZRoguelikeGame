@@ -170,6 +170,11 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/ui/CharacterUI.gd"
 }, {
 "base": "Reference",
+"class": "CombatEventReceiver",
+"language": "GDScript",
+"path": "res://scripts/battle/general/CombatEventReceiver.gd"
+}, {
+"base": "Reference",
 "class": "ComplexStatData",
 "language": "GDScript",
 "path": "res://scripts/battle/data/stats/ComplexStatData.gd"
@@ -372,6 +377,7 @@ _global_script_class_icons={
 "CharacterSelectUI": "",
 "CharacterStatus": "",
 "CharacterUI": "",
+"CombatEventReceiver": "",
 "ComplexStatData": "",
 "CustomEncounterData": "",
 "DungeonCamera": "",
@@ -420,9 +426,9 @@ config/icon="res://resource/icon.png"
 Constants="*res://scripts/library/Constants.gd"
 Utils="*res://scripts/library/Utils.gd"
 Dungeon="*res://scripts/battle/Dungeon.gd"
-HitResolutionManager="*res://scripts/battle/instance/HitResolutionManager.gd"
-CombatEventManager="*res://scripts/battle/instance/CombatEventManager.gd"
 GameEventManager="*res://scripts/GameEventManager.gd"
+HitResolutionManager="*res://scripts/battle/general/HitResolutionManager.gd"
+CombatEventManager="*res://scripts/battle/general/CombatEventManager.gd"
 
 [display]
 

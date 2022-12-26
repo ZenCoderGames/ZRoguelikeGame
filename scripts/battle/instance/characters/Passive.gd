@@ -3,6 +3,7 @@ class_name Passive
 var character
 var data:PassiveData
 var timelineActions:Array = []
+var _combatEventReceiver:CombatEventReceiver
 
 func _init(parentChar, passiveData:PassiveData):
 	character = parentChar
@@ -13,21 +14,10 @@ func _init(parentChar, passiveData:PassiveData):
 		if(action!=null):
 			timelineActions.append(action)
 
-	CombatEventManager.register_for_conditional_events(data.triggerConditions, self, character)
+	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, character, funcref(self, "on_event_triggered"))
 
-func activate_on_character_move(x, y):
+func on_event_triggered():
 	activate()
-
-func activate_on_target_or_item(targetOrSpell):
-	activate()
-
-func activate_on_attacker(attacker, defender, data):
-	if character==attacker:
-		activate()
-
-func activate_on_defender(attacker, defender, data):
-	if character==defender:
-		activate()
 
 func activate():
 	for action in timelineActions:

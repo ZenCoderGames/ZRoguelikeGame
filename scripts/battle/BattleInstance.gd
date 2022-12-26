@@ -7,8 +7,6 @@ onready var mainMenuUI:MainMenuUI = $"%MainMenuUI"
 onready var screenFade:Panel = $"%ScreenFade"
 onready var victoryUI:PanelContainer = $"%VictoryUI"
 
-export var timeBetweenMoves:float
-
 # DEBUG
 export var doorsStayOpenDuringBattle:bool
 export var pauseAIMovement:bool

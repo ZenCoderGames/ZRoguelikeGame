@@ -15,7 +15,7 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 		emit_signal("OnPreHit", sourceChar, targetChar, damage)
 		sourceChar.lastHitTarget = targetChar
 
-	if targetChar.status.is_invulnerable():
+	if !targetChar.can_take_damage():
 		if generateHits:
 			targetChar.on_blocked_hit(sourceChar)
 			emit_signal("OnBlockedHit", sourceChar, targetChar, finalDamage)

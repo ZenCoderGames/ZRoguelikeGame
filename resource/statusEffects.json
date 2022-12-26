@@ -24,6 +24,56 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "STEALTH",
+			"name": "Stealth",
+			"description": "Makes the player undetected for 2 turns. Next hit out of stealth does 2x damage.",
+			"instanceCount": 2,
+			"endConditions": [
+				"ON_END_TURN"
+			],
+			"forceEndConditions": [
+				"ON_PRE_ATTACK"
+			],
+			"startTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"invisible": 1
+					}
+				},
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"value": 2
+							}
+						]
+					}
+				}
+			],
+			"endTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"invisible": -1
+					}
+				},
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"value": -2
+							}
+						]
+					}
+				}
+			]
 		}
 	]
 }

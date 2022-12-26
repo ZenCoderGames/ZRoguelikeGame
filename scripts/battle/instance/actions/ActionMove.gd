@@ -15,9 +15,11 @@ func execute():
 	var actionMoveData:ActionMoveData = actionData as ActionMoveData
 	# Pathfind
 	if actionMoveData.moveType == ActionMoveData.MOVE_TYPE.PATHFIND_TO_TARGET:
-		var nextCell = character.currentRoom.find_next_best_path_cell(character.cell)
+		var nextCell = character.currentRoom.find_next_best_path_cell(character)
 		if nextCell!=null and nextCell!=character.cell:
 			character.move(nextCell.col-character.cell.col, nextCell.row-character.cell.row)
+		else:
+			character.failed_to_move()
 	# Wander
 	elif actionMoveData.moveType == ActionMoveData.MOVE_TYPE.WANDER:
 		var randomX:int = 0

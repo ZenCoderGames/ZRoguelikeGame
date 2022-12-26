@@ -9,6 +9,7 @@ var charData:CharacterData
 var displayName: String = ""
 var team: int = 0
 var stamina: int = 0
+var prevCell
 var cell
 var isDead:bool = false
 
@@ -100,7 +101,12 @@ func move(x, y):
 	if success:
 		emit_signal("OnCharacterMove", x, y)
 
+# Mostly for AI
+func failed_to_move():
+	on_turn_completed()
+
 func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
+	prevCell = cell
 	cell = newCell
 	if currentRoom != cell.room:
 		prevRoom = currentRoom
@@ -256,6 +262,12 @@ func attack(entity):
 		emit_signal("OnPostAttack", entity)
 
 	on_turn_completed()
+
+func can_take_damage()->bool:
+	if status.is_invulnerable():
+		return false
+
+	return true
 
 func take_damage(damageSource, damage):
 	modify_stat_value(StatData.STAT_TYPE.HEALTH, -damage)
