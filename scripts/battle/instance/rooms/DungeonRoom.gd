@@ -338,10 +338,13 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 	return false
 
 func enemy_died(entity):
-	enemies.remove(enemies.find(entity))
+	var foundEnemyIdx:int = enemies.find(entity)
+	if foundEnemyIdx>=0:
+		enemies.remove(foundEnemyIdx)
 	if enemies.empty():
 		_destroy_doors()
 	else:
+		# used for better AI pathfinding
 		for enemy in enemies:
 			(enemy as EnemyCharacter).on_ally_has_died()
 
@@ -472,13 +475,14 @@ func update_entities():
 
 func _update_next_enemy():
 	_processedEnemyIdx = _processedEnemyIdx + 1
+	
+	if _prevProcessedEnemy!=null:
+		_prevProcessedEnemy.disconnect("OnTurnCompleted", self, "_update_next_enemy")
+	
 	# Check for end of enemy list
 	if enemies==null or _processedEnemyIdx>=enemies.size():
 		CombatEventManager.on_all_enemy_turn_completed(self)
 		return
-
-	if _prevProcessedEnemy!=null:
-		_prevProcessedEnemy.disconnect("OnTurnCompleted", self, "_update_next_enemy")
 
 	var nextEnemy:Character = enemies[_processedEnemyIdx]
 	if nextEnemy.isDead:

@@ -18,7 +18,7 @@ func _init(parentChar, specialData:SpecialData):
 			timelineActions.append(action)
 
 	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, character, funcref(self, "on_event_triggered"))
-	Dungeon.connect("OnPlayerSpecialAbilityPressed", self, "_activate")
+	CombatEventManager.connect("OnPlayerSpecialAbilityPressed", self, "_activate")
 
 func on_event_triggered():
 	_increment()

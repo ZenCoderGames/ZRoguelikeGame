@@ -1,5 +1,22 @@
 extends Node
 
+signal OnPlayerCreated(newPlayer)
+signal OnStartTurn()
+signal OnEndTurn()
+signal OnEnemyMovedAdjacentToPlayer(enemy)
+signal OnRoomCombatStarted(room)
+signal OnRoomCombatEnded(room)
+signal OnPlayerTurnCompleted()
+signal OnAllEnemyTurnsCompleted()
+signal OnAnyAttack(isKillingBlow)
+signal OnPlayerSpecialAbilityProgress(percent)
+signal OnPlayerSpecialAbilityReady()
+signal OnPlayerSpecialAbilityPressed()
+signal OnPlayerSpecialAbilityReset()
+signal OnToggleInventory()
+signal OnShowInfo(title, content)
+signal OnHideInfo()
+
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):
 		parentCharacter.connect("OnPreAttack", object, "activate_on_parentCharacter_attack")
@@ -18,40 +35,40 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_DEATH):
 		parentCharacter.connect("OnDeath", object, "activate")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_START_TURN):
-		Dungeon.connect("OnStartTurn", object, "activate")
+		connect("OnStartTurn", object, "activate")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_END_TURN):
-		Dungeon.connect("OnEndTurn", object, "activate")
+		connect("OnEndTurn", object, "activate")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_MOVE):
 		parentCharacter.connect("OnCharacterMoveToCell", object, "activate_on_parentCharacter_move")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPELL_ACTIVATE):
 		parentCharacter.equipment.connect("OnSpellActivated", object, "activate_on_target_or_item")
 
 func on_room_combat_started(room):
-	Dungeon.emit_signal("OnRoomCombatStarted", room)
+	emit_signal("OnRoomCombatStarted", room)
 
 func on_room_combat_ended(room):
-	Dungeon.emit_signal("OnRoomCombatEnded", room)
+	emit_signal("OnRoomCombatEnded", room)
 
 func on_all_enemy_turn_completed(room):
-	Dungeon.emit_signal("OnAllEnemyTurnsCompleted")
+	emit_signal("OnAllEnemyTurnsCompleted")
 
 func on_any_attack(isKillingBlow):
-	Dungeon.emit_signal("OnAnyAttack", isKillingBlow)
+	emit_signal("OnAnyAttack", isKillingBlow)
 
 func on_show_info(title:String, content:String):
-	Dungeon.battleInstance.emit_signal("OnShowInfo", title, content)
+	emit_signal("OnShowInfo", title, content)
 
 func on_hide_info():
-	Dungeon.battleInstance.emit_signal("OnHideInfo")
+	emit_signal("OnHideInfo")
 
 func on_player_special_ability_progress(percent:float):
-	Dungeon.emit_signal("OnPlayerSpecialAbilityProgress", percent)
+	emit_signal("OnPlayerSpecialAbilityProgress", percent)
 
 func on_player_special_ability_ready():
-	Dungeon.emit_signal("OnPlayerSpecialAbilityReady")
+	emit_signal("OnPlayerSpecialAbilityReady")
 
 func on_player_special_ability_pressed():
-	Dungeon.emit_signal("OnPlayerSpecialAbilityPressed")
+	emit_signal("OnPlayerSpecialAbilityPressed")
 
 func on_player_special_ability_reset():
-	Dungeon.emit_signal("OnPlayerSpecialAbilityReset")
+	emit_signal("OnPlayerSpecialAbilityReset")

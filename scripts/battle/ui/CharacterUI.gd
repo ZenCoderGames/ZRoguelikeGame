@@ -40,7 +40,7 @@ var xpTween:Tween = null
 func init(entityObj):
 	character = entityObj as Character
 	#nameLabel.text = character.displayName
-	character.connect("OnStatChanged", self, "_on_stat_changed")
+	#character.connect("OnStatChanged", self, "_on_stat_changed")
 	character.connect("OnPassiveAdded", self, "on_passive_added")
 	character.connect("OnPassiveRemoved", self, "on_passive_removed")
 	character.connect("OnStatusEffectAdded", self, "on_status_effect_added")

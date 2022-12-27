@@ -10,12 +10,12 @@ func _ready():
 	SpecialProgressBar.value = 0
 	SpecialButton.disabled = true
 	SpecialButton.connect("pressed", self, "_on_special_pressed")
-	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 
 func _on_dungeon_init():
-	Dungeon.connect("OnPlayerSpecialAbilityProgress", self, "_on_ability_progress")
-	Dungeon.connect("OnPlayerSpecialAbilityReady", self, "_on_ability_ready")
-	Dungeon.connect("OnPlayerSpecialAbilityReset", self, "_on_ability_reset")
+	CombatEventManager.connect("OnPlayerSpecialAbilityProgress", self, "_on_ability_progress")
+	CombatEventManager.connect("OnPlayerSpecialAbilityReady", self, "_on_ability_ready")
+	CombatEventManager.connect("OnPlayerSpecialAbilityReset", self, "_on_ability_reset")
 
 func _on_ability_progress(percent:float):
 	SpecialProgressBar.value = percent * 100

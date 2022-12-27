@@ -20,7 +20,7 @@ var special:Special
 func init(charData, teamVal):
 	.init(charData, teamVal)
 
-	Dungeon.connect("OnEnemyMovedAdjacentToPlayer", self, "on_enemy_moved_adjacent")
+	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer", self, "on_enemy_moved_adjacent")
 	HitResolutionManager.connect("OnKill", self, "_on_kill")
 
 	special = Special.new(self, charData.special)

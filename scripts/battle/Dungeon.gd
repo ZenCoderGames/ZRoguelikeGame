@@ -1,21 +1,6 @@
 # Dungeon.gd
 extends Node2D
 
-# signals
-signal OnPlayerCreated(newPlayer)
-signal OnStartTurn()
-signal OnEndTurn()
-signal OnEnemyMovedAdjacentToPlayer(enemy)
-signal OnRoomCombatStarted(room)
-signal OnRoomCombatEnded(room)
-signal OnPlayerTurnCompleted()
-signal OnAllEnemyTurnsCompleted()
-signal OnAnyAttack(isKillingBlow)
-signal OnPlayerSpecialAbilityProgress(percent)
-signal OnPlayerSpecialAbilityReady()
-signal OnPlayerSpecialAbilityPressed()
-signal OnPlayerSpecialAbilityReset()
-
 var rooms:Array = []
 const intersectionBuffer:int = 0
 
@@ -48,7 +33,7 @@ func create(recreatePlayer:bool) -> void:
 	_init_enemies()
 		
 	player.connect("OnTurnCompleted", self, "_on_player_turn_completed")
-	connect("OnAllEnemyTurnsCompleted", self, "_end_turn")
+	CombatEventManager.connect("OnAllEnemyTurnsCompleted", self, "_end_turn")
 	_init_turns()
 	_start_turn()
 
@@ -349,7 +334,7 @@ func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	if recreatePlayer:
 		player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
-		emit_signal("OnPlayerCreated", player)
+		CombatEventManager.emit_signal("OnPlayerCreated", player)
 		turnsTaken = turnsTaken - 1
 	else:
 		player.move_to_cell(cell)
@@ -362,13 +347,13 @@ func _init_turns():
 	for room in rooms:
 		room.update_visibility()
 	turnsTaken = 0
-	emit_signal("OnEndTurn")
+	CombatEventManager.emit_signal("OnEndTurn")
 
 func _start_turn():
 	if isDungeonFinished:
 		return
 
-	emit_signal("OnStartTurn")
+	CombatEventManager.emit_signal("OnStartTurn")
 
 	# Pre Update
 	player.pre_update()
@@ -379,7 +364,7 @@ func _start_turn():
 func _on_player_turn_completed():
 	player.update()
 
-	emit_signal("OnPlayerTurnCompleted")
+	CombatEventManager.emit_signal("OnPlayerTurnCompleted")
 
 	# Wait for Enemy Turns
 	player.cell.room.update_entities()
@@ -393,7 +378,7 @@ func _end_turn():
 	for room in rooms:
 		room.update_visibility()
 
-	emit_signal("OnEndTurn")
+	CombatEventManager.emit_signal("OnEndTurn")
 
 	if !player.isDead:
 		_start_turn()

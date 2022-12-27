@@ -19,8 +19,8 @@ func _ready():
 	settingsButton.connect("button_up", self, "on_settings")
 	deathUI.visible = false
 	
-	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
+	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
 	GameEventManager.connect("OnCharacterSelected", self, "_on_character_chosen")
 
 func _on_character_chosen(charData):

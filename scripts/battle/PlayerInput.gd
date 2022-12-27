@@ -9,12 +9,12 @@ var inputDelay:float = 0.0
 var blockInputsForTurn:bool
 
 func _ready():
-	Dungeon.connect("OnPlayerCreated", self, "_register_player") 
-	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	Dungeon.battleInstance.connect("OnMainMenuOn", self, "on_main_menu_on")
-	Dungeon.battleInstance.connect("OnMainMenuOff", self, "on_main_menu_off")
-	Dungeon.connect("OnPlayerTurnCompleted", self, "_on_player_turn_completed")
-	Dungeon.connect("OnEndTurn", self, "_on_end_turn") 
+	CombatEventManager.connect("OnPlayerCreated", self, "_register_player") 
+	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnMainMenuOn", self, "on_main_menu_on")
+	GameEventManager.connect("OnMainMenuOff", self, "on_main_menu_off")
+	CombatEventManager.connect("OnPlayerTurnCompleted", self, "_on_player_turn_completed")
+	CombatEventManager.connect("OnEndTurn", self, "_on_end_turn") 
 	
 func _register_player(playerRef):
 	player = playerRef

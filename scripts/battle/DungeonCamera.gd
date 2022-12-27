@@ -4,7 +4,7 @@ class_name DungeonCamera
 
 var player
 
-const ZOOM_ON_COMBAT:float = 0.1
+const ZOOM_ON_COMBAT:float = 0.0
 
 # Camera Shake Params
 onready var noise = OpenSimplexNoise.new()
@@ -24,11 +24,11 @@ func _ready():
 	noise.period = 4
 	noise.octaves = 2
 
-	Dungeon.connect("OnPlayerCreated", self, "_register_player")
-	Dungeon.connect("OnRoomCombatStarted", self, "_on_room_combat_started")
-	Dungeon.connect("OnRoomCombatEnded", self, "_on_room_combat_ended")
-	Dungeon.battleInstance.connect("OnGameOver", self, "_on_game_over")
-	Dungeon.connect("OnAnyAttack", self, "_on_any_attack")
+	CombatEventManager.connect("OnPlayerCreated", self, "_register_player")
+	CombatEventManager.connect("OnRoomCombatStarted", self, "_on_room_combat_started")
+	CombatEventManager.connect("OnRoomCombatEnded", self, "_on_room_combat_ended")
+	GameEventManager.connect("OnGameOver", self, "_on_game_over")
+	CombatEventManager.connect("OnAnyAttack", self, "_on_any_attack")
 	
 func _register_player(playerRef):
 	player = playerRef

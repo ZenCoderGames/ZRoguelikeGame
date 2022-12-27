@@ -26,11 +26,11 @@ const InfoUI := preload("res://ui/battle/InfoUI.tscn")
 var infoUI:InfoUI = null
 
 func _ready():
-	Dungeon.battleInstance.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	Dungeon.battleInstance.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
-	Dungeon.battleInstance.connect("OnToggleInventory", self, "_on_toggle_inventory")
-	Dungeon.battleInstance.connect("OnShowInfo", self, "_on_show_info")
-	Dungeon.battleInstance.connect("OnHideInfo", self, "_on_hide_info")
+	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
+	CombatEventManager.connect("OnToggleInventory", self, "_on_toggle_inventory")
+	CombatEventManager.connect("OnShowInfo", self, "_on_show_info")
+	CombatEventManager.connect("OnHideInfo", self, "_on_hide_info")
 
 	inventoryUI = InventoryUI.instance()
 	self.add_child(inventoryUI)
@@ -42,7 +42,7 @@ func _ready():
 func _on_dungeon_init():
 	_shared_init()
 	
-	Dungeon.connect("OnEndTurn", self, "_on_turn_taken")
+	CombatEventManager.connect("OnEndTurn", self, "_on_turn_taken")
 	HitResolutionManager.connect("OnPostHit", self, "_on_attack")
 	HitResolutionManager.connect("OnKill", self, "_on_kill")
 

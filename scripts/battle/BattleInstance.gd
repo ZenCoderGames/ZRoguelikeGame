@@ -19,15 +19,6 @@ export var debugSpawnItemInFirstRoom:String
 export var setPlayerInvulnerable:bool
 export var debugShowAllRooms:bool
 
-signal OnDungeonInitialized()
-signal OnDungeonRecreated()
-signal OnGameOver()
-signal OnToggleInventory()
-signal OnShowInfo(title, content)
-signal OnHideInfo()
-signal OnMainMenuOn()
-signal OnMainMenuOff()
-
 var firstTimeDungeon:bool = false
 var onGameOver:bool
 
@@ -57,7 +48,7 @@ func _on_new_game():
 func _create_dungeon():
 	_shared_dungeon_init()
 	firstTimeDungeon = true
-	emit_signal("OnDungeonInitialized")
+	GameEventManager.emit_signal("OnDungeonInitialized")
 
 func recreate_dungeon(newDungeonIdx):
 	currentDungeonIdx = newDungeonIdx
@@ -65,7 +56,7 @@ func recreate_dungeon(newDungeonIdx):
 	Dungeon.init(self, dungeonDataList[newDungeonIdx])
 	_shared_dungeon_init(newDungeonIdx==0)
 	if newDungeonIdx==0:
-		emit_signal("OnDungeonRecreated")
+		GameEventManager.emit_signal("OnDungeonRecreated")
 
 func _shared_dungeon_init(recreatePlayer:bool=true):
 	Dungeon.create(recreatePlayer)
@@ -84,7 +75,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
-		emit_signal("OnToggleInventory")
+		CombatEventManager.emit_signal("OnToggleInventory")
 
 	if event.is_action_pressed(Constants.INPUT_TOGGLE_MAIN_MENU):
 		_toggle_main_menu()
@@ -93,14 +84,14 @@ func _toggle_main_menu():
 	mainMenuUI.visible = !mainMenuUI.visible
 	if mainMenuUI.visible:
 		mainMenuUI.show_menu()
-		emit_signal("OnMainMenuOn")
+		GameEventManager.emit_signal("OnMainMenuOn")
 	else:
-		emit_signal("OnMainMenuOff")
+		GameEventManager.emit_signal("OnMainMenuOff")
 
 func _on_game_over():
 	onGameOver = true
 	Dungeon.isDungeonFinished = true
-	emit_signal("OnGameOver")
+	GameEventManager.emit_signal("OnGameOver")
 
 func _on_dungeon_completed():
 	screenFade.visible = true

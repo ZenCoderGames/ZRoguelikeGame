@@ -37,7 +37,7 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 
 	if Dungeon.player!=null:
 		if(newCell.is_rowcol_adjacent(Dungeon.player.cell)):
-			Dungeon.emit_signal("OnEnemyMovedAdjacentToPlayer", self)
+			CombatEventManager.emit_signal("OnEnemyMovedAdjacentToPlayer", self)
 		
 		if !lastVisitedCellsSincePlayerMoved.has(newCell):
 			lastVisitedCellsSincePlayerMoved.append(newCell)

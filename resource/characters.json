@@ -13,7 +13,7 @@
 					},
 					{
 						"type": "DAMAGE",
-						"value": 3
+						"value": 2
 					}
 				],
 				"moveAction": {
@@ -30,7 +30,7 @@
 				},
 				"special": {
 					"id": "KNIGHT_SPECIAL",
-					"description": "3 successful attacks charges up the ability. \nOn use, grants the player [Protection]",
+					"description": "3 successful attacks charges up the ability. \nOn use, grants the player [Protection] for 1 turn",
 					"conditions": ["ON_POST_HIT"],
 					"count": 3,
 					"executeCondition": "NONE",
