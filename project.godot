@@ -442,6 +442,12 @@ GameEventManager="*res://scripts/GameEventManager.gd"
 HitResolutionManager="*res://scripts/battle/general/HitResolutionManager.gd"
 CombatEventManager="*res://scripts/battle/general/CombatEventManager.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/integer_division=false
+
 [display]
 
 window/size/width=800

@@ -23,7 +23,7 @@ func _ready():
 	GameEventManager.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
 	GameEventManager.connect("OnCharacterSelected", self, "_on_character_chosen")
 
-func _on_character_chosen(charData):
+func _on_character_chosen(_charData):
 	baseMenuUI.visible = false
 	
 func _on_dungeon_init():

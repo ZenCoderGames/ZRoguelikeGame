@@ -70,7 +70,7 @@ func _on_turn_taken():
 func _on_attack(attacker, defender, damage):
 	detailsLabel.text = str(attacker.displayName, " attacked ", defender.displayName, " for ", damage, " damage")
 	
-func _on_kill(attacker, defender, finalDmg):
+func _on_kill(attacker, defender, _finalDmg):
 	# Info panel
 	_info_panel_handle_death(defender)
 	

@@ -135,7 +135,7 @@ func _on_spell_activated(spellItem):
 	_on_spell_unequipped(spellItem)
 
 # EFFECTS
-func on_passive_added(character, passive):
+func on_passive_added(_character, passive):
 	var newEffectUI:EffectItemUI = EffectItemUI.instance()
 	effectContainer.add_child(newEffectUI)
 	newEffectUI.init(passive.data)
@@ -144,7 +144,7 @@ func on_passive_added(character, passive):
 	effectContainer.visible = true
 	_update_non_base_ui()
 
-func on_passive_removed(character, passive):
+func on_passive_removed(_character, passive):
 	if equippedEffects.has(passive):
 		effectContainer.remove_child(equippedEffects[passive])
 		equippedEffects.erase(passive)
@@ -154,7 +154,7 @@ func on_passive_removed(character, passive):
 		
 	_update_non_base_ui()
 
-func on_status_effect_added(character, statusEffect):
+func on_status_effect_added(_character, statusEffect):
 	var newEffectUI = EffectItemUI.instance()
 	effectContainer.add_child(newEffectUI)
 	newEffectUI.init(statusEffect.data)
@@ -163,7 +163,7 @@ func on_status_effect_added(character, statusEffect):
 	effectContainer.visible = true
 	_update_non_base_ui()
 
-func on_status_effect_removed(character, statusEffect):
+func on_status_effect_removed(_character, statusEffect):
 	if equippedEffects.has(statusEffect):
 		effectContainer.remove_child(equippedEffects[statusEffect])
 		equippedEffects.erase(statusEffect)

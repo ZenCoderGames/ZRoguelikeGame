@@ -40,11 +40,11 @@ func hide():
 	self.visible = false
 	noContent.visible = false
 	
-func _on_item_added_to_inventory(itemPicked):
+func _on_item_added_to_inventory(_itemPicked):
 	selectedIdx = 0
 	_refresh_ui()
 
-func _on_spell_activated(spellItem):
+func _on_spell_activated(_spellItem):
 	selectedIdx = 0
 	_refresh_ui()
 	

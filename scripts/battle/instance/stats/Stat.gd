@@ -28,7 +28,7 @@ func get_base_value():
 	return baseValue
 
 func modify_value(newValue:int):
-	value = clamp(newValue, 0, baseValue)
+	value = int(clamp(newValue, 0, baseValue))
 	return value
 
 func modify_base_value(newBaseValue:int):

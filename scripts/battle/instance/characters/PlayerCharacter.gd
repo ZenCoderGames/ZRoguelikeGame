@@ -46,7 +46,7 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 	elif newCell.is_end():
 		emit_signal("OnPlayerReachedEnd")
 	
-func on_enemy_moved_adjacent(enemy):
+func on_enemy_moved_adjacent(_enemy):
 	check_for_nearby_entities()
 
 func check_for_nearby_entities():

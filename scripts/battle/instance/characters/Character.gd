@@ -225,10 +225,10 @@ func on_stats_changed():
 func pick_item(itemToAdd):
 	inventory.add_item(itemToAdd)
 
-func _on_item_equipped(item):
+func _on_item_equipped(_item):
 	on_stats_changed()
 
-func _on_item_unequipped(item):
+func _on_item_unequipped(_item):
 	on_stats_changed()
 
 # COMBAT
@@ -269,11 +269,11 @@ func can_take_damage()->bool:
 
 	return true
 
-func take_damage(damageSource, damage):
+func take_damage(_damageSource, damage):
 	modify_stat_value(StatData.STAT_TYPE.HEALTH, -damage)
 	return get_health()
 
-func on_blocked_hit(attacker):
+func on_blocked_hit(_attacker):
 	show_blocked_text(self)
 
 func show_damage_from_hit(attacker, dmg):
@@ -290,7 +290,7 @@ func die():
 		cell.entityObject.hide()
 	cell.clear_entity_on_death()
 
-func show_hit(entity, dmg):
+func show_hit(entity, _dmg):
 	# shove
 	if !isDead:
 		var dirn:int = dirn_to_character(entity)
@@ -391,7 +391,7 @@ func get_targets():
 	return targetList
 
 # SPELLS
-func on_spell_activated(spellItem):
+func on_spell_activated(_spellItem):
 	on_turn_completed()
 
 # STATUS EFFECTS

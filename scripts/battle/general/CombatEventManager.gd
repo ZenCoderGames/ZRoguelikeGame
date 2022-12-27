@@ -49,7 +49,7 @@ func on_room_combat_started(room):
 func on_room_combat_ended(room):
 	emit_signal("OnRoomCombatEnded", room)
 
-func on_all_enemy_turn_completed(room):
+func on_all_enemy_turn_completed(_room):
 	emit_signal("OnAllEnemyTurnsCompleted")
 
 func on_any_attack(isKillingBlow):
