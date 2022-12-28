@@ -31,7 +31,7 @@ func update():
 	cell.room.update_path_map()
 
 func can_take_damage()->bool:
-	if Dungeon.battleInstance.setPlayerInvulnerable:
+	if GameGlobals.battleInstance.setPlayerInvulnerable:
 		return false
 
 	return .can_take_damage()
@@ -86,13 +86,13 @@ func _level_up():
 	emit_signal("OnLevelUp")
 	
 	levelUpAnim.visible = true
-	self.self_modulate = Dungeon.battleInstance.view.playerLevelUpColor
+	self.self_modulate = GameGlobals.battleInstance.view.playerLevelUpColor
 	yield(get_tree().create_timer(0.2), "timeout")
 	levelUpAnim.visible = false
 	levelUpLabel.visible = true
 	yield(get_tree().create_timer(0.25), "timeout")
 	levelUpLabel.visible = false
-	self.self_modulate = Dungeon.battleInstance.view.playerDamageColor
+	self.self_modulate = GameGlobals.battleInstance.view.playerDamageColor
 
 func get_xp():
 	return xp

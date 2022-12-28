@@ -16,7 +16,10 @@ var enemyDataList = []
 var customEncounterDataDict = {}
 var customEncounterDataList = []
 
+var dungeonDataList:Array
+
 func _init():
+	init_dungeon_data()
 	init_complex_stats()
 	init_status_effects()
 	init_passives()
@@ -27,6 +30,17 @@ func _init():
 
 func on_character_chosen(charData):
 	playerData = charData
+
+# DUNGEONS
+func init_dungeon_data():
+	var data = Utils.load_data_from_file("resource/dungeons.json")
+	var dungeonDataJSList:Array = data["dungeons"]
+	for dungeonDataJS in dungeonDataJSList:
+		var newDungeonData = DungeonData.new(dungeonDataJS)
+		dungeonDataList.append(newDungeonData)
+
+func get_max_levels():
+	return GameGlobals.dataManager.dungeonDataList.size()
 
 func init_status_effects():
 	var data = Utils.load_data_from_file("resource/statusEffects.json")

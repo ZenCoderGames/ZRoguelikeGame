@@ -68,17 +68,30 @@ Roguelike Dev:
 (D)- Class Properties: Knight (fills bar every attack, Can activate to get barrier)
 (D)- Camera fix for when near edges of room
 (D)- Class Specials
-- Bug with enemy pathing
-
-- Better Yield
-
-- Game Feel (death)
-
+(D)- Better enemy pathing
+- EffectManager/Global update
+- EffectData
+- VFX Upgrades (Barrier, Protection, Lifesteal, Lifedrain, Lightning bolt, Groundpound)
 - Better doors, death, exit sprites
-- Figure out Leveling again
+- Game Feel (death)
+- SFX Manager/SFXData
+
+- New Status Effects (Stun, Freeze, Burn, Poison, Shock, Root, Sleep)
+- Complex AI behavior (Skeleton - revive, Snake - poison, Giant - healing, Automaton - stun)
+
+- Class Passives
+
+- Spells or Specials that translate
+- Targeting of Spells/Specials
+
+- Traps
+
+- Level Up and Upgrade Choices
 
 - Balancing pass
+- Attack with character scaling up
 
+- Better Yield
 - Bug with costFromStart
 - Rewrite stat/complex stat system into stat and derived stats
 

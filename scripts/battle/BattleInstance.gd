@@ -22,22 +22,22 @@ export var debugShowAllRooms:bool
 var firstTimeDungeon:bool = false
 var onGameOver:bool
 
-var dungeonDataList:Array
 var currentDungeonIdx:int
 
 func _init():
-	currentDungeonIdx = 0
-	_init_dungeon_data()
-	Dungeon.init(self, dungeonDataList[currentDungeonIdx])
-
-	GameEventManager.connect("OnCharacterSelected", self, "_on_character_chosen")
+	GameGlobals.set_battle_instance(self)
 
 func _ready():
+	currentDungeonIdx = 0
+	GameGlobals.dungeon.init(GameGlobals.dataManager.dungeonDataList[currentDungeonIdx])
+
+	GameEventManager.connect("OnCharacterSelected", self, "_on_character_chosen")
+	
 	mainMenuUI.visible = true
 	GameEventManager.connect("OnReadyToBattle", self, "_on_new_game")
 
 func _on_character_chosen(charData):
-	Dungeon.dataManager.on_character_chosen(charData)
+	GameGlobals.dataManager.on_character_chosen(charData)
 
 func _on_new_game():
 	if !firstTimeDungeon:
@@ -52,19 +52,19 @@ func _create_dungeon():
 
 func recreate_dungeon(newDungeonIdx):
 	currentDungeonIdx = newDungeonIdx
-	Dungeon.clean_up(newDungeonIdx==0)
-	Dungeon.init(self, dungeonDataList[newDungeonIdx])
+	GameGlobals.dungeon.clean_up(newDungeonIdx==0)
+	GameGlobals.dungeon.init(GameGlobals.dataManager.dungeonDataList[newDungeonIdx])
 	_shared_dungeon_init(newDungeonIdx==0)
 	if newDungeonIdx==0:
 		GameEventManager.emit_signal("OnDungeonRecreated")
 
 func _shared_dungeon_init(recreatePlayer:bool=true):
-	Dungeon.create(recreatePlayer)
+	GameGlobals.dungeon.create(recreatePlayer)
 	onGameOver = false
 	_toggle_main_menu()
-	Dungeon.player.connect("OnDeath", self, "_on_game_over")
-	Dungeon.player.connect("OnPlayerReachedExit", self, "_on_dungeon_completed")
-	Dungeon.player.connect("OnPlayerReachedEnd", self, "_on_game_end")
+	GameGlobals.dungeon.player.connect("OnDeath", self, "_on_game_over")
+	GameGlobals.dungeon.player.connect("OnPlayerReachedExit", self, "_on_dungeon_completed")
+	GameGlobals.dungeon.player.connect("OnPlayerReachedEnd", self, "_on_game_end")
 	
 	yield(get_tree().create_timer(0.2), "timeout")
 	
@@ -90,46 +90,35 @@ func _toggle_main_menu():
 
 func _on_game_over():
 	onGameOver = true
-	Dungeon.isDungeonFinished = true
+	GameGlobals.dungeon.isDungeonFinished = true
 	GameEventManager.emit_signal("OnGameOver")
 
 func _on_dungeon_completed():
 	screenFade.visible = true
 	_toggle_main_menu()
 
-	Dungeon.isDungeonFinished = true
+	GameGlobals.dungeon.isDungeonFinished = true
 	
 	yield(get_tree().create_timer(0.05), "timeout")
 
 	currentDungeonIdx = currentDungeonIdx+1
-	if currentDungeonIdx<dungeonDataList.size():
+	if currentDungeonIdx<GameGlobals.dataManager.dungeonDataList.size():
 		recreate_dungeon(currentDungeonIdx)
 
 func _on_game_end():
 	victoryUI.visible = true
-	Dungeon.isDungeonFinished = true
+	GameGlobals.dungeon.isDungeonFinished = true
 	yield(get_tree().create_timer(0.5), "timeout")
 	_toggle_main_menu()
 
 func back_to_menu_from_victory():
 	_toggle_main_menu()
 	victoryUI.visible = false
-	Dungeon.isDungeonFinished = false
-
-# DUNGEONS
-func _init_dungeon_data():
-	var data = Utils.load_data_from_file("resource/dungeons.json")
-	var dungeonDataJSList:Array = data["dungeons"]
-	for dungeonDataJS in dungeonDataJSList:
-		var newDungeonData = DungeonData.new(dungeonDataJS)
-		dungeonDataList.append(newDungeonData)
+	GameGlobals.dungeon.isDungeonFinished = false
 
 # HELPERS
 func get_current_level():
 	return currentDungeonIdx+1
 
-func get_max_levels():
-	return dungeonDataList.size()
-
 func is_last_level():
-	return currentDungeonIdx == dungeonDataList.size()-1
+	return currentDungeonIdx == GameGlobals.dataManager.dungeonDataList.size()-1

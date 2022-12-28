@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://sourceArt/blood.png" type="Texture" id=3]
+
+[node name="DeathFX" type="Sprite"]
+modulate = Color( 0.42572, 0.446249, 0.484375, 1 )
+self_modulate = Color( 0.490196, 0.0941176, 0.0941176, 1 )
+position = Vector2( 208, 169 )
+texture = ExtResource( 3 )

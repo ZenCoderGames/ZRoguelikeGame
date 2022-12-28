@@ -68,7 +68,6 @@ func load_data_from_file(relativePath:String) -> JSON:
 	if data_parse.error != OK:
 		return null
 	return data_parse.result
-	#$Label.text = data["1"].name
 
 func do_hit_pause():
 	get_tree().paused = true
@@ -125,5 +124,5 @@ func random_chance(chance:float):
 
 func freeze_frame(time_scale, duration):
 	Engine.time_scale = time_scale
-	yield(Dungeon.battleInstance.get_tree().create_timer(time_scale * duration), "timeout")
+	yield(GameGlobals.battleInstance.get_tree().create_timer(time_scale * duration), "timeout")
 	Engine.time_scale = 1.0

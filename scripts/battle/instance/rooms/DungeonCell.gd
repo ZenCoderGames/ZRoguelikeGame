@@ -91,14 +91,14 @@ func show():
 
 	# color
 	if is_exit():
-		floorObject.modulate = Dungeon.battleInstance.view.showExitColor
+		floorObject.modulate = GameGlobals.battleInstance.view.showExitColor
 	elif is_end():
-		floorObject.modulate = Dungeon.battleInstance.view.showEndColor
+		floorObject.modulate = GameGlobals.battleInstance.view.showEndColor
 	else:
-		floorObject.modulate = Dungeon.battleInstance.view.showFloorColor
+		floorObject.modulate = GameGlobals.battleInstance.view.showFloorColor
 	if entityObject!=null:
 		if is_entity_type(Constants.ENTITY_TYPE.STATIC):
-			entityObject.modulate = Dungeon.battleInstance.view.showWallColor
+			entityObject.modulate = GameGlobals.battleInstance.view.showWallColor
 
 func hide():
 	floorObject.hide()
@@ -113,15 +113,15 @@ func dim():
 		
 	# color
 	if is_exit():
-		floorObject.modulate = Dungeon.battleInstance.view.dimExitColor
+		floorObject.modulate = GameGlobals.battleInstance.view.dimExitColor
 	elif is_end():
-		floorObject.modulate = Dungeon.battleInstance.view.dimEndColor
+		floorObject.modulate = GameGlobals.battleInstance.view.dimEndColor
 	else:
-		floorObject.modulate = Dungeon.battleInstance.view.dimFloorColor
+		floorObject.modulate = GameGlobals.battleInstance.view.dimFloorColor
 	if entityObject!=null:
 		if is_entity_type(Constants.ENTITY_TYPE.STATIC):
 			entityObject.show()
-			entityObject.modulate = Dungeon.battleInstance.view.dimWallColor
+			entityObject.modulate = GameGlobals.battleInstance.view.dimWallColor
 
 func showDebug(colorVal):
 	floorObject.show()

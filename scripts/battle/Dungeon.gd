@@ -1,5 +1,6 @@
-# Dungeon.gd
-extends Node2D
+class_name Dungeon
+
+extends Node
 
 var rooms:Array = []
 const intersectionBuffer:int = 0
@@ -10,17 +11,15 @@ var turnsTaken:int = -1
 var loadedScenes:Array = []
 var itemSpawnedMap:Dictionary = {}
 
-var battleInstance:BattleInstance
-
-var dataManager:DungeonDataManager
 var dungeonData:DungeonData
 
 var isDungeonFinished:bool
 
-func init(battleInst:BattleInstance, dungeonDataRef:DungeonData):
-	battleInstance = battleInst
+func _init():
+	GameGlobals.set_dungeon(self)
+
+func init(dungeonDataRef:DungeonData):
 	dungeonData = dungeonDataRef
-	_init_data()
 	isDungeonFinished = false
 
 func create(recreatePlayer:bool) -> void:
@@ -204,16 +203,12 @@ func _init_path():
 		reverse_path.append(room)
 	reverse_path.append(startRoom)
 
-func _init_data():
-	if dataManager==null:
-		dataManager = DungeonDataManager.new()
-
 func _init_enemies():
-	if battleInstance.dontSpawnEnemies:
+	if GameGlobals.battleInstance.dontSpawnEnemies:
 		return
 
-	if !battleInstance.debugSpawnEnemyEncounter.empty():
-		startRoom.generate_enemy_custom_encounter(battleInstance.debugSpawnEnemyEncounter)
+	if !GameGlobals.battleInstance.debugSpawnEnemyEncounter.empty():
+		startRoom.generate_enemy_custom_encounter(GameGlobals.battleInstance.debugSpawnEnemyEncounter)
 	
 	var minCostPerRoom:int = 5
 	var extraCostForSingleRoom:int = 5
@@ -229,7 +224,7 @@ func _init_enemies():
 			encounterCost = encounterCost + extraCostForSingleRoom
 		
 		var currentCost:int = 0
-		var enemyDataList:Array = Utils.duplicate_array(dataManager.enemyDataList)
+		var enemyDataList:Array = Utils.duplicate_array(GameGlobals.dataManager.enemyDataList)
 		var itemsToRemove:Array = []
 		for enemyData in enemyDataList:
 			if enemyData.difficulty > dungeonData.enemyDifficultyHighestTier:
@@ -251,7 +246,7 @@ func _init_enemies():
 					break
 
 func _init_obstacles():
-	if battleInstance.dontSpawnObstacles:
+	if GameGlobals.battleInstance.dontSpawnObstacles:
 		return
 
 	for room in rooms:
@@ -261,13 +256,13 @@ func _init_obstacles():
 		room.generate_obstacles(dungeonData.obstacleChance, dungeonData.minObstacles, dungeonData.maxObstacles)
 
 func _init_items():
-	if battleInstance.dontSpawnItems:
+	if GameGlobals.battleInstance.dontSpawnItems:
 		return
 
-	if !battleInstance.debugSpawnItemInFirstRoom.empty():
-		startRoom.generate_item(battleInstance.debugSpawnItemInFirstRoom)
+	if !GameGlobals.battleInstance.debugSpawnItemInFirstRoom.empty():
+		startRoom.generate_item(GameGlobals.battleInstance.debugSpawnItemInFirstRoom)
 
-	var itemDataList = Utils.duplicate_array(dataManager.itemDataList)
+	var itemDataList = Utils.duplicate_array(GameGlobals.dataManager.itemDataList)
 	itemDataList.shuffle()
 
 	var numItems:int = dungeonData.itemCountMin + randi() % (dungeonData.itemCountMax - dungeonData.itemCountMin + 1)
@@ -333,7 +328,7 @@ func _spawn_item(room, itemData):
 func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	if recreatePlayer:
-		player = load_character(loadedScenes, cell, dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
+		player = load_character(loadedScenes, cell, GameGlobals.dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
 		CombatEventManager.emit_signal("OnPlayerCreated", player)
 		turnsTaken = turnsTaken - 1
 	else:
@@ -432,9 +427,9 @@ func load_character(parentContainer, cell, characterData, entityType, groupName,
 	charObject.init(characterData, team)
 	charObject.move_to_cell(cell)
 	if team == Constants.TEAM.PLAYER:
-		charObject.self_modulate = battleInstance.view.playerDamageColor
+		charObject.self_modulate = GameGlobals.battleInstance.view.playerDamageColor
 	elif team == Constants.TEAM.ENEMY:
-		charObject.self_modulate = battleInstance.view.enemyDamageColor
+		charObject.self_modulate = GameGlobals.battleInstance.view.enemyDamageColor
 	return charObject
 
 func load_item(parentContainer, cell, itemData, entityType, groupName):
@@ -443,15 +438,12 @@ func load_item(parentContainer, cell, itemData, entityType, groupName):
 	cell.init_entity(itemObject, entityType)
 	itemObject.init(itemData, cell)
 	if itemData.is_gear():
-		itemObject.self_modulate = battleInstance.view.itemGearColor
+		itemObject.self_modulate = GameGlobals.battleInstance.view.itemGearColor
 	if itemData.is_consumable():
-		itemObject.self_modulate = battleInstance.view.itemConsumableColor
+		itemObject.self_modulate = GameGlobals.battleInstance.view.itemConsumableColor
 	if itemData.is_spell():
-		itemObject.self_modulate = battleInstance.view.itemSpellColor
+		itemObject.self_modulate = GameGlobals.battleInstance.view.itemSpellColor
 	return itemObject
-
-func create_delay(timeToDelay):
-	yield(battleInstance.get_tree().create_timer(timeToDelay), "timeout")  
 
 func get_adjacent_characters(character, relativeTeamType, numTiles:int=1):
 	var currentPlayerRoom:DungeonRoom = player.currentRoom

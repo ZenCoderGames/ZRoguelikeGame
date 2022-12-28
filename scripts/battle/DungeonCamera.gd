@@ -47,11 +47,11 @@ func _on_room_combat_started(_room):
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x-ZOOM_ON_COMBAT, self.zoom.y-ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_room_combat_ended(_room):
-	yield(Dungeon.battleInstance.get_tree().create_timer(0.25), "timeout")
+	yield(GameGlobals.battleInstance.get_tree().create_timer(0.25), "timeout")
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_game_over():
-	yield(Dungeon.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME), "timeout")
+	yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME), "timeout")
 
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 

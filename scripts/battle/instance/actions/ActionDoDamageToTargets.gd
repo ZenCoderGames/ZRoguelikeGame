@@ -6,7 +6,7 @@ func _init(actionData, parentChar).(actionData, parentChar):
 	pass
 
 func can_execute()->bool:
-	if Dungeon.battleInstance.pauseAIAttack and character.team == Constants.TEAM.ENEMY:
+	if GameGlobals.battleInstance.pauseAIAttack and character.team == Constants.TEAM.ENEMY:
 		return false
 
 	return character.has_targets()

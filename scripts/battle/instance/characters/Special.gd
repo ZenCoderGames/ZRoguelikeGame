@@ -38,7 +38,7 @@ func _is_execute_condition_met():
 		return true
 
 	if data.executeCondition == SpecialData.EXECUTE_CONDITION.NEARBY_ENEMY:
-		var adjacentChars:Array = Dungeon.get_adjacent_characters(character, Constants.RELATIVE_TEAM.ENEMY, 1)
+		var adjacentChars:Array = GameGlobals.dungeon.get_adjacent_characters(character, Constants.RELATIVE_TEAM.ENEMY, 1)
 		return adjacentChars.size()>0
 
 	return false

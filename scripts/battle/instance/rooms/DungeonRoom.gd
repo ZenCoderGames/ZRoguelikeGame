@@ -109,7 +109,7 @@ func _create_wall(r, c):
 	cell.init_entity(wall, Constants.ENTITY_TYPE.STATIC)
 
 func generate_enemy_custom_encounter(encounterId):
-	var customEncounterData:CustomEncounterData = Dungeon.dataManager.get_custom_encounter(encounterId)
+	var customEncounterData:CustomEncounterData = GameGlobals.dataManager.get_custom_encounter(encounterId)
 	for enemySpawnData in customEncounterData.enemySpawnDataList:
 		for i in enemySpawnData.count:
 			generate_enemy(enemySpawnData.type)
@@ -132,8 +132,8 @@ func spawn_random_enemy():
 		var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
 		# spawn random enemy
-		var randomEnemyData:CharacterData = Dungeon.dataManager.get_random_enemy_data()
-		var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
+		var randomEnemyData:CharacterData = GameGlobals.dataManager.get_random_enemy_data()
+		var enemy:Node = GameGlobals.dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 		enemies.append(enemy)
 		return true
 	else:
@@ -152,8 +152,8 @@ func generate_enemy(enemyId):
 		var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
 		# spawn random enemy
-		var randomEnemyData:CharacterData = Dungeon.dataManager.get_enemy_data(enemyId)
-		var enemy:Node = Dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
+		var randomEnemyData:CharacterData = GameGlobals.dataManager.get_enemy_data(enemyId)
+		var enemy:Node = GameGlobals.dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 		enemies.append(enemy)
 		return true
 	else:
@@ -174,8 +174,8 @@ func spawnItem():
 	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
 	# spawn random enemy
-	var randomItemData:ItemData = Dungeon.dataManager.get_random_item_data()
-	var item:Node = Dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
+	var randomItemData:ItemData = GameGlobals.dataManager.get_random_item_data()
+	var item:Node = GameGlobals.dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
 	items.append(item)
 
 func generate_item(itemId):
@@ -193,8 +193,8 @@ func generate_item(itemId):
 	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
 	# spawn random enemy
-	var randomItemData = Dungeon.dataManager.get_item_data(itemId)
-	var item:Node = Dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
+	var randomItemData = GameGlobals.dataManager.get_item_data(itemId)
+	var item:Node = GameGlobals.dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
 	items.append(item)
 
 func register_cell_connection(myCell):
@@ -224,18 +224,18 @@ func clean_up():
 
 func update_visibility():
 	# VISIBILITY
-	if Dungeon.battleInstance.debugShowAllRooms:
+	if GameGlobals.battleInstance.debugShowAllRooms:
 		if isStartRoom:
-			_show_debug(Dungeon.battleInstance.view.debugStartRoomColor)
+			_show_debug(GameGlobals.battleInstance.view.debugStartRoomColor)
 		elif isEndRoom:
-			_show_debug(Dungeon.battleInstance.view.debugEndRoomColor)
+			_show_debug(GameGlobals.battleInstance.view.debugEndRoomColor)
 		elif isCriticalPathRoom:
-			_show_debug(Dungeon.battleInstance.view.debugCriticalPathRoomColor)
+			_show_debug(GameGlobals.battleInstance.view.debugCriticalPathRoomColor)
 	else:	
-		var isPlayerCurrentRoom:bool = Dungeon.player.is_in_room(self)
-		var isPlayerPreviousRoom:bool = Dungeon.player.is_prev_room(self)
+		var isPlayerCurrentRoom:bool = GameGlobals.dungeon.player.is_in_room(self)
+		var isPlayerPreviousRoom:bool = GameGlobals.dungeon.player.is_prev_room(self)
 		var isAdjancentRoom:bool = false
-		var playerCell:DungeonCell = Dungeon.player.cell
+		var playerCell:DungeonCell = GameGlobals.dungeon.player.cell
 		if playerCell.is_connection():
 			for connectionCell in connections:
 				if playerCell.connectedCell == connectionCell:
@@ -260,7 +260,7 @@ func _show():
 
 func _dim():
 	for cell in cells:
-		if cell != Dungeon.player.cell:
+		if cell != GameGlobals.dungeon.player.cell:
 			cell.dim()
 
 func _hide():
@@ -275,11 +275,11 @@ func _show_debug(colorVal):
 func _check_for_doors():
 	CombatEventManager.on_room_combat_started(self)
 
-	if Dungeon.battleInstance.doorsStayOpenDuringBattle:
+	if GameGlobals.battleInstance.doorsStayOpenDuringBattle:
 		return
 
 	if doors.empty():
-		if enemies.size()>0 and !connections.has(Dungeon.player.cell):	
+		if enemies.size()>0 and !connections.has(GameGlobals.dungeon.player.cell):	
 			_create_doors()
 
 func _create_doors():
@@ -313,7 +313,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			if cell.entityObject is Item:
 				var item = cell.entityObject
 				entity.pick_item(item)
-				Dungeon.add_to_dungeon_scenes(item)
+				GameGlobals.dungeon.add_to_dungeon_scenes(item)
 				loadedScenes.erase(item)
 				item.picked()
 				items.erase(item)
@@ -354,7 +354,7 @@ var costFromStart = {}
 var visitedCells = {}
 func update_path_map():
 	# reset variables
-	var playerCell:DungeonCell = Dungeon.player.cell
+	var playerCell:DungeonCell = GameGlobals.dungeon.player.cell
 	visitedCells = {}
 	var cellsToVisit = []
 	costFromStart = {}
@@ -426,7 +426,7 @@ func find_next_best_path_cell(character):
 				lowestNeighbor = cell
 			# if the costs are the same, choose the closest to the player
 			elif pathCostOfCell == lowestCost and\
-				Dungeon.player.cell.pos.distance_to(cell.pos)<Dungeon.player.cell.pos.distance_to(lowestNeighbor.pos):
+				GameGlobals.dungeon.player.cell.pos.distance_to(cell.pos)<GameGlobals.dungeon.player.cell.pos.distance_to(lowestNeighbor.pos):
 				lowestNeighbor = cell
 
 		#if lowestCost>costFromStart[currentCell]:
@@ -453,7 +453,7 @@ func set_as_end_room():
 	var exitCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
 	var exitObj:Node = null
-	if Dungeon.battleInstance.is_last_level():
+	if GameGlobals.battleInstance.is_last_level():
 		exitObj = Utils.create_scene(loadedScenes, "end", Constants.End, Constants.room_end, exitCell)
 		exitCell.init_cell(exitObj, Constants.CELL_TYPE.END)
 	else:
@@ -465,7 +465,7 @@ func pre_update_entities():
 		enemy.pre_update()
 
 func update_entities():
-	if Dungeon.player.cell.is_connection() or enemies.size()==0:
+	if GameGlobals.dungeon.player.cell.is_connection() or enemies.size()==0:
 		CombatEventManager.on_all_enemy_turn_completed(self)
 		return
 
@@ -490,10 +490,10 @@ func _update_next_enemy():
 	else:
 		_prevProcessedEnemy = nextEnemy
 		nextEnemy.connect("OnTurnCompleted", self, "_update_next_enemy")
-		if Utils.is_adjacent(nextEnemy, Dungeon.player):
-			yield(Dungeon.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES_ADJACENT_TO_PLAYER), "timeout")
+		if Utils.is_adjacent(nextEnemy, GameGlobals.dungeon.player):
+			yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES_ADJACENT_TO_PLAYER), "timeout")
 		else:
-			yield(Dungeon.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES), "timeout")
+			yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES), "timeout")
 		
 		if nextEnemy!=null:
 			nextEnemy.update()

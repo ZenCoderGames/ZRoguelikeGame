@@ -31,7 +31,7 @@ func _on_special_pressed():
 	CombatEventManager.on_player_special_ability_pressed()
 
 func _on_mouse_entered():
-	CombatEventManager.on_show_info("Special Ability", Dungeon.player.special.data.description)
+	CombatEventManager.on_show_info("Special Ability", GameGlobals.dungeon.player.special.data.description)
 
 func _on_mouse_exited():
 	CombatEventManager.on_hide_info()

@@ -9,7 +9,7 @@ var lastVisitedCellsSincePlayerMoved:Array
 func init(charDataVal, teamVal):
 	.init(charDataVal, teamVal)
 
-	Dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_moved")
+	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_moved")
 
 func update():
 	.update()
@@ -21,7 +21,7 @@ func update():
 			else:
 				return
 
-	if Dungeon.player.status.is_invisible():
+	if GameGlobals.dungeon.player.status.is_invisible():
 		on_turn_completed()
 		return
 
@@ -35,8 +35,8 @@ func update():
 func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 	.move_to_cell(newCell, triggerTurnCompleteEvent)
 
-	if Dungeon.player!=null:
-		if(newCell.is_rowcol_adjacent(Dungeon.player.cell)):
+	if GameGlobals.dungeon.player!=null:
+		if(newCell.is_rowcol_adjacent(GameGlobals.dungeon.player.cell)):
 			CombatEventManager.emit_signal("OnEnemyMovedAdjacentToPlayer", self)
 		
 		if !lastVisitedCellsSincePlayerMoved.has(newCell):
@@ -69,7 +69,7 @@ func _los_check_in_dirn(rDir:int, cDir:int):
 		newC = newC + cDir * 1
 		var nextCell:DungeonCell = currentRoom.get_cell(newR, newC)
 		if nextCell!=null:
-			if nextCell == Dungeon.player.cell:
+			if nextCell == GameGlobals.dungeon.player.cell:
 				return true
 			if !nextCell.is_empty():
 				return false

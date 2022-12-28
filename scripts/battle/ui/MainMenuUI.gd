@@ -35,7 +35,7 @@ func _on_dungeon_recreated():
 	_shared_init()
 
 func _shared_init():
-	Dungeon.player.connect("OnDeath", self, "_on_game_over")
+	GameGlobals.dungeon.player.connect("OnDeath", self, "_on_game_over")
 
 func show_menu():
 	baseMenuUI.visible = true
@@ -58,13 +58,13 @@ func on_settings():
 	pass
 
 func _on_game_over():
-	yield(Dungeon.battleInstance.get_tree().create_timer(Constants.SHOW_DEATH_UI_TIME), "timeout")
+	yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.SHOW_DEATH_UI_TIME), "timeout")
 	
 	get_node(".").visible = true
 	deathUI.visible = true
 	baseMenuUI.visible = false
 
-	yield(Dungeon.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME), "timeout")
+	yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME), "timeout")
 
 	baseMenuUI.visible = true
 	characterSelectUI.visible = false

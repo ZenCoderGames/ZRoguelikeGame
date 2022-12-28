@@ -20,7 +20,7 @@ func execute():
 		return
 
 	if actionData.cellRange>0:
-		var adjacentChars:Array = Dungeon.get_adjacent_characters(character, Constants.RELATIVE_TEAM.ENEMY, (actionData as ActionFindTargetsData).cellRange)
+		var adjacentChars:Array = GameGlobals.dungeon.get_adjacent_characters(character, Constants.RELATIVE_TEAM.ENEMY, (actionData as ActionFindTargetsData).cellRange)
 		
 		for i in actionData.maxTargets:
 			if i>=adjacentChars.size():

@@ -54,18 +54,18 @@ func _shared_init():
 	playerUI = CharacterUI.instance()
 	playerPanel.add_child(playerUI)
 
-	inventoryUI.init(Dungeon.player)
+	inventoryUI.init(GameGlobals.dungeon.player)
 	
-	Dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_move")
-	Dungeon.player.connect("OnNearbyEntityFound", self, "_on_entity_nearby")
-	Dungeon.player.inventory.connect("OnItemAdded", self, "_on_item_picked_by_player")
+	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_move")
+	GameGlobals.dungeon.player.connect("OnNearbyEntityFound", self, "_on_entity_nearby")
+	GameGlobals.dungeon.player.inventory.connect("OnItemAdded", self, "_on_item_picked_by_player")
 	
-	playerUI.init(Dungeon.player)
-	levelLabel.text = str("Level: ", Dungeon.battleInstance.get_current_level(), "/", Dungeon.battleInstance.get_max_levels())
+	playerUI.init(GameGlobals.dungeon.player)
+	levelLabel.text = str("Level: ", GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
 	playerSpecialUI.visible = true
 
 func _on_turn_taken():
-	turnLabel.text = str("Turns: ", Dungeon.turnsTaken)
+	turnLabel.text = str("Turns: ", GameGlobals.dungeon.turnsTaken)
 	
 func _on_attack(attacker, defender, damage):
 	detailsLabel.text = str(attacker.displayName, " attacked ", defender.displayName, " for ", damage, " damage")

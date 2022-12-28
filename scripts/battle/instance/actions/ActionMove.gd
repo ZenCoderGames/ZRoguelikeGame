@@ -6,7 +6,7 @@ func _init(actionData, parentChar).(actionData, parentChar):
 	pass
 
 func can_execute()->bool:
-	if Dungeon.battleInstance.pauseAIMovement and character.team == Constants.TEAM.ENEMY:
+	if GameGlobals.battleInstance.pauseAIMovement and character.team == Constants.TEAM.ENEMY:
 		return false
 
 	return true

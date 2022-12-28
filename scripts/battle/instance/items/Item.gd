@@ -14,14 +14,14 @@ func init(itemData, myCell):
 
 func init_on_picked_up(character):
 	if data.spellId != "":
-		spell = Spell.new(Dungeon.dataManager.get_spell_data(data.spellId), character)
+		spell = Spell.new(GameGlobals.dataManager.get_spell_data(data.spellId), character)
 
 func consume(character):
 	if data.is_consumable():
 		for statModifier in data.statModifierDataList:
 			character.modify_stat_value_from_modifier(statModifier)
 		if !data.statusEffectId.empty():
-			var statusEffectData:StatusEffectData = Dungeon.dataManager.get_status_effect_data(data.statusEffectId)
+			var statusEffectData:StatusEffectData = GameGlobals.dataManager.get_status_effect_data(data.statusEffectId)
 			character.add_status_effect(statusEffectData)
 
 func can_activate()->bool:
@@ -42,7 +42,7 @@ func picked():
 
 func on_equipped(character):
 	if !data.passiveId.empty():
-		passive = character.add_passive(Dungeon.dataManager.get_passive_data(data.passiveId))
+		passive = character.add_passive(GameGlobals.dataManager.get_passive_data(data.passiveId))
 	
 func on_unequipped(character):
 	if !data.passiveId.empty():

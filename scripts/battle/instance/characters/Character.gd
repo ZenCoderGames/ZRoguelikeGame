@@ -58,11 +58,11 @@ func init(charDataVal, teamVal):
 	displayName = charData.displayName
 	team = teamVal
 	if team == Constants.TEAM.PLAYER:
-		originalColor = Dungeon.battleInstance.view.playerDamageColor
-		damageText.self_modulate = Dungeon.battleInstance.view.enemyDamageColor
+		originalColor = GameGlobals.battleInstance.view.playerDamageColor
+		damageText.self_modulate = GameGlobals.battleInstance.view.enemyDamageColor
 	elif team == Constants.TEAM.ENEMY:
-		originalColor = Dungeon.battleInstance.view.enemyDamageColor
-		damageText.self_modulate = Dungeon.battleInstance.view.playerDamageColor
+		originalColor = GameGlobals.battleInstance.view.enemyDamageColor
+		damageText.self_modulate = GameGlobals.battleInstance.view.playerDamageColor
 
 	# Stats
 	for statData in charData.statDataList:
@@ -70,8 +70,8 @@ func init(charDataVal, teamVal):
 		if stat!=null:
 			stats.append(stat)
 			statDict[statData.type] = stat
-			if Dungeon.dataManager.is_complex_stat_data(statData.type):
-				var complexStatData:ComplexStatData = Dungeon.dataManager.get_complex_stat_data(statData.type)
+			if GameGlobals.dataManager.is_complex_stat_data(statData.type):
+				var complexStatData:ComplexStatData = GameGlobals.dataManager.get_complex_stat_data(statData.type)
 				_create_linked_stat(complexStatData.linkedStatType, statData.type, complexStatData.linkedStatMultiplier)
 
 	# Actions
@@ -170,9 +170,9 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statModifierData.type:
-			if Dungeon.dataManager.is_complex_stat_data(statModifierData.type):
+			if GameGlobals.dataManager.is_complex_stat_data(statModifierData.type):
 				stat.modify_base_value(stat.get_base_value() + statModifierData.value)
-				var complexStatData:ComplexStatData = Dungeon.dataManager.get_complex_stat_data(statModifierData.type)
+				var complexStatData:ComplexStatData = GameGlobals.dataManager.get_complex_stat_data(statModifierData.type)
 				refresh_linked_stat_value(complexStatData.linkedStatType)
 			
 			if statModifierData.value!=0:
@@ -319,9 +319,9 @@ func show_damage_text(entity, dmg):
 		return
 	
 	"""if(entity.team == Constants.TEAM.ENEMY):
-		damageText.modulate = Dungeon.battleInstance.view.playerDamageColor
+		damageText.modulate = GameGlobals.battleInstance.view.playerDamageColor
 	else:
-		damageText.modulate = Dungeon.battleInstance.view.enemyDamageColor"""
+		damageText.modulate = GameGlobals.battleInstance.view.enemyDamageColor"""
 	damageText.visible = true
 	damageText.text = str(dmg)
 	_create_damage_text_tween(entity)
@@ -330,9 +330,9 @@ func show_damage_text(entity, dmg):
 
 func show_blocked_text(entity):
 	"""if(entity.team == Constants.TEAM.PLAYER):
-		damageText.modulate = Dungeon.battleInstance.view.playerDamageColor
+		damageText.modulate = GameGlobals.battleInstance.view.playerDamageColor
 	else:
-		damageText.modulate = Dungeon.battleInstance.view.enemyDamageColor"""
+		damageText.modulate = GameGlobals.battleInstance.view.enemyDamageColor"""
 	damageText.visible = true
 	damageText.text = "Immune"
 	_create_damage_text_tween(entity)

@@ -11,4 +11,4 @@ func can_execute()->bool:
 func execute():
     var actionStatusEffectData:ActionApplyStatusEffectData = actionData as ActionApplyStatusEffectData
     if actionStatusEffectData.target == "SELF":
-        character.add_status_effect(Dungeon.dataManager.get_status_effect_data(actionStatusEffectData.statusEffectId))
+        character.add_status_effect(GameGlobals.dataManager.get_status_effect_data(actionStatusEffectData.statusEffectId))

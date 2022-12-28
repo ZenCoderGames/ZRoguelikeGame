@@ -12,7 +12,7 @@ func init_from_data():
 	if initialized:
 		return
 		
-	for heroData in Dungeon.dataManager.heroDataList:
+	for heroData in GameGlobals.dataManager.heroDataList:
 		var charSelectItem = CharacterSelectItemUI.instance()
 		charSelectHolder.add_child(charSelectItem)
 		charSelectItem.init_from_data(heroData)
