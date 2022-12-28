@@ -6,8 +6,8 @@ var USE_SIMPLE_LOS:bool
 var _hasSeenPlayer:bool
 var lastVisitedCellsSincePlayerMoved:Array
 
-func init(charDataVal, teamVal):
-	.init(charDataVal, teamVal)
+func init(charId:int, charDataVal, teamVal):
+	.init(charId, charDataVal, teamVal)
 
 	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_moved")
 

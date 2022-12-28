@@ -17,8 +17,8 @@ onready var levelUpLabel:Node = $"%LevelUpLabel"
 
 var special:Special
 
-func init(charData, teamVal):
-	.init(charData, teamVal)
+func init(charId:int, charData, teamVal):
+	.init(charId, charData, teamVal)
 
 	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer", self, "on_enemy_moved_adjacent")
 	HitResolutionManager.connect("OnKill", self, "_on_kill")

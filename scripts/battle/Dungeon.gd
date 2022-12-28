@@ -5,6 +5,7 @@ extends Node
 var rooms:Array = []
 const intersectionBuffer:int = 0
 
+var charCounter:int = 0
 var player:PlayerCharacter = null
 var turnsTaken:int = -1
 
@@ -23,6 +24,8 @@ func init(dungeonDataRef:DungeonData):
 	isDungeonFinished = false
 
 func create(recreatePlayer:bool) -> void:
+	charCounter = 0
+
 	_init_rooms()
 	_init_connections()
 	_init_path()
@@ -424,7 +427,8 @@ func load_character(parentContainer, cell, characterData, entityType, groupName,
 	var charPrefab := load(str("res://", characterData.path))
 	var charObject = Utils.create_scene(parentContainer, characterData.displayName, charPrefab, groupName, cell)
 	cell.init_entity(charObject, entityType)
-	charObject.init(characterData, team)
+	charObject.init(charCounter, characterData, team)
+	charCounter = charCounter + 1
 	charObject.move_to_cell(cell)
 	if team == Constants.TEAM.PLAYER:
 		charObject.self_modulate = GameGlobals.battleInstance.view.playerDamageColor

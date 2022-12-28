@@ -21,6 +21,10 @@ static func create(actionData:ActionData, parentChar):
 		return ActionAddStatModifier.new(actionData, parentChar)
 	elif actionData.type==ActionModifyVisualData.ID:
 		return ActionModifyVisual.new(actionData, parentChar)
+	elif actionData.type==ActionSpawnEffectData.ID:
+		return ActionSpawnEffect.new(actionData, parentChar)
+	elif actionData.type==ActionDestroyEffectData.ID:
+		return ActionDestroyEffect.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)
 	return null

@@ -53,7 +53,10 @@ signal OnInitialized()
 
 var originalColor:Color
 
-func init(charDataVal, teamVal):
+var charId:int
+
+func init(id:int, charDataVal, teamVal):
+	charId = id
 	charData = charDataVal
 	displayName = charData.displayName
 	team = teamVal
