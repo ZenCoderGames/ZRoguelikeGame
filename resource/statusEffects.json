@@ -47,6 +47,12 @@
 						"effectPath": "entity/effects/Effect_StatusEffect_Protection.tscn",
 						"parent": true
 					}
+				},
+				{
+					"type": "ADD_PASSIVE",
+					"params": {
+						"passiveId": "PROTECTION_PUSHBACK"
+					}
 				}
 			],
 			"endTimeline": [ 
@@ -60,6 +66,12 @@
 					"type": "DESTROY_EFFECT",
 					"params": {
 						"effectId": "ProtectionEffect"
+					}
+				},
+				{
+					"type": "REMOVE_PASSIVE",
+					"params": {
+						"passiveId": "PROTECTION_PUSHBACK"
 					}
 				}
 			]

@@ -69,11 +69,10 @@ Roguelike Dev:
 (D)- Camera fix for when near edges of room
 (D)- Class Specials
 (D)- Better enemy pathing
-- EffectManager/Global update
-- EffectData
+(D)- EffectManager/Global update
 - VFX Upgrades (Barrier, Protection, Lifesteal, Lifedrain, Lightning bolt, Groundpound)
 - Better doors, death, exit sprites
-- Game Feel (death)
+- Game Feel (hitSparks, death)
 - SFX Manager/SFXData
 
 - New Status Effects (Stun, Freeze, Burn, Poison, Shock, Root, Sleep)

@@ -60,7 +60,11 @@ func init_passives():
 		passiveDataMap[newPassiveData.id] = newPassiveData
 
 func get_passive_data(id):
-	return passiveDataMap[id]
+	if passiveDataMap.has(id):
+		return passiveDataMap[id]
+	else:
+		print("ERROR: INVALID PASSIVE ID Requested: " + id)
+		return null
 
 func init_items():
 	var data = Utils.load_data_from_file("resource/items.json")

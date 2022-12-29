@@ -35,3 +35,10 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 		emit_signal("OnPostHit", sourceChar, targetChar, finalDamage)
 
 	return finalDamage
+
+func push(target, source, amount:int, awayFromSource:bool):
+	if awayFromSource:
+		var dirnX:int = (source.cell.col - target.cell.col) * amount
+		var dirnY:int = (source.cell.row - target.cell.row) * amount
+
+		target.move(-dirnX, -dirnY)

@@ -20,7 +20,9 @@ func _init(dataJS):
 
     var actionsJSList = dataJS["timeline"]
     for actionJS in actionsJSList:
-        timeline.append(ActionDataTypes.create(actionJS))
+        var actionData:ActionData = ActionDataTypes.create(actionJS)
+        if actionData!=null:
+            timeline.append(actionData)
 
 func get_display_name():
     return name

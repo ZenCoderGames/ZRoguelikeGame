@@ -43,6 +43,8 @@ func _init(dataJS):
 
 	var actionsJSList = dataJS["timeline"]
 	for actionJS in actionsJSList:
-		timeline.append(ActionDataTypes.create(actionJS))
+		var actionData:ActionData = ActionDataTypes.create(actionJS)
+		if actionData!=null:
+			timeline.append(actionData)
 
 	executeCondition = EXECUTE_CONDITION.get(dataJS["executeCondition"])

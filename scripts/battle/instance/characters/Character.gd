@@ -29,6 +29,7 @@ var prevRoom = null
 var targetList:Array = []
 var lastHitTarget:Character
 var lastKilledTarget:Character
+var lastEnemyThatHitMe:Character
 
 var statusEffectList:Array = []
 var passiveList:Array = []
@@ -262,9 +263,13 @@ func attack(entity):
 			Utils.freeze_frame(Constants.HIT_PAUSE_DEFAULT_AMOUNT, Constants.HIT_PAUSE_DEFAULT_DURATION)
 		CombatEventManager.on_any_attack(entity.isDead)
 
+		yield(get_tree().create_timer(0.1), "timeout")
+
 		emit_signal("OnPostAttack", entity)
 
-	on_turn_completed()
+		on_turn_completed()
+	else:
+		on_turn_completed()
 
 func can_take_damage()->bool:
 	if status.is_invulnerable():
@@ -274,10 +279,14 @@ func can_take_damage()->bool:
 
 func take_damage(_damageSource, damage):
 	modify_stat_value(StatData.STAT_TYPE.HEALTH, -damage)
+	if _damageSource!=null:
+		lastEnemyThatHitMe = _damageSource
 	return get_health()
 
 func on_blocked_hit(_attacker):
 	show_blocked_text(self)
+	if _attacker!=null:	
+		lastEnemyThatHitMe = _attacker
 
 func show_damage_from_hit(attacker, dmg):
 	show_hit(attacker, dmg)
@@ -393,6 +402,9 @@ func get_random_target():
 func get_targets():
 	return targetList
 
+func clear_targets():
+	targetList.clear()
+
 # SPELLS
 func on_spell_activated(_spellItem):
 	on_turn_completed()
@@ -412,6 +424,11 @@ func remove_status_effect(statusEffect):
 
 # PASSIVES
 func add_passive(passiveData:PassiveData):
+	# Don't add duplicates
+	for passive in passiveList:
+		if passive.data == passiveData:
+			return passive
+
 	var passive:Passive = Passive.new(self, passiveData)
 	passiveList.append(passive)
 	emit_signal("OnPassiveAdded", self, passive)
@@ -422,6 +439,14 @@ func remove_passive(passive:Passive):
 	passiveList.erase(passive)
 	emit_signal("OnPassiveRemoved", self, passive)
 	on_stats_changed()
+
+func remove_passive_from_data(passiveData:PassiveData):
+	for passive in passiveList:
+		if passive.data == passiveData:
+			passiveList.erase(passive)
+			emit_signal("OnPassiveRemoved", self, passive)
+			on_stats_changed()
+			break
 
 # TURNS
 func on_turn_completed():

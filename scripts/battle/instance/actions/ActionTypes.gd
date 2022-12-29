@@ -25,6 +25,12 @@ static func create(actionData:ActionData, parentChar):
 		return ActionSpawnEffect.new(actionData, parentChar)
 	elif actionData.type==ActionDestroyEffectData.ID:
 		return ActionDestroyEffect.new(actionData, parentChar)
+	elif actionData.type==ActionAddPassiveData.ID:
+		return ActionAddPassive.new(actionData, parentChar)
+	elif actionData.type==ActionRemovePassiveData.ID:
+		return ActionRemovePassive.new(actionData, parentChar)
+	elif actionData.type==ActionPushData.ID:
+		return ActionPush.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)
 	return null

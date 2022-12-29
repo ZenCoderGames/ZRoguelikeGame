@@ -1,6 +1,6 @@
 class_name ActionDataTypes
 
-static func create(dataJS):
+static func create(dataJS)->ActionData:
 	var actionType = dataJS["type"]
 	if actionType==ActionMoveData.ID:
 		return ActionMoveData.new(dataJS)
@@ -26,6 +26,12 @@ static func create(dataJS):
 		return ActionSpawnEffectData.new(dataJS)
 	elif actionType==ActionDestroyEffectData.ID:
 		return ActionDestroyEffectData.new(dataJS)
+	elif actionType==ActionAddPassiveData.ID:
+		return ActionAddPassiveData.new(dataJS)
+	elif actionType==ActionRemovePassiveData.ID:
+		return ActionRemovePassiveData.new(dataJS)
+	elif actionType==ActionPushData.ID:
+		return ActionPushData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

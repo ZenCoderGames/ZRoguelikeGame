@@ -21,6 +21,31 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PROTECTION_PUSHBACK",
+			"name": "Protection Pushback",
+			"description": "Push back any enemies that hit the player while [Protected] by 1 tile",
+			"conditions": [
+				"ON_TAKE_HIT",
+				"ON_BLOCKED_HIT"
+			],
+			"linkedToStatusEffect": "PROTECTION",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"lastEnemyThatHitMe": true
+					}
+				},
+				{
+					"type": "PUSH",
+					"params": {
+						"amount": 1,
+						"awayFromSource": true
+					}
+				}
+			]
 		}
 	]
 }

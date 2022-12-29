@@ -34,11 +34,15 @@ func _init(dataJS):
 
 	var actionsJSList = dataJS["startTimeline"]
 	for actionJS in actionsJSList:
-		startTimeline.append(ActionDataTypes.create(actionJS))
+		var actionData:ActionData = ActionDataTypes.create(actionJS)
+		if actionData!=null:
+			startTimeline.append(actionData)
 
 	actionsJSList = dataJS["endTimeline"]
 	for actionJS in actionsJSList:
-		endTimeline.append(ActionDataTypes.create(actionJS))
+		var actionData:ActionData = ActionDataTypes.create(actionJS)
+		if actionData!=null:
+			endTimeline.append(actionData)
 
 func get_display_name():
 	return name
