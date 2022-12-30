@@ -18,6 +18,9 @@ var customEncounterDataList = []
 
 var dungeonDataList:Array
 
+var abilityDataDict = {}
+var abilityList:Array
+
 func _init():
 	init_dungeon_data()
 	init_complex_stats()
@@ -25,6 +28,7 @@ func _init():
 	init_passives()
 	init_spells()
 	init_items()
+	init_abilities()
 	init_characters()
 	init_encounters()
 
@@ -152,3 +156,18 @@ func get_custom_encounter(encounterId):
 
 	print("Invalid Custom Encounter Data: ", encounterId)
 	return null
+
+func init_abilities():
+	var data = Utils.load_data_from_file("resource/abilities.json")
+	var abilityDataJSList:Array = data["abilities"]
+	for abilityDataJS in abilityDataJSList:
+		var newAbilityData = AbilityData.new(abilityDataJS)
+		abilityDataDict[newAbilityData.id] = newAbilityData
+		abilityList.append(newAbilityData)
+
+func get_ability_data(id):
+	if abilityDataDict.has(id):
+		return abilityDataDict[id]
+	else:
+		print("ERROR: INVALID ABILITY ID Requested: " + id)
+		return null

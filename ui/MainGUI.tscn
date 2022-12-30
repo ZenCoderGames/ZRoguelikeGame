@@ -104,6 +104,7 @@ text = "SPECIAL"
 icon_align = 1
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
+visible = false
 margin_left = 590.0
 margin_right = 800.0
 margin_bottom = 550.0

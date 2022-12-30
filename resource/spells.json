@@ -1,7 +1,7 @@
 {
 	"spells": [
 		{
-			"id": "LIGHTNING_BOLT",
+			"id": "SPELL_LIGHTNING_BOLT",
 			"timeline": [
 				{
 					"type": "FIND_TARGETS",
@@ -19,7 +19,7 @@
 			]
 		},
 		{
-			"id": "GROUND_POUND",
+			"id": "SPELL_GROUND_POUND",
 			"timeline": [
 				{
 					"type": "FIND_TARGETS",

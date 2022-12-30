@@ -1,7 +1,7 @@
 {
 	"passives": [
 		{
-			"id": "LIFESTEAL_ON_KILL_01",
+			"id": "PASSIVE_LIFESTEAL_ON_KILL_01",
 			"name": "Lifesteal",
 			"description": "Lifesteal On Hit",
 			"conditions": [
@@ -23,14 +23,13 @@
 			]
 		},
 		{
-			"id": "PROTECTION_PUSHBACK",
+			"id": "PASSIVE_PROTECTION_PUSHBACK",
 			"name": "Protection Pushback",
 			"description": "Push back any enemies that hit the player while [Protected] by 1 tile",
 			"conditions": [
 				"ON_TAKE_HIT",
 				"ON_BLOCKED_HIT"
 			],
-			"linkedToStatusEffect": "PROTECTION",
 			"timeline": [
 				{
 					"type": "FIND_TARGETS",

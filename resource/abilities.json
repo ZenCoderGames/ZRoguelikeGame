@@ -1,0 +1,64 @@
+{
+	"abilities": [
+		{
+			"id": "ABILITY_PROTECTION_PUSHBACK",
+			"characterId": "KNIGHT",
+			"name": "(Upgrade) Protection Pushback",
+			"description": "Push back any enemies that hit the player while [Protected] by 1 tile",
+			"abilityUpgrades": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_PROTECTION",
+						"startTimeline": [
+							{
+								"type": "ADD_PASSIVE",
+								"params": {
+									"passiveId": "PASSIVE_PROTECTION_PUSHBACK"
+								}
+							}
+						],
+						"endTimeline": [
+							{
+								"type": "REMOVE_PASSIVE",
+								"params": {
+									"passiveId": "PASSIVE_PROTECTION_PUSHBACK"
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_PROTECTION_LONGER",
+			"characterId": "KNIGHT",
+			"name": "(Upgrade) Protection++",
+			"description": "Allows [Protection] to last for 1 Additional Turn",
+			"abilityUpgrades": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_PROTECTION",
+						"instanceCountModifier": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_PROTECTION_FASTER",
+			"characterId": "KNIGHT",
+			"name": "(Upgrade) Protection Special++",
+			"description": "Allows the Protection Special to charge up with 1 less hit",
+			"abilityUpgrades": [
+				{
+					"type": "MODIFY_SPECIAL",
+					"params": {
+						"specialId": "KNIGHT_SPECIAL",
+						"countModifier": -1
+					}
+				}
+			]
+		}
+	]
+}

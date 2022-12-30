@@ -32,13 +32,13 @@
 					"id": "KNIGHT_SPECIAL",
 					"description": "3 successful attacks charges up the ability. \nOn use, grants the player [Protection] for 1 turn",
 					"conditions": ["ON_POST_HIT"],
-					"count": 1,
+					"count": 4,
 					"executeCondition": "NONE",
 					"timeline": [
 						{
 							"type": "APPLY_STATUS_EFFECT",
 							"params": {
-								"statusEffectId": "PROTECTION",
+								"statusEffectId": "STATUS_EFFECT_PROTECTION",
 								"target": "SELF"
 							}
 						}
@@ -131,7 +131,7 @@
 						{
 							"type": "APPLY_STATUS_EFFECT",
 							"params": {
-								"statusEffectId": "STEALTH",
+								"statusEffectId": "STATUS_EFFECT_STEALTH",
 								"target": "SELF"
 							}
 						}

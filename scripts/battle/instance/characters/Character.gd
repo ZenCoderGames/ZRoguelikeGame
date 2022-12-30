@@ -32,7 +32,9 @@ var lastKilledTarget:Character
 var lastEnemyThatHitMe:Character
 
 var statusEffectList:Array = []
+var statusEffectModifierList:Array = []
 var passiveList:Array = []
+var abilityList:Array = []
 
 signal OnCharacterMove(x, y)
 signal OnCharacterMoveToCell()
@@ -44,10 +46,12 @@ signal OnPreAttack(defender)
 signal OnPostAttack(defender)
 var successfulDamageThisFrame:int
 
-signal OnPassiveAdded(character, passive)
-signal OnPassiveRemoved(character, passive)
 signal OnStatusEffectAdded(character, statusEffect)
 signal OnStatusEffectRemoved(character, statusEffect)
+signal OnPassiveAdded(character, passive)
+signal OnPassiveRemoved(character, passive)
+signal OnAbilityAdded(character, ability)
+signal OnAbilityRemoved(character, ability)
 
 signal OnTurnCompleted()
 signal OnInitialized()
@@ -422,6 +426,22 @@ func remove_status_effect(statusEffect):
 	emit_signal("OnStatusEffectRemoved", self, statusEffect)
 	on_stats_changed()
 
+func add_status_effect_modifier(statusEffectModifier:StatusEffectModifier):
+	statusEffectModifierList.append(statusEffectModifier)
+
+func remove_status_effect_modifier(statusEffectId:String):
+	for i in range(statusEffectModifierList.size() - 1, -1, -1):
+		if (statusEffectId == statusEffectModifierList[i].statusEffectId):
+			statusEffectModifierList.remove(i)
+
+func get_status_effect_modifiers(statusEffectId:String):
+	var matchedStatusEffectModifiers:Array = []
+	for statusEffectModifier in statusEffectModifierList:
+		if statusEffectModifier.statusEffectId == statusEffectId:
+			matchedStatusEffectModifiers.append(statusEffectModifier)
+
+	return matchedStatusEffectModifiers
+
 # PASSIVES
 func add_passive(passiveData:PassiveData):
 	# Don't add duplicates
@@ -447,6 +467,19 @@ func remove_passive_from_data(passiveData:PassiveData):
 			emit_signal("OnPassiveRemoved", self, passive)
 			on_stats_changed()
 			break
+
+# ABILITIES
+func add_ability(abilityData:AbilityData):
+	var ability = Ability.new(self, abilityData)
+	abilityList.append(ability)
+	emit_signal("OnAbilityAdded", self, ability)
+	on_stats_changed()
+	return ability
+
+func remove_ability(ability):
+	abilityList.erase(ability)
+	emit_signal("OnAbilityRemoved", self, ability)
+	on_stats_changed()
 
 # TURNS
 func on_turn_completed():

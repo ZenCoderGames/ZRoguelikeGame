@@ -1,7 +1,7 @@
 {
 	"items": [
 		{
-			"id": "SWORD_00",
+			"id": "ITEM_SWORD_00",
 			"name": "Basic Sword",
 			"description": "(+1 Strength)",
 			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's Strength by 1",
@@ -18,7 +18,7 @@
 			]
 		},
 		{
-			"id": "HEAVY_SWORD",
+			"id": "ITEM_HEAVY_SWORD",
 			"name": "Heavy Sword",
 			"description": "A heavier more powerful sword\n(+4 damage)",
 			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +4",
@@ -35,7 +35,7 @@
 			]
 		},
 		{
-			"id": "NECRO_STAFF",
+			"id": "ITEM_NECRO_STAFF",
 			"name": "Necro Staff",
 			"description": "A staff that leeches health back on kill\n[Regen +1 Health]",
 			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +1 health on kill",
@@ -44,11 +44,11 @@
 			"slot": "WEAPON",
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "LIFESTEAL_ON_KILL_01"
+			"passiveId": "PASSIVE_LIFESTEAL_ON_KILL_01"
 		},
 		{
 			"#disable": true,
-			"id": "HEALTH_POTION_00",
+			"id": "ITEM_HEALTH_POTION_00",
 			"name": "Small Health Potion",
 			"description": "A tiny health potion\n(+4 health)",
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +4",
@@ -65,7 +65,7 @@
 		},
 		{
 			"#disable": true,
-			"id": "PRISMATIC_SHIELD",
+			"id": "ITEM_PRISMATIC_SHIELD",
 			"name": "Prismatic Shield",
 			"description": "Block 1 Instance of Any Damage",
 			"fullDescription": "Block 1 Instance of Any Damage",
@@ -73,11 +73,11 @@
 			"type": "CONSUMABLE",
 			"tier": 0,
 			"maxCount": 1,
-			"statusEffectId": "BARRIER"
+			"statusEffectId": "STATUS_EFFECT_BARRIER"
 		},
 		{
 			"#disable": true,
-			"id": "HEALTH_UPGRADE_00",
+			"id": "ITEM_HEALTH_UPGRADE_00",
 			"name": "Blessing of health",
 			"description": "A boost to base health\n(+2 Vitality)",
 			"fullDescription": "A blessing from a goddess to those who seek it.\nIncrease Vitality by +2",
@@ -94,7 +94,7 @@
 		},
 		{
 			"#disable": true,
-			"id": "SPELL_LIGHTNING_BOLT",
+			"id": "ITEM_SPELL_LIGHTNING_BOLT",
 			"name": "Lightning Bolt",
 			"description": "A Powerful Lightning Bolt",
 			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you for 10 damage",
@@ -102,11 +102,11 @@
 			"type": "SPELL",
 			"tier": 2,
 			"maxCount": 1,
-			"spellId": "LIGHTNING_BOLT"
+			"spellId": "SPELL_LIGHTNING_BOLT"
 		},
 		{
 			"#disable": true,
-			"id": "SPELL_GROUND_POUND",
+			"id": "ITEM_SPELL_GROUND_POUND",
 			"name": "Ground Pound",
 			"description": "Slam the ground and do damage to nearby enemies",
 			"fullDescription": "Slam the ground and do 5 damage to nearby enemies",
@@ -114,7 +114,7 @@
 			"type": "SPELL",
 			"tier": 2,
 			"maxCount": 1,
-			"spellId": "GROUND_POUND"
+			"spellId": "SPELL_GROUND_POUND"
 		}
 	]
 }

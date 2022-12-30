@@ -1,7 +1,7 @@
 {
 	"statusEffects": [
 		{
-			"id": "BARRIER",
+			"id": "STATUS_EFFECT_BARRIER",
 			"name": "Barrier",
 			"description": "Blocks 1 Instance Of Damage",
 			"instanceCount": 1,
@@ -26,7 +26,7 @@
 			]
 		},
 		{
-			"id": "PROTECTION",
+			"id": "STATUS_EFFECT_PROTECTION",
 			"name": "Protection",
 			"description": "Blocks All Instance Of Damage For 1 Turn",
 			"instanceCount": 1,
@@ -47,12 +47,6 @@
 						"effectPath": "entity/effects/Effect_StatusEffect_Protection.tscn",
 						"parent": true
 					}
-				},
-				{
-					"type": "ADD_PASSIVE",
-					"params": {
-						"passiveId": "PROTECTION_PUSHBACK"
-					}
 				}
 			],
 			"endTimeline": [ 
@@ -67,17 +61,11 @@
 					"params": {
 						"effectId": "ProtectionEffect"
 					}
-				},
-				{
-					"type": "REMOVE_PASSIVE",
-					"params": {
-						"passiveId": "PROTECTION_PUSHBACK"
-					}
 				}
 			]
 		},
 		{
-			"id": "STEALTH",
+			"id": "STATUS_EFFECT_STEALTH",
 			"name": "Stealth",
 			"description": "Makes the player undetected for 2 turns. Next hit out of stealth does 2x damage.",
 			"instanceCount": 3,

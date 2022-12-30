@@ -45,6 +45,8 @@ func init(entityObj):
 	character.connect("OnPassiveRemoved", self, "on_passive_removed")
 	character.connect("OnStatusEffectAdded", self, "on_status_effect_added")
 	character.connect("OnStatusEffectRemoved", self, "on_status_effect_removed")
+	character.connect("OnAbilityAdded", self, "on_ability_added")
+	character.connect("OnAbilityRemoved", self, "on_ability_removed")
 	character.equipment.connect("OnItemEquipped", self, "_on_item_equipped")
 	character.equipment.connect("OnItemUnEquipped", self, "_on_item_unequipped")
 	character.equipment.connect("OnSpellEquipped", self, "_on_spell_equipped")
@@ -167,6 +169,25 @@ func on_status_effect_removed(_character, statusEffect):
 	if equippedEffects.has(statusEffect):
 		effectContainer.remove_child(equippedEffects[statusEffect])
 		equippedEffects.erase(statusEffect)
+		
+	if equippedEffects.size()==0:
+		effectContainer.visible = false
+		
+	_update_non_base_ui()
+
+func on_ability_added(_character, ability):
+	var newEffectUI = EffectItemUI.instance()
+	effectContainer.add_child(newEffectUI)
+	newEffectUI.init(ability.data)
+	equippedEffects[ability] = newEffectUI
+
+	effectContainer.visible = true
+	_update_non_base_ui()
+
+func on_ability_removed(_character, ability):
+	if equippedEffects.has(ability):
+		effectContainer.remove_child(equippedEffects[ability])
+		equippedEffects.erase(ability)
 		
 	if equippedEffects.size()==0:
 		effectContainer.visible = false

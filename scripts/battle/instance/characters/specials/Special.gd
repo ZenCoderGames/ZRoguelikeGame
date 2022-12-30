@@ -25,8 +25,12 @@ func on_event_triggered():
 
 func _increment():
 	currentCount = currentCount + 1
-	CombatEventManager.on_player_special_ability_progress((float(currentCount))/(float(data.count)))
-	if currentCount==data.count:
+	check_for_ready()
+
+func check_for_ready():
+	var maxCount:int = _get_max_count()
+	CombatEventManager.on_player_special_ability_progress((float(currentCount))/(float(maxCount)))
+	if currentCount==maxCount:
 		_set_ready()
 
 func _set_ready():
@@ -53,3 +57,10 @@ func _reset():
 	isAvailable = false
 	currentCount = 0
 	CombatEventManager.on_player_special_ability_reset()
+
+func _get_max_count()->int:
+	var maxCount:int = data.count
+	var specialModifierList:Array = character.get_special_modifiers(data.id)
+	for specialModifier in specialModifierList:
+		maxCount = maxCount + specialModifier.countModifier
+	return maxCount

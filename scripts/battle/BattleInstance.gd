@@ -17,6 +17,7 @@ export var dontSpawnObstacles:bool
 export var dontSpawnItems:bool
 export var debugSpawnItemInFirstRoom:String
 export var setPlayerInvulnerable:bool
+export var debugGiveAbility:String
 export var debugShowAllRooms:bool
 
 var firstTimeDungeon:bool = false
@@ -49,6 +50,9 @@ func _create_dungeon():
 	_shared_dungeon_init()
 	firstTimeDungeon = true
 	GameEventManager.emit_signal("OnDungeonInitialized")
+
+	if !debugGiveAbility.empty():
+		GameGlobals.dungeon.player.add_ability(GameGlobals.dataManager.get_ability_data(debugGiveAbility))
 
 func recreate_dungeon(newDungeonIdx):
 	currentDungeonIdx = newDungeonIdx
