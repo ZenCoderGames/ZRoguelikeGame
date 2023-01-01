@@ -21,6 +21,10 @@ func update():
 			else:
 				return
 
+	if status.is_stunned():
+		on_turn_completed()
+		return
+
 	if GameGlobals.dungeon.player.status.is_invisible():
 		on_turn_completed()
 		return

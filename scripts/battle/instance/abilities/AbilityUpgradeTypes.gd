@@ -5,6 +5,8 @@ static func create(abilityUpgradeData:AbilityUpgradeData, parentChar):
 		return AbilityUpgradeModifyStatusEffect.new(abilityUpgradeData, parentChar)
 	elif abilityUpgradeData.type==AbilityUpgradeModifySpecialData.ID:
 		return AbilityUpgradeModifySpecial.new(abilityUpgradeData, parentChar)
+	elif abilityUpgradeData.type==AbilityUpgradeAddPassiveData.ID:
+		return AbilityUpgradeAddPassive.new(abilityUpgradeData, parentChar)
 
 	print_debug("[ERROR] Invalid Ability Upgrade Type", abilityUpgradeData.type)
 	return null

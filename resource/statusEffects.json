@@ -1,6 +1,31 @@
 {
 	"statusEffects": [
 		{
+			"id": "STATUS_EFFECT_STUN",
+			"name": "Stun",
+			"description": "Stuns for 1 turn",
+			"instanceCount": 1,
+			"endConditions": [
+				"ON_END_TURN"
+			],
+			"startTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"stunned": 1
+					}
+				}
+			],
+			"endTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"stunned": -1
+					}
+				}
+			]
+		},
+		{
 			"id": "STATUS_EFFECT_BARRIER",
 			"name": "Barrier",
 			"description": "Blocks 1 Instance Of Damage",

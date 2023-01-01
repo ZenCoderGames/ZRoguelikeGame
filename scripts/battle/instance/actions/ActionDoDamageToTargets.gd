@@ -12,6 +12,11 @@ func can_execute()->bool:
 	return character.has_targets()
 
 func execute():
+	var doDamageToTargetsData:ActionDoDamageToTargetsData = actionData as ActionDoDamageToTargetsData
+
 	var targets = character.get_targets()
 	for target in targets:
-		HitResolutionManager.do_hit(character, target, actionData.damage)
+		var damageVal:int = doDamageToTargetsData.damage
+		if doDamageToTargetsData.useCharacterDamage:
+			damageVal = character.get_damage()
+		HitResolutionManager.do_hit(character, target, damageVal)

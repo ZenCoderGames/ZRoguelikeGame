@@ -5,7 +5,9 @@ var name:String
 var description:String
 var instanceCount:int
 var triggerConditions:Array
+var triggerConditionParams:Dictionary
 var forceCompleteTriggerConditions:Array
+var forceCompleteTriggerConditionParams:Dictionary
 
 var startTimeline:Array
 var endTimeline:Array
@@ -24,6 +26,11 @@ func _init(dataJS):
 		else:
 			print("ERROR: Invalid Condition Type For StatusEffectData - ", conditionStr)
 
+	if dataJS.has("endConditionParams"):
+		var conditionParams = dataJS["endConditionParams"]
+		if conditionParams.has("statusEffectId"):
+			triggerConditionParams["statusEffectId"] = conditionParams["statusEffectId"]
+
 	if dataJS.has("forceEndConditions"):
 		conditionsJSList = dataJS["forceEndConditions"]
 		for conditionStr in conditionsJSList:
@@ -31,6 +38,11 @@ func _init(dataJS):
 				forceCompleteTriggerConditions.append(Constants.TRIGGER_CONDITION.get(conditionStr))
 			else:
 				print("ERROR: Invalid Force End Condition Type For StatusEffectData - ", conditionStr)
+
+	if dataJS.has("forceEndConditionParams"):
+		var conditionParams = dataJS["forceEndConditionParams"]
+		if conditionParams.has("statusEffectId"):
+			forceCompleteTriggerConditionParams["statusEffectId"] = conditionParams["statusEffectId"]
 
 	var actionsJSList = dataJS["startTimeline"]
 	for actionJS in actionsJSList:

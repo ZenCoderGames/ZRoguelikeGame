@@ -4,6 +4,7 @@ var id:String
 var name:String
 var description:String
 var triggerConditions:Array
+var triggerConditionParams:Dictionary
 var timeline:Array
 
 func _init(dataJS):
@@ -17,6 +18,11 @@ func _init(dataJS):
             triggerConditions.append(Constants.TRIGGER_CONDITION.get(conditionStr))
         else:
             print("ERROR: Invalid Condition Type For PassiveData - ", conditionStr)
+
+    if dataJS.has("conditionParams"):
+        var conditionParams = dataJS["conditionParams"]
+        if conditionParams.has("statusEffectId"):
+            triggerConditionParams["statusEffectId"] = conditionParams["statusEffectId"]
 
     var actionsJSList = dataJS["timeline"]
     for actionJS in actionsJSList:

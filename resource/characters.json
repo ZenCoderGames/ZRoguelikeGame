@@ -36,10 +36,10 @@
 					"executeCondition": "NONE",
 					"timeline": [
 						{
-							"type": "APPLY_STATUS_EFFECT",
+							"type": "ADD_STATUS_EFFECT",
 							"params": {
 								"statusEffectId": "STATUS_EFFECT_PROTECTION",
-								"target": "SELF"
+								"applyToSource": true
 							}
 						}
 					]
@@ -52,11 +52,11 @@
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
-						"type": "VITALITY",
+						"type": "HEALTH",
 						"value": 10
 					},
 					{
-						"type": "STRENGTH",
+						"type": "DAMAGE",
 						"value": 2
 					}
 				],
@@ -74,7 +74,7 @@
 				},
 				"special": {
 					"id": "BARBARIAN_SPECIAL",
-					"description": "4 successful hits taken by the player charges up the ability. \nOn use, Drain 2 life from each nearby enemy",
+					"description": "4 successful hits taken by the player charges up the ability. \nOn use, Stun each nearby enemy",
 					"conditions": ["ON_TAKE_HIT"],
 					"count": 4,
 					"executeCondition": "NEARBY_ENEMY",
@@ -87,9 +87,10 @@
 							}
 						},
 						{
-							"type": "LIFEDRAIN",
+							"type": "ADD_STATUS_EFFECT",
 							"params": {
-								"flatAmount": 2
+								"statusEffectId": "STATUS_EFFECT_STUN",
+								"applyToTargets": true
 							}
 						}
 					]
@@ -101,11 +102,11 @@
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
-						"type": "VITALITY",
+						"type": "HEALTH",
 						"value": 4
 					},
 					{
-						"type": "STRENGTH",
+						"type": "DAMAGE",
 						"value": 5
 					}
 				],
@@ -129,10 +130,10 @@
 					"executeCondition": "NONE",
 					"timeline": [
 						{
-							"type": "APPLY_STATUS_EFFECT",
+							"type": "ADD_STATUS_EFFECT",
 							"params": {
 								"statusEffectId": "STATUS_EFFECT_STEALTH",
-								"target": "SELF"
+								"applyToSource": true
 							}
 						}
 					]

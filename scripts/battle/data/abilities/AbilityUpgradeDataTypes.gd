@@ -6,6 +6,8 @@ static func create(dataJS)->AbilityUpgradeData:
 		return AbilityUpgradeModifyStatusEffectData.new(dataJS)
 	elif abilityUpgradeType==AbilityUpgradeModifySpecialData.ID:
 		return AbilityUpgradeModifySpecialData.new(dataJS)
+	elif abilityUpgradeType==AbilityUpgradeAddPassiveData.ID:
+		return AbilityUpgradeAddPassiveData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Ability Upgrade Data Type", abilityUpgradeType)
 	return null

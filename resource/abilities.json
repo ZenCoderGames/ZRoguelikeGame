@@ -46,16 +46,60 @@
 			]
 		},
 		{
-			"id": "ABILITY_PROTECTION_FASTER",
+			"id": "ABILITY_KNIGHT_SPECIAL_FASTER",
 			"characterId": "KNIGHT",
-			"name": "(Upgrade) Protection Special++",
-			"description": "Allows the Protection Special to charge up with 1 less hit",
+			"name": "(Upgrade) Knight Special Haste",
+			"description": "Allows the Knight Special to charge up with 2 less hits",
 			"abilityUpgrades": [
 				{
 					"type": "MODIFY_SPECIAL",
 					"params": {
 						"specialId": "KNIGHT_SPECIAL",
-						"countModifier": -1
+						"countModifier": -2
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_STUN_LONGER",
+			"characterId": "BARBARIAN",
+			"name": "(Upgrade) Stun++",
+			"description": "Allows [Stun] to last for 1 Additional Turn",
+			"abilityUpgrades": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STUN",
+						"instanceCountModifier": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_BARBARIAN_SPECIAL_FASTER",
+			"characterId": "BARBARIAN",
+			"name": "(Upgrade) Barbarian Special Haste",
+			"description": "Allows the Barbarian Special to charge up with 2 less hits",
+			"abilityUpgrades": [
+				{
+					"type": "MODIFY_SPECIAL",
+					"params": {
+						"specialId": "BARBARIAN_SPECIAL",
+						"countModifier": -2
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_BARBARIAN_RAGE",
+			"characterId": "BARBARIAN",
+			"name": "(Upgrade) Barbarian Rage",
+			"description": "Every enemy that the Barbarian stuns, increases his damage by 1",
+			"abilityUpgrades": [
+				{
+					"type": "ADD_PASSIVE",
+					"params": {
+						"passiveId": "PASSIVE_BARBARIAN_RAGE"
 					}
 				}
 			]

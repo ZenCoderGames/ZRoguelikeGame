@@ -22,7 +22,7 @@ func consume(character):
 			character.modify_stat_value_from_modifier(statModifier)
 		if !data.statusEffectId.empty():
 			var statusEffectData:StatusEffectData = GameGlobals.dataManager.get_status_effect_data(data.statusEffectId)
-			character.add_status_effect(statusEffectData)
+			character.add_status_effect(character, statusEffectData)
 
 func can_activate()->bool:
 	if spell!=null:

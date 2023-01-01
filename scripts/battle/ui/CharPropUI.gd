@@ -52,7 +52,8 @@ func animate_panel(panel, label, newVal):
 	#label.color = Color.white
 
 func on_mouse_entered():
-	CombatEventManager.on_show_info(parentCharacter.charData.get_display_name(), parentCharacter.charData.get_description())
+	var desc:String = parentCharacter.charData.get_description() + " " + parentCharacter.get_summary()
+	CombatEventManager.on_show_info(parentCharacter.charData.get_display_name(), desc)
 
 func on_mouse_exited():
 	CombatEventManager.on_hide_info()

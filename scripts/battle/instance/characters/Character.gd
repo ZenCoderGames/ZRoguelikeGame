@@ -47,6 +47,7 @@ signal OnPostAttack(defender)
 var successfulDamageThisFrame:int
 
 signal OnStatusEffectAdded(character, statusEffect)
+signal OnStatusEffectAddedToEnemy(character, statusEffect)
 signal OnStatusEffectRemoved(character, statusEffect)
 signal OnPassiveAdded(character, passive)
 signal OnPassiveRemoved(character, passive)
@@ -78,9 +79,10 @@ func init(id:int, charDataVal, teamVal):
 		if stat!=null:
 			stats.append(stat)
 			statDict[statData.type] = stat
-			if GameGlobals.dataManager.is_complex_stat_data(statData.type):
-				var complexStatData:ComplexStatData = GameGlobals.dataManager.get_complex_stat_data(statData.type)
-				_create_linked_stat(complexStatData.linkedStatType, statData.type, complexStatData.linkedStatMultiplier)
+			# Disable Complex Stats for now
+			#if GameGlobals.dataManager.is_complex_stat_data(statData.type):
+			#	var complexStatData:ComplexStatData = GameGlobals.dataManager.get_complex_stat_data(statData.type)
+			#	_create_linked_stat(complexStatData.linkedStatType, statData.type, complexStatData.linkedStatMultiplier)
 
 	# Actions
 	moveAction = ActionTypes.create(charData.moveAction, self)
@@ -414,10 +416,12 @@ func on_spell_activated(_spellItem):
 	on_turn_completed()
 
 # STATUS EFFECTS
-func add_status_effect(statusEffectData:StatusEffectData):
+func add_status_effect(sourceChar:Character, statusEffectData:StatusEffectData):
 	var statusEffect = StatusEffect.new(self, statusEffectData)
 	statusEffectList.append(statusEffect)
 	emit_signal("OnStatusEffectAdded", self, statusEffect)
+	if sourceChar!=self:
+		sourceChar.emit_signal("OnStatusEffectAddedToEnemy", self, statusEffect)
 	on_stats_changed()
 	return statusEffect
 
@@ -530,3 +534,16 @@ func _create_linked_stat(type:int, linkedStatType:int, linkedStatMultiplier:floa
 	newStat.add_link_to_stat(statDict[linkedStatType], linkedStatMultiplier)
 	stats.append(newStat)
 	statDict[newStatData.type] = newStat
+
+func get_summary()->String:
+	var summary:String = ""
+
+	if statusEffectList.size()>0 or passiveList.size()>0:
+		summary = summary + "\nEffects: "
+		for statusEffect in statusEffectList:
+			summary = summary + statusEffect.data.get_display_name() + " "
+
+		for passive in passiveList:
+			summary = summary + passive.data.get_display_name() + " "
+
+	return summary

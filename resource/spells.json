@@ -19,7 +19,7 @@
 			]
 		},
 		{
-			"id": "SPELL_GROUND_POUND",
+			"id": "SPELL_WHIRLWIND",
 			"timeline": [
 				{
 					"type": "FIND_TARGETS",
@@ -31,7 +31,25 @@
 				{
 					"type": "DO_DAMAGE_TO_TARGETS",
 					"params": {
-						"damage": 5
+						"useCharacterDamage": true
+					}
+				}
+			]
+		},
+		{
+			"id": "SPELL_LIFE_DRAIN",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 4
+					}
+				},
+				{
+					"type": "LIFEDRAIN",
+					"params": {
+						"flatAmount": 2
 					}
 				}
 			]

@@ -45,6 +45,30 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PASSIVE_BARBARIAN_RAGE",
+			"name": "Barbarian Rage",
+			"description": "+1 Damage for each time you stun an enemy",
+			"conditions": [
+				"ON_ADD_STATUS_EFFECT_TO_ENEMY"
+			],
+			"conditionParams": {
+				"statusEffectId": "STATUS_EFFECT_STUN"
+			}, 
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"baseValue": 1
+							}
+						]
+					}
+				}
+			]
 		}
 	]
 }

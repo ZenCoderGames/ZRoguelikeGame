@@ -42,6 +42,10 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 		parentCharacter.connect("OnCharacterMoveToCell", object, "activate_on_parentCharacter_move")
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPELL_ACTIVATE):
 		parentCharacter.equipment.connect("OnSpellActivated", object, "activate_on_target_or_item")
+	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_ADD_STATUS_EFFECT_TO_SELF):
+		parentCharacter.connect("OnStatusEffectAdded", object, "activate_on_add_status_effect")
+	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_ADD_STATUS_EFFECT_TO_ENEMY):
+		parentCharacter.connect("OnStatusEffectAddedToEnemy", object, "activate_on_add_status_effect")
 
 func on_room_combat_started(room):
 	emit_signal("OnRoomCombatStarted", room)

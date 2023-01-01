@@ -5,11 +5,11 @@ class_name ActionSetStatusData
 const ID:String = "SET_STATUS"
 
 var invulnerable:int
-var rooted:int
-var untargetable:int
-var evasive:int
-var uninterruptible:int
-var immovable:int
+var rooted:int # not implemented yet
+var untargetable:int # not implemented yet
+var evasive:int # not implemented yet
+var uninterruptible:int # not implemented yet
+var immovable:int # not implemented yet
 var stunned:int
 var invisible:int
 

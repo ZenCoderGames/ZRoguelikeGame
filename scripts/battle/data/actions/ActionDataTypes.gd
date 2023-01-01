@@ -16,8 +16,8 @@ static func create(dataJS)->ActionData:
 		return ActionLifeDrainData.new(dataJS)
 	elif actionType==ActionLifeStealData.ID:
 		return ActionLifeStealData.new(dataJS)
-	elif actionType==ActionApplyStatusEffectData.ID:
-		return ActionApplyStatusEffectData.new(dataJS)
+	elif actionType==ActionAddStatusEffectData.ID:
+		return ActionAddStatusEffectData.new(dataJS)
 	elif actionType==ActionAddStatModifierData.ID:
 		return ActionAddStatModifierData.new(dataJS)
 	elif actionType==ActionModifyVisualData.ID:
