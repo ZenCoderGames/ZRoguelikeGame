@@ -430,6 +430,13 @@ func remove_status_effect(statusEffect):
 	emit_signal("OnStatusEffectRemoved", self, statusEffect)
 	on_stats_changed()
 
+func has_status_effect(statusEffectId:String):
+	for statusEffect in statusEffectList:
+		if statusEffect.data.id == statusEffectId:
+			return true
+
+	return false
+
 func add_status_effect_modifier(statusEffectModifier:StatusEffectModifier):
 	statusEffectModifierList.append(statusEffectModifier)
 

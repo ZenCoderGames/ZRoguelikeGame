@@ -1,11 +1,11 @@
 
 class_name StatusEffectModifier
 
-var _data:AbilityUpgradeModifyStatusEffectData 
+var _data:ActionModifyStatusEffectData 
 var statusEffectId:String
 var instanceCounterModifier:int
 
-func _init(data:AbilityUpgradeModifyStatusEffectData):
+func _init(data:ActionModifyStatusEffectData):
 	_data = data
 	statusEffectId = data.statusEffectId
 	instanceCounterModifier = data.instanceCountModifier

@@ -45,7 +45,7 @@ script = ExtResource( 4 )
 doorsStayOpenDuringBattle = true
 debugSpawnEnemyEncounter = "TEST_ENC_MULTIPLE"
 debugSpawnItemInFirstRoom = "ITEM_HEAVY_SWORD"
-debugGiveAbility = "ABILITY_BARBARIAN_RAGE"
+debugGiveAbility = "ABILITY_STEALTH_ATTACK_BOOST"
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource( 3 )

@@ -24,7 +24,7 @@ var name:String
 var description:String
 var characterId:String
 var abilityConditions:Array
-var abilityUpgrades:Array
+var timeline:Array
 
 func _init(dataJS):
 	id = dataJS["id"]
@@ -32,11 +32,11 @@ func _init(dataJS):
 	description = dataJS["description"]
 	characterId = dataJS["characterId"]
 
-	var abilityUpgradeJSList = dataJS["abilityUpgrades"]
-	for abilityUpgradeJS in abilityUpgradeJSList:
-		var abilityUpgradeData:AbilityUpgradeData = AbilityUpgradeDataTypes.create(abilityUpgradeJS)
-		if abilityUpgradeData!=null:
-			abilityUpgrades.append(abilityUpgradeData)
+	var actionsJSList = dataJS["timeline"]
+	for actionJS in actionsJSList:
+		var actionData:ActionData = ActionDataTypes.create(actionJS)
+		if actionData!=null:
+			timeline.append(actionData)
 
 func get_display_name():
 	return name

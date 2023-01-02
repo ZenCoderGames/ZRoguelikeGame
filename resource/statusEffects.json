@@ -92,13 +92,13 @@
 		{
 			"id": "STATUS_EFFECT_STEALTH",
 			"name": "Stealth",
-			"description": "Makes the player undetected for 2 turns. Next hit out of stealth does 2x damage.",
-			"instanceCount": 3,
+			"description": "Makes the player undetected for 2 turns. Next hit out of stealth does bonus damage.",
+			"instanceCount": 2,
 			"endConditions": [
 				"ON_END_TURN"
 			],
 			"forceEndConditions": [
-				"ON_PRE_ATTACK"
+				"ON_POST_ATTACK"
 			],
 			"startTimeline": [ 
 				{
@@ -113,7 +113,7 @@
 						"statModifiers": [
 							{
 								"type": "DAMAGE",
-								"value": 2
+								"baseValue": 2
 							}
 						]
 					}
@@ -138,7 +138,7 @@
 						"statModifiers": [
 							{
 								"type": "DAMAGE",
-								"value": -2
+								"baseValue": -2
 							}
 						]
 					}

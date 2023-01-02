@@ -126,7 +126,7 @@
 					"id": "ASSASSIN_SPECIAL",
 					"description": "2 successful kills charges up the ability. \nOn use, grants the player [Stealth] for 2 turns",
 					"conditions": ["ON_KILL"],
-					"count": 1,
+					"count": 2,
 					"executeCondition": "NONE",
 					"timeline": [
 						{

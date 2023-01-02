@@ -58,6 +58,10 @@ func _reset():
 	currentCount = 0
 	CombatEventManager.on_player_special_ability_reset()
 
+func force_ready():
+	currentCount = _get_max_count()
+	check_for_ready()
+
 func _get_max_count()->int:
 	var maxCount:int = data.count
 	var specialModifierList:Array = character.get_special_modifiers(data.id)

@@ -69,6 +69,26 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PASSIVE_ASSASSIN_SPECIAL_REFRESH_ON_KILL",
+			"name": "Special Refresh",
+			"description": "On kill, refresh the Special",
+			"conditions": [
+				"ON_KILL"
+			],
+			"conditionParams": {
+				"statusEffectId": "STATUS_EFFECT_STEALTH"
+			}, 
+			"timeline": [
+				{
+					"type": "MODIFY_SPECIAL",
+					"params": {
+						"specialId": "ASSASSIN_SPECIAL",
+						"refill": true
+					}
+				}
+			]
 		}
 	]
 }

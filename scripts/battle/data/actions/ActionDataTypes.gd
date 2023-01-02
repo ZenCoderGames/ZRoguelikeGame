@@ -32,6 +32,10 @@ static func create(dataJS)->ActionData:
 		return ActionRemovePassiveData.new(dataJS)
 	elif actionType==ActionPushData.ID:
 		return ActionPushData.new(dataJS)
+	elif actionType==ActionModifySpecialData.ID:
+		return ActionModifySpecialData.new(dataJS)
+	elif actionType==ActionModifyStatusEffectData.ID:
+		return ActionModifyStatusEffectData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null
