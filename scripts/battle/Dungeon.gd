@@ -262,8 +262,9 @@ func _init_items():
 	if GameGlobals.battleInstance.dontSpawnItems:
 		return
 
-	if !GameGlobals.battleInstance.debugSpawnItemInFirstRoom.empty():
-		startRoom.generate_item(GameGlobals.battleInstance.debugSpawnItemInFirstRoom)
+	if GameGlobals.battleInstance.debugSpawnItems.size()>0:
+		for debugItem in GameGlobals.battleInstance.debugSpawnItems:
+			startRoom.generate_item(debugItem)
 
 	var itemDataList = Utils.duplicate_array(GameGlobals.dataManager.itemDataList)
 	itemDataList.shuffle()

@@ -15,16 +15,17 @@ var currentLevel:int = 0
 onready var levelUpAnim:Node = $"%LevelUpAnimation"
 onready var levelUpLabel:Node = $"%LevelUpLabel"
 
-var special:Special
-var specialModifierList:Array = []
-
 func init(charId:int, charData, teamVal):
 	.init(charId, charData, teamVal)
 
+	var moveData:Dictionary = {}
+	moveData["type"] = "MOVEMENT"
+	moveData["params"] = {}
+	moveData["params"]["moveType"] = "INPUT"
+	moveAction = ActionTypes.create(ActionDataTypes.create(moveData), self)
+
 	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer", self, "on_enemy_moved_adjacent")
 	HitResolutionManager.connect("OnKill", self, "_on_kill")
-
-	special = Special.new(self, charData.special)
 
 func update():
 	.update()
@@ -112,21 +113,3 @@ func get_xp_to_level_xp():
 
 func is_at_max_level():
 	return currentLevel == levelXpList.size()-1
-
-# SPECIAL
-func add_special_modifier(specialModifier:SpecialModifier):
-	specialModifierList.append(specialModifier)
-	special.check_for_ready()
-
-func remove_special_modifier(specialId:String):
-	for i in range(specialModifierList.size() - 1, -1, -1):
-		if (specialId == specialModifierList[i].specialId):
-			specialModifierList.remove(i)
-
-func get_special_modifiers(specialId:String):
-	var matchedspecialModifiers:Array = []
-	for specialModifier in specialModifierList:
-		if specialModifier.specialId == specialId:
-			matchedspecialModifiers.append(specialModifier)
-
-	return matchedspecialModifiers

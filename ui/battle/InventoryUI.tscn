@@ -204,10 +204,58 @@ valign = 1
 [node name="EquipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
 self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 262.0
-margin_right = 309.0
+margin_left = 524.0
+margin_right = 571.0
 margin_bottom = 20.0
 text = "Equip"
+
+[node name="EquipButton_Rune1" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
+margin_left = 398.0
+margin_right = 501.0
+margin_bottom = 20.0
+text = "Equip (Rune 1)"
+
+[node name="EquipButton_Rune2" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
+margin_left = 398.0
+margin_right = 501.0
+margin_bottom = 20.0
+text = "Equip (Rune 2)"
+
+[node name="EquipButton_Spell1" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
+margin_left = 151.0
+margin_right = 253.0
+margin_bottom = 20.0
+text = "Equip (Spell 1)"
+
+[node name="EquipButton_Spell2" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
+margin_left = 257.0
+margin_right = 359.0
+margin_bottom = 20.0
+text = "Equip (Spell 2)"
+
+[node name="EquipButton_Spell3" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
+margin_left = 363.0
+margin_right = 465.0
+margin_bottom = 20.0
+text = "Equip (Spell 3)"
+
+[node name="EquipButton_Spell4" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
+margin_left = 469.0
+margin_right = 571.0
+margin_bottom = 20.0
+text = "Equip (Spell 4)"
 
 [node name="UnequipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )

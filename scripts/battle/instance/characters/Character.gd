@@ -36,6 +36,12 @@ var statusEffectModifierList:Array = []
 var passiveList:Array = []
 var abilityList:Array = []
 
+var special:Special
+var specialModifierList:Array = []
+var specialPassive:Passive
+
+var maxSpellSlots:int = 2
+
 signal OnCharacterMove(x, y)
 signal OnCharacterMoveToCell()
 signal OnCharacterRoomChanged(newRoom)
@@ -84,15 +90,23 @@ func init(id:int, charDataVal, teamVal):
 			#	var complexStatData:ComplexStatData = GameGlobals.dataManager.get_complex_stat_data(statData.type)
 			#	_create_linked_stat(complexStatData.linkedStatType, statData.type, complexStatData.linkedStatMultiplier)
 
-	# Actions
-	moveAction = ActionTypes.create(charData.moveAction, self)
-	attackAction = ActionTypes.create(charData.attackAction, self)
+	var attackData:Dictionary = {}
+	attackData["type"] = "ATTACK"
+	attackData["params"] = {}
+	attackData["params"]["damageMultiplier"] = 1.0
+	attackAction = ActionTypes.create(ActionDataTypes.create(attackData), self)
 
 	# Status
 	status = CharacterStatus.new()
 
 	inventory = Inventory.new(self)
 	equipment = Equipment.new(self)
+
+	if charData.active!=null:
+		special = Special.new(self, charData.active)
+
+	if !charData.passive.empty():
+		specialPassive = add_passive(GameGlobals.dataManager.get_passive_data(charData.passive))
 
 	emit_signal("OnInitialized")
 
@@ -294,8 +308,8 @@ func on_blocked_hit(_attacker):
 	if _attacker!=null:	
 		lastEnemyThatHitMe = _attacker
 
-func show_damage_from_hit(attacker, dmg):
-	show_hit(attacker, dmg)
+func show_damage_from_hit(attacker, dmg, isCritical):
+	show_hit(attacker, dmg, isCritical)
 
 func die():
 	isDead = true
@@ -308,7 +322,7 @@ func die():
 		cell.entityObject.hide()
 	cell.clear_entity_on_death()
 
-func show_hit(entity, _dmg):
+func show_hit(entity, _dmg, isCritical):
 	# shove
 	if !isDead:
 		var dirn:int = dirn_to_character(entity)
@@ -322,6 +336,8 @@ func show_hit(entity, _dmg):
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 	
 	show_hit_flash()
+	if isCritical:
+		show_critical(entity)
 	#show_damage_text(entity, dmg)
 
 func show_hit_flash():
@@ -353,6 +369,17 @@ func show_blocked_text(entity):
 		damageText.modulate = GameGlobals.battleInstance.view.enemyDamageColor"""
 	damageText.visible = true
 	damageText.text = "Immune"
+	_create_damage_text_tween(entity)
+	yield(get_tree().create_timer(0.5), "timeout")
+	damageText.visible = false
+
+func show_critical(entity):
+	"""if(entity.team == Constants.TEAM.PLAYER):
+		damageText.modulate = GameGlobals.battleInstance.view.playerDamageColor
+	else:
+		damageText.modulate = GameGlobals.battleInstance.view.enemyDamageColor"""
+	damageText.visible = true
+	damageText.text = "Crit"
 	_create_damage_text_tween(entity)
 	yield(get_tree().create_timer(0.5), "timeout")
 	damageText.visible = false
@@ -478,6 +505,24 @@ func remove_passive_from_data(passiveData:PassiveData):
 			emit_signal("OnPassiveRemoved", self, passive)
 			on_stats_changed()
 			break
+
+# SPECIAL
+func add_special_modifier(specialModifier:SpecialModifier):
+	specialModifierList.append(specialModifier)
+	special.check_for_ready()
+
+func remove_special_modifier(specialId:String):
+	for i in range(specialModifierList.size() - 1, -1, -1):
+		if (specialId == specialModifierList[i].specialId):
+			specialModifierList.remove(i)
+
+func get_special_modifiers(specialId:String):
+	var matchedspecialModifiers:Array = []
+	for specialModifier in specialModifierList:
+		if specialModifier.specialId == specialId:
+			matchedspecialModifiers.append(specialModifier)
+
+	return matchedspecialModifiers
 
 # ABILITIES
 func add_ability(abilityData:AbilityData):

@@ -11,33 +11,36 @@ func _init(triggerConditions:Array, triggerConditionParams:Dictionary, character
 	_triggerConditionParams = triggerConditionParams
 	CombatEventManager.register_for_conditional_events(triggerConditions, self, character)
 
-func activate_on_parentCharacter_attack(_attacker):
-	_checkForConditionsAndActivate()
+func activate_on_parentCharacter_attack(_defender):
+	_checkForConditionsAndActivate(_defender)
 
 func activate_on_parentCharacter_move():
-	_checkForConditionsAndActivate()
+	_checkForConditionsAndActivate(null)
 
 func activate_on_parentCharacter_spell(_spellItem):
-	_checkForConditionsAndActivate()
+	_checkForConditionsAndActivate(null)
 
 func activate_on_attacker(_attacker, _defender, _data):
 	if _character==_attacker:
-		_checkForConditionsAndActivate()
+		_checkForConditionsAndActivate(_defender)
 
 func activate_on_defender(_attacker, _defender, _data):
 	if _character==_defender:
-		_checkForConditionsAndActivate()	
+		_checkForConditionsAndActivate(_attacker)	
 
 func activate_on_add_status_effect(_sourceCharacterOfStatusEffect, statusEffect):
 	if statusEffect.data.id == _triggerConditionParams["statusEffectId"]:
 		activate()
 
-func _checkForConditionsAndActivate():
+func _checkForConditionsAndActivate(_enemy):
 	if _triggerConditionParams.size()==0:
 		activate()
 	else:
 		if _triggerConditionParams.has("statusEffectId"):
 			if _character.has_status_effect(_triggerConditionParams["statusEffectId"]):
+				activate()
+		if _triggerConditionParams.has("enemyStatusEffectId") and _enemy!=null:
+			if _enemy.has_status_effect(_triggerConditionParams["enemyStatusEffectId"]):
 				activate()
 
 func activate():

@@ -70,20 +70,21 @@ Roguelike Dev:
 (D)- Class Specials
 (D)- Better enemy pathing
 (D)- EffectManager/Global update
-- Abilities/Ability Upgrades
-- Linked Passives
-- Keywords
-- Better testing tools for StatusEffects/Passives/Abilities/Specials
+(D)- Special Abilities
+(D)- Special Passives
+- Equipment Update
+- Rename Special to Special Ability
+- Better testing tools for StatusEffects/Passives/Specials
 
-- VFX Upgrades (Barrier, Protection, Lifesteal, Lifedrain, Lightning bolt, Groundpound)
+- VFX Upgrades (Stun, Barrier, Protection, Lifesteal, Lifedrain, Lightning bolt, Groundpound)
 - Better doors, death, exit sprites
 - Game Feel (hitSparks, death)
 - SFX Manager/SFXData
 
+- Keywords
+
 - New Status Effects (Stun, Freeze, Burn, Poison, Shock, Root, Sleep)
 - Complex AI behavior (Skeleton - revive, Snake - poison, Giant - healing, Automaton - stun)
-
-- Class Passives
 
 - Spells or Specials that translate
 - Targeting of Spells/Specials
@@ -95,13 +96,9 @@ Roguelike Dev:
 - Balancing pass
 - Attack with character scaling up
 
-- Better Yield
-- Bug with costFromStart
 - Rewrite stat/complex stat system into stat and derived stats
-
-- Get rid of Move/Attack Actions in character data
-
-- Game Feel (level up)
+- Bug with costFromStart
+- Better Yield
 
 - Saving and Loading
 
@@ -131,3 +128,9 @@ Roguelike Dev:
 - player tools are powerful but have limitations
 
 ---------------
+
+To Research:
+- Sproggiwood
+- Dungeonmans
+- Brogue
+- www.rockpapershotgun.com/2015/07/28/how-do-roguelikes-generate-levels/

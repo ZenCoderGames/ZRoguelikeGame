@@ -49,9 +49,6 @@ func init(entityObj):
 	character.connect("OnAbilityRemoved", self, "on_ability_removed")
 	character.equipment.connect("OnItemEquipped", self, "_on_item_equipped")
 	character.equipment.connect("OnItemUnEquipped", self, "_on_item_unequipped")
-	character.equipment.connect("OnSpellEquipped", self, "_on_spell_equipped")
-	character.equipment.connect("OnSpellUnEquipped", self, "_on_spell_unequipped")
-	character.equipment.connect("OnSpellActivated", self, "_on_spell_activated")
 	if character.team == Constants.TEAM.PLAYER:
 		nameBg.color = playerTintColor
 		isPlayer = true
@@ -97,44 +94,41 @@ func _show_level_up():
 
 # ITEMS
 func _on_item_equipped(item):
-	var newItemUI = EquippedItemUI.instance()
-	listContainer.add_child(newItemUI)
-	newItemUI.init(item)
-	equippedItems[item] = newItemUI
+	if item.data.is_spell():
+		var newSpellUI:SpellItemUI = SpellButtonUI.instance()
+		spellContainer.add_child(newSpellUI)
+		newSpellUI.init(item)
+		equippedSpells[item] = newSpellUI
+
+		newSpellUI.connect("pressed", self, "_on_equip_spell_selected", [item])
+		
+		spellContainer.visible = true
+		_update_non_base_ui()
+	else:
+		var newItemUI = EquippedItemUI.instance()
+		listContainer.add_child(newItemUI)
+		newItemUI.init(item)
+		equippedItems[item] = newItemUI
 
 func _on_item_unequipped(item):
-	if equippedItems.has(item):
-		listContainer.remove_child(equippedItems[item])
-		equippedItems.erase(item)
+	if item.data.is_spell():
+		if equippedSpells.has(item):
+			spellContainer.remove_child(equippedSpells[item])
+			equippedSpells.erase(item)
+			
+		if equippedSpells.size()==0:
+			spellContainer.visible = false
+			
+		_update_non_base_ui()
+	else:
+		if equippedItems.has(item):
+			listContainer.remove_child(equippedItems[item])
+			equippedItems.erase(item)
 
 # SPELLS
-func _on_spell_equipped(spellItem):
-	var newSpellUI:SpellItemUI = SpellButtonUI.instance()
-	spellContainer.add_child(newSpellUI)
-	newSpellUI.init(spellItem)
-	equippedSpells[spellItem] = newSpellUI
-
-	newSpellUI.connect("pressed", self, "_on_equip_spell_selected", [spellItem])
-	
-	spellContainer.visible = true
-	_update_non_base_ui()
-
-func _on_spell_unequipped(spellItem):
-	if equippedSpells.has(spellItem):
-		spellContainer.remove_child(equippedSpells[spellItem])
-		equippedSpells.erase(spellItem)
-		
-	if equippedSpells.size()==0:
-		spellContainer.visible = false
-		
-	_update_non_base_ui()
-
 func _on_equip_spell_selected(spellItem):
 	if spellItem.can_activate():
 		character.equipment.activate_spell(spellItem)
-
-func _on_spell_activated(spellItem):
-	_on_spell_unequipped(spellItem)
 
 # EFFECTS
 func on_passive_added(_character, passive):

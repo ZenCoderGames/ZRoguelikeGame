@@ -16,19 +16,7 @@
 						"value": 2
 					}
 				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "INPUT"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				},
-				"special": {
+				"active": {
 					"id": "KNIGHT_SPECIAL",
 					"description": "3 successful attacks charges up the ability. \nOn use, grants the player [Protection] for 1 turn",
 					"conditions": ["ON_POST_HIT"],
@@ -43,12 +31,13 @@
 							}
 						}
 					]
-				}
+				},
+				"passive": "PASSIVE_KNIGHT_HEAL"
 			},
 			{
-				"id": "BARBARIAN",
+				"id": "BERSERKER",
 				"displayName": "You",
-				"description": "Barbarian",
+				"description": "Berserker",
 				"path": "entity/characters/Player.tscn",
 				"stats": [
 					{
@@ -60,21 +49,9 @@
 						"value": 2
 					}
 				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "INPUT"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				},
-				"special": {
-					"id": "BARBARIAN_SPECIAL",
-					"description": "4 successful hits taken by the player charges up the ability. \nOn use, Stun each nearby enemy",
+				"active": {
+					"id": "BERSERKER_SPECIAL",
+					"description": "4 successful hits taken by the player charges up the ability. \nOn use, Spin around and do attack damage all nearby enemy",
 					"conditions": ["ON_TAKE_HIT"],
 					"count": 4,
 					"executeCondition": "NEARBY_ENEMY",
@@ -87,14 +64,14 @@
 							}
 						},
 						{
-							"type": "ADD_STATUS_EFFECT",
+							"type": "DO_DAMAGE_TO_TARGETS",
 							"params": {
-								"statusEffectId": "STATUS_EFFECT_STUN",
-								"applyToTargets": true
+								"useCharacterDamage": true
 							}
-						}
+						}	
 					]
-				}
+				},
+				"passive": "PASSIVE_BERSERKER_STUN"
 			},
 			{
 				"id": "ASSASSIN",
@@ -110,19 +87,7 @@
 						"value": 5
 					}
 				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "INPUT"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				},
-				"special": {
+				"active": {
 					"id": "ASSASSIN_SPECIAL",
 					"description": "2 successful kills charges up the ability. \nOn use, grants the player [Stealth] for 2 turns",
 					"conditions": ["ON_KILL"],
@@ -137,7 +102,8 @@
 							}
 						}
 					]
-				}
+				},
+				"passive": "PASSIVE_ASSASSIN_CRITICAL"
 			}
 		],
 		"enemies": [
@@ -158,19 +124,7 @@
 						"type": "DAMAGE",
 						"value": 2
 					}
-				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "PATHFIND_TO_TARGET"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				}
+				]
 			},
 			{
 				"#disable": true,
@@ -190,19 +144,7 @@
 						"type": "DAMAGE",
 						"value": 3
 					}
-				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "PATHFIND_TO_TARGET"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				}
+				]
 			},
 			{
 				"#disable": true,
@@ -222,19 +164,7 @@
 						"type": "DAMAGE",
 						"value": 1
 					}
-				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "PATHFIND_TO_TARGET"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				}
+				]
 			},
 			{
 				"#disable": true,
@@ -254,19 +184,7 @@
 						"type": "DAMAGE",
 						"value": 8
 					}
-				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "PATHFIND_TO_TARGET"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				}
+				]
 			},
 			{
 				"#disable": true,
@@ -286,19 +204,7 @@
 						"type": "DAMAGE",
 						"value": 6
 					}
-				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "PATHFIND_TO_TARGET"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				}
+				]
 			},
 			{
 				"#disable": true,
@@ -318,19 +224,7 @@
 						"type": "DAMAGE",
 						"value": 10
 					}
-				],
-				"moveAction": {
-					"type": "MOVEMENT",
-					"params": {
-						"moveType": "PATHFIND_TO_TARGET"
-					}
-				},
-				"attackAction": {
-					"type": "ATTACK",
-					"params": {
-						"damageMultiplier": 1
-					}
-				}
+				]
 			}
 		]
 	}

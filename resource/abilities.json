@@ -62,7 +62,7 @@
 		},
 		{
 			"id": "ABILITY_STUN_LONGER",
-			"characterId": "BARBARIAN",
+			"characterId": "BERSERKER",
 			"name": "(Upgrade) Stun++",
 			"description": "Allows [Stun] to last for 1 Additional Turn",
 			"timeline": [
@@ -76,30 +76,30 @@
 			]
 		},
 		{
-			"id": "ABILITY_BARBARIAN_SPECIAL_FASTER",
-			"characterId": "BARBARIAN",
-			"name": "(Upgrade) Barbarian Special Haste",
-			"description": "Allows the Barbarian Special to charge up with 2 less hits",
+			"id": "ABILITY_BERSERKER_SPECIAL_FASTER",
+			"characterId": "BERSERKER",
+			"name": "(Upgrade) Berserker Special Haste",
+			"description": "Allows the Berserker Special to charge up with 2 less hits",
 			"timeline": [
 				{
 					"type": "MODIFY_SPECIAL",
 					"params": {
-						"specialId": "BARBARIAN_SPECIAL",
+						"specialId": "BERSERKER_SPECIAL",
 						"countModifier": -2
 					}
 				}
 			]
 		},
 		{
-			"id": "ABILITY_BARBARIAN_RAGE",
-			"characterId": "BARBARIAN",
-			"name": "(Upgrade) Barbarian Rage",
-			"description": "Every enemy that the Barbarian stuns, increases his damage by 1",
+			"id": "ABILITY_BERSERKER_RAGE",
+			"characterId": "BERSERKER",
+			"name": "(Upgrade) Berserker Rage",
+			"description": "Every enemy that the Berserker stuns, increases his damage by 1",
 			"timeline": [
 				{
 					"type": "ADD_PASSIVE",
 					"params": {
-						"passiveId": "PASSIVE_BARBARIAN_RAGE"
+						"passiveId": "PASSIVE_BERSERKER_RAGE"
 					}
 				}
 			]

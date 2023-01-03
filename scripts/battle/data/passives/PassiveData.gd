@@ -6,6 +6,8 @@ var description:String
 var triggerConditions:Array
 var triggerConditionParams:Dictionary
 var timeline:Array
+var triggerCount:int
+var resetCountOnActivate:bool
 
 func _init(dataJS):
     id = dataJS["id"]
@@ -23,12 +25,17 @@ func _init(dataJS):
         var conditionParams = dataJS["conditionParams"]
         if conditionParams.has("statusEffectId"):
             triggerConditionParams["statusEffectId"] = conditionParams["statusEffectId"]
+        if conditionParams.has("enemyStatusEffectId"):
+            triggerConditionParams["enemyStatusEffectId"] = conditionParams["enemyStatusEffectId"]
 
     var actionsJSList = dataJS["timeline"]
     for actionJS in actionsJSList:
         var actionData:ActionData = ActionDataTypes.create(actionJS)
         if actionData!=null:
             timeline.append(actionData)
+
+    triggerCount = Utils.get_data_from_json(dataJS, "triggerCount", 0)
+    resetCountOnActivate = Utils.get_data_from_json(dataJS, "resetCountOnActivate", false)
 
 func get_display_name():
     return name

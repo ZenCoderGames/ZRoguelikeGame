@@ -57,23 +57,3 @@ func get_description():
 
 func get_full_description():
 	return data.fullDescription
-
-func is_gear():
-	return data.is_gear()
-
-func is_consumable():
-	return data.is_consumable()
-
-func is_spell():
-	return data.is_spell()
-
-func get_slot():
-	return data.slot
-
-func get_slot_string():
-	if data.slot == Constants.ITEM_EQUIP_SLOT.WEAPON:
-		return "Weapon"
-	elif data.slot == Constants.ITEM_EQUIP_SLOT.BODY:
-		return "Body"
-
-	return "[None]"

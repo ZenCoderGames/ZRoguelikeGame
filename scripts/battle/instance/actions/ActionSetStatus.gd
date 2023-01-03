@@ -26,3 +26,5 @@ func execute():
         character.status.set_stunned(actionSetStatusData.stunned)
     if actionSetStatusData.invisible:
         character.status.set_invisible(actionSetStatusData.invisible)
+    if actionSetStatusData.critical:
+        character.status.set_critical(actionSetStatusData.critical)

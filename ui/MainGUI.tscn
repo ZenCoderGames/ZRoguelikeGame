@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/battle/ui/BattleUI.gd" type="Script" id=2]
 [ext_resource path="res://scripts/battle/ui/PlayerSpecialAbilityUI.gd" type="Script" id=3]
+[ext_resource path="res://themes/passiveButtonThemeOverride.tres" type="StyleBox" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.2, 0.411765, 0.419608, 1 )
@@ -67,6 +68,7 @@ script = ExtResource( 3 )
 [node name="Panel" type="Panel" parent="PlayerAbilityPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 35.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -91,7 +93,7 @@ mouse_filter = 2
 custom_styles/fg = SubResource( 2 )
 value = 50.0
 
-[node name="Button" type="Button" parent="PlayerAbilityPanel/VBoxContainer"]
+[node name="ActiveButton" type="Button" parent="PlayerAbilityPanel/VBoxContainer"]
 margin_top = 18.0
 margin_right = 86.0
 margin_bottom = 88.0
@@ -100,7 +102,19 @@ focus_mode = 0
 custom_styles/normal = SubResource( 3 )
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
-text = "SPECIAL"
+text = "ACTIVE"
+icon_align = 1
+
+[node name="PassiveButton" type="Button" parent="PlayerAbilityPanel/VBoxContainer"]
+margin_top = 92.0
+margin_right = 86.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 0, 30 )
+focus_mode = 0
+custom_styles/normal = ExtResource( 4 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "PASSIVE"
 icon_align = 1
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
@@ -152,5 +166,5 @@ valign = 1
 
 [connection signal="mouse_entered" from="PlayerAbilityPanel" to="PlayerAbilityPanel" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PlayerAbilityPanel" to="PlayerAbilityPanel" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="PlayerAbilityPanel/VBoxContainer/Button" to="PlayerAbilityPanel" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="PlayerAbilityPanel/VBoxContainer/Button" to="PlayerAbilityPanel" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="PlayerAbilityPanel/VBoxContainer/PassiveButton" to="PlayerAbilityPanel" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerAbilityPanel/VBoxContainer/PassiveButton" to="PlayerAbilityPanel" method="_on_mouse_exited"]

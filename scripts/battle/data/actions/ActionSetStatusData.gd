@@ -12,6 +12,7 @@ var uninterruptible:int # not implemented yet
 var immovable:int # not implemented yet
 var stunned:int
 var invisible:int
+var critical:int
 
 func _init(dataJS).(dataJS):
     invulnerable = Utils.get_data_from_json(params, "invulnerable", false)
@@ -22,3 +23,4 @@ func _init(dataJS).(dataJS):
     immovable = Utils.get_data_from_json(params, "immovable", false)
     stunned = Utils.get_data_from_json(params, "stunned", false)
     invisible = Utils.get_data_from_json(params, "invisible", false)
+    critical = Utils.get_data_from_json(params, "critical", false)

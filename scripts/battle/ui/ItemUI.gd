@@ -12,11 +12,11 @@ func init(itemInstance:Item):
 	item = itemInstance
 	nameLabel.text = item.get_display_name()
 	descLabel.text = item.get_description()
-	if itemInstance.is_gear():
+	if itemInstance.data.is_gear():
 		nameBg.color = GameGlobals.battleInstance.view.itemGearColor
-	elif itemInstance.is_consumable():
+	elif itemInstance.data.is_consumable():
 		nameBg.color = GameGlobals.battleInstance.view.itemConsumableColor
-	elif itemInstance.is_spell():
+	elif itemInstance.data.is_spell():
 			nameBg.color = GameGlobals.battleInstance.view.itemSpellColor
 
 func has_entity(entity):

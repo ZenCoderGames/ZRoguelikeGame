@@ -26,6 +26,31 @@
 			]
 		},
 		{
+			"id": "STATUS_EFFECT_CRITICAL",
+			"name": "Critical",
+			"description": "Next hit is critical",
+			"instanceCount": 1,
+			"endConditions": [
+				"ON_POST_HIT"
+			],
+			"startTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"critical": 1
+					}
+				}
+			],
+			"endTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"critical": -1
+					}
+				}
+			]
+		},
+		{
 			"id": "STATUS_EFFECT_BARRIER",
 			"name": "Barrier",
 			"description": "Blocks 1 Instance Of Damage",

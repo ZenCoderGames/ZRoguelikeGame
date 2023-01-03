@@ -11,8 +11,11 @@ func _init():
 
 func do_hit(sourceChar, targetChar, damage, generateHits=true):
 	var finalDamage:int = damage
+	var isCritical:bool = sourceChar.status.has_critical()
+	if isCritical:
+		finalDamage = finalDamage * 2
 	if generateHits:
-		emit_signal("OnPreHit", sourceChar, targetChar, damage)
+		emit_signal("OnPreHit", sourceChar, targetChar, finalDamage)
 		sourceChar.lastHitTarget = targetChar
 
 	if !targetChar.can_take_damage():
@@ -22,7 +25,7 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 		return 0
 
 	var prevHealth:int = targetChar.get_health()
-	var targetHealth:int = targetChar.take_damage(sourceChar, damage)
+	var targetHealth:int = targetChar.take_damage(sourceChar, finalDamage)
 	if targetHealth<=0:
 		targetChar.die()
 		sourceChar.lastKilledTarget = targetChar
@@ -30,7 +33,7 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 		
 	if generateHits:
 		if targetHealth<prevHealth:
-			targetChar.show_damage_from_hit(sourceChar, damage)
+			targetChar.show_damage_from_hit(sourceChar, finalDamage, isCritical)
 		emit_signal("OnTakeHit", sourceChar, targetChar, finalDamage)
 		emit_signal("OnPostHit", sourceChar, targetChar, finalDamage)
 

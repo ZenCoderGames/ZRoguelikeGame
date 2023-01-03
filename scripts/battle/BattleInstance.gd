@@ -8,6 +8,7 @@ onready var screenFade:Panel = $"%ScreenFade"
 onready var victoryUI:PanelContainer = $"%VictoryUI"
 
 # DEBUG
+export var debugShowAllRooms:bool
 export var doorsStayOpenDuringBattle:bool
 export var pauseAIMovement:bool
 export var pauseAIAttack:bool
@@ -15,10 +16,13 @@ export var dontSpawnEnemies:bool
 export var debugSpawnEnemyEncounter:String
 export var dontSpawnObstacles:bool
 export var dontSpawnItems:bool
-export var debugSpawnItemInFirstRoom:String
+export(Array, String) var debugSpawnItems
 export var setPlayerInvulnerable:bool
+export var setEnemiesInvulnerable:bool
+export(Array, String) var debugAbilities
+export(Array, String) var debugPassives
+export(Array, String) var debugStatusEffects
 export var debugGiveAbility:String
-export var debugShowAllRooms:bool
 
 var firstTimeDungeon:bool = false
 var onGameOver:bool
@@ -51,8 +55,16 @@ func _create_dungeon():
 	firstTimeDungeon = true
 	GameEventManager.emit_signal("OnDungeonInitialized")
 
-	if !debugGiveAbility.empty():
-		GameGlobals.dungeon.player.add_ability(GameGlobals.dataManager.get_ability_data(debugGiveAbility))
+	# debug
+	if GameGlobals.battleInstance.debugAbilities.size()>0:
+		for debugAbility in GameGlobals.battleInstance.debugAbilities:
+			GameGlobals.dungeon.player.add_ability(GameGlobals.dataManager.get_ability_data(debugAbility))
+	if GameGlobals.battleInstance.debugPassives.size()>0:
+		for debugPassive in GameGlobals.battleInstance.debugPassives:
+			GameGlobals.dungeon.player.add_passive(GameGlobals.dataManager.get_passive_data(debugPassive))
+	if GameGlobals.battleInstance.debugStatusEffects.size()>0:
+		for debugStatusEffect in GameGlobals.battleInstance.debugStatusEffects:
+			GameGlobals.dungeon.player.add_status_effect(GameGlobals.dungeon.player, GameGlobals.dataManager.get_status_effect_data(debugStatusEffect))
 
 func recreate_dungeon(newDungeonIdx):
 	currentDungeonIdx = newDungeonIdx

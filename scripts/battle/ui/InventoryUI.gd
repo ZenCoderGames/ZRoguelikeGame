@@ -11,6 +11,13 @@ onready var nameLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/
 onready var typeLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/TypeContainer/TypeLabel")
 onready var descLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/DescContainer/DescLabel")
 onready var equipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton")
+onready var equipButtonRune1:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Rune1")
+onready var equipButtonRune2:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Rune2")
+onready var equipButtonSpell1:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell1")
+onready var equipButtonSpell2:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell2")
+onready var equipButtonSpell3:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell3")
+onready var equipButtonSpell4:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell4")
+
 onready var unequipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/UnequipButton")
 onready var consumeButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/ConsumeButton")
 onready var equippedUI:ColorRect = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquippedUI")
@@ -22,7 +29,13 @@ var selectedIdx:int
 
 func _ready():
 	hide()
-	equipButton.connect("pressed", self, "_on_equip_selected_item")
+	equipButton.connect("pressed", self, "_on_equip_selected_weapon_or_armor")
+	equipButtonRune1.connect("pressed", self, "_on_equip_selected_rune1")
+	equipButtonRune2.connect("pressed", self, "_on_equip_selected_rune2")
+	equipButtonSpell1.connect("pressed", self, "_on_equip_selected_spell1")
+	equipButtonSpell2.connect("pressed", self, "_on_equip_selected_spell2")
+	equipButtonSpell3.connect("pressed", self, "_on_equip_selected_spell3")
+	equipButtonSpell4.connect("pressed", self, "_on_equip_selected_spell4")
 	unequipButton.connect("pressed", self, "_on_unequip_selected_item")
 	consumeButton.connect("pressed", self, "_on_consume_selected_item")
 	
@@ -73,33 +86,76 @@ func _show_selected():
 	selectedItemButton.self_modulate = Color.orange
 	nameLabel.text = selectedItem.get_display_name() 
 	descLabel.text = selectedItem.get_full_description()
+	typeLabel.text = selectedItem.data.get_type_string()
 	consumeButton.visible = false
-	if selectedItem.is_spell():
-		equipButton.visible = !playerChar.equipment.equippedSpells.has(selectedItem)
-		unequipButton.visible = playerChar.equipment.equippedSpells.has(selectedItem)
-	elif selectedItem.is_consumable():
-		equipButton.visible = false
-		unequipButton.visible = false
+	equipButton.visible = false
+	unequipButton.visible = false
+	equipButtonRune1.visible = false
+	equipButtonRune2.visible = false
+	equipButtonSpell1.visible = false
+	equipButtonSpell2.visible = false
+	equipButtonSpell3.visible = false
+	equipButtonSpell4.visible = false
+	equippedUI.visible = false
+	if selectedItem.data.is_consumable():
 		consumeButton.visible = true
 	else:
-		equipButton.visible = !playerChar.equipment.equippedItems.has(selectedItem)
-		unequipButton.visible = playerChar.equipment.equippedItems.has(selectedItem)
-	equippedUI.visible = (playerChar.equipment.equippedItems.has(selectedItem) or playerChar.equipment.equippedSpells.has(selectedItem)) and !selectedItem.is_consumable()
-	if selectedItem.is_consumable():
-		typeLabel.text = "Consumable"
-	elif selectedItem.is_spell():
-		typeLabel.text = "Spell"
-	else:
-		typeLabel.text = selectedItem.get_slot_string()
+		var isEquippedItem:bool = playerChar.equipment.equippedItems.has(selectedItem)
+		unequipButton.visible = isEquippedItem
+		if !isEquippedItem:
+			equipButton.visible = (selectedItem.data.is_weapon() or selectedItem.data.is_armor())
+			equipButtonRune1.visible = selectedItem.data.is_rune()
+			equipButtonRune2.visible = selectedItem.data.is_rune()
+			equipButtonSpell1.visible = selectedItem.data.is_spell()
+			equipButtonSpell2.visible = selectedItem.data.is_spell()
+			equipButtonSpell3.visible = selectedItem.data.is_spell()
+			equipButtonSpell4.visible = selectedItem.data.is_spell()
+		equippedUI.visible = isEquippedItem
+	
 
-func _on_equip_selected_item():
+func _on_equip_selected_weapon_or_armor():
 	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
-	playerChar.equipment.equip_item(selectedItem)
+	var slot:int = 0
+	if selectedItem.data.is_weapon():
+		slot = Constants.ITEM_EQUIP_SLOT.WEAPON
+	elif selectedItem.data.is_armor():
+		slot = Constants.ITEM_EQUIP_SLOT.ARMOR
+	playerChar.equipment.equip_item(selectedItem, slot)
+	_refresh_ui()
+
+func _on_equip_selected_rune1():
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.RUNE_1)
+	_refresh_ui()
+
+func _on_equip_selected_rune2():
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.RUNE_2)
+	_refresh_ui()
+
+func _on_equip_selected_spell1():
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.SPELL_1)
+	_refresh_ui()
+
+func _on_equip_selected_spell2():
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.SPELL_2)
+	_refresh_ui()
+
+func _on_equip_selected_spell3():
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.SPELL_3)
+	_refresh_ui()
+
+func _on_equip_selected_spell4():
+	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.SPELL_4)
 	_refresh_ui()
 
 func _on_unequip_selected_item():
 	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
-	playerChar.equipment.unequip_item(selectedItem)
+	playerChar.equipment.unequip_item(selectedItem, playerChar.equipment.get_slot_for_item(selectedItem))
 	_refresh_ui()
 
 func _on_consume_selected_item():
@@ -125,6 +181,12 @@ func clear_items():
 	descLabel.text = ""
 	typeLabel.text = ""
 	equipButton.visible = false
+	equipButtonRune1.visible = false
+	equipButtonRune2.visible = false
+	equipButtonSpell1.visible = false
+	equipButtonSpell2.visible = false
+	equipButtonSpell3.visible = false
+	equipButtonSpell4.visible = false
 	consumeButton.visible = false
 	equippedUI.visible = false
 	noContent.visible = false

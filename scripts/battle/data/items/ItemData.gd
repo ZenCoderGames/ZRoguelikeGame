@@ -21,9 +21,8 @@ var fullDescription:String
 var path:String
 var statDataList:Array
 var statModifierDataList:Array
-var slot:int
 
-enum ITEM_TYPE { GEAR, CONSUMABLE, SPELL }
+enum ITEM_TYPE { WEAPON, ARMOR, RUNE, CONSUMABLE, SPELL }
 var type:int
 
 var tier:int
@@ -51,13 +50,6 @@ func _init(itemDataJS):
 	else:
 		print("ERROR: Invalid Item Type - ", itemType)
 
-	if itemDataJS.has("slot"):
-		var slotType = itemDataJS["slot"]
-		if Constants.ITEM_EQUIP_SLOT.has(slotType):
-			slot = Constants.ITEM_EQUIP_SLOT.get(slotType)
-		else:
-			print("ERROR: Invalid Slot Type - ", slotType)
-
 	if itemDataJS.has("stats"):
 		var statDataJSList = itemDataJS["stats"]
 		for statDataJS in statDataJSList:
@@ -75,11 +67,34 @@ func _init(itemDataJS):
 	passiveId = Utils.get_data_from_json(itemDataJS, "passiveId", "")
 	statusEffectId = Utils.get_data_from_json(itemDataJS, "statusEffectId", "")
 
+func is_weapon():
+	return type == ITEM_TYPE.WEAPON
+
+func is_armor():
+	return type == ITEM_TYPE.ARMOR
+
+func is_rune():
+	return type == ITEM_TYPE.RUNE
+
 func is_gear():
-	return type == ITEM_TYPE.GEAR
+	return is_weapon() or is_armor() or is_rune()
 
 func is_consumable():
 	return type == ITEM_TYPE.CONSUMABLE
 
 func is_spell():
 	return type == ITEM_TYPE.SPELL
+
+func get_type_string():
+	if is_weapon():
+		return "Weapon"
+	elif is_armor():
+		return "Armor"
+	elif is_rune():
+		return "Rune"
+	elif is_consumable():
+		return "Consumable"
+	elif is_spell():
+		return "Spell"
+	
+	return "None"

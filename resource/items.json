@@ -6,8 +6,7 @@
 			"description": "(+1 Strength)",
 			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's Strength by 1",
 			"path": "entity/items/gear/Gear_Tier1.tscn",
-			"type": "GEAR",
-			"slot": "WEAPON",
+			"type": "WEAPON",
 			"tier": 0,
 			"maxCount": 1,
 			"stats": [
@@ -20,11 +19,10 @@
 		{
 			"id": "ITEM_HEAVY_SWORD",
 			"name": "Heavy Sword",
-			"description": "A heavier more powerful sword\n(+4 damage)",
-			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +4",
+			"description": "A heavier more powerful sword\n(+3 damage)",
+			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +3",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
-			"type": "GEAR",
-			"slot": "WEAPON",
+			"type": "WEAPON",
 			"tier": 1,
 			"maxCount": 1,
 			"stats": [
@@ -35,16 +33,69 @@
 			]
 		},
 		{
-			"id": "ITEM_NECRO_STAFF",
-			"name": "Necro Staff",
-			"description": "A staff that leeches health back on kill\n[Regen +1 Health]",
-			"fullDescription": "A staff unearthed from the crypt of a necromancer that consumes a corpse to replenish the weilder\nReplenish +1 health on kill",
+			"id": "ITEM_WOODEN_PLATE",
+			"name": "Wooden Breastplate",
+			"description": "A light armored piece\n(+3 health)",
+			"fullDescription": "A light armored piece that protects the player.\nIncreases player's health by +2",
+			"path": "entity/items/gear/Gear_Tier1.tscn",
+			"type": "ARMOR",
+			"tier": 1,
+			"maxCount": 1,
+			"stats": [
+				{
+					"type": "HEALTH",
+					"value": 2
+				}
+			]
+		},
+		{
+			"id": "ITEM_SILVER_PLATE",
+			"name": "Silver Breastplate",
+			"description": "A heavy armored piece\n(+4 health)",
+			"fullDescription": "A heavy armored piece that protects the player.\nIncreases player's health by +4",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
-			"type": "GEAR",
-			"slot": "WEAPON",
+			"type": "ARMOR",
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "PASSIVE_LIFESTEAL_ON_KILL_01"
+			"stats": [
+				{
+					"type": "HEALTH",
+					"value": 4
+				}
+			]
+		},
+		{
+			"id": "RUNE_VAMPIRIC",
+			"name": "Vampiric",
+			"description": "Lifesteal 20% of your damage on hit",
+			"fullDescription": "Lifesteal 20% of your damage on hit",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_LIFESTEAL_01"
+		},
+		{
+			"id": "RUNE_CRITICAL_STUN",
+			"name": "Critical On Stun",
+			"description": "Do Critical hits on stunned targets",
+			"fullDescription": "Do Critical hits on stunned targets",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_STUN_CRITICAL"
+		},
+		{
+			"id": "RUNE_DELAYED_BARRIER",
+			"name": "Delayed Barrier",
+			"description": "After every 4 hits taken, gain a barrier",
+			"fullDescription": "After every 4 hits taken, gain a barrier",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_DELAYED_BARRIER"
 		},
 		{
 			"#disable": true,
@@ -119,7 +170,7 @@
 		{
 			"#disable": true,
 			"id": "ITEM_SPELL_LIFE_DRAIN",
-			"name": "Vampiric Grasp",
+			"name": "Life Drain",
 			"description": "Drain 2 life from each nearby enemy 1 tile away (Cardinal directions)",
 			"fullDescription": "Drain 2 life from each nearby enemies. \nAffects cardinal directions only.",
 			"path": "entity/items/spells/Spell_Tier1.tscn",
@@ -127,6 +178,30 @@
 			"tier": 2,
 			"maxCount": 2,
 			"spellId": "SPELL_LIFE_DRAIN"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_SPELL_FORCE_PUSH",
+			"name": "Force Push",
+			"description": "Pushes away all nearby enemies by 2 tiles (Cardinal directions)",
+			"fullDescription": "Pushes away all nearby enemies by 2 tiles. \nAffects cardinal directions only.",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
+			"type": "SPELL",
+			"tier": 2,
+			"maxCount": 2,
+			"spellId": "SPELL_FORCE_PUSH"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_SPELL_PROTECTION",
+			"name": "Instant Protection",
+			"description": "Gives the player [Protection] for 1 turn",
+			"fullDescription": "Gives the player [Protection] for 1 turn",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
+			"type": "SPELL",
+			"tier": 2,
+			"maxCount": 2,
+			"spellId": "SPELL_PROTECTION"
 		}
 	]
 }
