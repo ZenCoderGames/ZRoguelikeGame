@@ -72,9 +72,12 @@ Roguelike Dev:
 (D)- EffectManager/Global update
 (D)- Special Abilities
 (D)- Special Passives
-- Equipment Update
+(D)- Inventory/Equipment Update
+(D)- Better testing tools for StatusEffects/Passives/Specials
+- Spells need cooldowns
+- Character UI has placeholder disabled items/spell buttons
+
 - Rename Special to Special Ability
-- Better testing tools for StatusEffects/Passives/Specials
 
 - VFX Upgrades (Stun, Barrier, Protection, Lifesteal, Lifedrain, Lightning bolt, Groundpound)
 - Better doors, death, exit sprites

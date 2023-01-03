@@ -108,8 +108,8 @@ func _show_selected():
 			equipButtonRune2.visible = selectedItem.data.is_rune()
 			equipButtonSpell1.visible = selectedItem.data.is_spell()
 			equipButtonSpell2.visible = selectedItem.data.is_spell()
-			equipButtonSpell3.visible = selectedItem.data.is_spell()
-			equipButtonSpell4.visible = selectedItem.data.is_spell()
+			equipButtonSpell3.visible = selectedItem.data.is_spell() and playerChar.maxSpellSlots>2
+			equipButtonSpell4.visible = selectedItem.data.is_spell() and playerChar.maxSpellSlots>3
 		equippedUI.visible = isEquippedItem
 	
 

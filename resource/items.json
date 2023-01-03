@@ -34,7 +34,7 @@
 		},
 		{
 			"id": "ITEM_WOODEN_PLATE",
-			"name": "Wooden Breastplate",
+			"name": "Wooden Plate",
 			"description": "A light armored piece\n(+3 health)",
 			"fullDescription": "A light armored piece that protects the player.\nIncreases player's health by +2",
 			"path": "entity/items/gear/Gear_Tier1.tscn",
@@ -50,7 +50,7 @@
 		},
 		{
 			"id": "ITEM_SILVER_PLATE",
-			"name": "Silver Breastplate",
+			"name": "Silver Plate",
 			"description": "A heavy armored piece\n(+4 health)",
 			"fullDescription": "A heavy armored piece that protects the player.\nIncreases player's health by +4",
 			"path": "entity/items/gear/Gear_Tier2.tscn",

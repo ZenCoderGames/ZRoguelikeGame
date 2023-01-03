@@ -29,7 +29,7 @@ healthBarFlashColor = Color( 0.460938, 0.250275, 0.250275, 1 )
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 205.0
+margin_right = 457.0
 margin_bottom = 63.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -103,13 +103,12 @@ align = 1
 
 [node name="NonBase" type="HSplitContainer" parent="HSplitContainer"]
 margin_left = 198.0
-margin_right = 198.0
+margin_right = 450.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SpellContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
-visible = false
 margin_right = 120.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 120, 0 )
@@ -138,8 +137,8 @@ text = "Spells"
 align = 1
 
 [node name="EffectContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
-visible = false
-margin_right = 120.0
+margin_left = 132.0
+margin_right = 252.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 3
