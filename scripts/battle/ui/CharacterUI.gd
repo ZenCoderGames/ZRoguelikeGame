@@ -32,6 +32,7 @@ var character:Character
 var equippedItems:Dictionary = {}
 var equippedSpells:Dictionary = {}
 var equippedEffects:Dictionary = {}
+var spellSlots:Array = []
 
 var isPlayer:bool
 
@@ -60,6 +61,15 @@ func init(entityObj):
 		nameBg.color = enemyTintColor
 		xpUI.visible = false
 	_update_base_ui()
+
+	# Create Base Spells
+	nonBaseContainer.visible = true
+	spellContainer.visible = true
+	for i in range(character.maxSpellSlots):
+		var newSpellUI:SpellItemUI = SpellButtonUI.instance()
+		spellContainer.add_child(newSpellUI)
+		newSpellUI.init_as_empty(i)
+		spellSlots.append(newSpellUI)
 	
 func _update_base_ui():
 	if inLevelUpSequence:
@@ -93,39 +103,51 @@ func _show_level_up():
 	_update_base_ui()
 
 # ITEMS
-func _on_item_equipped(item):
+func _on_item_equipped(item, slotType):
 	if item.data.is_spell():
-		var newSpellUI:SpellItemUI = SpellButtonUI.instance()
-		spellContainer.add_child(newSpellUI)
+		var newSpellUI:SpellItemUI = _get_spell_slot(slotType)
 		newSpellUI.init(item)
 		equippedSpells[item] = newSpellUI
 
 		newSpellUI.connect("pressed", self, "_on_equip_spell_selected", [item])
-		
-		spellContainer.visible = true
-		_update_non_base_ui()
 	else:
 		var newItemUI = EquippedItemUI.instance()
 		listContainer.add_child(newItemUI)
 		newItemUI.init(item)
 		equippedItems[item] = newItemUI
 
-func _on_item_unequipped(item):
+func _on_item_unequipped(item, slotType):
 	if item.data.is_spell():
 		if equippedSpells.has(item):
-			spellContainer.remove_child(equippedSpells[item])
+			var newSpellUI:SpellItemUI = _get_spell_slot(slotType)
+			newSpellUI.init_as_empty(_get_spell_slotIndex(slotType))
+			newSpellUI.disconnect("pressed", self, "_on_equip_spell_selected")
 			equippedSpells.erase(item)
-			
-		if equippedSpells.size()==0:
-			spellContainer.visible = false
-			
-		_update_non_base_ui()
 	else:
 		if equippedItems.has(item):
 			listContainer.remove_child(equippedItems[item])
 			equippedItems.erase(item)
 
 # SPELLS
+func _get_spell_slot(slotType):
+	var slotIdx:int = _get_spell_slotIndex(slotType)
+	if slotIdx>=0:
+		return spellSlots[slotIdx]
+
+	return null
+
+func _get_spell_slotIndex(slotType):
+	if slotType == Constants.ITEM_EQUIP_SLOT.SPELL_1:
+		return 0
+	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_2:
+		return 1
+	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_3:
+		return 2
+	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_4:
+		return 3
+
+	return -1
+
 func _on_equip_spell_selected(spellItem):
 	if spellItem.can_activate():
 		character.equipment.activate_spell(spellItem)
@@ -138,7 +160,6 @@ func on_passive_added(_character, passive):
 	equippedEffects[passive] = newEffectUI
 
 	effectContainer.visible = true
-	_update_non_base_ui()
 
 func on_passive_removed(_character, passive):
 	if equippedEffects.has(passive):
@@ -147,8 +168,6 @@ func on_passive_removed(_character, passive):
 		
 	if equippedEffects.size()==0:
 		effectContainer.visible = false
-		
-	_update_non_base_ui()
 
 func on_status_effect_added(_character, statusEffect):
 	var newEffectUI = EffectItemUI.instance()
@@ -157,7 +176,6 @@ func on_status_effect_added(_character, statusEffect):
 	equippedEffects[statusEffect] = newEffectUI
 
 	effectContainer.visible = true
-	_update_non_base_ui()
 
 func on_status_effect_removed(_character, statusEffect):
 	if equippedEffects.has(statusEffect):
@@ -166,8 +184,6 @@ func on_status_effect_removed(_character, statusEffect):
 		
 	if equippedEffects.size()==0:
 		effectContainer.visible = false
-		
-	_update_non_base_ui()
 
 func on_ability_added(_character, ability):
 	var newEffectUI = EffectItemUI.instance()
@@ -176,7 +192,6 @@ func on_ability_added(_character, ability):
 	equippedEffects[ability] = newEffectUI
 
 	effectContainer.visible = true
-	_update_non_base_ui()
 
 func on_ability_removed(_character, ability):
 	if equippedEffects.has(ability):
@@ -185,11 +200,6 @@ func on_ability_removed(_character, ability):
 		
 	if equippedEffects.size()==0:
 		effectContainer.visible = false
-		
-	_update_non_base_ui()
-
-func _update_non_base_ui():
-	nonBaseContainer.visible = equippedSpells.size()>0 or equippedEffects.size()>0
 	
 func has_entity(entity):
 	return character == entity

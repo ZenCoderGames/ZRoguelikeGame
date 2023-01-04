@@ -76,6 +76,7 @@ Roguelike Dev:
 (D)- Better testing tools for StatusEffects/Passives/Specials
 - Spells need cooldowns
 - Character UI has placeholder disabled items/spell buttons
+- Google sheet for things
 
 - Rename Special to Special Ability
 

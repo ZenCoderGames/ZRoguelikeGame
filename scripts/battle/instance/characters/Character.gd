@@ -249,10 +249,10 @@ func on_stats_changed():
 func pick_item(itemToAdd):
 	inventory.add_item(itemToAdd)
 
-func _on_item_equipped(_item):
+func _on_item_equipped(_item, _slotType):
 	on_stats_changed()
 
-func _on_item_unequipped(_item):
+func _on_item_unequipped(_item, _slotType):
 	on_stats_changed()
 
 # COMBAT

@@ -5,8 +5,8 @@ var equippedSlots:Dictionary = {}
 
 var character
 
-signal OnItemEquipped(item)
-signal OnItemUnEquipped(item)
+signal OnItemEquipped(item, slotType)
+signal OnItemUnEquipped(item, slotType)
 signal OnSpellActivated(item)
 
 func _init(characterRef):
@@ -57,13 +57,13 @@ func equip_item(item, slotType:int):
 	equippedItems.append(item)
 	equippedSlots[slotType] = item
 	item.on_equipped(character)
-	emit_signal("OnItemEquipped", item)
+	emit_signal("OnItemEquipped", item, slotType)
 
 func unequip_item(item, slotType:int):
 	equippedItems.erase(equippedSlots[slotType])
 	item.on_unequipped(character)
 	equippedSlots[slotType] = null
-	emit_signal("OnItemUnEquipped", item)
+	emit_signal("OnItemUnEquipped", item, slotType)
 
 func activate_spell(spellItem):
 	spellItem.activate()
