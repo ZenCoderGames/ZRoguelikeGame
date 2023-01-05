@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sourceArt/Random/Circle.png" type="Texture" id=1]
+[ext_resource path="res://scripts/battle/instance/effects/EffectInstance.gd" type="Script" id=2]
+
+[node name="BaseFX" type="Sprite"]
+self_modulate = Color( 0.152941, 0.137255, 0.137255, 1 )
+position = Vector2( 208, 169 )
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

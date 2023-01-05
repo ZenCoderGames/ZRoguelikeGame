@@ -43,7 +43,7 @@ font_data = ExtResource( 10 )
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource( 4 )
 doorsStayOpenDuringBattle = true
-debugSpawnItems = [ "ITEM_SWORD_00", "ITEM_WOODEN_PLATE", "RUNE_VAMPIRIC", "RUNE_DELAYED_BARRIER", "RUNE_CRITICAL_STUN" ]
+debugSpawnItems = [ "ITEM_SPELL_LIGHTNING_BOLT", "ITEM_SPELL_WHIRLWIND" ]
 setPlayerInvulnerable = true
 setEnemiesInvulnerable = true
 

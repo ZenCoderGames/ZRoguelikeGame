@@ -9,6 +9,8 @@ func init(spellItemObj):
 	spellItem = spellItemObj
 	self.text = spellItem.get_display_name()
 	self.disabled = false
+	CombatEventManager.connect("OnStartTurn", self, "_on_start_turn")
+	GameGlobals.dungeon.player.equipment.connect("OnSpellActivated", self, "_on_spell_activated")
 
 func init_as_empty(name:String):
 	spellItem = null
@@ -17,6 +19,8 @@ func init_as_empty(name:String):
 	self.disabled = true
 
 func revert_as_empty():
+	GameGlobals.dungeon.player.equipment.disconnect("OnSpellActivated", self, "_on_spell_activated")
+	CombatEventManager.disconnect("OnStartTurn", self, "_on_start_turn")
 	spellItem = null
 	self.text = _name
 	self.disabled = true
@@ -28,3 +32,19 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	if spellItem!=null:
 		CombatEventManager.on_hide_info()
+
+func _on_start_turn():
+	_refresh_ui()
+
+func _refresh_ui():
+	var remainingCooldown:int = spellItem.spell.get_remaining_cooldown()
+	if remainingCooldown>0:
+		self.text = spellItem.get_display_name() + " (" + str(remainingCooldown) + ")"
+		self.disabled = true
+	else:
+		self.text = spellItem.get_display_name()
+		self.disabled = false
+
+func _on_spell_activated(spellItemObj):
+	if spellItemObj==spellItem:
+		_refresh_ui()

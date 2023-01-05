@@ -359,7 +359,7 @@ func _start_turn():
 	player.cell.room.pre_update_entities()
 
 	if player.status.is_stunned():
-		_on_player_turn_completed()
+		player.skip_turn()
 	else:
 		# Wait for Player Turn
 		pass

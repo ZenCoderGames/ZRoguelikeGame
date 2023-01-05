@@ -41,8 +41,6 @@ z_index = 2
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
 
-[node name="DamageText" parent="." instance=ExtResource( 2 )]
-
 [node name="LevelUpAnimation" type="AnimatedSprite" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -51,7 +49,7 @@ position = Vector2( -5, -6 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 5 )
 animation = "levelUpLoop"
-frame = 2
+frame = 1
 playing = true
 
 [node name="LevelUpLabel" type="Label" parent="."]
@@ -68,3 +66,14 @@ align = 1
 valign = 1
 
 [node name="CharacterUI" parent="." instance=ExtResource( 6 )]
+
+[node name="DamageText" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = -36.0
+margin_right = 14.0
+margin_bottom = 4.0
+text = "Immune"

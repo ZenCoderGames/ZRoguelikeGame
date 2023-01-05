@@ -3,6 +3,7 @@ class_name SpellData
 
 """{
     "id": "LIGHTNING_BOLT",
+    "cooldown": 10,
     "timeline": [
         {
             "type": "FIND_TARGETS",
@@ -21,10 +22,12 @@ class_name SpellData
 }"""
 
 var id:String
+var cooldown:int
 var timeline:Array
 
 func _init(spellDataJS):
     id = spellDataJS["id"]
+    cooldown = spellDataJS["cooldown"]
     var timelineJSList = spellDataJS["timeline"]
     for actionJS in timelineJSList:
         var newActionData:ActionData = ActionDataTypes.create(actionJS)

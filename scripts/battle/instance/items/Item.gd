@@ -32,8 +32,7 @@ func can_activate()->bool:
 
 func activate():
 	if spell!=null:
-		if spell.can_activate():
-			spell.activate()
+		spell.activate()
 
 func picked():
 	if cell.entityObject!=null:

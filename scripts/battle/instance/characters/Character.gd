@@ -75,10 +75,10 @@ func init(id:int, charDataVal, teamVal):
 	team = teamVal
 	if team == Constants.TEAM.PLAYER:
 		originalColor = GameGlobals.battleInstance.view.playerDamageColor
-		damageText.self_modulate = GameGlobals.battleInstance.view.enemyDamageColor
+		#damageText.self_modulate = GameGlobals.battleInstance.view.enemyDamageColor
 	elif team == Constants.TEAM.ENEMY:
 		originalColor = GameGlobals.battleInstance.view.enemyDamageColor
-		damageText.self_modulate = GameGlobals.battleInstance.view.playerDamageColor
+		#damageText.self_modulate = GameGlobals.battleInstance.view.playerDamageColor
 
 	# Stats
 	for statData in charData.statDataList:
@@ -349,6 +349,7 @@ func show_hit_flash():
 func reset_color():
 	self.self_modulate = originalColor
 	
+# Deprecated
 func show_damage_text(entity, dmg):
 	if entity==null:
 		return
@@ -357,32 +358,25 @@ func show_damage_text(entity, dmg):
 		damageText.modulate = GameGlobals.battleInstance.view.playerDamageColor
 	else:
 		damageText.modulate = GameGlobals.battleInstance.view.enemyDamageColor"""
-	damageText.visible = true
-	damageText.text = str(dmg)
-	_create_damage_text_tween(entity)
-	yield(get_tree().create_timer(0.35), "timeout")
-	damageText.visible = false
+	_show_generic_text(entity, str(dmg), 0.35)
 
 func show_blocked_text(entity):
-	"""if(entity.team == Constants.TEAM.PLAYER):
-		damageText.modulate = GameGlobals.battleInstance.view.playerDamageColor
-	else:
-		damageText.modulate = GameGlobals.battleInstance.view.enemyDamageColor"""
-	damageText.visible = true
-	damageText.text = "Immune"
-	_create_damage_text_tween(entity)
-	yield(get_tree().create_timer(0.5), "timeout")
-	damageText.visible = false
+	_show_generic_text(entity, "Immune")
 
 func show_critical(entity):
-	"""if(entity.team == Constants.TEAM.PLAYER):
-		damageText.modulate = GameGlobals.battleInstance.view.playerDamageColor
-	else:
-		damageText.modulate = GameGlobals.battleInstance.view.enemyDamageColor"""
+	_show_generic_text(entity, "Crit")
+
+func show_stun():
+	_show_generic_text(self, "Stun")
+
+func show_stunned():
+	_show_generic_text(self, "Stunned")
+
+func _show_generic_text(entity, val:String, duration:float=1.0):
 	damageText.visible = true
-	damageText.text = "Crit"
+	damageText.text = val
 	_create_damage_text_tween(entity)
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(duration), "timeout")
 	damageText.visible = false
 
 func _create_damage_text_tween(entity):
@@ -402,8 +396,9 @@ func _create_damage_text_tween(entity):
 	elif dirn==Constants.DIRN_TYPE.DOWN:
 		startPos = Vector2(0, 0)
 		endPos = Vector2(0, 10)
-	Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
-	#Utils.create_tween_vector2(damageText, "rect_size", Vector2(20,20), Vector2(40,40), 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	#Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	#Utils.create_tween_vector2(damageText, "rect_position", startPos, startPos, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	Utils.create_tween_vector2(damageText, "rect_size", Vector2(20,20), Vector2(40,40), 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 
 func pre_update():
 	successfulDamageThisFrame = 0
@@ -441,7 +436,8 @@ func clear_targets():
 
 # SPELLS
 func on_spell_activated(_spellItem):
-	on_turn_completed()
+	pass
+	#on_turn_completed()
 
 # STATUS EFFECTS
 func add_status_effect(sourceChar:Character, statusEffectData:StatusEffectData):
@@ -451,12 +447,19 @@ func add_status_effect(sourceChar:Character, statusEffectData:StatusEffectData):
 	if sourceChar!=self:
 		sourceChar.emit_signal("OnStatusEffectAddedToEnemy", self, statusEffect)
 	on_stats_changed()
+	_update_status_effect_visuals()
+
 	return statusEffect
 
 func remove_status_effect(statusEffect):
 	statusEffectList.erase(statusEffect)
 	emit_signal("OnStatusEffectRemoved", self, statusEffect)
 	on_stats_changed()
+	#_update_status_effect_visuals()
+
+func _update_status_effect_visuals():
+	if status.is_stunned():
+		show_stun()
 
 func has_status_effect(statusEffectId:String):
 	for statusEffect in statusEffectList:
@@ -541,6 +544,11 @@ func remove_ability(ability):
 # TURNS
 func on_turn_completed():
 	emit_signal("OnTurnCompleted")
+
+func skip_turn():
+	if status.is_stunned():
+		show_stunned()
+	on_turn_completed()
 
 # HELPERS
 func is_in_room(room):

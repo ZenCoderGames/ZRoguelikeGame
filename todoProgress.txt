@@ -74,9 +74,9 @@ Roguelike Dev:
 (D)- Special Passives
 (D)- Inventory/Equipment Update
 (D)- Better testing tools for StatusEffects/Passives/Specials
-- Spells need cooldowns
-- Character UI has placeholder disabled items/spell buttons
-- Google sheet for things
+(D)- Spells need cooldowns
+(D)- Character UI has placeholder disabled items/spell buttons
+(D)- Google sheet for things
 
 - Rename Special to Special Ability
 
