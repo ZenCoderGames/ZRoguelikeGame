@@ -41,6 +41,7 @@ var specialModifierList:Array = []
 var specialPassive:Passive
 
 var maxSpellSlots:int = 2
+var maxRuneSlots:int = 2
 
 signal OnCharacterMove(x, y)
 signal OnCharacterMoveToCell()

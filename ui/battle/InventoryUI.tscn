@@ -4,18 +4,15 @@
 [ext_resource path="res://scripts/battle/ui/InventoryUI.gd" type="Script" id=2]
 
 [node name="InventoryUI" type="MarginContainer"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchor_top = 0.665
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -400.0
-margin_top = -201.0
-margin_right = 400.0
+margin_top = 3.0
 script = ExtResource( 2 )
 
 [node name="Bg" type="ColorRect" parent="."]
 margin_right = 800.0
-margin_bottom = 201.0
+margin_bottom = 198.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0.341176, 0.305882, 0.27451, 1 )
@@ -51,7 +48,7 @@ valign = 1
 
 [node name="Content" type="MarginContainer" parent="."]
 margin_right = 800.0
-margin_bottom = 201.0
+margin_bottom = 198.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 25
 custom_constants/margin_left = 5
@@ -61,7 +58,7 @@ custom_constants/margin_bottom = 6
 margin_left = 5.0
 margin_top = 25.0
 margin_right = 794.0
-margin_bottom = 195.0
+margin_bottom = 192.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -69,14 +66,14 @@ split_offset = -200
 
 [node name="ItemPanel" type="VBoxContainer" parent="Content/HSplitContainer"]
 margin_right = 200.0
-margin_bottom = 170.0
+margin_bottom = 167.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Bg" type="ColorRect" parent="Content/HSplitContainer/ItemPanel"]
 margin_right = 200.0
-margin_bottom = 170.0
+margin_bottom = 167.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0.0980392, 0.105882, 0.101961, 1 )
@@ -95,27 +92,27 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 195.0
-margin_bottom = 165.0
+margin_bottom = 162.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Content/HSplitContainer/ItemPanel/Bg/MarginContainer/ItemList"]
 margin_right = 190.0
-margin_bottom = 160.0
+margin_bottom = 157.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="DetailsPanel" type="VBoxContainer" parent="Content/HSplitContainer"]
 margin_left = 208.0
 margin_right = 789.0
-margin_bottom = 170.0
+margin_bottom = 167.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Bg" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel"]
 margin_right = 581.0
-margin_bottom = 170.0
+margin_bottom = 167.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0.0980392, 0.105882, 0.101961, 1 )
@@ -132,7 +129,7 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 576.0
-margin_bottom = 165.0
+margin_bottom = 162.0
 
 [node name="NameContainer" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer"]
 margin_right = 571.0
@@ -168,7 +165,7 @@ valign = 1
 [node name="DescContainer" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer"]
 margin_top = 52.0
 margin_right = 571.0
-margin_bottom = 136.0
+margin_bottom = 133.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_vertical = 3
 color = Color( 0.184314, 0.164706, 0.164706, 1 )
@@ -181,9 +178,9 @@ align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer"]
-margin_top = 140.0
+margin_top = 137.0
 margin_right = 571.0
-margin_bottom = 160.0
+margin_bottom = 157.0
 alignment = 1
 
 [node name="EquippedUI" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -275,7 +272,7 @@ text = "Consume"
 [node name="NoContent" type="MarginContainer" parent="."]
 visible = false
 margin_right = 800.0
-margin_bottom = 201.0
+margin_bottom = 198.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 25
 custom_constants/margin_left = 5
@@ -285,7 +282,7 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 25.0
 margin_right = 795.0
-margin_bottom = 196.0
+margin_bottom = 193.0
 color = Color( 0.0941176, 0.0745098, 0.0745098, 1 )
 
 [node name="Label" type="Label" parent="NoContent/ColorRect"]

@@ -5,6 +5,7 @@ class_name DungeonCamera
 var player
 
 const ZOOM_ON_COMBAT:float = 0.0
+export var cam_offset = Vector2(0, 0)  # Maximum hor/ver shake in pixels.
 
 # Camera Shake Params
 onready var noise = OpenSimplexNoise.new()
@@ -41,7 +42,7 @@ func _update_camera_to_room(newRoom):
 	Utils.create_tween_vector2(self, "position", self.position, newRoom.get_center(), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _update_camera_to_player():
-	Utils.create_tween_vector2(self, "position", self.position, player.cell.pos, 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	Utils.create_tween_vector2(self, "position", self.position, player.cell.pos + cam_offset, 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_room_combat_started(_room):
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x-ZOOM_ON_COMBAT, self.zoom.y-ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

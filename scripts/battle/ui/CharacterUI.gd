@@ -33,6 +33,9 @@ var equippedItems:Dictionary = {}
 var equippedSpells:Dictionary = {}
 var equippedEffects:Dictionary = {}
 var spellSlots:Array = []
+var weaponSlot
+var armorSlot
+var runeSlots:Array = []
 
 var isPlayer:bool
 
@@ -68,8 +71,20 @@ func init(entityObj):
 	for i in range(character.maxSpellSlots):
 		var newSpellUI:SpellItemUI = SpellButtonUI.instance()
 		spellContainer.add_child(newSpellUI)
-		newSpellUI.init_as_empty(i)
+		newSpellUI.init_as_empty("Spell")
 		spellSlots.append(newSpellUI)
+
+	# Create Weapon
+	weaponSlot = _create_item_slot("Weapon")
+	armorSlot = _create_item_slot("Armor")
+	for i in range(character.maxRuneSlots):
+		runeSlots.append(_create_item_slot("Rune"))
+
+func _create_item_slot(slotName:String):
+	var newItemUI = EquippedItemUI.instance()
+	listContainer.add_child(newItemUI)
+	newItemUI.init_as_empty(slotName)
+	return newItemUI
 	
 func _update_base_ui():
 	if inLevelUpSequence:
@@ -111,8 +126,7 @@ func _on_item_equipped(item, slotType):
 
 		newSpellUI.connect("pressed", self, "_on_equip_spell_selected", [item])
 	else:
-		var newItemUI = EquippedItemUI.instance()
-		listContainer.add_child(newItemUI)
+		var newItemUI = _get_item_slot(slotType)
 		newItemUI.init(item)
 		equippedItems[item] = newItemUI
 
@@ -120,34 +134,16 @@ func _on_item_unequipped(item, slotType):
 	if item.data.is_spell():
 		if equippedSpells.has(item):
 			var newSpellUI:SpellItemUI = _get_spell_slot(slotType)
-			newSpellUI.init_as_empty(_get_spell_slotIndex(slotType))
+			newSpellUI.revert_as_empty()
 			newSpellUI.disconnect("pressed", self, "_on_equip_spell_selected")
 			equippedSpells.erase(item)
 	else:
 		if equippedItems.has(item):
-			listContainer.remove_child(equippedItems[item])
+			var itemUI = _get_item_slot(slotType)
+			itemUI.revert_as_empty()
 			equippedItems.erase(item)
 
 # SPELLS
-func _get_spell_slot(slotType):
-	var slotIdx:int = _get_spell_slotIndex(slotType)
-	if slotIdx>=0:
-		return spellSlots[slotIdx]
-
-	return null
-
-func _get_spell_slotIndex(slotType):
-	if slotType == Constants.ITEM_EQUIP_SLOT.SPELL_1:
-		return 0
-	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_2:
-		return 1
-	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_3:
-		return 2
-	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_4:
-		return 3
-
-	return -1
-
 func _on_equip_spell_selected(spellItem):
 	if spellItem.can_activate():
 		character.equipment.activate_spell(spellItem)
@@ -203,3 +199,35 @@ func on_ability_removed(_character, ability):
 	
 func has_entity(entity):
 	return character == entity
+
+# HELPERS
+func _get_spell_slot(slotType):
+	var slotIdx:int = _get_spell_slotIndex(slotType)
+	if slotIdx>=0:
+		return spellSlots[slotIdx]
+
+	return null
+
+func _get_spell_slotIndex(slotType):
+	if slotType == Constants.ITEM_EQUIP_SLOT.SPELL_1:
+		return 0
+	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_2:
+		return 1
+	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_3:
+		return 2
+	elif slotType == Constants.ITEM_EQUIP_SLOT.SPELL_4:
+		return 3
+
+	return -1
+
+func _get_item_slot(slotType):
+	if slotType == Constants.ITEM_EQUIP_SLOT.WEAPON:
+		return weaponSlot
+	elif slotType == Constants.ITEM_EQUIP_SLOT.ARMOR:
+		return armorSlot
+	elif slotType == Constants.ITEM_EQUIP_SLOT.RUNE_1:
+		return runeSlots[0]
+	elif slotType == Constants.ITEM_EQUIP_SLOT.RUNE_2:
+		return runeSlots[1]
+
+	return null

@@ -4,13 +4,10 @@
 [ext_resource path="res://scripts/battle/ui/InfoUI.gd" type="Script" id=2]
 
 [node name="InfoUI" type="MarginContainer"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchor_top = 0.833
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -400.0
-margin_top = -100.0
-margin_right = 400.0
+margin_top = 0.199951
 grow_vertical = 0
 size_flags_vertical = 3
 script = ExtResource( 2 )

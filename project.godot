@@ -577,7 +577,6 @@ gdscript/warnings/integer_division=false
 [display]
 
 window/size/width=800
-window/size/resizable=false
 window/energy_saving/keep_screen_on=false
 
 [input]

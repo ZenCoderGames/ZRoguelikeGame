@@ -43,7 +43,7 @@ font_data = ExtResource( 10 )
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource( 4 )
 doorsStayOpenDuringBattle = true
-debugSpawnItems = [ "ITEM_SPELL_LIGHTNING_BOLT", "ITEM_SPELL_WHIRLWIND", "ITEM_SPELL_LIFE_DRAIN" ]
+debugSpawnItems = [ "ITEM_SWORD_00", "ITEM_WOODEN_PLATE", "RUNE_VAMPIRIC", "RUNE_DELAYED_BARRIER", "RUNE_CRITICAL_STUN" ]
 setPlayerInvulnerable = true
 setEnemiesInvulnerable = true
 
@@ -83,6 +83,7 @@ position = Vector2( 400, 300 )
 current = true
 zoom = Vector2( 0.8, 0.8 )
 script = ExtResource( 1 )
+cam_offset = Vector2( 0, -50 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = SubResource( 1 )
