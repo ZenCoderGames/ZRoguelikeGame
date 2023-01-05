@@ -372,7 +372,7 @@ func show_stun():
 func show_stunned():
 	_show_generic_text(self, "Stunned")
 
-func _show_generic_text(entity, val:String, duration:float=1.0):
+func _show_generic_text(entity, val:String, duration:float=0.75):
 	damageText.visible = true
 	damageText.text = val
 	_create_damage_text_tween(entity)
@@ -458,8 +458,9 @@ func remove_status_effect(statusEffect):
 	#_update_status_effect_visuals()
 
 func _update_status_effect_visuals():
-	if status.is_stunned():
-		show_stun()
+	#if status.is_stunned():
+	#	show_stun()
+	pass
 
 func has_status_effect(statusEffectId:String):
 	for statusEffect in statusEffectList:

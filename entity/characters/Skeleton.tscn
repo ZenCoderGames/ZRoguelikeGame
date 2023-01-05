@@ -12,3 +12,12 @@ script = ExtResource( 2 )
 [node name="CharacterUI" parent="." instance=ExtResource( 4 )]
 
 [node name="DamageText" parent="." instance=ExtResource( 3 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = -36.0
+margin_right = 14.0
+margin_bottom = 4.0
+text = "Immune"

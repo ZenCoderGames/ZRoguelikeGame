@@ -15,30 +15,15 @@ position = Vector2( 209, 69 )
 texture = SubResource( 1 )
 script = ExtResource( 2 )
 
-[node name="HealthBarUI" type="ColorRect" parent="."]
-visible = false
-margin_left = -17.0
-margin_top = -34.0
-margin_right = 11.0
-margin_bottom = -23.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="Bg" type="ColorRect" parent="HealthBarUI"]
-anchor_right = 0.083
-anchor_bottom = 0.05
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 24.676
-margin_bottom = 9.45
-color = Color( 0.230469, 0.20256, 0.20256, 1 )
-
-[node name="Health" type="ColorRect" parent="HealthBarUI/Bg"]
-anchor_right = 0.083
-anchor_bottom = 0.05
-margin_right = 23.842
-margin_bottom = 8.55
-color = Color( 0, 0.811765, 0.0705882, 1 )
+[node name="CharacterUI" parent="." instance=ExtResource( 4 )]
 
 [node name="DamageText" parent="." instance=ExtResource( 3 )]
-
-[node name="CharacterUI" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.5
+margin_top = -39.5
+margin_right = 18.5
+margin_bottom = 3.5
+text = "Immune"
