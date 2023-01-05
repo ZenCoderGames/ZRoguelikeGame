@@ -12,13 +12,8 @@ func execute():
 	var lifeStealData:ActionLifeStealData = actionData as ActionLifeStealData
 	var lifeSteal:int = 0
 	if lifeStealData.percent>0:
-		lifeSteal = lifeStealData.percent * character.successfulDamageThisFrame
+		lifeSteal = int(ceil(lifeStealData.percent * float(character.successfulDamageThisFrame)))
 	else:
 		lifeSteal = lifeStealData.flatAmount
 
 	character.modify_stat_value(StatData.STAT_TYPE.HEALTH, lifeSteal)
-
-	var targets = character.get_targets()
-	for target in targets:
-		if !target.isDead:
-			HitResolutionManager.do_hit(character, target, lifeSteal, false)

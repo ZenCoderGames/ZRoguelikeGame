@@ -217,6 +217,10 @@ func clean_up_loaded_scene(sceneToCleanUp):
 		sceneToCleanUp.queue_free()
 
 func clean_up():
+	# clean up any loose ends
+	for enemy in enemies:
+		enemy.disconnect("OnTurnCompleted", self, "_update_next_enemy")
+
 	for loadedScene in loadedScenes:
 		loadedScene.queue_free()
 	loadedScenes.clear()

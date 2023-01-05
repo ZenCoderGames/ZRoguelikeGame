@@ -275,7 +275,7 @@ func attack(entity):
 
 		emit_signal("OnPreAttack", entity)
 		var damageAmount:int = get_stat_value(StatData.STAT_TYPE.DAMAGE)
-		successfulDamageThisFrame = HitResolutionManager.do_hit(self, entity, damageAmount)
+		HitResolutionManager.do_hit(self, entity, damageAmount)
 		
 		# Feels
 		if entity.isDead:
@@ -396,9 +396,15 @@ func _create_damage_text_tween(entity):
 	elif dirn==Constants.DIRN_TYPE.DOWN:
 		startPos = Vector2(0, 0)
 		endPos = Vector2(0, 10)
+
+	var colorOriginal:Color = damageText.self_modulate
+	colorOriginal.a = 1.0
+	var colorNew:Color = damageText.self_modulate
+	colorNew.a = 0.0
+
 	#Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	#Utils.create_tween_vector2(damageText, "rect_position", startPos, startPos, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	Utils.create_tween_vector2(damageText, "rect_size", Vector2(20,20), Vector2(40,40), 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	Utils.create_tween_vector2(damageText, "self_modulate", colorOriginal, colorNew, 1.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 
 func pre_update():
 	successfulDamageThisFrame = 0
@@ -458,9 +464,9 @@ func remove_status_effect(statusEffect):
 	#_update_status_effect_visuals()
 
 func _update_status_effect_visuals():
-	#if status.is_stunned():
-	#	show_stun()
-	pass
+	if status.is_stunned():
+		show_stun()
+	#pass
 
 func has_status_effect(statusEffectId:String):
 	for statusEffect in statusEffectList:
@@ -549,6 +555,7 @@ func on_turn_completed():
 func skip_turn():
 	if status.is_stunned():
 		show_stunned()
+	yield(get_tree().create_timer(0.5), "timeout")
 	on_turn_completed()
 
 # HELPERS

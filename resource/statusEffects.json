@@ -4,7 +4,7 @@
 			"id": "STATUS_EFFECT_STUN",
 			"name": "Stun",
 			"description": "Stuns for 1 turn",
-			"instanceCount": 1,
+			"instanceCount": 2,
 			"endConditions": [
 				"ON_END_TURN"
 			],
@@ -14,6 +14,14 @@
 					"params": {
 						"stunned": 1
 					}
+				},
+				{
+					"type": "#SPAWN_EFFECT",
+					"params": {
+						"effectId": "StunEffect",
+						"effectPath": "entity/effects/Effect_StatusEffect_Stun.tscn",
+						"parent": true
+					}
 				}
 			],
 			"endTimeline": [ 
@@ -21,6 +29,12 @@
 					"type": "SET_STATUS",
 					"params": {
 						"stunned": -1
+					}
+				},
+				{
+					"type": "#DESTROY_EFFECT",
+					"params": {
+						"effectId": "StunEffect"
 					}
 				}
 			]
