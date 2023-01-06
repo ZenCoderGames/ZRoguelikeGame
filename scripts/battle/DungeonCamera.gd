@@ -69,8 +69,8 @@ func add_trauma(amount):
 func shake():
 	noise_y += 1
 	self.rotation = max_roll * trauma * noise.get_noise_2d(noise.seed, noise_y)
-	self.offset.x = max_offset.x * trauma * noise.get_noise_2d(noise.seed*2, noise_y)
-	self.offset.y = max_offset.y * trauma * noise.get_noise_2d(noise.seed*3, noise_y)
+	self.offset.x = cam_offset.x + max_offset.x * trauma * noise.get_noise_2d(noise.seed*2, noise_y)
+	self.offset.y = cam_offset.y + max_offset.y * trauma * noise.get_noise_2d(noise.seed*3, noise_y)
 
 func _process(delta):
 	# DEBUG

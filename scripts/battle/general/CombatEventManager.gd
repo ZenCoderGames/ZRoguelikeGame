@@ -76,3 +76,6 @@ func on_player_special_ability_pressed():
 
 func on_player_special_ability_reset():
 	emit_signal("OnPlayerSpecialAbilityReset")
+
+func clean_up():
+	Utils.clean_up_all_signals(self)

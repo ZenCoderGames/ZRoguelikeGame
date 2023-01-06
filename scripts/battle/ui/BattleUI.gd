@@ -28,6 +28,7 @@ var infoUI:InfoUI = null
 func _ready():
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	GameEventManager.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
+	GameEventManager.connect("OnNewLevelLoaded", self, "_on_new_level_loaded")
 	CombatEventManager.connect("OnToggleInventory", self, "_on_toggle_inventory")
 	CombatEventManager.connect("OnShowInfo", self, "_on_show_info")
 	CombatEventManager.connect("OnHideInfo", self, "_on_hide_info")
@@ -63,6 +64,9 @@ func _shared_init():
 	playerUI.init(GameGlobals.dungeon.player)
 	levelLabel.text = str("Level: ", GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
 	playerSpecialUI.visible = true
+
+func _on_new_level_loaded():
+	levelLabel.text = str("Level: ", GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
 
 func _on_turn_taken():
 	turnLabel.text = str("Turns: ", GameGlobals.dungeon.turnsTaken)

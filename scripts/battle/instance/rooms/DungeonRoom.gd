@@ -499,7 +499,7 @@ func _update_next_enemy():
 		else:
 			yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES), "timeout")
 		
-		if nextEnemy!=null:
+		if nextEnemy!=null && is_instance_valid(nextEnemy):
 			nextEnemy.update()
 
 func post_update_entities():

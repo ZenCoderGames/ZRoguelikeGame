@@ -77,6 +77,9 @@ Roguelike Dev:
 (D)- Spells need cooldowns
 (D)- Character UI has placeholder disabled items/spell buttons
 (D)- Google sheet for things
+(D)- Bug with stats not working correctly after next level 
+(D)- (Also, turns not calculating correctly when moving to next level)
+
 - Show Progress of Passives
 - Dots (Poison, Fire)
 - New Status Effects (Freeze, Shock, Root, Sleep)

@@ -3,8 +3,8 @@
 		{
 			"id": "STATUS_EFFECT_STUN",
 			"name": "Stun",
-			"description": "Stuns for 2 turn",
-			"instanceCount": 2,
+			"description": "Stuns for 1 turn",
+			"instanceCount": 1,
 			"endConditions": [
 				"ON_END_TURN"
 			],

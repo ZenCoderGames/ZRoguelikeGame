@@ -7,7 +7,7 @@ const intersectionBuffer:int = 0
 
 var charCounter:int = 0
 var player:PlayerCharacter = null
-var turnsTaken:int = -1
+var turnsTaken:int = 0
 
 var loadedScenes:Array = []
 var itemSpawnedMap:Dictionary = {}
@@ -334,7 +334,7 @@ func _init_player(recreatePlayer:bool):
 	if recreatePlayer:
 		player = load_character(loadedScenes, cell, GameGlobals.dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
 		CombatEventManager.emit_signal("OnPlayerCreated", player)
-		turnsTaken = turnsTaken - 1
+		#turnsTaken = turnsTaken - 1
 	else:
 		player.move_to_cell(cell)
 
@@ -345,7 +345,6 @@ func _init_turns():
 	#player.update()
 	for room in rooms:
 		room.update_visibility()
-	turnsTaken = 0
 	CombatEventManager.emit_signal("OnEndTurn")
 
 func _start_turn():
@@ -401,7 +400,8 @@ func clean_up(fullRefreshDungeon:bool=true):
 		room.clean_up()
 	rooms.clear()
 	
-	turnsTaken = -1
+	if fullRefreshDungeon:
+		turnsTaken = 0
 
 # HELPERS
 func is_intersecting_with_any_room(testRoom):

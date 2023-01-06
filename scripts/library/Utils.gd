@@ -126,3 +126,10 @@ func freeze_frame(time_scale, duration):
 	Engine.time_scale = time_scale
 	yield(GameGlobals.battleInstance.get_tree().create_timer(time_scale * duration), "timeout")
 	Engine.time_scale = 1.0
+
+func clean_up_all_signals(node:Node):
+	var allSignals = node.get_signal_list()
+	for cur_signal in allSignals:
+		var conns = node.get_signal_connection_list(cur_signal.name)
+		for cur_conn in conns:
+			node.disconnect(cur_conn.signal, cur_conn.target, cur_conn.method)
