@@ -35,7 +35,7 @@
 		{
 			"id": "ITEM_WOODEN_PLATE",
 			"name": "Wooden Plate",
-			"description": "A light armored piece\n(+3 health)",
+			"description": "A light armored piece\n(+2 health)",
 			"fullDescription": "A light armored piece that protects the player.\nIncreases player's health by +2",
 			"path": "entity/items/gear/Gear_Tier1.tscn",
 			"type": "ARMOR",
@@ -106,7 +106,7 @@
 			"path": "entity/items/consumables/Consumable_Tier1.tscn",
 			"type": "CONSUMABLE",
 			"tier": 0,
-			"maxCount": 1,
+			"maxCount": 2,
 			"statModifiers": [
 				{
 					"type": "HEALTH",
@@ -123,7 +123,7 @@
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
 			"tier": 0,
-			"maxCount": 1,
+			"maxCount": 2,
 			"statusEffectId": "STATUS_EFFECT_BARRIER"
 		},
 		{
@@ -176,7 +176,7 @@
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,
-			"maxCount": 2,
+			"maxCount": 1,
 			"spellId": "SPELL_LIFE_DRAIN"
 		},
 		{
@@ -188,7 +188,7 @@
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,
-			"maxCount": 2,
+			"maxCount": 1,
 			"spellId": "SPELL_FORCE_PUSH"
 		},
 		{
@@ -200,7 +200,7 @@
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,
-			"maxCount": 2,
+			"maxCount": 1,
 			"spellId": "SPELL_PROTECTION"
 		}
 	]
