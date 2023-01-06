@@ -3,7 +3,7 @@
 		{
 			"id": "ITEM_SWORD_00",
 			"name": "Basic Sword",
-			"description": "(+1 Strength)",
+			"description": "(+1 Damage)",
 			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's Strength by 1",
 			"path": "entity/items/gear/Gear_Tier1.tscn",
 			"type": "WEAPON",
@@ -19,8 +19,8 @@
 		{
 			"id": "ITEM_HEAVY_SWORD",
 			"name": "Heavy Sword",
-			"description": "A heavier more powerful sword\n(+3 damage)",
-			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +3",
+			"description": "A heavier more powerful sword\n(+2 damage)",
+			"fullDescription": "A larger heftier sword that packs a powerful punch.\nIncreases player's damage by +2",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "WEAPON",
 			"tier": 1,

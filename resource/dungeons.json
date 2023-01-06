@@ -1,8 +1,8 @@
 {
 	"dungeons": [
 		{
-			"numRooms": 3,
-			"roomMinRows": 10,
+			"numRooms": 6,
+			"roomMinRows": 8,
 			"roomMaxRows": 12,
 			"roomMinCols": 8,
 			"roomMaxCols": 12,

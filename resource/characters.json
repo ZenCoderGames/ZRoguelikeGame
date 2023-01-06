@@ -42,7 +42,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 10
+						"value": 12
 					},
 					{
 						"type": "DAMAGE",
@@ -51,13 +51,26 @@
 				],
 				"active": {
 					"id": "BERSERKER_SPECIAL",
-					"description": "Charge: 3 successful hits charges up the ability. \n\nActivate: Charges up your next attack to do splash damage to all nearby targets",
+					"description": "Charge: 3 successful hits charges up the ability. \n\nActivate: Do a spin attack around you damaging all targets with your weapon",
 					"conditions": ["ON_POST_HIT"],
-					"count": 3,
+					"count": 4,
 					"executeCondition": "NONE",
 					"timeline": [
 						{
-							"type": "ADD_STATUS_EFFECT",
+							"type": "FIND_TARGETS",
+							"params": {
+								"range": 1,
+								"maxTargets": 4
+							}
+						},
+						{
+							"type": "DO_DAMAGE_TO_TARGETS",
+							"params": {
+								"useCharacterDamage": true
+							}
+						},
+						{
+							"type": "#ADD_STATUS_EFFECT",
 							"params": {
 								"statusEffectId": "STATUS_EFFECT_BARBARIAN_SPECIAL",
 								"applyToSource": true

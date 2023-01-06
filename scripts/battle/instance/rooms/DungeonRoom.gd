@@ -186,7 +186,7 @@ func generate_item(itemId):
 		if cell == playerCell:
 			continue
 
-		if cell.is_empty():
+		if cell.is_empty() and cell.is_within_room_buffered(2):
 			freeCells.append(cell)
 	
 	# choose random free cell
@@ -450,7 +450,7 @@ func set_as_end_room():
 	# find free cells
 	var freeCells:Array = []
 	for cell in cells:
-		if cell.is_empty():
+		if cell.is_empty() and cell.is_within_room_buffered(2):
 			freeCells.append(cell)
 	
 	# choose random free cell
