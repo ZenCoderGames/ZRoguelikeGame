@@ -18,7 +18,10 @@ func _init(parentChar, passiveData:PassiveData):
 		if(action!=null):
 			timelineActions.append(action)
 
-	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
+	if data.triggerConditions.size()>0:
+		_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
+	else:
+		activate()
 
 func on_event_triggered():
 	attempt_activate()

@@ -77,6 +77,9 @@ Roguelike Dev:
 (D)- Spells need cooldowns
 (D)- Character UI has placeholder disabled items/spell buttons
 (D)- Google sheet for things
+- Show Progress of Passives
+- Dots (Poison, Fire)
+- New Status Effects (Freeze, Shock, Root, Sleep)
 
 - Rename Special to Special Ability
 
@@ -87,7 +90,7 @@ Roguelike Dev:
 
 - Keywords
 
-- New Status Effects (Stun, Freeze, Burn, Poison, Shock, Root, Sleep)
+
 - Complex AI behavior (Skeleton - revive, Snake - poison, Giant - healing, Automaton - stun)
 
 - Spells or Specials that translate

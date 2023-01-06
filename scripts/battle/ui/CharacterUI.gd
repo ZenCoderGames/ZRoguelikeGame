@@ -68,7 +68,7 @@ func init(entityObj):
 	# Create Base Spells
 	nonBaseContainer.visible = true
 	spellContainer.visible = true
-	for i in range(character.maxSpellSlots):
+	for __ in range(character.maxSpellSlots):
 		var newSpellUI:SpellItemUI = SpellButtonUI.instance()
 		spellContainer.add_child(newSpellUI)
 		newSpellUI.init_as_empty("Spell")
@@ -77,7 +77,7 @@ func init(entityObj):
 	# Create Weapon
 	weaponSlot = _create_item_slot("Weapon")
 	armorSlot = _create_item_slot("Armor")
-	for i in range(character.maxRuneSlots):
+	for __ in range(character.maxRuneSlots):
 		runeSlots.append(_create_item_slot("Rune"))
 
 func _create_item_slot(slotName:String):

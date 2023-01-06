@@ -23,9 +23,9 @@
 			]
 		},
 		{
-			"id": "PASSIVE_KNIGHT_HEAL",
+			"id": "PASSIVE_KNIGHT",
 			"name": "Protection Heal",
-			"description": "Heal for 1 when hit while [Protected]",
+			"description": "Heal for 1 whenever you block a hit",
 			"conditions": [
 				"ON_BLOCKED_HIT"
 			],
@@ -44,9 +44,9 @@
 			]
 		},
 		{
-			"id": "PASSIVE_ASSASSIN_CRITICAL",
+			"id": "PASSIVE_BERSERKER",
 			"name": "Critical Strike",
-			"description": "Every 3rd attack is a critical hit",
+			"description": "After 3 attacks, charge up your next attack to do a critical hit",
 			"conditions": [
 				"ON_POST_ATTACK"
 			], 
@@ -63,26 +63,40 @@
 			]
 		},
 		{
-			"id": "PASSIVE_BERSERKER_STUN",
-			"name": "Berserker Stun",
-			"description": "Every 3rd hit from the Berserker, stuns its target",
-			"conditions": [
-				"ON_POST_ATTACK"
-			], 
-			"triggerCount": 3,
-			"resetCountOnActivate": true,
+			"id": "PASSIVE_ASSASSIN",
+			"name": "Assassin Stealth Rage",
+			"description": "Gain +2 Attack when going into Stealth",
 			"timeline": [
 				{
-					"type": "FIND_TARGETS",
+					"type": "MODIFY_STATUS_EFFECT",
 					"params": {
-						"lastHitTarget": true
-					}
-				},
-				{
-					"type": "ADD_STATUS_EFFECT",
-					"params": {
-						"statusEffectId": "STATUS_EFFECT_STUN",
-						"applyToTargets": true
+						"statusEffectId": "STATUS_EFFECT_STEALTH",
+						"startTimeline": [
+							{
+								"type": "ADD_STAT_MODIFIER",
+								"params": {
+									"statModifiers": [
+										{
+											"type": "DAMAGE",
+											"baseValue": 2
+										}
+									]
+								}
+							}
+						],
+						"endTimeline": [
+							{
+								"type": "ADD_STAT_MODIFIER",
+								"params": {
+									"statModifiers": [
+										{
+											"type": "DAMAGE",
+											"baseValue": -2
+										}
+									]
+								}
+							}
+						]
 					}
 				}
 			]

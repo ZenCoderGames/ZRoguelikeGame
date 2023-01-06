@@ -9,7 +9,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 7
+						"value": 10
 					},
 					{
 						"type": "DAMAGE",
@@ -18,9 +18,9 @@
 				],
 				"active": {
 					"id": "KNIGHT_SPECIAL",
-					"description": "3 successful attacks charges up the ability. \nOn use, grants the player [Protection] for 1 turn",
-					"conditions": ["ON_POST_HIT"],
-					"count": 4,
+					"description": "Charge: 3 successful hits taken charges up the ability.\n\nActivate: grants the player [Protection] for 1 turn",
+					"conditions": ["ON_TAKE_HIT"],
+					"count": 3,
 					"executeCondition": "NONE",
 					"timeline": [
 						{
@@ -32,7 +32,7 @@
 						}
 					]
 				},
-				"passive": "PASSIVE_KNIGHT_HEAL"
+				"passive": "PASSIVE_KNIGHT"
 			},
 			{
 				"id": "BERSERKER",
@@ -51,27 +51,21 @@
 				],
 				"active": {
 					"id": "BERSERKER_SPECIAL",
-					"description": "4 successful hits taken by the player charges up the ability. \nOn use, Spin around and do attack damage all nearby enemy",
-					"conditions": ["ON_TAKE_HIT"],
-					"count": 4,
-					"executeCondition": "NEARBY_ENEMY",
+					"description": "Charge: 3 successful hits charges up the ability. \n\nActivate: Charges up your next attack to do splash damage to all nearby targets",
+					"conditions": ["ON_POST_HIT"],
+					"count": 3,
+					"executeCondition": "NONE",
 					"timeline": [
 						{
-							"type": "FIND_TARGETS",
+							"type": "ADD_STATUS_EFFECT",
 							"params": {
-								"range": 1,
-								"maxTargets": 4
-							}
-						},
-						{
-							"type": "DO_DAMAGE_TO_TARGETS",
-							"params": {
-								"useCharacterDamage": true
+								"statusEffectId": "STATUS_EFFECT_BARBARIAN_SPECIAL",
+								"applyToSource": true
 							}
 						}	
 					]
 				},
-				"passive": "PASSIVE_BERSERKER_STUN"
+				"passive": "PASSIVE_BERSERKER"
 			},
 			{
 				"id": "ASSASSIN",
@@ -89,7 +83,7 @@
 				],
 				"active": {
 					"id": "ASSASSIN_SPECIAL",
-					"description": "2 successful kills charges up the ability. \nOn use, grants the player [Stealth] for 2 turns",
+					"description": "Charge: 2 successful kills charges up the ability. \n\nActivate: Grants the player [Stealth] for 2 turns",
 					"conditions": ["ON_KILL"],
 					"count": 2,
 					"executeCondition": "NONE",
@@ -103,7 +97,7 @@
 						}
 					]
 				},
-				"passive": "PASSIVE_ASSASSIN_CRITICAL"
+				"passive": "PASSIVE_ASSASSIN"
 			}
 		],
 		"enemies": [

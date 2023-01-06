@@ -157,15 +157,15 @@
 		},
 		{
 			"#disable": true,
-			"id": "ITEM_SPELL_WHIRLWIND",
-			"name": "Whirlwind",
-			"description": "Spin around and damage all targets with your current damage",
-			"fullDescription": "Spin around and damage all targets with your current damage",
+			"id": "ITEM_SPELL_AOE_STUN",
+			"name": "Aoe Stun",
+			"description": "Stun all nearby enemies",
+			"fullDescription": "Stun all nearby enemies",
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,
 			"maxCount": 1,
-			"spellId": "SPELL_WHIRLWIND"
+			"spellId": "SPELL_AOE_STUN"
 		},
 		{
 			"#disable": true,

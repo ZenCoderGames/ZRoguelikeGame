@@ -3,7 +3,7 @@
 		{
 			"id": "STATUS_EFFECT_STUN",
 			"name": "Stun",
-			"description": "Stuns for 1 turn",
+			"description": "Stuns for 2 turn",
 			"instanceCount": 2,
 			"endConditions": [
 				"ON_END_TURN"
@@ -45,7 +45,7 @@
 			"description": "Next hit is critical",
 			"instanceCount": 1,
 			"endConditions": [
-				"ON_POST_HIT"
+				"ON_POST_ATTACK"
 			],
 			"startTimeline": [ 
 				{
@@ -147,17 +147,6 @@
 					}
 				},
 				{
-					"type": "ADD_STAT_MODIFIER",
-					"params": {
-						"statModifiers": [
-							{
-								"type": "DAMAGE",
-								"baseValue": 2
-							}
-						]
-					}
-				},
-				{
 					"type": "MODIFY_VISUAL",
 					"params": {
 						"tintColor": "#5a3d4a4c"
@@ -172,20 +161,42 @@
 					}
 				},
 				{
-					"type": "ADD_STAT_MODIFIER",
-					"params": {
-						"statModifiers": [
-							{
-								"type": "DAMAGE",
-								"baseValue": -2
-							}
-						]
-					}
-				},
-				{
 					"type": "MODIFY_VISUAL",
 					"params": {
 						"resetToOriginalTint": true
+					}
+				}
+			]
+		},
+		{
+			"id": "STATUS_EFFECT_BARBARIAN_SPECIAL",
+			"name": "Cleave (360)",
+			"description": "Modifies player's attack to cleave all nearby enemies",
+			"instanceCount": 1,
+			"endConditions": [
+				"ON_POST_ATTACK"
+			],
+			"startTimeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 4
+					}
+				},
+				{
+					"type": "MODIFY_ATTACK",
+					"params": {
+						"damageMultiplier": 1.0,
+						"applyToTargets": true
+					}
+				}
+			],
+			"endTimeline": [
+				{
+					"type": "MODIFY_ATTACK",
+					"params": {
+						"removeModifier": true
 					}
 				}
 			]

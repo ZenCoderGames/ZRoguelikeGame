@@ -40,6 +40,8 @@ var special:Special
 var specialModifierList:Array = []
 var specialPassive:Passive
 
+var attackModifier:AttackModifier
+
 var maxSpellSlots:int = 2
 var maxRuneSlots:int = 2
 
@@ -274,8 +276,16 @@ func attack(entity):
 		yield(get_tree().create_timer(0.075), "timeout")
 
 		emit_signal("OnPreAttack", entity)
+
 		var damageAmount:int = get_stat_value(StatData.STAT_TYPE.DAMAGE)
-		HitResolutionManager.do_hit(self, entity, damageAmount)
+
+		if attackModifier!=null:
+			damageAmount = int(damageAmount * attackModifier.damageMultiplier)
+			var targets = get_targets()
+			for target in targets:
+				HitResolutionManager.do_hit(self, target, damageAmount)
+		else:
+			HitResolutionManager.do_hit(self, entity, damageAmount)
 		
 		# Feels
 		if entity.isDead:
@@ -379,8 +389,8 @@ func _show_generic_text(entity, val:String, duration:float=0.75):
 	yield(get_tree().create_timer(duration), "timeout")
 	damageText.visible = false
 
-func _create_damage_text_tween(entity):
-	var dirn:int = dirn_to_character(entity)
+func _create_damage_text_tween(_entity):
+	"""var dirn:int = dirn_to_character(entity)
 	# damage text
 	var startPos:Vector2 = Vector2(0,-30)
 	var endPos:Vector2 = Vector2(10,-60)
@@ -395,7 +405,7 @@ func _create_damage_text_tween(entity):
 		endPos = Vector2(0,-30)
 	elif dirn==Constants.DIRN_TYPE.DOWN:
 		startPos = Vector2(0, 0)
-		endPos = Vector2(0, 10)
+		endPos = Vector2(0, 10)"""
 
 	var colorOriginal:Color = damageText.self_modulate
 	colorOriginal.a = 1.0
@@ -534,6 +544,13 @@ func get_special_modifiers(specialId:String):
 			matchedspecialModifiers.append(specialModifier)
 
 	return matchedspecialModifiers
+
+# ATTACK
+func add_attack_modifier(attackModifierVal:AttackModifier):
+	attackModifier = attackModifierVal
+
+func remove_attack_modifier():
+	attackModifier = null
 
 # ABILITIES
 func add_ability(abilityData:AbilityData):

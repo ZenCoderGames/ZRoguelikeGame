@@ -7,20 +7,20 @@
 				{
 					"type": "FIND_TARGETS",
 					"params": {
-						"range": 1,
+						"range": 3,
 						"maxTargets": 1
 					}
 				},
 				{
 					"type": "DO_DAMAGE_TO_TARGETS",
 					"params": {
-						"damage": 10
+						"damage": 15
 					}
 				}
 			]
 		},
 		{
-			"id": "SPELL_WHIRLWIND",
+			"id": "SPELL_AOE_STUN",
 			"cooldown": 10,
 			"timeline": [
 				{
@@ -31,9 +31,10 @@
 					}
 				},
 				{
-					"type": "DO_DAMAGE_TO_TARGETS",
+					"type": "ADD_STATUS_EFFECT",
 					"params": {
-						"useCharacterDamage": true
+						"statusEffectId": "STATUS_EFFECT_STUN",
+						"applyToTargets": true
 					}
 				}
 			]

@@ -35,6 +35,8 @@ static func create(actionData:ActionData, parentChar):
 		return ActionModifySpecial.new(actionData, parentChar)
 	elif actionData.type==ActionModifyStatusEffectData.ID:
 		return ActionModifyStatusEffect.new(actionData, parentChar)
+	elif actionData.type==ActionModifyAttackData.ID:
+		return ActionModifyAttack.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)
 	return null
