@@ -596,6 +596,8 @@ gdscript/warnings/integer_division=false
 
 window/size/width=1200
 window/size/height=768
+window/size/fullscreen=true
+window/size/always_on_top=true
 window/energy_saving/keep_screen_on=false
 
 [input]

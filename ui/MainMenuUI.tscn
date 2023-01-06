@@ -10,6 +10,7 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 self_modulate = Color( 0.258824, 0.227451, 0.227451, 0.545098 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -119,3 +120,4 @@ disabled = true
 text = "Settings"
 
 [node name="CharacterSelectUI" parent="." instance=ExtResource( 3 )]
+visible = false

@@ -14,6 +14,9 @@ var itemCountMin:int
 var itemCountMax:int
 var itemHeighestTier:int
 var enemyDifficultyHighestTier:int
+var enemyMinCostPerRoom:int = 5
+var enemyExtraCostForSingleRoom:int = 5
+var enemyScalingCostPerRoom:int = 3
 
 func _init(dataJS):
 	numRooms = Utils.get_data_from_json(dataJS, "numRooms", 3)
@@ -28,3 +31,6 @@ func _init(dataJS):
 	itemCountMax = Utils.get_data_from_json(dataJS, "itemCountMax", 4)
 	itemHeighestTier = Utils.get_data_from_json(dataJS, "itemHeighestTier", 3)
 	enemyDifficultyHighestTier = Utils.get_data_from_json(dataJS, "enemyDifficultyHighestTier", 1)
+	enemyMinCostPerRoom = Utils.get_data_from_json(dataJS, "enemyMinCostPerRoom", 5)
+	enemyExtraCostForSingleRoom = Utils.get_data_from_json(dataJS, "enemyExtraCostForSingleRoom", 5)
+	enemyScalingCostPerRoom = Utils.get_data_from_json(dataJS, "enemyScalingCostPerRoom", 3)

@@ -176,7 +176,7 @@
 					},
 					{
 						"type": "DAMAGE",
-						"value": 8
+						"value": 6
 					}
 				]
 			},
@@ -196,7 +196,7 @@
 					},
 					{
 						"type": "DAMAGE",
-						"value": 6
+						"value": 8
 					}
 				]
 			},
