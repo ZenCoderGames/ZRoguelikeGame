@@ -79,6 +79,8 @@ Roguelike Dev:
 (D)- Google sheet for things
 (D)- Bug with stats not working correctly after next level 
 (D)- (Also, turns not calculating correctly when moving to next level)
+- Exit isn't allowed till you defeat all enemies in the room
+- FindTargets doesn't work with range = 3 (Lightning bolt)
 
 - Show Progress of Passives
 - Dots (Poison, Fire)

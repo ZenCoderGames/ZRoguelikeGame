@@ -4,6 +4,13 @@ class_name BattleUI
 
 onready var levelLabel:Label = get_node("BattleProgressPanel/LevelContainer/LevelLabel")
 onready var turnLabel:Label = get_node("BattleProgressPanel/TurnContainer/TurnLabel")
+# touchControls
+onready var touchControls:Node = $TouchControls
+onready var upArrowBtn:Button = $TouchControls/UpArrow
+onready var downArrowBtn:Button = $TouchControls/DownArrow
+onready var leftArrowBtn:Button = $TouchControls/LeftArrow
+onready var rightArrowBtn:Button = $TouchControls/RightArrow
+onready var skipTurnBtn:Button = $TouchControls/SkipTurn
 # details
 onready var detailsUI:Node = get_node("DetailsUI")
 onready var detailsLabel:Label = get_node("DetailsUI/DetailsLabel")
@@ -40,6 +47,8 @@ func _ready():
 	self.add_child(infoUI)
 	infoUI.hide()
 	
+	_setup_touch_buttons()
+	
 func _on_dungeon_init():
 	_shared_init()
 	
@@ -52,6 +61,8 @@ func _on_dungeon_recreated():
 	_shared_init()
 
 func _shared_init():
+	touchControls.visible = true
+	
 	playerUI = CharacterUI.instance()
 	playerPanel.add_child(playerUI)
 
@@ -144,6 +155,7 @@ func _on_toggle_inventory():
 		inventoryUI.hide()
 
 func _clean_up():
+	touchControls.visible = false
 	playerPanel.remove_child(playerUI)
 	playerUI.queue_free()
 
@@ -168,3 +180,26 @@ func _on_show_info(title:String, content:String):
 	
 func _on_hide_info():
 	infoUI.hideUI()
+
+# TOUCH BUTTON UI
+func _setup_touch_buttons():
+	leftArrowBtn.connect("pressed", self, "_on_left_touch_pressed")
+	upArrowBtn.connect("pressed", self, "_on_up_touch_pressed")
+	rightArrowBtn.connect("pressed", self, "_on_right_touch_pressed")
+	downArrowBtn.connect("pressed", self, "_on_down_touch_pressed")
+	skipTurnBtn.connect("pressed", self, "_on_skip_turn_pressed")
+
+func _on_left_touch_pressed():
+	CombatEventManager.on_touch_button_pressed(0)
+
+func _on_up_touch_pressed():
+	CombatEventManager.on_touch_button_pressed(1)
+
+func _on_right_touch_pressed():
+	CombatEventManager.on_touch_button_pressed(2)
+
+func _on_down_touch_pressed():
+	CombatEventManager.on_touch_button_pressed(3)
+	
+func _on_skip_turn_pressed():
+	CombatEventManager.on_skip_turn_pressed()

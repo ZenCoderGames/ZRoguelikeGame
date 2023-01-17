@@ -16,6 +16,8 @@ signal OnPlayerSpecialAbilityReset()
 signal OnToggleInventory()
 signal OnShowInfo(title, content)
 signal OnHideInfo()
+signal OnTouchButtonPressed(dirn)
+signal OnSkipTurnPressed()
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):
@@ -79,3 +81,9 @@ func on_player_special_ability_reset():
 
 func clean_up():
 	Utils.clean_up_all_signals(self)
+
+func on_touch_button_pressed(dirn):
+	emit_signal("OnTouchButtonPressed", dirn)
+
+func on_skip_turn_pressed():
+	emit_signal("OnSkipTurnPressed")

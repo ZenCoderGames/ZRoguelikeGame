@@ -15,6 +15,8 @@ func _ready():
 	GameEventManager.connect("OnMainMenuOff", self, "on_main_menu_off")
 	CombatEventManager.connect("OnPlayerTurnCompleted", self, "_on_player_turn_completed")
 	CombatEventManager.connect("OnEndTurn", self, "_on_end_turn") 
+	CombatEventManager.connect("OnTouchButtonPressed", self, "_on_touch_button_pressed")
+	CombatEventManager.connect("OnSkipTurnPressed", self, "_on_skip_turn_pressed")
 	
 func _register_player(playerRef):
 	player = playerRef
@@ -74,3 +76,21 @@ func _on_player_turn_completed():
 	
 func _on_end_turn():
 	blockInputsForTurn = false
+
+func _on_touch_button_pressed(dirn):
+	var x:int = 0
+	var y:int = 0
+	if dirn==0:
+		x = -1
+	elif dirn==1:
+		y = -1
+	elif dirn==2:
+		x = 1
+	elif dirn==3:
+		y = 1
+	if player != null:
+		if playerMoveAction.can_execute():
+			player.move(x, y)
+
+func _on_skip_turn_pressed():
+	player.on_turn_completed()
