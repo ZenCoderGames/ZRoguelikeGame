@@ -10,6 +10,22 @@
 [ext_resource path="res://sourceArt/Icons/arrowDown.png" type="Texture" id=8]
 [ext_resource path="res://sourceArt/Icons/arrowRight.png" type="Texture" id=9]
 
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 100, 100 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 9 )
+region_rect = Rect2( 0, 0, 100, 100 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 100, 100 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.2, 0.411765, 0.419608, 1 )
 border_width_left = 2
@@ -38,26 +54,61 @@ border_color = Color( 0.882353, 0.67451, 0.184314, 1 )
 shadow_size = 3
 shadow_offset = Vector2( 1, 1 )
 
-[sub_resource type="StyleBoxTexture" id=4]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 100, 100 )
-
-[sub_resource type="StyleBoxTexture" id=6]
-texture = ExtResource( 9 )
-region_rect = Rect2( 0, 0, 100, 100 )
-
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 100, 100 )
-
-[sub_resource type="StyleBoxTexture" id=8]
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 128, 128 )
-
 [node name="MainGUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
+
+[node name="TouchControls" type="Control" parent="."]
+visible = false
+anchor_left = 0.891
+anchor_top = 0.716
+anchor_right = 1.0
+anchor_bottom = 0.743
+margin_left = -36.368
+margin_top = -14.4481
+margin_right = 3.63196
+margin_bottom = 25.5519
+
+[node name="UpArrow" type="Button" parent="TouchControls"]
+self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
+margin_left = 7.98407
+margin_top = -32.0
+margin_right = 43.9841
+margin_bottom = 4.00003
+custom_styles/normal = SubResource( 4 )
+
+[node name="LeftArrow" type="Button" parent="TouchControls"]
+self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
+margin_left = -40.0159
+margin_top = 14.0
+margin_right = -4.01593
+margin_bottom = 50.0
+custom_styles/normal = ExtResource( 7 )
+
+[node name="RightArrow" type="Button" parent="TouchControls"]
+self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
+margin_left = 56.9841
+margin_top = 14.0
+margin_right = 92.9841
+margin_bottom = 50.0
+custom_styles/normal = SubResource( 6 )
+
+[node name="DownArrow" type="Button" parent="TouchControls"]
+self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
+margin_left = 7.98407
+margin_top = 60.0
+margin_right = 43.9841
+margin_bottom = 96.0
+custom_styles/normal = SubResource( 7 )
+
+[node name="SkipTurn" type="Button" parent="TouchControls"]
+self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
+margin_left = 8.0
+margin_top = 14.0
+margin_right = 44.0
+margin_bottom = 50.0
+custom_styles/normal = SubResource( 8 )
 
 [node name="DetailsUI" type="ColorRect" parent="."]
 visible = false
@@ -143,6 +194,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -210.0
 margin_bottom = -51.0
+mouse_filter = 2
 alignment = 1
 
 [node name="BattleProgressPanel" type="VBoxContainer" parent="."]
@@ -185,52 +237,6 @@ theme = ExtResource( 1 )
 text = "Turn: 0"
 align = 1
 valign = 1
-
-[node name="TouchControls" type="Control" parent="."]
-visible = false
-margin_left = 919.0
-margin_top = 536.0
-margin_right = 959.0
-margin_bottom = 576.0
-
-[node name="UpArrow" type="Button" parent="TouchControls"]
-self_modulate = Color( 0.627451, 0.611765, 0.611765, 1 )
-margin_left = 8.0
-margin_top = -28.0
-margin_right = 44.0
-margin_bottom = 8.0
-custom_styles/normal = SubResource( 4 )
-
-[node name="LeftArrow" type="Button" parent="TouchControls"]
-self_modulate = Color( 0.627451, 0.611765, 0.611765, 1 )
-margin_left = -36.0
-margin_top = 15.0
-margin_bottom = 51.0
-custom_styles/normal = ExtResource( 7 )
-
-[node name="RightArrow" type="Button" parent="TouchControls"]
-self_modulate = Color( 0.627451, 0.611765, 0.611765, 1 )
-margin_left = 54.0
-margin_top = 15.0
-margin_right = 90.0
-margin_bottom = 51.0
-custom_styles/normal = SubResource( 6 )
-
-[node name="DownArrow" type="Button" parent="TouchControls"]
-self_modulate = Color( 0.627451, 0.611765, 0.611765, 1 )
-margin_left = 8.0
-margin_top = 54.0
-margin_right = 44.0
-margin_bottom = 90.0
-custom_styles/normal = SubResource( 7 )
-
-[node name="SkipTurn" type="Button" parent="TouchControls"]
-self_modulate = Color( 0.627451, 0.611765, 0.611765, 1 )
-margin_left = 8.0
-margin_top = 14.0
-margin_right = 44.0
-margin_bottom = 50.0
-custom_styles/normal = SubResource( 8 )
 
 [connection signal="mouse_entered" from="PlayerAbilityPanel" to="PlayerAbilityPanel" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PlayerAbilityPanel" to="PlayerAbilityPanel" method="_on_mouse_exited"]

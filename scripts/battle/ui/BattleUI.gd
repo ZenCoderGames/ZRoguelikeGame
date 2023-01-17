@@ -157,7 +157,7 @@ func _on_toggle_inventory():
 func _clean_up():
 	touchControls.visible = false
 	playerPanel.remove_child(playerUI)
-	playerUI.queue_free()
+	playerUI.free()
 
 	for infoObject in infoPanelObjects:
 		if !weakref(infoObject).get_ref():
