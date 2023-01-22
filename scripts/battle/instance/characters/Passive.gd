@@ -40,3 +40,9 @@ func activate():
 	
 	if data.resetCountOnActivate:
 		_count = 0
+
+func has_counter():
+	return _triggerCount>0
+
+func get_remaining_to_trigger():
+	return _triggerCount-_count
