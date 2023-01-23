@@ -59,4 +59,6 @@ self_modulate = Color( 0.129412, 0.839216, 0.160784, 1 )
 margin_top = 129.0
 margin_right = 100.0
 margin_bottom = 149.0
+focus_mode = 0
+enabled_focus_mode = 0
 text = "Choose"

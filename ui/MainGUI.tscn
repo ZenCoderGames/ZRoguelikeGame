@@ -76,7 +76,9 @@ margin_left = 7.98407
 margin_top = -32.0
 margin_right = 43.9841
 margin_bottom = 4.00003
+focus_mode = 0
 custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
 
 [node name="LeftArrow" type="Button" parent="TouchControls"]
 self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
@@ -84,7 +86,9 @@ margin_left = -40.0159
 margin_top = 14.0
 margin_right = -4.01593
 margin_bottom = 50.0
+focus_mode = 0
 custom_styles/normal = ExtResource( 7 )
+enabled_focus_mode = 0
 
 [node name="RightArrow" type="Button" parent="TouchControls"]
 self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
@@ -92,7 +96,9 @@ margin_left = 56.9841
 margin_top = 14.0
 margin_right = 92.9841
 margin_bottom = 50.0
+focus_mode = 0
 custom_styles/normal = SubResource( 6 )
+enabled_focus_mode = 0
 
 [node name="DownArrow" type="Button" parent="TouchControls"]
 self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
@@ -100,7 +106,9 @@ margin_left = 7.98407
 margin_top = 60.0
 margin_right = 43.9841
 margin_bottom = 96.0
+focus_mode = 0
 custom_styles/normal = SubResource( 7 )
+enabled_focus_mode = 0
 
 [node name="SkipTurn" type="Button" parent="TouchControls"]
 self_modulate = Color( 0.627451, 0.611765, 0.611765, 0.454902 )
@@ -108,7 +116,9 @@ margin_left = 8.0
 margin_top = 14.0
 margin_right = 44.0
 margin_bottom = 50.0
+focus_mode = 0
 custom_styles/normal = SubResource( 8 )
+enabled_focus_mode = 0
 
 [node name="DetailsUI" type="ColorRect" parent="."]
 visible = false

@@ -19,6 +19,7 @@ margin_top = 28.0
 margin_right = 100.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 30 )
+focus_mode = 0
 size_flags_horizontal = 3
 custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
@@ -29,6 +30,7 @@ custom_fonts/font = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = SubResource( 3 )
 disabled = true
+enabled_focus_mode = 0
 text = "Spell 1"
 script = ExtResource( 2 )
 

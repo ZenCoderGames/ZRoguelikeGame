@@ -37,7 +37,7 @@ func on_main_menu_off():
 	disableInput = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
+	"""if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		get_tree().quit()
 
 	if disableInput:
@@ -52,7 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# skip turn
 	if event.is_action_pressed(Constants.INPUT_SKIP_TURN):
 		player.on_turn_completed()
-		return
+		return"""
 
 	# movement
 	var x:int = 0

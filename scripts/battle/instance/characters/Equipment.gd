@@ -70,6 +70,7 @@ func activate_spell(spellItem):
 	#character.inventory.remove_item(spellItem)
 	emit_signal("OnSpellActivated", spellItem)
 	character.on_spell_activated(spellItem)
+	#pass
 
 # SLOTS
 func _get_free_slot(itemData:ItemData):
