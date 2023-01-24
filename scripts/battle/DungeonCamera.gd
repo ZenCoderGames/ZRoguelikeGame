@@ -25,12 +25,16 @@ func _ready():
 	noise.period = 4
 	noise.octaves = 2
 
-	CombatEventManager.connect("OnPlayerCreated", self, "_register_player")
+	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnGameOver", self, "_on_game_over")
+	
+func _on_dungeon_init():
+	CombatEventManager.connect("OnAnyAttack", self, "_on_any_attack")
 	CombatEventManager.connect("OnRoomCombatStarted", self, "_on_room_combat_started")
 	CombatEventManager.connect("OnRoomCombatEnded", self, "_on_room_combat_ended")
-	GameEventManager.connect("OnGameOver", self, "_on_game_over")
-	CombatEventManager.connect("OnAnyAttack", self, "_on_any_attack")
-	
+	_register_player(GameGlobals.dungeon.player)
+
+
 func _register_player(playerRef):
 	player = playerRef
 	#player.connect("OnCharacterRoomChanged", self, "_update_camera_to_room")

@@ -20,17 +20,12 @@ func _ready():
 	deathUI.visible = false
 	
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	GameEventManager.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
 	GameEventManager.connect("OnCharacterSelected", self, "_on_character_chosen")
 
 func _on_character_chosen(_charData):
 	baseMenuUI.visible = false
 	
 func _on_dungeon_init():
-	_clean_up()
-	_shared_init()
-
-func _on_dungeon_recreated():
 	_clean_up()
 	_shared_init()
 

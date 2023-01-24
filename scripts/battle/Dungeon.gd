@@ -333,8 +333,6 @@ func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	if recreatePlayer:
 		player = load_character(loadedScenes, cell, GameGlobals.dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
-		CombatEventManager.emit_signal("OnPlayerCreated", player)
-		#turnsTaken = turnsTaken - 1
 	else:
 		player.move_to_cell(cell)
 

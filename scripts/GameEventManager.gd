@@ -3,7 +3,6 @@ extends Node
 signal OnReadyToBattle
 signal OnCharacterSelected(charData)
 signal OnDungeonInitialized()
-signal OnDungeonRecreated()
 signal OnGameOver()
 signal OnMainMenuOn()
 signal OnMainMenuOff()

@@ -9,14 +9,9 @@ var inputDelay:float = 0.0
 var blockInputsForTurn:bool
 
 func _ready():
-	CombatEventManager.connect("OnPlayerCreated", self, "_register_player") 
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	GameEventManager.connect("OnMainMenuOn", self, "on_main_menu_on")
 	GameEventManager.connect("OnMainMenuOff", self, "on_main_menu_off")
-	CombatEventManager.connect("OnPlayerTurnCompleted", self, "_on_player_turn_completed")
-	CombatEventManager.connect("OnEndTurn", self, "_on_end_turn") 
-	CombatEventManager.connect("OnTouchButtonPressed", self, "_on_touch_button_pressed")
-	CombatEventManager.connect("OnSkipTurnPressed", self, "_on_skip_turn_pressed")
 	
 func _register_player(playerRef):
 	player = playerRef
@@ -24,7 +19,14 @@ func _register_player(playerRef):
 
 func _on_dungeon_init():
 	disableInput = false
+	CombatEventManager.connect("OnPlayerTurnCompleted", self, "_on_player_turn_completed")
+	CombatEventManager.connect("OnEndTurn", self, "_on_end_turn") 
+	CombatEventManager.connect("OnTouchButtonPressed", self, "_on_touch_button_pressed")
+	CombatEventManager.connect("OnSkipTurnPressed", self, "_on_skip_turn_pressed")
+
+	player = GameGlobals.dungeon.player
 	playerMoveAction = player.moveAction
+	player.connect("OnDeath", self, "_on_player_death")
 
 func _on_player_death():
 	disableInput = true
@@ -37,7 +39,10 @@ func on_main_menu_off():
 	disableInput = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	"""if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
+	if player==null or !is_instance_valid(player):
+		return
+		
+	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		get_tree().quit()
 
 	if disableInput:
@@ -52,7 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# skip turn
 	if event.is_action_pressed(Constants.INPUT_SKIP_TURN):
 		player.on_turn_completed()
-		return"""
+		return
 
 	# movement
 	var x:int = 0

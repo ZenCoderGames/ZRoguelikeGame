@@ -73,14 +73,14 @@ func recreate_dungeon(newDungeonIdx):
 	yield(get_tree().create_timer(0.5), "timeout")
 	_shared_dungeon_init(newDungeonIdx==0)
 	if newDungeonIdx==0:
-		GameEventManager.emit_signal("OnDungeonRecreated")
+		GameEventManager.emit_signal("OnDungeonInitialized")
 	else:
 		GameEventManager.emit_signal("OnNewLevelLoaded")
 
 func _shared_dungeon_init(recreatePlayer:bool=true):
-	# Clean up (not working as intended)
-	#CombatEventManager.clean_up()
-	#HitResolutionManager.clean_up()
+	# Clean up all in battle events
+	CombatEventManager.clean_up()
+	HitResolutionManager.clean_up()
 
 	GameGlobals.dungeon.create(recreatePlayer)
 	onGameOver = false

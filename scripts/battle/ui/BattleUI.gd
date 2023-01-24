@@ -34,11 +34,7 @@ var infoUI:InfoUI = null
 
 func _ready():
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	GameEventManager.connect("OnDungeonRecreated", self, "_on_dungeon_recreated")
 	GameEventManager.connect("OnNewLevelLoaded", self, "_on_new_level_loaded")
-	CombatEventManager.connect("OnToggleInventory", self, "_on_toggle_inventory")
-	CombatEventManager.connect("OnShowInfo", self, "_on_show_info")
-	CombatEventManager.connect("OnHideInfo", self, "_on_hide_info")
 
 	inventoryUI = InventoryUI.instance()
 	self.add_child(inventoryUI)
@@ -50,14 +46,15 @@ func _ready():
 	_setup_touch_buttons()
 	
 func _on_dungeon_init():
-	_shared_init()
-	
+	_clean_up()
+
+	CombatEventManager.connect("OnToggleInventory", self, "_on_toggle_inventory")
+	CombatEventManager.connect("OnShowInfo", self, "_on_show_info")
+	CombatEventManager.connect("OnHideInfo", self, "_on_hide_info")
 	CombatEventManager.connect("OnEndTurn", self, "_on_turn_taken")
 	HitResolutionManager.connect("OnPostHit", self, "_on_attack")
 	HitResolutionManager.connect("OnKill", self, "_on_kill")
 
-func _on_dungeon_recreated():
-	_clean_up()
 	_shared_init()
 
 func _shared_init():
@@ -156,8 +153,9 @@ func _on_toggle_inventory():
 
 func _clean_up():
 	touchControls.visible = false
-	playerPanel.remove_child(playerUI)
-	playerUI.free()
+	if playerUI!=null:
+		playerPanel.remove_child(playerUI)
+		playerUI.free()
 
 	for infoObject in infoPanelObjects:
 		if !weakref(infoObject).get_ref():
@@ -170,7 +168,8 @@ func _clean_up():
 	detailsLabel.text = ""
 
 	isInventoryOpen = false
-	inventoryUI.clean_up()
+	if inventoryUI!=null:
+		inventoryUI.clean_up()
 
 	playerSpecialUI.visible = false
 
