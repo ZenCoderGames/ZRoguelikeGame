@@ -79,10 +79,15 @@ Roguelike Dev:
 (D)- Google sheet for things
 (D)- Bug with stats not working correctly after next level 
 (D)- (Also, turns not calculating correctly when moving to next level)
-- Exit isn't allowed till you defeat all enemies in the room
-- FindTargets doesn't work with range = 3 (Lightning bolt)
+(D) - FindTargets doesn't work with range = 3 (Lightning bolt)
+(D) - Show Progress of Passives
 
-- Show Progress of Passives
+(D)- Fix for keyboard input issues caused by UI focus
+(D)- CombatEventManager/HitResManager clean up breaking issues
+
+- Inventory categories
+- Exit isn't allowed till you defeat all enemies in the room
+
 - Dots (Poison, Fire)
 - New Status Effects (Freeze, Shock, Root, Sleep)
 

@@ -2,7 +2,7 @@ extends Node
 
 class_name InventoryUI
 
-onready var itemList:VBoxContainer = get_node("Content/HSplitContainer/ItemPanel/Bg/MarginContainer/ItemList/VBoxContainer")
+onready var itemList:VBoxContainer = get_node("Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/MarginContainer/ItemList/VBoxContainer")
 const InventoryItem := preload("res://ui/battle/InventoryItem.tscn")
 
 onready var noContent:Node = get_node("NoContent")
@@ -22,10 +22,20 @@ onready var unequipButton:Button = get_node("Content/HSplitContainer/DetailsPane
 onready var consumeButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/ConsumeButton")
 onready var equippedUI:ColorRect = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquippedUI")
 
+onready var sortAllButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/AllButton
+onready var sortWeaponButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/WeaponButton
+onready var sortArmorButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/ArmorButton
+onready var sortRuneButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/RuneButton
+onready var sortSpellButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/SpellButton
+
+enum SORT_OPTIONS { ALL, WEAPON, ARMOR, RUNE, SPELL }
+var _sortOption:int
+
 var playerChar:Character
 var itemButtons:Array
 var itemDict:Dictionary = {}
 var selectedIdx:int
+var sortedItemList:Array
 
 func _ready():
 	hide()
@@ -38,6 +48,11 @@ func _ready():
 	equipButtonSpell4.connect("pressed", self, "_on_equip_selected_spell4")
 	unequipButton.connect("pressed", self, "_on_unequip_selected_item")
 	consumeButton.connect("pressed", self, "_on_consume_selected_item")
+	sortAllButton.connect("pressed", self, "_on_sort_all_button")
+	sortWeaponButton.connect("pressed", self, "_on_sort_weapon_button")
+	sortArmorButton.connect("pressed", self, "_on_sort_armor_button")
+	sortRuneButton.connect("pressed", self, "_on_sort_rune_button")
+	sortSpellButton.connect("pressed", self, "_on_sort_spell_button")
 	
 func init(character):
 	playerChar = character
@@ -66,6 +81,15 @@ func _refresh_ui():
 
 	var idx:int = 0
 	for item in playerChar.inventory.items:
+		if _sortOption == SORT_OPTIONS.WEAPON and !item.data.is_weapon():
+			continue
+		if _sortOption == SORT_OPTIONS.ARMOR and !item.data.is_armor():
+			continue
+		if _sortOption == SORT_OPTIONS.RUNE and !item.data.is_rune():
+			continue
+		if _sortOption == SORT_OPTIONS.SPELL and !item.data.is_spell():
+			continue
+
 		var itemButton:Button = InventoryItem.instance()
 		itemList.add_child(itemButton)
 		itemButton.text = item.get_display_name()
@@ -73,16 +97,17 @@ func _refresh_ui():
 		itemButton.connect("pressed", self, "_on_item_selected", [idx])
 		itemButtons.append(itemButton)
 		itemDict[itemButton] = item
+		sortedItemList.append(item)
 		idx = idx + 1
 
-	if playerChar.inventory.items.size()>0:
+	if idx>0:
 		_show_selected()
 	else:
 		noContent.visible = true
 
 func _show_selected():
 	var selectedItemButton:Button = itemButtons[selectedIdx]
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	selectedItemButton.self_modulate = Color.orange
 	nameLabel.text = selectedItem.get_display_name() 
 	descLabel.text = selectedItem.get_full_description()
@@ -114,7 +139,7 @@ func _show_selected():
 	
 
 func _on_equip_selected_weapon_or_armor():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	var slot:int = 0
 	if selectedItem.data.is_weapon():
 		slot = Constants.ITEM_EQUIP_SLOT.WEAPON
@@ -124,48 +149,73 @@ func _on_equip_selected_weapon_or_armor():
 	_refresh_ui()
 
 func _on_equip_selected_rune1():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.RUNE_1)
 	_refresh_ui()
 
 func _on_equip_selected_rune2():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.RUNE_2)
 	_refresh_ui()
 
 func _on_equip_selected_spell1():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.SPELL_1)
 	_refresh_ui()
 
 func _on_equip_selected_spell2():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.SPELL_2)
 	_refresh_ui()
 
 func _on_equip_selected_spell3():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.SPELL_3)
 	_refresh_ui()
 
 func _on_equip_selected_spell4():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.equipment.equip_item(selectedItem, Constants.ITEM_EQUIP_SLOT.SPELL_4)
 	_refresh_ui()
 
 func _on_unequip_selected_item():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.equipment.unequip_item(selectedItem, playerChar.equipment.get_slot_for_item(selectedItem))
 	_refresh_ui()
 
 func _on_consume_selected_item():
-	var selectedItem:Item = playerChar.inventory.items[selectedIdx]
+	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.inventory.consume_item(selectedItem)
 	selectedIdx = 0
 	_refresh_ui()
 
 func _on_item_selected(idx):
 	selectedIdx = idx
+	_refresh_ui()
+
+func _on_sort_all_button():
+	_sortOption = SORT_OPTIONS.ALL
+	selectedIdx = 0
+	_refresh_ui()
+
+func _on_sort_weapon_button():
+	_sortOption = SORT_OPTIONS.WEAPON
+	selectedIdx = 0
+	_refresh_ui()
+
+func _on_sort_armor_button():
+	_sortOption = SORT_OPTIONS.ARMOR
+	selectedIdx = 0
+	_refresh_ui()
+
+func _on_sort_rune_button():
+	_sortOption = SORT_OPTIONS.RUNE
+	selectedIdx = 0
+	_refresh_ui()
+
+func _on_sort_spell_button():
+	_sortOption = SORT_OPTIONS.SPELL
+	selectedIdx = 0
 	_refresh_ui()
 
 func clear_items():
@@ -176,6 +226,7 @@ func clear_items():
 		itemButton.queue_free()
 	itemButtons.clear()
 	itemDict.clear()
+	sortedItemList.clear()
 	
 	nameLabel.text = ""
 	descLabel.text = ""
