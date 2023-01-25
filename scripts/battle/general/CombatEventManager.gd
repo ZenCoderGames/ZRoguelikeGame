@@ -17,6 +17,7 @@ signal OnShowInfo(title, content)
 signal OnHideInfo()
 signal OnTouchButtonPressed(dirn)
 signal OnSkipTurnPressed()
+signal OnDetailInfoShow(strVal, duration)
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):

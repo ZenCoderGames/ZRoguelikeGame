@@ -32,6 +32,9 @@ var inventoryUI:InventoryUI = null
 const InfoUI := preload("res://ui/battle/InfoUI.tscn")
 var infoUI:InfoUI = null
 
+const SKIP_TURN_COLOR:Color = Color("#74a09c9c")
+const SKIP_TURN_DISABLED_COLOR:Color = Color("#800000")
+
 func _ready():
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
 	GameEventManager.connect("OnNewLevelLoaded", self, "_on_new_level_loaded")
@@ -52,6 +55,7 @@ func _on_dungeon_init():
 	CombatEventManager.connect("OnShowInfo", self, "_on_show_info")
 	CombatEventManager.connect("OnHideInfo", self, "_on_hide_info")
 	CombatEventManager.connect("OnEndTurn", self, "_on_turn_taken")
+	CombatEventManager.connect("OnDetailInfoShow", self, "_show_detail_info_text")
 	HitResolutionManager.connect("OnPostHit", self, "_on_attack")
 	HitResolutionManager.connect("OnKill", self, "_on_kill")
 
@@ -77,7 +81,14 @@ func _on_new_level_loaded():
 	levelLabel.text = str("Level: ", GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
 
 func _on_turn_taken():
+	_refresh_ui()
+
+func _refresh_ui():
 	turnLabel.text = str("Turns: ", GameGlobals.dungeon.turnsTaken)
+	if GameGlobals.dungeon.player.can_skip_turn():
+		skipTurnBtn.self_modulate = SKIP_TURN_COLOR
+	else:
+		skipTurnBtn.self_modulate = SKIP_TURN_DISABLED_COLOR
 	
 func _on_attack(attacker, defender, damage):
 	detailsLabel.text = str(attacker.displayName, " attacked ", defender.displayName, " for ", damage, " damage")
@@ -87,15 +98,15 @@ func _on_kill(attacker, defender, _finalDmg):
 	_info_panel_handle_death(defender)
 	
 	# Details panel
-	detailsUI.visible = true
-	detailsLabel.text = str(attacker.displayName, " killed ", defender.displayName)
-	yield(get_tree().create_timer(1), "timeout")
-	detailsUI.visible = false
+	_show_detail_info_text(str(attacker.displayName, " killed ", defender.displayName), 1)
 	
 func _on_item_picked_by_player(item):
+	_show_detail_info_text(str(item.data.displayName, " picked up "), 1)
+
+func _show_detail_info_text(strVal, duration):
 	detailsUI.visible = true
-	detailsLabel.text = str(item.data.displayName, " picked up ")
-	yield(get_tree().create_timer(1), "timeout")
+	detailsLabel.text = strVal
+	yield(get_tree().create_timer(duration), "timeout")
 	detailsUI.visible = false
 	
 # INFO PANEL
@@ -202,3 +213,4 @@ func _on_down_touch_pressed():
 	
 func _on_skip_turn_pressed():
 	CombatEventManager.on_skip_turn_pressed()
+	_refresh_ui()

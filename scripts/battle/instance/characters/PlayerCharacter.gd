@@ -15,6 +15,8 @@ var currentLevel:int = 0
 onready var levelUpAnim:Node = $"%LevelUpAnimation"
 onready var levelUpLabel:Node = $"%LevelUpLabel"
 
+
+
 func init(charId:int, charData, teamVal):
 	.init(charId, charData, teamVal)
 
@@ -113,3 +115,17 @@ func get_xp_to_level_xp():
 
 func is_at_max_level():
 	return currentLevel == levelXpList.size()-1
+
+# SKIP_TURN MANAGEMENT
+var _lastSkipTurn:int = -1
+const SKIP_TURN_COOLDOWN:int = 10
+
+func skip_turn():
+	_lastSkipTurn = GameGlobals.dungeon.turnsTaken
+	on_turn_completed()
+
+func can_skip_turn():
+	return _lastSkipTurn==-1 or (GameGlobals.dungeon.turnsTaken - _lastSkipTurn > SKIP_TURN_COOLDOWN)
+
+func get_skip_turn_cooldown():
+	return SKIP_TURN_COOLDOWN - (GameGlobals.dungeon.turnsTaken - _lastSkipTurn) + 1

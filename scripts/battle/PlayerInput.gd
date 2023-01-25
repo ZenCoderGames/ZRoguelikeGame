@@ -56,7 +56,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	# skip turn
 	if event.is_action_pressed(Constants.INPUT_SKIP_TURN):
-		player.on_turn_completed()
+		_on_skip_turn_pressed()
 		return
 
 	# movement
@@ -98,4 +98,7 @@ func _on_touch_button_pressed(dirn):
 			player.move(x, y)
 
 func _on_skip_turn_pressed():
-	player.on_turn_completed()
+	if player.can_skip_turn():
+		player.skip_turn()
+	else:
+		CombatEventManager.emit_signal("OnDetailInfoShow", str("Hold Move On Cooldown (", player.get_skip_turn_cooldown(),")"), 1)
