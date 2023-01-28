@@ -213,9 +213,9 @@ func _init_enemies():
 	if !GameGlobals.battleInstance.debugSpawnEnemyEncounter.empty():
 		startRoom.generate_enemy_custom_encounter(GameGlobals.battleInstance.debugSpawnEnemyEncounter)
 	
-	var minCostPerRoom:int = 5
-	var extraCostForSingleRoom:int = 5
-	var scalingCostPerRoom:int = 3
+	var minCostPerRoom:int = dungeonData.enemyMinCostPerRoom
+	var extraCostForSingleRoom:int = dungeonData.enemyExtraCostForSingleRoom
+	var scalingCostPerRoom:int = dungeonData.enemyScalingCostPerRoom
 	var numCriticalPathRooms = reverse_path.size();
 	for room in rooms:
 		if room.isStartRoom:
@@ -235,6 +235,8 @@ func _init_enemies():
 
 		for items in itemsToRemove:
 			enemyDataList.erase(items)
+
+		print(encounterCost)
 
 		while(currentCost<encounterCost):
 			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]

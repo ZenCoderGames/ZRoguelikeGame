@@ -84,8 +84,11 @@ Roguelike Dev:
 
 (D)- Fix for keyboard input issues caused by UI focus
 (D)- CombatEventManager/HitResManager clean up breaking issues
+(D)- Inventory categories
+(D)- Hold move has a cooldown
 
-- Inventory categories
+- Tuning Pass
+
 - Exit isn't allowed till you defeat all enemies in the room
 
 - Dots (Poison, Fire)
@@ -98,7 +101,7 @@ Roguelike Dev:
 - Game Feel (hitSparks, death)
 - SFX Manager/SFXData
 
-- Keywords
+- Keywords (Tags with events)
 
 
 - Complex AI behavior (Skeleton - revive, Snake - poison, Giant - healing, Automaton - stun)
