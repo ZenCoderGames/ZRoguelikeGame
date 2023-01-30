@@ -46,14 +46,14 @@
 					},
 					{
 						"type": "DAMAGE",
-						"value": 2
+						"value": 3
 					}
 				],
 				"active": {
 					"id": "BERSERKER_SPECIAL",
 					"description": "Charge: 3 successful hits charges up the ability. \n\nActivate: Do a spin attack around you damaging all targets with your weapon",
 					"conditions": ["ON_POST_HIT"],
-					"count": 4,
+					"count": 3,
 					"executeCondition": "NONE",
 					"timeline": [
 						{

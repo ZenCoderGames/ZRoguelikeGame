@@ -8,6 +8,7 @@ onready var screenFade:Panel = $"%ScreenFade"
 onready var victoryUI:PanelContainer = $"%VictoryUI"
 
 # DEBUG
+export var debugStartAtEndRoom:bool
 export var debugShowAllRooms:bool
 export var doorsStayOpenDuringBattle:bool
 export var pauseAIMovement:bool

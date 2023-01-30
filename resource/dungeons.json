@@ -13,8 +13,8 @@
 			"itemCountMax": 6,
 			"itemHeighestTier": 2,
 			"enemyDifficultyHighestTier": 1,
-			"enemyMinCostPerRoom": 10,
-			"enemyExtraCostForSingleRoom": 10,
+			"enemyMinCostPerRoom": 6,
+			"enemyExtraCostForSingleRoom": 5,
 			"enemyScalingCostPerRoom": 4
 		},
 		{
@@ -30,9 +30,9 @@
 			"itemCountMax": 4,
 			"itemHeighestTier": 3,
 			"enemyDifficultyHighestTier": 2,
-			"enemyMinCostPerRoom": 7,
-			"enemyExtraCostForSingleRoom": 7,
-			"enemyScalingCostPerRoom": 5
+			"enemyMinCostPerRoom": 8,
+			"enemyExtraCostForSingleRoom": 6,
+			"enemyScalingCostPerRoom": 6
 		},
 		{
 			"numRooms": 7,
@@ -48,8 +48,8 @@
 			"itemHeighestTier": 4,
 			"enemyDifficultyHighestTier": 3,
 			"enemyMinCostPerRoom": 9,
-			"enemyExtraCostForSingleRoom": 9,
-			"enemyScalingCostPerRoom": 7
+			"enemyExtraCostForSingleRoom": 7,
+			"enemyScalingCostPerRoom": 8
 		},
 		{
 			"numRooms": 8,
@@ -65,8 +65,8 @@
 			"itemHeighestTier": 5,
 			"enemyDifficultyHighestTier": 4,
 			"enemyMinCostPerRoom": 11,
-			"enemyExtraCostForSingleRoom": 11,
-			"enemyScalingCostPerRoom": 9
+			"enemyExtraCostForSingleRoom": 8,
+			"enemyScalingCostPerRoom": 10
 		}
 	]
 }

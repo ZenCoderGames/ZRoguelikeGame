@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/battle/ui/BattleUI.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/battle/buttons/LeftArrowTheme.tres" type="StyleBox" id=7]
 [ext_resource path="res://sourceArt/Icons/arrowDown.png" type="Texture" id=8]
 [ext_resource path="res://sourceArt/Icons/arrowRight.png" type="Texture" id=9]
+[ext_resource path="res://sourceArt/Icons/signal3.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 6 )
@@ -210,41 +211,66 @@ alignment = 1
 [node name="BattleProgressPanel" type="VBoxContainer" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -121.0
+margin_left = -67.0
 margin_right = -1.0
 margin_bottom = 68.0
+grow_horizontal = 0
 custom_constants/separation = 0
 
-[node name="LevelContainer" type="PanelContainer" parent="BattleProgressPanel"]
+[node name="LevelContainer" type="HBoxContainer" parent="BattleProgressPanel"]
 self_modulate = Color( 0.992157, 0.937255, 0.486275, 1 )
-margin_right = 120.0
-margin_bottom = 34.0
+margin_right = 66.0
+margin_bottom = 30.0
 grow_horizontal = 0
+alignment = 2
+
+[node name="TextureRect2" type="TextureRect" parent="BattleProgressPanel/LevelContainer"]
+margin_left = 2.0
+margin_right = 32.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
 
 [node name="LevelLabel" type="Label" parent="BattleProgressPanel/LevelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 113.0
-margin_bottom = 27.0
+margin_left = 36.0
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 25.0
+grow_horizontal = 0
 theme = ExtResource( 1 )
-text = "Level: 1"
-align = 1
+text = "1/4"
+align = 2
 valign = 1
 
-[node name="TurnContainer" type="PanelContainer" parent="BattleProgressPanel"]
+[node name="TurnContainer" type="HBoxContainer" parent="BattleProgressPanel"]
 self_modulate = Color( 0.52549, 1, 0.968627, 1 )
-margin_top = 34.0
-margin_right = 120.0
-margin_bottom = 68.0
+margin_top = 30.0
+margin_right = 66.0
+margin_bottom = 60.0
 grow_horizontal = 0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 9
+size_flags_vertical = 9
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="BattleProgressPanel/TurnContainer"]
+margin_left = 22.0
+margin_right = 52.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
 
 [node name="TurnLabel" type="Label" parent="BattleProgressPanel/TurnContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 113.0
-margin_bottom = 27.0
+margin_left = 56.0
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 25.0
 theme = ExtResource( 1 )
-text = "Turn: 0"
+text = "0"
 align = 1
 valign = 1
 

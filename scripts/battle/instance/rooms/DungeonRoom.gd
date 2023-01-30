@@ -225,6 +225,7 @@ func clean_up():
 		loadedScene.queue_free()
 	loadedScenes.clear()
 	cells.clear()
+	enemies.clear()
 
 func update_visibility():
 	# VISIBILITY

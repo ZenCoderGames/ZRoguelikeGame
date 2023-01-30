@@ -39,6 +39,8 @@ func create(recreatePlayer:bool) -> void:
 	_init_turns()
 	_start_turn()
 
+	CombatEventManager.emit_signal("OnPlayerInitialized")
+
 func _init_rooms():
 	rooms = []
 	
@@ -235,8 +237,6 @@ func _init_enemies():
 
 		for items in itemsToRemove:
 			enemyDataList.erase(items)
-
-		print(encounterCost)
 
 		while(currentCost<encounterCost):
 			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]

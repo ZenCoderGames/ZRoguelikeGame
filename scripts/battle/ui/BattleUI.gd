@@ -74,17 +74,17 @@ func _shared_init():
 	GameGlobals.dungeon.player.inventory.connect("OnItemAdded", self, "_on_item_picked_by_player")
 	
 	playerUI.init(GameGlobals.dungeon.player)
-	levelLabel.text = str("Level: ", GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
+	levelLabel.text = str(GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
 	playerSpecialUI.visible = true
 
 func _on_new_level_loaded():
-	levelLabel.text = str("Level: ", GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
+	levelLabel.text = str(GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
 
 func _on_turn_taken():
 	_refresh_ui()
 
 func _refresh_ui():
-	turnLabel.text = str("Turns: ", GameGlobals.dungeon.turnsTaken)
+	turnLabel.text = str(GameGlobals.dungeon.turnsTaken)
 	if GameGlobals.dungeon.player.can_skip_turn():
 		skipTurnBtn.self_modulate = SKIP_TURN_COLOR
 	else:

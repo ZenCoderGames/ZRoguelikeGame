@@ -148,7 +148,7 @@
 			"id": "ITEM_SPELL_LIGHTNING_BOLT",
 			"name": "Lightning Bolt",
 			"description": "A Powerful Lightning Bolt",
-			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you for 10 damage",
+			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you for 5 damage",
 			"path": "entity/items/spells/Spell_Tier1.tscn",
 			"type": "SPELL",
 			"tier": 2,

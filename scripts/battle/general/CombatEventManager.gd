@@ -1,5 +1,6 @@
 extends Node
 
+signal OnPlayerInitialized()
 signal OnStartTurn()
 signal OnEndTurn()
 signal OnEnemyMovedAdjacentToPlayer(enemy)

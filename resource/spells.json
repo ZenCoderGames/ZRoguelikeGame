@@ -14,7 +14,7 @@
 				{
 					"type": "DO_DAMAGE_TO_TARGETS",
 					"params": {
-						"damage": 15
+						"damage": 5
 					}
 				}
 			]

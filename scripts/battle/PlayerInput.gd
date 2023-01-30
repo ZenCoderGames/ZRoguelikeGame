@@ -10,15 +10,20 @@ var blockInputsForTurn:bool
 
 func _ready():
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnNewLevelLoaded", self, "_on_new_level_loaded")
 	GameEventManager.connect("OnMainMenuOn", self, "on_main_menu_on")
 	GameEventManager.connect("OnMainMenuOff", self, "on_main_menu_off")
-	
-func _register_player(playerRef):
-	player = playerRef
-	player.connect("OnDeath", self, "_on_player_death")
 
 func _on_dungeon_init():
+	_init_for_level()
+	player.connect("OnDeath", self, "_on_player_death")
+
+func _on_new_level_loaded():
+	_init_for_level()
+
+func _init_for_level():
 	disableInput = false
+	blockInputsForTurn = false
 	CombatEventManager.connect("OnPlayerTurnCompleted", self, "_on_player_turn_completed")
 	CombatEventManager.connect("OnEndTurn", self, "_on_end_turn") 
 	CombatEventManager.connect("OnTouchButtonPressed", self, "_on_touch_button_pressed")
@@ -26,10 +31,10 @@ func _on_dungeon_init():
 
 	player = GameGlobals.dungeon.player
 	playerMoveAction = player.moveAction
-	player.connect("OnDeath", self, "_on_player_death")
 
 func _on_player_death():
 	disableInput = true
+	blockInputsForTurn = false
 	player.disconnect("OnDeath", self, "_on_player_death")
 
 func on_main_menu_on():

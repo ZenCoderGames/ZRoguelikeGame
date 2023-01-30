@@ -192,11 +192,11 @@
 		{
 			"id": "PASSIVE_DELAYED_BARRIER",
 			"name": "Delayed Barrier",
-			"description": "After every 4 hits taken, get a [Barrier]",
+			"description": "After every 3 hits taken, get a [Barrier]",
 			"conditions": [
 				"ON_TAKE_HIT"
 			],
-			"triggerCount": 4,
+			"triggerCount": 3,
 			"resetCountOnActivate": true,
 			"timeline": [
 				{
