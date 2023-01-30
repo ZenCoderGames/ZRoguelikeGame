@@ -190,14 +190,13 @@
 			]
 		},
 		{
-			"id": "PASSIVE_DELAYED_BARRIER",
-			"name": "Delayed Barrier",
-			"description": "After every 3 hits taken, get a [Barrier]",
+			"id": "PASSIVE_BARRIER_ON_KILL",
+			"name": "Barrier On Kill",
+			"description": "After every kill, get a [Barrier]",
+			"dontDisplayInUI": true,
 			"conditions": [
-				"ON_TAKE_HIT"
+				"ON_KILL"
 			],
-			"triggerCount": 3,
-			"resetCountOnActivate": true,
 			"timeline": [
 				{
 					"type": "ADD_STATUS_EFFECT",

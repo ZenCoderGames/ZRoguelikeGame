@@ -27,7 +27,10 @@ func _init():
 	init_status_effects()
 	init_passives()
 	init_spells()
-	init_items()
+	init_items("resource/items.json")
+	init_items("resource/runeItems.json")
+	init_items("resource/consumableItems.json")
+	init_items("resource/spellItems.json")
 	init_abilities()
 	init_characters()
 	init_encounters()
@@ -70,8 +73,8 @@ func get_passive_data(id):
 		print("ERROR: INVALID PASSIVE ID Requested: " + id)
 		return null
 
-func init_items():
-	var data = Utils.load_data_from_file("resource/items.json")
+func init_items(itemLocation:String):
+	var data = Utils.load_data_from_file(itemLocation)
 	var itemDataJSList:Array = data["items"]
 	for itemDataJS in itemDataJSList:
 		var newItemData = ItemData.new(itemDataJS)

@@ -8,11 +8,13 @@ var triggerConditionParams:Dictionary
 var timeline:Array
 var triggerCount:int
 var resetCountOnActivate:bool
+var dontDisplayInUI:bool
 
 func _init(dataJS):
 	id = dataJS["id"]
 	name = dataJS["name"]
 	description = dataJS["description"]
+	dontDisplayInUI = Utils.get_data_from_json(dataJS, "dontDisplayInUI", false)
 
 	if dataJS.has("conditions"):
 		var conditionsJSList = dataJS["conditions"]

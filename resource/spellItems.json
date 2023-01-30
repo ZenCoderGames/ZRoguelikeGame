@@ -1,0 +1,64 @@
+{
+	"items": [
+		{
+			"#disable": true,
+			"id": "ITEM_SPELL_LIGHTNING_BOLT",
+			"name": "Lightning Bolt",
+			"description": "A Powerful Lightning Bolt",
+			"fullDescription": "Summon a powerful bolt of lightning that strikes the first enemy near you for 5 damage",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
+			"type": "SPELL",
+			"tier": 2,
+			"maxCount": 1,
+			"spellId": "SPELL_LIGHTNING_BOLT"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_SPELL_AOE_STUN",
+			"name": "Aoe Stun",
+			"description": "Stun all nearby enemies",
+			"fullDescription": "Stun all nearby enemies",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
+			"type": "SPELL",
+			"tier": 2,
+			"maxCount": 1,
+			"spellId": "SPELL_AOE_STUN"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_SPELL_LIFE_DRAIN",
+			"name": "Life Drain",
+			"description": "Drain 2 life from each nearby enemy 1 tile away (Cardinal directions)",
+			"fullDescription": "Drain 2 life from each nearby enemies. \nAffects cardinal directions only.",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
+			"type": "SPELL",
+			"tier": 2,
+			"maxCount": 1,
+			"spellId": "SPELL_LIFE_DRAIN"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_SPELL_FORCE_PUSH",
+			"name": "Force Push",
+			"description": "Pushes away all nearby enemies by 2 tiles (Cardinal directions)",
+			"fullDescription": "Pushes away all nearby enemies by 2 tiles. \nAffects cardinal directions only.",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
+			"type": "SPELL",
+			"tier": 2,
+			"maxCount": 1,
+			"spellId": "SPELL_FORCE_PUSH"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_SPELL_PROTECTION",
+			"name": "Instant Protection",
+			"description": "Gives the player [Protection] for 1 turn",
+			"fullDescription": "Gives the player [Protection] for 1 turn",
+			"path": "entity/items/spells/Spell_Tier1.tscn",
+			"type": "SPELL",
+			"tier": 2,
+			"maxCount": 1,
+			"spellId": "SPELL_PROTECTION"
+		}
+	]
+}

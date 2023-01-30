@@ -1,0 +1,37 @@
+{
+	"items": [
+		{
+			"id": "RUNE_VAMPIRIC",
+			"name": "Vampiric",
+			"description": "Lifesteal 20% of your damage on hit",
+			"fullDescription": "Lifesteal 20% of your damage on hit",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_LIFESTEAL_01"
+		},
+		{
+			"id": "RUNE_CRITICAL_STUN",
+			"name": "Critical On Stun",
+			"description": "Do Critical hits on stunned targets",
+			"fullDescription": "Do Critical hits on stunned targets",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_STUN_CRITICAL"
+		},
+		{
+			"id": "RUNE_BARRIER_ON_KILL",
+			"name": "Barrier On Kill",
+			"description": "After every kill, gain a barrier",
+			"fullDescription": "After every kill, gain a barrier",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_BARRIER_ON_KILL"
+		}
+	]
+}

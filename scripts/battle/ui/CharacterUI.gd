@@ -150,6 +150,9 @@ func _on_equip_spell_selected(spellItem):
 
 # EFFECTS
 func on_passive_added(_character, passive):
+	if passive.data.dontDisplayInUI:
+		return
+
 	var newEffectUI:EffectItemUI = EffectItemUI.instance()
 	effectContainer.add_child(newEffectUI)
 	newEffectUI.init(passive)
@@ -158,6 +161,9 @@ func on_passive_added(_character, passive):
 	effectContainer.visible = true
 
 func on_passive_removed(_character, passive):
+	if passive.data.dontDisplayInUI:
+		return
+		
 	if equippedEffects.has(passive):
 		effectContainer.remove_child(equippedEffects[passive])
 		equippedEffects.erase(passive)
