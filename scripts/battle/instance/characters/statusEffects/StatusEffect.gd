@@ -26,6 +26,12 @@ func _init(parentChar, statusEffectData:StatusEffectData):
 		instanceCount = instanceCount + statusEffectModifier.instanceCounterModifier
 		statusEffectModifier.execute_start_timeline_if_exists(character)
 
+func reset_events():
+	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
+	if data.forceCompleteTriggerConditions.size()>0:
+		_forceCompleteCombatEventReceiver = CombatEventReceiver.new(data.forceCompleteTriggerConditions, data.forceCompleteTriggerConditionParams, character, funcref(self, "on_force_complete_event_triggered"))
+
+
 func on_event_triggered():
 	activate()
 	

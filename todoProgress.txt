@@ -82,12 +82,14 @@ Roguelike Dev:
 (D) - FindTargets doesn't work with range = 3 (Lightning bolt)
 (D) - Show Progress of Passives
 
-- Fix for keyboard input issues caused by UI focus
-- CombatEventManager/HitResManager clean up breaking issues
-- Inventory categories
-- Hold move has a cooldown
-- Better UI on turn/level
-- Difficulty increased
+(D)- Fix for keyboard input issues caused by UI focus
+(D)- CombatEventManager/HitResManager clean up breaking issues
+(D)- Inventory categories
+(D)- Hold move has a cooldown
+(D)- Better UI on turn/level
+(D)- Difficulty increased
+
+- Consumables show up in UI
 
 - Tuning Pass
 

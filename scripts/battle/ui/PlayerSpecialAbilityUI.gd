@@ -19,6 +19,7 @@ func _ready():
 	SpecialPassiveButton.connect("mouse_exited", self, "_on_mouse_exited_passive")
 	
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnNewLevelLoaded", self, "_on_dungeon_init")
 
 func _on_dungeon_init():
 	CombatEventManager.connect("OnPlayerSpecialAbilityProgress", self, "_on_ability_progress")

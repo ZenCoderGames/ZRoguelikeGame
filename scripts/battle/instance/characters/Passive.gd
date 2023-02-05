@@ -23,6 +23,10 @@ func _init(parentChar, passiveData:PassiveData):
 	else:
 		activate()
 
+func reset_events():
+	if _combatEventReceiver!=null:
+		_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
+
 func on_event_triggered():
 	attempt_activate()
 

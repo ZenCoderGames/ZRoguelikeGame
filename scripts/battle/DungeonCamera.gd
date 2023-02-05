@@ -26,6 +26,7 @@ func _ready():
 	noise.octaves = 2
 
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnNewLevelLoaded", self, "_on_dungeon_init")
 	GameEventManager.connect("OnGameOver", self, "_on_game_over")
 	
 func _on_dungeon_init():

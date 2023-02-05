@@ -26,6 +26,21 @@ func init(charId:int, charData, teamVal):
 	moveData["params"]["moveType"] = "INPUT"
 	moveAction = ActionTypes.create(ActionDataTypes.create(moveData), self)
 
+	_setup_events()
+
+# This is an init that is for every dungeon except the first init
+func init_for_next_dungeon():
+	_setup_events()
+	if charData.active!=null:
+		special.reset_events()
+	if specialPassive!=null:
+		specialPassive.reset_events()
+	for passive in passiveList:
+		passive.reset_events()
+	for statusEffect in statusEffectList:
+		statusEffect.reset_events()
+
+func _setup_events():
 	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer", self, "on_enemy_moved_adjacent")
 	HitResolutionManager.connect("OnKill", self, "_on_kill")
 

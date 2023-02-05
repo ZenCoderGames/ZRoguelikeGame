@@ -20,6 +20,7 @@ func _ready():
 	deathUI.visible = false
 	
 	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
+	GameEventManager.connect("OnNewLevelLoaded", self, "_on_dungeon_init")
 	GameEventManager.connect("OnCharacterSelected", self, "_on_character_chosen")
 
 func _on_character_chosen(_charData):

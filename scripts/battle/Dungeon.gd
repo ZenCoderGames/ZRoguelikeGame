@@ -336,6 +336,7 @@ func _init_player(recreatePlayer:bool):
 	if recreatePlayer:
 		player = load_character(loadedScenes, cell, GameGlobals.dataManager.playerData, Constants.ENTITY_TYPE.DYNAMIC, Constants.pc, Constants.TEAM.PLAYER)
 	else:
+		player.init_for_next_dungeon()
 		player.move_to_cell(cell)
 
 # TURN LOGIC
