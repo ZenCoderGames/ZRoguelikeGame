@@ -5,15 +5,15 @@ class_name DungeonCamera
 var player
 
 const ZOOM_ON_COMBAT:float = 0.0
-export var cam_offset = Vector2(0, 0)  # Maximum hor/ver shake in pixels.
+@export var cam_offset = Vector2(0, 0)  # Maximum hor/ver shake in pixels.
 
-# Camera Shake Params
-onready var noise = OpenSimplexNoise.new()
+# Camera3D Shake Params
+@onready var noise = FastNoiseLite.new()
 var noise_y = 0
 
-export var decay = 0.8  # How quickly the shaking stops [0, 1].
-export var max_offset = Vector2(100, 75)  # Maximum hor/ver shake in pixels.
-export var max_roll = 0.1  # Maximum rotation in radians (use sparingly).
+@export var decay = 0.8  # How quickly the shaking stops [0, 1].
+@export var max_offset = Vector2(100.0, 100.0)  # Maximum hor/ver shake in pixels.
+@export var max_roll = 0.1  # Maximum rotation in radians (use sparingly).
 
 var trauma = 0.0  # Current shake strength.
 var trauma_power = 2  # Trauma exponent. Use [2, 3].
@@ -21,25 +21,30 @@ var trauma_power = 2  # Trauma exponent. Use [2, 3].
 func _ready():
 	# camera shake
 	randomize()
+	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.seed = randi()
-	noise.period = 4
-	noise.octaves = 2
+	noise.frequency = 0.25
+	noise.fractal_lacunarity = 1
+	noise.fractal_gain = 0.2
+	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+	#noise.octaves = 2
 
-	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	GameEventManager.connect("OnNewLevelLoaded", self, "_on_dungeon_init")
-	GameEventManager.connect("OnGameOver", self, "_on_game_over")
+	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
+	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
+	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
+	GameEventManager.connect("OnGameOver",Callable(self,"_on_game_over"))
+	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_attack"))
+	CombatEventManager.connect("OnRoomCombatStarted",Callable(self,"_on_room_combat_started"))
+	CombatEventManager.connect("OnRoomCombatEnded",Callable(self,"_on_room_combat_ended"))
 	
 func _on_dungeon_init():
-	CombatEventManager.connect("OnAnyAttack", self, "_on_any_attack")
-	CombatEventManager.connect("OnRoomCombatStarted", self, "_on_room_combat_started")
-	CombatEventManager.connect("OnRoomCombatEnded", self, "_on_room_combat_ended")
 	_register_player(GameGlobals.dungeon.player)
 
 
 func _register_player(playerRef):
 	player = playerRef
-	#player.connect("OnCharacterRoomChanged", self, "_update_camera_to_room")
-	player.connect("OnCharacterMoveToCell", self, "_update_camera_to_player")
+	#player.connect("OnCharacterRoomChanged",Callable(self,"_update_camera_to_room"))
+	player.connect("OnCharacterMoveToCell",Callable(self,"_update_camera_to_player"))
 	self.position = player.cell.pos
 	_update_camera_to_player()
 
@@ -53,11 +58,11 @@ func _on_room_combat_started(_room):
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x-ZOOM_ON_COMBAT, self.zoom.y-ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_room_combat_ended(_room):
-	yield(GameGlobals.battleInstance.get_tree().create_timer(0.25), "timeout")
+	await GameGlobals.battleInstance.get_tree().create_timer(0.25).timeout
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_game_over():
-	yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME), "timeout")
+	await GameGlobals.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME).timeout
 
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
@@ -76,6 +81,7 @@ func shake():
 	self.rotation = max_roll * trauma * noise.get_noise_2d(noise.seed, noise_y)
 	self.offset.x = cam_offset.x + max_offset.x * trauma * noise.get_noise_2d(noise.seed*2, noise_y)
 	self.offset.y = cam_offset.y + max_offset.y * trauma * noise.get_noise_2d(noise.seed*3, noise_y)
+	#noise.get_noise_2d(noise.seed, noise_y))
 
 func _process(delta):
 	# DEBUG
@@ -113,3 +119,8 @@ func _move_input():
 		y = 1
 
 	self.position += Vector2(x * 20, y * 20)
+
+func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
+	if fullRefreshDungeon:
+		if player!=null and !player.is_queued_for_deletion():
+			player.disconnect("OnCharacterMoveToCell",Callable(self,"_update_camera_to_player"))

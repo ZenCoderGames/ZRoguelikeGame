@@ -1,166 +1,105 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bu24n5fjt8usn"]
 
-[ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
-[ext_resource path="res://scripts/battle/ui/CharacterUI.gd" type="Script" id=2]
-[ext_resource path="res://ui/battle/styles/InfoPanelStyleBox.tres" type="StyleBox" id=3]
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.152941, 0.443137, 0.435294, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.239216, 0.533333, 0.635294, 1 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.611765, 0.533333, 0.121569, 1 )
-border_color = Color( 0.933333, 0.933333, 0.0862745, 1 )
+[ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_tkee7"]
+[ext_resource type="Script" path="res://scripts/battle/ui/CharacterUI.gd" id="2"]
 
 [node name="PanelContainer" type="PanelContainer"]
-self_modulate = Color( 0.258824, 0.270588, 0.266667, 0.286275 )
-margin_right = 212.0
-margin_bottom = 70.0
-script = ExtResource( 2 )
-playerTintColor = Color( 0.0823529, 0.270588, 0.309804, 1 )
-enemyTintColor = Color( 0.309804, 0.0862745, 0.105882, 1 )
-baseContainerFlashColor = Color( 0.843137, 0.596078, 0.596078, 1 )
-healthBarFlashColor = Color( 0.460938, 0.250275, 0.250275, 1 )
+self_modulate = Color(0.258824, 0.270588, 0.266667, 0.286275)
+offset_right = 212.0
+offset_bottom = 70.0
+theme = ExtResource("1_tkee7")
+script = ExtResource("2")
+playerTintColor = Color(0.0823529, 0.270588, 0.309804, 1)
+enemyTintColor = Color(0.309804, 0.0862745, 0.105882, 1)
+baseContainerFlashColor = Color(0.843137, 0.596078, 0.596078, 1)
+healthBarFlashColor = Color(0.460938, 0.250275, 0.250275, 1)
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 457.0
-margin_bottom = 63.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_tkee7")
 
 [node name="Base" type="VBoxContainer" parent="HSplitContainer"]
-margin_right = 186.0
-margin_bottom = 56.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="XP" type="PanelContainer" parent="HSplitContainer/Base"]
-margin_right = 186.0
-margin_bottom = 28.0
-custom_styles/panel = ExtResource( 3 )
+layout_mode = 2
 
 [node name="XPBar" type="ProgressBar" parent="HSplitContainer/Base/XP"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 184.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 182, 24 )
-custom_styles/fg = SubResource( 2 )
+custom_minimum_size = Vector2(182, 24)
+layout_mode = 2
+theme = ExtResource("1_tkee7")
 value = 75.0
 rounded = true
-percent_visible = false
+show_percentage = false
 
 [node name="LevelUpBar" type="ProgressBar" parent="HSplitContainer/Base/XP"]
 visible = false
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 206.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 182, 24 )
-custom_styles/fg = SubResource( 3 )
+custom_minimum_size = Vector2(182, 24)
+layout_mode = 2
+theme = ExtResource("1_tkee7")
 value = 100.0
 rounded = true
-percent_visible = false
 
 [node name="XPLabel" type="Label" parent="HSplitContainer/Base/XP"]
-margin_left = 2.0
-margin_top = 4.0
-margin_right = 184.0
-margin_bottom = 24.0
-theme = ExtResource( 1 )
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_tkee7")
 text = "LEVEL UP!"
-align = 1
-valign = 1
 
 [node name="Name" type="PanelContainer" parent="HSplitContainer/Base"]
-self_modulate = Color( 0.929688, 0.809107, 0.0217896, 1 )
-margin_top = 32.0
-margin_right = 186.0
-margin_bottom = 56.0
-custom_styles/panel = ExtResource( 3 )
-
-[node name="Bg" type="ColorRect" parent="HSplitContainer/Base/Name"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 184.0
-margin_bottom = 22.0
-color = Color( 0.156863, 0.14902, 0.14902, 1 )
+layout_mode = 2
+theme = ExtResource("1_tkee7")
 
 [node name="NameLabel" type="Label" parent="HSplitContainer/Base/Name"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 184.0
-margin_bottom = 22.0
-theme = ExtResource( 1 )
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1")
 text = "Equipped Items"
-align = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NonBase" type="HSplitContainer" parent="HSplitContainer"]
-margin_left = 198.0
-margin_right = 450.0
-margin_bottom = 56.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SpellContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
-margin_right = 120.0
-margin_bottom = 56.0
-rect_min_size = Vector2( 120, 0 )
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Name" type="PanelContainer" parent="HSplitContainer/NonBase/SpellContainer"]
-margin_right = 120.0
-margin_bottom = 24.0
-custom_styles/panel = ExtResource( 3 )
-
-[node name="Bg" type="ColorRect" parent="HSplitContainer/NonBase/SpellContainer/Name"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 118.0
-margin_bottom = 22.0
-color = Color( 0.156863, 0.14902, 0.14902, 1 )
+layout_mode = 2
+theme = ExtResource("1_tkee7")
 
 [node name="NameLabel" type="Label" parent="HSplitContainer/NonBase/SpellContainer/Name"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 118.0
-margin_bottom = 22.0
-theme = ExtResource( 1 )
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1")
 text = "Spells"
-align = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EffectContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
-margin_left = 132.0
-margin_right = 252.0
-margin_bottom = 56.0
-rect_min_size = Vector2( 120, 0 )
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Name" type="PanelContainer" parent="HSplitContainer/NonBase/EffectContainer"]
-margin_right = 120.0
-margin_bottom = 24.0
-custom_styles/panel = ExtResource( 3 )
-
-[node name="Bg" type="ColorRect" parent="HSplitContainer/NonBase/EffectContainer/Name"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 118.0
-margin_bottom = 22.0
-color = Color( 0.156863, 0.14902, 0.14902, 1 )
+layout_mode = 2
+theme = ExtResource("1_tkee7")
 
 [node name="NameLabel" type="Label" parent="HSplitContainer/NonBase/EffectContainer/Name"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 118.0
-margin_bottom = 22.0
-theme = ExtResource( 1 )
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1")
 text = "Effects"
-align = 1
+horizontal_alignment = 1
+vertical_alignment = 1

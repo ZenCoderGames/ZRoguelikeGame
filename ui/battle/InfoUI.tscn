@@ -1,73 +1,70 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://3vxws5wqblgu"]
 
-[ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
-[ext_resource path="res://scripts/battle/ui/InfoUI.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
+[ext_resource type="Script" path="res://scripts/battle/ui/InfoUI.gd" id="2"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_h3yrs"]
 
 [node name="InfoUI" type="MarginContainer"]
+anchors_preset = -1
 anchor_top = 0.833
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 0.199951
+offset_top = 0.199951
 grow_vertical = 0
 size_flags_vertical = 3
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Bg" type="ColorRect" parent="."]
-margin_right = 800.0
-margin_bottom = 100.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.341176, 0.305882, 0.27451, 1 )
-
-[node name="Title" type="MarginContainer" parent="."]
-margin_right = 800.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 0, 23 )
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 2
-custom_constants/margin_left = 5
-
-[node name="ColorRect" type="ColorRect" parent="Title"]
-margin_left = 5.0
-margin_top = 2.0
-margin_right = 795.0
-margin_bottom = 23.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource( 1 )
-color = Color( 0.184314, 0.101961, 0.101961, 1 )
-
-[node name="Label" type="Label" parent="Title/ColorRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 4.0
-theme = ExtResource( 1 )
-text = "INFO"
-align = 1
-valign = 1
+color = Color(0.341176, 0.305882, 0.27451, 1)
 
 [node name="Content" type="MarginContainer" parent="."]
-margin_right = 800.0
-margin_bottom = 100.0
+layout_mode = 2
 size_flags_vertical = 3
-custom_constants/margin_right = 5
-custom_constants/margin_top = 25
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
 
 [node name="ColorRect" type="ColorRect" parent="Content"]
-margin_left = 5.0
-margin_top = 25.0
-margin_right = 795.0
-margin_bottom = 95.0
+layout_mode = 2
 size_flags_vertical = 3
-color = Color( 0.0941176, 0.0745098, 0.0745098, 1 )
+color = Color(0.0705882, 0.164706, 0.176471, 1)
 
 [node name="Label" type="Label" parent="Content/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 34.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "This sword gives the player +1 Strength"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 23)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("2_h3yrs")
+
+[node name="ColorRect" type="ColorRect" parent="Title"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1")
+color = Color(0.235294, 0.415686, 0.505882, 1)
+
+[node name="Label" type="Label" parent="Title/ColorRect"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
+text = "INFO"
+horizontal_alignment = 1
+vertical_alignment = 1

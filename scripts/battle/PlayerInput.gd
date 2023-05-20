@@ -9,14 +9,19 @@ var inputDelay:float = 0.0
 var blockInputsForTurn:bool
 
 func _ready():
-	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	GameEventManager.connect("OnNewLevelLoaded", self, "_on_new_level_loaded")
-	GameEventManager.connect("OnMainMenuOn", self, "on_main_menu_on")
-	GameEventManager.connect("OnMainMenuOff", self, "on_main_menu_off")
+	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
+	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
+	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_new_level_loaded"))
+	GameEventManager.connect("OnMainMenuOn",Callable(self,"on_main_menu_on"))
+	GameEventManager.connect("OnMainMenuOff",Callable(self,"on_main_menu_off"))
+	CombatEventManager.connect("OnPlayerTurnCompleted",Callable(self,"_on_player_turn_completed"))
+	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_end_turn")) 
+	CombatEventManager.connect("OnTouchButtonPressed",Callable(self,"_on_touch_button_pressed"))
+	CombatEventManager.connect("OnSkipTurnPressed",Callable(self,"_on_skip_turn_pressed"))
 
 func _on_dungeon_init():
 	_init_for_level()
-	player.connect("OnDeath", self, "_on_player_death")
+	player.connect("OnDeath",Callable(self,"_on_player_death"))
 
 func _on_new_level_loaded():
 	_init_for_level()
@@ -24,10 +29,6 @@ func _on_new_level_loaded():
 func _init_for_level():
 	disableInput = false
 	blockInputsForTurn = false
-	CombatEventManager.connect("OnPlayerTurnCompleted", self, "_on_player_turn_completed")
-	CombatEventManager.connect("OnEndTurn", self, "_on_end_turn") 
-	CombatEventManager.connect("OnTouchButtonPressed", self, "_on_touch_button_pressed")
-	CombatEventManager.connect("OnSkipTurnPressed", self, "_on_skip_turn_pressed")
 
 	player = GameGlobals.dungeon.player
 	playerMoveAction = player.moveAction
@@ -35,7 +36,7 @@ func _init_for_level():
 func _on_player_death():
 	disableInput = true
 	blockInputsForTurn = false
-	player.disconnect("OnDeath", self, "_on_player_death")
+	player.disconnect("OnDeath",Callable(self,"_on_player_death"))
 
 func on_main_menu_on():
 	disableInput = true
@@ -107,3 +108,7 @@ func _on_skip_turn_pressed():
 		player.skip_turn()
 	else:
 		CombatEventManager.emit_signal("OnDetailInfoShow", str("Hold Move On Cooldown (", player.get_skip_turn_cooldown(),")"), 1)
+
+func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
+	if fullRefreshDungeon:
+		player.disconnect("OnDeath",Callable(self,"_on_player_death"))

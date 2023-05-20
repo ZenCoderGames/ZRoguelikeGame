@@ -1,13 +1,13 @@
-extends ActionData
 
-class_name ActionMoveData
+class_name ActionMoveData extends ActionData
 
 const ID:String = "MOVEMENT"
 
 enum MOVE_TYPE { INPUT, WANDER, PATHFIND_TO_TARGET }
 var moveType:int
 
-func _init(dataJS).(dataJS):
+func _init(dataJS):
+	super(dataJS) 
 	var moveTypeStr = params["moveType"]
 	if MOVE_TYPE.has(moveTypeStr):
 		moveType = MOVE_TYPE.get(moveTypeStr)

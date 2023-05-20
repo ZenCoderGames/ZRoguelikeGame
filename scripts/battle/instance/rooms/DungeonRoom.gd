@@ -17,7 +17,7 @@ var topConnection = null
 var botConnection = null
 var connections:Array = []
 
-# Path
+# Path3D
 var isStartRoom:bool
 var isCriticalPathRoom:bool
 var isEndRoom:bool
@@ -44,7 +44,7 @@ var roomId:int = -1
 var _processedEnemyIdx:int = -1
 var _prevProcessedEnemy:Character = null
 
-func _init(id, mR, mC, sX, sY):
+func _init(id,mR,mC,sX,sY):
 	roomId = id
 	maxRows = mR
 	maxCols = mC
@@ -219,7 +219,7 @@ func clean_up_loaded_scene(sceneToCleanUp):
 func clean_up():
 	# clean up any loose ends
 	for enemy in enemies:
-		enemy.disconnect("OnTurnCompleted", self, "_update_next_enemy")
+		enemy.disconnect("OnTurnCompleted",Callable(self,"_update_next_enemy"))
 
 	for loadedScene in loadedScenes:
 		loadedScene.queue_free()
@@ -283,7 +283,7 @@ func _check_for_doors():
 	if GameGlobals.battleInstance.doorsStayOpenDuringBattle:
 		return
 
-	if doors.empty():
+	if doors.is_empty():
 		if enemies.size()>0 and !connections.has(GameGlobals.dungeon.player.cell):	
 			_create_doors()
 
@@ -293,7 +293,7 @@ func _create_doors():
 		connection.init_entity(doorObj, Constants.ENTITY_TYPE.STATIC)
 		doors.append(doorObj)
 		if connection == topConnection or connection == botConnection:
-			doorObj.rotate(deg2rad(90))
+			doorObj.rotate(deg_to_rad(90))
 
 func _destroy_doors():
 	for connection in connections:
@@ -345,8 +345,8 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 func enemy_died(entity):
 	var foundEnemyIdx:int = enemies.find(entity)
 	if foundEnemyIdx>=0:
-		enemies.remove(foundEnemyIdx)
-	if enemies.empty():
+		enemies.remove_at(foundEnemyIdx)
+	if enemies.is_empty():
 		_destroy_doors()
 	else:
 		# used for better AI pathfinding
@@ -382,7 +382,7 @@ func update_path_map():
 			if !costFromStart.has(cell) or pathCost<costFromStart[cell]:
 				costFromStart[cell] = pathCost
 				shortestNodeToStart[cell] = currentCell
-		cellsToVisit.remove(0)
+		cellsToVisit.remove_at(0)
 
 	# DEBUG DRAW
 	var showDebug:bool = false
@@ -482,7 +482,7 @@ func _update_next_enemy():
 	_processedEnemyIdx = _processedEnemyIdx + 1
 	
 	if _prevProcessedEnemy!=null:
-		_prevProcessedEnemy.disconnect("OnTurnCompleted", self, "_update_next_enemy")
+		_prevProcessedEnemy.disconnect("OnTurnCompleted",Callable(self,"_update_next_enemy"))
 	
 	# Check for end of enemy list
 	if enemies==null or _processedEnemyIdx>=enemies.size():
@@ -494,11 +494,11 @@ func _update_next_enemy():
 		_update_next_enemy()
 	else:
 		_prevProcessedEnemy = nextEnemy
-		nextEnemy.connect("OnTurnCompleted", self, "_update_next_enemy")
+		nextEnemy.connect("OnTurnCompleted",Callable(self,"_update_next_enemy"))
 		if Utils.is_adjacent(nextEnemy, GameGlobals.dungeon.player):
-			yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES_ADJACENT_TO_PLAYER), "timeout")
+			await GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES_ADJACENT_TO_PLAYER).timeout
 		else:
-			yield(GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES), "timeout")
+			await GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES).timeout
 		
 		if nextEnemy!=null && is_instance_valid(nextEnemy):
 			nextEnemy.update()

@@ -7,7 +7,7 @@ var instanceCount:int
 var _combatEventReceiver:CombatEventReceiver
 var _forceCompleteCombatEventReceiver:CombatEventReceiver
 
-func _init(parentChar, statusEffectData:StatusEffectData):
+func _init(parentChar,statusEffectData:StatusEffectData):
 	character = parentChar
 	data = statusEffectData
 	instanceCount = data.instanceCount
@@ -17,9 +17,9 @@ func _init(parentChar, statusEffectData:StatusEffectData):
 		if(action!=null):
 			action.execute()
 
-	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
+	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
 	if data.forceCompleteTriggerConditions.size()>0:
-		_forceCompleteCombatEventReceiver = CombatEventReceiver.new(data.forceCompleteTriggerConditions, data.forceCompleteTriggerConditionParams, character, funcref(self, "on_force_complete_event_triggered"))
+		_forceCompleteCombatEventReceiver = CombatEventReceiver.new(data.forceCompleteTriggerConditions, data.forceCompleteTriggerConditionParams, character, Callable(self, "on_force_complete_event_triggered"))
 
 	var statusEffectModifierList:Array = character.get_status_effect_modifiers(data.id)
 	for statusEffectModifier in statusEffectModifierList:
@@ -27,9 +27,9 @@ func _init(parentChar, statusEffectData:StatusEffectData):
 		statusEffectModifier.execute_start_timeline_if_exists(character)
 
 func reset_events():
-	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
+	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
 	if data.forceCompleteTriggerConditions.size()>0:
-		_forceCompleteCombatEventReceiver = CombatEventReceiver.new(data.forceCompleteTriggerConditions, data.forceCompleteTriggerConditionParams, character, funcref(self, "on_force_complete_event_triggered"))
+		_forceCompleteCombatEventReceiver = CombatEventReceiver.new(data.forceCompleteTriggerConditions, data.forceCompleteTriggerConditionParams, character, Callable(self, "on_force_complete_event_triggered"))
 
 
 func on_event_triggered():

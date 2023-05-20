@@ -2,29 +2,29 @@ extends Node
 
 class_name CharacterUI
 
-onready var baseContainer:PanelContainer = get_node(".")
-onready var listContainer:VBoxContainer = get_node("HSplitContainer/Base")
-onready var nameBg:ColorRect = get_node("HSplitContainer/Base/Name/Bg")
-onready var nameLabel:Label = get_node("HSplitContainer/Base/Name/NameLabel")
-onready var xpUI:PanelContainer = get_node("HSplitContainer/Base/XP")
-onready var xpBar:ProgressBar = get_node("HSplitContainer/Base/XP/XPBar")
-onready var levelUpBar:ProgressBar = get_node("HSplitContainer/Base/XP/LevelUpBar")
-onready var xpLabel:Label = get_node("HSplitContainer/Base/XP/XPLabel")
+@onready var baseContainer:PanelContainer = get_node(".")
+@onready var listContainer:VBoxContainer = get_node("HSplitContainer/Base")
+#@onready var nameBg:ColorRect = get_node("HSplitContainer/Base/Name/Bg")
+@onready var nameLabel:Label = get_node("HSplitContainer/Base/Name/NameLabel")
+@onready var xpUI:PanelContainer = get_node("HSplitContainer/Base/XP")
+@onready var xpBar:ProgressBar = get_node("HSplitContainer/Base/XP/XPBar")
+@onready var levelUpBar:ProgressBar = get_node("HSplitContainer/Base/XP/LevelUpBar")
+@onready var xpLabel:Label = get_node("HSplitContainer/Base/XP/XPLabel")
 const EquippedItemUI := preload("res://ui/battle/EquippedItemUI.tscn")
 
-onready var nonBaseContainer:HSplitContainer = get_node("HSplitContainer/NonBase")
+@onready var nonBaseContainer:HSplitContainer = get_node("HSplitContainer/NonBase")
 
-onready var spellContainer:VBoxContainer = get_node("HSplitContainer/NonBase/SpellContainer")
+@onready var spellContainer:VBoxContainer = get_node("HSplitContainer/NonBase/SpellContainer")
 const SpellButtonUI := preload("res://ui/battle/SpellButtonUI.tscn")
 
-onready var effectContainer:VBoxContainer = get_node("HSplitContainer/NonBase/EffectContainer")
+@onready var effectContainer:VBoxContainer = get_node("HSplitContainer/NonBase/EffectContainer")
 const EffectItemUI := preload("res://ui/battle/EffectItemUI.tscn")
 
-export var playerTintColor:Color
-export var enemyTintColor:Color
+@export var playerTintColor:Color
+@export var enemyTintColor:Color
 
-export var baseContainerFlashColor:Color
-export var healthBarFlashColor:Color
+@export var baseContainerFlashColor:Color
+@export var healthBarFlashColor:Color
 
 var originalHealthBarColor:Color
 var character:Character
@@ -44,24 +44,24 @@ var xpTween:Tween = null
 func init(entityObj):
 	character = entityObj as Character
 	#nameLabel.text = character.displayName
-	#character.connect("OnStatChanged", self, "_on_stat_changed")
-	character.connect("OnPassiveAdded", self, "on_passive_added")
-	character.connect("OnPassiveRemoved", self, "on_passive_removed")
-	character.connect("OnStatusEffectAdded", self, "on_status_effect_added")
-	character.connect("OnStatusEffectRemoved", self, "on_status_effect_removed")
-	character.connect("OnAbilityAdded", self, "on_ability_added")
-	character.connect("OnAbilityRemoved", self, "on_ability_removed")
-	character.equipment.connect("OnItemEquipped", self, "_on_item_equipped")
-	character.equipment.connect("OnItemUnEquipped", self, "_on_item_unequipped")
+	#character.connect("OnStatChanged",Callable(self,"_on_stat_changed"))
+	character.connect("OnPassiveAdded",Callable(self,"on_passive_added"))
+	character.connect("OnPassiveRemoved",Callable(self,"on_passive_removed"))
+	character.connect("OnStatusEffectAdded",Callable(self,"on_status_effect_added"))
+	character.connect("OnStatusEffectRemoved",Callable(self,"on_status_effect_removed"))
+	character.connect("OnAbilityAdded",Callable(self,"on_ability_added"))
+	character.connect("OnAbilityRemoved",Callable(self,"on_ability_removed"))
+	character.equipment.connect("OnItemEquipped",Callable(self,"_on_item_equipped"))
+	character.equipment.connect("OnItemUnEquipped",Callable(self,"_on_item_unequipped"))
 	if character.team == Constants.TEAM.PLAYER:
-		nameBg.color = playerTintColor
+		#nameBg.color = playerTintColor
 		isPlayer = true
 		xpUI.visible = true
 		var playerChar = character
-		playerChar.connect("OnXPGained", self, "_update_base_ui")
-		playerChar.connect("OnLevelUp", self, "_show_level_up")
+		playerChar.connect("OnXPGained",Callable(self,"_update_base_ui"))
+		playerChar.connect("OnLevelUp",Callable(self,"_show_level_up"))
 	elif character.team == Constants.TEAM.ENEMY:
-		nameBg.color = enemyTintColor
+		#nameBg.color = enemyTintColor
 		xpUI.visible = false
 	_update_base_ui()
 
@@ -69,7 +69,7 @@ func init(entityObj):
 	nonBaseContainer.visible = true
 	spellContainer.visible = true
 	for __ in range(character.maxSpellSlots):
-		var newSpellUI:SpellItemUI = SpellButtonUI.instance()
+		var newSpellUI:SpellItemUI = SpellButtonUI.instantiate()
 		spellContainer.add_child(newSpellUI)
 		newSpellUI.init_as_empty("Spell")
 		spellSlots.append(newSpellUI)
@@ -81,7 +81,7 @@ func init(entityObj):
 		runeSlots.append(_create_item_slot("Rune"))
 
 func _create_item_slot(slotName:String):
-	var newItemUI = EquippedItemUI.instance()
+	var newItemUI = EquippedItemUI.instantiate()
 	listContainer.add_child(newItemUI)
 	newItemUI.init_as_empty(slotName)
 	return newItemUI
@@ -112,7 +112,7 @@ func _show_level_up():
 	levelUpBar.visible = true
 	xpLabel.text = "Level Up!"
 	if get_tree()!=null:
-		yield(get_tree().create_timer(1.0), "timeout") 
+		await get_tree().create_timer(1.0).timeout 
 	levelUpBar.visible = false
 	inLevelUpSequence = false
 	_update_base_ui()
@@ -124,7 +124,7 @@ func _on_item_equipped(item, slotType):
 		newSpellUI.init(item)
 		equippedSpells[item] = newSpellUI
 
-		newSpellUI.connect("pressed", self, "_on_equip_spell_selected", [item])
+		newSpellUI.connect("pressed",Callable(self,"_on_equip_spell_selected").bind(item))
 	else:
 		var newItemUI = _get_item_slot(slotType)
 		newItemUI.init(item)
@@ -135,7 +135,7 @@ func _on_item_unequipped(item, slotType):
 		if equippedSpells.has(item):
 			var newSpellUI:SpellItemUI = _get_spell_slot(slotType)
 			newSpellUI.revert_as_empty()
-			newSpellUI.disconnect("pressed", self, "_on_equip_spell_selected")
+			newSpellUI.disconnect("pressed",Callable(self,"_on_equip_spell_selected"))
 			equippedSpells.erase(item)
 	else:
 		if equippedItems.has(item):
@@ -153,7 +153,7 @@ func on_passive_added(_character, passive):
 	if passive.data.dontDisplayInUI:
 		return
 
-	var newEffectUI:EffectItemUI = EffectItemUI.instance()
+	var newEffectUI:EffectItemUI = EffectItemUI.instantiate()
 	effectContainer.add_child(newEffectUI)
 	newEffectUI.init(passive)
 	equippedEffects[passive] = newEffectUI
@@ -172,7 +172,7 @@ func on_passive_removed(_character, passive):
 		effectContainer.visible = false
 
 func on_status_effect_added(_character, statusEffect):
-	var newEffectUI = EffectItemUI.instance()
+	var newEffectUI = EffectItemUI.instantiate()
 	effectContainer.add_child(newEffectUI)
 	newEffectUI.init(statusEffect)
 	equippedEffects[statusEffect] = newEffectUI
@@ -188,7 +188,7 @@ func on_status_effect_removed(_character, statusEffect):
 		effectContainer.visible = false
 
 func on_ability_added(_character, ability):
-	var newEffectUI = EffectItemUI.instance()
+	var newEffectUI = EffectItemUI.instantiate()
 	effectContainer.add_child(newEffectUI)
 	newEffectUI.init(ability.data)
 	equippedEffects[ability] = newEffectUI

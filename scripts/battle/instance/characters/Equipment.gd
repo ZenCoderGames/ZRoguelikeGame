@@ -19,7 +19,7 @@ func _init(characterRef):
 	equippedSlots[Constants.ITEM_EQUIP_SLOT.SPELL_4] = null
 	equippedSlots[Constants.ITEM_EQUIP_SLOT.RUNE_1] = null
 	equippedSlots[Constants.ITEM_EQUIP_SLOT.RUNE_2] = null
-	character.inventory.connect("OnItemAdded", self, "_on_item_added")
+	character.inventory.connect("OnItemAdded",Callable(self,"_on_item_added"))
 
 func _on_item_added(item:Item):
 	var freeSlot:int = _get_free_slot(item.data)

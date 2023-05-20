@@ -1,8 +1,8 @@
-extends Action
 
-class_name ActionAttack
+class_name ActionAttack extends Action
 
-func _init(actionData, parentChar).(actionData, parentChar):
+func _init(actionData,parentChar):
+	super(actionData, parentChar)
 	pass
 
 func can_execute()->bool:

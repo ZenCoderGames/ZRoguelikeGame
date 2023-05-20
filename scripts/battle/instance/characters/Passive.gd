@@ -7,7 +7,7 @@ var _combatEventReceiver:CombatEventReceiver
 var _triggerCount:int
 var _count:int
 
-func _init(parentChar, passiveData:PassiveData):
+func _init(parentChar,passiveData:PassiveData):
 	character = parentChar
 	data = passiveData
 	_triggerCount = data.triggerCount
@@ -19,13 +19,13 @@ func _init(parentChar, passiveData:PassiveData):
 			timelineActions.append(action)
 
 	if data.triggerConditions.size()>0:
-		_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
+		_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
 	else:
 		activate()
 
 func reset_events():
 	if _combatEventReceiver!=null:
-		_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
+		_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
 
 func on_event_triggered():
 	attempt_activate()

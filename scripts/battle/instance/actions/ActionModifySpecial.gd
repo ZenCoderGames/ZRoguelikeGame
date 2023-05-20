@@ -1,8 +1,8 @@
-extends Action
 
-class_name ActionModifySpecial
+class_name ActionModifySpecial extends Action
 
-func _init(actionData, parentChar).(actionData, parentChar):
+func _init(actionData,parentChar):
+	super(actionData,parentChar)
 	pass
 
 func execute():

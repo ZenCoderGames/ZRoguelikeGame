@@ -3,7 +3,7 @@ class_name Action
 var actionData:ActionData
 var character
 
-func _init(data:ActionData, parentChar):
+func _init(data:ActionData,parentChar):
 	actionData = data
 	character = parentChar
 

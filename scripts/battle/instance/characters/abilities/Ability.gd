@@ -4,7 +4,7 @@ var character
 var data:AbilityData
 var timelineActions:Array = []
 
-func _init(parentChar, abilityData:AbilityData):
+func _init(parentChar,abilityData:AbilityData):
 	character = parentChar
 	data = abilityData
 

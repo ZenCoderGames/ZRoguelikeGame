@@ -3,7 +3,7 @@ extends Node
 
 class_name Character
 
-onready var damageText:Label = get_node("DamageText")
+@onready var damageText:Label = get_node("DamageText")
 
 var charData:CharacterData
 var displayName: String = ""
@@ -108,13 +108,13 @@ func init(id:int, charDataVal, teamVal):
 	if charData.active!=null:
 		special = Special.new(self, charData.active)
 
-	if !charData.passive.empty():
+	if !charData.passive.is_empty():
 		specialPassive = add_passive(GameGlobals.dataManager.get_passive_data(charData.passive))
 
 	emit_signal("OnInitialized")
 
-	equipment.connect("OnItemEquipped", self, "_on_item_equipped")
-	equipment.connect("OnItemUnEquipped", self, "_on_item_unequipped")
+	equipment.connect("OnItemEquipped",Callable(self,"_on_item_equipped"))
+	equipment.connect("OnItemUnEquipped",Callable(self,"_on_item_unequipped"))
 
 # MOVEMENT
 func move(x, y):
@@ -143,7 +143,7 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 	emit_signal("OnCharacterMoveToCell")
 
 	Utils.create_tween_vector2(self, "position", self.position, Vector2(cell.pos.x, cell.pos.y), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
-	yield(get_tree().create_timer(0.05), "timeout")
+	await get_tree().create_timer(0.05).timeout
 
 	if triggerTurnCompleteEvent:
 		on_turn_completed()
@@ -272,8 +272,8 @@ func attack(entity):
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.UP:
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
-
-		yield(get_tree().create_timer(0.075), "timeout")
+		
+		await get_tree().create_timer(0.075).timeout
 
 		emit_signal("OnPreAttack", entity)
 
@@ -294,7 +294,7 @@ func attack(entity):
 			Utils.freeze_frame(Constants.HIT_PAUSE_DEFAULT_AMOUNT, Constants.HIT_PAUSE_DEFAULT_DURATION)
 		CombatEventManager.on_any_attack(entity.isDead)
 
-		yield(get_tree().create_timer(0.1), "timeout")
+		await get_tree().create_timer(0.1).timeout
 
 		emit_signal("OnPostAttack", entity)
 
@@ -327,7 +327,7 @@ func die():
 	currentRoom.enemy_died(self)
 	emit_signal("OnDeath")
 
-	yield(get_tree().create_timer(0.1), "timeout")
+	await get_tree().create_timer(0.1).timeout
 
 	if cell.entityObject!=null:
 		cell.entityObject.hide()
@@ -345,15 +345,15 @@ func show_hit(entity, _dmg, isCritical):
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.DOWN:
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-	
+		
 	show_hit_flash()
 	if isCritical:
 		show_critical(entity)
 	#show_damage_text(entity, dmg)
 
 func show_hit_flash():
-	self.self_modulate = Color.white
-	yield(get_tree().create_timer(0.1), "timeout")
+	self.self_modulate = Color.WHITE
+	await get_tree().create_timer(0.1).timeout
 	reset_color()
 
 func reset_color():
@@ -386,7 +386,7 @@ func _show_generic_text(entity, val:String, duration:float=0.75):
 	damageText.visible = true
 	damageText.text = val
 	_create_damage_text_tween(entity)
-	yield(get_tree().create_timer(duration), "timeout")
+	await get_tree().create_timer(duration).timeout
 	damageText.visible = false
 
 func _create_damage_text_tween(_entity):
@@ -412,8 +412,8 @@ func _create_damage_text_tween(_entity):
 	var colorNew:Color = damageText.self_modulate
 	colorNew.a = 0.0
 
-	#Utils.create_tween_vector2(damageText, "rect_position", startPos, endPos, 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
-	#Utils.create_tween_vector2(damageText, "rect_position", startPos, startPos, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	#Utils.create_tween_vector2(damageText, "position", startPos, endPos, 0.25, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	#Utils.create_tween_vector2(damageText, "position", startPos, startPos, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	Utils.create_tween_vector2(damageText, "self_modulate", colorOriginal, colorNew, 1.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 
 func pre_update():
@@ -491,7 +491,7 @@ func add_status_effect_modifier(statusEffectModifier:StatusEffectModifier):
 func remove_status_effect_modifier(statusEffectId:String):
 	for i in range(statusEffectModifierList.size() - 1, -1, -1):
 		if (statusEffectId == statusEffectModifierList[i].statusEffectId):
-			statusEffectModifierList.remove(i)
+			statusEffectModifierList.remove_at(i)
 
 func get_status_effect_modifiers(statusEffectId:String):
 	var matchedStatusEffectModifiers:Array = []
@@ -535,7 +535,7 @@ func add_special_modifier(specialModifier:SpecialModifier):
 func remove_special_modifier(specialId:String):
 	for i in range(specialModifierList.size() - 1, -1, -1):
 		if (specialId == specialModifierList[i].specialId):
-			specialModifierList.remove(i)
+			specialModifierList.remove_at(i)
 
 func get_special_modifiers(specialId:String):
 	var matchedspecialModifiers:Array = []
@@ -572,7 +572,7 @@ func on_turn_completed():
 func skip_turn():
 	if status.is_stunned():
 		show_stunned()
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	on_turn_completed()
 
 # HELPERS

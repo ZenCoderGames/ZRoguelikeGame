@@ -1,334 +1,293 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cr2gmt2ecajml"]
 
-[ext_resource path="res://themes/guiTheme.tres" type="Theme" id=1]
-[ext_resource path="res://scripts/battle/ui/InventoryUI.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
+[ext_resource type="Script" path="res://scripts/battle/ui/InventoryUI.gd" id="2"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="3_rxc0g"]
 
 [node name="InventoryUI" type="MarginContainer"]
+anchors_preset = -1
 anchor_top = 0.665
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 3.0
-script = ExtResource( 2 )
+offset_top = 3.0
+script = ExtResource("2")
 
 [node name="Bg" type="ColorRect" parent="."]
-margin_right = 1024.0
-margin_bottom = 224.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.341176, 0.305882, 0.27451, 1 )
+color = Color(0.341176, 0.305882, 0.27451, 1)
 
 [node name="Title" type="MarginContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 0, 23 )
+custom_minimum_size = Vector2(0, 23)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 2
-custom_constants/margin_left = 5
 
 [node name="ColorRect" type="ColorRect" parent="Title"]
-margin_left = 5.0
-margin_top = 2.0
-margin_right = 1019.0
-margin_bottom = 23.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 1 )
-color = Color( 0.184314, 0.101961, 0.101961, 1 )
+theme = ExtResource("1")
+color = Color(0.184314, 0.101961, 0.101961, 1)
 
 [node name="Label" type="Label" parent="Title/ColorRect"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 4.0
-theme = ExtResource( 1 )
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
 text = "INVENTORY"
-align = 1
-valign = 1
 
 [node name="Content" type="MarginContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 224.0
-custom_constants/margin_right = 6
-custom_constants/margin_top = 25
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 6
+layout_mode = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Content"]
-margin_left = 5.0
-margin_top = 25.0
-margin_right = 1018.0
-margin_bottom = 218.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
 split_offset = -200
 
 [node name="ItemPanel" type="VBoxContainer" parent="Content/HSplitContainer"]
-margin_right = 302.0
-margin_bottom = 193.0
-rect_min_size = Vector2( 200, 0 )
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Bg" type="ColorRect" parent="Content/HSplitContainer/ItemPanel"]
-margin_right = 302.0
-margin_bottom = 193.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.0980392, 0.105882, 0.101961, 1 )
+color = Color(0.0980392, 0.105882, 0.101961, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Content/HSplitContainer/ItemPanel/Bg"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 1.0
+offset_top = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer"]
-margin_right = 302.0
-margin_bottom = 20.0
+layout_mode = 2
 alignment = 1
 
 [node name="AllButton" type="Button" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer"]
-margin_left = 16.0
-margin_right = 45.0
-margin_bottom = 20.0
+layout_mode = 2
+theme = ExtResource("3_rxc0g")
 text = "All"
 
 [node name="WeaponButton" type="Button" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer"]
-margin_left = 49.0
-margin_right = 120.0
-margin_bottom = 20.0
+layout_mode = 2
+theme = ExtResource("3_rxc0g")
 text = "Weapons"
 
 [node name="ArmorButton" type="Button" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer"]
-margin_left = 124.0
-margin_right = 176.0
-margin_bottom = 20.0
+layout_mode = 2
+theme = ExtResource("3_rxc0g")
 text = "Armor"
 
 [node name="RuneButton" type="Button" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer"]
-margin_left = 180.0
-margin_right = 231.0
-margin_bottom = 20.0
+layout_mode = 2
+theme = ExtResource("3_rxc0g")
 text = "Runes"
 
 [node name="SpellButton" type="Button" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer"]
-margin_left = 235.0
-margin_right = 285.0
-margin_bottom = 20.0
+layout_mode = 2
+theme = ExtResource("3_rxc0g")
 text = "Spells"
 
 [node name="MarginContainer" type="MarginContainer" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer"]
-margin_top = 24.0
-margin_right = 302.0
-margin_bottom = 192.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
 
 [node name="ItemList" type="ScrollContainer" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/MarginContainer"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 297.0
-margin_bottom = 163.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/MarginContainer/ItemList"]
-margin_right = 292.0
-margin_bottom = 158.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="DetailsPanel" type="VBoxContainer" parent="Content/HSplitContainer"]
-margin_left = 310.0
-margin_right = 1013.0
-margin_bottom = 193.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Bg" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel"]
-margin_right = 703.0
-margin_bottom = 193.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.0980392, 0.105882, 0.101961, 1 )
+color = Color(0.0980392, 0.105882, 0.101961, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Content/HSplitContainer/DetailsPanel/Bg"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 698.0
-margin_bottom = 188.0
+layout_mode = 2
 
 [node name="NameContainer" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer"]
-margin_right = 693.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 0, 22 )
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
 size_flags_horizontal = 3
-color = Color( 0.262745, 0.14902, 0.0392157, 1 )
+color = Color(0.0509804, 0.211765, 0.129412, 1)
 
 [node name="NameLabel" type="Label" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/NameContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 1 )
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -11.5
+offset_right = 94.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
 text = "Heavy Sword Of Doom"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TypeContainer" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer"]
-margin_top = 26.0
-margin_right = 693.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 0, 22 )
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
 size_flags_horizontal = 3
-color = Color( 0.239216, 0.231373, 0.223529, 1 )
+color = Color(0.239216, 0.231373, 0.223529, 1)
 
 [node name="TypeLabel" type="Label" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/TypeContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 1 )
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -11.5
+offset_right = 30.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
 text = "Weapon"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DescContainer" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer"]
-margin_top = 52.0
-margin_right = 693.0
-margin_bottom = 159.0
-rect_min_size = Vector2( 0, 80 )
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
 size_flags_vertical = 3
-color = Color( 0.184314, 0.164706, 0.164706, 1 )
+color = Color(0.184314, 0.164706, 0.164706, 1)
 
 [node name="DescLabel" type="Label" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/DescContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_top = 0.016
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.967
 text = "This sword gives you +5 Damage once equipped."
-align = 1
-valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer"]
-margin_top = 163.0
-margin_right = 693.0
-margin_bottom = 183.0
+layout_mode = 2
 alignment = 1
 
 [node name="EquippedUI" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 623.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
-color = Color( 0.227451, 0.243137, 0.0705882, 1 )
+color = Color(0.227451, 0.243137, 0.0705882, 1)
 
 [node name="NameLabel" type="Label" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquippedUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 1 )
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
 text = "Equipped"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EquipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 524.0
-margin_right = 571.0
-margin_bottom = 20.0
+self_modulate = Color(0.2, 0.92549, 0.262745, 1)
+layout_mode = 2
 text = "Equip"
 
 [node name="EquipButton_Rune1" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 398.0
-margin_right = 501.0
-margin_bottom = 20.0
+self_modulate = Color(0.2, 0.92549, 0.262745, 1)
+layout_mode = 2
 text = "Equip (Rune 1)"
 
 [node name="EquipButton_Rune2" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 398.0
-margin_right = 501.0
-margin_bottom = 20.0
+self_modulate = Color(0.2, 0.92549, 0.262745, 1)
+layout_mode = 2
 text = "Equip (Rune 2)"
 
 [node name="EquipButton_Spell1" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 151.0
-margin_right = 253.0
-margin_bottom = 20.0
+self_modulate = Color(0.2, 0.92549, 0.262745, 1)
+layout_mode = 2
 text = "Equip (Spell 1)"
 
 [node name="EquipButton_Spell2" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 257.0
-margin_right = 359.0
-margin_bottom = 20.0
+self_modulate = Color(0.2, 0.92549, 0.262745, 1)
+layout_mode = 2
 text = "Equip (Spell 2)"
 
 [node name="EquipButton_Spell3" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 363.0
-margin_right = 465.0
-margin_bottom = 20.0
+self_modulate = Color(0.2, 0.92549, 0.262745, 1)
+layout_mode = 2
 text = "Equip (Spell 3)"
 
 [node name="EquipButton_Spell4" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 469.0
-margin_right = 571.0
-margin_bottom = 20.0
+self_modulate = Color(0.2, 0.92549, 0.262745, 1)
+layout_mode = 2
 text = "Equip (Spell 4)"
 
 [node name="UnequipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
-self_modulate = Color( 0.2, 0.92549, 0.262745, 1 )
-margin_left = 627.0
-margin_right = 693.0
-margin_bottom = 20.0
+self_modulate = Color(0.2, 0.92549, 0.262745, 1)
+layout_mode = 2
 text = "Unequip"
 
 [node name="ConsumeButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
-self_modulate = Color( 0.140805, 0.879176, 0.24886, 1 )
-margin_left = 249.0
-margin_right = 321.0
-margin_bottom = 20.0
+self_modulate = Color(0.140805, 0.879176, 0.24886, 1)
+layout_mode = 2
 text = "Consume"
 
 [node name="NoContent" type="MarginContainer" parent="."]
 visible = false
-margin_right = 1024.0
-margin_bottom = 224.0
-custom_constants/margin_right = 5
-custom_constants/margin_top = 25
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
+layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="NoContent"]
-margin_left = 5.0
-margin_top = 25.0
-margin_right = 1019.0
-margin_bottom = 219.0
-color = Color( 0.0941176, 0.0745098, 0.0745098, 1 )
+layout_mode = 2
+color = Color(0.0941176, 0.0745098, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="NoContent/ColorRect"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "No Items In Inventory"
-align = 1
-valign = 1

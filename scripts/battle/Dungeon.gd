@@ -18,6 +18,8 @@ var isDungeonFinished:bool
 
 func _init():
 	GameGlobals.set_dungeon(self)
+	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
+	CombatEventManager.connect("OnAllEnemyTurnsCompleted",Callable(self,"_end_turn"))
 
 func init(dungeonDataRef:DungeonData):
 	dungeonData = dungeonDataRef
@@ -34,8 +36,7 @@ func create(recreatePlayer:bool) -> void:
 	_init_player(recreatePlayer)
 	_init_enemies()
 		
-	player.connect("OnTurnCompleted", self, "_on_player_turn_completed")
-	CombatEventManager.connect("OnAllEnemyTurnsCompleted", self, "_end_turn")
+	player.connect("OnTurnCompleted",Callable(self,"_on_player_turn_completed"))
 	_init_turns()
 	_start_turn()
 
@@ -180,7 +181,7 @@ func _init_path():
 			var pathCost = costFromStart[room]+1
 			if !costFromStart.has(connectedRoom) or pathCost<costFromStart[connectedRoom]:
 				costFromStart[connectedRoom] = pathCost
-		roomsToVisit.remove(0)
+		roomsToVisit.remove_at(0)
 	# find the furthest room
 	var furthestCost:int = 0
 	for room in rooms:
@@ -212,7 +213,7 @@ func _init_enemies():
 	if GameGlobals.battleInstance.dontSpawnEnemies:
 		return
 
-	if !GameGlobals.battleInstance.debugSpawnEnemyEncounter.empty():
+	if !GameGlobals.battleInstance.debugSpawnEnemyEncounter.is_empty():
 		startRoom.generate_enemy_custom_encounter(GameGlobals.battleInstance.debugSpawnEnemyEncounter)
 	
 	var minCostPerRoom:int = dungeonData.enemyMinCostPerRoom
@@ -389,13 +390,11 @@ func _end_turn():
 func add_to_dungeon_scenes(scene):
 	loadedScenes.append(scene)
 
-func clean_up(fullRefreshDungeon:bool=true):
+func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 	if fullRefreshDungeon:
 		for loadedScene in loadedScenes:
 			loadedScene.free()
 		loadedScenes.clear()
-		
-		player = null
 	
 	for room in rooms:
 		room.clean_up()
@@ -403,6 +402,9 @@ func clean_up(fullRefreshDungeon:bool=true):
 	
 	if fullRefreshDungeon:
 		turnsTaken = 0
+		if player!=null and !player.is_queued_for_deletion():
+			player.disconnect("OnTurnCompleted",Callable(self,"_on_player_turn_completed"))
+		player = null
 
 # HELPERS
 func is_intersecting_with_any_room(testRoom):
@@ -424,10 +426,10 @@ func is_intersecting_with_room_test(testRoom, room):
 	var p4 := Vector2(testRoom.startX + Constants.STEP_X * testRoom.maxCols, testRoom.startY + Constants.STEP_Y * testRoom.maxRows)
 	var p5 := Vector2(testRoom.get_center().x, testRoom.get_center().y)
 	return room.is_point_inside(p1.x, p1.y, intersectionBuffer) or\
-		   room.is_point_inside(p2.x, p2.y, intersectionBuffer) or\
-		   room.is_point_inside(p3.x, p3.y, intersectionBuffer) or\
-		   room.is_point_inside(p4.x, p4.y, intersectionBuffer) or\
-		   room.is_point_inside(p5.x, p5.y, 0)
+			room.is_point_inside(p2.x, p2.y, intersectionBuffer) or\
+			room.is_point_inside(p3.x, p3.y, intersectionBuffer) or\
+			room.is_point_inside(p4.x, p4.y, intersectionBuffer) or\
+			room.is_point_inside(p5.x, p5.y, 0)
 
 func load_character(parentContainer, cell, characterData, entityType, groupName, team):
 	var charPrefab := load(str("res://", characterData.path))

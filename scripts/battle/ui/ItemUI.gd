@@ -2,9 +2,9 @@ extends Node
 
 class_name ItemUI
 
-onready var nameBg:ColorRect = $"%NameBg"
-onready var nameLabel:Label = $"%NameLabel"
-onready var descLabel:Label = $"%DescLabel"
+@onready var nameBg:ColorRect = $"%NameBg"
+@onready var nameLabel:Label = $"%NameLabel"
+@onready var descLabel:Label = $"%DescLabel"
 
 var item:Item
 

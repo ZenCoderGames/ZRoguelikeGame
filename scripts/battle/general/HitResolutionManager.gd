@@ -50,4 +50,5 @@ func push(target, source, amount:int, awayFromSource:bool):
 		target.move(-dirnX, -dirnY)
 
 func clean_up():
-	Utils.clean_up_all_signals(self)
+	#Utils.clean_up_all_signals(self)
+	pass

@@ -2,29 +2,31 @@ extends Control
 
 class_name PlayerSpecialAbilityUI
 
-onready var SpecialProgressBar:ProgressBar = $VBoxContainer/ProgressBar
-onready var SpecialActiveButton:Button = $VBoxContainer/ActiveButton
-onready var SpecialPassiveButton:Button = $VBoxContainer/PassiveButton
+@onready var SpecialProgressBar:ProgressBar = $VBoxContainer/ProgressBar
+@onready var SpecialActiveButton:Button = $VBoxContainer/ActiveButton
+@onready var SpecialPassiveButton:Button = $VBoxContainer/PassiveButton
 
 func _ready():
 	self.visible = false
 	SpecialProgressBar.value = 0
 	SpecialActiveButton.disabled = true
-	SpecialActiveButton.connect("pressed", self, "_on_special_pressed")
-	SpecialActiveButton.connect("mouse_entered", self, "_on_mouse_entered_active")
-	SpecialActiveButton.connect("mouse_exited", self, "_on_mouse_exited_active")
+	SpecialActiveButton.connect("pressed",Callable(self,"_on_special_pressed"))
+	SpecialActiveButton.connect("mouse_entered",Callable(self,"_on_mouse_entered_active"))
+	SpecialActiveButton.connect("mouse_exited",Callable(self,"_on_mouse_exited_active"))
 	
 	#SpecialPassiveButton.disabled = true
-	SpecialPassiveButton.connect("mouse_entered", self, "_on_mouse_entered_passive")
-	SpecialPassiveButton.connect("mouse_exited", self, "_on_mouse_exited_passive")
+	SpecialPassiveButton.connect("mouse_entered",Callable(self,"_on_mouse_entered_passive"))
+	SpecialPassiveButton.connect("mouse_exited",Callable(self,"_on_mouse_exited_passive"))
 	
-	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	GameEventManager.connect("OnNewLevelLoaded", self, "_on_dungeon_init")
+	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
+	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
+
+	CombatEventManager.connect("OnPlayerSpecialAbilityProgress",Callable(self,"_on_ability_progress"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_ability_ready"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityReset",Callable(self,"_on_ability_reset"))
 
 func _on_dungeon_init():
-	CombatEventManager.connect("OnPlayerSpecialAbilityProgress", self, "_on_ability_progress")
-	CombatEventManager.connect("OnPlayerSpecialAbilityReady", self, "_on_ability_ready")
-	CombatEventManager.connect("OnPlayerSpecialAbilityReset", self, "_on_ability_reset")
+	pass
 
 func _on_ability_progress(percent:float):
 	SpecialProgressBar.value = percent * 100

@@ -6,575 +6,14 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Reference",
-"class": "Ability",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/abilities/Ability.gd"
-}, {
-"base": "Reference",
-"class": "AbilityData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/abilities/AbilityData.gd"
-}, {
-"base": "Reference",
-"class": "Action",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/Action.gd"
-}, {
-"base": "Action",
-"class": "ActionAddPassive",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionAddPassive.gd"
-}, {
-"base": "ActionData",
-"class": "ActionAddPassiveData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionAddPassiveData.gd"
-}, {
-"base": "Action",
-"class": "ActionAddStatModifier",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionAddStatModifier.gd"
-}, {
-"base": "ActionData",
-"class": "ActionAddStatModifierData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionAddStatModifierData.gd"
-}, {
-"base": "Action",
-"class": "ActionAddStatusEffect",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionAddStatusEffect.gd"
-}, {
-"base": "ActionData",
-"class": "ActionAddStatusEffectData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionAddStatusEffectData.gd"
-}, {
-"base": "Action",
-"class": "ActionAttack",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionAttack.gd"
-}, {
-"base": "ActionData",
-"class": "ActionAttackData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionAttackData.gd"
-}, {
-"base": "Reference",
-"class": "ActionData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionData.gd"
-}, {
-"base": "Reference",
-"class": "ActionDataTypes",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionDataTypes.gd"
-}, {
-"base": "Action",
-"class": "ActionDestroyEffect",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionDestroyEffect.gd"
-}, {
-"base": "ActionData",
-"class": "ActionDestroyEffectData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionDestroyEffectData.gd"
-}, {
-"base": "Action",
-"class": "ActionDoDamageToTargets",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionDoDamageToTargets.gd"
-}, {
-"base": "ActionData",
-"class": "ActionDoDamageToTargetsData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionDoDamageToTargetsData.gd"
-}, {
-"base": "Action",
-"class": "ActionFindTargets",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionFindTargets.gd"
-}, {
-"base": "ActionData",
-"class": "ActionFindTargetsData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionFindTargetsData.gd"
-}, {
-"base": "Action",
-"class": "ActionLifeDrain",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionLifeDrain.gd"
-}, {
-"base": "ActionData",
-"class": "ActionLifeDrainData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionLifeDrainData.gd"
-}, {
-"base": "Action",
-"class": "ActionLifeSteal",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionLifeSteal.gd"
-}, {
-"base": "ActionData",
-"class": "ActionLifeStealData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionLifeStealData.gd"
-}, {
-"base": "Action",
-"class": "ActionModifyAttack",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionModifyAttack.gd"
-}, {
-"base": "ActionData",
-"class": "ActionModifyAttackData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionModifyAttackData.gd"
-}, {
-"base": "Action",
-"class": "ActionModifySpecial",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionModifySpecial.gd"
-}, {
-"base": "ActionData",
-"class": "ActionModifySpecialData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionModifySpecialData.gd"
-}, {
-"base": "Action",
-"class": "ActionModifyStatusEffect",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionModifyStatusEffect.gd"
-}, {
-"base": "ActionData",
-"class": "ActionModifyStatusEffectData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionModifyStatusEffectData.gd"
-}, {
-"base": "Action",
-"class": "ActionModifyVisual",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionModifyVisual.gd"
-}, {
-"base": "ActionData",
-"class": "ActionModifyVisualData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionModifyVisualData.gd"
-}, {
-"base": "Action",
-"class": "ActionMove",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionMove.gd"
-}, {
-"base": "ActionData",
-"class": "ActionMoveData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionMoveData.gd"
-}, {
-"base": "Action",
-"class": "ActionPush",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionPush.gd"
-}, {
-"base": "ActionData",
-"class": "ActionPushData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionPushData.gd"
-}, {
-"base": "Action",
-"class": "ActionRemovePassive",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionRemovePassive.gd"
-}, {
-"base": "ActionData",
-"class": "ActionRemovePassiveData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionRemovePassiveData.gd"
-}, {
-"base": "Action",
-"class": "ActionSetStatus",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionSetStatus.gd"
-}, {
-"base": "ActionData",
-"class": "ActionSetStatusData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionSetStatusData.gd"
-}, {
-"base": "Action",
-"class": "ActionSpawnEffect",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionSpawnEffect.gd"
-}, {
-"base": "ActionData",
-"class": "ActionSpawnEffectData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/actions/ActionSpawnEffectData.gd"
-}, {
-"base": "Reference",
-"class": "ActionTypes",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/actions/ActionTypes.gd"
-}, {
-"base": "Reference",
-"class": "AttackModifier",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/AttackModifier.gd"
-}, {
-"base": "Node",
-"class": "BattleInstance",
-"language": "GDScript",
-"path": "res://scripts/battle/BattleInstance.gd"
-}, {
-"base": "Node",
-"class": "BattleUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/BattleUI.gd"
-}, {
-"base": "Node",
-"class": "BattleView",
-"language": "GDScript",
-"path": "res://scripts/battle/BattleView.gd"
-}, {
-"base": "Node2D",
-"class": "CharPropUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/CharPropUI.gd"
-}, {
-"base": "Node",
-"class": "Character",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/Character.gd"
-}, {
-"base": "Reference",
-"class": "CharacterData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/CharacterData.gd"
-}, {
-"base": "PanelContainer",
-"class": "CharacterSelectItemUI",
-"language": "GDScript",
-"path": "res://scripts/menu/CharacterSelectItemUI.gd"
-}, {
-"base": "Panel",
-"class": "CharacterSelectUI",
-"language": "GDScript",
-"path": "res://scripts/menu/CharacterSelectUI.gd"
-}, {
-"base": "Reference",
-"class": "CharacterStatus",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/CharacterStatus.gd"
-}, {
-"base": "Node",
-"class": "CharacterUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/CharacterUI.gd"
-}, {
-"base": "Reference",
-"class": "CombatEventReceiver",
-"language": "GDScript",
-"path": "res://scripts/battle/general/CombatEventReceiver.gd"
-}, {
-"base": "Reference",
-"class": "ComplexStatData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/stats/ComplexStatData.gd"
-}, {
-"base": "Reference",
-"class": "CustomEncounterData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/encounters/CustomEncounterData.gd"
-}, {
-"base": "Node",
-"class": "Dungeon",
-"language": "GDScript",
-"path": "res://scripts/battle/Dungeon.gd"
-}, {
-"base": "Camera2D",
-"class": "DungeonCamera",
-"language": "GDScript",
-"path": "res://scripts/battle/DungeonCamera.gd"
-}, {
-"base": "Reference",
-"class": "DungeonCell",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/rooms/DungeonCell.gd"
-}, {
-"base": "Node",
-"class": "DungeonData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/DungeonData.gd"
-}, {
-"base": "Reference",
-"class": "DungeonDataManager",
-"language": "GDScript",
-"path": "res://scripts/battle/data/DungeonDataManager.gd"
-}, {
-"base": "Reference",
-"class": "DungeonRoom",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/rooms/DungeonRoom.gd"
-}, {
-"base": "Node",
-"class": "EffectInstance",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/effects/EffectInstance.gd"
-}, {
-"base": "PanelContainer",
-"class": "EffectItemUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/EffectItemUI.gd"
-}, {
-"base": "Node",
-"class": "EffectManager",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/effects/EffectManager.gd"
-}, {
-"base": "Character",
-"class": "EnemyCharacter",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/EnemyCharacter.gd"
-}, {
-"base": "Reference",
-"class": "EnemySpawnData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/encounters/EnemySpawnData.gd"
-}, {
-"base": "Reference",
-"class": "Equipment",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/Equipment.gd"
-}, {
-"base": "Node",
-"class": "EquippedItemUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/EquippedItemUI.gd"
-}, {
-"base": "MarginContainer",
-"class": "InfoUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/InfoUI.gd"
-}, {
-"base": "Reference",
-"class": "Inventory",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/Inventory.gd"
-}, {
-"base": "Node",
-"class": "InventoryUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/InventoryUI.gd"
-}, {
-"base": "Node2D",
-"class": "Item",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/items/Item.gd"
-}, {
-"base": "Reference",
-"class": "ItemData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/items/ItemData.gd"
-}, {
-"base": "Node",
-"class": "ItemUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/ItemUI.gd"
-}, {
-"base": "Node",
-"class": "MainMenuUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/MainMenuUI.gd"
-}, {
-"base": "Reference",
-"class": "Passive",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/Passive.gd"
-}, {
-"base": "Reference",
-"class": "PassiveData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/passives/PassiveData.gd"
-}, {
-"base": "Character",
-"class": "PlayerCharacter",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/PlayerCharacter.gd"
-}, {
-"base": "Control",
-"class": "PlayerSpecialAbilityUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/PlayerSpecialAbilityUI.gd"
-}, {
-"base": "Reference",
-"class": "Special",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/specials/Special.gd"
-}, {
-"base": "Reference",
-"class": "SpecialData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/specials/SpecialData.gd"
-}, {
-"base": "Reference",
-"class": "SpecialModifier",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/specials/SpecialModifier.gd"
-}, {
-"base": "Reference",
-"class": "Spell",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/spells/Spell.gd"
-}, {
-"base": "Reference",
-"class": "SpellData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/spells/SpellData.gd"
-}, {
-"base": "Button",
-"class": "SpellItemUI",
-"language": "GDScript",
-"path": "res://scripts/battle/ui/SpellItemUI.gd"
-}, {
-"base": "Reference",
-"class": "Stat",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/stats/Stat.gd"
-}, {
-"base": "Reference",
-"class": "StatData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/stats/StatData.gd"
-}, {
-"base": "Reference",
-"class": "StatModifier",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/stats/StatModifier.gd"
-}, {
-"base": "Reference",
-"class": "StatModifierData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/stats/StatModifierData.gd"
-}, {
-"base": "Reference",
-"class": "StatusEffect",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/statusEffects/StatusEffect.gd"
-}, {
-"base": "Reference",
-"class": "StatusEffectData",
-"language": "GDScript",
-"path": "res://scripts/battle/data/statusEffects/StatusEffectData.gd"
-}, {
-"base": "Reference",
-"class": "StatusEffectModifier",
-"language": "GDScript",
-"path": "res://scripts/battle/instance/characters/statusEffects/StatusEffectModifier.gd"
-} ]
-_global_script_class_icons={
-"Ability": "",
-"AbilityData": "",
-"Action": "",
-"ActionAddPassive": "",
-"ActionAddPassiveData": "",
-"ActionAddStatModifier": "",
-"ActionAddStatModifierData": "",
-"ActionAddStatusEffect": "",
-"ActionAddStatusEffectData": "",
-"ActionAttack": "",
-"ActionAttackData": "",
-"ActionData": "",
-"ActionDataTypes": "",
-"ActionDestroyEffect": "",
-"ActionDestroyEffectData": "",
-"ActionDoDamageToTargets": "",
-"ActionDoDamageToTargetsData": "",
-"ActionFindTargets": "",
-"ActionFindTargetsData": "",
-"ActionLifeDrain": "",
-"ActionLifeDrainData": "",
-"ActionLifeSteal": "",
-"ActionLifeStealData": "",
-"ActionModifyAttack": "",
-"ActionModifyAttackData": "",
-"ActionModifySpecial": "",
-"ActionModifySpecialData": "",
-"ActionModifyStatusEffect": "",
-"ActionModifyStatusEffectData": "",
-"ActionModifyVisual": "",
-"ActionModifyVisualData": "",
-"ActionMove": "",
-"ActionMoveData": "",
-"ActionPush": "",
-"ActionPushData": "",
-"ActionRemovePassive": "",
-"ActionRemovePassiveData": "",
-"ActionSetStatus": "",
-"ActionSetStatusData": "",
-"ActionSpawnEffect": "",
-"ActionSpawnEffectData": "",
-"ActionTypes": "",
-"AttackModifier": "",
-"BattleInstance": "",
-"BattleUI": "",
-"BattleView": "",
-"CharPropUI": "",
-"Character": "",
-"CharacterData": "",
-"CharacterSelectItemUI": "",
-"CharacterSelectUI": "",
-"CharacterStatus": "",
-"CharacterUI": "",
-"CombatEventReceiver": "",
-"ComplexStatData": "",
-"CustomEncounterData": "",
-"Dungeon": "",
-"DungeonCamera": "",
-"DungeonCell": "",
-"DungeonData": "",
-"DungeonDataManager": "",
-"DungeonRoom": "",
-"EffectInstance": "",
-"EffectItemUI": "",
-"EffectManager": "",
-"EnemyCharacter": "",
-"EnemySpawnData": "",
-"Equipment": "",
-"EquippedItemUI": "",
-"InfoUI": "",
-"Inventory": "",
-"InventoryUI": "",
-"Item": "",
-"ItemData": "",
-"ItemUI": "",
-"MainMenuUI": "",
-"Passive": "",
-"PassiveData": "",
-"PlayerCharacter": "",
-"PlayerSpecialAbilityUI": "",
-"Special": "",
-"SpecialData": "",
-"SpecialModifier": "",
-"Spell": "",
-"SpellData": "",
-"SpellItemUI": "",
-"Stat": "",
-"StatData": "",
-"StatModifier": "",
-"StatModifierData": "",
-"StatusEffect": "",
-"StatusEffectData": "",
-"StatusEffectModifier": ""
-}
+config_version=5
 
 [application]
 
 config/name="ZRoguelikeGame"
 run/main_scene="res://scene/main/MainScene.tscn"
-boot_splash/bg_color=Color( 0.0901961, 0.0901961, 0.0901961, 1 )
+config/features=PackedStringArray("4.0")
+boot_splash/bg_color=Color(0.0901961, 0.0901961, 0.0901961, 1)
 config/icon="res://resource/icon.png"
 
 [autoload]
@@ -594,80 +33,80 @@ gdscript/warnings/integer_division=false
 
 [display]
 
-window/size/height=678
+window/size/viewport_height=678
 window/energy_saving/keep_screen_on=false
 
 [input]
 
 move_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194319,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 move_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194321,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 move_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194320,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 move_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194322,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 exit={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 cam_zoom_out={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":69,"physical_keycode":0,"key_label":0,"unicode":101,"echo":false,"script":null)
+]
 }
 cam_zoom_in={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":81,"physical_keycode":0,"key_label":0,"unicode":113,"echo":false,"script":null)
+]
 }
 cam_move_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":87,"physical_keycode":0,"key_label":0,"unicode":119,"echo":false,"script":null)
+]
 }
 cam_move_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":115,"echo":false,"script":null)
+]
 }
 cam_move_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":100,"echo":false,"script":null)
+]
 }
 cam_move_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":97,"echo":false,"script":null)
+]
 }
 toggle_inventory={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":73,"physical_keycode":0,"key_label":0,"unicode":105,"echo":false,"script":null)
+]
 }
 toggle_main_menu={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":77,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":77,"physical_keycode":0,"key_label":0,"unicode":109,"echo":false,"script":null)
+]
 }
 skip_turn={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":72,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":72,"physical_keycode":0,"key_label":0,"unicode":104,"echo":false,"script":null)
+]
 }
 
 [physics]
@@ -676,5 +115,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_clear_color=Color( 0.152941, 0.164706, 0.176471, 1 )
-environment/default_environment="res://resource/default_env.tres"
+environment/defaults/default_clear_color=Color(0.152941, 0.164706, 0.176471, 1)
+environment/defaults/default_environment="res://resource/default_env.tres"

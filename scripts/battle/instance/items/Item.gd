@@ -20,7 +20,7 @@ func consume(character):
 	if data.is_consumable():
 		for statModifier in data.statModifierDataList:
 			character.modify_stat_value_from_modifier(statModifier)
-		if !data.statusEffectId.empty():
+		if !data.statusEffectId.is_empty():
 			var statusEffectData:StatusEffectData = GameGlobals.dataManager.get_status_effect_data(data.statusEffectId)
 			character.add_status_effect(character, statusEffectData)
 
@@ -40,11 +40,11 @@ func picked():
 	cell.clear_entity()
 
 func on_equipped(character):
-	if !data.passiveId.empty():
+	if !data.passiveId.is_empty():
 		passive = character.add_passive(GameGlobals.dataManager.get_passive_data(data.passiveId))
 	
 func on_unequipped(character):
-	if !data.passiveId.empty():
+	if !data.passiveId.is_empty():
 		character.remove_passive(passive)
 		passive = null
 

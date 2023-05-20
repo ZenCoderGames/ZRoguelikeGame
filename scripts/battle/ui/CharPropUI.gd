@@ -2,10 +2,10 @@ extends Node2D
 
 class_name CharPropUI
 
-onready var attackPanel:Sprite = $Attack
-onready var attackLabel:Label = $Attack/AttackLabel
-onready var healthPanel:Sprite = $Health
-onready var healthLabel:Label = $Health/HealthLabel
+@onready var attackPanel:Sprite2D = $Attack
+@onready var attackLabel:Label = $Attack/AttackLabel
+@onready var healthPanel:Sprite2D = $Health
+@onready var healthLabel:Label = $Health/HealthLabel
 
 var parentCharacter:Character
 
@@ -13,13 +13,13 @@ var prevDamageVal:int
 var prevHealthVal:int
 
 func _ready():
-	get_parent().connect("OnInitialized", self, "init_parent_char")
+	get_parent().connect("OnInitialized",Callable(self,"init_parent_char"))
 
 func init_parent_char():
 	parentCharacter = get_parent()
 	_update_stats()
 	
-	parentCharacter.connect("OnStatChanged", self, "_on_char_stat_changed")
+	parentCharacter.connect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
 
 func _on_char_stat_changed(statChangeChar):
 	if parentCharacter==statChangeChar:
@@ -45,11 +45,11 @@ func animate_panel(panel, label, newVal):
 	var startScale:Vector2 = Vector2(0.5, 0.5)
 	var endScale:Vector2 = Vector2(0.8, 0.8)
 	Utils.create_return_tween_vector2(panel, "scale", startScale, endScale, 0.15, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR, 0.5)
-	yield(get_tree().create_timer(0.15), "timeout")
-	#label.color = Color.green
+	await get_tree().create_timer(0.15).timeout
+	#label.color = Color.GREEN
 	label.text = str(newVal)
-	yield(get_tree().create_timer(0.5), "timeout")
-	#label.color = Color.white
+	await get_tree().create_timer(0.5).timeout
+	#label.color = Color.WHITE
 
 func on_mouse_entered():
 	var desc:String = parentCharacter.charData.get_description() + " " + parentCharacter.get_summary()

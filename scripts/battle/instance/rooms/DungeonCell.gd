@@ -13,7 +13,7 @@ var row:int
 var col:int
 var pos:Vector2
 
-func _init(roomRef, r:int, c:int):
+func _init(roomRef,r:int,c:int):
 	room = roomRef
 	row = r
 	col = c
@@ -65,7 +65,7 @@ func clear_entity():
 func clear_entity_on_death():
 	clear_entity()
 	var deathNode:Node = floorObject.get_node("Death")
-	deathNode.rotate(rand_range(0, 180))
+	deathNode.rotate(randf_range(0, 180))
 	deathNode.visible = true
 	
 func unload_entity():
@@ -169,7 +169,7 @@ func is_bot_edge():
 func is_corner():
 	return (row==0 and col==0) or\
 			(row==0 and col==room.maxCols-1) or\
-		 	(col==0 and row==room.maxRows-1) or\
+			(col==0 and row==room.maxRows-1) or\
 			(col==room.maxCols-1 and row==room.maxRows-1)
 
 func is_middle_of_left_edge():

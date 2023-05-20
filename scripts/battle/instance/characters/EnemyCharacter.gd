@@ -7,7 +7,7 @@ var _hasSeenPlayer:bool
 var lastVisitedCellsSincePlayerMoved:Array
 
 func init(charId:int, charDataVal, teamVal):
-	.init(charId, charDataVal, teamVal)
+	super.init(charId, charDataVal, teamVal)
 
 	var moveData:Dictionary = {}
 	moveData["type"] = "MOVEMENT"
@@ -15,10 +15,10 @@ func init(charId:int, charDataVal, teamVal):
 	moveData["params"]["moveType"] = "PATHFIND_TO_TARGET"
 	moveAction = ActionTypes.create(ActionDataTypes.create(moveData), self)
 
-	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_moved")
+	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell",Callable(self,"_on_player_moved"))
 
 func update():
-	.update()
+	super.update()
 
 	if USE_SIMPLE_LOS:
 		if !_hasSeenPlayer:
@@ -46,10 +46,10 @@ func can_take_damage()->bool:
 	if GameGlobals.battleInstance.setEnemiesInvulnerable:
 		return false
 
-	return .can_take_damage()
+	return super.can_take_damage()
 
 func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
-	.move_to_cell(newCell, triggerTurnCompleteEvent)
+	super.move_to_cell(newCell, triggerTurnCompleteEvent)
 
 	if GameGlobals.dungeon.player!=null:
 		if(newCell.is_rowcol_adjacent(GameGlobals.dungeon.player.cell)):

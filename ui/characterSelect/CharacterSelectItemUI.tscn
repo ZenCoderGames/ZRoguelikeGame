@@ -1,64 +1,59 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://c2plbok40unee"]
 
-[ext_resource path="res://resource/fonts/montreal/Montreal-Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scripts/menu/CharacterSelectItemUI.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_68jt7"]
+[ext_resource type="Script" path="res://scripts/menu/CharacterSelectItemUI.gd" id="2"]
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcdbj"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.866667, 0.439216, 0.262745, 1)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
 
 [node name="CharacterSelectItemUI" type="PanelContainer"]
-self_modulate = Color( 0.847059, 0.65098, 0.556863, 1 )
-margin_left = 225.0
-margin_right = 339.0
-margin_bottom = 163.0
-script = ExtResource( 2 )
+offset_left = 225.0
+offset_right = 339.0
+offset_bottom = 159.0
+theme = ExtResource("1_68jt7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_pcdbj")
+script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 107.0
-margin_bottom = 156.0
+layout_mode = 2
+theme = ExtResource("1_68jt7")
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-self_modulate = Color( 0.482353, 0.580392, 0.576471, 1 )
-margin_right = 100.0
-margin_bottom = 125.0
-rect_min_size = Vector2( 100, 125 )
+custom_minimum_size = Vector2(100, 125)
+layout_mode = 2
+theme = ExtResource("1_68jt7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 93.0
-margin_bottom = 118.0
+layout_mode = 2
+theme = ExtResource("1_68jt7")
 alignment = 1
-
-[node name="CharNameLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-self_modulate = Color( 0.819608, 0.580392, 0.0509804, 1 )
-margin_top = 27.0
-margin_right = 86.0
-margin_bottom = 48.0
-custom_fonts/font = SubResource( 1 )
-text = "Knight"
-align = 1
-valign = 1
 
 [node name="DescLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 52.0
-margin_right = 86.0
-margin_bottom = 83.0
+layout_mode = 2
 text = "Vitality: 5
 Strength: 3"
-align = 1
-valign = 1
+horizontal_alignment = 1
+
+[node name="CharNameLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+self_modulate = Color(0.537255, 0.862745, 0.94902, 1)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Knight"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ChooseButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-self_modulate = Color( 0.129412, 0.839216, 0.160784, 1 )
-margin_top = 129.0
-margin_right = 100.0
-margin_bottom = 149.0
+layout_mode = 2
+size_flags_vertical = 8
 focus_mode = 0
-enabled_focus_mode = 0
-text = "Choose"
+theme = ExtResource("1_68jt7")
+text = "Select"

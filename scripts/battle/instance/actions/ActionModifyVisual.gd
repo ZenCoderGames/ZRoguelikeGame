@@ -1,18 +1,18 @@
-extends Action
 
-class_name ActionModifyVisual
+class_name ActionModifyVisual extends Action
 
-func _init(actionData, parentChar).(actionData, parentChar):
+func _init(actionData,parentChar):
+	super(actionData,parentChar)
 	pass
 
 func can_execute()->bool:
 	return true
 
 func execute():
-    var modifyVisualData:ActionModifyVisualData = actionData as ActionModifyVisualData
+	var modifyVisualData:ActionModifyVisualData = actionData as ActionModifyVisualData
 
-    if !modifyVisualData.tintColor.empty():
-        character.self_modulate = Color(modifyVisualData.tintColor)
+	if !modifyVisualData.tintColor.is_empty():
+		character.self_modulate = Color(modifyVisualData.tintColor)
 
-    if modifyVisualData.resetToOriginalTint:
-        character.reset_color()
+	if modifyVisualData.resetToOriginalTint:
+		character.reset_color()

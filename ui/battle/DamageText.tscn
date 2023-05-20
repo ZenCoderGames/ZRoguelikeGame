@@ -1,24 +1,14 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://resource/FiraCode-Regular.ttf" type="DynamicFontData" id=1]
-
-[sub_resource type="DynamicFont" id=2]
-size = 14
-outline_size = 2
-outline_color = Color( 0.00784314, 0.00392157, 0.00392157, 1 )
-font_data = ExtResource( 1 )
+[gd_scene format=3 uid="uid://d3ws0y1qr1yda"]
 
 [node name="DamageText" type="Label"]
 visible = false
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-custom_fonts/font = SubResource( 2 )
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 text = "Immune"
-align = 1
-valign = 1

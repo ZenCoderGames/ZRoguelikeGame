@@ -10,7 +10,7 @@ func _init():
 
 func spawn_effect(id:String, path:String, pos:Vector2, parent:Node, lifetime:float):
 	var effectPrefab := load(str("res://", path))
-	var newEffect = effectPrefab.instance()
+	var newEffect = effectPrefab.instantiate()
 	newEffect.position = pos
 	if parent==null:
 		self.add_child(newEffect)

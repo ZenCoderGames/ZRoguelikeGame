@@ -1,10 +1,10 @@
-extends Action
 
-class_name ActionModifyStatusEffect
+class_name ActionModifyStatusEffect extends Action
 
 var StatusEffectModifier = load("res://scripts/battle/instance/characters/statusEffects/StatusEffectModifier.gd")
 
-func _init(actionData, parentChar).(actionData, parentChar):
+func _init(actionData,parentChar):
+	super(actionData,parentChar)
 	pass
 
 func execute():

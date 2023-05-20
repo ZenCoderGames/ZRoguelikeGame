@@ -7,7 +7,7 @@ var currentCount:int
 var isAvailable:bool
 var _combatEventReceiver:CombatEventReceiver
 
-func _init(parentChar, specialData:SpecialData):
+func _init(parentChar,specialData:SpecialData):
 	character = parentChar
 	data = specialData
 	_reset()
@@ -20,8 +20,8 @@ func _init(parentChar, specialData:SpecialData):
 	reset_events()
 
 func reset_events():
-	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, funcref(self, "on_event_triggered"))
-	CombatEventManager.connect("OnPlayerSpecialAbilityPressed", self, "_activate")
+	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_activate"))
 
 func on_event_triggered():
 	_increment()

@@ -1,11 +1,11 @@
 
 class_name CombatEventReceiver
 
-var _parentReturnFunc:FuncRef
+var _parentReturnFunc:Callable
 var _character
 var _triggerConditionParams:Dictionary
 
-func _init(triggerConditions:Array, triggerConditionParams:Dictionary, character, returnFunc:FuncRef):
+func _init(triggerConditions:Array,triggerConditionParams:Dictionary,character,returnFunc:Callable):
 	_parentReturnFunc = returnFunc
 	_character = character
 	_triggerConditionParams = triggerConditionParams
@@ -44,4 +44,4 @@ func _checkForConditionsAndActivate(_enemy):
 				activate()
 
 func activate():
-	_parentReturnFunc.call_func()
+	_parentReturnFunc.call()

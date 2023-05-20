@@ -12,13 +12,13 @@ var levelXpList:Array = [0, 20, 40, 70, 110, 160, 220, 290, 380]
 var xp:int = 0
 var currentLevel:int = 0
 
-onready var levelUpAnim:Node = $"%LevelUpAnimation"
-onready var levelUpLabel:Node = $"%LevelUpLabel"
+@onready var levelUpAnim:Node = $"%LevelUpAnimation"
+@onready var levelUpLabel:Node = $"%LevelUpLabel"
 
 
 
 func init(charId:int, charData, teamVal):
-	.init(charId, charData, teamVal)
+	super.init(charId, charData, teamVal)
 
 	var moveData:Dictionary = {}
 	moveData["type"] = "MOVEMENT"
@@ -30,7 +30,7 @@ func init(charId:int, charData, teamVal):
 
 # This is an init that is for every dungeon except the first init
 func init_for_next_dungeon():
-	_setup_events()
+	#_setup_events()
 	if charData.active!=null:
 		special.reset_events()
 	if specialPassive!=null:
@@ -41,11 +41,11 @@ func init_for_next_dungeon():
 		statusEffect.reset_events()
 
 func _setup_events():
-	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer", self, "on_enemy_moved_adjacent")
-	HitResolutionManager.connect("OnKill", self, "_on_kill")
+	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer",Callable(self,"on_enemy_moved_adjacent"))
+	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
 func update():
-	.update()
+	super.update()
 
 	cell.room.update_path_map()
 
@@ -53,10 +53,10 @@ func can_take_damage()->bool:
 	if GameGlobals.battleInstance.setPlayerInvulnerable:
 		return false
 
-	return .can_take_damage()
+	return super.can_take_damage()
 
 func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
-	.move_to_cell(newCell, triggerTurnCompleteEvent)
+	super.move_to_cell(newCell, triggerTurnCompleteEvent)
 
 	check_for_nearby_entities()
 
@@ -106,10 +106,10 @@ func _level_up():
 	
 	levelUpAnim.visible = true
 	self.self_modulate = GameGlobals.battleInstance.view.playerLevelUpColor
-	yield(get_tree().create_timer(0.2), "timeout")
+	await get_tree().create_timer(0.2).timeout
 	levelUpAnim.visible = false
 	levelUpLabel.visible = true
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	levelUpLabel.visible = false
 	self.self_modulate = GameGlobals.battleInstance.view.playerDamageColor
 

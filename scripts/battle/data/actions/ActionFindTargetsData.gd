@@ -1,6 +1,5 @@
-extends ActionData
 
-class_name ActionFindTargetsData
+class_name ActionFindTargetsData extends ActionData
 
 const ID:String = "FIND_TARGETS"
 
@@ -10,7 +9,8 @@ var lastHitTarget:bool
 var lastKilledTarget:bool
 var lastEnemyThatHitMe:bool
 
-func _init(dataJS).(dataJS):
+func _init(dataJS):
+	super(dataJS)
 	cellRange = Utils.get_data_from_json(dataJS["params"], "range", 0)
 	maxTargets = Utils.get_data_from_json(dataJS["params"], "maxTargets", 1)
 	lastHitTarget = Utils.get_data_from_json(dataJS["params"], "lastHitTarget", false)

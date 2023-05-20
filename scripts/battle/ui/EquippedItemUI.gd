@@ -2,8 +2,8 @@ extends Node
 
 class_name EquippedItemUI
 
-onready var descLabel:Label = $DescLabel
-onready var bgRect:ColorRect = $Bg
+@onready var descLabel:Label = $DescLabel
+@onready var bgRect:ColorRect = $Bg
 
 var item:Item
 var _name:String

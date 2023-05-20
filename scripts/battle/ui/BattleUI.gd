@@ -2,25 +2,25 @@ extends Node
 
 class_name BattleUI
 
-onready var levelLabel:Label = get_node("BattleProgressPanel/LevelContainer/LevelLabel")
-onready var turnLabel:Label = get_node("BattleProgressPanel/TurnContainer/TurnLabel")
+@onready var levelLabel:Label = get_node("BattleProgressPanel/LevelContainer/LevelLabel")
+@onready var turnLabel:Label = get_node("BattleProgressPanel/TurnContainer/TurnLabel")
 # touchControls
-onready var touchControls:Node = $TouchControls
-onready var upArrowBtn:Button = $TouchControls/UpArrow
-onready var downArrowBtn:Button = $TouchControls/DownArrow
-onready var leftArrowBtn:Button = $TouchControls/LeftArrow
-onready var rightArrowBtn:Button = $TouchControls/RightArrow
-onready var skipTurnBtn:Button = $TouchControls/SkipTurn
+@onready var touchControls:Node = $TouchControls
+@onready var upArrowBtn:Button = $TouchControls/UpArrow
+@onready var downArrowBtn:Button = $TouchControls/DownArrow
+@onready var leftArrowBtn:Button = $TouchControls/LeftArrow
+@onready var rightArrowBtn:Button = $TouchControls/RightArrow
+@onready var skipTurnBtn:Button = $TouchControls/SkipTurn
 # details
-onready var detailsUI:Node = get_node("DetailsUI")
-onready var detailsLabel:Label = get_node("DetailsUI/DetailsLabel")
+@onready var detailsUI:Node = get_node("DetailsUI")
+@onready var detailsLabel:Label = get_node("DetailsUI/DetailsLabel")
 # player xp/equipment
-onready var playerPanel:Node = get_node("PlayerPanel")
+@onready var playerPanel:Node = get_node("PlayerPanel")
 var playerUI:CharacterUI
 # player ability
-onready var playerSpecialUI:Node = get_node("PlayerAbilityPanel")
+@onready var playerSpecialUI:Node = get_node("PlayerAbilityPanel")
 # info panel
-onready var infoPanel:Node = get_node("InfoPanel")
+@onready var infoPanel:Node = get_node("InfoPanel")
 var infoPanelObjects:Array = []
 var registeredEnemies:Dictionary = {}
 const CharacterUI := preload("res://ui/battle/CharacterUI.tscn")
@@ -36,42 +36,40 @@ const SKIP_TURN_COLOR:Color = Color("#74a09c9c")
 const SKIP_TURN_DISABLED_COLOR:Color = Color("#800000")
 
 func _ready():
-	GameEventManager.connect("OnDungeonInitialized", self, "_on_dungeon_init")
-	GameEventManager.connect("OnNewLevelLoaded", self, "_on_new_level_loaded")
+	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
+	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
+	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_new_level_loaded"))
+	CombatEventManager.connect("OnToggleInventory",Callable(self,"_on_toggle_inventory"))
+	CombatEventManager.connect("OnShowInfo",Callable(self,"_on_show_info"))
+	CombatEventManager.connect("OnHideInfo",Callable(self,"_on_hide_info"))
+	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_turn_taken"))
+	CombatEventManager.connect("OnDetailInfoShow",Callable(self,"_show_detail_info_text"))
+	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_attack"))
+	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
-	inventoryUI = InventoryUI.instance()
+	inventoryUI = InventoryUI.instantiate()
 	self.add_child(inventoryUI)
 	
-	infoUI = InfoUI.instance()
+	infoUI = InfoUI.instantiate()
 	self.add_child(infoUI)
 	infoUI.hide()
 	
 	_setup_touch_buttons()
 	
 func _on_dungeon_init():
-	_clean_up()
-
-	CombatEventManager.connect("OnToggleInventory", self, "_on_toggle_inventory")
-	CombatEventManager.connect("OnShowInfo", self, "_on_show_info")
-	CombatEventManager.connect("OnHideInfo", self, "_on_hide_info")
-	CombatEventManager.connect("OnEndTurn", self, "_on_turn_taken")
-	CombatEventManager.connect("OnDetailInfoShow", self, "_show_detail_info_text")
-	HitResolutionManager.connect("OnPostHit", self, "_on_attack")
-	HitResolutionManager.connect("OnKill", self, "_on_kill")
-
 	_shared_init()
 
 func _shared_init():
 	touchControls.visible = true
 	
-	playerUI = CharacterUI.instance()
+	playerUI = CharacterUI.instantiate()
 	playerPanel.add_child(playerUI)
 
 	inventoryUI.init(GameGlobals.dungeon.player)
 	
-	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell", self, "_on_player_move")
-	GameGlobals.dungeon.player.connect("OnNearbyEntityFound", self, "_on_entity_nearby")
-	GameGlobals.dungeon.player.inventory.connect("OnItemAdded", self, "_on_item_picked_by_player")
+	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell",Callable(self,"_on_player_move"))
+	GameGlobals.dungeon.player.connect("OnNearbyEntityFound",Callable(self,"_on_entity_nearby"))
+	GameGlobals.dungeon.player.inventory.connect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))
 	
 	playerUI.init(GameGlobals.dungeon.player)
 	levelLabel.text = str(GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
@@ -106,7 +104,7 @@ func _on_item_picked_by_player(item):
 func _show_detail_info_text(strVal, duration):
 	detailsUI.visible = true
 	detailsLabel.text = strVal
-	yield(get_tree().create_timer(duration), "timeout")
+	await get_tree().create_timer(duration).timeout
 	detailsUI.visible = false
 	
 # INFO PANEL
@@ -124,12 +122,12 @@ func _on_entity_nearby(entity):
 		
 	if entity is Character:
 		pass
-		#var newCharUI = CharacterUI.instance()
+		#var newCharUI = CharacterUI.instantiate()
 		#infoPanel.add_child(newCharUI)
 		#infoPanelObjects.append(newCharUI)
 		#newCharUI.init(entity)
 	elif entity is Item:
-		var newItemUI = ItemUI.instance()
+		var newItemUI = ItemUI.instantiate()
 		infoPanel.add_child(newItemUI)
 		infoPanelObjects.append(newItemUI)
 		newItemUI.init(entity)
@@ -166,7 +164,7 @@ func _clean_up():
 	touchControls.visible = false
 	if playerUI!=null:
 		playerPanel.remove_child(playerUI)
-		playerUI.free()
+		playerUI.queue_free()
 
 	for infoObject in infoPanelObjects:
 		if !weakref(infoObject).get_ref():
@@ -193,11 +191,11 @@ func _on_hide_info():
 
 # TOUCH BUTTON UI
 func _setup_touch_buttons():
-	leftArrowBtn.connect("pressed", self, "_on_left_touch_pressed")
-	upArrowBtn.connect("pressed", self, "_on_up_touch_pressed")
-	rightArrowBtn.connect("pressed", self, "_on_right_touch_pressed")
-	downArrowBtn.connect("pressed", self, "_on_down_touch_pressed")
-	skipTurnBtn.connect("pressed", self, "_on_skip_turn_pressed")
+	leftArrowBtn.connect("pressed",Callable(self,"_on_left_touch_pressed"))
+	upArrowBtn.connect("pressed",Callable(self,"_on_up_touch_pressed"))
+	rightArrowBtn.connect("pressed",Callable(self,"_on_right_touch_pressed"))
+	downArrowBtn.connect("pressed",Callable(self,"_on_down_touch_pressed"))
+	skipTurnBtn.connect("pressed",Callable(self,"_on_skip_turn_pressed"))
 
 func _on_left_touch_pressed():
 	CombatEventManager.on_touch_button_pressed(0)
@@ -214,3 +212,12 @@ func _on_down_touch_pressed():
 func _on_skip_turn_pressed():
 	CombatEventManager.on_skip_turn_pressed()
 	_refresh_ui()
+
+func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
+	if fullRefreshDungeon:
+		_clean_up()
+		var player = GameGlobals.dungeon.player
+		if player!=null and !player.is_queued_for_deletion():
+			player.disconnect("OnCharacterMoveToCell",Callable(self,"_on_player_move"))
+			player.disconnect("OnNearbyEntityFound",Callable(self,"_on_entity_nearby"))
+			player.inventory.disconnect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))

@@ -5,7 +5,7 @@ var spellData:SpellData
 var timelineActions:Array
 var _cooldownTimer:int
 
-func _init(spellDataDef, characterRef):
+func _init(spellDataDef,characterRef):
 	character = characterRef
 	spellData = spellDataDef
 	for actionData in spellData.timeline:

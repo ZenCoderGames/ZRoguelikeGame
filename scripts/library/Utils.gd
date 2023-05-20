@@ -3,7 +3,7 @@ extends Node
 # DUNGEON
 func create_scene(container:Array, name : String, prefab: PackedScene, group: String, cell:DungeonCell,
 	x_offset: int = 0, y_offset: int = 0):
-	var new_scene := prefab.instance()
+	var new_scene := prefab.instantiate()
 	new_scene.position = Vector2(cell.pos.x + x_offset, cell.pos.y + y_offset)
 	new_scene.name = name
 	new_scene.add_to_group(group)
@@ -15,63 +15,53 @@ func create_scene(container:Array, name : String, prefab: PackedScene, group: St
 
 # GENERAL
 func create_tween_float(node, fieldName, startPose, endPose, duration, transType, easeType):
-	var tween = Tween.new()
-	add_child(tween)
-	tween.interpolate_property(
-		node, fieldName, 
-		startPose, endPose, duration,
-		transType, easeType)
-	tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(node, fieldName, endPose, duration).from(startPose).set_trans(transType).set_ease(easeType)
 	return tween
 
 func create_tween_vector2(node, fieldName, startPose, endPose, duration, transType, easeType):
-	var tween = Tween.new()
-	add_child(tween)
-	tween.interpolate_property(
+	var tween = get_tree().create_tween()
+	tween.tween_property(
 		node, fieldName, 
-		startPose, endPose, duration,
-		transType, easeType)
-	tween.start()
+		endPose, duration).from(startPose).set_trans(transType).set_ease(easeType)
 	return tween
 
 func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, transType, easeType, delayDuration:float=-1):
 	if delayDuration==-1:
 		delayDuration = duration
 
-	var tween = Tween.new()
-	add_child(tween)
-	tween.interpolate_property(
-		node, fieldName, 
-		startPose, endPose, duration,
-		transType, easeType)
-	tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(
+		node, fieldName, endPose, duration).from(startPose).set_trans(transType).set_ease(easeType)
+		
+	await get_tree().create_timer(duration).timeout
 
-	yield(get_tree().create_timer(duration), "timeout")
-
-	var return_tween = Tween.new()
-	add_child(return_tween)
-	return_tween.interpolate_property(
-		node, fieldName, 
-		endPose, startPose, duration,
-		transType, easeType)
-	return_tween.start()
+	var return_tween = get_tree().create_tween()
+	return_tween.tween_property(
+		node, fieldName, startPose, duration).from(startPose).set_trans(transType).set_ease(easeType)
 
 	return return_tween
 
-func load_data_from_file(relativePath:String) -> JSON:
-	var data_file = File.new()
-	if data_file.open(str("res://",relativePath), File.READ) != OK:
-		return null
-	var data_text = data_file.get_as_text()
-	data_file.close()
-	var data_parse = JSON.parse(data_text)
-	if data_parse.error != OK:
-		return null
-	return data_parse.result
+func load_data_from_file(relativePath:String) -> Dictionary:
+	var dataFilePath:String = str("res://",relativePath)
+	if FileAccess.file_exists(dataFilePath):
+		print("file found")
+		var file = FileAccess.open(dataFilePath, FileAccess.READ)
+		var data_text = file.get_as_text()
+		file.close()
+		var test_json_conv = JSON.new()
+		var parseResult = test_json_conv.parse(data_text)
+		var data_parse = test_json_conv.get_data()
+		if parseResult != OK:
+			return {}
+		return data_parse
+	else:
+		print("file not found " + dataFilePath)
+		return {}
 
 func do_hit_pause():
 	get_tree().paused = true
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	get_tree().paused = false
 
 func is_relative_team(char1, char2, relativeTeamType:int):
@@ -108,7 +98,7 @@ func duplicate_array(arrayRef:Array)->Array:
 	return newArray
 
 func convert_to_camel_case(string:String):
-	var result = PoolStringArray()
+	var result = PackedStringArray()
 	var i:int = 0
 	for ch in string:
 		if i==0:
@@ -117,19 +107,22 @@ func convert_to_camel_case(string:String):
 			result.append(ch.to_lower())
 		i = i + 1
 
-	return result.join('')
+	return ''.join(result)
 
 func random_chance(chance:float):
 	return randf() < chance/100
 
 func freeze_frame(time_scale, duration):
 	Engine.time_scale = time_scale
-	yield(GameGlobals.battleInstance.get_tree().create_timer(time_scale * duration), "timeout")
+	await GameGlobals.battleInstance.get_tree().create_timer(time_scale * duration).timeout
 	Engine.time_scale = 1.0
 
 func clean_up_all_signals(node:Node):
-	var allSignals = node.get_signal_list()
+	'''var allSignals = node.get_signal_list()
 	for cur_signal in allSignals:
 		var conns = node.get_signal_connection_list(cur_signal.name)
 		for cur_conn in conns:
-			node.disconnect(cur_conn.signal, cur_conn.target, cur_conn.method)
+			node.disconnect(cur_conn.source, cur_conn.signal, cur_conn.target, cur_conn.method)
+			#cur_conn.source.disconnect(, node, cur_conn.method_name)
+	'''
+	pass

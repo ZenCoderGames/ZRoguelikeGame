@@ -1,8 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=3 uid="uid://b835okdbcf0ag"]
+
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_c53u5"]
 
 [node name="Button" type="Button"]
-margin_right = 190.0
-margin_bottom = 20.0
+offset_right = 190.0
+offset_bottom = 20.0
 size_flags_horizontal = 3
+theme = ExtResource("1_c53u5")
 text = "Badass Heavy Sword Of Doom"
 clip_text = true

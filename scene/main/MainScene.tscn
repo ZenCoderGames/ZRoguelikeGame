@@ -1,17 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://d0vuvgr4glgdp"]
 
-[ext_resource path="res://scripts/battle/DungeonCamera.gd" type="Script" id=1]
-[ext_resource path="res://ui/MainGUI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/battle/PlayerInput.gd" type="Script" id=3]
-[ext_resource path="res://scripts/battle/BattleInstance.gd" type="Script" id=4]
-[ext_resource path="res://scripts/battle/BattleView.gd" type="Script" id=5]
-[ext_resource path="res://scripts/battle/instance/effects/EffectManager.gd" type="Script" id=6]
-[ext_resource path="res://scripts/battle/Dungeon.gd" type="Script" id=7]
-[ext_resource path="res://ui/MainMenuUI.tscn" type="PackedScene" id=8]
-[ext_resource path="res://resource/fonts/connection/ConnectionBold.otf" type="DynamicFontData" id=9]
-[ext_resource path="res://resource/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" type="DynamicFontData" id=10]
+[ext_resource type="Script" path="res://scripts/battle/DungeonCamera.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cusqgwo5ljbli" path="res://ui/MainGUI.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/battle/PlayerInput.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/battle/BattleInstance.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/battle/BattleView.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/battle/instance/effects/EffectManager.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/battle/Dungeon.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://3gpoj14w4qny" path="res://ui/MainMenuUI.tscn" id="8"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="9_07g2x"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node
 
 
@@ -30,115 +29,89 @@ func _ready():
 #	pass
 "
 
-[sub_resource type="DynamicFont" id=2]
-size = 60
-font_data = ExtResource( 9 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 30
-font_data = ExtResource( 10 )
-
 [node name="MainScene" type="Node"]
 
 [node name="Battle" type="Node2D" parent="."]
-script = ExtResource( 4 )
+script = ExtResource("4")
 doorsStayOpenDuringBattle = true
+debugSpawnEnemyEncounter = "TEST_ENC_SINGLE"
 
 [node name="PlayerInput" type="Node" parent="Battle"]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="View" type="Node" parent="Battle"]
 unique_name_in_owner = true
-script = ExtResource( 5 )
-showWallColor = Color( 0.843137, 0.843137, 0.843137, 1 )
-showFloorColor = Color( 1, 1, 1, 1 )
-showExitColor = Color( 0.0823529, 0.529412, 0.141176, 1 )
-showEndColor = Color( 0.603922, 0.619608, 0.129412, 1 )
-dimWallColor = Color( 0.529412, 0.529412, 0.529412, 1 )
-dimFloorColor = Color( 0.529412, 0.529412, 0.529412, 1 )
-dimExitColor = Color( 0.086441, 0.214844, 0.103336, 1 )
-dimEndColor = Color( 0.241572, 0.246094, 0.104782, 1 )
-playerDamageColor = Color( 0.0823529, 0.666667, 0.760784, 1 )
-playerStealthColor = Color( 0.239216, 0.290196, 0.298039, 0.352941 )
-playerLevelUpColor = Color( 0.803922, 0.882353, 0.0980392, 1 )
-enemyDamageColor = Color( 0.72549, 0.376471, 0.223529, 1 )
-itemGearColor = Color( 0.368627, 0.603922, 0.184314, 1 )
-itemConsumableColor = Color( 0.203922, 0.466667, 0.74902, 1 )
-itemSpellColor = Color( 0.552941, 0.196078, 0.639216, 1 )
-debugStartRoomColor = Color( 0.0980392, 0.6, 0.105882, 1 )
-debugCriticalPathRoomColor = Color( 0.576471, 0.337255, 0.12549, 1 )
-debugEndRoomColor = Color( 0.792157, 0.270588, 0.270588, 1 )
+script = ExtResource("5")
+showWallColor = Color(0.843137, 0.843137, 0.843137, 1)
+showFloorColor = Color(1, 1, 1, 1)
+showExitColor = Color(0.0823529, 0.529412, 0.141176, 1)
+showEndColor = Color(0.603922, 0.619608, 0.129412, 1)
+dimWallColor = Color(0.529412, 0.529412, 0.529412, 1)
+dimFloorColor = Color(0.529412, 0.529412, 0.529412, 1)
+dimExitColor = Color(0.086441, 0.214844, 0.103336, 1)
+dimEndColor = Color(0.241572, 0.246094, 0.104782, 1)
+playerDamageColor = Color(0.0823529, 0.666667, 0.760784, 1)
+playerStealthColor = Color(0.239216, 0.290196, 0.298039, 0.352941)
+playerLevelUpColor = Color(0.803922, 0.882353, 0.0980392, 1)
+enemyDamageColor = Color(0.72549, 0.376471, 0.223529, 1)
+itemGearColor = Color(0.368627, 0.603922, 0.184314, 1)
+itemConsumableColor = Color(0.203922, 0.466667, 0.74902, 1)
+itemSpellColor = Color(0.552941, 0.196078, 0.639216, 1)
+debugStartRoomColor = Color(0.0980392, 0.6, 0.105882, 1)
+debugCriticalPathRoomColor = Color(0.576471, 0.337255, 0.12549, 1)
+debugEndRoomColor = Color(0.792157, 0.270588, 0.270588, 1)
 
 [node name="EffectManager" type="Node" parent="Battle"]
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="Dungeon" type="Node" parent="Battle"]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 400, 300 )
-current = true
-zoom = Vector2( 0.8, 0.8 )
-script = ExtResource( 1 )
+position = Vector2(400, 300)
+script = ExtResource("1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = SubResource( 1 )
+script = SubResource("1")
 
-[node name="BattleUI" parent="CanvasLayer" instance=ExtResource( 2 )]
+[node name="BattleUI" parent="CanvasLayer" instance=ExtResource("2")]
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="MainMenuUI" parent="CanvasLayer" instance=ExtResource( 8 )]
+[node name="MainMenuUI" parent="CanvasLayer" instance=ExtResource("8")]
 unique_name_in_owner = true
 mouse_filter = 2
 
 [node name="ScreenFade" type="Panel" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
-self_modulate = Color( 0.301961, 0.298039, 0.298039, 1 )
+self_modulate = Color(0.301961, 0.298039, 0.298039, 1)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VictoryUI" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
-self_modulate = Color( 0.380392, 0.301961, 0.301961, 1 )
+self_modulate = Color(0.380392, 0.301961, 0.301961, 1)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/VictoryUI"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1193.0
-margin_bottom = 761.0
-size_flags_horizontal = 3
-size_flags_vertical = 7
-custom_fonts/font = SubResource( 2 )
+layout_mode = 2
+size_flags_horizontal = 4
 text = "YOU WIN !"
-align = 1
-valign = 1
-
-[node name="Label2" type="Label" parent="CanvasLayer/VictoryUI"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1193.0
-margin_bottom = 44.0
-rect_pivot_offset = Vector2( 0, 100 )
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_fonts/font = SubResource( 3 )
-text = "You have beaten the Dungeon of Zekonia"
-align = 1
-valign = 1
-autowrap = true
 
 [node name="BackToMenu" type="Button" parent="CanvasLayer/VictoryUI"]
-margin_left = 550.0
-margin_top = 741.0
-margin_right = 649.0
-margin_bottom = 761.0
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme = ExtResource("9_07g2x")
 text = "Back to Menu"
-icon_align = 1
+icon_alignment = 1
 
 [connection signal="button_up" from="CanvasLayer/VictoryUI/BackToMenu" to="Battle" method="back_to_menu_from_victory"]

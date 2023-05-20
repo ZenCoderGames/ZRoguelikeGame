@@ -2,31 +2,31 @@ extends Node
 
 class_name InventoryUI
 
-onready var itemList:VBoxContainer = get_node("Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/MarginContainer/ItemList/VBoxContainer")
+@onready var itemList:VBoxContainer = get_node("Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/MarginContainer/ItemList/VBoxContainer")
 const InventoryItem := preload("res://ui/battle/InventoryItem.tscn")
 
-onready var noContent:Node = get_node("NoContent")
+@onready var noContent:Node = get_node("NoContent")
 
-onready var nameLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/NameContainer/NameLabel")
-onready var typeLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/TypeContainer/TypeLabel")
-onready var descLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/DescContainer/DescLabel")
-onready var equipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton")
-onready var equipButtonRune1:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Rune1")
-onready var equipButtonRune2:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Rune2")
-onready var equipButtonSpell1:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell1")
-onready var equipButtonSpell2:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell2")
-onready var equipButtonSpell3:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell3")
-onready var equipButtonSpell4:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell4")
+@onready var nameLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/NameContainer/NameLabel")
+@onready var typeLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/TypeContainer/TypeLabel")
+@onready var descLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/DescContainer/DescLabel")
+@onready var equipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton")
+@onready var equipButtonRune1:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Rune1")
+@onready var equipButtonRune2:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Rune2")
+@onready var equipButtonSpell1:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell1")
+@onready var equipButtonSpell2:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell2")
+@onready var equipButtonSpell3:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell3")
+@onready var equipButtonSpell4:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell4")
 
-onready var unequipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/UnequipButton")
-onready var consumeButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/ConsumeButton")
-onready var equippedUI:ColorRect = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquippedUI")
+@onready var unequipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/UnequipButton")
+@onready var consumeButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/ConsumeButton")
+@onready var equippedUI:ColorRect = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquippedUI")
 
-onready var sortAllButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/AllButton
-onready var sortWeaponButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/WeaponButton
-onready var sortArmorButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/ArmorButton
-onready var sortRuneButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/RuneButton
-onready var sortSpellButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/SpellButton
+@onready var sortAllButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/AllButton
+@onready var sortWeaponButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/WeaponButton
+@onready var sortArmorButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/ArmorButton
+@onready var sortRuneButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/RuneButton
+@onready var sortSpellButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/SpellButton
 
 enum SORT_OPTIONS { ALL, WEAPON, ARMOR, RUNE, SPELL }
 var _sortOption:int
@@ -39,25 +39,25 @@ var sortedItemList:Array
 
 func _ready():
 	hide()
-	equipButton.connect("pressed", self, "_on_equip_selected_weapon_or_armor")
-	equipButtonRune1.connect("pressed", self, "_on_equip_selected_rune1")
-	equipButtonRune2.connect("pressed", self, "_on_equip_selected_rune2")
-	equipButtonSpell1.connect("pressed", self, "_on_equip_selected_spell1")
-	equipButtonSpell2.connect("pressed", self, "_on_equip_selected_spell2")
-	equipButtonSpell3.connect("pressed", self, "_on_equip_selected_spell3")
-	equipButtonSpell4.connect("pressed", self, "_on_equip_selected_spell4")
-	unequipButton.connect("pressed", self, "_on_unequip_selected_item")
-	consumeButton.connect("pressed", self, "_on_consume_selected_item")
-	sortAllButton.connect("pressed", self, "_on_sort_all_button")
-	sortWeaponButton.connect("pressed", self, "_on_sort_weapon_button")
-	sortArmorButton.connect("pressed", self, "_on_sort_armor_button")
-	sortRuneButton.connect("pressed", self, "_on_sort_rune_button")
-	sortSpellButton.connect("pressed", self, "_on_sort_spell_button")
+	equipButton.connect("pressed",Callable(self,"_on_equip_selected_weapon_or_armor"))
+	equipButtonRune1.connect("pressed",Callable(self,"_on_equip_selected_rune1"))
+	equipButtonRune2.connect("pressed",Callable(self,"_on_equip_selected_rune2"))
+	equipButtonSpell1.connect("pressed",Callable(self,"_on_equip_selected_spell1"))
+	equipButtonSpell2.connect("pressed",Callable(self,"_on_equip_selected_spell2"))
+	equipButtonSpell3.connect("pressed",Callable(self,"_on_equip_selected_spell3"))
+	equipButtonSpell4.connect("pressed",Callable(self,"_on_equip_selected_spell4"))
+	unequipButton.connect("pressed",Callable(self,"_on_unequip_selected_item"))
+	consumeButton.connect("pressed",Callable(self,"_on_consume_selected_item"))
+	sortAllButton.connect("pressed",Callable(self,"_on_sort_all_button"))
+	sortWeaponButton.connect("pressed",Callable(self,"_on_sort_weapon_button"))
+	sortArmorButton.connect("pressed",Callable(self,"_on_sort_armor_button"))
+	sortRuneButton.connect("pressed",Callable(self,"_on_sort_rune_button"))
+	sortSpellButton.connect("pressed",Callable(self,"_on_sort_spell_button"))
 	
 func init(character):
 	playerChar = character
-	playerChar.inventory.connect("OnItemAdded", self, "_on_item_added_to_inventory")
-	playerChar.equipment.connect("OnSpellActivated", self, "_on_spell_activated")
+	playerChar.inventory.connect("OnItemAdded",Callable(self,"_on_item_added_to_inventory"))
+	playerChar.equipment.connect("OnSpellActivated",Callable(self,"_on_spell_activated"))
 	
 func show():
 	selectedIdx = 0
@@ -90,11 +90,11 @@ func _refresh_ui():
 		if _sortOption == SORT_OPTIONS.SPELL and !item.data.is_spell():
 			continue
 
-		var itemButton:Button = InventoryItem.instance()
+		var itemButton:Button = InventoryItem.instantiate()
 		itemList.add_child(itemButton)
 		itemButton.text = item.get_display_name()
 		itemButton.clip_text = true
-		itemButton.connect("pressed", self, "_on_item_selected", [idx])
+		itemButton.connect("pressed",Callable(self,"_on_item_selected").bind(idx))
 		itemButtons.append(itemButton)
 		itemDict[itemButton] = item
 		sortedItemList.append(item)
@@ -108,7 +108,7 @@ func _refresh_ui():
 func _show_selected():
 	var selectedItemButton:Button = itemButtons[selectedIdx]
 	var selectedItem:Item = sortedItemList[selectedIdx]
-	selectedItemButton.self_modulate = Color.orange
+	selectedItemButton.self_modulate = Color.ORANGE
 	nameLabel.text = selectedItem.get_display_name() 
 	descLabel.text = selectedItem.get_full_description()
 	typeLabel.text = selectedItem.data.get_type_string()

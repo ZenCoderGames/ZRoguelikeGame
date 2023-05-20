@@ -1,6 +1,5 @@
-extends ActionData
 
-class_name ActionModifyStatusEffectData
+class_name ActionModifyStatusEffectData extends ActionData
 
 var ActionDataTypes = load("res://scripts/battle/data/actions/ActionDataTypes.gd")
 
@@ -12,7 +11,8 @@ var instanceCountModifier:int
 var startTimeline:Array
 var endTimeline:Array
 
-func _init(dataJS).(dataJS):
+func _init(dataJS):
+	super(dataJS)
 	statusEffectId = dataJS["params"]["statusEffectId"]
 	instanceCountModifier = Utils.get_data_from_json(dataJS["params"], "instanceCountModifier", 0)
 
