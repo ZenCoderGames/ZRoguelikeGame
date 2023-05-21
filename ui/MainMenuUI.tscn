@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chuqffpcxuinf" path="res://ui/characterSelect/CharacterSelectUI.tscn" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61nyt"]
-bg_color = Color(0.156863, 0.286275, 0.188235, 1)
+bg_color = Color(0.184314, 0.270588, 0.270588, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
@@ -66,6 +66,7 @@ vertical_alignment = 1
 
 [node name="MenuUI" type="PanelContainer" parent="."]
 unique_name_in_owner = true
+self_modulate = Color(0.631373, 0.631373, 0.631373, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

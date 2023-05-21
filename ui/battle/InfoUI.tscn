@@ -27,7 +27,7 @@ size_flags_vertical = 3
 [node name="ColorRect" type="ColorRect" parent="Content"]
 layout_mode = 2
 size_flags_vertical = 3
-color = Color(0.0705882, 0.164706, 0.176471, 1)
+color = Color(0.0705882, 0.12549, 0.12549, 1)
 
 [node name="Label" type="Label" parent="Content/ColorRect"]
 layout_mode = 1
@@ -52,7 +52,7 @@ theme = ExtResource("2_h3yrs")
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1")
-color = Color(0.235294, 0.415686, 0.505882, 1)
+color = Color(0.141176, 0.211765, 0.25098, 1)
 
 [node name="Label" type="Label" parent="Title/ColorRect"]
 layout_mode = 1

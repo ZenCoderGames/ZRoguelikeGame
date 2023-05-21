@@ -13,9 +13,19 @@ shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
 [node name="CharacterSelectItemUI" type="PanelContainer"]
-offset_left = 225.0
-offset_right = 339.0
-offset_bottom = 159.0
+custom_minimum_size = Vector2(200, 270)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -142.5
+offset_right = 107.0
+offset_bottom = 142.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
 theme = ExtResource("1_68jt7")
 theme_override_styles/panel = SubResource("StyleBoxFlat_pcdbj")
 script = ExtResource("2")
@@ -25,7 +35,7 @@ layout_mode = 2
 theme = ExtResource("1_68jt7")
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(100, 125)
+custom_minimum_size = Vector2(100, 250)
 layout_mode = 2
 theme = ExtResource("1_68jt7")
 
@@ -41,10 +51,26 @@ text = "Vitality: 5
 Strength: 3"
 horizontal_alignment = 1
 
-[node name="CharNameLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="CharNameLabel" type="Label" parent="VBoxContainer/PanelContainer/Panel"]
 unique_name_in_owner = true
 self_modulate = Color(0.537255, 0.862745, 0.94902, 1)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -13.0
+offset_right = 105.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 0
 text = "Knight"
 horizontal_alignment = 1
