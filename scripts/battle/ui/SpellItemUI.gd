@@ -12,9 +12,9 @@ func init(spellItemObj):
 	CombatEventManager.connect("OnStartTurn",Callable(self,"_on_start_turn"))
 	GameGlobals.dungeon.player.equipment.connect("OnSpellActivated",Callable(self,"_on_spell_activated"))
 
-func init_as_empty(name:String):
+func init_as_empty(spellName:String):
 	spellItem = null
-	_name = name
+	_name = spellName
 	self.text = _name
 	self.disabled = true
 

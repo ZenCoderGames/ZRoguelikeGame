@@ -45,7 +45,6 @@ func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, 
 func load_data_from_file(relativePath:String) -> Dictionary:
 	var dataFilePath:String = str("res://",relativePath)
 	if FileAccess.file_exists(dataFilePath):
-		print("file found")
 		var file = FileAccess.open(dataFilePath, FileAccess.READ)
 		var data_text = file.get_as_text()
 		file.close()

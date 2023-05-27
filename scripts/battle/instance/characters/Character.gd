@@ -503,10 +503,10 @@ func get_status_effect_modifiers(statusEffectId:String):
 
 # PASSIVES
 func add_passive(passiveData:PassiveData):
-	# Don't add duplicates
-	for passive in passiveList:
-		if passive.data == passiveData:
-			return passive
+	# Don't add duplicates (may need this in the future ?)
+	#for passive in passiveList:
+	#	if passive.data == passiveData:
+	#		return passive
 
 	var passive:Passive = Passive.new(self, passiveData)
 	passiveList.append(passive)

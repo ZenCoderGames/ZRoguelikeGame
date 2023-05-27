@@ -67,9 +67,10 @@ func unequip_item(item, slotType:int):
 
 func activate_spell(spellItem):
 	spellItem.activate()
-	#character.inventory.remove_item(spellItem)
 	emit_signal("OnSpellActivated", spellItem)
 	character.on_spell_activated(spellItem)
+	unequip_item(spellItem, get_slot_for_item(spellItem))
+	character.inventory.remove_item(spellItem)
 	#pass
 
 # SLOTS

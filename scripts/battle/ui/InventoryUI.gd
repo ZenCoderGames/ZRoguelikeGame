@@ -27,8 +27,9 @@ const InventoryItem := preload("res://ui/battle/InventoryItem.tscn")
 @onready var sortArmorButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/ArmorButton
 @onready var sortRuneButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/RuneButton
 @onready var sortSpellButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/SpellButton
+@onready var sortItemButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/ItemButton
 
-enum SORT_OPTIONS { ALL, WEAPON, ARMOR, RUNE, SPELL }
+enum SORT_OPTIONS { ALL, WEAPON, ARMOR, RUNE, SPELL, ITEM }
 var _sortOption:int
 
 var playerChar:Character
@@ -53,6 +54,7 @@ func _ready():
 	sortArmorButton.connect("pressed",Callable(self,"_on_sort_armor_button"))
 	sortRuneButton.connect("pressed",Callable(self,"_on_sort_rune_button"))
 	sortSpellButton.connect("pressed",Callable(self,"_on_sort_spell_button"))
+	sortItemButton.connect("pressed",Callable(self,"_on_sort_item_button"))
 	
 func init(character):
 	playerChar = character
@@ -89,6 +91,8 @@ func _refresh_ui():
 			continue
 		if _sortOption == SORT_OPTIONS.SPELL and !item.data.is_spell():
 			continue
+		if _sortOption == SORT_OPTIONS.ITEM and !item.data.is_consumable():
+			continue
 
 		var itemButton:Button = InventoryItem.instantiate()
 		itemList.add_child(itemButton)
@@ -104,6 +108,8 @@ func _refresh_ui():
 		_show_selected()
 	else:
 		noContent.visible = true
+		await get_tree().create_timer(0.5).timeout
+		_on_sort_all_button()
 
 func _show_selected():
 	var selectedItemButton:Button = itemButtons[selectedIdx]
@@ -215,6 +221,11 @@ func _on_sort_rune_button():
 
 func _on_sort_spell_button():
 	_sortOption = SORT_OPTIONS.SPELL
+	selectedIdx = 0
+	_refresh_ui()
+
+func _on_sort_item_button():
+	_sortOption = SORT_OPTIONS.ITEM
 	selectedIdx = 0
 	_refresh_ui()
 
