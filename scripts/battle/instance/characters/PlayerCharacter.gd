@@ -96,7 +96,7 @@ func _gain_xp(val:int):
 
 func _level_up():
 	# DISABLING FOR NOW
-	return
+	#return
 
 	modify_absolute_stat_value(StatData.STAT_TYPE.VITALITY, 1)
 	modify_absolute_stat_value(StatData.STAT_TYPE.STRENGTH, 1)

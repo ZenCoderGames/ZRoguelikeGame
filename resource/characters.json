@@ -2,10 +2,11 @@
 	"characters": {
 		"heroes": [
 			{
-				"id": "KNIGHT",
+				"id": "PALADIN",
 				"displayName": "You",
-				"description": "Knight",
+				"description": "Paladin",
 				"path": "entity/characters/Player.tscn",
+				"portraitPath": "resource/portraits/Paladin.png",
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -17,7 +18,7 @@
 					}
 				],
 				"active": {
-					"id": "KNIGHT_SPECIAL",
+					"id": "PALADIN_SPECIAL",
 					"description": "Charge: 3 successful hits taken charges up the ability.\n\nActivate: grants the player [Protection] for 1 turn",
 					"conditions": ["ON_TAKE_HIT"],
 					"count": 3,
@@ -32,13 +33,14 @@
 						}
 					]
 				},
-				"passive": "PASSIVE_KNIGHT"
+				"passive": "PASSIVE_PALADIN"
 			},
 			{
 				"id": "BERSERKER",
 				"displayName": "You",
 				"description": "Berserker",
 				"path": "entity/characters/Player.tscn",
+				"portraitPath": "resource/portraits/Berserker.png",
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -84,6 +86,7 @@
 				"id": "ASSASSIN",
 				"displayName": "You",
 				"path": "entity/characters/Player.tscn",
+				"portraitPath": "resource/portraits/Assassin.png",
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -145,7 +148,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 25
+						"value": 20
 					},
 					{
 						"type": "DAMAGE",
@@ -185,7 +188,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 10
+						"value": 8
 					},
 					{
 						"type": "DAMAGE",

@@ -103,7 +103,7 @@ func init_characters():
 			enemyDataList.append(newCharData)
 		characterDataDict[newCharData.id] = newCharData
 		
-	playerData = characterDataDict["KNIGHT"]
+	playerData = characterDataDict["PALADIN"]
 
 func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]

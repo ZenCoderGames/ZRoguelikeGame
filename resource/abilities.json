@@ -2,7 +2,7 @@
 	"abilities": [
 		{
 			"id": "ABILITY_PROTECTION_PUSHBACK",
-			"characterId": "KNIGHT",
+			"characterId": "PALADIN",
 			"name": "(Upgrade) Protection Pushback",
 			"description": "Push back any enemies that hit the player while [Protected] by 1 tile",
 			"timeline": [
@@ -32,7 +32,7 @@
 		},
 		{
 			"id": "ABILITY_PROTECTION_LONGER",
-			"characterId": "KNIGHT",
+			"characterId": "PALADIN",
 			"name": "(Upgrade) Protection++",
 			"description": "Allows [Protection] to last for 1 Additional Turn",
 			"timeline": [
@@ -46,15 +46,15 @@
 			]
 		},
 		{
-			"id": "ABILITY_KNIGHT_SPECIAL_FASTER",
-			"characterId": "KNIGHT",
+			"id": "ABILITY_PALADIN_SPECIAL_FASTER",
+			"characterId": "PALADIN",
 			"name": "(Upgrade) Knight Special Haste",
 			"description": "Allows the Knight Special to charge up with 2 less hits",
 			"timeline": [
 				{
 					"type": "MODIFY_SPECIAL",
 					"params": {
-						"specialId": "KNIGHT_SPECIAL",
+						"specialId": "PALADIN_SPECIAL",
 						"countModifier": -2
 					}
 				}

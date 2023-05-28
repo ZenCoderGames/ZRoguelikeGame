@@ -5,6 +5,9 @@ class_name CharacterSelectItemUI
 @onready var charLabel:Label = $"%CharNameLabel"
 @onready var descLabel:Label = $"%DescLabel"
 @onready var chooseBtn:Button = $"%ChooseButton"
+@onready var portrait:TextureRect = $"%Portrait"
+@onready var active:TextureRect = $"%Active"
+@onready var passive:TextureRect = $"%Passive"
 
 var myCharData:CharacterData
 
@@ -17,6 +20,10 @@ func init_from_data(charData:CharacterData):
 	#statStr.erase(statStr.length()-1, 1)
 	descLabel.text = statStr
 	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
+	var portraitTex = load(str("res://",myCharData.portraitPath))
+	portrait.texture = portraitTex
+	active.tooltip_text = charData.active.description
+	passive.tooltip_text = GameGlobals.dataManager.get_passive_data(charData.passive).description
 
 func _on_item_chosen():
 	GameEventManager.on_character_chosen(myCharData)

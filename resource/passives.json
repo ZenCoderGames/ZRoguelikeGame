@@ -23,7 +23,7 @@
 			]
 		},
 		{
-			"id": "PASSIVE_KNIGHT",
+			"id": "PASSIVE_PALADIN",
 			"name": "Protection Heal",
 			"description": "Heal for 1 whenever you block a hit",
 			"conditions": [

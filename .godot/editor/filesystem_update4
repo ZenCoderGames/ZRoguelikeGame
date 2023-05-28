@@ -55,3 +55,10 @@ res://scripts/battle/data/actions/ActionMoveData.gd
 res://scripts/battle/data/actions/ActionRemovePassiveData.gd
 res://scripts/battle/data/actions/ActionSetStatusData.gd
 res://scripts/battle/data/actions/ActionSpawnEffectData.gd
+res://scripts/battle/instance/characters/specials/Special.gd
+res://scripts/battle/data/DungeonDataManager.gd
+res://scripts/menu/CharacterSelectItemUI.gd
+res://scripts/battle/data/CharacterData.gd
+res://scripts/GameEventManager.gd
+res://scripts/battle/BattleInstance.gd
+res://scripts/battle/data/specials/SpecialData.gd
