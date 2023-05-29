@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cusqgwo5ljbli"]
+[gd_scene load_steps=13 format=3 uid="uid://cusqgwo5ljbli"]
 
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wj80w"]
@@ -10,6 +10,22 @@
 [ext_resource type="Texture2D" uid="uid://cktcjr0tuc4x7" path="res://sourceArt/Icons/arrowDown.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://bmuvff2xqjsds" path="res://sourceArt/Icons/arrowRight.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://bbh8mtn84lvlf" path="res://sourceArt/Icons/signal3.png" id="10"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6m1n"]
+bg_color = Color(0.709804, 0.462745, 0.937255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.866667, 0.639216, 0.968627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiprc"]
+bg_color = Color(0.294118, 0.631373, 0.866667, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.64918, 0.740085, 0.944838, 1)
 
 [node name="MainGUI" type="Control"]
 layout_mode = 3
@@ -205,6 +221,8 @@ value = 50.0
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 focus_mode = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_r6m1n")
 shortcut_in_tooltip = false
 text = "ACTIVE"
 icon_alignment = 1
@@ -213,11 +231,15 @@ icon_alignment = 1
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 focus_mode = 0
+theme_override_colors/font_color = Color(0.141176, 0.133333, 0.384314, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_iiprc")
+keep_pressed_outside = true
 shortcut_in_tooltip = false
 text = "PASSIVE"
 icon_alignment = 1
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

@@ -78,6 +78,14 @@
 					"params": {
 						"invulnerable": 1
 					}
+				},
+				{
+					"type": "SPAWN_EFFECT",
+					"params": {
+						"effectId": "BarrierEffect",
+						"effectPath": "entity/effects/Effect_StatusEffect_Protection.tscn",
+						"parent": true
+					}
 				}
 			],
 			"endTimeline": [ 
@@ -85,6 +93,12 @@
 					"type": "SET_STATUS",
 					"params": {
 						"invulnerable": -1
+					}
+				},
+				{
+					"type": "DESTROY_EFFECT",
+					"params": {
+						"effectId": "BarrierEffect"
 					}
 				}
 			]

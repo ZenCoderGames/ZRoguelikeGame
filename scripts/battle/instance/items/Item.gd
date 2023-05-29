@@ -45,6 +45,7 @@ func on_equipped(character):
 	
 func on_unequipped(character):
 	if !data.passiveId.is_empty():
+		passive.clear_events()
 		character.remove_passive(passive)
 		passive = null
 

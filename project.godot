@@ -14,6 +14,7 @@ config/name="ZRoguelikeGame"
 run/main_scene="res://scene/main/MainScene.tscn"
 config/features=PackedStringArray("4.0")
 boot_splash/bg_color=Color(0.0901961, 0.0901961, 0.0901961, 1)
+boot_splash/image="res://sourceArt/Bg/Game/Bg.png"
 config/icon="res://resource/icon.png"
 
 [autoload]
@@ -115,5 +116,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.152941, 0.164706, 0.176471, 1)
+environment/defaults/default_clear_color=Color(0.145098, 0.196078, 0.298039, 1)
 environment/defaults/default_environment="res://resource/default_env.tres"

@@ -108,7 +108,7 @@ var inLevelUpSequence:bool
 func _show_level_up():
 	inLevelUpSequence = true
 	if xpTween!=null:
-		xpTween.stop_all()
+		xpTween.stop()
 	levelUpBar.visible = true
 	xpLabel.text = "Level Up!"
 	if get_tree()!=null:

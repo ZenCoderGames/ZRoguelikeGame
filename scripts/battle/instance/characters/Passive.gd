@@ -50,3 +50,6 @@ func has_counter():
 
 func get_remaining_to_trigger():
 	return _triggerCount-_count
+
+func clear_events():
+	_combatEventReceiver = null

@@ -1,3 +1,4 @@
-HBoxContainer
-TextureRect
 Panel
+CanvasLayer
+TextureRect
+HBoxContainer
