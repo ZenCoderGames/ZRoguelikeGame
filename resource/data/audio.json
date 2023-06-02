@@ -1,0 +1,64 @@
+{
+	"audio": [
+		{
+			"id": "UI_BUTTON_MAIN_MENU",
+			"path": "audio/doz_ui_menu_select_new_game.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "UI_BUTTON_CHARACTER_SELECT",
+			"path": "audio/doz_ui_menu_select_character.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "NEW_ROOM_APPEAR",
+			"path": "audio/doz_ui_new_room_appear.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "ITEM_PICKUP",
+			"path": "audio/doz_ui_pickup_item.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "PLAYER_ATTACK",
+			"path": "audio/doz_hero_attack.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "ENEMY_ATTACK",
+			"path": "audio/doz_hero_take_damage.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "PLAYER_MOVE",
+			"path": "audio/doz_hero_footstep.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "ENEMY_MOVE",
+			"path": "audio/doz_enemy_footstep.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "ENEMY_DEATH",
+			"path": "audio/doz_enemy_death.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "PLAYER_DEATH",
+			"path": "audio/doz_enemy_death.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "PLAYER_SPECIAL_READY",
+			"path": "audio/doz_ui_special_ready.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "PLAYER_SPECIAL_ON_ACTIVATE",
+			"path": "audio/doz_ui_levelup.wav",
+			"volume": 1.0
+		}
+	]
+}

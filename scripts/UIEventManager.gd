@@ -1,0 +1,7 @@
+extends Node
+
+signal OnGenericUIButtonClick
+signal OnGenericMenuOpen
+signal OnGenericMenuClose
+signal OnMainMenuButton
+signal OnCharacterSelectButton

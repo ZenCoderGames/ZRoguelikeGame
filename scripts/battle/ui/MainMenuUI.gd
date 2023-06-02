@@ -39,6 +39,7 @@ func show_menu():
 	characterSelectUI.visible = false
 
 func on_new_game():
+	UIEventManager.emit_signal("OnMainMenuButton")
 	_clean_up()
 	baseMenuUI.visible = false
 	characterSelectUI.visible = true

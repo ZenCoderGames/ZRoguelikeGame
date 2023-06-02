@@ -42,13 +42,13 @@ func _on_special_pressed():
 	CombatEventManager.on_player_special_ability_pressed()
 
 func _on_mouse_entered_active():
-	CombatEventManager.on_show_info("Special Ability", GameGlobals.dungeon.player.special.data.description)
+	CombatEventManager.on_show_info("Special", GameGlobals.dungeon.player.special.data.description)
 
 func _on_mouse_exited_active():
 	CombatEventManager.on_hide_info()
 
 func _on_mouse_entered_passive():
-	CombatEventManager.on_show_info("Special Ability", GameGlobals.dungeon.player.specialPassive.data.description)
+	CombatEventManager.on_show_info("Trait", GameGlobals.dungeon.player.specialPassive.data.description)
 
 func _on_mouse_exited_passive():
 	CombatEventManager.on_hide_info()

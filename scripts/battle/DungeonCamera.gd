@@ -67,8 +67,8 @@ func _on_game_over():
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 # CAMERA SHAKE
-func _on_any_attack(isKillingBlow):
-	if isKillingBlow:
+func _on_any_attack(entity):
+	if entity.isDead:
 		add_trauma(Constants.CAMERA_SHAKE_KILL_TRAUMA)
 	else:
 		add_trauma(Constants.CAMERA_SHAKE_DEFAULT_TRAUMA)

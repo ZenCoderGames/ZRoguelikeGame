@@ -156,7 +156,7 @@ layout_mode = 0
 anchor_top = 0.9
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.137255, 0.219608, 0.333333, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="DetailsLabel" type="Label" parent="DetailsUI"]
 layout_mode = 1
@@ -224,7 +224,7 @@ focus_mode = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_r6m1n")
 shortcut_in_tooltip = false
-text = "ACTIVE"
+text = "SPECIAL"
 icon_alignment = 1
 
 [node name="PassiveButton" type="Button" parent="PlayerAbilityPanel/VBoxContainer"]
@@ -235,7 +235,7 @@ theme_override_colors/font_color = Color(0.141176, 0.133333, 0.384314, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_iiprc")
 keep_pressed_outside = true
 shortcut_in_tooltip = false
-text = "PASSIVE"
+text = "TRAIT"
 icon_alignment = 1
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]

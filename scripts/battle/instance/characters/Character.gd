@@ -47,6 +47,7 @@ var maxRuneSlots:int = 2
 
 signal OnCharacterMove(x, y)
 signal OnCharacterMoveToCell()
+signal OnCharacterItemPicked()
 signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
 signal OnDeath()
@@ -251,6 +252,7 @@ func on_stats_changed():
 # For testing when player goes over, they get the item
 func pick_item(itemToAdd):
 	inventory.add_item(itemToAdd)
+	emit_signal("OnCharacterItemPicked")
 
 func _on_item_equipped(_item, _slotType):
 	on_stats_changed()
@@ -292,7 +294,7 @@ func attack(entity):
 			Utils.freeze_frame(Constants.HIT_PAUSE_KILL_AMOUNT, Constants.HIT_PAUSE_KILL_DURATION)
 		else:
 			Utils.freeze_frame(Constants.HIT_PAUSE_DEFAULT_AMOUNT, Constants.HIT_PAUSE_DEFAULT_DURATION)
-		CombatEventManager.on_any_attack(entity.isDead)
+		CombatEventManager.on_any_attack(entity)
 
 		await get_tree().create_timer(0.1).timeout
 
@@ -326,6 +328,7 @@ func die():
 	isDead = true
 	currentRoom.enemy_died(self)
 	emit_signal("OnDeath")
+	CombatEventManager.emit_signal("OnAnyCharacterDeath", self)
 
 	await get_tree().create_timer(0.1).timeout
 

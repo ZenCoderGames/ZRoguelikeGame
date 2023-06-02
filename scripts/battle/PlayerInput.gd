@@ -45,12 +45,12 @@ func on_main_menu_off():
 	disableInput = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if player==null or !is_instance_valid(player):
-		return
-		
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		get_tree().quit()
 
+	if player==null or !is_instance_valid(player):
+		return
+	
 	if disableInput:
 		return
 

@@ -27,10 +27,10 @@ func _init():
 	init_status_effects()
 	init_passives()
 	init_spells()
-	init_items("resource/items.json")
-	init_items("resource/runeItems.json")
-	init_items("resource/consumableItems.json")
-	init_items("resource/spellItems.json")
+	init_items("resource/data/items.json")
+	init_items("resource/data/runeItems.json")
+	init_items("resource/data/consumableItems.json")
+	init_items("resource/data/spellItems.json")
 	init_abilities()
 	init_characters()
 	init_encounters()
@@ -40,7 +40,7 @@ func on_character_chosen(charData):
 
 # DUNGEONS
 func init_dungeon_data():
-	var data = Utils.load_data_from_file("resource/dungeons.json")
+	var data = Utils.load_data_from_file("resource/data/dungeons.json")
 	var dungeonDataJSList:Array = data["dungeons"]
 	for dungeonDataJS in dungeonDataJSList:
 		var newDungeonData = DungeonData.new(dungeonDataJS)
@@ -50,7 +50,7 @@ func get_max_levels():
 	return GameGlobals.dataManager.dungeonDataList.size()
 
 func init_status_effects():
-	var data = Utils.load_data_from_file("resource/statusEffects.json")
+	var data = Utils.load_data_from_file("resource/data/statusEffects.json")
 	var statusEffectDataJSList:Array = data["statusEffects"]
 	for statusEffectDataJS in statusEffectDataJSList:
 		var newStatusEffectData = StatusEffectData.new(statusEffectDataJS)
@@ -60,7 +60,7 @@ func get_status_effect_data(id):
 	return statusEffectDataMap[id]
 
 func init_passives():
-	var data = Utils.load_data_from_file("resource/passives.json")
+	var data = Utils.load_data_from_file("resource/data/passives.json")
 	var passiveDataJSList:Array = data["passives"]
 	for passiveDataJS in passiveDataJSList:
 		var newPassiveData = PassiveData.new(passiveDataJS)
@@ -90,7 +90,7 @@ func get_item_data(id):
 	return null
 
 func init_characters():
-	var data = Utils.load_data_from_file("resource/characters.json")
+	var data = Utils.load_data_from_file("resource/data/characters.json")
 	var heroDataJSList:Array = data["characters"]["heroes"]
 	for heroDataJS in heroDataJSList:
 		var newCharData = CharacterData.new(heroDataJS)
@@ -115,7 +115,7 @@ func get_random_item_data():
 	return itemDataList[randi() % itemDataList.size()]
 
 func init_spells():
-	var data = Utils.load_data_from_file("resource/spells.json")
+	var data = Utils.load_data_from_file("resource/data/spells.json")
 	var spellDataJSList:Array = data["spells"]
 	for spellDataJS in spellDataJSList:
 		var newSpellData:SpellData = SpellData.new(spellDataJS)
@@ -129,7 +129,7 @@ func get_spell_data(spellId):
 	return null
 
 func init_complex_stats():
-	var data = Utils.load_data_from_file("resource/complexStats.json")
+	var data = Utils.load_data_from_file("resource/data/complexStats.json")
 	var complexStatsJSList:Array = data["complexStats"]
 	for complexStatDataJS in complexStatsJSList:
 		var complexStatData:ComplexStatData = ComplexStatData.new(complexStatDataJS)
@@ -146,7 +146,7 @@ func get_complex_stat_data(statType):
 	return null
 
 func init_encounters():
-	var data = Utils.load_data_from_file("resource/encounters.json")
+	var data = Utils.load_data_from_file("resource/data/encounters.json")
 	var encounterJSList:Array = data["custom"]
 	for encounterJS in encounterJSList:
 		var newCustomEncounter = CustomEncounterData.new(encounterJS)
@@ -161,7 +161,7 @@ func get_custom_encounter(encounterId):
 	return null
 
 func init_abilities():
-	var data = Utils.load_data_from_file("resource/abilities.json")
+	var data = Utils.load_data_from_file("resource/data/abilities.json")
 	var abilityDataJSList:Array = data["abilities"]
 	for abilityDataJS in abilityDataJSList:
 		var newAbilityData = AbilityData.new(abilityDataJS)

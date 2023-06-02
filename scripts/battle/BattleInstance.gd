@@ -133,7 +133,7 @@ func _on_dungeon_completed():
 func _on_game_end():
 	victoryUI.visible = true
 	GameGlobals.dungeon.isDungeonFinished = true
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.05).timeout
 	_toggle_main_menu()
 
 func back_to_menu_from_victory():

@@ -19,6 +19,7 @@ signal OnHideInfo()
 signal OnTouchButtonPressed(dirn)
 signal OnSkipTurnPressed()
 signal OnDetailInfoShow(strVal, duration)
+signal OnAnyCharacterDeath(character)
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):
@@ -59,8 +60,8 @@ func on_room_combat_ended(room):
 func on_all_enemy_turn_completed(_room):
 	emit_signal("OnAllEnemyTurnsCompleted")
 
-func on_any_attack(isKillingBlow):
-	emit_signal("OnAnyAttack", isKillingBlow)
+func on_any_attack(entity):
+	emit_signal("OnAnyAttack", entity)
 
 func on_show_info(title:String, content:String):
 	emit_signal("OnShowInfo", title, content)

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://brsvqpkn34kxe"]
 
-[ext_resource type="FontFile" uid="uid://dtj2q47qxgrki" path="res://resource/FiraCode-Regular.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://dtj2q47qxgrki" path="res://resource/fonts/FiraCode-Regular.ttf" id="1"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("1")])

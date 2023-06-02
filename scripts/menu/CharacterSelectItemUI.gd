@@ -26,5 +26,6 @@ func init_from_data(charData:CharacterData):
 	passive.tooltip_text = GameGlobals.dataManager.get_passive_data(charData.passive).description
 
 func _on_item_chosen():
+	UIEventManager.emit_signal("OnCharacterSelectButton")
 	GameEventManager.on_character_chosen(myCharData)
 	GameEventManager.ready_to_battle()

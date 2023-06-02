@@ -25,6 +25,7 @@ GameGlobals="*res://scripts/GameGlobals.gd"
 GameEventManager="*res://scripts/GameEventManager.gd"
 HitResolutionManager="*res://scripts/battle/general/HitResolutionManager.gd"
 CombatEventManager="*res://scripts/battle/general/CombatEventManager.gd"
+UIEventManager="*res://scripts/UIEventManager.gd"
 
 [debug]
 
