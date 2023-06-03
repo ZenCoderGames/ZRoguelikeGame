@@ -190,7 +190,7 @@ func on_status_effect_removed(_character, statusEffect):
 func on_ability_added(_character, ability):
 	var newEffectUI = EffectItemUI.instantiate()
 	effectContainer.add_child(newEffectUI)
-	newEffectUI.init(ability.data)
+	newEffectUI.init(ability)
 	equippedEffects[ability] = newEffectUI
 
 	effectContainer.visible = true

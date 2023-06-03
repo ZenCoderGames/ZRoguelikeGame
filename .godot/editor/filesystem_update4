@@ -46,3 +46,10 @@ res://scripts/battle/instance/actions/ActionRemovePassive.gd
 res://scripts/battle/instance/actions/ActionPlayAudio.gd
 res://scripts/battle/instance/actions/ActionSpawnEffect.gd
 res://scripts/battle/instance/actions/ActionTypes.gd
+res://scripts/battle/data/actions/ActionModifySpecialData.gd
+res://scripts/battle/instance/characters/abilities/Ability.gd
+res://scripts/battle/data/abilities/AbilityData.gd
+res://scripts/battle/ui/CharacterUI.gd
+res://scripts/battle/instance/actions/ActionModifyStatusEffect.gd
+res://scripts/battle/instance/characters/Passive.gd
+res://scripts/battle/instance/characters/PlayerCharacter.gd

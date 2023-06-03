@@ -525,6 +525,7 @@ func remove_passive(passive:Passive):
 func remove_passive_from_data(passiveData:PassiveData):
 	for passive in passiveList:
 		if passive.data == passiveData:
+			passive.clear_events()
 			passiveList.erase(passive)
 			emit_signal("OnPassiveRemoved", self, passive)
 			on_stats_changed()
