@@ -15,9 +15,11 @@ func _ready():
 func play(id:String):
 	var audioData:AudioData = _get_data(id)
 	if audioData!=null:
-		var audioStream = _get_free_stream()
-		audioStream.stream = audioData.stream
-		audioStream.play()
+		var audioStreamPlayer:AudioStreamPlayer2D = _get_free_stream()
+		audioStreamPlayer.stream = audioData.stream
+		audioStreamPlayer.set_volume_db(linear_to_db(audioData.volume))
+		print(audioData.volume)
+		audioStreamPlayer.play()
 
 # STREAMS
 func _init_streams():
