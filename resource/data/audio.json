@@ -59,6 +59,16 @@
 			"id": "PLAYER_SPECIAL_ON_ACTIVATE",
 			"path": "audio/doz_ui_levelup.wav",
 			"volume": 1.0
+		},
+		{
+			"id": "CONSUMABLE_POTION",
+			"path": "audio/doz_consumable_potion.wav",
+			"volume": 1.0
+		},
+		{
+			"id": "STATUS_EFFECT_BARRIER",
+			"path": "audio/doz_consumable_shield.wav",
+			"volume": 1.0
 		}
 	]
 }

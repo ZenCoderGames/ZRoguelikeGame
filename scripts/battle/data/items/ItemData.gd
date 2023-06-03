@@ -33,6 +33,8 @@ var statusEffectId:String
 
 var maxCount:int
 
+var consumeAudioId:String
+
 var disable:bool
 
 func _init(itemDataJS):
@@ -66,6 +68,7 @@ func _init(itemDataJS):
 	spellId = Utils.get_data_from_json(itemDataJS, "spellId", "")
 	passiveId = Utils.get_data_from_json(itemDataJS, "passiveId", "")
 	statusEffectId = Utils.get_data_from_json(itemDataJS, "statusEffectId", "")
+	consumeAudioId = Utils.get_data_from_json(itemDataJS, "consumeAudioId", "")
 
 func is_weapon():
 	return type == ITEM_TYPE.WEAPON

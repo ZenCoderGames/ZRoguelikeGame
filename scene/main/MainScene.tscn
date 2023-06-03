@@ -132,8 +132,6 @@ icon_alignment = 1
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("11_x0m75")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AudioManager"]
-
 [node name="AudioHandler" type="Node" parent="AudioManager"]
 script = ExtResource("12_w0uop")
 

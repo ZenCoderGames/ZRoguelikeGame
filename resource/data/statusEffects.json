@@ -86,6 +86,12 @@
 						"effectPath": "entity/effects/Effect_StatusEffect_Protection.tscn",
 						"parent": true
 					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "STATUS_EFFECT_BARRIER"
+					}
 				}
 			],
 			"endTimeline": [ 
@@ -124,6 +130,12 @@
 						"effectId": "ProtectionEffect",
 						"effectPath": "entity/effects/Effect_StatusEffect_Protection.tscn",
 						"parent": true
+					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "STATUS_EFFECT_BARRIER"
 					}
 				}
 			],

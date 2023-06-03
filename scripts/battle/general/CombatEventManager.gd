@@ -20,6 +20,7 @@ signal OnTouchButtonPressed(dirn)
 signal OnSkipTurnPressed()
 signal OnDetailInfoShow(strVal, duration)
 signal OnAnyCharacterDeath(character)
+signal OnConsumeItem(itemData)
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):

@@ -15,7 +15,8 @@
 					"type": "HEALTH",
 					"value": 4
 				}
-			]
+			],
+			"consumeAudioId": "CONSUMABLE_POTION"
 		},
 		{
 			"#disable": true,
@@ -44,7 +45,8 @@
 					"type": "HEALTH",
 					"baseValue": 2
 				}
-			]
+			],
+			"consumeAudioId": "CONSUMABLE_POTION"
 		}
 	]
 }

@@ -8,6 +8,7 @@ func _ready():
 	CombatEventManager.connect("OnAnyCharacterDeath",Callable(self,"_on_any_character_death"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_player_special_ready"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_on_player_special_activated"))
+	CombatEventManager.connect("OnConsumeItem",Callable(self,"_on_consume_item"))
 
 func _on_main_menu_button():
 	GameGlobals.audioManager.play("UI_BUTTON_MAIN_MENU")
@@ -42,3 +43,7 @@ func _on_player_special_ready():
 
 func _on_player_special_activated():
 	GameGlobals.audioManager.play("PLAYER_SPECIAL_ON_ACTIVATE")
+
+func _on_consume_item(itemData:ItemData):
+	if !itemData.consumeAudioId.is_empty():
+		GameGlobals.audioManager.play(itemData.consumeAudioId)

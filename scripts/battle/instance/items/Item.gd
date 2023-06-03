@@ -23,6 +23,7 @@ func consume(character):
 		if !data.statusEffectId.is_empty():
 			var statusEffectData:StatusEffectData = GameGlobals.dataManager.get_status_effect_data(data.statusEffectId)
 			character.add_status_effect(character, statusEffectData)
+		CombatEventManager.emit_signal("OnConsumeItem", data)
 
 func can_activate()->bool:
 	if spell!=null:

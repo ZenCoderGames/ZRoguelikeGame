@@ -1,0 +1,13 @@
+
+class_name ActionPlayAudio extends Action
+
+func _init(actionData,parentChar):
+	super(actionData,parentChar)
+	pass
+
+func can_execute()->bool:
+	return true
+
+func execute():
+	var playAudioData:ActionPlayAudioData = actionData as ActionPlayAudioData
+	GameGlobals.audioManager.play(playAudioData.audioId)
