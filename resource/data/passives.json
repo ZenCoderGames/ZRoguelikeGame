@@ -206,6 +206,28 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PASSIVE_REINCARNATION",
+			"name": "Reincarnation",
+			"description": "Revive once after death",
+			"conditions": [
+				"ON_DEATH"
+			],
+			"timeline": [
+				{
+					"type": "REVIVE",
+					"params": {
+						"numTurnsToReviveAfter": 2
+					}
+				},
+				{
+					"type": "REMOVE_PASSIVE",
+					"params": {
+						"passiveId": "PASSIVE_REINCARNATION"
+					}
+				}
+			]
 		}
 	]
 }

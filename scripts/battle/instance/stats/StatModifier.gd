@@ -1,8 +1,8 @@
 class_name StatModifier
 
 var type:int
-var baseValue:int
+var maxValue:int
 
 func _init(statModifierData):
     type = statModifierData.type
-    baseValue = statModifierData.baseValue
+    maxValue = statModifierData.maxValue

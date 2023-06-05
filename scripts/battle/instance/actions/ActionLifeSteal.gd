@@ -12,7 +12,7 @@ func execute():
 	var lifeStealData:ActionLifeStealData = actionData as ActionLifeStealData
 	var lifeSteal:int = 0
 	if lifeStealData.percent>0:
-		lifeSteal = int(ceil(lifeStealData.percent * float(character.successfulDamageThisFrame)))
+		lifeSteal = int(ceil(lifeStealData.percent * float(character.successfulDamageThisTurn)))
 	else:
 		lifeSteal = lifeStealData.flatAmount
 

@@ -12,6 +12,7 @@ var stamina: int = 0
 var prevCell
 var cell
 var isDead:bool = false
+var setToRevive:int = -1
 
 var stats:Array = []
 var statDict:Dictionary = {}
@@ -54,7 +55,8 @@ signal OnDeath()
 
 signal OnPreAttack(defender)
 signal OnPostAttack(defender)
-var successfulDamageThisFrame:int
+var successfulDamageThisTurn:int
+var skipThisTurn:bool
 
 signal OnStatusEffectAdded(character, statusEffect)
 signal OnStatusEffectAddedToEnemy(character, statusEffect)
@@ -89,10 +91,6 @@ func init(id:int, charDataVal, teamVal):
 		if stat!=null:
 			stats.append(stat)
 			statDict[statData.type] = stat
-			# Disable Complex Stats for now
-			#if GameGlobals.dataManager.is_complex_stat_data(statData.type):
-			#	var complexStatData:ComplexStatData = GameGlobals.dataManager.get_complex_stat_data(statData.type)
-			#	_create_linked_stat(complexStatData.linkedStatType, statData.type, complexStatData.linkedStatMultiplier)
 
 	var attackData:Dictionary = {}
 	attackData["type"] = "ATTACK"
@@ -155,30 +153,30 @@ func get_stat_value(statType):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			statValue = statValue + stat.get_value()
+			statValue = statValue + stat.value
 	# iterate through items
 	statValue = statValue + equipment.get_stat_bonus_from_equipped_items(statType)
 	
 	return statValue
 
-func get_stat_base_value(statType):
-	var statBaseValue:int = 0
+func get_stat_max_value(statType):
+	var statMaxValue:int = 0
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			statBaseValue = statBaseValue + stat.get_base_value()
+			statMaxValue = statMaxValue + stat.maxValue
 	# iterate through items
-	statBaseValue = statBaseValue + equipment.get_stat_base_bonus_from_equipped_items(statType)
+	statMaxValue = statMaxValue + equipment.get_stat_max_bonus_from_equipped_items(statType)
 
-	return statBaseValue
+	return statMaxValue
 
 func modify_absolute_stat_value(statType, modifierValue):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			stat.modify_absolute_value(stat.get_value() + modifierValue)
+			stat.modify_absolute(stat.value + modifierValue)
 			on_stats_changed()
-			return stat.get_value()
+			return stat.value
 
 	print("ERROR: Can't find stat type - ", statType)
 	return null
@@ -187,9 +185,9 @@ func modify_stat_value(statType, modifierValue):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			stat.modify_value(stat.get_value() + modifierValue)
+			stat.modify(stat.value + modifierValue)
 			on_stats_changed()
-			return stat.get_value()
+			return stat.value
 
 	print("ERROR: Can't find stat type - ", statType)
 	return null
@@ -198,19 +196,14 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 	# iterate through char
 	for stat in stats:
 		if stat.type == statModifierData.type:
-			if GameGlobals.dataManager.is_complex_stat_data(statModifierData.type):
-				stat.modify_base_value(stat.get_base_value() + statModifierData.value)
-				var complexStatData:ComplexStatData = GameGlobals.dataManager.get_complex_stat_data(statModifierData.type)
-				refresh_linked_stat_value(complexStatData.linkedStatType)
-			
 			if statModifierData.value!=0:
-				stat.modify_value(stat.get_value() + statModifierData.value)
-			elif statModifierData.baseValue!=0:
-				stat.modify_base_value(stat.get_base_value() + statModifierData.baseValue)
-				stat.modify_value(stat.get_value() + statModifierData.baseValue)
+				stat.modify(stat.value + statModifierData.value)
+			elif statModifierData.maxValue!=0:
+				stat.modify_max(stat.maxValue + statModifierData.maxValue)
+				stat.modify(stat.value + statModifierData.maxValue)
 
 			on_stats_changed()
-			return stat.get_value()
+			return stat.value
 
 	print("ERROR: Can't find stat type - ", statModifierData.type)
 	return null
@@ -222,24 +215,25 @@ func get_stat(statType):
 
 	return null
 
-func refresh_linked_stat_value(statType):
-	# iterate through char
-	for stat in stats:
-		if stat.type == statType:
-			stat.update_from_modified_linked_stat()
-			on_stats_changed()
-			return stat.get_value()
+func initiate_revive(numTurns):
+	setToRevive = numTurns
+	_show_generic_text(self, "Revive")
 
-	print("ERROR: Can't find stat type - ", statType)
-	return null
+func revive():
+	reset_all_stats()
+	# Maybe play an animation here
+
+func reset_all_stats():
+	for stat in stats:
+		stat.reset()
+	on_stats_changed()
 
 func reset_stat_value(statType):
-	# iterate through char
 	for stat in stats:
 		if stat.type == statType:
-			stat.reset_value()
+			stat.reset()
 			on_stats_changed()
-			return stat.get_value()
+			return stat.value
 
 	print("ERROR: Can't find stat type - ", statType)
 	return null
@@ -305,6 +299,9 @@ func attack(entity):
 		on_turn_completed()
 
 func can_take_damage()->bool:
+	if is_reviving():
+		return false
+
 	if status.is_invulnerable():
 		return false
 
@@ -325,16 +322,19 @@ func show_damage_from_hit(attacker, dmg, isCritical):
 	show_hit(attacker, dmg, isCritical)
 
 func die():
-	isDead = true
-	currentRoom.enemy_died(self)
 	emit_signal("OnDeath")
 	CombatEventManager.emit_signal("OnAnyCharacterDeath", self)
 
-	await get_tree().create_timer(0.1).timeout
+	if setToRevive>0:
+		pass
+	else:
+		isDead = true
+		currentRoom.enemy_died(self)
+		await get_tree().create_timer(0.1).timeout
 
-	if cell.entityObject!=null:
-		cell.entityObject.hide()
-	cell.clear_entity_on_death()
+		if cell.entityObject!=null:
+			cell.entityObject.hide()
+		cell.clear_entity_on_death()
 
 func show_hit(entity, _dmg, isCritical):
 	# shove
@@ -420,14 +420,24 @@ func _create_damage_text_tween(_entity):
 	Utils.create_tween_vector2(damageText, "self_modulate", colorOriginal, colorNew, 1.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 
 func pre_update():
-	successfulDamageThisFrame = 0
+	successfulDamageThisTurn = 0
+	skipThisTurn = false
 
 func update():
-	pass
+	if setToRevive>=0:
+		setToRevive = setToRevive - 1
+		skipThisTurn = true
+		if setToRevive==-1:
+			revive()
+		return
+
+	if status.is_stunned():
+		skipThisTurn = true
+		return
 
 func post_update():
 	targetList = []
-	successfulDamageThisFrame = 0
+	successfulDamageThisTurn = 0
 
 # TARGETING
 func add_target(target):
@@ -580,6 +590,9 @@ func skip_turn():
 	on_turn_completed()
 
 # HELPERS
+func is_reviving():
+	return setToRevive>=0
+
 func is_in_room(room):
 	return currentRoom == room
 
@@ -609,21 +622,19 @@ func get_health():
 	return get_stat_value(StatData.STAT_TYPE.HEALTH)
 
 func get_max_health():
-	return get_stat_base_value(StatData.STAT_TYPE.HEALTH)
+	return get_stat_max_value(StatData.STAT_TYPE.HEALTH)
 
 func get_damage():
 	return get_stat_value(StatData.STAT_TYPE.DAMAGE)
 
+func get_max_damage():
+	return get_stat_max_value(StatData.STAT_TYPE.DAMAGE)
+
 func get_armor():
 	return get_stat_value(StatData.STAT_TYPE.ARMOR)
 
-func _create_linked_stat(type:int, linkedStatType:int, linkedStatMultiplier:float):
-	var newStatData:StatData = StatData.new()
-	newStatData.init_from_code(type, 0)
-	var newStat:Stat = Stat.new(newStatData)
-	newStat.add_link_to_stat(statDict[linkedStatType], linkedStatMultiplier)
-	stats.append(newStat)
-	statDict[newStatData.type] = newStat
+func get_max_armor():
+	return get_stat_max_value(StatData.STAT_TYPE.ARMOR)
 
 func get_summary()->String:
 	var summary:String = ""

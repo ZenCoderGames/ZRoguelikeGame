@@ -1,6 +1,6 @@
 class_name StatData
 
-enum STAT_TYPE { HEALTH, DAMAGE, ARMOR, VITALITY, STRENGTH }
+enum STAT_TYPE { HEALTH, DAMAGE, ARMOR }
 var type:int
 
 var value:int

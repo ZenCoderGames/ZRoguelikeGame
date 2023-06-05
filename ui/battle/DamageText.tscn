@@ -1,7 +1,16 @@
-[gd_scene format=3 uid="uid://d3ws0y1qr1yda"]
+[gd_scene load_steps=3 format=3 uid="uid://d3ws0y1qr1yda"]
+
+[ext_resource type="FontFile" uid="uid://banvpavkfhevp" path="res://resource/fonts/connection/ConnectionBold.otf" id="1_064ey"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_76ior"]
+font = ExtResource("1_064ey")
+outline_size = 2
+outline_color = Color(1, 0.752941, 0.0117647, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="DamageText" type="Label"]
-visible = false
+z_index = 5
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -12,3 +21,6 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 text = "Immune"
+label_settings = SubResource("LabelSettings_76ior")
+horizontal_alignment = 1
+vertical_alignment = 1

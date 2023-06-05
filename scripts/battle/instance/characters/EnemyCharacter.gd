@@ -20,16 +20,16 @@ func init(charId:int, charDataVal, teamVal):
 func update():
 	super.update()
 
+	if skipThisTurn:
+		skip_turn()
+		return
+
 	if USE_SIMPLE_LOS:
 		if !_hasSeenPlayer:
 			if _is_player_in_los():
 				_hasSeenPlayer = true
 			else:
 				return
-
-	if status.is_stunned():
-		skip_turn()
-		return
 
 	if GameGlobals.dungeon.player.status.is_invisible():
 		on_turn_completed()

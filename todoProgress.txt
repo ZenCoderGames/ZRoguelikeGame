@@ -81,36 +81,35 @@ Roguelike Dev:
 (D)- (Also, turns not calculating correctly when moving to next level)
 (D) - FindTargets doesn't work with range = 3 (Lightning bolt)
 (D) - Show Progress of Passives
-
 (D)- Fix for keyboard input issues caused by UI focus
 (D)- CombatEventManager/HitResManager clean up breaking issues
 (D)- Inventory categories
 (D)- Hold move has a cooldown
 (D)- Better UI on turn/level
 (D)- Difficulty increased
+(D)- Issues with going to new dungeon after event manager clean up
+(D)- SFX Manager/SFXData
+
+- Rewrite Stat System
+- Exit isn't allowed till you defeat all enemies in the room
+
+- Abilities with positionality and spacing
+- Show enemy next move
+- Complex AI behavior (Skeleton - revive, Snake - poison, Giant - healing, Automaton - stun)
 
 - Consumables show up in UI
 
 - Tuning Pass
 
-- Exit isn't allowed till you defeat all enemies in the room
-
 - Dots (Poison, Fire)
 - New Status Effects (Freeze, Shock, Root, Sleep)
-
-- Rename Special to Special Ability
 
 - VFX Upgrades (Stun, Barrier, Protection, Lifesteal, Lifedrain, Lightning bolt, Groundpound)
 - Better doors, death, exit sprites
 - Game Feel (hitSparks, death)
-- SFX Manager/SFXData
 
 - Keywords (Tags with events)
 
-
-- Complex AI behavior (Skeleton - revive, Snake - poison, Giant - healing, Automaton - stun)
-
-- Spells or Specials that translate
 - Targeting of Spells/Specials
 
 - Traps

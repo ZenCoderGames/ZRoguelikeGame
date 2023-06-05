@@ -43,7 +43,7 @@
 			"statModifiers": [
 				{
 					"type": "HEALTH",
-					"baseValue": 2
+					"maxValue": 2
 				}
 			],
 			"consumeAudioId": "CONSUMABLE_POTION"

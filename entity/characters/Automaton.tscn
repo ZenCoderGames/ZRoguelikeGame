@@ -1,29 +1,24 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://cinh7ujpfqlt6"]
 
 [ext_resource type="Texture2D" uid="uid://cxsiy2hwhcan0" path="res://resource/images/curses_vector_24x36.png" id="1"]
 [ext_resource type="Script" path="res://scripts/battle/instance/characters/EnemyCharacter.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="4"]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 24, 144, 23, 36 )
+[sub_resource type="AtlasTexture" id="1"]
+atlas = ExtResource("1")
+region = Rect2(24, 144, 23, 36)
 
 [node name="Automaton" type="Sprite2D"]
-position = Vector2( 209, 69 )
-texture = SubResource( 1 )
-script = ExtResource( 2 )
+position = Vector2(209, 69)
+texture = SubResource("1")
+script = ExtResource("2")
 
-[node name="CharacterUI" parent="." instance=ExtResource( 4 )]
+[node name="CharacterUI" parent="." instance=ExtResource("4")]
 
-[node name="DamageText" parent="." instance=ExtResource( 3 )]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="DamageText" parent="." instance=ExtResource("3")]
+visible = false
 offset_left = -41.5
 offset_top = -39.5
 offset_right = 18.5
 offset_bottom = 3.5
-text = "Immune"

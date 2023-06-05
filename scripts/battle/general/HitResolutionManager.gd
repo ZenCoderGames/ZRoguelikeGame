@@ -27,7 +27,7 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 	var prevHealth:int = targetChar.get_health()
 	var targetHealth:int = targetChar.take_damage(sourceChar, finalDamage)
 
-	sourceChar.successfulDamageThisFrame = prevHealth-targetHealth
+	sourceChar.successfulDamageThisTurn = prevHealth-targetHealth
 
 	if targetHealth<=0:
 		targetChar.die()

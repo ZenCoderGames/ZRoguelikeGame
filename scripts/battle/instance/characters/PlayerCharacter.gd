@@ -47,6 +47,10 @@ func _setup_events():
 func update():
 	super.update()
 
+	if skipThisTurn:
+		skip_turn()
+		return
+
 	cell.room.update_path_map()
 
 func can_take_damage()->bool:
@@ -98,10 +102,8 @@ func _level_up():
 	# DISABLING FOR NOW
 	return
 
-	modify_absolute_stat_value(StatData.STAT_TYPE.VITALITY, 1)
-	modify_absolute_stat_value(StatData.STAT_TYPE.STRENGTH, 1)
-	refresh_linked_stat_value(StatData.STAT_TYPE.HEALTH)
-	refresh_linked_stat_value(StatData.STAT_TYPE.DAMAGE)
+	reset_stat_value(StatData.STAT_TYPE.HEALTH)
+	reset_stat_value(StatData.STAT_TYPE.DAMAGE)
 	emit_signal("OnLevelUp")
 	
 	levelUpAnim.visible = true

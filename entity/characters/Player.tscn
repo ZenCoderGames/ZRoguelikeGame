@@ -64,6 +64,7 @@ text = "LEVEL UP"
 [node name="CharacterUI" parent="." instance=ExtResource("6")]
 
 [node name="DamageText" parent="." instance=ExtResource("2")]
+visible = false
 offset_left = -46.0
 offset_top = -36.0
 offset_right = 14.0

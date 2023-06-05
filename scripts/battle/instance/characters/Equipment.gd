@@ -33,23 +33,18 @@ func get_stat_bonus_from_equipped_items(statType):
 		for statData in item.data.statDataList:
 			if statData.type == statType:
 				statValue = statValue + statData.value
-			else:
-				if GameGlobals.dataManager.is_complex_stat_data(statData.type):
-					var complexStatData:ComplexStatData = GameGlobals.dataManager.get_complex_stat_data(statData.type)
-					if complexStatData.linkedStatType == statType:
-						statValue = statValue + statData.value * complexStatData.linkedStatMultiplier
 	
 	return statValue
 
-func get_stat_base_bonus_from_equipped_items(statType):
-	var statBaseValue:int = 0
+func get_stat_max_bonus_from_equipped_items(statType):
+	var statMaxValue:int = 0
 	# iterate through items
 	for item in equippedItems:
 		for statData in item.data.statDataList:
 			if statData.type == statType:
-				statBaseValue = statBaseValue + statData.baseValue
+				statMaxValue = statMaxValue + statData.maxValue
 
-	return statBaseValue
+	return statMaxValue
 
 func equip_item(item, slotType:int):
 	if equippedSlots[slotType] != null:
