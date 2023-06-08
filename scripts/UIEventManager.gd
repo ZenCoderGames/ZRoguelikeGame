@@ -5,3 +5,6 @@ signal OnGenericMenuOpen
 signal OnGenericMenuClose
 signal OnMainMenuButton
 signal OnCharacterSelectButton
+
+signal OnMainMenuOn
+signal OnMainMenuOff

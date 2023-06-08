@@ -217,7 +217,7 @@ func get_stat(statType):
 
 func initiate_revive(numTurns):
 	setToRevive = numTurns
-	_show_generic_text(self, "Revive")
+	_show_generic_text(self, str("Revive (", str(numTurns), ")"))
 
 func revive():
 	reset_all_stats()

@@ -89,8 +89,11 @@ Roguelike Dev:
 (D)- Difficulty increased
 (D)- Issues with going to new dungeon after event manager clean up
 (D)- SFX Manager/SFXData
+(D)- Rewrite Stat System
+(D)- Add Music To Title Screen
+(D)- Fix MainMenuTurning On when transitioning levels
+(D)- Fix restarting after death being broken
 
-- Rewrite Stat System
 - Exit isn't allowed till you defeat all enemies in the room
 
 - Abilities with positionality and spacing

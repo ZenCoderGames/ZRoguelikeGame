@@ -10,4 +10,4 @@ func can_execute()->bool:
 
 func execute():
 	var playAudioData:ActionPlayAudioData = actionData as ActionPlayAudioData
-	GameGlobals.audioManager.play(playAudioData.audioId)
+	GameGlobals.audioManager.play_sfx(playAudioData.audioId)

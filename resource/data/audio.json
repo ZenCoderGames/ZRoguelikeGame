@@ -1,6 +1,11 @@
 {
 	"audio": [
 		{
+			"id": "MUSIC_TITLE_SCREEN",
+			"path": "audio/doz_titlescreen_mus.mp3",
+			"volume": 0.5
+		},
+		{
 			"id": "UI_BUTTON_MAIN_MENU",
 			"path": "audio/doz_ui_menu_select_new_game.wav",
 			"volume": 1.0

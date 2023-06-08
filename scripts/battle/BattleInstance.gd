@@ -42,6 +42,9 @@ func _ready():
 	mainMenuUI.visible = true
 	GameEventManager.connect("OnReadyToBattle",Callable(self,"_on_new_game"))
 
+	await get_tree().create_timer(0.1).timeout
+	GameEventManager.emit_signal("OnGameInitialized")
+
 func _on_character_chosen(charData):
 	GameGlobals.dataManager.on_character_chosen(charData)
 
@@ -52,6 +55,7 @@ func _on_new_game():
 		recreate_dungeon(0)
 
 func _create_dungeon():
+	_toggle_main_menu()
 	_shared_dungeon_init()
 	firstTimeDungeon = true
 	GameEventManager.emit_signal("OnDungeonInitialized")
@@ -75,6 +79,7 @@ func recreate_dungeon(newDungeonIdx):
 	await get_tree().create_timer(0.1).timeout
 	_shared_dungeon_init(newDungeonIdx==0)
 	if isNewDungeon:
+		_toggle_main_menu()
 		GameEventManager.emit_signal("OnDungeonInitialized")
 	else:
 		GameEventManager.emit_signal("OnNewLevelLoaded")
@@ -86,7 +91,7 @@ func _shared_dungeon_init(recreatePlayer:bool=true):
 
 	GameGlobals.dungeon.create(recreatePlayer)
 	onGameOver = false
-	_toggle_main_menu()
+	#_toggle_main_menu()
 	GameGlobals.dungeon.player.connect("OnDeath",Callable(self,"_on_game_over"))
 	GameGlobals.dungeon.player.connect("OnPlayerReachedExit",Callable(self,"_on_dungeon_completed"))
 	GameGlobals.dungeon.player.connect("OnPlayerReachedEnd",Callable(self,"_on_game_end"))
@@ -109,9 +114,9 @@ func _toggle_main_menu():
 	mainMenuUI.visible = !mainMenuUI.visible
 	if mainMenuUI.visible:
 		mainMenuUI.show_menu()
-		GameEventManager.emit_signal("OnMainMenuOn")
+		UIEventManager.emit_signal("OnMainMenuOn")
 	else:
-		GameEventManager.emit_signal("OnMainMenuOff")
+		UIEventManager.emit_signal("OnMainMenuOff")
 
 func _on_game_over():
 	onGameOver = true
@@ -120,7 +125,7 @@ func _on_game_over():
 
 func _on_dungeon_completed():
 	screenFade.visible = true
-	_toggle_main_menu()
+	#_toggle_main_menu()
 
 	GameGlobals.dungeon.isDungeonFinished = true
 	

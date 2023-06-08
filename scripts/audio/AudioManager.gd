@@ -2,37 +2,81 @@ extends Node
 
 class_name AudioManager
 
-@export var numStreams:int = 5
+@export var numMusicStreams:int = 3
+@export var numSfxStreams:int = 5
 
 var audioDataDict = {}
-var audioStreams = []
+
+var audioCurrentPlayingMusicDict = {}
+var audioMusicStreams = []
+
+var audioCurrentPlayingSFXDict = {}
+var audioSfxStreams = []
 
 func _ready():
 	GameGlobals.set_audio_manager(self)
 	_init_data()
 	_init_streams()
 
-func play(id:String):
+# PLAY MUSIC	
+func play_music(id:String):
 	var audioData:AudioData = _get_data(id)
 	if audioData!=null:
-		var audioStreamPlayer:AudioStreamPlayer2D = _get_free_stream()
+		var audioStreamPlayer:AudioStreamPlayer2D = null
+		if audioCurrentPlayingMusicDict.has(id):
+			audioStreamPlayer = audioCurrentPlayingMusicDict[id]
+		else:
+			audioStreamPlayer = _get_free_music_stream()
+			audioCurrentPlayingMusicDict[id] = audioStreamPlayer
 		audioStreamPlayer.stream = audioData.stream
 		audioStreamPlayer.set_volume_db(linear_to_db(audioData.volume))
 		audioStreamPlayer.play()
 
+func stop_music(id:String):
+	if audioCurrentPlayingMusicDict.has(id):
+		audioCurrentPlayingMusicDict[id].stop()
+		audioCurrentPlayingMusicDict.erase(id)
+
+# PLAY SFX
+func play_sfx(id:String):
+	var audioData:AudioData = _get_data(id)
+	if audioData!=null:
+		var audioStreamPlayer:AudioStreamPlayer2D = _get_free_sfx_stream()
+		audioStreamPlayer.stream = audioData.stream
+		audioStreamPlayer.set_volume_db(linear_to_db(audioData.volume))
+		audioStreamPlayer.play()
+		audioCurrentPlayingSFXDict[id] = audioStreamPlayer
+
+func stop_sfx(id:String):
+	if audioCurrentPlayingSFXDict.has(id):
+		audioCurrentPlayingSFXDict[id].stop()
+		audioCurrentPlayingSFXDict.erase(id)
+
 # STREAMS
 func _init_streams():
-	for i in numStreams:
+	for i in numMusicStreams:
 		var newStream:AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 		add_child(newStream)
-		audioStreams.append(newStream)
+		audioMusicStreams.append(newStream)
 
-func _get_free_stream():
-	for i in numStreams:
-		if !audioStreams[i].is_playing():
-			return audioStreams[i]
+	for i in numSfxStreams:
+		var newStream:AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+		add_child(newStream)
+		audioSfxStreams.append(newStream)
 
-	return audioStreams[0]
+func _get_free_music_stream():
+	for i in numMusicStreams:
+		if !audioMusicStreams[i].is_playing():
+			return audioMusicStreams[i]
+
+	return audioSfxStreams[0]
+
+func _get_free_sfx_stream():
+	for i in numSfxStreams:
+		if !audioSfxStreams[i].is_playing():
+			return audioSfxStreams[i]
+
+	return audioSfxStreams[0]
 
 # DATA
 func _init_data():

@@ -1,11 +1,10 @@
 extends Node
 
+signal OnGameInitialized
 signal OnReadyToBattle
 signal OnCharacterSelected(charData)
 signal OnDungeonInitialized()
 signal OnGameOver()
-signal OnMainMenuOn()
-signal OnMainMenuOff()
 signal OnNewLevelLoaded()
 signal OnCleanUpForDungeonRecreation(isNewDungeon:bool)
 
