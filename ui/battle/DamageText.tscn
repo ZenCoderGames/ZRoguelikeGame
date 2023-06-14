@@ -4,8 +4,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_76ior"]
 font = ExtResource("1_064ey")
-outline_size = 2
-outline_color = Color(1, 0.752941, 0.0117647, 1)
+outline_size = 4
+outline_color = Color(0.32549, 0.235294, 0, 1)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 

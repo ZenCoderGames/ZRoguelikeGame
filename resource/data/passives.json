@@ -3,9 +3,9 @@
 		{
 			"id": "PASSIVE_LIFESTEAL_01",
 			"name": "Lifesteal",
-			"description": "Lifesteal On Hit",
+			"description": "Lifesteal On Kill",
 			"conditions": [
-				"ON_POST_HIT"
+				"ON_KILL"
 			],
 			"timeline": [
 				{
@@ -17,7 +17,7 @@
 				{
 					"type": "LIFESTEAL",
 					"params": {
-						"percent": 0.2
+						"percent": 0.25
 					}
 				}
 			]

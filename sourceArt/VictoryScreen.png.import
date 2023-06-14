@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2jb6v276wp0k"
-path="res://.godot/imported/Rat_01.png-08ec8b5b9ba2f6b8ccda79a462ef8a43.ctex"
+uid="uid://c0fswqjk64i3j"
+path="res://.godot/imported/VictoryScreen.png-0026707e27ddf1c0b0d9223588a931a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sourceArt/Enemies/Rat_01.png"
-dest_files=["res://.godot/imported/Rat_01.png-08ec8b5b9ba2f6b8ccda79a462ef8a43.ctex"]
+source_file="res://sourceArt/VictoryScreen.png"
+dest_files=["res://.godot/imported/VictoryScreen.png-0026707e27ddf1c0b0d9223588a931a1.ctex"]
 
 [params]
 

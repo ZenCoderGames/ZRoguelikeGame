@@ -1,7 +1,8 @@
+AnimationPlayer
+TextureRect
 Label
 Node
 AudioStreamPlayer2D
-TextureRect
 Panel
 CanvasLayer
 HBoxContainer

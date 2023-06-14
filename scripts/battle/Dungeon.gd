@@ -223,7 +223,11 @@ func _init_enemies():
 	for room in rooms:
 		if room.isStartRoom:
 			continue
-
+		
+		if !costFromStart.has(room):
+			print("ERROR: Room doesn't exist in cost from start")
+			continue
+		
 		var encounterCost = minCostPerRoom + int(float(costFromStart[room])/float(numCriticalPathRooms) * float(scalingCostPerRoom))
 		# single rooms
 		if room.connections.size()==1:

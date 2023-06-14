@@ -4,6 +4,7 @@ extends Node
 class_name Character
 
 @onready var damageText:Label = get_node("DamageText")
+@onready var animPlayer:AnimationPlayer = get_node("AnimationPlayer")
 
 var charData:CharacterData
 var displayName: String = ""
@@ -47,10 +48,13 @@ var maxSpellSlots:int = 2
 var maxRuneSlots:int = 2
 
 signal OnCharacterMove(x, y)
+signal OnCharacterFailedToMove(x, y)
 signal OnCharacterMoveToCell()
 signal OnCharacterItemPicked()
 signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
+signal OnReviveStart()
+signal OnReviveEnd()
 signal OnDeath()
 
 signal OnPreAttack(defender)
@@ -126,6 +130,8 @@ func move(x, y):
 	var success:bool = cell.room.move_entity(self, cell, newR, newC)
 	if success:
 		emit_signal("OnCharacterMove", x, y)
+	else:
+		emit_signal("OnCharacterFailedToMove", x, y)
 
 # Mostly for AI
 func failed_to_move():
@@ -217,10 +223,12 @@ func get_stat(statType):
 
 func initiate_revive(numTurns):
 	setToRevive = numTurns
-	_show_generic_text(self, str("Revive (", str(numTurns), ")"))
+	emit_signal("OnReviveStart")
+	#_show_generic_text(self, str("Revive x", str(numTurns)))
 
 func revive():
 	reset_all_stats()
+	emit_signal("OnReviveEnd")
 	# Maybe play an animation here
 
 func reset_all_stats():
@@ -260,6 +268,7 @@ func attack(entity):
 		# shove towards
 		var SHOVE_AMOUNT:float = 7
 		var dirn:int = dirn_to_character(entity)
+		var originalPos:Vector2 = self.position
 		if dirn==Constants.DIRN_TYPE.LEFT:
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(SHOVE_AMOUNT, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.RIGHT:
@@ -270,6 +279,8 @@ func attack(entity):
 			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		
 		await get_tree().create_timer(0.075).timeout
+
+		self.position = originalPos
 
 		emit_signal("OnPreAttack", entity)
 
@@ -324,16 +335,17 @@ func show_damage_from_hit(attacker, dmg, isCritical):
 func die():
 	emit_signal("OnDeath")
 	CombatEventManager.emit_signal("OnAnyCharacterDeath", self)
-
+	
 	if setToRevive>0:
 		pass
 	else:
 		isDead = true
+		if animPlayer!=null:
+			animPlayer.play("Death")
+		
 		currentRoom.enemy_died(self)
+		
 		await get_tree().create_timer(0.1).timeout
-
-		if cell.entityObject!=null:
-			cell.entityObject.hide()
 		cell.clear_entity_on_death()
 
 func show_hit(entity, _dmg, isCritical):
@@ -429,6 +441,8 @@ func update():
 		skipThisTurn = true
 		if setToRevive==-1:
 			revive()
+		else:
+			_show_generic_text(self, str("Revive x", str(setToRevive+1)))
 		return
 
 	if status.is_stunned():

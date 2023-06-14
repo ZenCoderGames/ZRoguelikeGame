@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0vuvgr4glgdp"]
+[gd_scene load_steps=15 format=3 uid="uid://d0vuvgr4glgdp"]
 
 [ext_resource type="Script" path="res://scripts/battle/DungeonCamera.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="1_bihmr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/battle/Dungeon.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://3gpoj14w4qny" path="res://ui/MainMenuUI.tscn" id="8"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="9_07g2x"]
+[ext_resource type="Texture2D" uid="uid://c0fswqjk64i3j" path="res://sourceArt/VictoryScreen.png" id="10_lb8q0"]
 [ext_resource type="Script" path="res://scripts/audio/AudioManager.gd" id="11_x0m75"]
 [ext_resource type="Script" path="res://scripts/audio/AudioHandler.gd" id="12_w0uop"]
 
@@ -52,6 +53,7 @@ expand_mode = 1
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource("4")
 doorsStayOpenDuringBattle = true
+debugSpawnEnemyEncounter = "TEST_ENC_SINGLE"
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource("3")
@@ -101,10 +103,12 @@ mouse_filter = 2
 [node name="ScreenFade" type="Panel" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
-self_modulate = Color(0.301961, 0.298039, 0.298039, 1)
+self_modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VictoryUI" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -116,14 +120,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/VictoryUI"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VictoryUI"]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "YOU WIN !"
+texture = ExtResource("10_lb8q0")
 
 [node name="BackToMenu" type="Button" parent="CanvasLayer/VictoryUI"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 8
 theme = ExtResource("9_07g2x")
 text = "Back to Menu"

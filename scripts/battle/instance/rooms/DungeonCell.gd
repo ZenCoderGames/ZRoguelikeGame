@@ -63,10 +63,12 @@ func clear_entity():
 	entityObject = null
 
 func clear_entity_on_death():
+	#if entityObject!=null:
+	#	entityObject.hide()
 	clear_entity()
-	var deathNode:Node = floorObject.get_node("Death")
+	'''var deathNode:Node = floorObject.get_node("Death")
 	deathNode.rotate(randf_range(0, 180))
-	deathNode.visible = true
+	deathNode.visible = true'''
 	
 func unload_entity():
 	room.clean_up_loaded_scene(entityObject)

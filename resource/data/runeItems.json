@@ -3,8 +3,8 @@
 		{
 			"id": "RUNE_VAMPIRIC",
 			"name": "Vampiric",
-			"description": "Lifesteal 20% of your damage on hit",
-			"fullDescription": "Lifesteal 20% of your damage on hit",
+			"description": "Lifesteal 25% of your damage on kill",
+			"fullDescription": "Lifesteal 25% of your damage on kill",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"tier": 2,

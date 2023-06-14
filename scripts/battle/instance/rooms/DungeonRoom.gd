@@ -328,8 +328,10 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 				return true
 			# Enemy
 			if entity.is_opposite_team(cell.entityObject):
-				entity.attack(cell.entityObject)
-				return true
+				var enemyChar = cell.entityObject
+				if enemyChar.can_take_damage():
+					entity.attack(cell.entityObject)
+					return true
 	# out of bounds of room
 	else:
 		# if there is a connection, move to the connected cell
@@ -495,10 +497,10 @@ func _update_next_enemy():
 	else:
 		_prevProcessedEnemy = nextEnemy
 		nextEnemy.connect("OnTurnCompleted",Callable(self,"_update_next_enemy"))
-		if Utils.is_adjacent(nextEnemy, GameGlobals.dungeon.player):
+		'''if Utils.is_adjacent(nextEnemy, GameGlobals.dungeon.player):
 			await GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES_ADJACENT_TO_PLAYER).timeout
 		else:
-			await GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES).timeout
+			await GameGlobals.battleInstance.get_tree().create_timer(Constants.TIME_BETWEEN_MOVES).timeout'''
 		
 		if nextEnemy!=null && is_instance_valid(nextEnemy):
 			nextEnemy.update()

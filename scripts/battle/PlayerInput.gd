@@ -83,7 +83,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.move(x, y)
 
 func _on_player_turn_completed():
-	blockInputsForTurn = true
+	blockInputsForTurn = false ## used to be true
 	
 func _on_end_turn():
 	blockInputsForTurn = false

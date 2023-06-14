@@ -5,7 +5,7 @@
 				"id": "PALADIN",
 				"displayName": "You",
 				"description": "Paladin",
-				"path": "entity/characters/Player.tscn",
+				"path": "entity/characters/Player/Player.tscn",
 				"portraitPath": "resource/portraits/Paladin.png",
 				"stats": [
 					{
@@ -39,7 +39,7 @@
 				"id": "BERSERKER",
 				"displayName": "You",
 				"description": "Berserker",
-				"path": "entity/characters/Player.tscn",
+				"path": "entity/characters/Player/Player.tscn",
 				"portraitPath": "resource/portraits/Berserker.png",
 				"stats": [
 					{
@@ -85,7 +85,7 @@
 			{
 				"id": "ASSASSIN",
 				"displayName": "You",
-				"path": "entity/characters/Player.tscn",
+				"path": "entity/characters/Player/Player.tscn",
 				"portraitPath": "resource/portraits/Assassin.png",
 				"stats": [
 					{
@@ -121,7 +121,7 @@
 				"id": "SKELETON",
 				"displayName": "Skeleton",
 				"description": "No special properties",
-				"path": "entity/characters/Skeleton.tscn",
+				"path": "entity/characters/Skeleton/Skeleton.tscn",
 				"difficulty": 1,
 				"cost": 5,
 				"xp": 10,
@@ -142,7 +142,7 @@
 				"id": "GIANT",
 				"displayName": "Giant",
 				"description": "This creature will heal every turn",
-				"path": "entity/characters/Giant.tscn",
+				"path": "entity/characters/Giant/Giant.tscn",
 				"difficulty": 2,
 				"cost": 10,
 				"xp": 20,
@@ -162,7 +162,7 @@
 				"id": "RAT",
 				"displayName": "Rat",
 				"description": "No special properties",
-				"path": "entity/characters/Rat.tscn",
+				"path": "entity/characters/Rat/Rat.tscn",
 				"difficulty": 1,
 				"cost": 2,
 				"xp": 3,
@@ -182,7 +182,7 @@
 				"id": "SERPENT",
 				"displayName": "Serpent",
 				"description": "These venomous fiends deal poison damage on hit",
-				"path": "entity/characters/Serpent.tscn",
+				"path": "entity/characters/Serpent/Serpent.tscn",
 				"difficulty": 2,
 				"cost": 5,
 				"xp": 8,
@@ -202,7 +202,7 @@
 				"id": "AUTOMATON",
 				"displayName": "Automaton",
 				"description": "This creature is immune to elemental or status effects",
-				"path": "entity/characters/Automaton.tscn",
+				"path": "entity/characters/Automaton/Automaton.tscn",
 				"difficulty": 3,
 				"cost": 7,
 				"xp": 15,
@@ -222,7 +222,7 @@
 				"id": "DRAGON",
 				"displayName": "Dragon",
 				"description": "The dragon will breathe fire on its victims",
-				"path": "entity/characters/Dragon.tscn",
+				"path": "entity/characters/Dragon/Dragon.tscn",
 				"difficulty": 4,
 				"cost": 10,
 				"xp": 30,

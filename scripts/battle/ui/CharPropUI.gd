@@ -20,10 +20,22 @@ func init_parent_char():
 	_update_stats()
 	
 	parentCharacter.connect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
+	parentCharacter.connect("OnDeath",Callable(self,"_on_char_death"))
+	parentCharacter.connect("OnReviveStart",Callable(self,"_on_char_revive_start"))
+	parentCharacter.connect("OnReviveEnd",Callable(self,"_on_char_revive_end"))
 
 func _on_char_stat_changed(statChangeChar):
 	if parentCharacter==statChangeChar:
 		_update_stats()
+
+func _on_char_death():
+	self.visible = false
+
+func _on_char_revive_start():
+	self.visible = false
+
+func _on_char_revive_end():
+	self.visible = true
 
 func _update_stats():
 	update_attack(parentCharacter.get_damage())

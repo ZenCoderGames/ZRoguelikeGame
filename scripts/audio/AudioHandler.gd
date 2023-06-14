@@ -30,10 +30,14 @@ func _on_character_select_button():
 
 func _on_dungeon_initialized():
 	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell", Callable(self,"_on_player_move"))
+	GameGlobals.dungeon.player.connect("OnCharacterFailedToMove", Callable(self,"_on_player_failed_to_move"))
 	GameGlobals.dungeon.player.connect("OnCharacterItemPicked", Callable(self,"_on_player_item_picked"))
 	GameGlobals.dungeon.player.connect("OnPlayerReachedEnd",Callable(self,"_play_menu_music"))
 
 func _on_player_move():
+	GameGlobals.audioManager.play_sfx("PLAYER_MOVE")
+
+func _on_player_failed_to_move(_x, _y):
 	GameGlobals.audioManager.play_sfx("PLAYER_MOVE")
 
 func _on_player_item_picked():

@@ -38,6 +38,10 @@ gdscript/warnings/integer_division=false
 window/size/viewport_height=678
 window/energy_saving/keep_screen_on=false
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+
 [input]
 
 move_left={

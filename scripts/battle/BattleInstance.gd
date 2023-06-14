@@ -142,7 +142,7 @@ func _on_game_end():
 	_toggle_main_menu()
 
 func back_to_menu_from_victory():
-	_toggle_main_menu()
+	#_toggle_main_menu()
 	victoryUI.visible = false
 	GameGlobals.dungeon.isDungeonFinished = false
 
