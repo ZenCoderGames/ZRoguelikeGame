@@ -18,3 +18,5 @@ res://entity/characters/Skeleton/Skeleton.tscn
 res://entity/characters/Giant/Giant.tscn
 res://entity/characters/Dragon/Dragon.tscn
 res://entity/characters/Automaton/Automaton.tscn
+res://scripts/battle/instance/stats/Stat.gd
+res://scripts/battle/instance/characters/Character.gd

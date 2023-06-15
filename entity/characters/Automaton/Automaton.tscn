@@ -4,11 +4,13 @@
 [ext_resource type="Script" path="res://scripts/battle/instance/characters/EnemyCharacter.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="4"]
-[ext_resource type="Texture2D" uid="uid://dx3ycb5nxh5v3" path="res://entity/characters/Rat/Rat_01.png" id="5_i3rv8"]
 
 [sub_resource type="AtlasTexture" id="1"]
 atlas = ExtResource("1")
 region = Rect2(24, 144, 23, 36)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u6ywn"]
+load_path = "res://.godot/imported/Rat_01.png-0994be6c0e95f2a01eac132489c87402.ctex"
 
 [sub_resource type="Animation" id="Animation_2hrqu"]
 length = 0.4
@@ -22,7 +24,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_i3rv8")]
+"values": [SubResource("CompressedTexture2D_u6ywn")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -86,7 +88,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_i3rv8")]
+"values": [SubResource("CompressedTexture2D_u6ywn")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false

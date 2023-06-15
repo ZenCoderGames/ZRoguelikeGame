@@ -154,6 +154,15 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 		on_turn_completed()
 
 # STATS
+func get_stat_base_value(statType:Stat):
+	var statValue:int = 0
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			statValue = statValue + stat.value
+	
+	return statValue
+
 func get_stat_value(statType):
 	var statValue:int = 0
 	# iterate through char
@@ -335,7 +344,7 @@ func show_damage_from_hit(attacker, dmg, isCritical):
 func die():
 	emit_signal("OnDeath")
 	CombatEventManager.emit_signal("OnAnyCharacterDeath", self)
-	
+
 	if setToRevive>0:
 		pass
 	else:
