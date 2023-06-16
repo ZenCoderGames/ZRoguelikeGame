@@ -23,6 +23,9 @@ var playerUI:CharacterUI
 @onready var infoPanel:Node = get_node("InfoPanel")
 var infoPanelObjects:Array = []
 var registeredEnemies:Dictionary = {}
+# level up
+var levelUpUI:LevelUpUI
+const LevelUpUI := preload("res://ui/battle/LevelUpUI.tscn")
 const CharacterUI := preload("res://ui/battle/CharacterUI.tscn")
 const ItemUI := preload("res://ui/battle/ItemUI.tscn")
 # inventory UI
@@ -44,6 +47,7 @@ func _ready():
 	CombatEventManager.connect("OnHideInfo",Callable(self,"_on_hide_info"))
 	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_turn_taken"))
 	CombatEventManager.connect("OnDetailInfoShow",Callable(self,"_show_detail_info_text"))
+	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
 	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_attack"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
@@ -70,6 +74,7 @@ func _shared_init():
 	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell",Callable(self,"_on_player_move"))
 	GameGlobals.dungeon.player.connect("OnNearbyEntityFound",Callable(self,"_on_entity_nearby"))
 	GameGlobals.dungeon.player.inventory.connect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))
+	GameGlobals.dungeon.player.connect("OnLevelUp",Callable(self,"_on_player_level_up"))
 	
 	playerUI.init(GameGlobals.dungeon.player)
 	levelLabel.text = str(GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
@@ -221,3 +226,20 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 			player.disconnect("OnCharacterMoveToCell",Callable(self,"_on_player_move"))
 			player.disconnect("OnNearbyEntityFound",Callable(self,"_on_entity_nearby"))
 			player.inventory.disconnect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))
+
+# LEVEL UP
+func _on_player_level_up():
+	levelUpUI = LevelUpUI.instantiate()
+	add_child(levelUpUI)
+
+	var hasALevelUpItem:bool = levelUpUI.init_from_data()
+	if !hasALevelUpItem:
+		_remove_level_up_ui()
+
+func _on_levelup_ability_selected(_abilityData:AbilityData):
+	_remove_level_up_ui()
+
+func _remove_level_up_ui():
+	remove_child(levelUpUI)
+	levelUpUI.queue_free()
+	levelUpUI = null

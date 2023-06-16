@@ -602,6 +602,13 @@ func remove_ability(ability):
 	emit_signal("OnAbilityRemoved", self, ability)
 	on_stats_changed()
 
+func has_ability(abilityData:AbilityData):
+	for ability in abilityList:
+		if ability.data == abilityData:
+			return true
+
+	return false
+
 # TURNS
 func on_turn_completed():
 	emit_signal("OnTurnCompleted")

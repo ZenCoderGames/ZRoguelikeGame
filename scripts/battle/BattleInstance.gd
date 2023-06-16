@@ -23,7 +23,6 @@ class_name BattleInstance
 @export var debugAbilities:Array # (Array, String)
 @export var debugPassives:Array # (Array, String)
 @export var debugStatusEffects:Array # (Array, String)
-@export var debugGiveAbility:String
 
 var firstTimeDungeon:bool = false
 var onGameOver:bool

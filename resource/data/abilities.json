@@ -1,6 +1,44 @@
 {
 	"abilities": [
 		{
+			"id": "ABILITY_HERO_DAMAGE_UPGRADE",
+			"characterId": "",
+			"name": "(Upgrade) Stat Upgrade",
+			"description": "Upgrade your base Attack by 1",
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"maxValue": 1
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_HERO_HEALTH_UPGRADE",
+			"characterId": "",
+			"name": "(Upgrade) Stat Upgrade",
+			"description": "Upgrade your base Health by 2",
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "HEALTH",
+								"maxValue": 2
+							}
+						]
+					}
+				}
+			]
+		},
+		{
 			"id": "ABILITY_PROTECTION_PUSHBACK",
 			"characterId": "PALADIN",
 			"name": "(Upgrade) Protection Pushback",

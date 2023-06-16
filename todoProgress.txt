@@ -93,6 +93,8 @@ Roguelike Dev:
 (D)- Add Music To Title Screen
 (D)- Fix MainMenuTurning On when transitioning levels
 (D)- Fix restarting after death being broken
+(D)- Add Level Ups
+- Randomize Level Ups
 
 - Exit isn't allowed till you defeat all enemies in the room
 

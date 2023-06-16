@@ -54,7 +54,6 @@ expand_mode = 1
 script = ExtResource("4")
 doorsStayOpenDuringBattle = true
 debugSpawnEnemyEncounter = "TEST_ENC_SINGLE"
-debugSpawnItems = ["ITEM_WOODEN_PLATE"]
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource("3")

@@ -10,5 +10,5 @@ func can_execute()->bool:
 
 func execute():
 	var actionStatModifierData:ActionAddStatModifierData = actionData as ActionAddStatModifierData
-	for statModifier in actionStatModifierData.statusModifiers:
+	for statModifier in actionStatModifierData.statModifiers:
 		character.modify_stat_value_from_modifier(statModifier)

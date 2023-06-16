@@ -1,8 +1,10 @@
+Label
+Panel
+PanelContainer
+Control
 AnimationPlayer
 TextureRect
-Label
 Node
 AudioStreamPlayer2D
-Panel
 CanvasLayer
 HBoxContainer

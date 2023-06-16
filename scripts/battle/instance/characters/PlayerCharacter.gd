@@ -8,14 +8,12 @@ signal OnPlayerReachedEnd()
 signal OnXPGained()
 signal OnLevelUp()
 
-var levelXpList:Array = [0, 20, 40, 70, 110, 160, 220, 290, 380]
+var levelXpList:Array = [0, 30, 50, 80, 120, 170, 230, 300, 380]
 var xp:int = 0
 var currentLevel:int = 0
 
 @onready var levelUpAnim:Node = $"%LevelUpAnimation"
 @onready var levelUpLabel:Node = $"%LevelUpLabel"
-
-
 
 func init(charId:int, charData, teamVal):
 	super.init(charId, charData, teamVal)
@@ -42,6 +40,7 @@ func init_for_next_dungeon():
 
 func _setup_events():
 	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer",Callable(self,"on_enemy_moved_adjacent"))
+	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
 func update():
@@ -100,20 +99,20 @@ func _gain_xp(val:int):
 
 func _level_up():
 	# DISABLING FOR NOW
-	return
+	#return
 
-	reset_stat_value(StatData.STAT_TYPE.HEALTH)
-	reset_stat_value(StatData.STAT_TYPE.DAMAGE)
+	#reset_stat_value(StatData.STAT_TYPE.HEALTH)
+	#reset_stat_value(StatData.STAT_TYPE.DAMAGE)
 	emit_signal("OnLevelUp")
 	
-	levelUpAnim.visible = true
+	'''levelUpAnim.visible = true
 	self.self_modulate = GameGlobals.battleInstance.view.playerLevelUpColor
 	await get_tree().create_timer(0.2).timeout
 	levelUpAnim.visible = false
 	levelUpLabel.visible = true
 	await get_tree().create_timer(0.25).timeout
 	levelUpLabel.visible = false
-	self.self_modulate = GameGlobals.battleInstance.view.playerDamageColor
+	self.self_modulate = GameGlobals.battleInstance.view.playerDamageColor'''
 
 func get_xp():
 	return xp
@@ -132,6 +131,9 @@ func get_xp_to_level_xp():
 
 func is_at_max_level():
 	return currentLevel == levelXpList.size()-1
+
+func _on_levelup_ability_selected(abilityData:AbilityData):
+	add_ability(abilityData)
 
 # SKIP_TURN MANAGEMENT
 var _lastSkipTurn:int = -1

@@ -10,12 +10,16 @@ config_version=5
 
 [application]
 
-config/name="ZRoguelikeGame"
+config/name="DungeonsOfZekonia"
 run/main_scene="res://scene/main/MainScene.tscn"
 config/features=PackedStringArray("4.0")
 boot_splash/bg_color=Color(0.0901961, 0.0901961, 0.0901961, 1)
 boot_splash/image="res://sourceArt/Bg/Game/Bg.png"
 config/icon="res://resource/icon.png"
+
+[aseprite]
+
+animation/layers/exclusion_pattern="_"
 
 [autoload]
 
