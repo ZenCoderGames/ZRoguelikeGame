@@ -12,8 +12,10 @@ func _ready():
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
 	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
 	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_new_level_loaded"))
-	UIEventManager.connect("OnMainMenuOn",Callable(self,"on_main_menu_on"))
-	UIEventManager.connect("OnMainMenuOff",Callable(self,"on_main_menu_off"))
+	UIEventManager.connect("OnMainMenuOn",Callable(self,"on_menu_on"))
+	UIEventManager.connect("OnMainMenuOff",Callable(self,"on_menu_off"))
+	UIEventManager.connect("OnLevelUpMenuOn",Callable(self,"on_menu_on"))
+	UIEventManager.connect("OnLevelUpMenuOff",Callable(self,"on_menu_off"))
 	CombatEventManager.connect("OnPlayerTurnCompleted",Callable(self,"_on_player_turn_completed"))
 	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_end_turn")) 
 	CombatEventManager.connect("OnTouchButtonPressed",Callable(self,"_on_touch_button_pressed"))
@@ -38,10 +40,10 @@ func _on_player_death():
 	blockInputsForTurn = false
 	player.disconnect("OnDeath",Callable(self,"_on_player_death"))
 
-func on_main_menu_on():
+func on_menu_on():
 	disableInput = true
 
-func on_main_menu_off():
+func on_menu_off():
 	disableInput = false
 
 func _unhandled_input(event: InputEvent) -> void:

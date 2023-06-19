@@ -20,3 +20,8 @@ res://scripts/battle/BattleInstance.gd
 res://scripts/battle/instance/characters/PlayerCharacter.gd
 res://scripts/battle/general/CombatEventManager.gd
 res://scripts/battle/instance/characters/Character.gd
+res://scripts/battle/instance/rooms/DungeonRoom.gd
+res://scripts/battle/ui/LevelUp/LevelUpUI.gd
+res://scripts/battle/PlayerInput.gd
+res://scripts/UIEventManager.gd
+res://scripts/battle/ui/BattleUI.gd

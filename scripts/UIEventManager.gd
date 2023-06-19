@@ -8,3 +8,5 @@ signal OnCharacterSelectButton
 
 signal OnMainMenuOn
 signal OnMainMenuOff
+signal OnLevelUpMenuOn
+signal OnLevelUpMenuOff

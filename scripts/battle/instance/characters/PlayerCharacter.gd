@@ -11,6 +11,7 @@ signal OnLevelUp()
 var levelXpList:Array = [0, 30, 50, 80, 120, 170, 230, 300, 380]
 var xp:int = 0
 var currentLevel:int = 0
+var _levelUpThisTurn:bool = false
 
 @onready var levelUpAnim:Node = $"%LevelUpAnimation"
 @onready var levelUpLabel:Node = $"%LevelUpLabel"
@@ -44,6 +45,10 @@ func _setup_events():
 	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
+func pre_update():
+	super.pre_update()
+	_levelUpThisTurn = false
+
 func update():
 	super.update()
 
@@ -52,6 +57,15 @@ func update():
 		return
 
 	cell.room.update_path_map()
+
+func post_update():
+	super.post_update()
+
+	if isDead:
+		return
+
+	if _levelUpThisTurn:
+		emit_signal("OnLevelUp")
 
 func can_take_damage()->bool:
 	if GameGlobals.battleInstance.setPlayerInvulnerable:
@@ -99,21 +113,7 @@ func _gain_xp(val:int):
 	emit_signal("OnXPGained")
 
 func _level_up():
-	# DISABLING FOR NOW
-	#return
-
-	#reset_stat_value(StatData.STAT_TYPE.HEALTH)
-	#reset_stat_value(StatData.STAT_TYPE.DAMAGE)
-	emit_signal("OnLevelUp")
-	
-	'''levelUpAnim.visible = true
-	self.self_modulate = GameGlobals.battleInstance.view.playerLevelUpColor
-	await get_tree().create_timer(0.2).timeout
-	levelUpAnim.visible = false
-	levelUpLabel.visible = true
-	await get_tree().create_timer(0.25).timeout
-	levelUpLabel.visible = false
-	self.self_modulate = GameGlobals.battleInstance.view.playerDamageColor'''
+	_levelUpThisTurn = true
 
 func get_xp():
 	return xp

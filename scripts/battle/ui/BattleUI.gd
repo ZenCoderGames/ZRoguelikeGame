@@ -235,6 +235,8 @@ func _on_player_level_up():
 	var hasALevelUpItem:bool = levelUpUI.init_from_data()
 	if !hasALevelUpItem:
 		_remove_level_up_ui()
+	else:
+		UIEventManager.emit_signal("OnLevelUpMenuOn")
 
 func _on_levelup_ability_selected(_abilityData:AbilityData):
 	_remove_level_up_ui()
@@ -243,3 +245,4 @@ func _remove_level_up_ui():
 	remove_child(levelUpUI)
 	levelUpUI.queue_free()
 	levelUpUI = null
+	UIEventManager.emit_signal("OnLevelUpMenuOff")
