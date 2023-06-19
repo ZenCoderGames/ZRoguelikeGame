@@ -26,12 +26,6 @@ func _init(parentChar,statusEffectData:StatusEffectData):
 		instanceCount = instanceCount + statusEffectModifier.instanceCounterModifier
 		statusEffectModifier.execute_start_timeline_if_exists(character)
 
-func reset_events():
-	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
-	if data.forceCompleteTriggerConditions.size()>0:
-		_forceCompleteCombatEventReceiver = CombatEventReceiver.new(data.forceCompleteTriggerConditions, data.forceCompleteTriggerConditionParams, character, Callable(self, "on_force_complete_event_triggered"))
-
-
 func on_event_triggered():
 	activate()
 	
@@ -61,3 +55,6 @@ func _clean_up():
 	var statusEffectModifierList:Array = character.get_status_effect_modifiers(data.id)
 	for statusEffectModifier in statusEffectModifierList:
 		statusEffectModifier.execute_end_timeline_if_exists(character)
+
+	_combatEventReceiver = null
+	_forceCompleteCombatEventReceiver = null

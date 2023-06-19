@@ -29,7 +29,10 @@ func _init():
 	init_items("resource/data/runeItems.json")
 	init_items("resource/data/consumableItems.json")
 	init_items("resource/data/spellItems.json")
-	init_abilities()
+	init_abilities("resource/data/abilities/abilities_shared.json")
+	init_abilities("resource/data/abilities/abilities_paladin.json")
+	init_abilities("resource/data/abilities/abilities_berserker.json")
+	init_abilities("resource/data/abilities/abilities_assassin.json")
 	init_characters()
 	init_encounters()
 
@@ -141,8 +144,8 @@ func get_custom_encounter(encounterId):
 	print("Invalid Custom Encounter Data: ", encounterId)
 	return null
 
-func init_abilities():
-	var data = Utils.load_data_from_file("resource/data/abilities.json")
+func init_abilities(dataPath:String):
+	var data = Utils.load_data_from_file(dataPath)
 	var abilityDataJSList:Array = data["abilities"]
 	for abilityDataJS in abilityDataJSList:
 		var newAbilityData = AbilityData.new(abilityDataJS)

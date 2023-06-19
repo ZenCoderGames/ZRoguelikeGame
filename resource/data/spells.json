@@ -16,6 +16,12 @@
 					"params": {
 						"damage": 6
 					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "PLAYER_ATTACK"
+					}
 				}
 			]
 		},
@@ -36,6 +42,12 @@
 						"statusEffectId": "STATUS_EFFECT_STUN",
 						"applyToTargets": true
 					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "PLAYER_ATTACK"
+					}
 				}
 			]
 		},
@@ -54,6 +66,12 @@
 					"type": "LIFEDRAIN",
 					"params": {
 						"flatAmount": 2
+					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "STATUS_EFFECT_BARRIER"
 					}
 				}
 			]
@@ -75,6 +93,12 @@
 						"amount": 2,
 						"awayFromSource": true
 					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "PLAYER_ATTACK"
+					}
 				}
 			]
 		},
@@ -87,6 +111,12 @@
 					"params": {
 						"statusEffectId": "STATUS_EFFECT_PROTECTION",
 						"applyToSource": true
+					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "STATUS_EFFECT_BARRIER"
 					}
 				}
 			]

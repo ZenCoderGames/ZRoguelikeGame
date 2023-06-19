@@ -44,17 +44,19 @@ func _init(dataJS):
 		if conditionParams.has("statusEffectId"):
 			forceCompleteTriggerConditionParams["statusEffectId"] = conditionParams["statusEffectId"]
 
-	var actionsJSList = dataJS["startTimeline"]
-	for actionJS in actionsJSList:
-		var actionData:ActionData = ActionDataTypes.create(actionJS)
-		if actionData!=null:
-			startTimeline.append(actionData)
+	if dataJS.has("startTimeline"):
+		var actionsJSList = dataJS["startTimeline"]
+		for actionJS in actionsJSList:
+			var actionData:ActionData = ActionDataTypes.create(actionJS)
+			if actionData!=null:
+				startTimeline.append(actionData)
 
-	actionsJSList = dataJS["endTimeline"]
-	for actionJS in actionsJSList:
-		var actionData:ActionData = ActionDataTypes.create(actionJS)
-		if actionData!=null:
-			endTimeline.append(actionData)
+	if dataJS.has("endTimeline"):
+		var actionsJSList = dataJS["endTimeline"]
+		for actionJS in actionsJSList:
+			var actionData:ActionData = ActionDataTypes.create(actionJS)
+			if actionData!=null:
+				endTimeline.append(actionData)
 
 func get_display_name():
 	return name

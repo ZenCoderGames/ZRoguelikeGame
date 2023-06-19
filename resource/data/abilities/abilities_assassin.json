@@ -1,0 +1,73 @@
+{
+	"abilities": [
+		{
+			"id": "ABILITY_STEALTH_LONGER",
+			"characterId": "ASSASSIN",
+			"name": "(Upgrade) Stealth++",
+			"description": "Allows [Stealth] to last for 2 Additional Turns",
+			"timeline": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STEALTH",
+						"instanceCountModifier": 2
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_STEALTH_ATTACK_BOOST",
+			"characterId": "ASSASSIN",
+			"name": "(Upgrade) Stealth Attack++",
+			"description": "Attacking out of [Stealth] now gives you 2 Additional Damage",
+			"timeline": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STEALTH",
+						"startTimeline": [
+							{
+								"type": "ADD_STAT_MODIFIER",
+								"params": {
+									"statModifiers": [
+										{
+											"type": "DAMAGE",
+											"value": 2
+										}
+									]
+								}
+							}
+						],
+						"endTimeline": [
+							{
+								"type": "ADD_STAT_MODIFIER",
+								"params": {
+									"statModifiers": [
+										{
+											"type": "DAMAGE",
+											"value": -2
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_STEALTH_REFRESH",
+			"characterId": "ASSASSIN",
+			"name": "(Upgrade) Stealth Reset",
+			"description": "Any [Stealth] kill instantly refreshes the Special",
+			"timeline": [
+				{
+					"type": "ADD_PASSIVE",
+					"params": {
+						"passiveId": "PASSIVE_ASSASSIN_SPECIAL_REFRESH_ON_KILL"
+					}
+				}
+			]
+		}
+	]
+}

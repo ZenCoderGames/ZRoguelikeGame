@@ -17,9 +17,6 @@ func _init(parentChar,specialData:SpecialData):
 		if(action!=null):
 			timelineActions.append(action)
 
-	reset_events()
-
-func reset_events():
 	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_activate"))
 

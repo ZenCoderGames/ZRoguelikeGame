@@ -10,7 +10,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 10
+						"value": 8
 					},
 					{
 						"type": "DAMAGE",
@@ -48,7 +48,7 @@
 					},
 					{
 						"type": "DAMAGE",
-						"value": 3
+						"value": 2
 					}
 				],
 				"active": {
@@ -70,14 +70,7 @@
 							"params": {
 								"useCharacterDamage": true
 							}
-						},
-						{
-							"type": "#ADD_STATUS_EFFECT",
-							"params": {
-								"statusEffectId": "STATUS_EFFECT_BARBARIAN_SPECIAL",
-								"applyToSource": true
-							}
-						}	
+						}
 					]
 				},
 				"passive": "PASSIVE_BERSERKER"

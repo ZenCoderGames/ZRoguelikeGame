@@ -195,34 +195,23 @@
 			]
 		},
 		{
-			"id": "STATUS_EFFECT_BARBARIAN_SPECIAL",
-			"name": "Cleave (360)",
-			"description": "Modifies player's attack to cleave all nearby enemies",
-			"instanceCount": 1,
+			"id": "STATUS_EFFECT_BERSERKER_RAGE",
+			"name": "Berserker Rage",
+			"description": "+2 Damage whenever you stun an enemy for the next turn",
+			"instanceCount": 2,
 			"endConditions": [
-				"ON_POST_ATTACK"
-			],
-			"startTimeline": [
-				{
-					"type": "FIND_TARGETS",
-					"params": {
-						"range": 1,
-						"maxTargets": 4
-					}
-				},
-				{
-					"type": "MODIFY_ATTACK",
-					"params": {
-						"damageMultiplier": 1.0,
-						"applyToTargets": true
-					}
-				}
+				"ON_END_TURN"
 			],
 			"endTimeline": [
 				{
-					"type": "MODIFY_ATTACK",
+					"type": "ADD_STAT_MODIFIER",
 					"params": {
-						"removeModifier": true
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"maxValue": -2
+							}
+						]
 					}
 				}
 			]

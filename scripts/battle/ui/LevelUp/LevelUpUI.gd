@@ -14,19 +14,22 @@ func init_from_data():
 		
 	var hasALevelUp:bool = false
 
+	GameGlobals.dataManager.abilityList.shuffle()
+
 	var abilityList:Array = []
 	# Only allow one
 	var allowedGeneralAbilites:int = 1
 	for abilityData in GameGlobals.dataManager.abilityList:
-		abilityList.append(abilityData)
-		allowedGeneralAbilites = allowedGeneralAbilites - 1
-		if allowedGeneralAbilites==0:
-			break
+		if abilityData.characterId=="":
+			abilityList.append(abilityData)
+			allowedGeneralAbilites = allowedGeneralAbilites - 1
+			if allowedGeneralAbilites==0:
+				break
 
 	# Only allow up to 2 more
 	var allowedAbilites:int = 2
 	for abilityData in GameGlobals.dataManager.abilityList:
-		if abilityData.characterId=="" and (abilityData.characterId != GameGlobals.dungeon.player.charData.id):
+		if abilityData.characterId=="" or (abilityData.characterId != GameGlobals.dungeon.player.charData.id):
 			continue
 
 		if GameGlobals.dungeon.player.has_ability(abilityData):

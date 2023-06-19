@@ -94,7 +94,8 @@ Roguelike Dev:
 (D)- Fix MainMenuTurning On when transitioning levels
 (D)- Fix restarting after death being broken
 (D)- Add Level Ups
-- Randomize Level Ups
+(D)- Randomize Level Ups
+- Fix issues with status effect and passives not working right when going into a new dungeon
 
 - Exit isn't allowed till you defeat all enemies in the room
 

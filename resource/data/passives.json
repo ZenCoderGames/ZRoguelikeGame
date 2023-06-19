@@ -45,8 +45,8 @@
 		},
 		{
 			"id": "PASSIVE_BERSERKER",
-			"name": "Critical Strike",
-			"description": "After 3 attacks, charge up your next attack to do a critical hit",
+			"name": "Delayed Stun",
+			"description": "After 3 attacks, charge up your next attack to do a stun",
 			"conditions": [
 				"ON_POST_ATTACK"
 			], 
@@ -54,10 +54,16 @@
 			"resetCountOnActivate": true,
 			"timeline": [
 				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"lastHitTarget": true
+					}
+				},
+				{
 					"type": "ADD_STATUS_EFFECT",
 					"params": {
-						"statusEffectId": "STATUS_EFFECT_CRITICAL",
-						"applyToSource": true
+						"statusEffectId": "STATUS_EFFECT_STUN",
+						"applyToTargets": true
 					}
 				}
 			]
@@ -78,7 +84,7 @@
 									"statModifiers": [
 										{
 											"type": "DAMAGE",
-											"baseValue": 2
+											"maxValue": 2
 										}
 									]
 								}
@@ -91,7 +97,7 @@
 									"statModifiers": [
 										{
 											"type": "DAMAGE",
-											"baseValue": -2
+											"maxValue": -2
 										}
 									]
 								}
@@ -102,9 +108,9 @@
 			]
 		},
 		{
-			"id": "PASSIVE_PROTECTION_PUSHBACK",
-			"name": "Protection Pushback",
-			"description": "Push back any enemies that hit the player while [Protected] by 1 tile",
+			"id": "PASSIVE_PROTECTION_THORNS",
+			"name": "Protection Thorns",
+			"description": "Damage any enemies that hit you while [Protected] by 2",
 			"conditions": [
 				"ON_TAKE_HIT",
 				"ON_BLOCKED_HIT"
@@ -117,10 +123,9 @@
 					}
 				},
 				{
-					"type": "PUSH",
+					"type": "DO_DAMAGE_TO_TARGETS",
 					"params": {
-						"amount": 1,
-						"awayFromSource": true
+						"damage": 2
 					}
 				}
 			]
@@ -137,12 +142,19 @@
 			}, 
 			"timeline": [
 				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_BERSERKER_RAGE",
+						"applyToSource": true
+					}
+				},
+				{
 					"type": "ADD_STAT_MODIFIER",
 					"params": {
 						"statModifiers": [
 							{
 								"type": "DAMAGE",
-								"baseValue": 1
+								"maxValue": 2
 							}
 						]
 					}

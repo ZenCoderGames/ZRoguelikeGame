@@ -1,0 +1,64 @@
+{
+	"abilities": [
+		{
+			"id": "ABILITY_PROTECTION_THORNS",
+			"characterId": "PALADIN",
+			"name": "(Upgrade) Protection Thorns",
+			"description": "Damage any enemies that hit you while [Protected] by 2",
+			"timeline": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_PROTECTION",
+						"startTimeline": [
+							{
+								"type": "ADD_PASSIVE",
+								"params": {
+									"passiveId": "PASSIVE_PROTECTION_THORNS"
+								}
+							}
+						],
+						"endTimeline": [
+							{
+								"type": "REMOVE_PASSIVE",
+								"params": {
+									"passiveId": "PASSIVE_PROTECTION_THORNS"
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_PROTECTION_LONGER",
+			"characterId": "PALADIN",
+			"name": "(Upgrade) Protection++",
+			"description": "Allows [Protection] to last for 1 Additional Turn",
+			"timeline": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_PROTECTION",
+						"instanceCountModifier": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_PALADIN_SPECIAL_FASTER",
+			"characterId": "PALADIN",
+			"name": "(Upgrade) Knight Special Haste",
+			"description": "Allows the Knight Special to charge up with 1 less hit",
+			"timeline": [
+				{
+					"type": "MODIFY_SPECIAL",
+					"params": {
+						"specialId": "PALADIN_SPECIAL",
+						"countModifier": -1
+					}
+				}
+			]
+		}
+	]
+}
