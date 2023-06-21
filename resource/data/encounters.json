@@ -4,8 +4,8 @@
 			"id": "TEST_ENC_SINGLE",
 			"enemies": [
 				{
-					"type": "SKELETON",
-					"count": 2
+					"type": "GHOST",
+					"count": 1
 				}
 			]
 		},

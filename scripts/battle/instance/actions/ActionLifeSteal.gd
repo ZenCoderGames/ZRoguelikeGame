@@ -6,6 +6,9 @@ func _init(actionData,parentChar):
 	pass
 
 func can_execute()->bool:
+	if !super.can_execute():
+		return false
+		
 	return character.successfulDamageThisFrame>0
 
 func execute():

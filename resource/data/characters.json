@@ -132,6 +132,41 @@
 			},
 			{
 				"#disable": true,
+				"id": "GHOST",
+				"displayName": "Ghost",
+				"description": "This chained ethereal creature goes invisible",
+				"path": "entity/characters/Ghost/Ghost.tscn",
+				"difficulty": 1,
+				"cost": 5,
+				"xp": 10,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 6
+					},
+					{
+						"type": "DAMAGE",
+						"value": 2
+					}
+				],
+				"active": {
+					"id": "GHOST_SPECIAL",
+					"description": "Grants the ghost stealth the first time it moves",
+					"executeCondition": "NO_NEARBY_ENEMY",
+					"removeAfterExecute": true,
+					"timeline": [
+						{
+							"type": "ADD_STATUS_EFFECT",
+							"params": {
+								"statusEffectId": "STATUS_EFFECT_STEALTH_GHOST",
+								"applyToSource": true
+							}
+						}
+					]
+				}
+			},
+			{
+				"#disable": true,
 				"id": "GIANT",
 				"displayName": "Giant",
 				"description": "This creature will heal every turn",

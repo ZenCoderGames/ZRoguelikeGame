@@ -23,6 +23,7 @@ func init_parent_char():
 	parentCharacter.connect("OnDeath",Callable(self,"_on_char_death"))
 	parentCharacter.connect("OnReviveStart",Callable(self,"_on_char_revive_start"))
 	parentCharacter.connect("OnReviveEnd",Callable(self,"_on_char_revive_end"))
+	parentCharacter.connect("HideCharacterUI",Callable(self,"_hide_ui"))
 
 func _on_char_stat_changed(statChangeChar):
 	if parentCharacter==statChangeChar:
@@ -69,3 +70,6 @@ func on_mouse_entered():
 
 func on_mouse_exited():
 	CombatEventManager.on_hide_info()
+
+func _hide_ui(hideVal:bool):
+	self.visible = !hideVal

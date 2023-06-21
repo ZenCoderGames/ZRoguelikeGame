@@ -5,9 +5,6 @@ func _init(actionData,parentChar):
 	super(actionData,parentChar)
 	pass
 
-func can_execute()->bool:
-	return true
-
 func execute():
 	var actionSetStatusData:ActionSetStatusData = actionData as ActionSetStatusData
 	if actionSetStatusData.invulnerable:

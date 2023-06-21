@@ -103,7 +103,7 @@ func _update_base_ui():
 			pctXP = float(playerChar.get_xp_from_current_level())/xpToLevelUp
 		#xpBar.value = pctXP * 100
 		xpTween = Utils.create_tween_float(xpBar, "value", xpBar.value, pctXP * 100, 0.25, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-	
+
 var inLevelUpSequence:bool
 func _show_level_up():
 	inLevelUpSequence = true

@@ -18,7 +18,9 @@ func _init(parentChar,specialData:SpecialData):
 			timelineActions.append(action)
 
 	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
-	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_activate"))
+	
+	if parentChar is PlayerCharacter:
+		CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"try_activate"))
 
 func on_event_triggered():
 	_increment()
@@ -45,12 +47,29 @@ func _is_execute_condition_met():
 		var adjacentChars:Array = GameGlobals.dungeon.get_adjacent_characters(character, Constants.RELATIVE_TEAM.ENEMY, 1)
 		return adjacentChars.size()>0
 
+	if data.executeCondition == SpecialData.EXECUTE_CONDITION.NO_NEARBY_ENEMY:
+		var adjacentChars:Array = GameGlobals.dungeon.get_adjacent_characters(character, Constants.RELATIVE_TEAM.ENEMY, 1)
+		return adjacentChars.size()==0
+
 	return false
 
-func _activate():
+func try_activate():
 	if _is_execute_condition_met():
-		for action in timelineActions:
+		_activate()
+		return true
+	else:
+		CombatEventManager.emit_signal("OnPlayerSpecialAbilityFailedToActivate")
+		return false
+
+func _activate():
+	for action in timelineActions:
+		if action.can_execute():
 			action.execute()
+	CombatEventManager.emit_signal("OnPlayerSpecialAbilityActivated")
+
+	if data.removeAfterExecute:
+		character.remove_special()
+	else:
 		_reset()
 
 func _reset():

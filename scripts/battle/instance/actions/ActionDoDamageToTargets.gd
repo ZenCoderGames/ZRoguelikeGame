@@ -6,6 +6,9 @@ func _init(actionData,parentChar):
 	pass
 
 func can_execute()->bool:
+	if !super.can_execute():
+		return false
+		
 	if GameGlobals.battleInstance.pauseAIAttack and character.team == Constants.TEAM.ENEMY:
 		return false
 

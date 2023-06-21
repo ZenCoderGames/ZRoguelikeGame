@@ -26,21 +26,23 @@ var triggerConditionParams:Dictionary
 var count:int
 var itemsGranted:Array
 var timeline:Array
+var removeAfterExecute:bool
 
-enum EXECUTE_CONDITION { NONE, NEARBY_ENEMY }
+enum EXECUTE_CONDITION { NONE, NEARBY_ENEMY, NO_NEARBY_ENEMY }
 var executeCondition:int
 
 func _init(dataJS):
 	id = dataJS["id"]
 	description = dataJS["description"]
-	count = dataJS["count"]
+	count = Utils.get_data_from_json(dataJS, "count", 0)
 
-	var conditionsJSList = dataJS["conditions"]
-	for conditionStr in conditionsJSList:
-		if Constants.TRIGGER_CONDITION.has(conditionStr):
-			triggerConditions.append(Constants.TRIGGER_CONDITION.get(conditionStr))
-		else:
-			print("ERROR: Invalid Condition Type For PassiveData - ", conditionStr)
+	if dataJS.has("conditions"):
+		var conditionsJSList = dataJS["conditions"]
+		for conditionStr in conditionsJSList:
+			if Constants.TRIGGER_CONDITION.has(conditionStr):
+				triggerConditions.append(Constants.TRIGGER_CONDITION.get(conditionStr))
+			else:
+				print("ERROR: Invalid Condition Type For PassiveData - ", conditionStr)
 
 	if dataJS.has("conditionParams"):
 		var conditionParams = dataJS["conditionParams"]
@@ -53,4 +55,9 @@ func _init(dataJS):
 		if actionData!=null:
 			timeline.append(actionData)
 
-	executeCondition = EXECUTE_CONDITION.get(dataJS["executeCondition"])
+	if dataJS.has("executeCondition"):
+		executeCondition = EXECUTE_CONDITION.get(dataJS["executeCondition"])
+	else:
+		executeCondition = EXECUTE_CONDITION.NONE
+
+	removeAfterExecute = Utils.get_data_from_json(dataJS, "removeAfterExecute", false)

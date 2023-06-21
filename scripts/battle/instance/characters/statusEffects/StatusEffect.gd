@@ -14,7 +14,7 @@ func _init(parentChar,statusEffectData:StatusEffectData):
 
 	for actionData in data.startTimeline:
 		var action:Action = ActionTypes.create(actionData, character)
-		if(action!=null):
+		if(action!=null) && action.can_execute():
 			action.execute()
 
 	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
@@ -49,7 +49,7 @@ func _clean_up():
 
 	for actionData in data.endTimeline:
 		var action:Action = ActionTypes.create(actionData, character)
-		if(action!=null):
+		if (action!=null) && action.can_execute():
 			action.execute()
 
 	var statusEffectModifierList:Array = character.get_status_effect_modifiers(data.id)

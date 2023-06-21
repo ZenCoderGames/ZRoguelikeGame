@@ -11,7 +11,7 @@ func _ready():
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_character_attack"))
 	CombatEventManager.connect("OnAnyCharacterDeath",Callable(self,"_on_any_character_death"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_player_special_ready"))
-	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_on_player_special_activated"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityActivated",Callable(self,"_on_player_special_activated"))
 	CombatEventManager.connect("OnConsumeItem",Callable(self,"_on_consume_item"))
 
 # MUSIC

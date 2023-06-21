@@ -195,6 +195,61 @@
 			]
 		},
 		{
+			"id": "STATUS_EFFECT_STEALTH_GHOST",
+			"name": "Stealth",
+			"description": "Makes the character undetected.",
+			"instanceCount": 1,
+			"endConditions": [
+				"ON_NEAR_ENEMY"
+			],
+			"startTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"invisible": 1
+					}
+				},
+				{
+					"type": "MODIFY_VISUAL",
+					"params": {
+						"tintColor": "#5a3d4a00"
+					}
+				},
+				{
+					"type": "HIDE_CHARACTER_UI",
+					"params": {
+						"hide": true
+					}
+				},
+				{
+					"type": "SHOW_CHARACTER_UI_TEXT",
+					"params": {
+						"text": "Stealth"
+					}
+				}
+			],
+			"endTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"invisible": -1
+					}
+				},
+				{
+					"type": "MODIFY_VISUAL",
+					"params": {
+						"resetToOriginalTint": true
+					}
+				},
+				{
+					"type": "HIDE_CHARACTER_UI",
+					"params": {
+						"hide": false
+					}
+				}
+			]
+		},
+		{
 			"id": "STATUS_EFFECT_BERSERKER_RAGE",
 			"name": "Berserker Rage",
 			"description": "+2 Damage whenever you stun an enemy for the next turn",

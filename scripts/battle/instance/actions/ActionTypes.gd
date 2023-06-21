@@ -41,6 +41,10 @@ static func create(actionData:ActionData, parentChar):
 		return ActionPlayAudio.new(actionData, parentChar)
 	elif actionData.type==ActionReviveData.ID:
 		return ActionRevive.new(actionData, parentChar)
+	elif actionData.type==ActionHideCharacterUIData.ID:
+		return ActionHideCharacterUI.new(actionData, parentChar)
+	elif actionData.type==ActionShowCharacterUITextData.ID:
+		return ActionShowCharacterUIText.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)
 	return null

@@ -8,7 +8,10 @@ func _init(data:ActionData,parentChar):
 	character = parentChar
 
 func can_execute()->bool:
-	return true
+	if actionData.team == Constants.TEAM.NONE:
+		return true
+	else:
+		return character.team == actionData.team
 
 func execute():
 	pass

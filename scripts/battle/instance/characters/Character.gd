@@ -56,6 +56,7 @@ signal OnStatChanged(character)
 signal OnReviveStart()
 signal OnReviveEnd()
 signal OnDeath()
+signal HideCharacterUI()
 
 signal OnPreAttack(defender)
 signal OnPostAttack(defender)
@@ -69,6 +70,7 @@ signal OnPassiveAdded(character, passive)
 signal OnPassiveRemoved(character, passive)
 signal OnAbilityAdded(character, ability)
 signal OnAbilityRemoved(character, ability)
+signal OnNearEnemy()
 
 signal OnTurnCompleted()
 signal OnInitialized()
@@ -118,6 +120,7 @@ func init(id:int, charDataVal, teamVal):
 
 	equipment.connect("OnItemEquipped",Callable(self,"_on_item_equipped"))
 	equipment.connect("OnItemUnEquipped",Callable(self,"_on_item_unequipped"))
+	CombatEventManager.connect("OnAnyCharacterMoved",Callable(self,"_on_any_character_moved"))
 
 # MOVEMENT
 func move(x, y):
@@ -130,6 +133,7 @@ func move(x, y):
 	var success:bool = cell.room.move_entity(self, cell, newR, newC)
 	if success:
 		emit_signal("OnCharacterMove", x, y)
+		CombatEventManager.emit_signal("OnAnyCharacterMoved", self)
 	else:
 		emit_signal("OnCharacterFailedToMove", x, y)
 
@@ -152,6 +156,11 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 
 	if triggerTurnCompleteEvent:
 		on_turn_completed()
+
+func _on_any_character_moved(charThatMoved:Character):
+	var adjacentChars:Array = GameGlobals.dungeon.get_adjacent_characters(self, Constants.RELATIVE_TEAM.ENEMY, 1)
+	if adjacentChars.size()>0:
+		emit_signal("OnNearEnemy")
 
 # STATS
 func get_stat_base_value(statType:Stat):
@@ -406,6 +415,9 @@ func show_stun():
 func show_stunned():
 	_show_generic_text(self, "Stunned")
 
+func show_text_on_self(val:String, duration:float=0.75):
+	_show_generic_text(self, val, duration)
+
 func _show_generic_text(entity, val:String, duration:float=0.75):
 	damageText.visible = true
 	damageText.text = val
@@ -581,6 +593,9 @@ func get_special_modifiers(specialId:String):
 			matchedspecialModifiers.append(specialModifier)
 
 	return matchedspecialModifiers
+
+func remove_special():
+	special = null
 
 # ATTACK
 func add_attack_modifier(attackModifierVal:AttackModifier):

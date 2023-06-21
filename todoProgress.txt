@@ -95,7 +95,8 @@ Roguelike Dev:
 (D)- Fix restarting after death being broken
 (D)- Add Level Ups
 (D)- Randomize Level Ups
-- Fix issues with status effect and passives not working right when going into a new dungeon
+(D)- Fix issues with status effect and passives not working right when going into a new dungeon
+- Fix stealth on ghost
 
 - Exit isn't allowed till you defeat all enemies in the room
 

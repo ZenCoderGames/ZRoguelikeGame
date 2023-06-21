@@ -15,7 +15,7 @@ func _init(parentChar,passiveData:PassiveData):
 
 	for actionData in data.timeline:
 		var action:Action = ActionTypes.create(actionData, character)
-		if(action!=null):
+		if (action!=null):
 			timelineActions.append(action)
 
 	if data.triggerConditions.size()>0:
@@ -36,7 +36,8 @@ func attempt_activate():
 
 func activate():
 	for action in timelineActions:
-		action.execute()
+		if action.can_execute():
+			action.execute()
 	
 	if data.resetCountOnActivate:
 		_count = 0

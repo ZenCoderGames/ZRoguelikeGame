@@ -42,6 +42,10 @@ static func create(dataJS)->ActionData:
 		return ActionPlayAudioData.new(dataJS)
 	elif actionType==ActionReviveData.ID:
 		return ActionReviveData.new(dataJS)
+	elif actionType==ActionHideCharacterUIData.ID:
+		return ActionHideCharacterUIData.new(dataJS)
+	elif actionType==ActionShowCharacterUITextData.ID:
+		return ActionShowCharacterUITextData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

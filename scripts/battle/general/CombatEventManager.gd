@@ -4,6 +4,7 @@ signal OnPlayerInitialized()
 signal OnStartTurn()
 signal OnEndTurn()
 signal OnEnemyMovedAdjacentToPlayer(enemy)
+signal OnAnyCharacterMoved(char)
 signal OnRoomCombatStarted(room)
 signal OnRoomCombatEnded(room)
 signal OnPlayerTurnCompleted()
@@ -12,6 +13,8 @@ signal OnAnyAttack(isKillingBlow)
 signal OnPlayerSpecialAbilityProgress(percent)
 signal OnPlayerSpecialAbilityReady()
 signal OnPlayerSpecialAbilityPressed()
+signal OnPlayerSpecialAbilityActivated()
+signal OnPlayerSpecialAbilityFailedToActivate()
 signal OnPlayerSpecialAbilityReset()
 signal OnToggleInventory()
 signal OnShowInfo(title, content)
@@ -52,6 +55,8 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 		parentCharacter.connect("OnStatusEffectAdded",Callable(object,"activate_on_add_status_effect"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_ADD_STATUS_EFFECT_TO_ENEMY):
 		parentCharacter.connect("OnStatusEffectAddedToEnemy",Callable(object,"activate_on_add_status_effect"))
+	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_NEAR_ENEMY):
+		parentCharacter.connect("OnNearEnemy",Callable(object,"activate"))
 
 func on_room_combat_started(room):
 	emit_signal("OnRoomCombatStarted", room)

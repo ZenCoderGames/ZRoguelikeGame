@@ -23,7 +23,8 @@ func is_on_cooldown():
 
 func activate():
 	for action in timelineActions:
-		action.execute()
+		if action.can_execute():
+			action.execute()
 	
 	_cooldownTimer = GameGlobals.dungeon.turnsTaken
 

@@ -17,4 +17,5 @@ func _init(parentChar,abilityData:AbilityData):
 
 func activate():
 	for action in timelineActions:
-		action.execute()
+		if action.can_execute():
+			action.execute()

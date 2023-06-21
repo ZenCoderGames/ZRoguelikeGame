@@ -16,10 +16,10 @@ res://entity/Exit.tscn::d674e914a67bb37b4b4d53dfd779b562::1686887198::res://.god
 res://entity/Floor.tscn::22c34a1c083af726741327c54e07e86a::1679447365::res://.godot/exported/133200997/export-189a40c087f1256b70556ad649e7b0c3-Floor.scn
 res://entity/Wall.tscn::4fa33875f25ab728eeb8e19e5f025096::1679447365::res://.godot/exported/133200997/export-f2e537b14c1a52a28792d7e56043411b-Wall.scn
 res://resource/fonts/linux-libertine/LinuxLibertine.tres::8dd020a5fcf8aa75d12ef424a15db4a2::1679447364::res://.godot/exported/133200997/export-a6a8fe55eba4db14824d121395f8d191-LinuxLibertine.res
-res://resource/default_env.tres::7bf04fd309adbca25e035aed0f326189::1686976626::res://.godot/exported/133200997/export-00384327e85e5b64fecf9666c172aa6b-default_env.res
-res://scene/main/MainScene.tscn::cf5a5c4528bcab6e5550afe86dbaf8b1::1686976626::res://.godot/exported/133200997/export-b7201a64ae6772ff6978fa20aa170619-MainScene.scn
-res://themes/gameui_theme.tres::d7c92ad18fe1d0dfacb34d17b729aae4::1686714524::res://.godot/exported/133200997/export-c6e9d274273921539b97e6612c00edf0-gameui_theme.res
-res://themes/guiTheme.tres::23be8eaf04818fd5164fa93757538da4::1686714524::res://.godot/exported/133200997/export-2198a12f3e8a140c5ecbb7e286d67fec-guiTheme.res
+res://resource/default_env.tres::7bf04fd309adbca25e035aed0f326189::1687204600::res://.godot/exported/133200997/export-00384327e85e5b64fecf9666c172aa6b-default_env.res
+res://scene/main/MainScene.tscn::cf5a5c4528bcab6e5550afe86dbaf8b1::1687204600::res://.godot/exported/133200997/export-b7201a64ae6772ff6978fa20aa170619-MainScene.scn
+res://themes/gameui_theme.tres::d7c92ad18fe1d0dfacb34d17b729aae4::1687138479::res://.godot/exported/133200997/export-c6e9d274273921539b97e6612c00edf0-gameui_theme.res
+res://themes/guiTheme.tres::23be8eaf04818fd5164fa93757538da4::1687138479::res://.godot/exported/133200997/export-2198a12f3e8a140c5ecbb7e286d67fec-guiTheme.res
 res://themes/passiveButtonThemeOverride.tres::c116a95238fcde0f9ff055e65b6d4632::1679447364::res://.godot/exported/133200997/export-7edf948bec9ca32d825a108884bc97c8-passiveButtonThemeOverride.res
 res://ui/battle/buttons/LeftArrowTheme.tres::33853d3c7e0f487afa9f0534e85f7b80::1679447365::res://.godot/exported/133200997/export-813b192db7c3423cdd87fd185474f4d9-LeftArrowTheme.res
 res://ui/battle/styles/DisabledItemUIBox.tres::356f535d6385da6cf8c3671f4980e059::1679447365::res://.godot/exported/133200997/export-ce8621020c5d3a4c0850e08896af2835-DisabledItemUIBox.res
@@ -37,8 +37,8 @@ res://ui/battle/ItemUI.tscn::e3c625febc7a104a5a2578157d15ebcb::1686887197::res:/
 res://ui/battle/SpellButtonUI.tscn::4bc0c1a662919ee6e8ab08d6538c64db::1684906806::res://.godot/exported/133200997/export-682ba8dae158a1bb647b3d18c4b99c2a-SpellButtonUI.scn
 res://ui/characterSelect/CharacterSelectItemUI.tscn::c6cf9fa02eb169be40ebe11d7a58578c::1686887197::res://.godot/exported/133200997/export-4a01fa2fdf8d198fe994d921ee0a7605-CharacterSelectItemUI.scn
 res://ui/characterSelect/CharacterSelectUI.tscn::3c8cadaa36a075ce29524359bdb7110a::1686887862::res://.godot/exported/133200997/export-e695472e78f65261aac005d365664fc5-CharacterSelectUI.scn
-res://ui/MainGUI.tscn::effecf008188f234a3bca151445367b7::1686976455::res://.godot/exported/133200997/export-dc26b142142d164bea6ecd4e123af7c3-MainGUI.scn
-res://ui/MainMenuUI.tscn::45d2e026fa4af39b44810bd86fa3cc15::1686976455::res://.godot/exported/133200997/export-c49b61bc5eb13043152c1aa8c53295de-MainMenuUI.scn
+res://ui/MainGUI.tscn::effecf008188f234a3bca151445367b7::1687204470::res://.godot/exported/133200997/export-dc26b142142d164bea6ecd4e123af7c3-MainGUI.scn
+res://ui/MainMenuUI.tscn::45d2e026fa4af39b44810bd86fa3cc15::1687204470::res://.godot/exported/133200997/export-c49b61bc5eb13043152c1aa8c53295de-MainMenuUI.scn
 res://addons/AsepriteWizard/animated_sprite/docks/wizard_nodes/import_date.tscn::d6a4d9fc86b84c0a33fd480b8eba1731::1679535161::res://.godot/exported/133200997/export-86b52f3bb665097bcecb637db30980a8-import_date.scn
 res://addons/AsepriteWizard/animated_sprite/docks/wizard_nodes/list_actions.tscn::b51b25ceb8f4aa8ea7433949e085030f::1679535161::res://.godot/exported/133200997/export-6c233fc273724f71e6d0c25b3b98b119-list_actions.scn
 res://addons/AsepriteWizard/animated_sprite/docks/wizard_nodes/output_path.tscn::0ccfdb184d2c65af6c2e9ffee3358e60::1679535161::res://.godot/exported/133200997/export-216b3756c748e44eb1fd0b2faf08a090-output_path.scn
@@ -54,5 +54,5 @@ res://entity/characters/Dragon/Dragon.tscn::5d1b8a3d2381d6e04ca6c910a9eb6611::16
 res://entity/characters/Giant/Giant.tscn::a06b15b594671db3d029245e3e40934c::1686887199::res://.godot/exported/133200997/export-b457e3a94a541c202ba19540f2682c58-Giant.scn
 res://entity/characters/Serpent/Serpent.tscn::a1349dcca43f9716a9ebe8e63a1ece64::1686887199::res://.godot/exported/133200997/export-005a60ea5f224900b81044e672e3781b-Serpent.scn
 res://entity/characters/Skeleton/Skeleton.tscn::6a776c7180e8794e9e125907763860e7::1686887199::res://.godot/exported/133200997/export-5ee0606bf6819910790b46012076a493-Skeleton.scn
-res://ui/battle/LevelUpItemUI.tscn::536ef32f70c88bfbe9183a6540c8454c::1686976455::res://.godot/exported/133200997/export-f7bf17cb03cf1af2057e09100a86e822-LevelUpItemUI.scn
-res://ui/battle/LevelUpUI.tscn::439e595959e4192473acf823159058a6::1686976455::res://.godot/exported/133200997/export-04c2f1910ffc35492baeedcc241d059d-LevelUpUI.scn
+res://ui/battle/LevelUpItemUI.tscn::536ef32f70c88bfbe9183a6540c8454c::1687204469::res://.godot/exported/133200997/export-f7bf17cb03cf1af2057e09100a86e822-LevelUpItemUI.scn
+res://ui/battle/LevelUpUI.tscn::439e595959e4192473acf823159058a6::1687204469::res://.godot/exported/133200997/export-04c2f1910ffc35492baeedcc241d059d-LevelUpUI.scn
