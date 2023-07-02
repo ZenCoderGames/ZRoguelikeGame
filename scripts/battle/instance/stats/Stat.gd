@@ -6,8 +6,8 @@ var value:int
 
 func _init(statData):
 	type = statData.type
-	maxValue = statData.value
 	value = statData.value
+	maxValue = statData.maxValue
 
 func modify(newValue:int):
 	value = newValue

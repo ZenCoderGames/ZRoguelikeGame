@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://fui0k8v0dutq"]
+
+[ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="1_0mvyk"]
+
+[node name="TextureRect" type="TextureRect"]
+self_modulate = Color(0.168627, 1, 0, 1)
+clip_contents = true
+custom_minimum_size = Vector2(20, 20)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_0mvyk")
+expand_mode = 1

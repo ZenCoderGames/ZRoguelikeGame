@@ -175,49 +175,46 @@ offset_right = 200.0
 offset_bottom = 150.0
 
 [node name="PlayerAbilityPanel" type="Control" parent="."]
-layout_mode = 1
-anchor_top = 0.786
-anchor_bottom = 0.786
-offset_top = -99.908
-offset_right = 100.0
-offset_bottom = 48.092
+layout_mode = 2
+anchors_preset = 0
+offset_top = 329.0
+offset_right = 40.0
+offset_bottom = 369.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_wj80w")
 script = ExtResource("3")
 
-[node name="Panel" type="Panel" parent="PlayerAbilityPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme = ExtResource("1_wj80w")
+[node name="PanelContainer" type="PanelContainer" parent="PlayerAbilityPanel"]
+layout_mode = 0
+offset_right = 114.0
+offset_bottom = 137.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerAbilityPanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = -67.5
-offset_right = 43.0
-offset_bottom = 67.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerAbilityPanel/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="PlayerAbilityPanel/VBoxContainer"]
+[node name="ResourceContainer" type="GridContainer" parent="PlayerAbilityPanel/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
+
+[node name="PlayerAbilityProgressBar" type="ProgressBar" parent="PlayerAbilityPanel/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 mouse_filter = 2
-value = 50.0
+theme = ExtResource("1_wj80w")
+max_value = 4.0
+step = 1.0
+value = 2.0
+rounded = true
 
-[node name="ActiveButton" type="Button" parent="PlayerAbilityPanel/VBoxContainer"]
+[node name="PlayerAbilityActiveButton" type="Button" parent="PlayerAbilityPanel/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 focus_mode = 0
@@ -227,7 +224,8 @@ shortcut_in_tooltip = false
 text = "SPECIAL"
 icon_alignment = 1
 
-[node name="PassiveButton" type="Button" parent="PlayerAbilityPanel/VBoxContainer"]
+[node name="PlayerAbilityPassiveButton" type="Button" parent="PlayerAbilityPanel/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 focus_mode = 0
@@ -301,7 +299,12 @@ layout_mode = 2
 theme = ExtResource("1")
 text = "0"
 
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="mouse_entered" from="PlayerAbilityPanel" to="PlayerAbilityPanel" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="PlayerAbilityPanel" to="PlayerAbilityPanel" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="PlayerAbilityPanel/VBoxContainer/PassiveButton" to="PlayerAbilityPanel" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="PlayerAbilityPanel/VBoxContainer/PassiveButton" to="PlayerAbilityPanel" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="PlayerAbilityPanel/PanelContainer/VBoxContainer/PlayerAbilityPassiveButton" to="PlayerAbilityPanel" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerAbilityPanel/PanelContainer/VBoxContainer/PlayerAbilityPassiveButton" to="PlayerAbilityPanel" method="_on_mouse_exited"]

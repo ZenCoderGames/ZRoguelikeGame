@@ -1,10 +1,11 @@
+PanelContainer
+GridContainer
+TextureRect
+HBoxContainer
 Label
 Panel
-PanelContainer
 Control
 AnimationPlayer
-TextureRect
 Node
 AudioStreamPlayer2D
 CanvasLayer
-HBoxContainer

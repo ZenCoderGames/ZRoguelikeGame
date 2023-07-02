@@ -16,7 +16,8 @@ func init_from_data(charData:CharacterData):
 	charLabel.text = Utils.convert_to_camel_case(charData.id)
 	var statStr:String = ""
 	for statData in charData.statDataList:
-		statStr = statStr + Utils.convert_to_camel_case(statData.get_stat_name()) + ": " + str(statData.value) + "\n"
+		if statData.type != StatData.STAT_TYPE.ENERGY:
+			statStr = statStr + Utils.convert_to_camel_case(statData.get_stat_name()) + ": " + str(statData.value) + "\n"
 	#statStr.erase(statStr.length()-1, 1)
 	descLabel.text = statStr
 	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))

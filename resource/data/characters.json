@@ -15,6 +15,10 @@
 					{
 						"type": "DAMAGE",
 						"value": 2
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 3
 					}
 				],
 				"active": {
@@ -49,6 +53,10 @@
 					{
 						"type": "DAMAGE",
 						"value": 2
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 3
 					}
 				],
 				"active": {
@@ -88,6 +96,10 @@
 					{
 						"type": "DAMAGE",
 						"value": 5
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 2
 					}
 				],
 				"active": {
@@ -110,6 +122,26 @@
 			}
 		],
 		"enemies": [
+			{
+				"#disable": true,
+				"id": "RAT",
+				"displayName": "Rat",
+				"description": "No special properties",
+				"path": "entity/characters/Rat/Rat.tscn",
+				"difficulty": 1,
+				"cost": 2,
+				"xp": 3,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 3
+					},
+					{
+						"type": "DAMAGE",
+						"value": 1
+					}
+				]
+			},
 			{
 				"id": "SKELETON",
 				"displayName": "Skeleton",
@@ -182,26 +214,6 @@
 					{
 						"type": "DAMAGE",
 						"value": 3
-					}
-				]
-			},
-			{
-				"#disable": true,
-				"id": "RAT",
-				"displayName": "Rat",
-				"description": "No special properties",
-				"path": "entity/characters/Rat/Rat.tscn",
-				"difficulty": 1,
-				"cost": 2,
-				"xp": 3,
-				"stats": [
-					{
-						"type": "HEALTH",
-						"value": 3
-					},
-					{
-						"type": "DAMAGE",
-						"value": 1
 					}
 				]
 			},

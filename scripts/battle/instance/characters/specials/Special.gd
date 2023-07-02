@@ -7,6 +7,8 @@ var currentCount:int
 var isAvailable:bool
 var _combatEventReceiver:CombatEventReceiver
 
+signal OnSpecialCountUpdated(currentResourceCount)
+
 func _init(parentChar,specialData:SpecialData):
 	character = parentChar
 	data = specialData
@@ -26,7 +28,7 @@ func on_event_triggered():
 	_increment()
 
 func _increment():
-	currentCount = currentCount + 1
+	_updateCount(currentCount + 1)
 	check_for_ready()
 
 func check_for_ready():
@@ -74,11 +76,11 @@ func _activate():
 
 func _reset():
 	isAvailable = false
-	currentCount = 0
+	_updateCount(0)
 	CombatEventManager.on_player_special_ability_reset()
 
 func force_ready():
-	currentCount = _get_max_count()
+	_updateCount(_get_max_count())
 	check_for_ready()
 
 func _get_max_count()->int:
@@ -87,3 +89,7 @@ func _get_max_count()->int:
 	for specialModifier in specialModifierList:
 		maxCount = maxCount + specialModifier.countModifier
 	return maxCount
+
+func _updateCount(newCount:int):
+	currentCount = newCount
+	emit_signal("OnSpecialCountUpdated", currentCount)

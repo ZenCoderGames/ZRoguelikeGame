@@ -53,6 +53,7 @@ signal OnCharacterMoveToCell()
 signal OnCharacterItemPicked()
 signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
+signal OnResourceStatChanged()
 signal OnReviveStart()
 signal OnReviveEnd()
 signal OnDeath()
@@ -112,6 +113,7 @@ func init(id:int, charDataVal, teamVal):
 
 	if charData.active!=null:
 		special = Special.new(self, charData.active)
+		special.connect("OnSpecialCountUpdated",Callable(self,"_on_special_count_updated"))
 
 	if !charData.passive.is_empty():
 		specialPassive = add_passive(GameGlobals.dataManager.get_passive_data(charData.passive))
@@ -157,13 +159,21 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 	if triggerTurnCompleteEvent:
 		on_turn_completed()
 
-func _on_any_character_moved(charThatMoved:Character):
+func _on_any_character_moved(_charThatMoved:Character):
 	var adjacentChars:Array = GameGlobals.dungeon.get_adjacent_characters(self, Constants.RELATIVE_TEAM.ENEMY, 1)
 	if adjacentChars.size()>0:
 		emit_signal("OnNearEnemy")
 
 # STATS
-func get_stat_base_value(statType:Stat):
+func has_stat(statType):
+	# iterate through char
+	for stat in stats:
+		if stat.type == statType:
+			return true
+	
+	return false
+
+func get_stat_base_value(statType):
 	var statValue:int = 0
 	# iterate through char
 	for stat in stats:
@@ -577,6 +587,11 @@ func remove_passive_from_data(passiveData:PassiveData):
 			break
 
 # SPECIAL
+func _on_special_count_updated(newCount:int):
+	if has_stat(StatData.STAT_TYPE.ENERGY):
+		get_stat(StatData.STAT_TYPE.ENERGY).modify(newCount)
+		emit_signal("OnResourceStatChanged")
+
 func add_special_modifier(specialModifier:SpecialModifier):
 	specialModifierList.append(specialModifier)
 	special.check_for_ready()
@@ -680,6 +695,12 @@ func get_armor():
 
 func get_max_armor():
 	return get_stat_max_value(StatData.STAT_TYPE.ARMOR)
+
+func get_energy():
+	return get_stat_value(StatData.STAT_TYPE.ENERGY)
+
+func get_max_energy():
+	return get_stat_max_value(StatData.STAT_TYPE.ENERGY)
 
 func get_summary()->String:
 	var summary:String = ""

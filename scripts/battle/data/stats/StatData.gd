@@ -1,9 +1,10 @@
 class_name StatData
 
-enum STAT_TYPE { HEALTH, DAMAGE, ARMOR }
+enum STAT_TYPE { HEALTH, DAMAGE, ARMOR, ENERGY }
 var type:int
 
 var value:int
+var maxValue:int
 
 func init_from_json(statDataJS):
 	var statType = statDataJS["type"]
@@ -11,11 +12,8 @@ func init_from_json(statDataJS):
 		type = STAT_TYPE.get(statType)
 	else:
 		print("ERROR: Invalid Stat Type - ", statType)
-	value = statDataJS["value"]
-
-func init_from_code(statType, statValue):
-	type = statType
-	value = statValue
+	value = Utils.get_data_from_json(statDataJS, "value", 0)
+	maxValue = Utils.get_data_from_json(statDataJS, "maxValue", value)
 
 func get_stat_name():
 	return STAT_TYPE.keys()[type]

@@ -9,7 +9,7 @@ func can_execute()->bool:
 	if !super.can_execute():
 		return false
 		
-	return character.successfulDamageThisFrame>0
+	return character.successfulDamageThisTurn>0
 
 func execute():
 	var lifeStealData:ActionLifeStealData = actionData as ActionLifeStealData

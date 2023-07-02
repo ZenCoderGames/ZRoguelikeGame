@@ -2,9 +2,12 @@ extends Control
 
 class_name PlayerSpecialAbilityUI
 
-@onready var SpecialProgressBar:ProgressBar = $VBoxContainer/ProgressBar
-@onready var SpecialActiveButton:Button = $VBoxContainer/ActiveButton
-@onready var SpecialPassiveButton:Button = $VBoxContainer/PassiveButton
+@onready var SpecialProgressBar:ProgressBar = $"%PlayerAbilityProgressBar"
+@onready var SpecialActiveButton:Button = $"%PlayerAbilityActiveButton"
+@onready var SpecialPassiveButton:Button = $"%PlayerAbilityPassiveButton"
+@onready var ResourceContainer:GridContainer = $"%ResourceContainer"
+const ResourceSlotUI := preload("res://ui/battle/ResourceSlotUI.tscn")
+var resourceSlots:Array = []
 
 func _ready():
 	self.visible = false
@@ -19,14 +22,14 @@ func _ready():
 	SpecialPassiveButton.connect("mouse_exited",Callable(self,"_on_mouse_exited_passive"))
 	
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
-	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
 
 	CombatEventManager.connect("OnPlayerSpecialAbilityProgress",Callable(self,"_on_ability_progress"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_ability_ready"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityReset",Callable(self,"_on_ability_reset"))
+	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
 
 func _on_dungeon_init():
-	pass
+	_init_resource_slots()
 
 func _on_ability_progress(percent:float):
 	SpecialProgressBar.value = percent * 100
@@ -52,3 +55,42 @@ func _on_mouse_entered_passive():
 
 func _on_mouse_exited_passive():
 	CombatEventManager.on_hide_info()
+
+func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
+	if fullRefreshDungeon:
+		_clean_up_resource_slots()
+
+# RESOURCES
+func _init_resource_slots():
+	var maxEnergy:int = GameGlobals.dungeon.player.get_max_energy()
+	for i in maxEnergy:
+		_create_resource_slot()
+	_refresh_resources()
+	GameGlobals.dungeon.player.connect("OnResourceStatChanged", _on_player_resource_updated)
+
+func _create_resource_slot():
+	var resourceSlot := ResourceSlotUI.instantiate()
+	ResourceContainer.add_child(resourceSlot)
+	resourceSlots.append(resourceSlot)
+	resourceSlot.self_modulate = Color.GRAY
+
+func _refresh_resources():
+	var currentEnergy:int = GameGlobals.dungeon.player.get_energy()
+	var maxEnergy:int = GameGlobals.dungeon.player.get_max_energy()
+
+	#var startScale:Vector2 = Vector2(1, 1)
+	#var endScale:Vector2 = Vector2(1.5, 1.5)
+	for i in maxEnergy:
+		if currentEnergy<=i:
+			resourceSlots[i].self_modulate = Color.GRAY
+		else:
+			#Utils.create_tween_vector2(resourceSlots[i], "self_modulate", Color.WHITE, Color.GREEN, 0.1, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			resourceSlots[i].self_modulate = Color.GREEN
+
+func _on_player_resource_updated():
+	_refresh_resources()
+
+func _clean_up_resource_slots():
+	for resourceSlot in resourceSlots:
+		resourceSlot.queue_free()
+	resourceSlots.clear()
