@@ -22,14 +22,13 @@ func _ready():
 	SpecialPassiveButton.connect("mouse_exited",Callable(self,"_on_mouse_exited_passive"))
 	
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
-
-	CombatEventManager.connect("OnPlayerSpecialAbilityProgress",Callable(self,"_on_ability_progress"))
-	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_ability_ready"))
-	CombatEventManager.connect("OnPlayerSpecialAbilityReset",Callable(self,"_on_ability_reset"))
 	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
 
 func _on_dungeon_init():
 	_init_resource_slots()
+	GameGlobals.dungeon.player.special.connect("OnProgress",Callable(self,"_on_ability_progress"))
+	GameGlobals.dungeon.player.special.connect("OnReady",Callable(self,"_on_ability_ready"))
+	GameGlobals.dungeon.player.special.connect("OnReset",Callable(self,"_on_ability_reset"))
 
 func _on_ability_progress(percent:float):
 	SpecialProgressBar.value = percent * 100
@@ -62,11 +61,15 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 
 # RESOURCES
 func _init_resource_slots():
+	_create_all_resource_slots()
+	#GameGlobals.dungeon.player.connect("OnResourceStatChanged", Callable(self,"_on_player_resource_updated"))
+	GameGlobals.dungeon.player.get_stat(StatData.STAT_TYPE.ENERGY).connect("OnUpdated",Callable(self,"_on_player_resource_updated"))
+
+func _create_all_resource_slots():
 	var maxEnergy:int = GameGlobals.dungeon.player.get_max_energy()
 	for i in maxEnergy:
 		_create_resource_slot()
 	_refresh_resources()
-	GameGlobals.dungeon.player.connect("OnResourceStatChanged", _on_player_resource_updated)
 
 func _create_resource_slot():
 	var resourceSlot := ResourceSlotUI.instantiate()
@@ -77,6 +80,10 @@ func _create_resource_slot():
 func _refresh_resources():
 	var currentEnergy:int = GameGlobals.dungeon.player.get_energy()
 	var maxEnergy:int = GameGlobals.dungeon.player.get_max_energy()
+
+	if resourceSlots.size() != maxEnergy:
+		_clean_up_resource_slots()
+		_create_all_resource_slots()
 
 	#var startScale:Vector2 = Vector2(1, 1)
 	#var endScale:Vector2 = Vector2(1.5, 1.5)

@@ -46,16 +46,28 @@
 			]
 		},
 		{
-			"id": "ABILITY_PALADIN_SPECIAL_FASTER",
+			"id": "ABILITY_PROTECTION_HEAL",
 			"characterId": "PALADIN",
-			"name": "(Upgrade) Knight Special Haste",
-			"description": "Allows the Knight Special to charge up with 1 less hit",
+			"name": "(Upgrade) Protection Heal",
+			"description": "Gaining [Protection] heals you for 2",
 			"timeline": [
 				{
-					"type": "MODIFY_SPECIAL",
+					"type": "MODIFY_STATUS_EFFECT",
 					"params": {
-						"specialId": "PALADIN_SPECIAL",
-						"countModifier": -1
+						"statusEffectId": "STATUS_EFFECT_PROTECTION",
+						"startTimeline": [
+							{
+								"type": "ADD_STAT_MODIFIER",
+								"params": {
+									"statModifiers": [
+										{
+											"type": "HEALTH",
+											"value": 2
+										}
+									]
+								}
+							}
+						]
 					}
 				}
 			]

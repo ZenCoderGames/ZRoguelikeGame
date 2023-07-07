@@ -4,27 +4,42 @@ var type:int
 var maxValue:int
 var value:int
 
+signal OnUpdated()
+signal OnValueUpdated()
+signal OnMaxValueUpdated()
+
 func _init(statData):
 	type = statData.type
 	value = statData.value
 	maxValue = statData.maxValue
 
 func modify(newValue:int):
-	value = newValue
-	#if value>maxValue:
-	#	value = maxValue
-	#if value<0:
-	#	value = 0
+	_update_value(newValue)
 	return value
 
 func modify_max(newMaxValue:int):
-	maxValue = newMaxValue
+	_update_max_value(newMaxValue)
 	return maxValue
-	
+
 func modify_absolute(newValue:int):
-	maxValue = newValue
-	value = maxValue
+	_update_max_value(newValue)
+	_update_value(maxValue)
 	return maxValue
 
 func reset():
-	value = maxValue
+	if _is_resetable_stat(type):
+		_update_value(maxValue)
+
+func _is_resetable_stat(statType:int):
+	return statType == StatData.STAT_TYPE.HEALTH or statType == StatData.STAT_TYPE.DAMAGE
+
+# should this be clamped to 0<maxValue
+func _update_value(newValue:int):
+	value = newValue
+	emit_signal("OnValueUpdated", value)
+	emit_signal("OnUpdated")
+
+func _update_max_value(newMaxValue:int):
+	maxValue = newMaxValue
+	emit_signal("OnMaxValueUpdated", maxValue)
+	emit_signal("OnUpdated")

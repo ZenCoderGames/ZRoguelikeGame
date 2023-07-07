@@ -10,12 +10,8 @@ signal OnRoomCombatEnded(room)
 signal OnPlayerTurnCompleted()
 signal OnAllEnemyTurnsCompleted()
 signal OnAnyAttack(isKillingBlow)
-signal OnPlayerSpecialAbilityProgress(percent)
-signal OnPlayerSpecialAbilityReady()
 signal OnPlayerSpecialAbilityPressed()
-signal OnPlayerSpecialAbilityActivated()
 signal OnPlayerSpecialAbilityFailedToActivate()
-signal OnPlayerSpecialAbilityReset()
 signal OnToggleInventory()
 signal OnShowInfo(title, content)
 signal OnHideInfo()
@@ -51,6 +47,8 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 		parentCharacter.connect("OnCharacterMoveToCell",Callable(object,"activate_on_parentCharacter_move"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPELL_ACTIVATE):
 		parentCharacter.equipment.connect("OnSpellActivated",Callable(object,"activate_on_parentCharacter_spell"))
+	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPECIAL_ACTIVATE):
+		parentCharacter.special.connect("OnActivated",Callable(object,"activate"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_ADD_STATUS_EFFECT_TO_SELF):
 		parentCharacter.connect("OnStatusEffectAdded",Callable(object,"activate_on_add_status_effect"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_ADD_STATUS_EFFECT_TO_ENEMY):
@@ -76,17 +74,8 @@ func on_show_info(title:String, content:String):
 func on_hide_info():
 	emit_signal("OnHideInfo")
 
-func on_player_special_ability_progress(percent:float):
-	emit_signal("OnPlayerSpecialAbilityProgress", percent)
-
-func on_player_special_ability_ready():
-	emit_signal("OnPlayerSpecialAbilityReady")
-
 func on_player_special_ability_pressed():
 	emit_signal("OnPlayerSpecialAbilityPressed")
-
-func on_player_special_ability_reset():
-	emit_signal("OnPlayerSpecialAbilityReset")
 
 func clean_up():
 	#Utils.clean_up_all_signals(self)

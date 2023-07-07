@@ -337,11 +337,24 @@ func attack(entity):
 	else:
 		on_turn_completed()
 
+func pre_hit(_sourceChar:Character, _targetChar:Character, _damageFromHit:int):
+	var evasionStat:int = get_evasion()
+	var evadeThisHit:bool = Utils.random_chance((float)(evasionStat)/100.0)
+	if evadeThisHit:
+		status.set_evasive(1)
+
+func post_hit(_sourceChar:Character, _targetChar:Character, _damageTakenFromHit:int):
+	if status.is_evasive():
+		status.set_evasive(-1)
+
 func can_take_damage()->bool:
 	if is_reviving():
 		return false
 
 	if status.is_invulnerable():
+		return false
+
+	if status.is_evasive():
 		return false
 
 	return true
@@ -414,7 +427,10 @@ func show_damage_text(entity, dmg):
 	_show_generic_text(entity, str(dmg), 0.35)
 
 func show_blocked_text(entity):
-	_show_generic_text(entity, "Immune")
+	if status.is_evasive():
+		_show_generic_text(entity, "Miss")
+	else:
+		_show_generic_text(entity, "Immune")
 
 func show_critical(entity):
 	_show_generic_text(entity, "Crit")
@@ -701,6 +717,15 @@ func get_energy():
 
 func get_max_energy():
 	return get_stat_max_value(StatData.STAT_TYPE.ENERGY)
+
+func get_evasion():
+	return get_stat_value(StatData.STAT_TYPE.EVASION)
+
+func get_critical_chance():
+	return get_stat_value(StatData.STAT_TYPE.CRITICAL_CHANCE)
+
+func get_critical_damage():
+	return get_stat_value(StatData.STAT_TYPE.CRITICAL_DAMAGE)
 
 func get_summary()->String:
 	var summary:String = ""

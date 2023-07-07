@@ -11,5 +11,8 @@ func execute():
 	if data.refill:
 		character.special.force_ready()
 	else:
-		var specialModifier:SpecialModifier = SpecialModifier.new(data.specialId, data.countModifier)
+		var specialId:String = data.specialId
+		if specialId == "":
+			specialId = character.special.data.id
+		var specialModifier:SpecialModifier = SpecialModifier.new(specialId, data.countModifier)
 		character.add_special_modifier(specialModifier)

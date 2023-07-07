@@ -7,6 +7,10 @@ var currentCount:int
 var isAvailable:bool
 var _combatEventReceiver:CombatEventReceiver
 
+signal OnActivated()
+signal OnProgress(progress)
+signal OnReady()
+signal OnReset()
 signal OnSpecialCountUpdated(currentResourceCount)
 
 func _init(parentChar,specialData:SpecialData):
@@ -20,9 +24,6 @@ func _init(parentChar,specialData:SpecialData):
 			timelineActions.append(action)
 
 	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
-	
-	if parentChar is PlayerCharacter:
-		CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"try_activate"))
 
 func on_event_triggered():
 	_increment()
@@ -33,13 +34,13 @@ func _increment():
 
 func check_for_ready():
 	var maxCount:int = _get_max_count()
-	CombatEventManager.on_player_special_ability_progress((float(currentCount))/(float(maxCount)))
+	emit_signal("OnProgress", (float(currentCount))/(float(maxCount)))
 	if currentCount==maxCount:
 		_set_ready()
 
 func _set_ready():
 	isAvailable = true
-	CombatEventManager.on_player_special_ability_ready()
+	emit_signal("OnReady")
 
 func _is_execute_condition_met():
 	if data.executeCondition == SpecialData.EXECUTE_CONDITION.NONE:
@@ -59,15 +60,15 @@ func try_activate():
 	if _is_execute_condition_met():
 		_activate()
 		return true
-	else:
-		CombatEventManager.emit_signal("OnPlayerSpecialAbilityFailedToActivate")
-		return false
+	
+	return false
 
 func _activate():
 	for action in timelineActions:
 		if action.can_execute():
 			action.execute()
-	CombatEventManager.emit_signal("OnPlayerSpecialAbilityActivated")
+
+	emit_signal("OnActivated")
 
 	if data.removeAfterExecute:
 		character.remove_special()
@@ -77,7 +78,7 @@ func _activate():
 func _reset():
 	isAvailable = false
 	_updateCount(0)
-	CombatEventManager.on_player_special_ability_reset()
+	emit_signal("OnReset")
 
 func force_ready():
 	_updateCount(_get_max_count())

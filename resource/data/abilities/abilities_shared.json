@@ -1,7 +1,7 @@
 {
 	"abilities": [
 		{
-			"id": "ABILITY_HERO_DAMAGE_UPGRADE",
+			"id": "ABILITY_DAMAGE_UPGRADE",
 			"characterId": "",
 			"name": "(Upgrade) Stat Upgrade",
 			"description": "Upgrade your base Attack by 1",
@@ -20,7 +20,7 @@
 			]
 		},
 		{
-			"id": "ABILITY_HERO_HEALTH_UPGRADE",
+			"id": "ABILITY_HEALTH_UPGRADE",
 			"characterId": "",
 			"name": "(Upgrade) Stat Upgrade",
 			"description": "Upgrade your base Health by 2",
@@ -34,6 +34,87 @@
 								"maxValue": 2
 							}
 						]
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_ENERGY_UPGRADE",
+			"characterId": "",
+			"name": "(Upgrade) Stat Upgrade",
+			"description": "Upgrade your max Energy by 1",
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "ENERGY",
+								"maxValue": 1
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_EVASION_UPGRADE",
+			"characterId": "",
+			"name": "(Upgrade) Evasion Upgrade",
+			"description": "Gain +25% Evasion",
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "EVASION",
+								"maxValue": 25
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_SPECIAL_FASTER",
+			"characterId": "",
+			"name": "(Upgrade) Special Haste",
+			"description": "Allows the Special to charge up with 1 less hit",
+			"timeline": [
+				{
+					"type": "MODIFY_SPECIAL",
+					"params": {
+						"countModifier": -1
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_STUN_LONGER",
+			"characterId": "",
+			"name": "(Upgrade) Stun++",
+			"description": "Allows [Stun] to last for 1 Additional Turn",
+			"timeline": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STUN",
+						"instanceCountModifier": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_SPECIAL_HEAL",
+			"characterId": "",
+			"name": "(Upgrade) Healing Special",
+			"description": "Heal for 2 when using the special",
+			"timeline": [
+				{
+					"type": "ADD_PASSIVE",
+					"params": {
+						"passiveId": "PASSIVE_HEAL_ON_SPECIAL"
 					}
 				}
 			]

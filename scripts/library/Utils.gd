@@ -109,7 +109,7 @@ func convert_to_camel_case(string:String):
 	return ''.join(result)
 
 func random_chance(chance:float):
-	return randf() < chance/100
+	return randf() < chance
 
 func freeze_frame(time_scale, duration):
 	Engine.time_scale = time_scale

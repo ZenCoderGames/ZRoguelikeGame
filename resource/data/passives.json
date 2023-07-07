@@ -108,6 +108,24 @@
 			]
 		},
 		{
+			"id": "PASSIVE_ASSASSIN_EVASION",
+			"name": "Assassin Evasion",
+			"description": "Gain +25% evasion",
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "EVASION",
+								"maxValue": 25
+							}
+						]
+					}
+				}
+			]
+		},
+		{
 			"id": "PASSIVE_PROTECTION_THORNS",
 			"name": "Protection Thorns",
 			"description": "Damage any enemies that hit you while [Protected] by 2",
@@ -237,6 +255,27 @@
 					"type": "REMOVE_PASSIVE",
 					"params": {
 						"passiveId": "PASSIVE_REINCARNATION"
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_HEAL_ON_SPECIAL",
+			"name": "Heal On Special",
+			"description": "Heal for 2 when you activate a special",
+			"conditions": [
+				"ON_SPECIAL_ACTIVATE"
+			],
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "HEALTH",
+								"value": 2
+							}
+						]
 					}
 				}
 			]

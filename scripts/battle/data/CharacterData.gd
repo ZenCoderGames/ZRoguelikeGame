@@ -31,6 +31,10 @@ func _init(dataJS):
 		statData.init_from_json(statDataJS)
 		statDataList.append(statData)
 
+	_generate_inherent_stat(StatData.STAT_TYPE.EVASION, 0, 100)
+	_generate_inherent_stat(StatData.STAT_TYPE.CRITICAL_CHANCE, 0, 100)
+	_generate_inherent_stat(StatData.STAT_TYPE.CRITICAL_DAMAGE, 50, 200)
+
 	disable =  Utils.get_data_from_json(dataJS, "disable", false)
 
 	if dataJS.has("active"):
@@ -44,3 +48,8 @@ func get_display_name():
 
 func get_description():
 	return description
+
+func _generate_inherent_stat(statType:int, value:int, maxValue:int):
+	var statData:StatData = StatData.new()
+	statData.init_from_data(statType, value, maxValue)
+	statDataList.append(statData)

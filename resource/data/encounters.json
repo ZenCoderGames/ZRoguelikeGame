@@ -4,7 +4,7 @@
 			"id": "TEST_ENC_SINGLE",
 			"enemies": [
 				{
-					"type": "GHOST",
+					"type": "RAT",
 					"count": 1
 				}
 			]

@@ -43,6 +43,7 @@ func init_for_next_dungeon():
 func _setup_events():
 	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer",Callable(self,"on_enemy_moved_adjacent"))
 	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_on_special_pressed"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
 func pre_update():
@@ -138,7 +139,7 @@ func _on_levelup_ability_selected(abilityData:AbilityData):
 
 # SKIP_TURN MANAGEMENT
 var _lastSkipTurn:int = -1
-const SKIP_TURN_COOLDOWN:int = 10
+const SKIP_TURN_COOLDOWN:int = 0
 
 func skip_turn():
 	_lastSkipTurn = GameGlobals.dungeon.turnsTaken
@@ -149,3 +150,8 @@ func can_skip_turn():
 
 func get_skip_turn_cooldown():
 	return SKIP_TURN_COOLDOWN - (GameGlobals.dungeon.turnsTaken - _lastSkipTurn) + 1
+
+# SPECIAL
+func _on_special_pressed():
+	if !special.try_activate():
+		CombatEventManager.emit_signal("OnPlayerSpecialAbilityFailedToActivate")

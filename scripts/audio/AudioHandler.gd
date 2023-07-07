@@ -10,8 +10,6 @@ func _ready():
 	#UIEventManager.connect("OnMainMenuOn",Callable(self,"_play_menu_music"))
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_character_attack"))
 	CombatEventManager.connect("OnAnyCharacterDeath",Callable(self,"_on_any_character_death"))
-	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_player_special_ready"))
-	CombatEventManager.connect("OnPlayerSpecialAbilityActivated",Callable(self,"_on_player_special_activated"))
 	CombatEventManager.connect("OnConsumeItem",Callable(self,"_on_consume_item"))
 
 # MUSIC
@@ -33,6 +31,8 @@ func _on_dungeon_initialized():
 	GameGlobals.dungeon.player.connect("OnCharacterFailedToMove", Callable(self,"_on_player_failed_to_move"))
 	GameGlobals.dungeon.player.connect("OnCharacterItemPicked", Callable(self,"_on_player_item_picked"))
 	GameGlobals.dungeon.player.connect("OnPlayerReachedEnd",Callable(self,"_play_menu_music"))
+	GameGlobals.dungeon.player.special.connect("OnReady",Callable(self,"_on_player_special_ready"))
+	GameGlobals.dungeon.player.special.connect("OnActivated",Callable(self,"_on_player_special_activated"))
 
 func _on_player_move():
 	GameGlobals.audioManager.play_sfx("PLAYER_MOVE")

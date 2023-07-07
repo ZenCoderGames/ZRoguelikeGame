@@ -1,6 +1,7 @@
 extends Node
 
 signal OnPreHit(sourceChar, defender, dmg)
+signal OnEvadedHit(sourceChar, defender, dmg)
 signal OnBlockedHit(sourceChar, defender, dmg)
 signal OnTakeHit(sourceChar, defender, dmg)
 signal OnPostHit(sourceChar, defender, dmg)
@@ -14,6 +15,8 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 	var isCritical:bool = sourceChar.status.has_critical()
 	if isCritical:
 		finalDamage = finalDamage * 2
+
+	targetChar.pre_hit(sourceChar, targetChar, finalDamage)
 	if generateHits:
 		emit_signal("OnPreHit", sourceChar, targetChar, finalDamage)
 		sourceChar.lastHitTarget = targetChar
@@ -21,13 +24,19 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 	if !targetChar.can_take_damage():
 		if generateHits:
 			targetChar.on_blocked_hit(sourceChar)
-			emit_signal("OnBlockedHit", sourceChar, targetChar, finalDamage)
+			targetChar.post_hit(sourceChar, targetChar, sourceChar.successfulDamageThisTurn)
+			if targetChar.status.is_evasive():
+				emit_signal("OnEvadedHit", sourceChar, targetChar, finalDamage)
+			else:
+				emit_signal("OnBlockedHit", sourceChar, targetChar, finalDamage)
 		return 0
 
 	var prevHealth:int = targetChar.get_health()
 	var targetHealth:int = targetChar.take_damage(sourceChar, finalDamage)
 
 	sourceChar.successfulDamageThisTurn = prevHealth-targetHealth
+
+	targetChar.post_hit(sourceChar, targetChar, sourceChar.successfulDamageThisTurn)
 
 	if targetHealth<=0:
 		targetChar.die()

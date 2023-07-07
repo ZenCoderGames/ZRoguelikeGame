@@ -1,36 +1,6 @@
 {
 	"abilities": [
 		{
-			"id": "ABILITY_STUN_LONGER",
-			"characterId": "BERSERKER",
-			"name": "(Upgrade) Stun++",
-			"description": "Allows [Stun] to last for 1 Additional Turn",
-			"timeline": [
-				{
-					"type": "MODIFY_STATUS_EFFECT",
-					"params": {
-						"statusEffectId": "STATUS_EFFECT_STUN",
-						"instanceCountModifier": 1
-					}
-				}
-			]
-		},
-		{
-			"id": "ABILITY_BERSERKER_SPECIAL_FASTER",
-			"characterId": "BERSERKER",
-			"name": "(Upgrade) Berserker Special Haste",
-			"description": "Allows the Berserker Special to charge up with 1 less hit",
-			"timeline": [
-				{
-					"type": "MODIFY_SPECIAL",
-					"params": {
-						"specialId": "BERSERKER_SPECIAL",
-						"countModifier": -1
-					}
-				}
-			]
-		},
-		{
 			"id": "ABILITY_BERSERKER_RAGE",
 			"characterId": "BERSERKER",
 			"name": "(Upgrade) Berserker Rage",

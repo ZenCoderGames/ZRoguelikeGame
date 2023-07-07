@@ -118,7 +118,7 @@
 						}
 					]
 				},
-				"passive": "PASSIVE_ASSASSIN"
+				"passive": "PASSIVE_ASSASSIN_EVASION"
 			}
 		],
 		"enemies": [
