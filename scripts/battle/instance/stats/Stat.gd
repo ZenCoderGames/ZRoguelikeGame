@@ -13,6 +13,18 @@ func _init(statData):
 	value = statData.value
 	maxValue = statData.maxValue
 
+func add(val:int):
+	modify(value + val)
+	return value
+
+func add_max(val:int):
+	modify_max(value + val)
+	return value
+
+func add_absolute(val:int):
+	modify_absolute(value + val)
+	return maxValue
+
 func modify(newValue:int):
 	_update_value(newValue)
 	return value

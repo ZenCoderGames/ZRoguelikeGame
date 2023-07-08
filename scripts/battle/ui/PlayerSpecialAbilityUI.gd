@@ -29,6 +29,8 @@ func _on_dungeon_init():
 	GameGlobals.dungeon.player.special.connect("OnProgress",Callable(self,"_on_ability_progress"))
 	GameGlobals.dungeon.player.special.connect("OnReady",Callable(self,"_on_ability_ready"))
 	GameGlobals.dungeon.player.special.connect("OnReset",Callable(self,"_on_ability_reset"))
+	GameGlobals.dungeon.player.connect("OnSpecialModifierAdded",Callable(self,"_on_player_resource_updated"))
+	GameGlobals.dungeon.player.connect("OnSpecialModifierRemoved",Callable(self,"_on_player_resource_updated"))
 
 func _on_ability_progress(percent:float):
 	SpecialProgressBar.value = percent * 100
@@ -75,24 +77,24 @@ func _create_resource_slot():
 	var resourceSlot := ResourceSlotUI.instantiate()
 	ResourceContainer.add_child(resourceSlot)
 	resourceSlots.append(resourceSlot)
-	resourceSlot.self_modulate = Color.GRAY
 
 func _refresh_resources():
 	var currentEnergy:int = GameGlobals.dungeon.player.get_energy()
 	var maxEnergy:int = GameGlobals.dungeon.player.get_max_energy()
+	var maxSpecialCount:int = GameGlobals.dungeon.player.special.get_max_count()
 
 	if resourceSlots.size() != maxEnergy:
 		_clean_up_resource_slots()
 		_create_all_resource_slots()
 
-	#var startScale:Vector2 = Vector2(1, 1)
-	#var endScale:Vector2 = Vector2(1.5, 1.5)
 	for i in maxEnergy:
+		resourceSlots[i].clear()
+		if i<maxSpecialCount:
+			resourceSlots[i].set_as_special_count()
 		if currentEnergy<=i:
-			resourceSlots[i].self_modulate = Color.GRAY
+			resourceSlots[i].set_empty()
 		else:
-			#Utils.create_tween_vector2(resourceSlots[i], "self_modulate", Color.WHITE, Color.GREEN, 0.1, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
-			resourceSlots[i].self_modulate = Color.GREEN
+			resourceSlots[i].set_filled()
 
 func _on_player_resource_updated():
 	_refresh_resources()

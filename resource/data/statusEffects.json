@@ -270,28 +270,6 @@
 					}
 				}
 			]
-		},
-		{
-			"id": "STATUS_EFFECT_ASSASSIN_PASSIVE",
-			"name": "Evasion",
-			"description": "Get +25% evasion",
-			"instanceCount": 2,
-			"endConditions": [
-				"ON_END_TURN"
-			],
-			"endTimeline": [
-				{
-					"type": "ADD_STAT_MODIFIER",
-					"params": {
-						"statModifiers": [
-							{
-								"type": "DAMAGE",
-								"maxValue": -2
-							}
-						]
-					}
-				}
-			]
 		}
 	]
 }

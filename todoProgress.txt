@@ -97,8 +97,8 @@ Roguelike Dev:
 (D)- Randomize Level Ups
 (D)- Fix issues with status effect and passives not working right when going into a new dungeon
 (D)- Fix stealth on ghost
-
-- Resources: Energy -> Specials use Energy
+(D)- Resources: Energy -> Specials use Energy
+(IP)- UI on Energy shows how much is needed for special
 
 - Level Up: +1 Attack, +4 Health, +2 Max Health ; No Passive ; Kill Level Boss to get upgrade
 - Enemies use Energy

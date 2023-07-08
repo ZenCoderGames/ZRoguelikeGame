@@ -118,7 +118,7 @@
 						"statModifiers": [
 							{
 								"type": "EVASION",
-								"maxValue": 25
+								"value": 25
 							}
 						]
 					}

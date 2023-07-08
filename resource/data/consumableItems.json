@@ -61,6 +61,7 @@
 			"statModifiers": [
 				{
 					"type": "HEALTH",
+					"value": 2,
 					"maxValue": 2
 				}
 			],

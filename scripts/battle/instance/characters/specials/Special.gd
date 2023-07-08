@@ -11,7 +11,8 @@ signal OnActivated()
 signal OnProgress(progress)
 signal OnReady()
 signal OnReset()
-signal OnSpecialCountUpdated(currentResourceCount)
+signal OnCountIncremented()
+signal OnCountUpdated(currentResourceCount)
 
 func _init(parentChar,specialData:SpecialData):
 	character = parentChar
@@ -29,11 +30,13 @@ func on_event_triggered():
 	_increment()
 
 func _increment():
-	_updateCount(currentCount + 1)
-	check_for_ready()
+	if !isAvailable:
+		_updateCount(currentCount + 1)
+		check_for_ready()
+	emit_signal("OnCountIncremented")
 
 func check_for_ready():
-	var maxCount:int = _get_max_count()
+	var maxCount:int = get_max_count()
 	emit_signal("OnProgress", (float(currentCount))/(float(maxCount)))
 	if currentCount==maxCount:
 		_set_ready()
@@ -81,10 +84,10 @@ func _reset():
 	emit_signal("OnReset")
 
 func force_ready():
-	_updateCount(_get_max_count())
+	_updateCount(get_max_count())
 	check_for_ready()
 
-func _get_max_count()->int:
+func get_max_count()->int:
 	var maxCount:int = data.count
 	var specialModifierList:Array = character.get_special_modifiers(data.id)
 	for specialModifier in specialModifierList:
@@ -93,4 +96,4 @@ func _get_max_count()->int:
 
 func _updateCount(newCount:int):
 	currentCount = newCount
-	emit_signal("OnSpecialCountUpdated", currentCount)
+	emit_signal("OnCountUpdated", currentCount)

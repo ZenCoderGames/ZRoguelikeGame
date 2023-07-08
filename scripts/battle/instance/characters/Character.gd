@@ -72,6 +72,8 @@ signal OnPassiveRemoved(character, passive)
 signal OnAbilityAdded(character, ability)
 signal OnAbilityRemoved(character, ability)
 signal OnNearEnemy()
+signal OnSpecialModifierAdded()
+signal OnSpecialModifierRemoved()
 
 signal OnTurnCompleted()
 signal OnInitialized()
@@ -113,7 +115,8 @@ func init(id:int, charDataVal, teamVal):
 
 	if charData.active!=null:
 		special = Special.new(self, charData.active)
-		special.connect("OnSpecialCountUpdated",Callable(self,"_on_special_count_updated"))
+		special.connect("OnCountIncremented",Callable(self,"_on_special_count_incremented"))
+		special.connect("OnReset",Callable(self,"_on_special_reset"))
 
 	if !charData.passive.is_empty():
 		specialPassive = add_passive(GameGlobals.dataManager.get_passive_data(charData.passive))
@@ -232,9 +235,9 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 		if stat.type == statModifierData.type:
 			if statModifierData.value!=0:
 				stat.modify(stat.value + statModifierData.value)
-			elif statModifierData.maxValue!=0:
+			if statModifierData.maxValue!=0:
 				stat.modify_max(stat.maxValue + statModifierData.maxValue)
-				stat.modify(stat.value + statModifierData.maxValue)
+				#stat.modify(stat.value + statModifierData.maxValue)
 
 			on_stats_changed()
 			return stat.value
@@ -603,19 +606,26 @@ func remove_passive_from_data(passiveData:PassiveData):
 			break
 
 # SPECIAL
-func _on_special_count_updated(newCount:int):
+func _on_special_count_incremented():
 	if has_stat(StatData.STAT_TYPE.ENERGY):
-		get_stat(StatData.STAT_TYPE.ENERGY).modify(newCount)
+		get_stat(StatData.STAT_TYPE.ENERGY).add(1)
+		emit_signal("OnResourceStatChanged")
+
+func _on_special_reset():
+	if has_stat(StatData.STAT_TYPE.ENERGY):
+		get_stat(StatData.STAT_TYPE.ENERGY).add(-special.get_max_count())
 		emit_signal("OnResourceStatChanged")
 
 func add_special_modifier(specialModifier:SpecialModifier):
 	specialModifierList.append(specialModifier)
 	special.check_for_ready()
+	emit_signal("OnSpecialModifierAdded")
 
 func remove_special_modifier(specialId:String):
 	for i in range(specialModifierList.size() - 1, -1, -1):
 		if (specialId == specialModifierList[i].specialId):
 			specialModifierList.remove_at(i)
+	emit_signal("OnSpecialModifierRemoved")
 
 func get_special_modifiers(specialId:String):
 	var matchedspecialModifiers:Array = []

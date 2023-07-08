@@ -40,3 +40,6 @@ res://scripts/battle/ui/PlayerSpecialAbilityUI.gd
 res://scripts/GameGlobals.gd
 res://scripts/GameEventManager.gd
 res://scripts/audio/AudioHandler.gd
+res://scripts/battle/ui/CharacterUI.gd
+res://ui/battle/ResourceSlotUIItem.gd
+res://scripts/battle/instance/characters/EnemyCharacter.gd
