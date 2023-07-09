@@ -1,4 +1,4 @@
-extends PanelContainer
+extends TextureRect
 
 class_name EffectItemUI
 
@@ -6,12 +6,13 @@ class_name EffectItemUI
 
 var item
 
-func init(itemObj):
+func init(itemObj, color:Color):
 	item = itemObj
-	descLabel.text = item.data.get_display_name()
+	#descLabel.text = item.data.get_display_name()
 	#if item is Passive:
 	#	if item.has_counter():
 	#		CombatEventManager.connect("OnStartTurn",Callable(self,"_update_for_passive"))
+	self.self_modulate = color
 
 func _on_mouse_entered():
 	CombatEventManager.on_show_info(item.data.get_display_name(), item.data.get_description())

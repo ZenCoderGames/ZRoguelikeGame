@@ -160,7 +160,7 @@
 						"value": 2
 					}
 				],
-				"passive": "PASSIVE_REINCARNATION"
+				"passive": "PASSIVE_REINCARNATION_AFTER_2"
 			},
 			{
 				"#disable": true,

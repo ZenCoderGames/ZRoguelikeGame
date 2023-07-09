@@ -103,3 +103,8 @@ theme = ExtResource("1")
 text = "Effects"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EffectGridContainer" type="GridContainer" parent="HSplitContainer/NonBase/EffectContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 4

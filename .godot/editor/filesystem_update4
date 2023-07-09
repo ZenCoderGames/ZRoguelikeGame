@@ -43,3 +43,7 @@ res://scripts/audio/AudioHandler.gd
 res://scripts/battle/ui/CharacterUI.gd
 res://ui/battle/ResourceSlotUIItem.gd
 res://scripts/battle/instance/characters/EnemyCharacter.gd
+res://ui/battle/EffectItemUI.tscn
+res://scripts/battle/ui/EffectItemUI.gd
+res://scripts/battle/ui/BattleUI.gd
+res://ui/battle/PlayerAbilityUI.tscn

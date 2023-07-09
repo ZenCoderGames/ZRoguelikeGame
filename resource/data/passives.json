@@ -248,13 +248,35 @@
 				{
 					"type": "REVIVE",
 					"params": {
-						"numTurnsToReviveAfter": 2
+						"numTurnsToReviveAfter": 0
 					}
 				},
 				{
 					"type": "REMOVE_PASSIVE",
 					"params": {
 						"passiveId": "PASSIVE_REINCARNATION"
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_REINCARNATION_AFTER_2",
+			"name": "Reincarnation",
+			"description": "Revive once after death",
+			"conditions": [
+				"ON_DEATH"
+			],
+			"timeline": [
+				{
+					"type": "REVIVE",
+					"params": {
+						"numTurnsToReviveAfter": 2
+					}
+				},
+				{
+					"type": "REMOVE_PASSIVE",
+					"params": {
+						"passiveId": "PASSIVE_REINCARNATION_AFTER_2"
 					}
 				}
 			]

@@ -1,9 +1,9 @@
-TextureRect
 PanelContainer
+Panel
 GridContainer
+TextureRect
 HBoxContainer
 Label
-Panel
 Control
 AnimationPlayer
 Node

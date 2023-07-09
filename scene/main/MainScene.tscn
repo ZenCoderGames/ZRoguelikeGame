@@ -53,7 +53,6 @@ expand_mode = 1
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource("4")
 doorsStayOpenDuringBattle = true
-debugSpawnEnemyEncounter = "TEST_ENC_SINGLE"
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource("3")

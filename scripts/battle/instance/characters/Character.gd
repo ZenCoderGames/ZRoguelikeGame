@@ -118,14 +118,16 @@ func init(id:int, charDataVal, teamVal):
 		special.connect("OnCountIncremented",Callable(self,"_on_special_count_incremented"))
 		special.connect("OnReset",Callable(self,"_on_special_reset"))
 
-	if !charData.passive.is_empty():
-		specialPassive = add_passive(GameGlobals.dataManager.get_passive_data(charData.passive))
-
 	emit_signal("OnInitialized")
 
 	equipment.connect("OnItemEquipped",Callable(self,"_on_item_equipped"))
 	equipment.connect("OnItemUnEquipped",Callable(self,"_on_item_unequipped"))
 	CombatEventManager.connect("OnAnyCharacterMoved",Callable(self,"_on_any_character_moved"))
+
+	await get_tree().create_timer(0.05).timeout
+
+	if !charData.passive.is_empty():
+		specialPassive = add_passive(GameGlobals.dataManager.get_passive_data(charData.passive))
 
 # MOVEMENT
 func move(x, y):

@@ -18,6 +18,7 @@ const EquippedItemUI := preload("res://ui/battle/EquippedItemUI.tscn")
 const SpellButtonUI := preload("res://ui/battle/SpellButtonUI.tscn")
 
 @onready var effectContainer:VBoxContainer = get_node("HSplitContainer/NonBase/EffectContainer")
+@onready var effectGridContainer:GridContainer = $"%EffectGridContainer"
 const EffectItemUI := preload("res://ui/battle/EffectItemUI.tscn")
 
 @export var playerTintColor:Color
@@ -154,8 +155,8 @@ func on_passive_added(_character, passive):
 		return
 
 	var newEffectUI:EffectItemUI = EffectItemUI.instantiate()
-	effectContainer.add_child(newEffectUI)
-	newEffectUI.init(passive)
+	effectGridContainer.add_child(newEffectUI)
+	newEffectUI.init(passive, Color.ORANGE)
 	equippedEffects[passive] = newEffectUI
 
 	effectContainer.visible = true
@@ -165,7 +166,7 @@ func on_passive_removed(_character, passive):
 		return
 		
 	if equippedEffects.has(passive):
-		effectContainer.remove_child(equippedEffects[passive])
+		effectGridContainer.remove_child(equippedEffects[passive])
 		equippedEffects.erase(passive)
 		
 	if equippedEffects.size()==0:
@@ -173,15 +174,15 @@ func on_passive_removed(_character, passive):
 
 func on_status_effect_added(_character, statusEffect):
 	var newEffectUI = EffectItemUI.instantiate()
-	effectContainer.add_child(newEffectUI)
-	newEffectUI.init(statusEffect)
+	effectGridContainer.add_child(newEffectUI)
+	newEffectUI.init(statusEffect, Color.CYAN)
 	equippedEffects[statusEffect] = newEffectUI
 
 	effectContainer.visible = true
 
 func on_status_effect_removed(_character, statusEffect):
 	if equippedEffects.has(statusEffect):
-		effectContainer.remove_child(equippedEffects[statusEffect])
+		effectGridContainer.remove_child(equippedEffects[statusEffect])
 		equippedEffects.erase(statusEffect)
 		
 	if equippedEffects.size()==0:
@@ -189,15 +190,15 @@ func on_status_effect_removed(_character, statusEffect):
 
 func on_ability_added(_character, ability):
 	var newEffectUI = EffectItemUI.instantiate()
-	effectContainer.add_child(newEffectUI)
-	newEffectUI.init(ability)
+	effectGridContainer.add_child(newEffectUI)
+	newEffectUI.init(ability, Color.YELLOW)
 	equippedEffects[ability] = newEffectUI
 
 	effectContainer.visible = true
 
 func on_ability_removed(_character, ability):
 	if equippedEffects.has(ability):
-		effectContainer.remove_child(equippedEffects[ability])
+		effectGridContainer.remove_child(equippedEffects[ability])
 		equippedEffects.erase(ability)
 		
 	if equippedEffects.size()==0:
