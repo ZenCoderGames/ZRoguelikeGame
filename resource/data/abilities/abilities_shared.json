@@ -12,8 +12,7 @@
 						"statModifiers": [
 							{
 								"type": "DAMAGE",
-								"value": 1,
-								"maxValue": 1
+								"absoluteValue": 1
 							}
 						]
 					}
@@ -32,8 +31,7 @@
 						"statModifiers": [
 							{
 								"type": "HEALTH",
-								"value": 2,
-								"maxValue": 2
+								"absoluteValue": 2
 							}
 						]
 					}

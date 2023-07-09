@@ -53,6 +53,7 @@ expand_mode = 1
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource("4")
 doorsStayOpenDuringBattle = true
+debugSpawnItems = ["ITEM_HEALTH_POTION_01", "ITEM_HEALTH_UPGRADE_00", "ITEM_WOODEN_PLATE"]
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource("3")

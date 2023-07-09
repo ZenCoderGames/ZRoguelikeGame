@@ -4,7 +4,7 @@
 			"#disable": true,
 			"id": "ITEM_HEALTH_POTION_00",
 			"name": "Small Health Potion",
-			"description": "A tiny health potion\n(+2 health)",
+			"description": "A tiny health potion\n(Heal up to 4 health)",
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +2",
 			"path": "entity/items/consumables/Consumable_Tier1.tscn",
 			"type": "CONSUMABLE",
@@ -22,7 +22,7 @@
 			"#disable": true,
 			"id": "ITEM_HEALTH_POTION_01",
 			"name": "Medium Health Potion",
-			"description": "A tiny health potion\n(+4 health)",
+			"description": "A tiny health potion\n(Heal up to 4 health)",
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +4",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
@@ -61,8 +61,7 @@
 			"statModifiers": [
 				{
 					"type": "HEALTH",
-					"value": 2,
-					"maxValue": 2
+					"absoluteValue": 2
 				}
 			],
 			"consumeAudioId": "CONSUMABLE_POTION"

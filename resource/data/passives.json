@@ -84,7 +84,7 @@
 									"statModifiers": [
 										{
 											"type": "DAMAGE",
-											"maxValue": 2
+											"absoluteValue": 2
 										}
 									]
 								}
@@ -97,7 +97,7 @@
 									"statModifiers": [
 										{
 											"type": "DAMAGE",
-											"maxValue": -2
+											"absoluteValue": -2
 										}
 									]
 								}
@@ -172,7 +172,7 @@
 						"statModifiers": [
 							{
 								"type": "DAMAGE",
-								"maxValue": 2
+								"absoluteValue": 2
 							}
 						]
 					}

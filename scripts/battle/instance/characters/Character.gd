@@ -237,9 +237,11 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 		if stat.type == statModifierData.type:
 			if statModifierData.value!=0:
 				stat.modify(stat.value + statModifierData.value)
-			if statModifierData.maxValue!=0:
+			elif statModifierData.maxValue!=0:
 				stat.modify_max(stat.maxValue + statModifierData.maxValue)
-				#stat.modify(stat.value + statModifierData.maxValue)
+			elif statModifierData.absoluteValue!=0:
+				stat.modify_max(stat.maxValue + statModifierData.absoluteValue)
+				stat.modify(stat.value + statModifierData.absoluteValue)
 
 			on_stats_changed()
 			return stat.value
@@ -254,6 +256,14 @@ func get_stat(statType):
 
 	return null
 
+func stat_compare(statType:int):
+	for stat in stats:
+		if stat.type == statType:
+			return stat.compare_with_max()
+
+	return 0
+
+# REVIVE
 func initiate_revive(numTurns):
 	setToRevive = numTurns
 	emit_signal("OnReviveStart")

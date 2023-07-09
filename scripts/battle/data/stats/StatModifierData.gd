@@ -3,6 +3,7 @@ class_name StatModifierData
 var type:int
 var value:int
 var maxValue:int
+var absoluteValue:int
 
 func _init(statModDataJS):
 	var statType = statModDataJS["type"]
@@ -16,3 +17,6 @@ func _init(statModDataJS):
 
 	if statModDataJS.has("maxValue"):
 		maxValue = statModDataJS["maxValue"]
+
+	if statModDataJS.has("absoluteValue"):
+		absoluteValue = statModDataJS["absoluteValue"]

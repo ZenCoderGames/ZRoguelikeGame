@@ -48,6 +48,7 @@ func _is_resetable_stat(statType:int):
 # should this be clamped to 0<maxValue
 func _update_value(newValue:int):
 	value = newValue
+	value = clampi(value, 0, maxValue)
 	emit_signal("OnValueUpdated", value)
 	emit_signal("OnUpdated")
 
@@ -55,3 +56,10 @@ func _update_max_value(newMaxValue:int):
 	maxValue = newMaxValue
 	emit_signal("OnMaxValueUpdated", maxValue)
 	emit_signal("OnUpdated")
+
+func compare_with_max()->int:
+	if value<maxValue:
+		return -1
+	if value>maxValue:
+		return 1
+	return 0

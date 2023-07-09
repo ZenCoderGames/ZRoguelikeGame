@@ -39,30 +39,38 @@ func _on_char_revive_end():
 	self.visible = true
 
 func _update_stats():
-	update_attack(parentCharacter.get_damage())
-	update_health(parentCharacter.get_health())
+	update_attack(parentCharacter.get_damage(), parentCharacter.stat_compare(StatData.STAT_TYPE.DAMAGE), attackPanel, attackLabel)
+	update_health(parentCharacter.get_health(), parentCharacter.stat_compare(StatData.STAT_TYPE.HEALTH), healthPanel, healthLabel)
 
-func update_attack(val:int):
+func update_attack(val:int, compareWithMax:int, panel, label):
 	if prevDamageVal!=val:
-		attackLabel.text = str(val)
-		animate_panel(attackPanel, attackLabel, val)
+		label.text = str(val)
+		animate_panel(panel, label, val)
 	prevDamageVal = val
+	_update_stat_color(label, compareWithMax)
 	
-func update_health(val:int):
+func update_health(val:int, compareWithMax:int, panel, label):
 	if prevHealthVal!=val:
-		healthLabel.text = str(val)
-		animate_panel(healthPanel, healthLabel, val)
+		label.text = str(val)
+		animate_panel(panel, label, val)
 	prevHealthVal = val
+	_update_stat_color(label, compareWithMax)
+
+func _update_stat_color(label, compareWithMax):
+	if compareWithMax==0:
+		label.self_modulate = Color.WHITE
+	elif compareWithMax==-1:
+		label.self_modulate = Color.INDIAN_RED
+	elif compareWithMax==1:
+		label.self_modulate = Color.LAWN_GREEN
 
 func animate_panel(panel, label, newVal):
 	var startScale:Vector2 = Vector2(0.5, 0.5)
 	var endScale:Vector2 = Vector2(0.8, 0.8)
 	Utils.create_return_tween_vector2(panel, "scale", startScale, endScale, 0.15, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR, 0.5)
 	await get_tree().create_timer(0.15).timeout
-	#label.color = Color.GREEN
 	label.text = str(newVal)
 	await get_tree().create_timer(0.5).timeout
-	#label.color = Color.WHITE
 
 func on_mouse_entered():
 	var desc:String = parentCharacter.charData.get_description() + " " + parentCharacter.get_summary()
