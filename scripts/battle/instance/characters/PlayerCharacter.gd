@@ -51,6 +51,9 @@ func pre_update():
 	_levelUpThisTurn = false
 
 func update():
+	if _hasUpdatedThisTurn:
+		return
+		
 	super.update()
 
 	if skipThisTurn:
@@ -80,9 +83,15 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 	check_for_nearby_entities()
 
 	if newCell.is_exit():
-		emit_signal("OnPlayerReachedExit")
+		if newCell.room.is_cleared():
+			emit_signal("OnPlayerReachedExit")
+		else:
+			CombatEventManager.on_show_info("Exit", "Kill Miniboss to exit")
 	elif newCell.is_end():
-		emit_signal("OnPlayerReachedEnd")
+		if newCell.room.is_cleared():
+			emit_signal("OnPlayerReachedEnd")
+		else:
+			CombatEventManager.on_show_info("Exit", "Kill Boss to exit")
 	
 func on_enemy_moved_adjacent(_enemy):
 	check_for_nearby_entities()
@@ -139,11 +148,11 @@ func _on_levelup_ability_selected(abilityData:AbilityData):
 
 # SKIP_TURN MANAGEMENT
 var _lastSkipTurn:int = -1
-const SKIP_TURN_COOLDOWN:int = 0
+const SKIP_TURN_COOLDOWN:int = 5
 
 func skip_turn():
 	_lastSkipTurn = GameGlobals.dungeon.turnsTaken
-	on_turn_completed()
+	super.skip_turn()
 
 func can_skip_turn():
 	return _lastSkipTurn==-1 or (GameGlobals.dungeon.turnsTaken - _lastSkipTurn > SKIP_TURN_COOLDOWN)
@@ -153,5 +162,8 @@ func get_skip_turn_cooldown():
 
 # SPECIAL
 func _on_special_pressed():
-	if !special.try_activate():
+	if special.try_activate():
+		pass
+		#on_turn_completed()
+	else:
 		CombatEventManager.emit_signal("OnPlayerSpecialAbilityFailedToActivate")

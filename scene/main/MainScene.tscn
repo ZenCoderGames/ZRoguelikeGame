@@ -53,7 +53,6 @@ expand_mode = 1
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource("4")
 doorsStayOpenDuringBattle = true
-debugSpawnItems = ["ITEM_HEALTH_POTION_01", "ITEM_HEALTH_UPGRADE_00", "ITEM_WOODEN_PLATE"]
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource("3")
@@ -73,6 +72,7 @@ playerDamageColor = Color(0.0823529, 0.666667, 0.760784, 1)
 playerStealthColor = Color(0.239216, 0.290196, 0.298039, 0.352941)
 playerLevelUpColor = Color(0.803922, 0.882353, 0.0980392, 1)
 enemyDamageColor = Color(0.72549, 0.376471, 0.223529, 1)
+minibossDamageColor = Color(0.733333, 0.203922, 0.772549, 1)
 itemGearColor = Color(0.368627, 0.603922, 0.184314, 1)
 itemConsumableColor = Color(0.203922, 0.466667, 0.74902, 1)
 itemSpellColor = Color(0.552941, 0.196078, 0.639216, 1)

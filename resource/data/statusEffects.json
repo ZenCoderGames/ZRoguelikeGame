@@ -40,6 +40,46 @@
 			]
 		},
 		{
+			"comment": "This has to be different from the player due to how end conditions work and turn order",
+			"id": "STATUS_EFFECT_STUN_FROM_ENEMY",
+			"name": "Stun",
+			"description": "Stuns for 1 turn",
+			"instanceCount": 2,
+			"endConditions": [
+				"ON_START_TURN"
+			],
+			"startTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"stunned": 1
+					}
+				},
+				{
+					"type": "#SPAWN_EFFECT",
+					"params": {
+						"effectId": "StunEffect",
+						"effectPath": "entity/effects/Effect_StatusEffect_Stun.tscn",
+						"parent": true
+					}
+				}
+			],
+			"endTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"stunned": -1
+					}
+				},
+				{
+					"type": "#DESTROY_EFFECT",
+					"params": {
+						"effectId": "StunEffect"
+					}
+				}
+			]
+		},
+		{
 			"id": "STATUS_EFFECT_CRITICAL",
 			"name": "Critical",
 			"description": "Next hit is critical",
@@ -115,7 +155,7 @@
 			"description": "Blocks All Instance Of Damage For 1 Turn",
 			"instanceCount": 1,
 			"endConditions": [
-				"ON_END_TURN"
+				"ON_START_TURN"
 			],
 			"startTimeline": [ 
 				{

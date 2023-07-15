@@ -43,6 +43,8 @@ var wasRoomVisited:bool = false
 var roomId:int = -1
 var _processedEnemyIdx:int = -1
 var _prevProcessedEnemy:Character = null
+var _exitCell:DungeonCell
+var _isCleared:bool = true
 
 func _init(id,mR,mC,sX,sY):
 	roomId = id
@@ -155,9 +157,22 @@ func generate_enemy(enemyId):
 		var randomEnemyData:CharacterData = GameGlobals.dataManager.get_enemy_data(enemyId)
 		var enemy:Node = GameGlobals.dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 		enemies.append(enemy)
-		return true
-	else:
-		return false
+		return enemy
+	
+	return null
+
+# MINIBOSS
+func generate_miniboss(enemyId):
+	var enemy:Node = generate_enemy(enemyId)
+	if enemy!=null:
+		enemy.set_as_miniboss()
+		enemy.connect("OnDeath", Callable(self,"_on_miniboss_death"))
+
+func _on_miniboss_death():
+	_isCleared = true
+
+func is_cleared():
+	return _isCleared
 
 func generate_items(totalItemsToSpawn):
 	for i in totalItemsToSpawn:
@@ -239,18 +254,20 @@ func update_visibility():
 	else:	
 		var isPlayerCurrentRoom:bool = GameGlobals.dungeon.player.is_in_room(self)
 		var isPlayerPreviousRoom:bool = GameGlobals.dungeon.player.is_prev_room(self)
-		var isAdjancentRoom:bool = false
+		var isAdjacentRoom:bool = false
 		var playerCell:DungeonCell = GameGlobals.dungeon.player.cell
 		if playerCell.is_connection():
+			#isAdjancentRoom = true
 			for connectionCell in connections:
 				if playerCell.connectedCell == connectionCell:
-					isAdjancentRoom = true
+					isAdjacentRoom = true
 
-		if isPlayerCurrentRoom or isAdjancentRoom:
+		if isPlayerCurrentRoom or isAdjacentRoom:
 			_show()
-			if !wasRoomVisited:
-				_check_for_doors()
-			wasRoomVisited = true
+			if !playerCell.connectedCell:
+				if !wasRoomVisited:
+					_check_for_doors()
+				wasRoomVisited = true
 		elif isPlayerPreviousRoom:
 			_dim()
 		elif wasRoomVisited:
@@ -329,7 +346,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			# Enemy
 			if entity.is_opposite_team(cell.entityObject):
 				var enemyChar = cell.entityObject
-				if enemyChar.can_take_damage():
+				if enemyChar.is_targetable():
 					entity.attack(cell.entityObject)
 					return true
 	# out of bounds of room
@@ -457,15 +474,17 @@ func set_as_end_room():
 			freeCells.append(cell)
 	
 	# choose random free cell
-	var exitCell:DungeonCell = freeCells[randi() % freeCells.size()]
+	_exitCell = freeCells[randi() % freeCells.size()]
 
 	var exitObj:Node = null
 	if GameGlobals.battleInstance.is_last_level():
-		exitObj = Utils.create_scene(loadedScenes, "end", Constants.End, Constants.room_end, exitCell)
-		exitCell.init_cell(exitObj, Constants.CELL_TYPE.END)
+		exitObj = Utils.create_scene(loadedScenes, "end", Constants.End, Constants.room_end, _exitCell)
+		_exitCell.init_cell(exitObj, Constants.CELL_TYPE.END)
 	else:
-		exitObj = Utils.create_scene(loadedScenes, "exit", Constants.Exit, Constants.room_exit, exitCell)
-		exitCell.init_cell(exitObj, Constants.CELL_TYPE.EXIT)
+		exitObj = Utils.create_scene(loadedScenes, "exit", Constants.Exit, Constants.room_exit, _exitCell)
+		_exitCell.init_cell(exitObj, Constants.CELL_TYPE.EXIT)
+	
+	_isCleared = false
 
 func pre_update_entities():
 	for enemy in enemies:

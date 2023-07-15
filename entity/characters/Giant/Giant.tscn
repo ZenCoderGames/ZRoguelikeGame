@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b04qwlegu3eq"]
+[gd_scene load_steps=10 format=3 uid="uid://b04qwlegu3eq"]
 
 [ext_resource type="Texture2D" uid="uid://b855b2vytd5lh" path="res://sourceArt/Enemies/Giant_01.png" id="1_a4nje"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="2"]
 [ext_resource type="Script" path="res://scripts/battle/instance/characters/EnemyCharacter.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="5_hefep"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u6ywn"]
 load_path = "res://.godot/imported/Rat_01.png-0994be6c0e95f2a01eac132489c87402.ctex"
@@ -155,6 +156,38 @@ offset_left = -46.0
 offset_top = -37.5
 offset_right = 14.0
 offset_bottom = 5.5
+
+[node name="CounterHolder" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.603922, 0, 0, 1)
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = -23.0
+offset_right = -6.0
+offset_bottom = -2.0
+grow_horizontal = 2
+texture = ExtResource("5_hefep")
+expand_mode = 1
+
+[node name="CounterText" parent="CounterHolder" instance=ExtResource("2")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

@@ -10,7 +10,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 8
+						"value": 10
 					},
 					{
 						"type": "DAMAGE",
@@ -145,7 +145,7 @@
 			{
 				"id": "SKELETON",
 				"displayName": "Skeleton",
-				"description": "No special properties",
+				"description": "Passive: Reincarnation (Revives once after death with full health)",
 				"path": "entity/characters/Skeleton/Skeleton.tscn",
 				"difficulty": 1,
 				"cost": 5,
@@ -166,7 +166,7 @@
 				"#disable": true,
 				"id": "GHOST",
 				"displayName": "Ghost",
-				"description": "This chained ethereal creature goes invisible",
+				"description": "Passive: Stealth (Goes invisible)",
 				"path": "entity/characters/Ghost/Ghost.tscn",
 				"difficulty": 1,
 				"cost": 5,
@@ -201,7 +201,7 @@
 				"#disable": true,
 				"id": "GIANT",
 				"displayName": "Giant",
-				"description": "This creature will heal every turn",
+				"description": "Passive: Regeneration (Heal for 1 every turn)",
 				"path": "entity/characters/Giant/Giant.tscn",
 				"difficulty": 2,
 				"cost": 10,
@@ -209,19 +209,20 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 20
+						"value": 15
 					},
 					{
 						"type": "DAMAGE",
 						"value": 3
 					}
-				]
+				],
+				"passive": "PASSIVE_REGENERATION"
 			},
 			{
 				"#disable": true,
 				"id": "SERPENT",
 				"displayName": "Serpent",
-				"description": "These venomous fiends deal poison damage on hit",
+				"description": "Active: Petrify (Stuns all enemies around it for 1 turn)",
 				"path": "entity/characters/Serpent/Serpent.tscn",
 				"difficulty": 2,
 				"cost": 5,
@@ -235,13 +236,36 @@
 						"type": "DAMAGE",
 						"value": 6
 					}
-				]
+				],
+				"active": {
+					"id": "SERPENT_SPECIAL",
+					"description": "Stuns the target",
+					"conditions": ["ON_TAKE_HIT"],
+					"count": 2,
+					"executeCondition": "NONE",
+					"timeline": [
+						{
+							"type": "FIND_TARGETS",
+							"params": {
+								"range": 1,
+								"maxTargets": 4
+							}
+						},
+						{
+							"type": "ADD_STATUS_EFFECT",
+							"params": {
+								"statusEffectId": "STATUS_EFFECT_STUN_FROM_ENEMY",
+								"applyToTargets": true
+							}
+						}
+					]
+				}
 			},
 			{
 				"#disable": true,
 				"id": "AUTOMATON",
 				"displayName": "Automaton",
-				"description": "This creature is immune to elemental or status effects",
+				"description": "Active: Repair (Restores 50% health)",
 				"path": "entity/characters/Automaton/Automaton.tscn",
 				"difficulty": 3,
 				"cost": 7,
@@ -249,19 +273,45 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 20
+						"value": 16
 					},
 					{
 						"type": "DAMAGE",
-						"value": 8
+						"value": 6
 					}
-				]
+				],
+				"active": {
+					"id": "AUTOMATON_SPECIAL",
+					"description": "Heal",
+					"conditions": ["ON_TAKE_HIT"],
+					"count": 4,
+					"executeCondition": "NONE",
+					"timeline": [
+						{
+							"type": "ADD_STAT_MODIFIER",
+							"params": {
+								"statModifiers": [
+									{
+										"type": "HEALTH",
+										"value": 10
+									}
+								]
+							}
+						},
+						{
+							"type": "SHOW_CHARACTER_UI_TEXT",
+							"params": {
+								"text": "Repair"
+							}
+						}
+					]
+				}
 			},
 			{
 				"#disable": true,
 				"id": "DRAGON",
 				"displayName": "Dragon",
-				"description": "The dragon will breathe fire on its victims",
+				"description": "",
 				"path": "entity/characters/Dragon/Dragon.tscn",
 				"difficulty": 4,
 				"cost": 10,

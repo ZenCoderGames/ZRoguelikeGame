@@ -24,7 +24,10 @@ func _init(parentChar,specialData:SpecialData):
 		if(action!=null):
 			timelineActions.append(action)
 
-	_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
+	if data.triggerConditions.size()>0:
+		_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
+	else:
+		_set_ready()
 
 func on_event_triggered():
 	_increment()
@@ -97,3 +100,6 @@ func get_max_count()->int:
 func _updateCount(newCount:int):
 	currentCount = newCount
 	emit_signal("OnCountUpdated", currentCount)
+
+func get_remaining_count():
+	return get_max_count() - currentCount

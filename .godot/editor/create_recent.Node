@@ -1,7 +1,7 @@
+TextureRect
 PanelContainer
 Panel
 GridContainer
-TextureRect
 HBoxContainer
 Label
 Control

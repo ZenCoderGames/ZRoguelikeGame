@@ -41,7 +41,7 @@ func show_debug_path_cell(cost:int):
 
 func is_connection():
 	return is_cell_type(Constants.CELL_TYPE.CONNECTOR)
-	
+
 # ENTITY TYPE
 func init_entity(obj:Node, type:int):
 	entityObject = obj
@@ -93,9 +93,15 @@ func show():
 
 	# color
 	if is_exit():
-		floorObject.modulate = GameGlobals.battleInstance.view.showExitColor
+		if room.is_cleared():
+			floorObject.modulate = GameGlobals.battleInstance.view.showExitColor
+		else:
+			floorObject.modulate = Color.GRAY
 	elif is_end():
-		floorObject.modulate = GameGlobals.battleInstance.view.showEndColor
+		if room.is_cleared():
+			floorObject.modulate = GameGlobals.battleInstance.view.showEndColor
+		else:
+			floorObject.modulate = Color.GRAY
 	else:
 		floorObject.modulate = GameGlobals.battleInstance.view.showFloorColor
 	if entityObject!=null:

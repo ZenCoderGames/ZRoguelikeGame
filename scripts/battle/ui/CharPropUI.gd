@@ -60,7 +60,7 @@ func _update_stat_color(label, compareWithMax):
 	if compareWithMax==0:
 		label.self_modulate = Color.WHITE
 	elif compareWithMax==-1:
-		label.self_modulate = Color.INDIAN_RED
+		label.self_modulate = Color.PALE_VIOLET_RED
 	elif compareWithMax==1:
 		label.self_modulate = Color.LAWN_GREEN
 
@@ -74,7 +74,7 @@ func animate_panel(panel, label, newVal):
 
 func on_mouse_entered():
 	var desc:String = parentCharacter.charData.get_description() + " " + parentCharacter.get_summary()
-	CombatEventManager.on_show_info(parentCharacter.charData.get_display_name(), desc)
+	CombatEventManager.on_show_info(parentCharacter.displayName, desc)
 
 func on_mouse_exited():
 	CombatEventManager.on_hide_info()

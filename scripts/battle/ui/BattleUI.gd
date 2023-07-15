@@ -74,7 +74,7 @@ func _shared_init():
 	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell",Callable(self,"_on_player_move"))
 	GameGlobals.dungeon.player.connect("OnNearbyEntityFound",Callable(self,"_on_entity_nearby"))
 	GameGlobals.dungeon.player.inventory.connect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))
-	GameGlobals.dungeon.player.connect("OnLevelUp",Callable(self,"_on_player_level_up"))
+	#GameGlobals.dungeon.player.connect("OnLevelUp",Callable(self,"_on_player_level_up"))
 	
 	playerUI.init(GameGlobals.dungeon.player)
 	levelLabel.text = str(GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())

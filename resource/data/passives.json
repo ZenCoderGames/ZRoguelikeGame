@@ -301,6 +301,27 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PASSIVE_REGENERATION",
+			"name": "Heal",
+			"description": "Heal for 1 every turn",
+			"conditions": [
+				"ON_START_TURN"
+			],
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "HEALTH",
+								"value": 1
+							}
+						]
+					}
+				}
+			]
 		}
 	]
 }

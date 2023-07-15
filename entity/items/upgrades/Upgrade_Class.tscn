@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://csc0ao834ms1j"]
+
+[ext_resource type="Texture2D" uid="uid://cv7erey0w52ra" path="res://sourceArt/Random/ShadedStar.png" id="1_hxo3p"]
+[ext_resource type="Script" path="res://scripts/battle/instance/upgrades/Upgrade.gd" id="2_b2lmy"]
+
+[node name="Upgrade_Shared" type="Sprite2D"]
+self_modulate = Color(0.682353, 0.298039, 0.768627, 1)
+position = Vector2(209, 69)
+texture = ExtResource("1_hxo3p")
+region_filter_clip_enabled = true
+script = ExtResource("2_b2lmy")

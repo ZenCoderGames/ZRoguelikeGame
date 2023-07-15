@@ -14,6 +14,7 @@ class_name BattleView
 @export var playerStealthColor:Color
 @export var playerLevelUpColor:Color
 @export var enemyDamageColor:Color
+@export var minibossDamageColor:Color
 @export var itemGearColor:Color
 @export var itemConsumableColor:Color
 @export var itemSpellColor:Color

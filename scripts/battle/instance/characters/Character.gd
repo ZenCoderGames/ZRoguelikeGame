@@ -4,6 +4,8 @@ extends Node
 class_name Character
 
 @onready var damageText:Label = get_node("DamageText")
+@onready var counterHolder:TextureRect = $"%CounterHolder"
+@onready var counterText:Label = $"%CounterText"
 @onready var animPlayer:AnimationPlayer = get_node("AnimationPlayer")
 
 var charData:CharacterData
@@ -14,6 +16,7 @@ var prevCell
 var cell
 var isDead:bool = false
 var setToRevive:int = -1
+var _hasUpdatedThisTurn:bool = false
 
 var stats:Array = []
 var statDict:Dictionary = {}
@@ -362,10 +365,13 @@ func post_hit(_sourceChar:Character, _targetChar:Character, _damageTakenFromHit:
 	if status.is_evasive():
 		status.set_evasive(-1)
 
-func can_take_damage()->bool:
+func is_targetable():
 	if is_reviving():
 		return false
+	
+	return true
 
+func can_take_damage()->bool:
 	if status.is_invulnerable():
 		return false
 
@@ -466,6 +472,13 @@ func _show_generic_text(entity, val:String, duration:float=0.75):
 	await get_tree().create_timer(duration).timeout
 	damageText.visible = false
 
+func _show_counter_text(entity, val:String, duration:float=0.75):
+	counterHolder.visible = true
+	counterText.text = val
+	_create_damage_text_tween(entity)
+	await get_tree().create_timer(duration).timeout
+	counterHolder.visible = false
+
 func _create_damage_text_tween(_entity):
 	"""var dirn:int = dirn_to_character(entity)
 	# damage text
@@ -493,11 +506,17 @@ func _create_damage_text_tween(_entity):
 	#Utils.create_tween_vector2(damageText, "position", startPos, startPos, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	Utils.create_tween_vector2(damageText, "self_modulate", colorOriginal, colorNew, 1.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 
+func is_due_to_skip_turn():
+	return status.is_stunned() or setToRevive==-1
+
 func pre_update():
 	successfulDamageThisTurn = 0
 	skipThisTurn = false
+	_hasUpdatedThisTurn = false
 
 func update():
+	_hasUpdatedThisTurn = true
+
 	if setToRevive>=0:
 		setToRevive = setToRevive - 1
 		skipThisTurn = true
@@ -514,6 +533,7 @@ func update():
 func post_update():
 	targetList = []
 	successfulDamageThisTurn = 0
+	_hasUpdatedThisTurn = false
 
 # TARGETING
 func add_target(target):
@@ -684,7 +704,7 @@ func on_turn_completed():
 func skip_turn():
 	if status.is_stunned():
 		show_stunned()
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.25).timeout
 	on_turn_completed()
 
 # HELPERS

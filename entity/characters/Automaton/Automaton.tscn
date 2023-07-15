@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cinh7ujpfqlt6"]
+[gd_scene load_steps=11 format=3 uid="uid://cinh7ujpfqlt6"]
 
 [ext_resource type="Texture2D" uid="uid://cxsiy2hwhcan0" path="res://resource/images/curses_vector_24x36.png" id="1"]
 [ext_resource type="Script" path="res://scripts/battle/instance/characters/EnemyCharacter.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="5_n8e3w"]
 
 [sub_resource type="AtlasTexture" id="1"]
 atlas = ExtResource("1")
@@ -153,6 +154,7 @@ script = ExtResource("2")
 [node name="CharacterUI" parent="." instance=ExtResource("4")]
 
 [node name="DamageText" parent="." instance=ExtResource("3")]
+visible = false
 offset_left = -41.5
 offset_top = -39.5
 offset_right = 18.5
@@ -163,3 +165,35 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_fthc7")
 }
+
+[node name="CounterHolder" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.603922, 0, 0, 1)
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.5
+offset_top = -18.0
+offset_right = -1.5
+offset_bottom = 3.0
+grow_horizontal = 2
+texture = ExtResource("5_n8e3w")
+expand_mode = 1
+
+[node name="CounterText" parent="CounterHolder" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"

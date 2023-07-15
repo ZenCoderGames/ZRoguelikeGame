@@ -5,6 +5,7 @@ class_name EnemyCharacter
 var USE_SIMPLE_LOS:bool
 var _hasSeenPlayer:bool
 var lastVisitedCellsSincePlayerMoved:Array
+var isMiniboss:bool
 
 func init(charId:int, charDataVal, teamVal):
 	super.init(charId, charDataVal, teamVal)
@@ -18,6 +19,9 @@ func init(charId:int, charDataVal, teamVal):
 	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell",Callable(self,"_on_player_moved"))
 
 func update():
+	#if _hasUpdatedThisTurn: For some reason this is bugged out when going really fast with the player
+	#	return
+
 	super.update()
 
 	if skipThisTurn:
@@ -36,9 +40,12 @@ func update():
 		return
 
 	if special!=null:
-		if special.try_activate():
-			on_turn_completed()
-			return
+		if special.isAvailable:
+			if special.try_activate():
+				on_turn_completed()
+				return
+		else:
+			_show_counter_text(self, str(special.get_remaining_count()))
 
 	if attackAction.can_execute():
 		attackAction.execute()
@@ -98,3 +105,11 @@ func _los_check_in_dirn(rDir:int, cDir:int):
 			break
 
 	return false
+
+func set_as_miniboss():
+	isMiniboss = true
+	modify_absolute_stat_value(StatData.STAT_TYPE.DAMAGE, get_stat_max_value(StatData.STAT_TYPE.DAMAGE)/2)
+	modify_absolute_stat_value(StatData.STAT_TYPE.HEALTH, get_stat_max_value(StatData.STAT_TYPE.HEALTH)/2)
+	originalColor = GameGlobals.battleInstance.view.minibossDamageColor
+	reset_color()
+	displayName = "(Elite) " + displayName

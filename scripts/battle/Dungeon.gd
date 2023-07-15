@@ -243,10 +243,15 @@ func _init_enemies():
 		for items in itemsToRemove:
 			enemyDataList.erase(items)
 
+		# Miniboss
+		if room.isEndRoom:
+			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]
+			room.generate_miniboss(enemyData.id)
+
 		while(currentCost<encounterCost):
 			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]
 			if currentCost + enemyData.cost<=encounterCost:
-				if room.generate_enemy(enemyData.id):
+				if room.generate_enemy(enemyData.id)!=null:
 					currentCost = currentCost + enemyData.cost
 				else:
 					break
@@ -363,8 +368,8 @@ func _start_turn():
 	player.pre_update()
 	player.cell.room.pre_update_entities()
 
-	if player.status.is_stunned():
-		player.skip_turn()
+	if player.is_due_to_skip_turn():
+		player.update()
 	else:
 		# Wait for Player Turn
 		pass
