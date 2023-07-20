@@ -18,6 +18,8 @@ class_name BattleInstance
 @export var dontSpawnObstacles:bool
 @export var dontSpawnItems:bool
 @export var debugSpawnItems:Array # (Array, String)
+@export var debugSpawnSharedUpgrade:bool
+@export var debugSpawnClassSpecificUpgrade:bool
 @export var setPlayerInvulnerable:bool
 @export var setEnemiesInvulnerable:bool
 @export var debugAbilities:Array # (Array, String)

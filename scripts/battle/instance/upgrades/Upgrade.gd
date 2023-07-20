@@ -1,12 +1,21 @@
-extends Node
+extends Node2D
 
-class Upgrade
+class_name Upgrade
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+enum UPGRADE_TYPE { SHARED, CLASS_SPECIFIC }
+@export var upgradeType:UPGRADE_TYPE
 
+func activate():
+	CombatEventManager.emit_signal("ShowUpgrade", upgradeType)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func get_display_name():
+	if upgradeType==UPGRADE_TYPE.CLASS_SPECIFIC:
+		return "Class Upgrade"
+	
+	return "General Upgrade"
+
+func get_description():
+	if upgradeType==UPGRADE_TYPE.CLASS_SPECIFIC:
+		return "Contains class specific upgrades"
+	
+	return "Contains upgrades"

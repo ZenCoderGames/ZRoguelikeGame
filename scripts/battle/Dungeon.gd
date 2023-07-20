@@ -33,6 +33,7 @@ func create(recreatePlayer:bool) -> void:
 	_init_path()
 	_init_obstacles()
 	_init_items()
+	_init_upgrades()
 	_init_player(recreatePlayer)
 	_init_enemies()
 		
@@ -341,6 +342,13 @@ func _spawn_item(room, itemData):
 	else:
 		itemSpawnedMap[itemData.id] = 1
 
+func _init_upgrades():
+	if GameGlobals.battleInstance.debugSpawnSharedUpgrade:
+		startRoom.generate_upgrade(Upgrade.UPGRADE_TYPE.SHARED)
+
+	if GameGlobals.battleInstance.debugSpawnClassSpecificUpgrade:
+		startRoom.generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
+
 func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	if recreatePlayer:
@@ -465,6 +473,17 @@ func load_item(parentContainer, cell, itemData, entityType, groupName):
 	if itemData.is_spell():
 		itemObject.self_modulate = GameGlobals.battleInstance.view.itemSpellColor
 	return itemObject
+
+func load_upgrade(parentContainer, cell, upgradeType, entityType, groupName):
+	var upgradePath:String = ""
+	if upgradeType == Upgrade.UPGRADE_TYPE.SHARED:
+		upgradePath = "entity/upgrades/Upgrade_Shared.tscn"
+	elif upgradeType == Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC:
+		upgradePath = "entity/upgrades/Upgrade_Class.tscn"
+	var upgradePrefab := load(str("res://", upgradePath))
+	var upgradeObject = Utils.create_scene(parentContainer, "Upgrade", upgradePrefab, groupName, cell)
+	cell.init_entity(upgradeObject, entityType)
+	return upgradeObject
 
 func get_adjacent_characters(character, relativeTeamType, numTiles:int=1):
 	var currentPlayerRoom:DungeonRoom = player.currentRoom

@@ -48,6 +48,7 @@ func _ready():
 	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_turn_taken"))
 	CombatEventManager.connect("OnDetailInfoShow",Callable(self,"_show_detail_info_text"))
 	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
+	CombatEventManager.connect("ShowUpgrade",Callable(self,"_on_player_level_up"))
 	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_attack"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
@@ -131,7 +132,7 @@ func _on_entity_nearby(entity):
 		#infoPanel.add_child(newCharUI)
 		#infoPanelObjects.append(newCharUI)
 		#newCharUI.init(entity)
-	elif entity is Item:
+	elif entity is Item or entity is Upgrade:
 		var newItemUI = ItemUI.instantiate()
 		infoPanel.add_child(newItemUI)
 		infoPanelObjects.append(newItemUI)
@@ -228,11 +229,11 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 			player.inventory.disconnect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))
 
 # LEVEL UP
-func _on_player_level_up():
+func _on_player_level_up(upgradeType:Upgrade.UPGRADE_TYPE):
 	levelUpUI = LevelUpUI.instantiate()
 	add_child(levelUpUI)
 
-	var hasALevelUpItem:bool = levelUpUI.init_from_data()
+	var hasALevelUpItem:bool = levelUpUI.init_from_data(upgradeType)
 	if !hasALevelUpItem:
 		_remove_level_up_ui()
 	else:

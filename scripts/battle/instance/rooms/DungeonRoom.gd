@@ -31,6 +31,9 @@ var doors:Array = []
 # Items
 var items:Array = []
 
+# Upgrade
+var upgrades:Array = []
+
 var maxRows:int
 var maxCols:int
 var startX:int
@@ -212,6 +215,24 @@ func generate_item(itemId):
 	var item:Node = GameGlobals.dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
 	items.append(item)
 
+func generate_upgrade(upgradeType:Upgrade.UPGRADE_TYPE):
+	# find free cells
+	var playerCell = get_safe_starting_cell()
+	var freeCells:Array = []
+	for cell in cells:
+		if cell == playerCell:
+			continue
+
+		if cell.is_empty() and cell.is_within_room_buffered(2):
+			freeCells.append(cell)
+	
+	# choose random free cell
+	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
+
+	# spawn random enemy
+	var upgrade:Node = GameGlobals.dungeon.load_upgrade(loadedScenes, randomCell, upgradeType, Constants.ENTITY_TYPE.DYNAMIC, Constants.upgrades)
+	upgrades.append(upgrade)
+
 func register_cell_connection(myCell):
 	if myCell.is_top_edge():
 		topConnection = myCell
@@ -331,6 +352,17 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			entity.move_to_cell(cell, true)
 			return true
 		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
+			# Item
+			if cell.entityObject is Upgrade:
+				var upgrade = cell.entityObject
+				GameGlobals.dungeon.add_to_dungeon_scenes(upgrade)
+				loadedScenes.erase(upgrade)
+				upgrade.activate()
+				upgrade.hide()
+				currentCell.clear_entity()
+				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
+				entity.move_to_cell(cell, true)
+				return true
 			# Item
 			if cell.entityObject is Item:
 				var item = cell.entityObject

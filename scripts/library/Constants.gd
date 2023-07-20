@@ -33,6 +33,7 @@ const room_end: String = "end"
 const room_door: String = "door"
 const enemies: String = "enemies"
 const items: String = "items"
+const upgrades: String = "upgrades"
 
 # INPUTS
 const INPUT_EXIT_GAME: String = "exit"
