@@ -60,6 +60,7 @@ signal OnResourceStatChanged()
 signal OnReviveStart()
 signal OnReviveEnd()
 signal OnDeath()
+signal OnDeathFinal()
 signal HideCharacterUI()
 
 signal OnPreAttack(defender)
@@ -67,6 +68,8 @@ signal OnPostAttack(defender)
 var successfulDamageThisTurn:int
 var skipThisTurn:bool
 
+signal OnConsumableAdded(character, consumable)
+signal OnConsumableRemoved(character, consumable)
 signal OnStatusEffectAdded(character, statusEffect)
 signal OnStatusEffectAddedToEnemy(character, statusEffect)
 signal OnStatusEffectRemoved(character, statusEffect)
@@ -406,6 +409,8 @@ func die():
 			animPlayer.play("Death")
 		
 		currentRoom.enemy_died(self)
+
+		emit_signal("OnDeathFinal")
 		
 		await get_tree().create_timer(0.1).timeout
 		cell.clear_entity_on_death()

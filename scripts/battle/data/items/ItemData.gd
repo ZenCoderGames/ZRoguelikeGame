@@ -34,6 +34,7 @@ var statusEffectId:String
 var maxCount:int
 
 var consumeAudioId:String
+var tintColor:String
 
 var disable:bool
 
@@ -69,6 +70,7 @@ func _init(itemDataJS):
 	passiveId = Utils.get_data_from_json(itemDataJS, "passiveId", "")
 	statusEffectId = Utils.get_data_from_json(itemDataJS, "statusEffectId", "")
 	consumeAudioId = Utils.get_data_from_json(itemDataJS, "consumeAudioId", "")
+	tintColor = Utils.get_data_from_json(itemDataJS, "tintColor", "")
 
 func is_weapon():
 	return type == ITEM_TYPE.WEAPON

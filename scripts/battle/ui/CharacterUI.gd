@@ -14,10 +14,14 @@ const EquippedItemUI := preload("res://ui/battle/EquippedItemUI.tscn")
 
 @onready var nonBaseContainer:HSplitContainer = get_node("HSplitContainer/NonBase")
 
-@onready var spellContainer:VBoxContainer = get_node("HSplitContainer/NonBase/SpellContainer")
+@onready var spellContainer:VBoxContainer = $"%SpellContainer"
 const SpellButtonUI := preload("res://ui/battle/SpellButtonUI.tscn")
 
-@onready var effectContainer:VBoxContainer = get_node("HSplitContainer/NonBase/EffectContainer")
+@onready var potionContainer:VBoxContainer = $"%PotionContainer"
+@onready var potionGridContainer:GridContainer = $"%PotionGridContainer"
+const ConsumableItemUI := preload("res://ui/battle/ConsumableItemUI.tscn")
+
+@onready var effectContainer:VBoxContainer = $"%EffectContainer"
 @onready var effectGridContainer:GridContainer = $"%EffectGridContainer"
 const EffectItemUI := preload("res://ui/battle/EffectItemUI.tscn")
 
@@ -33,6 +37,7 @@ var character:Character
 var equippedItems:Dictionary = {}
 var equippedSpells:Dictionary = {}
 var equippedEffects:Dictionary = {}
+var equippedPotions:Dictionary = {}
 var spellSlots:Array = []
 var weaponSlot
 var armorSlot
@@ -46,6 +51,8 @@ func init(entityObj):
 	character = entityObj as Character
 	#nameLabel.text = character.displayName
 	#character.connect("OnStatChanged",Callable(self,"_on_stat_changed"))
+	character.inventory.connect("OnConsumableItemAdded",Callable(self,"on_consumable_added"))
+	character.inventory.connect("OnConsumableItemRemoved",Callable(self,"on_consumable_removed"))
 	character.connect("OnPassiveAdded",Callable(self,"on_passive_added"))
 	character.connect("OnPassiveRemoved",Callable(self,"on_passive_removed"))
 	character.connect("OnStatusEffectAdded",Callable(self,"on_status_effect_added"))
@@ -148,6 +155,23 @@ func _on_item_unequipped(item, slotType):
 func _on_equip_spell_selected(spellItem):
 	if spellItem.can_activate():
 		character.equipment.activate_spell(spellItem)
+
+# POTIONS
+func on_consumable_added(item):
+	var consumableItemUI:ConsumableItemUI = ConsumableItemUI.instantiate()
+	potionGridContainer.add_child(consumableItemUI)
+	consumableItemUI.init(item)
+	equippedPotions[item] = consumableItemUI
+
+	potionContainer.visible = true
+
+func on_consumable_removed(item):
+	if equippedPotions.has(item):
+		potionGridContainer.remove_child(equippedPotions[item])
+		equippedPotions.erase(item)
+		
+	if equippedPotions.size()==0:
+		potionContainer.visible = false
 
 # EFFECTS
 func on_passive_added(_character, passive):

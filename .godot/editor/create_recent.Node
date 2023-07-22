@@ -1,8 +1,9 @@
+HSplitContainer
+HBoxContainer
 TextureRect
 PanelContainer
 Panel
 GridContainer
-HBoxContainer
 Label
 Control
 AnimationPlayer

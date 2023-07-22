@@ -97,26 +97,15 @@ Roguelike Dev:
 (D)- Randomize Level Ups
 (D)- Fix issues with status effect and passives not working right when going into a new dungeon
 (D)- Fix stealth on ghost
+(D)- Evasion
 (D)- Resources: Energy -> Specials use Energy
-(D)- UI on Energy shows how much is needed for special
-(D)- Better UI on upgrades: Now it is just passives
-(D)- Door closing not working as intended
-(D)- Passive Counters in UI
-(D)- Enemies use Specials -> Show counter
-(D)- (Bug) Going to door shows all rooms rather than only adjacent room
-(D)- (Bug) Stats should not be clamped
-(D)- (Bug) Ghost ability not working right
-(D)- Miniboss at end of level
-(D)- End of level needs miniboss
-
-- Level Up: +1 Attack, +4 Heal, +2 Max Health; No Passive ; Kill Level Boss to get stat upgrade and level up
-- Refactor Character scenes into one scene
-- Miniboss mechanic (take existing enemy, buff stats, *Aura*)
-- Armor
-- Potions in UI
-- Trading NPC (Exchange runes/spells)
-- Healing Stone (healing)
+(D)- Miniboss mechanic (take existing enemy, buff stats)
+(D)- Consumables show up in UI
 - Gold/Shopkeeper (Items/Spells)
+- Healing Stone (healing)
+- Pass on minimizing ui effects that are part of runes or upgrades
+
+- Armor
 - Enchanter (Spell Slot/Rune Slot)
 - Targeting for Specials/Spells
 

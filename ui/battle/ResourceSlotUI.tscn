@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://fui0k8v0dutq"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cdbfmuxhyewhy" path="res://sourceArt/Random/Circle.png" id="1_f6ybf"]
-[ext_resource type="Script" path="res://ui/battle/ResourceSlotUIItem.gd" id="2_iet2o"]
+[ext_resource type="Script" path="res://scripts/battle/ui/ResourceSlotUIItem.gd" id="2_iet2o"]
 
 [node name="OuterCircle" type="TextureRect"]
 self_modulate = Color(0.847059, 0.823529, 0.827451, 1)

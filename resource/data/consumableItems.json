@@ -16,7 +16,8 @@
 					"value": 2
 				}
 			],
-			"consumeAudioId": "CONSUMABLE_POTION"
+			"consumeAudioId": "CONSUMABLE_POTION",
+			"tintColor": "#3bb625"
 		},
 		{
 			"#disable": true,
@@ -34,7 +35,8 @@
 					"value": 4
 				}
 			],
-			"consumeAudioId": "CONSUMABLE_POTION"
+			"consumeAudioId": "CONSUMABLE_POTION",
+			"tintColor": "#3bb625"
 		},
 		{
 			"#disable": true,
@@ -46,7 +48,8 @@
 			"type": "CONSUMABLE",
 			"tier": 0,
 			"maxCount": 2,
-			"statusEffectId": "STATUS_EFFECT_BARRIER"
+			"statusEffectId": "STATUS_EFFECT_BARRIER",
+			"tintColor": "#b2b625"
 		},
 		{
 			"#disable": true,
@@ -64,7 +67,8 @@
 					"absoluteValue": 2
 				}
 			],
-			"consumeAudioId": "CONSUMABLE_POTION"
+			"consumeAudioId": "CONSUMABLE_POTION",
+			"tintColor": "#3bb625"
 		}
 	]
 }

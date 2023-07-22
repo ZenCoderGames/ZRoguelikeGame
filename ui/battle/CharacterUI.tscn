@@ -68,17 +68,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SpellContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
+[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer/NonBase"]
+layout_mode = 2
+
+[node name="SpellContainer" type="VBoxContainer" parent="HSplitContainer/NonBase/HSplitContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Name" type="PanelContainer" parent="HSplitContainer/NonBase/SpellContainer"]
+[node name="Name" type="PanelContainer" parent="HSplitContainer/NonBase/HSplitContainer/SpellContainer"]
 layout_mode = 2
 theme = ExtResource("1_tkee7")
 
-[node name="NameLabel" type="Label" parent="HSplitContainer/NonBase/SpellContainer/Name"]
+[node name="NameLabel" type="Label" parent="HSplitContainer/NonBase/HSplitContainer/SpellContainer/Name"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1")
@@ -86,8 +90,33 @@ text = "Spells"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EffectContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
+[node name="PotionContainer" type="VBoxContainer" parent="HSplitContainer/NonBase/HSplitContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name" type="PanelContainer" parent="HSplitContainer/NonBase/HSplitContainer/PotionContainer"]
+layout_mode = 2
+theme = ExtResource("1_tkee7")
+
+[node name="NameLabel" type="Label" parent="HSplitContainer/NonBase/HSplitContainer/PotionContainer/Name"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1")
+text = "Potions"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PotionGridContainer" type="GridContainer" parent="HSplitContainer/NonBase/HSplitContainer/PotionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 4
+
+[node name="EffectContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -107,4 +136,4 @@ vertical_alignment = 1
 [node name="EffectGridContainer" type="GridContainer" parent="HSplitContainer/NonBase/EffectContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-columns = 4
+columns = 6

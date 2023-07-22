@@ -1,6 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2wgar6caudl2"]
+[gd_scene load_steps=4 format=3 uid="uid://d2wgar6caudl2"]
 
 [ext_resource type="Script" path="res://scripts/battle/ui/PlayerSpecialAbilityUI.gd" id="2_1o1vb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryb5y"]
+bg_color = Color(0.122252, 0.122252, 0.122252, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6m1n"]
 bg_color = Color(0.709804, 0.462745, 0.937255, 1)
@@ -12,6 +21,7 @@ border_color = Color(0.866667, 0.639216, 0.968627, 1)
 
 [node name="Panel" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0.639216)
+custom_minimum_size = Vector2(100, 100)
 anchors_preset = -1
 anchor_top = 0.428
 anchor_right = 0.103
@@ -20,6 +30,7 @@ offset_top = -3.18402
 offset_right = 0.343994
 offset_bottom = -0.104004
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ryb5y")
 script = ExtResource("2_1o1vb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

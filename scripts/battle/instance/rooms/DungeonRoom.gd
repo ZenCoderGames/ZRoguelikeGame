@@ -169,10 +169,12 @@ func generate_miniboss(enemyId):
 	var enemy:Node = generate_enemy(enemyId)
 	if enemy!=null:
 		enemy.set_as_miniboss()
-		enemy.connect("OnDeath", Callable(self,"_on_miniboss_death"))
+		enemy.connect("OnDeathFinal", Callable(self,"_on_miniboss_death"))
 
 func _on_miniboss_death():
 	_isCleared = true
+	generate_upgrade(Upgrade.UPGRADE_TYPE.SHARED)
+	generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
 
 func is_cleared():
 	return _isCleared

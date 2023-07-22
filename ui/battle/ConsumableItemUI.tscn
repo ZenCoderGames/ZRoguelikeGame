@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://yksef6o6wf2m"]
+
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_8fv76"]
+[ext_resource type="Texture2D" uid="uid://8hwykvr4s81q" path="res://sourceArt/Icons/flask_full.png" id="2_gwyaf"]
+[ext_resource type="Script" path="res://scripts/battle/ui/ConsumableItemUI.gd" id="2_p8863"]
+
+[node name="ConsumableButton" type="Button"]
+custom_minimum_size = Vector2(30, 30)
+offset_top = 28.0
+offset_right = 36.0
+offset_bottom = 64.0
+size_flags_horizontal = 3
+focus_mode = 0
+theme = ExtResource("1_8fv76")
+disabled = true
+icon = ExtResource("2_gwyaf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_p8863")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
