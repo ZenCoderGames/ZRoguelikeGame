@@ -16,6 +16,6 @@ func get_display_name():
 
 func get_description():
 	if upgradeType==UPGRADE_TYPE.CLASS_SPECIFIC:
-		return "Class Upgrade"
+		return "This is a class specific upgrade"
 	
-	return "Basic Upgrade"
+	return "This is a basic Upgrade"

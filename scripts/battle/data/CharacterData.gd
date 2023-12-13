@@ -4,6 +4,7 @@ var id:String
 var displayName:String
 var description:String
 var portraitPath:String
+var spritePath:String
 var path:String
 var difficulty:int
 var cost:int
@@ -20,6 +21,7 @@ func _init(dataJS):
 	displayName = dataJS["displayName"]
 	description = Utils.get_data_from_json(dataJS, "description", "")
 	portraitPath = Utils.get_data_from_json(dataJS, "portraitPath", "")
+	spritePath = Utils.get_data_from_json(dataJS, "spritePath", "")
 	path = dataJS["path"]
 	difficulty = Utils.get_data_from_json(dataJS, "difficulty", 1)
 	cost =  Utils.get_data_from_json(dataJS, "cost", 0)

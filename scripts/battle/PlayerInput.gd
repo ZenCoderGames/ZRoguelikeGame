@@ -112,5 +112,5 @@ func _on_skip_turn_pressed():
 		CombatEventManager.emit_signal("OnDetailInfoShow", str("Hold Move On Cooldown (", player.get_skip_turn_cooldown(),")"), 1)
 
 func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
-	if fullRefreshDungeon:
+	if fullRefreshDungeon and player!=null:
 		player.disconnect("OnDeath",Callable(self,"_on_player_death"))

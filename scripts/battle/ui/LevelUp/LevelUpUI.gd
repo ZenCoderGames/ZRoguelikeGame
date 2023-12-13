@@ -22,7 +22,7 @@ func init_from_data(upgradeType:Upgrade.UPGRADE_TYPE):
 	
 	if upgradeType==Upgrade.UPGRADE_TYPE.SHARED:
 		levelUpTitle.text = "GENERAL PERK"
-		var allowedGeneralAbilites:int = 3
+		var allowedGeneralAbilites:int = 2
 		for abilityData in GameGlobals.dataManager.abilityList:
 			if abilityData.characterId=="":
 				abilityList.append(abilityData)
@@ -31,7 +31,7 @@ func init_from_data(upgradeType:Upgrade.UPGRADE_TYPE):
 					break
 	elif upgradeType==Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC:
 		levelUpTitle.text = "CLASS PERK"
-		var allowedAbilites:int = 3
+		var allowedAbilites:int = 2
 		for abilityData in GameGlobals.dataManager.abilityList:
 			if abilityData.characterId=="" or (abilityData.characterId != GameGlobals.dungeon.player.charData.id):
 				continue

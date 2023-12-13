@@ -1,6 +1,87 @@
 
 Roguelike Dev:
 
+- Level Up: +1 Attack, +4 Heal, +2 Max Health; No Passive ; Kill Level Boss to get stat upgrade and level up
+- Refactor Character scenes into one scene
+- Miniboss mechanic (take existing enemy, buff stats, *Aura*)
+- Armor
+- Trading NPC (Exchange runes/spells)
+- Healing Stone (healing)
+- Gold/Shopkeeper (Items/Spells)
+- Enchanter (Spell Slot/Rune Slot)
+- Targeting for Specials/Spells
+
+- Lots more items/spells/runes
+
+- Lock and Key
+- Ultimates
+
+- Exit isn't allowed till you defeat miniboss
+
+- Abilities with positionality and spacing
+- Show enemy next move
+
+- Consumables show up in UI
+
+- Tuning Pass
+
+- Dots (Poison, Fire)
+- New Status Effects (Freeze, Shock, Root, Sleep)
+
+- VFX Upgrades (Stun, Barrier, Protection, Lifesteal, Lifedrain, Lightning bolt, Groundpound)
+- Better doors, death, exit sprites
+- Game Feel (hitSparks)
+
+- Keywords (Tags with events)
+
+- Traps
+
+- Level Up and Upgrade Choices
+
+- Balancing pass
+- Attack with character scaling up
+
+- Rewrite stat/complex stat system into stat and derived stats
+- Bug with costFromStart
+- Better Yield
+
+- Saving and Loading
+
+- Enemy leveling ?
+
+- More Extra Ranged Scrolls (Leap, Stun)
+- More Passive Abilities (Critical, Revive)
+- More Weapons (Ranged)
+- More Items (Armor, Dual Blades)
+
+- Enemy line of sight
+- Typed pass
+
+-------------------------
+
+- lower fov in trap rooms
+- identify scroll
+- random spawner instead of already spawned enemy
+- show end room
+- cursed items
+- armor
+
+----------------
+
+- real power fantasy
+- ceremony for big moments
+- player tools are powerful but have limitations
+
+---------------
+
+To Research:
+- Sproggiwood
+- Dungeonmans
+- Brogue
+- www.rockpapershotgun.com/2015/07/28/how-do-roguelikes-generate-levels/
+
+---
+
 (D)- Debug Camera controls
 (D)- Multiple dungeons
 (D)- Room connections
@@ -97,83 +178,17 @@ Roguelike Dev:
 (D)- Randomize Level Ups
 (D)- Fix issues with status effect and passives not working right when going into a new dungeon
 (D)- Fix stealth on ghost
-(D)- Evasion
 (D)- Resources: Energy -> Specials use Energy
-(D)- Miniboss mechanic (take existing enemy, buff stats)
-(D)- Consumables show up in UI
-- Gold/Shopkeeper (Items/Spells)
-- Healing Stone (healing)
-- Pass on minimizing ui effects that are part of runes or upgrades
-
-- Armor
-- Enchanter (Spell Slot/Rune Slot)
-- Targeting for Specials/Spells
-
-- Lots more items/spells/runes
-
-- Lock and Key
-- Ultimates
-
-- Exit isn't allowed till you defeat miniboss
-
-- Abilities with positionality and spacing
-- Show enemy next move
-
-- Consumables show up in UI
-
-- Tuning Pass
-
-- Dots (Poison, Fire)
-- New Status Effects (Freeze, Shock, Root, Sleep)
-
-- VFX Upgrades (Stun, Barrier, Protection, Lifesteal, Lifedrain, Lightning bolt, Groundpound)
-- Better doors, death, exit sprites
-- Game Feel (hitSparks)
-
-- Keywords (Tags with events)
-
-- Traps
-
-- Level Up and Upgrade Choices
-
-- Balancing pass
-- Attack with character scaling up
-
-- Rewrite stat/complex stat system into stat and derived stats
-- Bug with costFromStart
-- Better Yield
-
-- Saving and Loading
-
-- Enemy leveling ?
-
-- More Extra Ranged Scrolls (Leap, Stun)
-- More Passive Abilities (Critical, Revive)
-- More Weapons (Ranged)
-- More Items (Armor, Dual Blades)
-
-- Enemy line of sight
-- Typed pass
-
--------------------------
-
-- lower fov in trap rooms
-- identify scroll
-- random spawner instead of already spawned enemy
-- show end room
-- cursed items
-- armor
-
-----------------
-
-- real power fantasy
-- ceremony for big moments
-- player tools are powerful but have limitations
-
----------------
-
-To Research:
-- Sproggiwood
-- Dungeonmans
-- Brogue
-- www.rockpapershotgun.com/2015/07/28/how-do-roguelikes-generate-levels/
+(D)- UI on Energy shows how much is needed for special
+(D)- Better UI on upgrades: Now it is just passives
+(D)- Door closing not working as intended
+(D)- Passive Counters in UI
+(D)- Enemies use Specials -> Show counter
+(D)- (Bug) Going to door shows all rooms rather than only adjacent room
+(D)- (Bug) Stats should not be clamped
+(D)- (Bug) Ghost ability not working right
+(D)- Miniboss at end of level
+(D)- End of level needs miniboss
+(D)- Class and General Upgrade Tech
+(D)- Hook up upgrades to mini boss death
+(D)- Potions in UI

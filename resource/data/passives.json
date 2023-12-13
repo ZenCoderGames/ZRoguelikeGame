@@ -151,7 +151,7 @@
 		{
 			"id": "PASSIVE_BERSERKER_RAGE",
 			"name": "Berserker Rage",
-			"description": "+1 Damage for each time you stun an enemy",
+			"description": "+2 Damage for each time you stun an enemy",
 			"conditions": [
 				"ON_ADD_STATUS_EFFECT_TO_ENEMY"
 			],
@@ -173,6 +173,30 @@
 							{
 								"type": "DAMAGE",
 								"absoluteValue": 2
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_BERSERKER_HEAL",
+			"name": "Berserker Rage",
+			"description": "+2 heal when you stun an enemy",
+			"conditions": [
+				"ON_ADD_STATUS_EFFECT_TO_ENEMY"
+			],
+			"conditionParams": {
+				"statusEffectId": "STATUS_EFFECT_STUN"
+			}, 
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "HEALTH",
+								"value": 2
 							}
 						]
 					}

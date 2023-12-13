@@ -4,12 +4,41 @@
 			"id": "ABILITY_BERSERKER_RAGE",
 			"characterId": "BERSERKER",
 			"name": "(Upgrade) Berserker Rage",
-			"description": "Every enemy that the Berserker stuns, increases his damage by 1",
+			"description": "Every enemy that the Berserker stuns, increases his damage by 2 for 2 turns",
 			"timeline": [
 				{
 					"type": "ADD_PASSIVE",
 					"params": {
 						"passiveId": "PASSIVE_BERSERKER_RAGE"
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_BERSERKER_HEAL",
+			"characterId": "BERSERKER",
+			"name": "(Upgrade) Berserker Heal",
+			"description": "+2 heal when you stun an enemy",
+			"timeline": [
+				{
+					"type": "ADD_PASSIVE",
+					"params": {
+						"passiveId": "PASSIVE_BERSERKER_HEAL"
+					}
+				}
+			]
+		},
+		{
+			"id": "ABILITY_BERSERKER_STUN",
+			"characterId": "BERSERKER",
+			"name": "(Upgrade) Berkerser Stun++",
+			"description": "Allows [Stun] to last for 1 Additional Turn",
+			"timeline": [
+				{
+					"type": "MODIFY_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STUN",
+						"instanceCountModifier": 1
 					}
 				}
 			]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnl06fyais2hp"
-path="res://.godot/imported/Serpent_01.png-a9a3017442362fb3c5650ab2fce81c57.ctex"
+uid="uid://bdj0gmaxfgkh"
+path="res://.godot/imported/Skeleton_01.png-10df0fdf1bec6bf1214364776f03421b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sourceArt/Enemies/Serpent_01.png"
-dest_files=["res://.godot/imported/Serpent_01.png-a9a3017442362fb3c5650ab2fce81c57.ctex"]
+source_file="res://entity/characters/textures/Skeleton_01.png"
+dest_files=["res://.godot/imported/Skeleton_01.png-10df0fdf1bec6bf1214364776f03421b.ctex"]
 
 [params]
 

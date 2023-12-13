@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1hbu1pe4bbs8"
-path="res://.godot/imported/Dragon_01.png-a959534b56098f23bf37796288e6162b.ctex"
+uid="uid://cnl06fyais2hp"
+path="res://.godot/imported/Serpent_01.png-e8c619a2af7149feba926e02e35f7fc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sourceArt/Enemies/Dragon_01.png"
-dest_files=["res://.godot/imported/Dragon_01.png-a959534b56098f23bf37796288e6162b.ctex"]
+source_file="res://entity/characters/textures/Serpent_01.png"
+dest_files=["res://.godot/imported/Serpent_01.png-e8c619a2af7149feba926e02e35f7fc2.ctex"]
 
 [params]
 

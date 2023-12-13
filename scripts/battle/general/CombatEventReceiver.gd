@@ -39,7 +39,7 @@ func _checkForConditionsAndActivate(_enemy):
 		if _triggerConditionParams.has("statusEffectId"):
 			if _character.has_status_effect(_triggerConditionParams["statusEffectId"]):
 				activate()
-		if _triggerConditionParams.has("enemyStatusEffectId") and _enemy!=null:
+		elif _triggerConditionParams.has("enemyStatusEffectId") and _enemy!=null:
 			if _enemy.has_status_effect(_triggerConditionParams["enemyStatusEffectId"]):
 				activate()
 

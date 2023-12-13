@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b855b2vytd5lh"
-path="res://.godot/imported/Giant_01.png-6bef5b7dd78601dc68daf237bcbed42c.ctex"
+uid="uid://b0qfo8n4dto5y"
+path="res://.godot/imported/Ghost_01.png-07b632b5536bcc3291d0bdb59d3a342f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sourceArt/Enemies/Giant_01.png"
-dest_files=["res://.godot/imported/Giant_01.png-6bef5b7dd78601dc68daf237bcbed42c.ctex"]
+source_file="res://entity/characters/textures/Ghost_01.png"
+dest_files=["res://.godot/imported/Ghost_01.png-07b632b5536bcc3291d0bdb59d3a342f.ctex"]
 
 [params]
 

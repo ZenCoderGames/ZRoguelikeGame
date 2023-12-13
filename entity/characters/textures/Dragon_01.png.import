@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdj0gmaxfgkh"
-path="res://.godot/imported/Skeleton_01.png-9ad9dcaf21e70fdf56ba891069d0cd89.ctex"
+uid="uid://d1hbu1pe4bbs8"
+path="res://.godot/imported/Dragon_01.png-9d4ea45d6916775e979509bce193efc4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sourceArt/Enemies/Skeleton_01.png"
-dest_files=["res://.godot/imported/Skeleton_01.png-9ad9dcaf21e70fdf56ba891069d0cd89.ctex"]
+source_file="res://entity/characters/textures/Dragon_01.png"
+dest_files=["res://.godot/imported/Dragon_01.png-9d4ea45d6916775e979509bce193efc4.ctex"]
 
 [params]
 

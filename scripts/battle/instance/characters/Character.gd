@@ -3,10 +3,13 @@ extends Node
 
 class_name Character
 
+@onready var root:Sprite2D = $"%Root"
 @onready var damageText:Label = get_node("DamageText")
 @onready var counterHolder:TextureRect = $"%CounterHolder"
 @onready var counterText:Label = $"%CounterText"
 @onready var animPlayer:AnimationPlayer = get_node("AnimationPlayer")
+
+const DEATH_SPRITE_PATH:String = "res://entity/characters/textures/Death.png"
 
 var charData:CharacterData
 var displayName: String = ""
@@ -130,10 +133,17 @@ func init(id:int, charDataVal, teamVal):
 	equipment.connect("OnItemUnEquipped",Callable(self,"_on_item_unequipped"))
 	CombatEventManager.connect("OnAnyCharacterMoved",Callable(self,"_on_any_character_moved"))
 
-	await get_tree().create_timer(0.05).timeout
+	#await get_tree().create_timer(0.05).timeout
 
 	if !charData.passive.is_empty():
 		specialPassive = add_passive(GameGlobals.dataManager.get_passive_data(charData.passive))
+
+	# Visuals
+	if !charData.spritePath.is_empty():
+		set_sprite(str("res://") + charData.spritePath)
+
+		if animPlayer!=null:
+			animPlayer.play("Idle")
 
 # MOVEMENT
 func move(x, y):
@@ -407,6 +417,8 @@ func die():
 		isDead = true
 		if animPlayer!=null:
 			animPlayer.play("Death")
+		else:
+			set_sprite(DEATH_SPRITE_PATH)
 		
 		currentRoom.enemy_died(self)
 
@@ -786,3 +798,8 @@ func get_summary()->String:
 			summary = summary + passive.data.get_display_name() + " "
 
 	return summary
+
+func set_sprite(spritePath:String):
+	var root_node:Node = self
+	var mySprite:Sprite2D = root_node as Sprite2D
+	mySprite.texture = load(spritePath)

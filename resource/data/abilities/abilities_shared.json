@@ -39,6 +39,25 @@
 			]
 		},
 		{
+			"id": "ABILITY_HEALTH_UPGRADE",
+			"characterId": "",
+			"name": "(Upgrade) Heal",
+			"description": "Heal upto 4 health",
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "HEALTH",
+								"value": 4
+							}
+						]
+					}
+				}
+			]
+		},
+		{
 			"id": "ABILITY_ENERGY_UPGRADE",
 			"characterId": "",
 			"name": "(Upgrade) Stat Upgrade",
@@ -86,21 +105,6 @@
 					"type": "MODIFY_SPECIAL",
 					"params": {
 						"countModifier": -1
-					}
-				}
-			]
-		},
-		{
-			"id": "ABILITY_STUN_LONGER",
-			"characterId": "",
-			"name": "(Upgrade) Stun++",
-			"description": "Allows [Stun] to last for 1 Additional Turn",
-			"timeline": [
-				{
-					"type": "MODIFY_STATUS_EFFECT",
-					"params": {
-						"statusEffectId": "STATUS_EFFECT_STUN",
-						"instanceCountModifier": 1
 					}
 				}
 			]
