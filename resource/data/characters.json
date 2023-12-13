@@ -5,7 +5,8 @@
 				"id": "PALADIN",
 				"displayName": "You",
 				"description": "Paladin",
-				"path": "entity/characters/Player/Player.tscn",
+				"path": "entity/characters/PlayerCharacter.tscn",
+				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Paladin.png",
 				"stats": [
 					{
@@ -43,7 +44,8 @@
 				"id": "BERSERKER",
 				"displayName": "You",
 				"description": "Berserker",
-				"path": "entity/characters/Player/Player.tscn",
+				"path": "entity/characters/PlayerCharacter.tscn",
+				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Berserker.png",
 				"stats": [
 					{
@@ -86,7 +88,8 @@
 			{
 				"id": "ASSASSIN",
 				"displayName": "You",
-				"path": "entity/characters/Player/Player.tscn",
+				"path": "entity/characters/PlayerCharacter.tscn",
+				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Assassin.png",
 				"stats": [
 					{
@@ -151,8 +154,8 @@
 				"path": "entity/characters/EnemyCharacter.tscn",
 				"spritePath": "entity/characters/textures/RatKing.png",
 				"difficulty": 2,
-				"cost": 10,
-				"xp": 20,
+				"cost": 8,
+				"xp": 10,
 				"stats": [
 					{
 						"type": "HEALTH",

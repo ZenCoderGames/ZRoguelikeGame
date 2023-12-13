@@ -1,39 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bh3ol3rqa50bn"]
+[gd_scene load_steps=8 format=3 uid="uid://bh3ol3rqa50bn"]
 
 [ext_resource type="Texture2D" uid="uid://clruuu5jhyxtn" path="res://entity/characters/Player/Player_01.png" id="1_4yqio"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="2"]
 [ext_resource type="Script" path="res://scripts/battle/instance/characters/PlayerCharacter.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://btseeowdx080x" path="res://sourceArt/Player/LevelUp.png" id="4"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="6"]
-
-[sub_resource type="AtlasTexture" id="2"]
-atlas = ExtResource("4")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="3"]
-atlas = ExtResource("4")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="4"]
-atlas = ExtResource("4")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("2")
-}, {
-"duration": 1.0,
-"texture": SubResource("3")
-}, {
-"duration": 1.0,
-"texture": SubResource("4")
-}],
-"loop": true,
-"name": &"levelUpLoop",
-"speed": 12.0
-}]
 
 [sub_resource type="Animation" id="Animation_jtpl6"]
 length = 0.4
@@ -175,6 +145,7 @@ texture_filter = 1
 texture = ExtResource("1_4yqio")
 hframes = 3
 vframes = 2
+frame = 1
 script = ExtResource("3")
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
@@ -186,26 +157,6 @@ metadata/_aseprite_wizard_config_ = {
 "player": "AnimationPlayer",
 "source": "res://sourceArt/Player/Player_01.aseprite"
 }
-
-[node name="LevelUpAnimation" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(0.72549, 0.796078, 0.109804, 0.576471)
-position = Vector2(1, -6)
-scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("5")
-animation = &"levelUpLoop"
-frame = 2
-
-[node name="LevelUpLabel" type="Label" parent="."]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(0.866667, 0.933333, 0.0823529, 1)
-offset_left = -35.0
-offset_top = -40.0
-offset_right = 27.0
-offset_bottom = -26.0
-text = "LEVEL UP"
 
 [node name="CharacterUI" parent="." instance=ExtResource("6")]
 

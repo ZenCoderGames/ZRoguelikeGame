@@ -13,9 +13,6 @@ var xp:int = 0
 var currentLevel:int = 0
 var _levelUpThisTurn:bool = false
 
-@onready var levelUpAnim:Node = $"%LevelUpAnimation"
-@onready var levelUpLabel:Node = $"%LevelUpLabel"
-
 func init(charId:int, charData, teamVal):
 	super.init(charId, charData, teamVal)
 

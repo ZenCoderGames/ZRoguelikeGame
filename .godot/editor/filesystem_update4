@@ -34,3 +34,5 @@ res://scripts/battle/data/actions/ActionSetStatusData.gd
 res://scripts/battle/instance/actions/ActionSetStatus.gd
 res://scripts/battle/instance/characters/CharacterStatus.gd
 res://scripts/GameGlobals.gd
+res://scripts/battle/instance/characters/PlayerCharacter.gd
+res://entity/characters/PlayerCharacter.tscn
