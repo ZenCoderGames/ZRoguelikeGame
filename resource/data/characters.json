@@ -144,6 +144,44 @@
 				]
 			},
 			{
+				"#disable": true,
+				"id": "RAT_KING",
+				"displayName": "Rat King",
+				"description": "Active: Summons 2 rats to fight with it",
+				"path": "entity/characters/EnemyCharacter.tscn",
+				"spritePath": "entity/characters/textures/RatKing.png",
+				"difficulty": 2,
+				"cost": 10,
+				"xp": 20,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 6
+					},
+					{
+						"type": "DAMAGE",
+						"value": 2
+					}
+				],
+				"active": {
+					"id": "RAT_KING_SPECIAL",
+					"description": "Spawn 2 Rats",
+					"conditions": ["ON_END_TURN"],
+					"count": 3,
+					"executeCondition": "NONE",
+					"removeAfterExecute": true,
+					"timeline": [
+						{
+							"type": "SPAWN_CHARACTER",
+							"params": {
+								"characterId": "RAT",
+								"count": 3
+							}
+						}
+					]
+				}
+			},
+			{
 				"id": "SKELETON",
 				"displayName": "Skeleton",
 				"description": "Passive: Reincarnation (Revives once after death with full health)",

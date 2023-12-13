@@ -45,6 +45,8 @@ static func create(actionData:ActionData, parentChar):
 		return ActionHideCharacterUI.new(actionData, parentChar)
 	elif actionData.type==ActionShowCharacterUITextData.ID:
 		return ActionShowCharacterUIText.new(actionData, parentChar)
+	elif actionData.type==ActionSpawnCharacterData.ID:
+		return ActionSpawnCharacter.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)
 	return null
