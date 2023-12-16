@@ -6,12 +6,14 @@ signal OnNearbyEntityFound(entity)
 signal OnPlayerReachedExit()
 signal OnPlayerReachedEnd()
 signal OnXPGained()
+signal OnSoulsGained()
 signal OnLevelUp()
 
 var levelXpList:Array = [0, 30, 50, 80, 120, 170, 230, 300, 380]
 var xp:int = 0
 var currentLevel:int = 0
 var _levelUpThisTurn:bool = false
+var _souls:int = 0
 
 func init(charId:int, charData, teamVal):
 	super.init(charId, charData, teamVal)
@@ -106,8 +108,18 @@ func notify_if_nearby_entity(r:int, c:int):
 
 func _on_kill(attacker, defender, _finalDmg):
 	if attacker == self:
-		_gain_xp(defender.charData.xp)
+		#_gain_xp(defender.charData.xp)
+		_gain_souls(defender.charData.xp)
 
+# SOULS
+func _gain_souls(val:int):
+	_souls = _souls + val
+	emit_signal("OnSoulsGained")
+
+func get_souls():
+	return _souls
+
+# LEVELING
 func _gain_xp(val:int):
 	xp = xp + val
 	var prevLevel = currentLevel

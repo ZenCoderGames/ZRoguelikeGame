@@ -8,6 +8,8 @@ class_name Character
 @onready var counterHolder:TextureRect = $"%CounterHolder"
 @onready var counterText:Label = $"%CounterText"
 @onready var animPlayer:AnimationPlayer = get_node("AnimationPlayer")
+@onready var soulsIcon:Node = $"%SoulsIcon"
+@onready var soulsLabel:Label = $"%SoulsLabel"
 
 const DEATH_SPRITE_PATH:String = "res://entity/characters/textures/Death.png"
 
@@ -424,8 +426,18 @@ func die():
 
 		emit_signal("OnDeathFinal")
 		
-		await get_tree().create_timer(0.1).timeout
+		if soulsIcon!=null:
+			soulsIcon.visible = true
+			soulsLabel.text = str(charData.xp)
+			var startScale:Vector2 = Vector2(1, 1)
+			var endScale:Vector2 = Vector2(1.25, 1.25)
+			Utils.create_return_tween_vector2(soulsIcon, "scale", startScale, endScale, 0.25, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR, 0.25)
+
+		await get_tree().create_timer(0.5).timeout
 		cell.clear_entity_on_death()
+
+		if soulsIcon!=null:
+			soulsIcon.visible = false
 
 func show_hit(entity, _dmg, isCritical):
 	# shove

@@ -1,10 +1,10 @@
-HSplitContainer
+Label
 HBoxContainer
 TextureRect
+HSplitContainer
 PanelContainer
 Panel
 GridContainer
-Label
 Control
 AnimationPlayer
 Node

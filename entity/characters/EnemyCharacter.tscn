@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck65kfnu25xkn"]
+[gd_scene load_steps=9 format=3 uid="uid://ck65kfnu25xkn"]
 
 [ext_resource type="Texture2D" uid="uid://b855b2vytd5lh" path="res://entity/characters/textures/Giant_01.png" id="1_6m1ro"]
 [ext_resource type="Script" path="res://scripts/battle/instance/characters/EnemyCharacter.gd" id="2_ksw3y"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="3_q30x2"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="4_hqlgr"]
 [ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="5_1psgf"]
+[ext_resource type="Texture2D" uid="uid://dpqcdq2oyp0g0" path="res://sourceArt/Icons/skull.png" id="6_4aukl"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="7_1ihey"]
+[ext_resource type="FontFile" uid="uid://b7hngmc0h5ao5" path="res://resource/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="8_rl370"]
 
 [node name="Root" type="Sprite2D"]
 texture = ExtResource("1_6m1ro")
@@ -60,3 +63,48 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "2"
+
+[node name="SoulsIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.831373, 0.435294, 0.0431373, 1)
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -26.5
+offset_right = -6.0
+offset_bottom = -5.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_4aukl")
+expand_mode = 2
+
+[node name="SoulsLabel" type="Label" parent="SoulsIcon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -17.5
+offset_right = 9.0
+offset_bottom = 9.5
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("7_1ihey")
+theme_override_colors/font_color = Color(0.94902, 0.870588, 0.823529, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.568627, 0.392157, 0.129412, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("8_rl370")
+theme_override_font_sizes/font_size = 15
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 2

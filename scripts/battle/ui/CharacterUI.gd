@@ -11,6 +11,8 @@ class_name CharacterUI
 @onready var levelUpBar:ProgressBar = get_node("HSplitContainer/Base/XP/LevelUpBar")
 @onready var xpLabel:Label = get_node("HSplitContainer/Base/XP/XPLabel")
 const EquippedItemUI := preload("res://ui/battle/EquippedItemUI.tscn")
+@onready var soulsIcon:TextureRect = $"%SoulsIcon"
+@onready var soulsLabel:Label = $"%SoulsLabel"
 
 @onready var nonBaseContainer:HSplitContainer = get_node("HSplitContainer/NonBase")
 
@@ -67,7 +69,8 @@ func init(entityObj):
 		xpUI.visible = true
 		var playerChar = character
 		playerChar.connect("OnXPGained",Callable(self,"_update_base_ui"))
-		playerChar.connect("OnLevelUp",Callable(self,"_show_level_up"))
+		playerChar.connect("OnSoulsGained",Callable(self,"_update_base_ui"))
+		#playerChar.connect("OnLevelUp",Callable(self,"_show_level_up"))
 	elif character.team == Constants.TEAM.ENEMY:
 		#nameBg.color = enemyTintColor
 		xpUI.visible = false
@@ -101,7 +104,7 @@ func _update_base_ui():
 	if isPlayer:
 		var playerChar = character
 		#nameLabel.text = str(character.displayName, " (Lvl ", playerChar.get_level()+1, ")")
-		var xpToLevelUp:float = float(playerChar.get_xp_to_level_xp())
+		'''var xpToLevelUp:float = float(playerChar.get_xp_to_level_xp())
 		if playerChar.is_at_max_level():
 			xpLabel.text = "Max Level"
 		else:
@@ -110,7 +113,12 @@ func _update_base_ui():
 		if xpToLevelUp>0:
 			pctXP = float(playerChar.get_xp_from_current_level())/xpToLevelUp
 		#xpBar.value = pctXP * 100
-		xpTween = Utils.create_tween_float(xpBar, "value", xpBar.value, pctXP * 100, 0.25, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+		xpTween = Utils.create_tween_float(xpBar, "value", xpBar.value, pctXP * 100, 0.25, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)'''
+		soulsLabel.text = str(playerChar.get_souls())
+		var startScale:Vector2 = Vector2(1, 1)
+		var endScale:Vector2 = Vector2(1.5, 1.5)
+		Utils.create_return_tween_vector2(soulsIcon, "scale", startScale, endScale, 0.25, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR, 0.25)
+
 
 var inLevelUpSequence:bool
 func _show_level_up():

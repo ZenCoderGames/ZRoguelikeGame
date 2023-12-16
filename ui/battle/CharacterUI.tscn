@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bu24n5fjt8usn"]
+[gd_scene load_steps=5 format=3 uid="uid://bu24n5fjt8usn"]
 
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_tkee7"]
 [ext_resource type="Script" path="res://scripts/battle/ui/CharacterUI.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dpqcdq2oyp0g0" path="res://sourceArt/Icons/skull.png" id="3_pqgq0"]
 
 [node name="PanelContainer" type="PanelContainer"]
 self_modulate = Color(0.258824, 0.270588, 0.266667, 0.286275)
@@ -27,13 +28,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="XP" type="PanelContainer" parent="HSplitContainer/Base"]
+visible = false
 layout_mode = 2
 
 [node name="XPBar" type="ProgressBar" parent="HSplitContainer/Base/XP"]
+visible = false
 custom_minimum_size = Vector2(182, 24)
 layout_mode = 2
 theme = ExtResource("1_tkee7")
-value = 75.0
 rounded = true
 show_percentage = false
 
@@ -46,10 +48,30 @@ value = 100.0
 rounded = true
 
 [node name="XPLabel" type="Label" parent="HSplitContainer/Base/XP"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_tkee7")
 text = "LEVEL UP!"
+
+[node name="Souls" type="HBoxContainer" parent="HSplitContainer/Base"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SoulsIcon" type="TextureRect" parent="HSplitContainer/Base/Souls"]
+unique_name_in_owner = true
+modulate = Color(0.823529, 0.447059, 0.0862745, 1)
+layout_mode = 2
+texture = ExtResource("3_pqgq0")
+expand_mode = 2
+
+[node name="SoulsLabel" type="Label" parent="HSplitContainer/Base/Souls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_tkee7")
+theme_override_font_sizes/font_size = 26
+text = "0"
 
 [node name="Name" type="PanelContainer" parent="HSplitContainer/Base"]
 layout_mode = 2

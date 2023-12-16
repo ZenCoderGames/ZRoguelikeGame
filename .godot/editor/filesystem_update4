@@ -36,3 +36,11 @@ res://scripts/battle/instance/characters/CharacterStatus.gd
 res://scripts/GameGlobals.gd
 res://scripts/battle/instance/characters/PlayerCharacter.gd
 res://entity/characters/PlayerCharacter.tscn
+res://scripts/battle/ui/CharacterUI.gd
+res://scripts/library/Utils.gd
+res://ui/battle/CharPropUI.tscn
+res://entity/effects/Effect_Death.tscn
+res://ui/battle/DamageText.tscn
+res://scripts/battle/instance/rooms/DungeonCell.gd
+res://scripts/battle/DungeonCamera.gd
+res://scripts/battle/ui/CharPropUI.gd

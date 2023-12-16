@@ -134,7 +134,7 @@
 				"spritePath": "entity/characters/textures/Rat_01.png",
 				"difficulty": 1,
 				"cost": 2,
-				"xp": 3,
+				"xp": 1,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -155,7 +155,7 @@
 				"spritePath": "entity/characters/textures/RatKing.png",
 				"difficulty": 2,
 				"cost": 8,
-				"xp": 10,
+				"xp": 4,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -192,7 +192,7 @@
 				"spritePath": "entity/characters/textures/Skeleton_01.png",
 				"difficulty": 1,
 				"cost": 5,
-				"xp": 10,
+				"xp": 1,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -214,7 +214,7 @@
 				"spritePath": "entity/characters/textures/Ghost_01.png",
 				"difficulty": 1,
 				"cost": 5,
-				"xp": 10,
+				"xp": 2,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -250,7 +250,7 @@
 				"spritePath": "entity/characters/textures/Giant_01.png",
 				"difficulty": 2,
 				"cost": 10,
-				"xp": 20,
+				"xp": 5,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -272,7 +272,7 @@
 				"spritePath": "entity/characters/textures/Serpent_01.png",
 				"difficulty": 2,
 				"cost": 5,
-				"xp": 8,
+				"xp": 5,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -316,7 +316,7 @@
 				"spritePath": "entity/characters/textures/Automaton_01.png",
 				"difficulty": 3,
 				"cost": 7,
-				"xp": 15,
+				"xp": 10,
 				"stats": [
 					{
 						"type": "HEALTH",
