@@ -69,7 +69,7 @@ func init(entityObj):
 		xpUI.visible = true
 		var playerChar = character
 		playerChar.connect("OnXPGained",Callable(self,"_update_base_ui"))
-		playerChar.connect("OnSoulsGained",Callable(self,"_update_base_ui"))
+		playerChar.connect("OnSoulsModified",Callable(self,"_update_base_ui"))
 		#playerChar.connect("OnLevelUp",Callable(self,"_show_level_up"))
 	elif character.team == Constants.TEAM.ENEMY:
 		#nameBg.color = enemyTintColor

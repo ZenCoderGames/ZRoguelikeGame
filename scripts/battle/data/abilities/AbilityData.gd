@@ -25,12 +25,14 @@ var description:String
 var characterId:String
 var abilityConditions:Array
 var timeline:Array
+var soulCost:int
 
 func _init(dataJS):
 	id = dataJS["id"]
 	name = dataJS["name"]
 	description = dataJS["description"]
 	characterId = dataJS["characterId"]
+	soulCost = Utils.get_data_from_json(dataJS, "soulCost", 0)
 
 	var actionsJSList = dataJS["timeline"]
 	for actionJS in actionsJSList:

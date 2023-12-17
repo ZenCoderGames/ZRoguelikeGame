@@ -7,6 +7,7 @@ func _ready():
 	GameEventManager.connect("OnGameOver",Callable(self,"_play_menu_music"))
 	UIEventManager.connect("OnMainMenuButton",Callable(self,"_on_main_menu_button"))
 	UIEventManager.connect("OnCharacterSelectButton",Callable(self,"_on_character_select_button"))
+	UIEventManager.connect("OnGenericUIEvent",Callable(self,"_on_generic_ui_event"))
 	#UIEventManager.connect("OnMainMenuOn",Callable(self,"_play_menu_music"))
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_character_attack"))
 	CombatEventManager.connect("OnAnyCharacterDeath",Callable(self,"_on_any_character_death"))
@@ -24,6 +25,9 @@ func _on_main_menu_button():
 	GameGlobals.audioManager.play_sfx("UI_BUTTON_MAIN_MENU")
 
 func _on_character_select_button():
+	GameGlobals.audioManager.play_sfx("UI_BUTTON_CHARACTER_SELECT")
+
+func _on_generic_ui_event():
 	GameGlobals.audioManager.play_sfx("UI_BUTTON_CHARACTER_SELECT")
 
 func _on_dungeon_initialized():

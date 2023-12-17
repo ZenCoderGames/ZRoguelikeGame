@@ -36,6 +36,7 @@ func create(recreatePlayer:bool) -> void:
 	_init_upgrades()
 	_init_player(recreatePlayer)
 	_init_enemies()
+	_init_vendors()
 		
 	player.connect("OnTurnCompleted",Callable(self,"_on_player_turn_completed"))
 	_init_turns()
@@ -349,6 +350,10 @@ func _init_upgrades():
 	if GameGlobals.battleInstance.debugSpawnClassSpecificUpgrade:
 		startRoom.generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
 
+func _init_vendors():
+	if !GameGlobals.battleInstance.debugSpawnVendor.is_empty():
+		startRoom.generate_vendor(GameGlobals.battleInstance.debugSpawnVendor)
+
 func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	if recreatePlayer:
@@ -484,6 +489,14 @@ func load_upgrade(parentContainer, cell, upgradeType, entityType, groupName):
 	var upgradeObject = Utils.create_scene(parentContainer, "Upgrade", upgradePrefab, groupName, cell)
 	cell.init_entity(upgradeObject, entityType)
 	return upgradeObject
+
+func load_vendor(parentContainer, cell, vendorId, entityType, groupName):
+	var vendorData:VendorData = GameGlobals.dataManager.get_vendor_data(vendorId)
+	var vendorPrefab := load(str("res://", vendorData.path))
+	var vendorObject = Utils.create_scene(parentContainer, "Vendor", vendorPrefab, groupName, cell)
+	vendorObject.init(vendorData)
+	cell.init_entity(vendorObject, entityType)
+	return vendorObject
 
 func get_adjacent_characters(character, relativeTeamType, numTiles:int=1):
 	var currentPlayerRoom:DungeonRoom = player.currentRoom

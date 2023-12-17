@@ -1,0 +1,72 @@
+{
+	"vendors": [
+		{
+			"id": "SOUL_VENDOR",
+			"name": "Soul Collector",
+			"description": "Exchange souls for perks",
+			"path": "entity/characters/VendorCharacter.tscn",
+			"perks": [
+				{
+					"id": "ABILITY_DAMAGE_UPGRADE",
+					"characterId": "",
+					"name": "Damage Boost",
+					"description": "Upgrade your base Attack by 1",
+					"soulCost": 2,
+					"timeline": [
+						{
+							"type": "ADD_STAT_MODIFIER",
+							"params": {
+								"statModifiers": [
+									{
+										"type": "DAMAGE",
+										"absoluteValue": 1
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"id": "ABILITY_HEALTH_UPGRADE",
+					"characterId": "",
+					"name": "Health Boost",
+					"description": "Upgrade your base Health by 2",
+					"soulCost": 2,
+					"timeline": [
+						{
+							"type": "ADD_STAT_MODIFIER",
+							"params": {
+								"statModifiers": [
+									{
+										"type": "HEALTH",
+										"absoluteValue": 2
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"id": "ABILITY_HEALTH_UPGRADE",
+					"characterId": "",
+					"name": "Heal",
+					"description": "Heal upto 4 health",
+					"soulCost": 2,
+					"timeline": [
+						{
+							"type": "ADD_STAT_MODIFIER",
+							"params": {
+								"statModifiers": [
+									{
+										"type": "HEALTH",
+										"value": 4
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

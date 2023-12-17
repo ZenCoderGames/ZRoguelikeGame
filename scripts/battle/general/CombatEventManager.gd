@@ -22,6 +22,8 @@ signal OnAnyCharacterDeath(character)
 signal OnConsumeItem(itemData)
 signal OnLevelUpAbilitySelected(abilityData)
 signal ShowUpgrade(upgradeType)
+signal ShowVendor(vendorChar)
+signal OnVendorAbilitySelected(abilityData)
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):

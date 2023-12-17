@@ -6,7 +6,7 @@ signal OnNearbyEntityFound(entity)
 signal OnPlayerReachedExit()
 signal OnPlayerReachedEnd()
 signal OnXPGained()
-signal OnSoulsGained()
+signal OnSoulsModified()
 signal OnLevelUp()
 
 var levelXpList:Array = [0, 30, 50, 80, 120, 170, 230, 300, 380]
@@ -42,6 +42,7 @@ func init_for_next_dungeon():
 func _setup_events():
 	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer",Callable(self,"on_enemy_moved_adjacent"))
 	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
+	CombatEventManager.connect("OnVendorAbilitySelected",Callable(self,"_on_vendor_ability_selected"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_on_special_pressed"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
@@ -102,9 +103,9 @@ func check_for_nearby_entities():
 	notify_if_nearby_entity(cell.row, cell.col+1)
 
 func notify_if_nearby_entity(r:int, c:int):
-	var cell = currentRoom.get_cell(r, c)
-	if cell!=null and cell.has_entity() and cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC):
-		emit_signal("OnNearbyEntityFound", cell.entityObject)
+	var currentCell = currentRoom.get_cell(r, c)
+	if currentCell!=null and currentCell.has_entity() and currentCell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC):
+		emit_signal("OnNearbyEntityFound", currentCell.entityObject)
 
 func _on_kill(attacker, defender, _finalDmg):
 	if attacker == self:
@@ -114,10 +115,14 @@ func _on_kill(attacker, defender, _finalDmg):
 # SOULS
 func _gain_souls(val:int):
 	_souls = _souls + val
-	emit_signal("OnSoulsGained")
+	emit_signal("OnSoulsModified")
 
 func get_souls():
 	return _souls
+
+func consume_souls(val:int):
+	_souls = _souls - val
+	emit_signal("OnSoulsModified")
 
 # LEVELING
 func _gain_xp(val:int):
@@ -154,6 +159,10 @@ func is_at_max_level():
 
 func _on_levelup_ability_selected(abilityData:AbilityData):
 	add_ability(abilityData)
+
+func _on_vendor_ability_selected(abilityData:AbilityData):
+	if abilityData!=null:
+		add_ability(abilityData)
 
 # SKIP_TURN MANAGEMENT
 var _lastSkipTurn:int = -1

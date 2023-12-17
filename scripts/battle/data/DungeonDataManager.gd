@@ -6,6 +6,8 @@ var passiveDataMap = {}
 var itemDataMap = {}
 var itemDataList = []
 var spellDataMap = {}
+var vendorDataMap = {}
+var vendorDataList = []
 
 var characterDataDict = {}
 var playerData:CharacterData
@@ -35,6 +37,7 @@ func _init():
 	init_abilities("resource/data/abilities/abilities_assassin.json")
 	init_characters()
 	init_encounters()
+	init_vendors("resource/data/vendors.json")
 
 func on_character_chosen(charData):
 	playerData = charData
@@ -105,6 +108,22 @@ func init_characters():
 		characterDataDict[newCharData.id] = newCharData
 		
 	playerData = characterDataDict["PALADIN"]
+
+func init_vendors(vendorLocation:String):
+	var data = Utils.load_data_from_file(vendorLocation)
+	var vendorDataJSList:Array = data["vendors"]
+	for vendorDataJS in vendorDataJSList:
+		var newVendorData = VendorData.new(vendorDataJS)
+		if !newVendorData.disable:
+			vendorDataMap[newVendorData.id] = newVendorData
+			vendorDataList.append(newVendorData)
+
+func get_vendor_data(id):
+	if vendorDataMap.has(id):
+		return vendorDataMap[id]
+		
+	print("Invalid Vendor ID:", id)
+	return null
 
 func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]

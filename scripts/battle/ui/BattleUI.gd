@@ -28,6 +28,9 @@ var levelUpUI:LevelUpUI
 const LevelUpUI := preload("res://ui/battle/LevelUpUI.tscn")
 const CharacterUI := preload("res://ui/battle/CharacterUI.tscn")
 const ItemUI := preload("res://ui/battle/ItemUI.tscn")
+# vendor
+var vendorUI:VendorUI
+const VendorUI := preload("res://ui/battle/VendorUI.tscn")
 # inventory UI
 const InventoryUI := preload("res://ui/battle/InventoryUI.tscn")
 var inventoryUI:InventoryUI = null
@@ -48,7 +51,9 @@ func _ready():
 	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_turn_taken"))
 	CombatEventManager.connect("OnDetailInfoShow",Callable(self,"_show_detail_info_text"))
 	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
-	CombatEventManager.connect("ShowUpgrade",Callable(self,"_on_player_level_up"))
+	CombatEventManager.connect("ShowUpgrade",Callable(self,"_on_show_upgrade"))
+	CombatEventManager.connect("ShowVendor",Callable(self,"_on_show_vendor"))
+	CombatEventManager.connect("OnVendorAbilitySelected",Callable(self,"_on_vendor_ability_selected"))
 	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_attack"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
@@ -75,7 +80,7 @@ func _shared_init():
 	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell",Callable(self,"_on_player_move"))
 	GameGlobals.dungeon.player.connect("OnNearbyEntityFound",Callable(self,"_on_entity_nearby"))
 	GameGlobals.dungeon.player.inventory.connect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))
-	#GameGlobals.dungeon.player.connect("OnLevelUp",Callable(self,"_on_player_level_up"))
+	#GameGlobals.dungeon.player.connect("OnLevelUp",Callable(self,"_on_show_upgrade"))
 	
 	playerUI.init(GameGlobals.dungeon.player)
 	levelLabel.text = str(GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
@@ -132,7 +137,7 @@ func _on_entity_nearby(entity):
 		#infoPanel.add_child(newCharUI)
 		#infoPanelObjects.append(newCharUI)
 		#newCharUI.init(entity)
-	elif entity is Item or entity is Upgrade:
+	elif entity is Item or entity is Upgrade or entity is VendorCharacter:
 		var newItemUI = ItemUI.instantiate()
 		infoPanel.add_child(newItemUI)
 		infoPanelObjects.append(newItemUI)
@@ -229,7 +234,7 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 			player.inventory.disconnect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))
 
 # LEVEL UP
-func _on_player_level_up(upgradeType:Upgrade.UPGRADE_TYPE):
+func _on_show_upgrade(upgradeType:Upgrade.UPGRADE_TYPE):
 	levelUpUI = LevelUpUI.instantiate()
 	add_child(levelUpUI)
 
@@ -237,7 +242,7 @@ func _on_player_level_up(upgradeType:Upgrade.UPGRADE_TYPE):
 	if !hasALevelUpItem:
 		_remove_level_up_ui()
 	else:
-		UIEventManager.emit_signal("OnLevelUpMenuOn")
+		UIEventManager.emit_signal("OnSelectionMenuOn")
 
 func _on_levelup_ability_selected(_abilityData:AbilityData):
 	_remove_level_up_ui()
@@ -246,4 +251,18 @@ func _remove_level_up_ui():
 	remove_child(levelUpUI)
 	levelUpUI.queue_free()
 	levelUpUI = null
-	UIEventManager.emit_signal("OnLevelUpMenuOff")
+	UIEventManager.emit_signal("OnSelectionMenuOff")
+
+# VENDOR
+func _on_show_vendor(vendorData:VendorData):
+	vendorUI = VendorUI.instantiate()
+	add_child(vendorUI)
+
+	vendorUI.init_from_data(vendorData)
+	UIEventManager.emit_signal("OnSelectionMenuOn")
+
+func _on_vendor_ability_selected(_abilityData:AbilityData):
+	remove_child(vendorUI)
+	vendorUI.queue_free()
+	vendorUI = null
+	UIEventManager.emit_signal("OnSelectionMenuOff")

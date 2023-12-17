@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ufg4otstwt0i"]
+
+[ext_resource type="Texture2D" uid="uid://bwyhivsdx3lj4" path="res://sourceArt/Vendors/SoulVendor.png" id="1_xn3qb"]
+[ext_resource type="Script" path="res://scripts/battle/instance/characters/VendorCharacter.gd" id="2_dt2ul"]
+
+[node name="Root" type="Sprite2D"]
+self_modulate = Color(1, 0.568627, 0, 1)
+texture = ExtResource("1_xn3qb")
+script = ExtResource("2_dt2ul")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "_",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"player": "",
+"source": ""
+}

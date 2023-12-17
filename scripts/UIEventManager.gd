@@ -5,8 +5,9 @@ signal OnGenericMenuOpen
 signal OnGenericMenuClose
 signal OnMainMenuButton
 signal OnCharacterSelectButton
+signal OnGenericUIEvent
 
 signal OnMainMenuOn
 signal OnMainMenuOff
-signal OnLevelUpMenuOn
-signal OnLevelUpMenuOff
+signal OnSelectionMenuOn
+signal OnSelectionMenuOff

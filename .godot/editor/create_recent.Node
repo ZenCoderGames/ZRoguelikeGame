@@ -1,6 +1,7 @@
+TextureButton
 Label
-HBoxContainer
 TextureRect
+HBoxContainer
 HSplitContainer
 PanelContainer
 Panel

@@ -381,7 +381,7 @@ func post_hit(_sourceChar:Character, _targetChar:Character, _damageTakenFromHit:
 		status.set_evasive(-1)
 
 func is_targetable():
-	if is_reviving():
+	if is_reviving() || isDead:
 		return false
 	
 	return true
