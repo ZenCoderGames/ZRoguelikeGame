@@ -5,67 +5,41 @@
 			"name": "Soul Collector",
 			"description": "Exchange souls for perks",
 			"path": "entity/characters/VendorCharacter.tscn",
-			"perks": [
-				{
-					"id": "ABILITY_DAMAGE_UPGRADE",
-					"characterId": "",
-					"name": "Damage Boost",
-					"description": "Upgrade your base Attack by 1",
-					"soulCost": 2,
-					"timeline": [
-						{
-							"type": "ADD_STAT_MODIFIER",
-							"params": {
-								"statModifiers": [
-									{
-										"type": "DAMAGE",
-										"absoluteValue": 1
-									}
-								]
-							}
-						}
-					]
-				},
-				{
-					"id": "ABILITY_HEALTH_UPGRADE",
-					"characterId": "",
-					"name": "Health Boost",
-					"description": "Upgrade your base Health by 2",
-					"soulCost": 2,
-					"timeline": [
-						{
-							"type": "ADD_STAT_MODIFIER",
-							"params": {
-								"statModifiers": [
-									{
-										"type": "HEALTH",
-										"absoluteValue": 2
-									}
-								]
-							}
-						}
-					]
-				},
-				{
-					"id": "ABILITY_HEALTH_UPGRADE",
-					"characterId": "",
-					"name": "Heal",
-					"description": "Heal upto 4 health",
-					"soulCost": 2,
-					"timeline": [
-						{
-							"type": "ADD_STAT_MODIFIER",
-							"params": {
-								"statModifiers": [
-									{
-										"type": "HEALTH",
-										"value": 4
-									}
-								]
-							}
-						}
-					]
-				}
+			"numItemsShown": 3,
+			"oneTimePurchaseOnly": false,
+			"onlyUniquePurchases": false,
+			"abilities": [
+				"ABILITY_DAMAGE_UPGRADE",
+				"ABILITY_HEALTH_UPGRADE",
+				"ABILITY_RISKY_UPGRADE"
+			]
+		},
+		{
+			"id": "MYSTIC_VENDOR",
+			"name": "Mystic",
+			"description": "Choose an Active Power",
+			"path": "entity/characters/VendorCharacter.tscn",
+			"numItemsShown": 3,
+			"#oneTimePurchaseOnly": true,
+			"onlyUniquePurchases": true,
+			"specials": [
+				"SPECIAL_PALADIN",
+				"SPECIAL_BERSERKER",
+				"SPECIAL_ASSASSIN"
+			]
+		},
+		{
+			"id": "SHAMAN_VENDOR",
+			"name": "Shaman",
+			"description": "Choose a Passive Power",
+			"path": "entity/characters/VendorCharacter.tscn",
+			"numItemsShown": 3,
+			"oneTimePurchaseOnly": true,
+			"onlyUniquePurchases": true,
+			"passives": [
+				"PASSIVE_PALADIN",
+				"PASSIVE_BERSERKER",
+				"PASSIVE_ASSASSIN"
 			]
 		}
 	]

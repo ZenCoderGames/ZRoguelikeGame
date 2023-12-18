@@ -6,13 +6,16 @@ var timelineActions:Array = []
 var currentCount:int
 var isAvailable:bool
 var _combatEventReceiver:CombatEventReceiver
+var _specialModifierList:Array = []
 
 signal OnActivated()
 signal OnProgress(progress)
 signal OnReady()
-signal OnReset()
-signal OnCountIncremented()
+signal OnReset(special)
+signal OnCountIncremented(special)
 signal OnCountUpdated(currentResourceCount)
+signal OnSpecialModifierAdded()
+signal OnSpecialModifierRemoved()
 
 func _init(parentChar,specialData:SpecialData):
 	character = parentChar
@@ -36,7 +39,7 @@ func _increment():
 	if !isAvailable:
 		_updateCount(currentCount + 1)
 		check_for_ready()
-	emit_signal("OnCountIncremented")
+	emit_signal("OnCountIncremented", self)
 
 func check_for_ready():
 	var maxCount:int = get_max_count()
@@ -47,6 +50,7 @@ func check_for_ready():
 func _set_ready():
 	isAvailable = true
 	emit_signal("OnReady")
+	CombatEventManager.emit_signal("OnPlayerSpecialAbilityReady", self)
 
 func _is_execute_condition_met():
 	if data.executeCondition == SpecialData.EXECUTE_CONDITION.NONE:
@@ -75,6 +79,7 @@ func _activate():
 			action.execute()
 
 	emit_signal("OnActivated")
+	CombatEventManager.emit_signal("OnPlayerSpecialAbilityActivated", self)
 
 	if data.removeAfterExecute:
 		character.remove_special()
@@ -84,7 +89,7 @@ func _activate():
 func _reset():
 	isAvailable = false
 	_updateCount(0)
-	emit_signal("OnReset")
+	emit_signal("OnReset", self)
 
 func force_ready():
 	_updateCount(get_max_count())
@@ -92,8 +97,7 @@ func force_ready():
 
 func get_max_count()->int:
 	var maxCount:int = data.count
-	var specialModifierList:Array = character.get_special_modifiers(data.id)
-	for specialModifier in specialModifierList:
+	for specialModifier in _specialModifierList:
 		maxCount = maxCount + specialModifier.countModifier
 	return maxCount
 
@@ -103,3 +107,14 @@ func _updateCount(newCount:int):
 
 func get_remaining_count():
 	return get_max_count() - currentCount
+
+# MODIFIERS
+func add_modifier(specialModifier:SpecialModifier):
+	_specialModifierList.append(specialModifier)
+	check_for_ready()
+	emit_signal("OnSpecialModifierAdded")
+
+func remove_modifier(specialId:String):
+	for i in range(_specialModifierList.size() - 1, -1, -1):
+		_specialModifierList.remove_at(i)
+	emit_signal("OnSpecialModifierRemoved")

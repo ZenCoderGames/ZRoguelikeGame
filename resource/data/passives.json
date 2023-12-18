@@ -1,7 +1,7 @@
 {
 	"passives": [
 		{
-			"id": "PASSIVE_LIFESTEAL_01",
+			"id": "PASSIVE_LIFESTEAL_ON_KILL",
 			"name": "Lifesteal",
 			"description": "Lifesteal On Kill",
 			"conditions": [
@@ -17,7 +17,7 @@
 				{
 					"type": "LIFESTEAL",
 					"params": {
-						"percent": 0.25
+						"flatAmount": 2
 					}
 				}
 			]
@@ -70,45 +70,6 @@
 		},
 		{
 			"id": "PASSIVE_ASSASSIN",
-			"name": "Assassin Stealth Rage",
-			"description": "Gain +2 Attack when going into Stealth",
-			"timeline": [
-				{
-					"type": "MODIFY_STATUS_EFFECT",
-					"params": {
-						"statusEffectId": "STATUS_EFFECT_STEALTH",
-						"startTimeline": [
-							{
-								"type": "ADD_STAT_MODIFIER",
-								"params": {
-									"statModifiers": [
-										{
-											"type": "DAMAGE",
-											"absoluteValue": 2
-										}
-									]
-								}
-							}
-						],
-						"endTimeline": [
-							{
-								"type": "ADD_STAT_MODIFIER",
-								"params": {
-									"statModifiers": [
-										{
-											"type": "DAMAGE",
-											"absoluteValue": -2
-										}
-									]
-								}
-							}
-						]
-					}
-				}
-			]
-		},
-		{
-			"id": "PASSIVE_ASSASSIN_EVASION",
 			"name": "Assassin Evasion",
 			"description": "Gain +25% evasion",
 			"timeline": [

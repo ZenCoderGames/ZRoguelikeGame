@@ -8,6 +8,7 @@ class_name BattleInstance
 @onready var victoryUI:PanelContainer = $"%VictoryUI"
 
 # DEBUG
+@export var startWithClasses:bool
 @export var debugStartAtEndRoom:bool
 @export var debugShowAllRooms:bool
 @export var doorsStayOpenDuringBattle:bool
@@ -21,6 +22,7 @@ class_name BattleInstance
 @export var debugSpawnSharedUpgrade:bool
 @export var debugSpawnClassSpecificUpgrade:bool
 @export var debugSpawnVendor:String
+@export var debugSouls:int
 @export var setPlayerInvulnerable:bool
 @export var setEnemiesInvulnerable:bool
 @export var debugAbilities:Array # (Array, String)

@@ -42,9 +42,13 @@ func on_new_game():
 	UIEventManager.emit_signal("OnMainMenuButton")
 	_clean_up()
 	baseMenuUI.visible = false
-	characterSelectUI.visible = true
-	characterSelectUI.init_from_data()
-	#GameEventManager.ready_to_battle()
+
+	if GameGlobals.battleInstance.startWithClasses:
+		characterSelectUI.visible = true
+		characterSelectUI.init_from_data()
+	else:
+		GameEventManager.on_character_chosen(GameGlobals.dataManager.get_character_data("GENERIC_HERO"))
+		GameEventManager.ready_to_battle()
 	
 func on_save_game():
 	pass
@@ -76,3 +80,4 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 		var player = GameGlobals.dungeon.player
 		if player!=null and !player.is_queued_for_deletion():
 			player.disconnect("OnDeath",Callable(self,"_on_game_over"))
+

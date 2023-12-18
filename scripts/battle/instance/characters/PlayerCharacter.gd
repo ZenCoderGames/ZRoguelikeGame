@@ -29,20 +29,11 @@ func init(charId:int, charData, teamVal):
 # This is an init that is for every dungeon except the first init
 func init_for_next_dungeon():
 	pass
-	#_setup_events()
-	'''if charData.active!=null:
-		special.reset_events()
-	if specialPassive!=null:
-		specialPassive.reset_events()
-	for passive in passiveList:
-		passive.reset_events()
-	for statusEffect in statusEffectList:
-		statusEffect.reset_events()'''
 
 func _setup_events():
 	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer",Callable(self,"on_enemy_moved_adjacent"))
 	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
-	CombatEventManager.connect("OnVendorAbilitySelected",Callable(self,"_on_vendor_ability_selected"))
+	CombatEventManager.connect("OnVendorItemSelected",Callable(self,"_on_vendor_item_selected"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_on_special_pressed"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
@@ -110,10 +101,10 @@ func notify_if_nearby_entity(r:int, c:int):
 func _on_kill(attacker, defender, _finalDmg):
 	if attacker == self:
 		#_gain_xp(defender.charData.xp)
-		_gain_souls(defender.charData.xp)
+		gain_souls(defender.charData.xp)
 
 # SOULS
-func _gain_souls(val:int):
+func gain_souls(val:int):
 	_souls = _souls + val
 	emit_signal("OnSoulsModified")
 
@@ -160,9 +151,14 @@ func is_at_max_level():
 func _on_levelup_ability_selected(abilityData:AbilityData):
 	add_ability(abilityData)
 
-func _on_vendor_ability_selected(abilityData:AbilityData):
-	if abilityData!=null:
-		add_ability(abilityData)
+# VENDOR
+func _on_vendor_item_selected(itemData):
+	if itemData is AbilityData:
+		add_ability(itemData)
+	elif itemData is SpecialData:
+		add_special(itemData)
+	elif itemData is PassiveData:
+		add_passive(itemData)
 
 # SKIP_TURN MANAGEMENT
 var _lastSkipTurn:int = -1
@@ -179,9 +175,8 @@ func get_skip_turn_cooldown():
 	return SKIP_TURN_COOLDOWN - (GameGlobals.dungeon.turnsTaken - _lastSkipTurn) + 1
 
 # SPECIAL
-func _on_special_pressed():
+func _on_special_pressed(special:Special):
 	if special.try_activate():
 		pass
-		#on_turn_completed()
 	else:
-		CombatEventManager.emit_signal("OnPlayerSpecialAbilityFailedToActivate")
+		CombatEventManager.emit_signal("OnPlayerSpecialAbilityFailedToActivate", special)

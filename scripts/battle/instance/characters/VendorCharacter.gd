@@ -12,7 +12,7 @@ func init(data:VendorData):
 	_data = data
 
 func activate():
-	CombatEventManager.emit_signal("ShowVendor", _data)
+	CombatEventManager.emit_signal("ShowVendor", self, _data)
 
 func get_display_name():
 	return _data.displayName

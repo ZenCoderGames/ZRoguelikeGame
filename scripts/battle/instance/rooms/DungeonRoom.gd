@@ -160,7 +160,7 @@ func generate_enemy(enemyId):
 		var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
 
 		# spawn random enemy
-		var randomEnemyData:CharacterData = GameGlobals.dataManager.get_enemy_data(enemyId)
+		var randomEnemyData:CharacterData = GameGlobals.dataManager.get_character_data(enemyId)
 		var enemy:Node = GameGlobals.dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 		enemies.append(enemy)
 		return enemy
@@ -421,6 +421,13 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			return true
 
 	return false
+
+func clear_entity_in_cell(cell:DungeonCell):
+	var entity = cell.entityObject
+	GameGlobals.dungeon.add_to_dungeon_scenes(entity)
+	loadedScenes.erase(entity)
+	entity.hide()
+	cell.clear_entity()
 
 func enemy_died(entity):
 	var foundEnemyIdx:int = enemies.find(entity)

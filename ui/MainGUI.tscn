@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cusqgwo5ljbli"]
+[gd_scene load_steps=10 format=3 uid="uid://cusqgwo5ljbli"]
 
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wj80w"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cor6yaesr2dar" path="res://sourceArt/Icons/arrowUp.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://cktcjr0tuc4x7" path="res://sourceArt/Icons/arrowDown.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://bmuvff2xqjsds" path="res://sourceArt/Icons/arrowRight.png" id="9"]
-[ext_resource type="PackedScene" uid="uid://d2wgar6caudl2" path="res://ui/battle/PlayerAbilityUI.tscn" id="9_chmhj"]
 [ext_resource type="Texture2D" uid="uid://bbh8mtn84lvlf" path="res://sourceArt/Icons/signal3.png" id="10"]
 
 [node name="MainGUI" type="Control"]
@@ -158,16 +157,17 @@ anchors_preset = 0
 offset_right = 200.0
 offset_bottom = 150.0
 
-[node name="PlayerAbilityPanel" parent="." instance=ExtResource("9_chmhj")]
+[node name="PlayerAbilities" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.0
 anchor_bottom = 0.5
-offset_left = 6.0
-offset_top = -47.0
-offset_right = 106.0
-offset_bottom = 47.0
+offset_top = -206.0
+offset_right = 100.0
+offset_bottom = 206.0
+grow_vertical = 2
+alignment = 1
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(300, 0)

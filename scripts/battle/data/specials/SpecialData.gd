@@ -20,7 +20,9 @@ class_name SpecialData
 """
 
 var id:String
+var name:String
 var description:String
+var soulCost:int
 var triggerConditions:Array
 var triggerConditionParams:Dictionary
 var count:int
@@ -33,8 +35,10 @@ var executeCondition:int
 
 func _init(dataJS):
 	id = dataJS["id"]
+	name = dataJS["name"]
 	description = dataJS["description"]
 	count = Utils.get_data_from_json(dataJS, "count", 0)
+	soulCost = Utils.get_data_from_json(dataJS, "soulCost", 0)
 
 	if dataJS.has("conditions"):
 		var conditionsJSList = dataJS["conditions"]

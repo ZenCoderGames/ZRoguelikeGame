@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx55o77d3jahg"]
+[gd_scene load_steps=4 format=3 uid="uid://cx55o77d3jahg"]
 
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_8x1tg"]
 [ext_resource type="Script" path="res://scripts/battle/ui/LevelUp/LevelUpItemUI.gd" id="1_f71is"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itji0"]
+bg_color = Color(0.521569, 0.247059, 0.431373, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.678431, 0.352941, 0.556863, 1)
+border_blend = true
 
 [node name="LevelUpItem" type="PanelContainer"]
 custom_minimum_size = Vector2(250, 0)
@@ -42,6 +51,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_8x1tg")
+theme_override_styles/panel = SubResource("StyleBoxFlat_itji0")
 
 [node name="UpgradeDescLabel" type="Label" parent="VBoxContainer/PanelContainer"]
 unique_name_in_owner = true

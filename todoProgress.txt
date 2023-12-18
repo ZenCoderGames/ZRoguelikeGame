@@ -3,7 +3,11 @@ Roguelike Dev:
 
 (D)- Refactor Character scenes into one scene
 (D)- Convert xp -> souls
-- Soul vendor
+(D)- Soul vendor
+(D)- Soul vendor -> repeated buys, add an expensive upgrade
+(IP)- No classes -> Randomized active/passive at start room
+- Character.gd -> special variable should be a list
+
 - Armor
 
 - Lock and Key

@@ -3,13 +3,13 @@
 		{
 			"id": "RUNE_VAMPIRIC",
 			"name": "Vampiric",
-			"description": "Lifesteal 25% of your damage on kill",
-			"fullDescription": "Lifesteal 25% of your damage on kill",
+			"description": "Lifesteal +2 Health on kill",
+			"fullDescription": "Lifesteal +2 Health on kill",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "PASSIVE_LIFESTEAL_01"
+			"passiveId": "PASSIVE_LIFESTEAL_ON_KILL"
 		},
 		{
 			"id": "RUNE_CRITICAL_STUN",

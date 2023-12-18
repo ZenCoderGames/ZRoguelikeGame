@@ -23,8 +23,8 @@ func init_from_data(charData:CharacterData):
 	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
 	var portraitTex = load(str("res://",myCharData.portraitPath))
 	portrait.texture = portraitTex
-	active.tooltip_text = charData.active.description
-	passive.tooltip_text = GameGlobals.dataManager.get_passive_data(charData.passive).description
+	active.tooltip_text = GameGlobals.dataManager.get_special_data(charData.specialId).description
+	passive.tooltip_text = GameGlobals.dataManager.get_passive_data(charData.passiveId).description
 
 func _on_item_chosen():
 	UIEventManager.emit_signal("OnCharacterSelectButton")

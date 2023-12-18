@@ -13,6 +13,8 @@ func init_from_data():
 		return
 		
 	for heroData in GameGlobals.dataManager.heroDataList:
+		if heroData.id == "GENERIC_HERO":
+			continue
 		var charSelectItem = CharacterSelectItemUI.instantiate()
 		charSelectHolder.add_child(charSelectItem)
 		charSelectItem.init_from_data(heroData)

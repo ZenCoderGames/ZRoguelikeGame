@@ -353,6 +353,8 @@ func _init_upgrades():
 func _init_vendors():
 	if !GameGlobals.battleInstance.debugSpawnVendor.is_empty():
 		startRoom.generate_vendor(GameGlobals.battleInstance.debugSpawnVendor)
+	if GameGlobals.battleInstance.debugSouls>0:
+		player.gain_souls(GameGlobals.battleInstance.debugSouls)
 
 func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
@@ -495,6 +497,7 @@ func load_vendor(parentContainer, cell, vendorId, entityType, groupName):
 	var vendorPrefab := load(str("res://", vendorData.path))
 	var vendorObject = Utils.create_scene(parentContainer, "Vendor", vendorPrefab, groupName, cell)
 	vendorObject.init(vendorData)
+	vendorObject.cell = cell
 	cell.init_entity(vendorObject, entityType)
 	return vendorObject
 

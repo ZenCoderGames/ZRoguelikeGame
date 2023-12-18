@@ -8,23 +8,23 @@ class_name PlayerSpecialAbilityUI
 const ResourceSlotUI := preload("res://ui/battle/ResourceSlotUI.tscn")
 var resourceSlots:Array = []
 
-func _ready():
-	self.visible = false
-	SpecialActiveButton.disabled = true
-	SpecialActiveButton.connect("pressed",Callable(self,"_on_special_pressed"))
-	SpecialActiveButton.connect("mouse_entered",Callable(self,"_on_mouse_entered_active"))
-	SpecialActiveButton.connect("mouse_exited",Callable(self,"_on_mouse_exited_active"))
-	
-	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
-	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
+var _parentChar:Character
+var _special:Special
 
-func _on_dungeon_init():
+func init(parentChar:Character, special:Special):
+	_parentChar = parentChar
+	_special = special
 	SpecialActiveButton.disabled = true
 	_init_resource_slots()
-	GameGlobals.dungeon.player.special.connect("OnReady",Callable(self,"_on_ability_ready"))
-	GameGlobals.dungeon.player.special.connect("OnReset",Callable(self,"_on_ability_reset"))
-	GameGlobals.dungeon.player.connect("OnSpecialModifierAdded",Callable(self,"_on_player_resource_updated"))
-	GameGlobals.dungeon.player.connect("OnSpecialModifierRemoved",Callable(self,"_on_player_resource_updated"))
+	_special.connect("OnReady",Callable(self,"_on_ability_ready"))
+	_special.connect("OnReset",Callable(self,"_on_ability_reset"))
+	_parentChar.connect("OnSpecialModifierAdded",Callable(self,"_on_player_resource_updated"))
+	_parentChar.connect("OnSpecialModifierRemoved",Callable(self,"_on_player_resource_updated"))
+	self.connect("mouse_entered", Callable(self,"_on_mouse_entered"))
+	SpecialActiveButton.connect("mouse_entered", Callable(self,"_on_mouse_entered"))
+	self.connect("mouse_exited", Callable(self,"_on_mouse_exited"))
+	SpecialActiveButton.connect("mouse_exited", Callable(self,"_on_mouse_exited"))
+	SpecialActiveButton.connect("pressed", Callable(self,"_on_special_pressed"))
 
 func _on_ability_ready():
 	SpecialActiveButton.disabled = false
@@ -33,26 +33,31 @@ func _on_ability_reset():
 	SpecialActiveButton.disabled = true
 
 func _on_special_pressed():
-	CombatEventManager.on_player_special_ability_pressed()
+	CombatEventManager.emit_signal("OnPlayerSpecialAbilityPressed", _special)
 
-func _on_mouse_entered_active():
-	CombatEventManager.on_show_info("Special", GameGlobals.dungeon.player.special.data.description)
+func _on_mouse_entered():
+	CombatEventManager.on_show_info("Special", _special.data.description)
 
-func _on_mouse_exited_active():
+func _on_mouse_exited():
 	CombatEventManager.on_hide_info()
 
-func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
-	if fullRefreshDungeon:
-		_clean_up_resource_slots()
+func _cleanup():
+	_clean_up_resource_slots()
+
+	if _special!=null:
+		_special.disconnect("OnReady",Callable(self,"_on_ability_ready"))
+		_special.disconnect("OnReset",Callable(self,"_on_ability_reset"))
+	if _parentChar!=null:
+		_parentChar.disconnect("OnSpecialModifierAdded",Callable(self,"_on_player_resource_updated"))
+		_parentChar.disconnect("OnSpecialModifierRemoved",Callable(self,"_on_player_resource_updated"))
 
 # RESOURCES
 func _init_resource_slots():
 	_create_all_resource_slots()
-	#GameGlobals.dungeon.player.connect("OnResourceStatChanged", Callable(self,"_on_player_resource_updated"))
-	GameGlobals.dungeon.player.get_stat(StatData.STAT_TYPE.ENERGY).connect("OnUpdated",Callable(self,"_on_player_resource_updated"))
+	_parentChar.get_stat(StatData.STAT_TYPE.ENERGY).connect("OnUpdated",Callable(self,"_on_player_resource_updated"))
 
 func _create_all_resource_slots():
-	var maxEnergy:int = GameGlobals.dungeon.player.get_max_energy()
+	var maxEnergy:int = _parentChar.get_max_energy()
 	for i in maxEnergy:
 		_create_resource_slot()
 	_refresh_resources()
@@ -63,9 +68,9 @@ func _create_resource_slot():
 	resourceSlots.append(resourceSlot)
 
 func _refresh_resources():
-	var currentEnergy:int = GameGlobals.dungeon.player.get_energy()
-	var maxEnergy:int = GameGlobals.dungeon.player.get_max_energy()
-	var maxSpecialCount:int = GameGlobals.dungeon.player.special.get_max_count()
+	var currentEnergy:int = _parentChar.get_energy()
+	var maxEnergy:int = _parentChar.get_max_energy()
+	var maxSpecialCount:int = _special.get_max_count()
 
 	if resourceSlots.size() != maxEnergy:
 		_clean_up_resource_slots()

@@ -3,6 +3,7 @@ class_name PassiveData
 var id:String
 var name:String
 var description:String
+var soulCost:int
 var triggerConditions:Array
 var triggerConditionParams:Dictionary
 var timeline:Array
@@ -15,6 +16,7 @@ func _init(dataJS):
 	name = dataJS["name"]
 	description = dataJS["description"]
 	dontDisplayInUI = Utils.get_data_from_json(dataJS, "dontDisplayInUI", false)
+	soulCost = Utils.get_data_from_json(dataJS, "soulCost", 0)
 
 	if dataJS.has("conditions"):
 		var conditionsJSList = dataJS["conditions"]

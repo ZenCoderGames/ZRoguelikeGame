@@ -1,5 +1,7 @@
 extends Node
 
+class_name AudioHandler
+
 func _ready():
 	GameEventManager.connect("OnGameInitialized",Callable(self,"_play_menu_music"))
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_initialized"))
@@ -12,6 +14,8 @@ func _ready():
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_character_attack"))
 	CombatEventManager.connect("OnAnyCharacterDeath",Callable(self,"_on_any_character_death"))
 	CombatEventManager.connect("OnConsumeItem",Callable(self,"_on_consume_item"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_player_special_ready"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityActivated",Callable(self,"_on_player_special_activated"))
 
 # MUSIC
 func _play_menu_music():
@@ -35,8 +39,6 @@ func _on_dungeon_initialized():
 	GameGlobals.dungeon.player.connect("OnCharacterFailedToMove", Callable(self,"_on_player_failed_to_move"))
 	GameGlobals.dungeon.player.connect("OnCharacterItemPicked", Callable(self,"_on_player_item_picked"))
 	GameGlobals.dungeon.player.connect("OnPlayerReachedEnd",Callable(self,"_play_menu_music"))
-	GameGlobals.dungeon.player.special.connect("OnReady",Callable(self,"_on_player_special_ready"))
-	GameGlobals.dungeon.player.special.connect("OnActivated",Callable(self,"_on_player_special_activated"))
 
 func _on_player_move():
 	GameGlobals.audioManager.play_sfx("PLAYER_MOVE")
@@ -59,10 +61,10 @@ func _on_any_character_death(character:Character):
 	else:
 		GameGlobals.audioManager.play_sfx("PLAYER_DEATH")
 
-func _on_player_special_ready():
+func _on_player_special_ready(special:Special):
 	GameGlobals.audioManager.play_sfx("PLAYER_SPECIAL_READY")
 
-func _on_player_special_activated():
+func _on_player_special_activated(special:Special):
 	GameGlobals.audioManager.play_sfx("PLAYER_SPECIAL_ON_ACTIVATE")
 
 func _on_consume_item(itemData:ItemData):

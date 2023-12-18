@@ -39,7 +39,7 @@ func update():
 		on_turn_completed()
 		return
 
-	if special!=null:
+	for special in specialList:
 		if special.isAvailable:
 			if special.try_activate():
 				on_turn_completed()

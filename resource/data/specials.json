@@ -1,0 +1,122 @@
+{
+	"specials": [
+		{
+			"id": "SPECIAL_PALADIN",
+			"name": "Protection",
+			"description": "Grants the player [Protection] for 1 turn\n(Get hit 3 times to get charged)",
+			"conditions": ["ON_TAKE_HIT"],
+			"count": 3,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_PROTECTION",
+						"applyToSource": true
+					}
+				}
+			]
+		},
+		{
+			"id": "SPECIAL_BERSERKER",
+			"name": "Whirlwind",
+			"description": "Do a spin attack around you damaging all targets with your weapon\n(Do 3 successful hits to get charged)",
+			"conditions": ["ON_POST_HIT"],
+			"count": 3,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 4
+					}
+				},
+				{
+					"type": "DO_DAMAGE_TO_TARGETS",
+					"params": {
+						"useCharacterDamage": true
+					}
+				}
+			]
+		},
+		{
+			"id": "SPECIAL_ASSASSIN",
+			"name": "Assassin",
+			"description": "Grants the player [Stealth] for 3 turns\n(2 successful kills to get charged)",
+			"conditions": ["ON_KILL"],
+			"count": 2,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STEALTH",
+						"applyToSource": true
+					}
+				}
+			]
+		},
+		{
+			"id": "RAT_KING_SPECIAL",
+			"name": "Summon Rats",
+			"description": "Spawn 2 Rats",
+			"conditions": ["ON_END_TURN"],
+			"count": 3,
+			"executeCondition": "NONE",
+			"removeAfterExecute": true,
+			"timeline": [
+				{
+					"type": "SPAWN_CHARACTER",
+					"params": {
+						"characterId": "RAT",
+						"count": 3
+					}
+				}
+			]
+		},
+		{
+			"id": "GHOST_SPECIAL",
+			"name": "Stealth",
+			"description": "Grants the ghost stealth the first time it moves",
+			"executeCondition": "NO_NEARBY_ENEMY",
+			"removeAfterExecute": true,
+			"timeline": [
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STEALTH_GHOST",
+						"applyToSource": true
+					}
+				}
+			]
+		},
+		{
+			"id": "SERPENT_SPECIAL",
+			"name": "Petrify",
+			"description": "Stuns the target",
+			"conditions": ["ON_TAKE_HIT"],
+			"count": 2,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 4
+					}
+				},
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STUN_FROM_ENEMY",
+						"applyToTargets": true
+					}
+				}
+			]
+		}
+	]
+}

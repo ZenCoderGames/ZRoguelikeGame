@@ -3,8 +3,9 @@
 		{
 			"id": "ABILITY_DAMAGE_UPGRADE",
 			"characterId": "",
-			"name": "(Upgrade) Stat Upgrade",
-			"description": "Upgrade your base Attack by 1",
+			"name": "Damage Boost",
+			"description": "+1 Base Attack",
+			"soulCost": 8,
 			"timeline": [
 				{
 					"type": "ADD_STAT_MODIFIER",
@@ -22,8 +23,9 @@
 		{
 			"id": "ABILITY_HEALTH_UPGRADE",
 			"characterId": "",
-			"name": "(Upgrade) Stat Upgrade",
-			"description": "Upgrade your base Health by 2",
+			"name": "Health Boost",
+			"description": "+2 Max Health",
+			"soulCost": 8,
 			"timeline": [
 				{
 					"type": "ADD_STAT_MODIFIER",
@@ -39,10 +41,11 @@
 			]
 		},
 		{
-			"id": "ABILITY_HEALTH_UPGRADE",
+			"id": "ABILITY_RISKY_UPGRADE",
 			"characterId": "",
-			"name": "(Upgrade) Heal",
-			"description": "Heal upto 4 health",
+			"name": "Risky Endeavor",
+			"description": "+2 Base Attack, -2 Health",
+			"soulCost": 8,
 			"timeline": [
 				{
 					"type": "ADD_STAT_MODIFIER",
@@ -50,7 +53,11 @@
 						"statModifiers": [
 							{
 								"type": "HEALTH",
-								"value": 4
+								"value": -2
+							},
+							{
+								"type": "DAMAGE",
+								"absoluteValue": 2
 							}
 						]
 					}

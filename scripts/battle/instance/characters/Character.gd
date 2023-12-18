@@ -45,10 +45,8 @@ var statusEffectList:Array = []
 var statusEffectModifierList:Array = []
 var passiveList:Array = []
 var abilityList:Array = []
-
-var special:Special
-var specialModifierList:Array = []
-var specialPassive:Passive
+var specialDict:Dictionary = {}
+var specialList:Array = []
 
 var attackModifier:AttackModifier
 
@@ -83,8 +81,8 @@ signal OnPassiveRemoved(character, passive)
 signal OnAbilityAdded(character, ability)
 signal OnAbilityRemoved(character, ability)
 signal OnNearEnemy()
-signal OnSpecialModifierAdded()
-signal OnSpecialModifierRemoved()
+signal OnSpecialAdded(character, special)
+signal OnSpecialRemoved(character, special)
 
 signal OnTurnCompleted()
 signal OnInitialized()
@@ -124,21 +122,20 @@ func init(id:int, charDataVal, teamVal):
 	inventory = Inventory.new(self)
 	equipment = Equipment.new(self)
 
-	if charData.active!=null:
-		special = Special.new(self, charData.active)
-		special.connect("OnCountIncremented",Callable(self,"_on_special_count_incremented"))
-		special.connect("OnReset",Callable(self,"_on_special_reset"))
-
 	emit_signal("OnInitialized")
 
 	equipment.connect("OnItemEquipped",Callable(self,"_on_item_equipped"))
 	equipment.connect("OnItemUnEquipped",Callable(self,"_on_item_unequipped"))
 	CombatEventManager.connect("OnAnyCharacterMoved",Callable(self,"_on_any_character_moved"))
 
-	#await get_tree().create_timer(0.05).timeout
+	# need this for some edge case initialization flow
+	await get_tree().create_timer(0.05).timeout
 
-	if !charData.passive.is_empty():
-		specialPassive = add_passive(GameGlobals.dataManager.get_passive_data(charData.passive))
+	if !charData.specialId.is_empty():
+		add_special(GameGlobals.dataManager.get_special_data(charData.specialId))
+
+	if !charData.passiveId.is_empty():
+		add_passive(GameGlobals.dataManager.get_passive_data(charData.passiveId))
 
 	# Visuals
 	if !charData.spritePath.is_empty():
@@ -666,38 +663,54 @@ func remove_passive_from_data(passiveData:PassiveData):
 			on_stats_changed()
 			break
 
+func has_passive(passiveData:PassiveData):
+	for passive in passiveList:
+		if passive.data == passiveData:
+			return true
+
+	return false
+
 # SPECIAL
-func _on_special_count_incremented():
+func add_special(specialData:SpecialData):
+	var special = Special.new(self, specialData)
+	special.connect("OnCountIncremented",Callable(self,"_on_special_count_incremented"))
+	special.connect("OnReset",Callable(self,"_on_special_reset"))
+	emit_signal("OnSpecialAdded", self, special)
+	specialList.append(special)
+	specialDict[special.data.id] = special
+
+func _on_special_count_incremented(_special:Special):
 	if has_stat(StatData.STAT_TYPE.ENERGY):
 		get_stat(StatData.STAT_TYPE.ENERGY).add(1)
 		emit_signal("OnResourceStatChanged")
 
-func _on_special_reset():
+func _on_special_reset(special:Special):
 	if has_stat(StatData.STAT_TYPE.ENERGY):
 		get_stat(StatData.STAT_TYPE.ENERGY).add(-special.get_max_count())
 		emit_signal("OnResourceStatChanged")
 
-func add_special_modifier(specialModifier:SpecialModifier):
-	specialModifierList.append(specialModifier)
-	special.check_for_ready()
-	emit_signal("OnSpecialModifierAdded")
+func add_special_modifier(specialId:String, specialModifier:SpecialModifier):
+	if !specialId.is_empty():
+		specialDict[specialId].add_modifier(specialModifier)
+	else:
+		for special in specialList:
+			special.add_modifier(specialModifier)
 
-func remove_special_modifier(specialId:String):
-	for i in range(specialModifierList.size() - 1, -1, -1):
-		if (specialId == specialModifierList[i].specialId):
-			specialModifierList.remove_at(i)
-	emit_signal("OnSpecialModifierRemoved")
+func remove_special(specialId:String):
+	var special:Special = specialDict[specialId]
+	emit_signal("OnSpecialRemoved", self, special)
+	specialList.erase(special)
+	specialDict.erase(specialId)
 
-func get_special_modifiers(specialId:String):
-	var matchedspecialModifiers:Array = []
-	for specialModifier in specialModifierList:
-		if specialModifier.specialId == specialId:
-			matchedspecialModifiers.append(specialModifier)
+func has_special(specialData:SpecialData):
+	return specialDict.has(specialData.id)
 
-	return matchedspecialModifiers
-
-func remove_special():
-	special = null
+func force_special_ready(specialId:String):
+	if !specialId.is_empty():
+		specialDict[specialId].force_ready()
+	else:
+		for special in specialList:
+			special.force_ready()
 
 # ATTACK
 func add_attack_modifier(attackModifierVal:AttackModifier):

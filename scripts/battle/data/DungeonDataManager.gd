@@ -3,6 +3,8 @@ class_name DungeonDataManager
 
 var statusEffectDataMap = {}
 var passiveDataMap = {}
+var specialDataList = []
+var specialDataMap = {}
 var itemDataMap = {}
 var itemDataList = []
 var spellDataMap = {}
@@ -26,6 +28,7 @@ func _init():
 	init_dungeon_data()
 	init_status_effects()
 	init_passives()
+	init_specials()
 	init_spells()
 	init_items("resource/data/items.json")
 	init_items("resource/data/runeItems.json")
@@ -77,6 +80,20 @@ func get_passive_data(id):
 		print("ERROR: INVALID PASSIVE ID Requested: " + id)
 		return null
 
+func init_specials():
+	var data = Utils.load_data_from_file("resource/data/specials.json")
+	var specialDataJSList:Array = data["specials"]
+	for specialDataJS in specialDataJSList:
+		var newSpecialData = SpecialData.new(specialDataJS)
+		specialDataMap[newSpecialData.id] = newSpecialData
+
+func get_special_data(id):
+	if specialDataMap.has(id):
+		return specialDataMap[id]
+	else:
+		print("ERROR: INVALID SPECIAL ID Requested: " + id)
+		return null
+
 func init_items(itemLocation:String):
 	var data = Utils.load_data_from_file(itemLocation)
 	var itemDataJSList:Array = data["items"]
@@ -114,9 +131,8 @@ func init_vendors(vendorLocation:String):
 	var vendorDataJSList:Array = data["vendors"]
 	for vendorDataJS in vendorDataJSList:
 		var newVendorData = VendorData.new(vendorDataJS)
-		if !newVendorData.disable:
-			vendorDataMap[newVendorData.id] = newVendorData
-			vendorDataList.append(newVendorData)
+		vendorDataMap[newVendorData.id] = newVendorData
+		vendorDataList.append(newVendorData)
 
 func get_vendor_data(id):
 	if vendorDataMap.has(id):
@@ -128,8 +144,8 @@ func get_vendor_data(id):
 func get_random_enemy_data():
 	return enemyDataList[randi() % enemyDataList.size()]
 
-func get_enemy_data(enemyId):
-	return characterDataDict[enemyId]
+func get_character_data(charId):
+	return characterDataDict[charId]
 
 func get_random_item_data():
 	return itemDataList[randi() % itemDataList.size()]

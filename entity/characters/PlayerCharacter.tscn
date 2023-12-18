@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="5_7vvrp"]
 
 [node name="Root" type="Sprite2D"]
+z_index = 10
 texture = ExtResource("1_5a5gy")
 script = ExtResource("2_r8m2l")
 metadata/_aseprite_wizard_config_ = {

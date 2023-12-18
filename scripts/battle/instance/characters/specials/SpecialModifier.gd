@@ -1,9 +1,7 @@
 
 class_name SpecialModifier
 
-var specialId:String
 var countModifier:int
 
-func _init(specialIdVal:String,countModifierVal:int):
-    specialId = specialIdVal
+func _init(countModifierVal:int):
     countModifier = countModifierVal

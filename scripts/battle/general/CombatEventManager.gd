@@ -10,8 +10,10 @@ signal OnRoomCombatEnded(room)
 signal OnPlayerTurnCompleted()
 signal OnAllEnemyTurnsCompleted()
 signal OnAnyAttack(isKillingBlow)
-signal OnPlayerSpecialAbilityPressed()
-signal OnPlayerSpecialAbilityFailedToActivate()
+signal OnPlayerSpecialAbilityReady(special)
+signal OnPlayerSpecialAbilityActivated(special)
+signal OnPlayerSpecialAbilityPressed(special)
+signal OnPlayerSpecialAbilityFailedToActivate(special)
 signal OnToggleInventory()
 signal OnShowInfo(title, content)
 signal OnHideInfo()
@@ -22,8 +24,9 @@ signal OnAnyCharacterDeath(character)
 signal OnConsumeItem(itemData)
 signal OnLevelUpAbilitySelected(abilityData)
 signal ShowUpgrade(upgradeType)
-signal ShowVendor(vendorChar)
-signal OnVendorAbilitySelected(abilityData)
+signal ShowVendor(vendorChar, vendorData)
+signal OnVendorItemSelected(abilityData)
+signal OnVendorClosed()
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):
@@ -76,9 +79,6 @@ func on_show_info(title:String, content:String):
 
 func on_hide_info():
 	emit_signal("OnHideInfo")
-
-func on_player_special_ability_pressed():
-	emit_signal("OnPlayerSpecialAbilityPressed")
 
 func clean_up():
 	#Utils.clean_up_all_signals(self)
