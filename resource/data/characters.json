@@ -109,7 +109,7 @@
 				"path": "entity/characters/EnemyCharacter.tscn",
 				"spritePath": "entity/characters/textures/RatKing.png",
 				"difficulty": 2,
-				"cost": 8,
+				"cost": 6,
 				"xp": 4,
 				"stats": [
 					{
@@ -130,8 +130,8 @@
 				"path": "entity/characters/EnemyCharacter.tscn",
 				"spritePath": "entity/characters/textures/Skeleton_01.png",
 				"difficulty": 1,
-				"cost": 5,
-				"xp": 1,
+				"cost": 2,
+				"xp": 2,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -153,7 +153,7 @@
 				"spritePath": "entity/characters/textures/Ghost_01.png",
 				"difficulty": 1,
 				"cost": 5,
-				"xp": 2,
+				"xp": 3,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -266,7 +266,7 @@
 				"spritePath": "entity/characters/textures/Dragon_01.png",
 				"difficulty": 4,
 				"cost": 10,
-				"xp": 30,
+				"xp": 20,
 				"stats": [
 					{
 						"type": "HEALTH",

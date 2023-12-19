@@ -51,7 +51,7 @@ func on_unequipped(character):
 		passive = null
 
 func get_display_name():
-	return data.displayName
+	return data.name
 
 func get_description():
 	return data.description

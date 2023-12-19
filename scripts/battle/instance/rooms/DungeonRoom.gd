@@ -181,8 +181,9 @@ func _on_miniboss_death():
 	if GameGlobals.battleInstance.startWithClasses:
 		generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
 
-	generate_vendor("SOUL_VENDOR")
+	generate_vendor("MYSTIC_VENDOR")
 	#generate_vendor("ARCHIVIST_VENDOR")
+	generate_item("ITEM_HEALTH_POTION_LARGE")
 
 func is_cleared():
 	return _isCleared
@@ -224,6 +225,16 @@ func generate_item(itemId):
 	var randomItemData = GameGlobals.dataManager.get_item_data(itemId)
 	var item:Node = GameGlobals.dungeon.load_item(loadedScenes, randomCell, randomItemData, Constants.ENTITY_TYPE.DYNAMIC, Constants.items)
 	items.append(item)
+	return item
+
+func generate_and_consume_item(character, itemId):
+	var item = generate_item(itemId)
+	character.pick_item(item)
+	GameGlobals.dungeon.add_to_dungeon_scenes(item)
+	loadedScenes.erase(item)
+	item.picked()
+	items.erase(item)
+	item.cell.clear_entity()
 
 func generate_upgrade(upgradeType:Upgrade.UPGRADE_TYPE):
 	# find free cells

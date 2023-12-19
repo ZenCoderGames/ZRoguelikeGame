@@ -249,6 +249,7 @@ func _init_enemies():
 		if room.isEndRoom:
 			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]
 			room.generate_miniboss(enemyData.id)
+			room.generate_vendor("SOUL_VENDOR")
 
 		while(currentCost<encounterCost):
 			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]
@@ -359,7 +360,7 @@ func _init_vendors():
 	#startRoom.generate_vendor("MYSTIC_VENDOR")
 	if !GameGlobals.battleInstance.startWithClasses:
 		var specialRoom:DungeonRoom = rooms[rooms.size()/2]
-		var specialVendors:Array = ["SHAMAN_VENDOR", "ARCHIVIST_VENDOR", "MYSTIC_VENDOR"]
+		var specialVendors:Array = ["SHAMAN_VENDOR", "ARCHIVIST_VENDOR", "BLACKSMITH_VENDOR", "RUNESMITH_VENDOR"]
 		specialVendors.shuffle()
 		specialRoom.generate_vendor(specialVendors[0])
 
@@ -477,7 +478,7 @@ func load_character(parentContainer, cell, characterData, entityType, groupName,
 
 func load_item(parentContainer, cell, itemData, entityType, groupName):
 	var itemPrefab := load(str("res://", itemData.path))
-	var itemObject = Utils.create_scene(parentContainer, itemData.displayName, itemPrefab, groupName, cell)
+	var itemObject = Utils.create_scene(parentContainer, itemData.name, itemPrefab, groupName, cell)
 	cell.init_entity(itemObject, entityType)
 	itemObject.init(itemData, cell)
 	if itemData.is_gear():

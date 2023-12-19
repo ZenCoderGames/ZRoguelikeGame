@@ -159,6 +159,8 @@ func _on_vendor_item_selected(itemData):
 		add_special(itemData)
 	elif itemData is PassiveData:
 		add_passive(itemData)
+	elif itemData is ItemData:
+		cell.room.generate_and_consume_item(self, itemData.id)
 
 # SKIP_TURN MANAGEMENT
 var _lastSkipTurn:int = -1

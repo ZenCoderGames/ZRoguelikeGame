@@ -2,9 +2,9 @@
 	"items": [
 		{
 			"#disable": true,
-			"id": "ITEM_HEALTH_POTION_00",
+			"id": "ITEM_HEALTH_POTION_SMALL",
 			"name": "Small Health Potion",
-			"description": "A tiny health potion\n(Heal up to 4 health)",
+			"description": "A tiny health potion\n(Heal up to 2 health)",
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +2",
 			"path": "entity/items/consumables/Consumable_Tier1.tscn",
 			"type": "CONSUMABLE",
@@ -21,9 +21,9 @@
 		},
 		{
 			"#disable": true,
-			"id": "ITEM_HEALTH_POTION_01",
+			"id": "ITEM_HEALTH_POTION_MEDIUM",
 			"name": "Medium Health Potion",
-			"description": "A tiny health potion\n(Heal up to 4 health)",
+			"description": "A medium health potion\n(Heal up to 4 health)",
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +4",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
@@ -33,6 +33,25 @@
 				{
 					"type": "HEALTH",
 					"value": 4
+				}
+			],
+			"consumeAudioId": "CONSUMABLE_POTION",
+			"tintColor": "#3bb625"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_HEALTH_POTION_LARGE",
+			"name": "Large Health Potion",
+			"description": "A large health potion\n(Heal up to 8 health)",
+			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +8",
+			"path": "entity/items/consumables/Consumable_Tier3.tscn",
+			"type": "CONSUMABLE",
+			"tier": 2,
+			"maxCount": 1,
+			"statModifiers": [
+				{
+					"type": "HEALTH",
+					"value": 8
 				}
 			],
 			"consumeAudioId": "CONSUMABLE_POTION",
@@ -50,25 +69,6 @@
 			"maxCount": 2,
 			"statusEffectId": "STATUS_EFFECT_BARRIER",
 			"tintColor": "#b2b625"
-		},
-		{
-			"#disable": true,
-			"id": "ITEM_HEALTH_UPGRADE_00",
-			"name": "Blessing of health",
-			"description": "A boost to base health\n(+2 Max Health)",
-			"fullDescription": "A blessing from a goddess to those who seek it.\nIncrease Max Health by +2",
-			"path": "entity/items/consumables/Consumable_Tier2.tscn",
-			"type": "CONSUMABLE",
-			"tier": 2,
-			"maxCount": 1,
-			"statModifiers": [
-				{
-					"type": "HEALTH",
-					"absoluteValue": 2
-				}
-			],
-			"consumeAudioId": "CONSUMABLE_POTION",
-			"tintColor": "#3bb625"
 		}
 	]
 }

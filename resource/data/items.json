@@ -1,7 +1,7 @@
 {
 	"items": [
 		{
-			"id": "ITEM_SWORD_00",
+			"id": "ITEM_BASIC_SWORD",
 			"name": "Basic Sword",
 			"description": "(+1 Damage)",
 			"fullDescription": "A simple rundown sword that is usually weilded by the untrained.\nIncreases the player's Strength by 1",

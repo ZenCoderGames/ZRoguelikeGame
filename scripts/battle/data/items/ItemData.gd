@@ -15,7 +15,7 @@ class_name ItemData
 		}"""
 
 var id:String
-var displayName:String
+var name:String
 var description:String
 var fullDescription:String
 var path:String
@@ -32,6 +32,7 @@ var passiveId:String
 var statusEffectId:String
 
 var maxCount:int
+var soulCost:int
 
 var consumeAudioId:String
 var tintColor:String
@@ -40,12 +41,13 @@ var disable:bool
 
 func _init(itemDataJS):
 	id = itemDataJS["id"]
-	displayName = itemDataJS["name"]
+	name = itemDataJS["name"]
 	description = itemDataJS["description"]
 	fullDescription = itemDataJS["fullDescription"]
 	path = itemDataJS["path"]
 	tier = itemDataJS["tier"]
 	maxCount =  Utils.get_data_from_json(itemDataJS, "maxCount", 1)
+	soulCost =  Utils.get_data_from_json(itemDataJS, "soulCost", 0)
 
 	var itemType = itemDataJS["type"]
 	if ITEM_TYPE.has(itemType):

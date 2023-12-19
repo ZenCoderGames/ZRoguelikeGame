@@ -13,8 +13,6 @@ var initialized:bool = false
 var _vendorChar:VendorCharacter
 var _vendorData:VendorData
 var _vendorItemList:Array
-enum UPGRADE_TYPE { ABILITY, SPECIAL, PASSIVE }
-var _upgradeType:UPGRADE_TYPE
 
 func init(vendorChar:VendorCharacter, vendorData:VendorData):
 	if initialized:
@@ -25,41 +23,37 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 	title.text = vendorData.displayName
 	var maxItemsToDisplay:int = vendorData.numItemsShown
 
+	var itemsToConsider:Array = []
+
 	if vendorData.abilities.size()>0:
-		_upgradeType = UPGRADE_TYPE.ABILITY
-		vendorData.abilities.shuffle()
 		for abilityId in vendorData.abilities:
-			var vendorItem = VendorItemUI.instantiate()
-			itemHolder.add_child(vendorItem)
-			vendorItem.init_as_ability(self, GameGlobals.dataManager.get_ability_data(abilityId))
-			_vendorItemList.append(vendorItem)
-			maxItemsToDisplay = maxItemsToDisplay - 1
-			if maxItemsToDisplay==0:
-				break
+			itemsToConsider.append(GameGlobals.dataManager.get_ability_data(abilityId))
 
 	if vendorData.specials.size()>0:
-		_upgradeType = UPGRADE_TYPE.SPECIAL
-		vendorData.specials.shuffle()
 		for specialId in vendorData.specials:
-			var vendorItem = VendorItemUI.instantiate()
-			itemHolder.add_child(vendorItem)
-			vendorItem.init_as_special(self, GameGlobals.dataManager.get_special_data(specialId))
-			_vendorItemList.append(vendorItem)
-			maxItemsToDisplay = maxItemsToDisplay - 1
-			if maxItemsToDisplay==0:
-				break
+			itemsToConsider.append(GameGlobals.dataManager.get_special_data(specialId))
 
 	if vendorData.passives.size()>0:
-		_upgradeType = UPGRADE_TYPE.PASSIVE
-		vendorData.passives.shuffle()
 		for passiveId in vendorData.passives:
-			var vendorItem = VendorItemUI.instantiate()
-			itemHolder.add_child(vendorItem)
-			vendorItem.init_as_passive(self, GameGlobals.dataManager.get_passive_data(passiveId))
-			_vendorItemList.append(vendorItem)
-			maxItemsToDisplay = maxItemsToDisplay - 1
-			if maxItemsToDisplay==0:
-				break
+			itemsToConsider.append(GameGlobals.dataManager.get_passive_data(passiveId))
+
+	if vendorData.items.size()>0:
+		for itemId in vendorData.items:
+			itemsToConsider.append(GameGlobals.dataManager.get_item_data(itemId))
+
+	if vendorData.runes.size()>0:
+		for runeId in vendorData.runes:
+			itemsToConsider.append(GameGlobals.dataManager.get_item_data(runeId))
+
+	itemsToConsider.shuffle()
+	for item in itemsToConsider:
+		var vendorItem = VendorItemUI.instantiate()
+		itemHolder.add_child(vendorItem)
+		_vendorItemList.append(vendorItem)
+		vendorItem.init(self, item)
+		maxItemsToDisplay = maxItemsToDisplay - 1
+		if maxItemsToDisplay==0:
+			break
 
 	backBtn.connect("button_up",Callable(self,"_on_back_pressed"))
 
@@ -79,15 +73,6 @@ func item_bought():
 		CombatEventManager.emit_signal("OnVendorClosed")
 		UIEventManager.emit_signal("OnGenericUIEvent")
 		_vendorChar.cell.room.clear_entity_in_cell(_vendorChar.cell)
-
-func is_ability():
-	return _upgradeType == UPGRADE_TYPE.ABILITY
-
-func is_special():
-	return _upgradeType == UPGRADE_TYPE.SPECIAL
-
-func is_passive():
-	return _upgradeType == UPGRADE_TYPE.PASSIVE
 
 func onlyUniquePurchases():
 	return _vendorData.onlyUniquePurchases

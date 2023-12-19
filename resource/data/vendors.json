@@ -3,8 +3,9 @@
 		{
 			"id": "SOUL_VENDOR",
 			"name": "Soul Collector",
-			"description": "Exchange souls for perks",
+			"description": "Exchange souls for power",
 			"path": "entity/characters/VendorCharacter.tscn",
+			"tintColor": "#df99ad",
 			"numItemsShown": 3,
 			"oneTimePurchaseOnly": false,
 			"onlyUniquePurchases": false,
@@ -19,6 +20,7 @@
 			"name": "Mystic",
 			"description": "Choose a Special",
 			"path": "entity/characters/VendorCharacter.tscn",
+			"tintColor": "#846fa4",
 			"numItemsShown": 2,
 			"oneTimePurchaseOnly": true,
 			"onlyUniquePurchases": true,
@@ -33,6 +35,7 @@
 			"name": "Shaman",
 			"description": "Choose a Passive",
 			"path": "entity/characters/VendorCharacter.tscn",
+			"tintColor": "#143e2f",
 			"numItemsShown": 2,
 			"oneTimePurchaseOnly": true,
 			"onlyUniquePurchases": true,
@@ -47,6 +50,7 @@
 			"name": "Archivist",
 			"description": "Choose an Upgrade",
 			"path": "entity/characters/VendorCharacter.tscn",
+			"tintColor": "#254892",
 			"numItemsShown": 2,
 			"oneTimePurchaseOnly": true,
 			"onlyUniquePurchases": true,
@@ -62,6 +66,37 @@
 				"ABILITY_STEALTH_LONGER",
 				"ABILITY_STEALTH_ATTACK_BOOST",
 				"ABILITY_STEALTH_REFRESH"
+			]
+		},
+		{
+			"id": "BLACKSMITH_VENDOR",
+			"name": "Blacksmith",
+			"description": "Offers various items to buy",
+			"path": "entity/characters/VendorCharacter.tscn",
+			"tintColor": "#df99ad",
+			"numItemsShown": 2,
+			"oneTimePurchaseOnly": true,
+			"onlyUniquePurchases": true,
+			"items": [
+				"ITEM_BASIC_SWORD",
+				"ITEM_HEAVY_SWORD",
+				"ITEM_WOODEN_PLATE",
+				"ITEM_SILVER_PLATE"
+			]
+		},
+		{
+			"id": "RUNESMITH_VENDOR",
+			"name": "Runesmith",
+			"description": "Offers various runes to buy",
+			"path": "entity/characters/VendorCharacter.tscn",
+			"tintColor": "#df99ad",
+			"numItemsShown": 2,
+			"oneTimePurchaseOnly": true,
+			"onlyUniquePurchases": true,
+			"runes": [
+				"RUNE_VAMPIRIC",
+				"RUNE_CRITICAL_STUN",
+				"RUNE_BARRIER_ON_KILL"
 			]
 		}
 	]

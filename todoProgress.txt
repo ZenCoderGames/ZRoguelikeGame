@@ -8,7 +8,12 @@ Roguelike Dev:
 (D)- No classes -> Randomized active/passive at start room
 (D)- Character.gd -> special variable should be a list
 (D)- Special should have its own resources. Get rid of energy. Make multiple specials work.
-- Setup Mystic and Shaman vendors as part of the flow
+(D)- Setup Mystic and Shaman vendors as part of the flow
+- New Vendors (Blacksmith, Runesmith)
+- New Vendor (Enigma)
+
+- Another way of using souls -> Healing, Blacksmith
+- Figure out what to do with extra items (convert to souls button)
 
 - Armor
 
