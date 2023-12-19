@@ -26,3 +26,10 @@ func consume_item(item):
 
 func remove_item(item):
 	items.erase(item)
+
+func has_item(itemData):
+	for item in items:
+		if item.data == itemData:
+			return true
+
+	return false

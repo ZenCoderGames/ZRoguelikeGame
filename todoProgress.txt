@@ -9,18 +9,17 @@ Roguelike Dev:
 (D)- Character.gd -> special variable should be a list
 (D)- Special should have its own resources. Get rid of energy. Make multiple specials work.
 (D)- Setup Mystic and Shaman vendors as part of the flow
-- New Vendors (Blacksmith, Runesmith)
-- New Vendor (Enigma)
-
-- Another way of using souls -> Healing, Blacksmith
+(D)- New Vendors (Blacksmith, Runesmith)
 - Figure out what to do with extra items (convert to souls button)
+- More Things (3 runes, 3 items, 3 specials, 3 passives)
 
 - Armor
+
+- Regenerate map on failure
 
 - Lock and Key
 - Trading NPC (Exchange runes/spells)
 - Healing Stone (healing)
-- Gold/Shopkeeper (Items/Spells)
 - Enchanter (Spell Slot/Rune Slot)
 - Targeting for Specials/Spells
 

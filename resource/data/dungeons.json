@@ -13,9 +13,9 @@
 			"itemCountMax": 6,
 			"itemHeighestTier": 2,
 			"enemyDifficultyHighestTier": 1,
-			"enemyMinCostPerRoom": 6,
-			"enemyExtraCostForSingleRoom": 5,
-			"enemyScalingCostPerRoom": 4
+			"enemyMinCostPerRoom": 4,
+			"enemyExtraCostForSingleRoom": 4,
+			"enemyScalingCostPerRoom": 2
 		},
 		{
 			"numRooms": 6,

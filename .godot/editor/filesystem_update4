@@ -25,3 +25,4 @@ res://scripts/battle/data/items/ItemData.gd
 res://scripts/battle/ui/BattleUI.gd
 res://scripts/library/Utils.gd
 res://scripts/battle/BattleView.gd
+res://scripts/battle/ui/CharacterUI.gd

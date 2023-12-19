@@ -59,8 +59,8 @@ func init(entityObj):
 	character.connect("OnPassiveRemoved",Callable(self,"on_passive_removed"))
 	character.connect("OnStatusEffectAdded",Callable(self,"on_status_effect_added"))
 	character.connect("OnStatusEffectRemoved",Callable(self,"on_status_effect_removed"))
-	character.connect("OnAbilityAdded",Callable(self,"on_ability_added"))
-	character.connect("OnAbilityRemoved",Callable(self,"on_ability_removed"))
+	#character.connect("OnAbilityAdded",Callable(self,"on_ability_added"))
+	#character.connect("OnAbilityRemoved",Callable(self,"on_ability_removed"))
 	character.equipment.connect("OnItemEquipped",Callable(self,"_on_item_equipped"))
 	character.equipment.connect("OnItemUnEquipped",Callable(self,"_on_item_unequipped"))
 	if character.team == Constants.TEAM.PLAYER:

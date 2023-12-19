@@ -5,7 +5,7 @@
 			"characterId": "",
 			"name": "Damage Boost",
 			"description": "+1 Base Attack",
-			"soulCost": 8,
+			"soulCost": 10,
 			"timeline": [
 				{
 					"type": "ADD_STAT_MODIFIER",
@@ -25,7 +25,7 @@
 			"characterId": "",
 			"name": "Health Boost",
 			"description": "+4 Max Health",
-			"soulCost": 8,
+			"soulCost": 10,
 			"timeline": [
 				{
 					"type": "ADD_STAT_MODIFIER",
@@ -44,8 +44,8 @@
 			"id": "ABILITY_RISKY_UPGRADE",
 			"characterId": "",
 			"name": "Risky Endeavor",
-			"description": "+2 Base Attack, -2 Health",
-			"soulCost": 8,
+			"description": "+2 Base Attack, -4 Health",
+			"soulCost": 10,
 			"timeline": [
 				{
 					"type": "ADD_STAT_MODIFIER",
@@ -53,7 +53,7 @@
 						"statModifiers": [
 							{
 								"type": "HEALTH",
-								"value": -2
+								"value": -4
 							},
 							{
 								"type": "DAMAGE",
