@@ -24,6 +24,7 @@ func init(parentChar:Character, special:Special):
 	self.connect("mouse_exited", Callable(self,"_on_mouse_exited"))
 	SpecialActiveButton.connect("mouse_exited", Callable(self,"_on_mouse_exited"))
 	SpecialActiveButton.connect("pressed", Callable(self,"_on_special_pressed"))
+	SpecialActiveButton.text = special.data.name
 
 func _on_ability_ready(_specialVar:Special):
 	SpecialActiveButton.disabled = false

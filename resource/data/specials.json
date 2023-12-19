@@ -3,7 +3,7 @@
 		{
 			"id": "SPECIAL_PALADIN",
 			"name": "Protection",
-			"description": "Grants the player [Protection] for 1 turn\n(Get hit 3 times to get charged)",
+			"description": "Grants [[Protection]] for 1 turn\n\n(Gain Charge: On Take Hit)",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 3,
 			"soulCost": 0,
@@ -21,7 +21,7 @@
 		{
 			"id": "SPECIAL_BERSERKER",
 			"name": "Whirlwind",
-			"description": "Do a spin attack around you damaging all targets with your weapon\n(Do 3 successful hits to get charged)",
+			"description": "Do a 360 spin attack\n\n(Gain Charge: On Attack)",
 			"conditions": ["ON_POST_HIT"],
 			"count": 3,
 			"soulCost": 0,
@@ -45,7 +45,7 @@
 		{
 			"id": "SPECIAL_ASSASSIN",
 			"name": "Assassin",
-			"description": "Grants the player [Stealth] for 3 turns\n(2 successful kills to get charged)",
+			"description": "Grants [[Stealth]] for 3 turns\n\n(Gain Charge: On Kill)",
 			"conditions": ["ON_KILL"],
 			"count": 2,
 			"soulCost": 0,

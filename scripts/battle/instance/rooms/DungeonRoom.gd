@@ -180,9 +180,10 @@ func _on_miniboss_death():
 	#generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
 	if GameGlobals.battleInstance.startWithClasses:
 		generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
+	else:
+		generate_vendor("ARCHIVIST_VENDOR")
 
-	generate_vendor("MYSTIC_VENDOR")
-	#generate_vendor("ARCHIVIST_VENDOR")
+	#generate_vendor("MYSTIC_VENDOR")
 	generate_item("ITEM_HEALTH_POTION_LARGE")
 
 func is_cleared():

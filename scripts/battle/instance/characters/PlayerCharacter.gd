@@ -31,6 +31,7 @@ func init_for_next_dungeon():
 	pass
 
 func _setup_events():
+	CombatEventManager.connect("OnCombatInitialized", Callable(self,"check_for_nearby_entities"))
 	CombatEventManager.connect("OnEnemyMovedAdjacentToPlayer",Callable(self,"on_enemy_moved_adjacent"))
 	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
 	CombatEventManager.connect("OnVendorItemSelected",Callable(self,"_on_vendor_item_selected"))

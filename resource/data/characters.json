@@ -135,7 +135,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 4
+						"value": 3
 					},
 					{
 						"type": "DAMAGE",
@@ -157,7 +157,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 6
+						"value": 4
 					},
 					{
 						"type": "DAMAGE",

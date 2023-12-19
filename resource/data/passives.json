@@ -178,7 +178,7 @@
 				{
 					"type": "MODIFY_SPECIAL",
 					"params": {
-						"specialId": "ASSASSIN_SPECIAL",
+						"specialId": "SPECIAL_ASSASSIN",
 						"refill": true
 					}
 				}

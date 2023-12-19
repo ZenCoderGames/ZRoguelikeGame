@@ -42,7 +42,7 @@ func create(recreatePlayer:bool) -> void:
 	_init_turns()
 	_start_turn()
 
-	CombatEventManager.emit_signal("OnPlayerInitialized")
+	CombatEventManager.emit_signal("OnCombatInitialized")
 
 func _init_rooms():
 	rooms = []
@@ -357,12 +357,12 @@ func _init_vendors():
 	if GameGlobals.battleInstance.debugSouls>0:
 		player.gain_souls(GameGlobals.battleInstance.debugSouls)
 
-	#startRoom.generate_vendor("MYSTIC_VENDOR")
-	if !GameGlobals.battleInstance.startWithClasses:
-		var specialRoom:DungeonRoom = rooms[rooms.size()/2]
-		var specialVendors:Array = ["SHAMAN_VENDOR", "ARCHIVIST_VENDOR", "BLACKSMITH_VENDOR", "RUNESMITH_VENDOR"]
-		specialVendors.shuffle()
-		specialRoom.generate_vendor(specialVendors[0])
+	startRoom.generate_vendor("MYSTIC_VENDOR")
+	
+	var specialRoom:DungeonRoom = rooms[rooms.size()/2]
+	var specialVendors:Array = ["SHAMAN_VENDOR", "BLACKSMITH_VENDOR", "RUNESMITH_VENDOR"]
+	specialVendors.shuffle()
+	specialRoom.generate_vendor(specialVendors[0])
 
 func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()

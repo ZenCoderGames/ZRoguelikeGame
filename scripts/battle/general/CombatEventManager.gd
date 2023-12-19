@@ -1,6 +1,6 @@
 extends Node
 
-signal OnPlayerInitialized()
+signal OnCombatInitialized()
 signal OnStartTurn()
 signal OnEndTurn()
 signal OnEnemyMovedAdjacentToPlayer(enemy)

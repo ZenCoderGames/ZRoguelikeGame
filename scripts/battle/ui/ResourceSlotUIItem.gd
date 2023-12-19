@@ -16,6 +16,3 @@ func set_empty():
 func clear():
 	self.self_modulate = Color.TRANSPARENT
 	innerCircle.self_modulate = Color.WHITE
-
-func set_as_special_count():
-	self.self_modulate = Color.CORAL
