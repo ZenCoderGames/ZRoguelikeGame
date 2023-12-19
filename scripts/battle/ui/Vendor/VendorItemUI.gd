@@ -72,6 +72,7 @@ func refresh():
 			chooseBtn.text = "BUY"
 	else:
 		chooseBtn.text = "SELECT"
+		chooseBtn.disabled = false
 
 func _get_soul_cost():
 	var soulCost:int = 0

@@ -81,6 +81,7 @@ signal OnPassiveRemoved(character, passive)
 signal OnAbilityAdded(character, ability)
 signal OnAbilityRemoved(character, ability)
 signal OnNearEnemy()
+signal OnAnySpecialActivated()
 signal OnSpecialAdded(character, special)
 signal OnSpecialRemoved(character, special)
 
@@ -673,21 +674,9 @@ func has_passive(passiveData:PassiveData):
 # SPECIAL
 func add_special(specialData:SpecialData):
 	var special = Special.new(self, specialData)
-	special.connect("OnCountIncremented",Callable(self,"_on_special_count_incremented"))
-	special.connect("OnReset",Callable(self,"_on_special_reset"))
 	emit_signal("OnSpecialAdded", self, special)
 	specialList.append(special)
 	specialDict[special.data.id] = special
-
-func _on_special_count_incremented(_special:Special):
-	if has_stat(StatData.STAT_TYPE.ENERGY):
-		get_stat(StatData.STAT_TYPE.ENERGY).add(1)
-		emit_signal("OnResourceStatChanged")
-
-func _on_special_reset(special:Special):
-	if has_stat(StatData.STAT_TYPE.ENERGY):
-		get_stat(StatData.STAT_TYPE.ENERGY).add(-special.get_max_count())
-		emit_signal("OnResourceStatChanged")
 
 func add_special_modifier(specialId:String, specialModifier:SpecialModifier):
 	if !specialId.is_empty():

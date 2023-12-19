@@ -33,8 +33,9 @@ func init_from_data(upgradeType:Upgrade.UPGRADE_TYPE):
 		levelUpTitle.text = "CLASS PERK"
 		var allowedAbilites:int = 2
 		for abilityData in GameGlobals.dataManager.abilityList:
-			if abilityData.characterId=="" or (abilityData.characterId != GameGlobals.dungeon.player.charData.id):
-				continue
+			if GameGlobals.battleInstance.startWithClasses:
+				if abilityData.characterId=="" or (abilityData.characterId != GameGlobals.dungeon.player.charData.id):
+					continue
 
 			if GameGlobals.dungeon.player.has_ability(abilityData):
 				continue

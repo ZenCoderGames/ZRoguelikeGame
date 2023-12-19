@@ -1,9 +1,7 @@
 # VendorCharacter.gd
-extends Node2D
+extends Sprite2D
 
 class_name VendorCharacter
-
-@onready var root:Sprite2D = $"%Root"
 
 var _data:VendorData
 var cell:DungeonCell

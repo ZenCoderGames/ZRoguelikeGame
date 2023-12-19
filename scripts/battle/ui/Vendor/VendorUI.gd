@@ -27,6 +27,7 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 
 	if vendorData.abilities.size()>0:
 		_upgradeType = UPGRADE_TYPE.ABILITY
+		vendorData.abilities.shuffle()
 		for abilityId in vendorData.abilities:
 			var vendorItem = VendorItemUI.instantiate()
 			itemHolder.add_child(vendorItem)
@@ -38,6 +39,7 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 
 	if vendorData.specials.size()>0:
 		_upgradeType = UPGRADE_TYPE.SPECIAL
+		vendorData.specials.shuffle()
 		for specialId in vendorData.specials:
 			var vendorItem = VendorItemUI.instantiate()
 			itemHolder.add_child(vendorItem)
@@ -49,6 +51,7 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 
 	if vendorData.passives.size()>0:
 		_upgradeType = UPGRADE_TYPE.PASSIVE
+		vendorData.passives.shuffle()
 		for passiveId in vendorData.passives:
 			var vendorItem = VendorItemUI.instantiate()
 			itemHolder.add_child(vendorItem)

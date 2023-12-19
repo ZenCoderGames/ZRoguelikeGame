@@ -33,3 +33,14 @@ res://scripts/battle/instance/characters/AttackModifier.gd
 res://scripts/battle/ui/PlayerSpecialAbilityUI.gd
 res://scripts/audio/AudioHandler.gd
 res://scripts/battle/instance/characters/EnemyCharacter.gd
+res://scripts/battle/instance/stats/Stat.gd
+res://scripts/battle/data/stats/StatData.gd
+res://scripts/battle/ui/LevelUp/LevelUpUI.gd
+res://scripts/battle/BattleInstance.gd
+res://scripts/battle/ui/ConsumableItemUI.gd
+res://scripts/battle/ui/SpellItemUI.gd
+res://scripts/battle/ui/EffectItemUI.gd
+res://scripts/battle/instance/actions/ActionAddStatModifier.gd
+res://ui/MainGUI.tscn
+res://entity/characters/VendorCharacter.tscn
+res://scripts/battle/instance/spells/Spell.gd

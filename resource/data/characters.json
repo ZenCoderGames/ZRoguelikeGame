@@ -11,15 +11,11 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 10
+						"value": 20
 					},
 					{
 						"type": "DAMAGE",
 						"value": 2
-					},
-					{
-						"type": "ENERGY",
-						"maxValue": 3
 					}
 				]
 			},
@@ -38,10 +34,6 @@
 					{
 						"type": "DAMAGE",
 						"value": 2
-					},
-					{
-						"type": "ENERGY",
-						"maxValue": 3
 					}
 				],
 				"specialId": "SPECIAL_PALADIN",
@@ -62,10 +54,6 @@
 					{
 						"type": "DAMAGE",
 						"value": 3
-					},
-					{
-						"type": "ENERGY",
-						"maxValue": 3
 					}
 				],
 				"specialId": "SPECIAL_BERSERKER",
@@ -85,10 +73,6 @@
 					{
 						"type": "DAMAGE",
 						"value": 5
-					},
-					{
-						"type": "ENERGY",
-						"maxValue": 2
 					}
 				],
 				"specialId": "SPECIAL_ASSASSIN",

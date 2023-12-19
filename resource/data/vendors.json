@@ -17,10 +17,10 @@
 		{
 			"id": "MYSTIC_VENDOR",
 			"name": "Mystic",
-			"description": "Choose an Active Power",
+			"description": "Choose a Special",
 			"path": "entity/characters/VendorCharacter.tscn",
-			"numItemsShown": 3,
-			"#oneTimePurchaseOnly": true,
+			"numItemsShown": 2,
+			"oneTimePurchaseOnly": true,
 			"onlyUniquePurchases": true,
 			"specials": [
 				"SPECIAL_PALADIN",
@@ -31,15 +31,37 @@
 		{
 			"id": "SHAMAN_VENDOR",
 			"name": "Shaman",
-			"description": "Choose a Passive Power",
+			"description": "Choose a Passive",
 			"path": "entity/characters/VendorCharacter.tscn",
-			"numItemsShown": 3,
+			"numItemsShown": 2,
 			"oneTimePurchaseOnly": true,
 			"onlyUniquePurchases": true,
 			"passives": [
 				"PASSIVE_PALADIN",
 				"PASSIVE_BERSERKER",
 				"PASSIVE_ASSASSIN"
+			]
+		},
+		{
+			"id": "ARCHIVIST_VENDOR",
+			"name": "Archivist",
+			"description": "Choose an Upgrade",
+			"path": "entity/characters/VendorCharacter.tscn",
+			"numItemsShown": 2,
+			"oneTimePurchaseOnly": true,
+			"onlyUniquePurchases": true,
+			"abilities": [
+				"ABILITY_EVASION_UPGRADE",
+				"ABILITY_SPECIAL_HEAL",
+				"ABILITY_PROTECTION_THORNS",
+				"ABILITY_PROTECTION_LONGER",
+				"ABILITY_PROTECTION_HEAL",
+				"ABILITY_BERSERKER_RAGE",
+				"ABILITY_BERSERKER_HEAL",
+				"ABILITY_BERSERKER_STUN",
+				"ABILITY_STEALTH_LONGER",
+				"ABILITY_STEALTH_ATTACK_BOOST",
+				"ABILITY_STEALTH_REFRESH"
 			]
 		}
 	]

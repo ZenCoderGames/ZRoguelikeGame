@@ -163,9 +163,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -206.0
+offset_top = -132.0
 offset_right = 100.0
-offset_bottom = 206.0
+offset_bottom = 251.0
 grow_vertical = 2
 alignment = 1
 

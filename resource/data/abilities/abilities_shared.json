@@ -65,25 +65,6 @@
 			]
 		},
 		{
-			"id": "ABILITY_ENERGY_UPGRADE",
-			"characterId": "",
-			"name": "(Upgrade) Stat Upgrade",
-			"description": "Upgrade your max Energy by 1",
-			"timeline": [
-				{
-					"type": "ADD_STAT_MODIFIER",
-					"params": {
-						"statModifiers": [
-							{
-								"type": "ENERGY",
-								"maxValue": 1
-							}
-						]
-					}
-				}
-			]
-		},
-		{
 			"id": "ABILITY_EVASION_UPGRADE",
 			"characterId": "",
 			"name": "(Upgrade) Evasion Upgrade",
@@ -98,20 +79,6 @@
 								"value": 25
 							}
 						]
-					}
-				}
-			]
-		},
-		{
-			"id": "ABILITY_SPECIAL_FASTER",
-			"characterId": "",
-			"name": "(Upgrade) Special Haste",
-			"description": "Allows the Special to charge up with 1 less hit",
-			"timeline": [
-				{
-					"type": "MODIFY_SPECIAL",
-					"params": {
-						"countModifier": -1
 					}
 				}
 			]

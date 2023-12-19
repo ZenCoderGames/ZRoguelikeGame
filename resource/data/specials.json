@@ -73,7 +73,7 @@
 					"type": "SPAWN_CHARACTER",
 					"params": {
 						"characterId": "RAT",
-						"count": 3
+						"count": 2
 					}
 				}
 			]

@@ -8,7 +8,6 @@ func init(consumableItemObj):
 	consumableItem = consumableItemObj
 	#self.text = consumableItem.get_display_name()
 	self.disabled = false
-	CombatEventManager.connect("OnStartTurn",Callable(self,"_on_start_turn"))
 	GameGlobals.dungeon.player.equipment.connect("OnSpellActivated",Callable(self,"_on_spell_activated"))
 	self.connect("pressed",Callable(self,"_on_consumable_activated"))
 	self.self_modulate = consumableItem.data.tintColor

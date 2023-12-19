@@ -10,7 +10,7 @@ var _specialModifierList:Array = []
 
 signal OnActivated()
 signal OnProgress(progress)
-signal OnReady()
+signal OnReady(special)
 signal OnReset(special)
 signal OnCountIncremented(special)
 signal OnCountUpdated(currentResourceCount)
@@ -49,7 +49,7 @@ func check_for_ready():
 
 func _set_ready():
 	isAvailable = true
-	emit_signal("OnReady")
+	emit_signal("OnReady", self)
 	CombatEventManager.emit_signal("OnPlayerSpecialAbilityReady", self)
 
 func _is_execute_condition_met():
@@ -79,10 +79,11 @@ func _activate():
 			action.execute()
 
 	emit_signal("OnActivated")
+	character.emit_signal("OnAnySpecialActivated")
 	CombatEventManager.emit_signal("OnPlayerSpecialAbilityActivated", self)
 
 	if data.removeAfterExecute:
-		character.remove_special()
+		character.remove_special(data.id)
 	else:
 		_reset()
 
@@ -94,6 +95,9 @@ func _reset():
 func force_ready():
 	_updateCount(get_max_count())
 	check_for_ready()
+
+func get_current_count()->int:
+	return currentCount
 
 func get_max_count()->int:
 	var maxCount:int = data.count
@@ -114,7 +118,7 @@ func add_modifier(specialModifier:SpecialModifier):
 	check_for_ready()
 	emit_signal("OnSpecialModifierAdded")
 
-func remove_modifier(specialId:String):
+func remove_modifier(_specialId:String):
 	for i in range(_specialModifierList.size() - 1, -1, -1):
 		_specialModifierList.remove_at(i)
 	emit_signal("OnSpecialModifierRemoved")

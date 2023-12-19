@@ -177,8 +177,12 @@ func generate_miniboss(enemyId):
 func _on_miniboss_death():
 	_isCleared = true
 	#generate_upgrade(Upgrade.UPGRADE_TYPE.SHARED)
+	#generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
+	if GameGlobals.battleInstance.startWithClasses:
+		generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
+
 	generate_vendor("SOUL_VENDOR")
-	generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
+	#generate_vendor("ARCHIVIST_VENDOR")
 
 func is_cleared():
 	return _isCleared

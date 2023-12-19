@@ -5,8 +5,10 @@ Roguelike Dev:
 (D)- Convert xp -> souls
 (D)- Soul vendor
 (D)- Soul vendor -> repeated buys, add an expensive upgrade
-(IP)- No classes -> Randomized active/passive at start room
-- Character.gd -> special variable should be a list
+(D)- No classes -> Randomized active/passive at start room
+(D)- Character.gd -> special variable should be a list
+(D)- Special should have its own resources. Get rid of energy. Make multiple specials work.
+- Setup Mystic and Shaman vendors as part of the flow
 
 - Armor
 
