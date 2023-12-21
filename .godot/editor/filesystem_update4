@@ -14,3 +14,14 @@ res://scripts/battle/Dungeon.gd
 res://scripts/battle/general/CombatEventManager.gd
 res://scripts/battle/ui/Vendor/VendorUI.gd
 res://scripts/battle/data/vendors/VendorData.gd
+res://scripts/battle/ui/BattleUI.gd
+res://scripts/battle/BattleInstance.gd
+res://scripts/battle/instance/characters/EnemyCharacter.gd
+res://scripts/battle/instance/characters/Character.gd
+res://scripts/battle/instance/stats/Stat.gd
+res://scripts/GameGlobals.gd
+res://scripts/battle/ui/CharPropUI.gd
+res://scripts/battle/instance/actions/ActionPush.gd
+res://scripts/battle/general/HitResolutionManager.gd
+res://scripts/battle/instance/actions/ActionLifeSteal.gd
+res://scripts/battle/instance/actions/ActionLifeDrain.gd

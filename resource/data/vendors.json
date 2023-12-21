@@ -35,7 +35,7 @@
 			"name": "Shaman",
 			"description": "Choose a Passive",
 			"path": "entity/characters/VendorCharacter.tscn",
-			"tintColor": "#143e2f",
+			"tintColor": "#64f2a4",
 			"numItemsShown": 2,
 			"oneTimePurchaseOnly": true,
 			"onlyUniquePurchases": true,

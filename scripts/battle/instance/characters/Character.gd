@@ -160,6 +160,31 @@ func move(x, y):
 	else:
 		emit_signal("OnCharacterFailedToMove", x, y)
 
+	return success
+
+func move_incrementally(x, y):
+	if x==0 and y==0:
+		return
+
+	if x>0:
+		for i in x:
+			if !move(1, 0):
+				return
+	elif x<0:
+		for i in -x:
+			if !move(-1, 0):
+				return
+
+	if y>0:
+		for i in y:
+			if !move(0, 1):
+				return
+	elif y<0:
+		for i in -y:
+			if !move(-1, 0):
+				return
+
+
 # Mostly for AI
 func failed_to_move():
 	on_turn_completed()

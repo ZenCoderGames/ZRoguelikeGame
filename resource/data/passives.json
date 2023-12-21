@@ -1,9 +1,31 @@
 {
 	"passives": [
 		{
+			"id": "PASSIVE_LIFESTEAL_ON_HIT",
+			"name": "Lifesteal",
+			"description": "Lifesteal +1 On Hit",
+			"conditions": [
+				"ON_POST_HIT"
+			],
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"lastHitTarget": true
+					}
+				},
+				{
+					"type": "LIFESTEAL",
+					"params": {
+						"flatAmount": 1
+					}
+				}
+			]
+		},
+		{
 			"id": "PASSIVE_LIFESTEAL_ON_KILL",
 			"name": "Lifesteal",
-			"description": "Lifesteal On Kill",
+			"description": "Lifesteal +3 On Kill",
 			"conditions": [
 				"ON_KILL"
 			],
@@ -17,7 +39,7 @@
 				{
 					"type": "LIFESTEAL",
 					"params": {
-						"flatAmount": 2
+						"flatAmount": 3
 					}
 				}
 			]

@@ -23,14 +23,17 @@ script = ExtResource("2")
 [node name="TouchControls" type="Control" parent="."]
 visible = false
 layout_mode = 1
-anchor_left = 0.891
-anchor_top = 0.716
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.743
-offset_left = -36.368
-offset_top = -14.4481
-offset_right = 3.63196
-offset_bottom = 25.5519
+anchor_bottom = 0.5
+offset_left = -96.0001
+offset_top = 172.0
+offset_right = -56.0002
+offset_bottom = 212.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="UpArrow" type="Button" parent="TouchControls"]
 layout_mode = 0

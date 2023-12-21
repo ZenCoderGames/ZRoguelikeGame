@@ -44,7 +44,7 @@
 		},
 		{
 			"id": "SPECIAL_ASSASSIN",
-			"name": "Assassin",
+			"name": "Stealth",
 			"description": "Grants [[Stealth]] for 3 turns\n\n(Gain Charge: On Kill)",
 			"conditions": ["ON_KILL"],
 			"count": 2,

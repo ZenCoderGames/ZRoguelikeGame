@@ -4,7 +4,7 @@
 			"id": "TEST_ENC_SINGLE",
 			"enemies": [
 				{
-					"type": "SERPENT",
+					"type": "GIANT",
 					"count": 1
 				}
 			]

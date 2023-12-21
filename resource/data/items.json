@@ -33,6 +33,17 @@
 			]
 		},
 		{
+			"id": "ITEM_BLOOD_SWORD",
+			"name": "Blood Sword",
+			"description": "Lifesteal +1 on hit",
+			"fullDescription": "A red glowing sword that was left by a dead vampire knight",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "WEAPON",
+			"tier": 1,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_LIFESTEAL_ON_HIT"
+		},
+		{
 			"id": "ITEM_WOODEN_PLATE",
 			"name": "Wooden Plate",
 			"description": "A light armored piece\n(+2 health)",
@@ -63,6 +74,17 @@
 					"value": 4
 				}
 			]
+		},
+		{
+			"id": "ITEM_THORNMAIL",
+			"name": "Thornmail",
+			"description": "Returns +2 damage to anyone who hits the player",
+			"fullDescription": "A thorny chest plate that returns damage back to the attacker",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "ARMOR",
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_PROTECTION_THORNS"
 		}
 	]
 }

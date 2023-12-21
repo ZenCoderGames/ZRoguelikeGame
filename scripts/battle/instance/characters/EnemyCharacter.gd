@@ -18,6 +18,12 @@ func init(charId:int, charDataVal, teamVal):
 
 	GameGlobals.dungeon.player.connect("OnCharacterMoveToCell",Callable(self,"_on_player_moved"))
 
+	if GameGlobals.battleInstance.useLevelScalingOnEnemies:
+		var level:int = GameGlobals.battleInstance.currentDungeonIdx
+		displayName = str(displayName, " (Lvl: ", str(level+1), ")")
+		for stat in stats:
+			stat.add_absolute(level)
+
 func update():
 	#if _hasUpdatedThisTurn: For some reason this is bugged out when going really fast with the player
 	#	return

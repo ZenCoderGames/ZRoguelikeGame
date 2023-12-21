@@ -28,31 +28,31 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 	if vendorData.abilities.size()>0:
 		for abilityId in vendorData.abilities:
 			var abilityData:AbilityData = GameGlobals.dataManager.get_ability_data(abilityId)
-			if !_vendorData.onlyUniquePurchases and !_is_upgrade_owned(abilityData):
+			if !_vendorData.onlyUniquePurchases or !_is_upgrade_owned(abilityData):
 				itemsToConsider.append(abilityData)
 
 	if vendorData.specials.size()>0:
 		for specialId in vendorData.specials:
 			var specialData:SpecialData = GameGlobals.dataManager.get_special_data(specialId)
-			if !_vendorData.onlyUniquePurchases and !_is_upgrade_owned(specialData):
+			if !_vendorData.onlyUniquePurchases or !_is_upgrade_owned(specialData):
 				itemsToConsider.append(specialData)
 
 	if vendorData.passives.size()>0:
 		for passiveId in vendorData.passives:
 			var passiveData:PassiveData = GameGlobals.dataManager.get_passive_data(passiveId)
-			if !_vendorData.onlyUniquePurchases and !_is_upgrade_owned(passiveData):
+			if !_vendorData.onlyUniquePurchases or !_is_upgrade_owned(passiveData):
 				itemsToConsider.append(passiveData)
 
 	if vendorData.items.size()>0:
 		for itemId in vendorData.items:
 			var itemData:ItemData = GameGlobals.dataManager.get_item_data(itemId)
-			if !_vendorData.onlyUniquePurchases and !_is_upgrade_owned(itemData):
+			if !_vendorData.onlyUniquePurchases or !_is_upgrade_owned(itemData):
 				itemsToConsider.append(itemData)
 
 	if vendorData.runes.size()>0:
 		for runeId in vendorData.runes:
 			var itemData:ItemData = GameGlobals.dataManager.get_item_data(runeId)
-			if !_vendorData.onlyUniquePurchases and !_is_upgrade_owned(itemData):
+			if !_vendorData.onlyUniquePurchases or !_is_upgrade_owned(itemData):
 				itemsToConsider.append(itemData)
 
 	itemsToConsider.shuffle()

@@ -9,9 +9,10 @@ class_name BattleInstance
 
 # DEBUG
 @export var startWithClasses:bool
+@export var doorsStayOpenDuringBattle:bool
+@export var useLevelScalingOnEnemies:bool
 @export var debugStartAtEndRoom:bool
 @export var debugShowAllRooms:bool
-@export var doorsStayOpenDuringBattle:bool
 @export var pauseAIMovement:bool
 @export var pauseAIAttack:bool
 @export var dontSpawnEnemies:bool

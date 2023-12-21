@@ -56,7 +56,7 @@ func push(target, source, amount:int, awayFromSource:bool):
 		var dirnX:int = (source.cell.col - target.cell.col) * amount
 		var dirnY:int = (source.cell.row - target.cell.row) * amount
 
-		target.move(-dirnX, -dirnY)
+		target.move_incrementally(-dirnX, -dirnY)
 
 func clean_up():
 	#Utils.clean_up_all_signals(self)
