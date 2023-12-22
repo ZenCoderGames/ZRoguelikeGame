@@ -245,6 +245,25 @@
 			]
 		},
 		{
+			"id": "PASSIVE_BARRIER_ON_3RD_KILL",
+			"name": "Barrier On Kill (3)",
+			"description": "After every 3rd kill, get a [Barrier]",
+			"conditions": [
+				"ON_KILL"
+			], 
+			"triggerCount": 3,
+			"resetCountOnActivate": true,
+			"timeline": [
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_BARRIER",
+						"applyToSource": true
+					}
+				}
+			]
+		},
+		{
 			"id": "PASSIVE_REINCARNATION",
 			"name": "Reincarnation",
 			"description": "Revive once after death",

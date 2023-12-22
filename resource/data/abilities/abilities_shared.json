@@ -24,7 +24,7 @@
 			"id": "ABILITY_HEALTH_UPGRADE",
 			"characterId": "",
 			"name": "Health Boost",
-			"description": "+4 Max Health",
+			"description": "+2 Max Health",
 			"soulCost": 10,
 			"timeline": [
 				{

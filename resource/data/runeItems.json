@@ -24,14 +24,14 @@
 		},
 		{
 			"id": "RUNE_BARRIER_ON_KILL",
-			"name": "Barrier On Kill",
-			"description": "After every kill, gain a barrier",
-			"fullDescription": "After every kill, gain a barrier",
+			"name": "Barrier On Every 3rd Kill",
+			"description": "After every 3rd kill, gain a barrier",
+			"fullDescription": "After every 3rd kill, gain a barrier",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "PASSIVE_BARRIER_ON_KILL"
+			"passiveId": "PASSIVE_BARRIER_ON_3RD_KILL"
 		}
 	]
 }

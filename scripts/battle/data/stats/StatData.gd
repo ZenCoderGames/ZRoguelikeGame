@@ -21,6 +21,7 @@ func init_from_data(statType:int, val:int, maxVal:int):
 	type = statType
 	value = val
 	maxValue = maxVal
+	levelScaling = 0
 
 func get_stat_name():
 	return STAT_TYPE.keys()[type]

@@ -24,7 +24,7 @@ func init(charId:int, charDataVal, teamVal):
 			level = GameGlobals.battleInstance.debugLevelScaling
 		displayName = str(displayName, " (Lvl: ", str(level+1), ")")
 		for stat in stats:
-			stat.add_absolute(level)
+			stat.scale_with_level(level)
 		
 		on_stats_changed()
 

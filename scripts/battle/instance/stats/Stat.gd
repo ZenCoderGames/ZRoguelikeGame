@@ -41,7 +41,8 @@ func modify_absolute(newValue:int):
 	return maxValue
 
 func scale_with_level(level:int):
-	add_absolute(level * levelScaling)
+	if levelScaling>0:
+		add_absolute(level * levelScaling)
 
 func reset():
 	if _is_resetable_stat(type):

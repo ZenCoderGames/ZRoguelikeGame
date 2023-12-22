@@ -17,8 +17,9 @@ func can_execute()->bool:
 func execute():
 	var doDamageToTargetsData:ActionDoDamageToTargetsData = actionData as ActionDoDamageToTargetsData
 
-	var targets = character.get_targets()
-	for target in targets:
+	var targets:Array = character.get_targets()
+	var duplicateTargetList:Array = targets.duplicate()
+	for target in duplicateTargetList:
 		var damageVal:int = doDamageToTargetsData.damage
 		if doDamageToTargetsData.useCharacterDamage:
 			damageVal = character.get_damage()

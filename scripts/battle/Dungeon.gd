@@ -212,11 +212,11 @@ func _init_path():
 	reverse_path.append(startRoom)
 
 func _init_enemies():
-	if GameGlobals.battleInstance.dontSpawnEnemies:
-		return
-
 	if !GameGlobals.battleInstance.debugSpawnEnemyEncounter.is_empty():
 		startRoom.generate_enemy_custom_encounter(GameGlobals.battleInstance.debugSpawnEnemyEncounter)
+
+	if GameGlobals.battleInstance.dontSpawnEnemies:
+		return
 	
 	var minCostPerRoom:int = dungeonData.enemyMinCostPerRoom
 	var extraCostForSingleRoom:int = dungeonData.enemyExtraCostForSingleRoom

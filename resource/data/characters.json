@@ -94,7 +94,7 @@
 					{
 						"type": "HEALTH",
 						"value": 3,
-						"levelScaling": 1
+						"levelScaling": 2
 					},
 					{
 						"type": "DAMAGE",
@@ -117,7 +117,7 @@
 					{
 						"type": "HEALTH",
 						"value": 6,
-						"levelScaling": 1
+						"levelScaling": 2
 					},
 					{
 						"type": "DAMAGE",
@@ -164,12 +164,12 @@
 					{
 						"type": "HEALTH",
 						"value": 4,
-						"levelScaling": 2
+						"levelScaling": 3
 					},
 					{
 						"type": "DAMAGE",
 						"value": 2,
-						"levelScaling": 1
+						"levelScaling": 2
 					}
 				],
 				"specialId": "GHOST_SPECIAL"
@@ -188,12 +188,12 @@
 					{
 						"type": "HEALTH",
 						"value": 10,
-						"levelScaling": 4
+						"levelScaling": 6
 					},
 					{
 						"type": "DAMAGE",
-						"value": 2,
-						"levelScaling": 2
+						"value": 3,
+						"levelScaling": 1
 					}
 				],
 				"passiveId": "PASSIVE_REGENERATION"
@@ -236,7 +236,7 @@
 					{
 						"type": "HEALTH",
 						"value": 12,
-						"levelScaling": 2
+						"levelScaling": 4
 					},
 					{
 						"type": "DAMAGE",

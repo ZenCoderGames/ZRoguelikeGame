@@ -28,3 +28,7 @@ res://scripts/battle/instance/actions/ActionLifeDrain.gd
 res://scripts/battle/data/stats/StatData.gd
 res://scripts/library/Utils.gd
 res://scripts/battle/ui/Vendor/VendorItemUI.gd
+res://scripts/battle/instance/actions/ActionFindTargets.gd
+res://scripts/battle/instance/actions/ActionDoDamageToTargets.gd
+res://scripts/battle/data/items/ItemData.gd
+res://scripts/battle/data/CharacterData.gd

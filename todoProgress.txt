@@ -10,10 +10,11 @@ Roguelike Dev:
 (D)- Special should have its own resources. Get rid of energy. Make multiple specials work.
 (D)- Setup Mystic and Shaman vendors as part of the flow
 (D)- New Vendors (Blacksmith, Runesmith)
-- Enemies scale up stats with levels
+(D)- Enemies scale up stats with levels
+(D)- Bug with stats scaling up
 - Figure out what to do with extra items (convert to souls button)
 - More Things (3 runes)
-- More Things (3 items)
+- More Things (3 items) - 1 left
 - More Things (3 specials)
 - More Things (3 passives)
 - More Things (3 enemies)
