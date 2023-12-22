@@ -5,6 +5,7 @@ var type:int
 
 var value:int
 var maxValue:int
+var levelScaling:int
 
 func init_from_json(statDataJS):
 	var statType = statDataJS["type"]
@@ -14,6 +15,7 @@ func init_from_json(statDataJS):
 		print("ERROR: Invalid Stat Type - ", statType)
 	value = Utils.get_data_from_json(statDataJS, "value", 0)
 	maxValue = Utils.get_data_from_json(statDataJS, "maxValue", value)
+	levelScaling = Utils.get_data_from_json(statDataJS, "levelScaling", 0)
 
 func init_from_data(statType:int, val:int, maxVal:int):
 	type = statType

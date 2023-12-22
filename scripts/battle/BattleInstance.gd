@@ -11,6 +11,7 @@ class_name BattleInstance
 @export var startWithClasses:bool
 @export var doorsStayOpenDuringBattle:bool
 @export var useLevelScalingOnEnemies:bool
+@export var debugLevelScaling:int
 @export var debugStartAtEndRoom:bool
 @export var debugShowAllRooms:bool
 @export var pauseAIMovement:bool

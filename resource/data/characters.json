@@ -93,11 +93,13 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 3
+						"value": 3,
+						"levelScaling": 1
 					},
 					{
 						"type": "DAMAGE",
-						"value": 1
+						"value": 1,
+						"levelScaling": 1
 					}
 				]
 			},
@@ -114,11 +116,13 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 6
+						"value": 6,
+						"levelScaling": 1
 					},
 					{
 						"type": "DAMAGE",
-						"value": 2
+						"value": 2,
+						"levelScaling": 1
 					}
 				],
 				"specialId": "RAT_KING_SPECIAL"
@@ -135,11 +139,13 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 3
+						"value": 3,
+						"levelScaling": 2
 					},
 					{
 						"type": "DAMAGE",
-						"value": 2
+						"value": 2,
+						"levelScaling": 1
 					}
 				],
 				"passiveId": "PASSIVE_REINCARNATION_AFTER_2"
@@ -157,11 +163,13 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 4
+						"value": 4,
+						"levelScaling": 2
 					},
 					{
 						"type": "DAMAGE",
-						"value": 2
+						"value": 2,
+						"levelScaling": 1
 					}
 				],
 				"specialId": "GHOST_SPECIAL"
@@ -179,11 +187,13 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 15
+						"value": 10,
+						"levelScaling": 4
 					},
 					{
 						"type": "DAMAGE",
-						"value": 3
+						"value": 2,
+						"levelScaling": 2
 					}
 				],
 				"passiveId": "PASSIVE_REGENERATION"
@@ -201,11 +211,13 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 8
+						"value": 6,
+						"levelScaling": 2
 					},
 					{
 						"type": "DAMAGE",
-						"value": 6
+						"value": 4,
+						"levelScaling": 2
 					}
 				],
 				"specialId": "SERPENT_SPECIAL"
@@ -223,11 +235,13 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 16
+						"value": 12,
+						"levelScaling": 2
 					},
 					{
 						"type": "DAMAGE",
-						"value": 6
+						"value": 4,
+						"levelScaling": 2
 					}
 				],
 				"special": {
@@ -270,11 +284,13 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 50
+						"value": 30,
+						"levelScaling": 10
 					},
 					{
 						"type": "DAMAGE",
-						"value": 10
+						"value": 5,
+						"levelScaling": 5
 					}
 				]
 			}

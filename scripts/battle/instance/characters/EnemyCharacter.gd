@@ -20,9 +20,13 @@ func init(charId:int, charDataVal, teamVal):
 
 	if GameGlobals.battleInstance.useLevelScalingOnEnemies:
 		var level:int = GameGlobals.battleInstance.currentDungeonIdx
+		if GameGlobals.battleInstance.debugLevelScaling>0:
+			level = GameGlobals.battleInstance.debugLevelScaling
 		displayName = str(displayName, " (Lvl: ", str(level+1), ")")
 		for stat in stats:
 			stat.add_absolute(level)
+		
+		on_stats_changed()
 
 func update():
 	#if _hasUpdatedThisTurn: For some reason this is bugged out when going really fast with the player

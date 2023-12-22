@@ -3,8 +3,8 @@
 		{
 			"id": "RUNE_VAMPIRIC",
 			"name": "Vampiric",
-			"description": "Lifesteal +2 Health on kill",
-			"fullDescription": "Lifesteal +2 Health on kill",
+			"description": "Lifesteal +3 Health on kill",
+			"fullDescription": "Lifesteal +3 Health on kill",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"tier": 2,

@@ -25,3 +25,6 @@ res://scripts/battle/instance/actions/ActionPush.gd
 res://scripts/battle/general/HitResolutionManager.gd
 res://scripts/battle/instance/actions/ActionLifeSteal.gd
 res://scripts/battle/instance/actions/ActionLifeDrain.gd
+res://scripts/battle/data/stats/StatData.gd
+res://scripts/library/Utils.gd
+res://scripts/battle/ui/Vendor/VendorItemUI.gd

@@ -9,22 +9,26 @@ class_name VenderItemUI
 
 var _parent:VendorUI
 var _data
+var _soulCost:int
 
 func init(parent:VendorUI, data):
 	_parent = parent
 	_data = data
+	_soulCost = _data.soulCost
 	nameLabel.text = _data.name
 	descLabel.text = _data.description
-	soulCostLabel.text = str(_data.soulCost)
+	soulCostLabel.text = str(_soulCost)
 	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
 	refresh()
 
 func _on_item_chosen():
-	var soulCost:int = _get_soul_cost()
-	GameGlobals.dungeon.player.consume_souls(soulCost)
+	GameGlobals.dungeon.player.consume_souls(_soulCost)
 	CombatEventManager.emit_signal("OnVendorItemSelected", _data)
 	UIEventManager.emit_signal("OnGenericUIEvent")
 	_parent.item_bought()
+	_soulCost = _soulCost * 2
+	soulCostLabel.text = str(_soulCost)
+	refresh()
 
 func refresh():
 	if _is_upgrade_owned() and _parent.onlyUniquePurchases():
@@ -32,10 +36,9 @@ func refresh():
 		chooseBtn.text = "PURCHASED"
 		return
 
-	var soulCost:int = _get_soul_cost()
-	if soulCost>0:
+	if _soulCost>0:
 		var playerSouls:int = GameGlobals.dungeon.player.get_souls()
-		var notEnoughCurrency:bool = playerSouls < soulCost
+		var notEnoughCurrency:bool = playerSouls < _soulCost
 		chooseBtn.disabled = notEnoughCurrency
 		if notEnoughCurrency:
 			chooseBtn.text = "NOT ENOUGH SOULS"
@@ -45,12 +48,6 @@ func refresh():
 		chooseBtn.text = "SELECT"
 		chooseBtn.disabled = false
 		soulCostLabel.visible = false
-
-func _get_soul_cost():
-	var soulCost:int = 0
-	if _data!=null:
-		soulCost = _data.soulCost
-	return soulCost
 
 func _is_upgrade_owned():
 	if _data is AbilityData:

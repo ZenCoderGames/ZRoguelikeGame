@@ -3,6 +3,7 @@ class_name Stat
 var type:int
 var maxValue:int
 var value:int
+var levelScaling:int
 
 signal OnUpdated()
 signal OnValueUpdated()
@@ -12,6 +13,7 @@ func _init(statData):
 	type = statData.type
 	value = statData.value
 	maxValue = statData.maxValue
+	levelScaling = statData.levelScaling
 
 func add(val:int):
 	modify(value + val)
@@ -37,6 +39,9 @@ func modify_absolute(newValue:int):
 	_update_max_value(newValue)
 	_update_value(maxValue)
 	return maxValue
+
+func scale_with_level(level:int):
+	add_absolute(level * levelScaling)
 
 func reset():
 	if _is_resetable_stat(type):

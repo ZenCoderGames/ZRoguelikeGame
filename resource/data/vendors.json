@@ -81,7 +81,8 @@
 				"ITEM_BASIC_SWORD",
 				"ITEM_HEAVY_SWORD",
 				"ITEM_WOODEN_PLATE",
-				"ITEM_SILVER_PLATE"
+				"ITEM_SILVER_PLATE",
+				"ITEM_BLOOD_SWORD"
 			]
 		},
 		{
@@ -96,7 +97,8 @@
 			"runes": [
 				"RUNE_VAMPIRIC",
 				"RUNE_CRITICAL_STUN",
-				"RUNE_BARRIER_ON_KILL"
+				"RUNE_BARRIER_ON_KILL",
+				"ITEM_THORNMAIL"
 			]
 		}
 	]
