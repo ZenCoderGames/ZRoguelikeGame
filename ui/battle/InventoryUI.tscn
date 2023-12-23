@@ -147,6 +147,7 @@ size_flags_horizontal = 3
 color = Color(0.0509804, 0.211765, 0.129412, 1)
 
 [node name="NameLabel" type="Label" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/NameContainer"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -171,6 +172,7 @@ size_flags_horizontal = 3
 color = Color(0.239216, 0.231373, 0.223529, 1)
 
 [node name="TypeLabel" type="Label" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/TypeContainer"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -195,6 +197,7 @@ size_flags_vertical = 3
 color = Color(0.184314, 0.164706, 0.164706, 1)
 
 [node name="DescLabel" type="Label" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/DescContainer"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.016
@@ -208,6 +211,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="EquippedUI" type="ColorRect" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -232,57 +236,73 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EquipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.2, 0.92549, 0.262745, 1)
 layout_mode = 2
 text = "Equip"
 
 [node name="EquipButton_Rune1" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.2, 0.92549, 0.262745, 1)
 layout_mode = 2
 text = "Equip (Rune 1)"
 
 [node name="EquipButton_Rune2" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.2, 0.92549, 0.262745, 1)
 layout_mode = 2
 text = "Equip (Rune 2)"
 
 [node name="EquipButton_Spell1" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.2, 0.92549, 0.262745, 1)
 layout_mode = 2
 text = "Equip (Spell 1)"
 
 [node name="EquipButton_Spell2" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.2, 0.92549, 0.262745, 1)
 layout_mode = 2
 text = "Equip (Spell 2)"
 
 [node name="EquipButton_Spell3" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.2, 0.92549, 0.262745, 1)
 layout_mode = 2
 text = "Equip (Spell 3)"
 
 [node name="EquipButton_Spell4" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.2, 0.92549, 0.262745, 1)
 layout_mode = 2
 text = "Equip (Spell 4)"
 
 [node name="UnequipButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 self_modulate = Color(0.2, 0.92549, 0.262745, 1)
 layout_mode = 2
 text = "Unequip"
 
 [node name="ConsumeButton" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.140805, 0.879176, 0.24886, 1)
 layout_mode = 2
 text = "Consume"
+
+[node name="ConvertToSouls" type="Button" parent="Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.878431, 0.560784, 0.141176, 1)
+layout_mode = 2
+text = "Convert To Souls"
 
 [node name="NoContent" type="Panel" parent="."]
 visible = false

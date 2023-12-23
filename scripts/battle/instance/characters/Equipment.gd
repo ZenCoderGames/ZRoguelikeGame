@@ -54,6 +54,13 @@ func equip_item(item, slotType:int):
 	item.on_equipped(character)
 	emit_signal("OnItemEquipped", item, slotType)
 
+func is_equipped(itemToCheck):
+	for item in equippedItems:
+		if item == itemToCheck:
+			return true
+
+	return false
+
 func unequip_item(item, slotType:int):
 	equippedItems.erase(equippedSlots[slotType])
 	item.on_unequipped(character)

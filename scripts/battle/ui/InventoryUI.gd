@@ -7,20 +7,22 @@ const InventoryItem := preload("res://ui/battle/InventoryItem.tscn")
 
 @onready var noContent:Node = get_node("NoContent")
 
-@onready var nameLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/NameContainer/NameLabel")
-@onready var typeLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/TypeContainer/TypeLabel")
-@onready var descLabel:Label = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/DescContainer/DescLabel")
-@onready var equipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton")
-@onready var equipButtonRune1:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Rune1")
-@onready var equipButtonRune2:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Rune2")
-@onready var equipButtonSpell1:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell1")
-@onready var equipButtonSpell2:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell2")
-@onready var equipButtonSpell3:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell3")
-@onready var equipButtonSpell4:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquipButton_Spell4")
+@onready var nameLabel:Label = $"%NameLabel"
+@onready var typeLabel:Label = $"%TypeLabel"
+@onready var descLabel:Label = $"%DescLabel"
+@onready var equipButton:Button = $"%EquipButton"
+@onready var equipButtonRune1:Button = $"%EquipButton_Rune1"
+@onready var equipButtonRune2:Button = $"%EquipButton_Rune2"
+@onready var equipButtonSpell1:Button = $"%EquipButton_Spell1"
+@onready var equipButtonSpell2:Button = $"%EquipButton_Spell2"
+@onready var equipButtonSpell3:Button = $"%EquipButton_Spell3"
+@onready var equipButtonSpell4:Button = $"%EquipButton_Spell4"
 
-@onready var unequipButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/UnequipButton")
-@onready var consumeButton:Button = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/ConsumeButton")
-@onready var equippedUI:ColorRect = get_node("Content/HSplitContainer/DetailsPanel/Bg/MarginContainer/VBoxContainer/HBoxContainer/EquippedUI")
+@onready var unequipButton:Button = $"%UnequipButton"
+@onready var consumeButton:Button = $"%ConsumeButton"
+@onready var convertToSoulsButton:Button = $"%ConvertToSouls"
+
+@onready var equippedUI:ColorRect = $"%EquippedUI"
 
 @onready var sortAllButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/AllButton
 @onready var sortWeaponButton:Button = $Content/HSplitContainer/ItemPanel/Bg/VBoxContainer/HBoxContainer/WeaponButton
@@ -49,6 +51,7 @@ func _ready():
 	equipButtonSpell4.connect("pressed",Callable(self,"_on_equip_selected_spell4"))
 	unequipButton.connect("pressed",Callable(self,"_on_unequip_selected_item"))
 	consumeButton.connect("pressed",Callable(self,"_on_consume_selected_item"))
+	convertToSoulsButton.connect("pressed",Callable(self,"_on_convert_to_souls_selected"))
 	sortAllButton.connect("pressed",Callable(self,"_on_sort_all_button"))
 	sortWeaponButton.connect("pressed",Callable(self,"_on_sort_weapon_button"))
 	sortArmorButton.connect("pressed",Callable(self,"_on_sort_armor_button"))
@@ -128,8 +131,11 @@ func _show_selected():
 	equipButtonSpell3.visible = false
 	equipButtonSpell4.visible = false
 	equippedUI.visible = false
+	convertToSoulsButton.visible = false
 	if selectedItem.data.is_consumable():
 		consumeButton.visible = true
+		convertToSoulsButton.visible = true
+		convertToSoulsButton.text = str("Convert to Souls (", str(selectedItem.data.soulCost), ")")
 	else:
 		var isEquippedItem:bool = playerChar.equipment.equippedItems.has(selectedItem)
 		unequipButton.visible = isEquippedItem
@@ -142,6 +148,8 @@ func _show_selected():
 			equipButtonSpell3.visible = selectedItem.data.is_spell() and playerChar.maxSpellSlots>2
 			equipButtonSpell4.visible = selectedItem.data.is_spell() and playerChar.maxSpellSlots>3
 		equippedUI.visible = isEquippedItem
+		convertToSoulsButton.text = str("Convert to Souls (", str(selectedItem.data.soulCost), ")")
+		convertToSoulsButton.visible = true
 	
 
 func _on_equip_selected_weapon_or_armor():
@@ -193,6 +201,14 @@ func _on_consume_selected_item():
 	var selectedItem:Item = sortedItemList[selectedIdx]
 	playerChar.inventory.consume_item(selectedItem)
 	selectedIdx = 0
+	_refresh_ui()
+
+func _on_convert_to_souls_selected():
+	var selectedItem:Item = sortedItemList[selectedIdx]
+	if playerChar.equipment.is_equipped(selectedItem):
+		playerChar.equipment.unequip_item(selectedItem, playerChar.equipment.get_slot_for_item(selectedItem))
+	playerChar.inventory.remove_item(selectedItem)
+	playerChar.gain_souls(selectedItem.data.soulCost)
 	_refresh_ui()
 
 func _on_item_selected(idx):

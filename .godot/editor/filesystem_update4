@@ -32,3 +32,8 @@ res://scripts/battle/instance/actions/ActionFindTargets.gd
 res://scripts/battle/instance/actions/ActionDoDamageToTargets.gd
 res://scripts/battle/data/items/ItemData.gd
 res://scripts/battle/data/CharacterData.gd
+res://ui/battle/InventoryUI.tscn
+res://scripts/battle/ui/InventoryUI.gd
+res://scripts/battle/instance/characters/Equipment.gd
+res://scripts/battle/instance/characters/Inventory.gd
+res://scripts/battle/instance/items/Item.gd

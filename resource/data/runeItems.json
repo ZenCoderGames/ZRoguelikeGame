@@ -7,6 +7,7 @@
 			"fullDescription": "Lifesteal +3 Health on kill",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
+			"soulCost": 4,
 			"tier": 2,
 			"maxCount": 1,
 			"passiveId": "PASSIVE_LIFESTEAL_ON_KILL"
@@ -18,6 +19,7 @@
 			"fullDescription": "Do Critical hits on stunned targets",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
+			"soulCost": 4,
 			"tier": 2,
 			"maxCount": 1,
 			"passiveId": "PASSIVE_STUN_CRITICAL"
@@ -29,6 +31,7 @@
 			"fullDescription": "After every 3rd kill, gain a barrier",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
+			"soulCost": 4,
 			"tier": 2,
 			"maxCount": 1,
 			"passiveId": "PASSIVE_BARRIER_ON_3RD_KILL"

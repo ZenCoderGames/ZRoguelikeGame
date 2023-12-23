@@ -8,6 +8,7 @@
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +2",
 			"path": "entity/items/consumables/Consumable_Tier1.tscn",
 			"type": "CONSUMABLE",
+			"soulCost": 1,
 			"tier": 0,
 			"maxCount": 2,
 			"statModifiers": [
@@ -27,6 +28,7 @@
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +4",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
+			"soulCost": 1,
 			"tier": 0,
 			"maxCount": 1,
 			"statModifiers": [
@@ -46,6 +48,7 @@
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +8",
 			"path": "entity/items/consumables/Consumable_Tier3.tscn",
 			"type": "CONSUMABLE",
+			"soulCost": 1,
 			"tier": 2,
 			"maxCount": 1,
 			"statModifiers": [
@@ -65,6 +68,7 @@
 			"fullDescription": "Block 1 Instance of Any Damage",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
+			"soulCost": 1,
 			"tier": 0,
 			"maxCount": 2,
 			"statusEffectId": "STATUS_EFFECT_BARRIER",

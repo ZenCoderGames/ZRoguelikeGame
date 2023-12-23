@@ -212,7 +212,7 @@
 					{
 						"type": "HEALTH",
 						"value": 6,
-						"levelScaling": 2
+						"levelScaling": 3
 					},
 					{
 						"type": "DAMAGE",
@@ -285,7 +285,7 @@
 					{
 						"type": "HEALTH",
 						"value": 30,
-						"levelScaling": 10
+						"levelScaling": 15
 					},
 					{
 						"type": "DAMAGE",
