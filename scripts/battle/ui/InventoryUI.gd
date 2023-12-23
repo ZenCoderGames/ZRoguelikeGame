@@ -209,6 +209,7 @@ func _on_convert_to_souls_selected():
 		playerChar.equipment.unequip_item(selectedItem, playerChar.equipment.get_slot_for_item(selectedItem))
 	playerChar.inventory.remove_item(selectedItem)
 	playerChar.gain_souls(selectedItem.data.soulCost)
+	selectedIdx = 0
 	_refresh_ui()
 
 func _on_item_selected(idx):
