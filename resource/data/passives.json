@@ -348,6 +348,27 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PASSIVE_HEAL_ON_HIT",
+			"name": "Heal On Hit",
+			"description": "Heal for 1 every time you are hit",
+			"conditions": [
+				"ON_TAKE_HIT"
+			],
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "HEALTH",
+								"value": 1
+							}
+						]
+					}
+				}
+			]
 		}
 	]
 }

@@ -91,6 +91,18 @@
 			"tier": 2,
 			"maxCount": 1,
 			"passiveId": "PASSIVE_PROTECTION_THORNS"
+		},
+		{
+			"id": "ITEM_HEARTSTEEL",
+			"name": "Heartsteel",
+			"description": "Heal 1 health back on taking damage",
+			"fullDescription": "Heal 1 health back on taking damage",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "ARMOR",
+			"soulCost": 2,
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_HEAL_ON_HIT"
 		}
 	]
 }
