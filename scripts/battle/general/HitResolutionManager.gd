@@ -24,11 +24,11 @@ func do_hit(sourceChar, targetChar, damage, generateHits=true):
 	if !targetChar.can_take_damage():
 		if generateHits:
 			targetChar.on_blocked_hit(sourceChar)
-			targetChar.post_hit(sourceChar, targetChar, sourceChar.successfulDamageThisTurn)
 			if targetChar.status.is_evasive():
 				emit_signal("OnEvadedHit", sourceChar, targetChar, finalDamage)
 			else:
 				emit_signal("OnBlockedHit", sourceChar, targetChar, finalDamage)
+			targetChar.post_hit(sourceChar, targetChar, sourceChar.successfulDamageThisTurn)
 		return 0
 
 	var prevHealth:int = targetChar.get_health()

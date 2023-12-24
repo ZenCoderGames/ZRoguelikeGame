@@ -39,6 +39,8 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 		HitResolutionManager.connect("OnPostHit",Callable(object,"activate_on_attacker"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_BLOCKED_HIT):
 		HitResolutionManager.connect("OnBlockedHit",Callable(object,"activate_on_defender"))
+	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_EVADED_HIT):
+		HitResolutionManager.connect("OnEvadedHit",Callable(object,"activate_on_defender"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_TAKE_HIT):
 		HitResolutionManager.connect("OnTakeHit",Callable(object,"activate_on_defender"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_KILL):

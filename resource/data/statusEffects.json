@@ -105,6 +105,31 @@
 			]
 		},
 		{
+			"id": "STATUS_EFFECT_EVASIVE",
+			"name": "Evasive",
+			"description": "Evade the next hit",
+			"instanceCount": 1,
+			"endConditions": [
+				"ON_EVADED_HIT"
+			],
+			"startTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"evasive": 1
+					}
+				}
+			],
+			"endTimeline": [ 
+				{
+					"type": "SET_STATUS",
+					"params": {
+						"evasive": -1
+					}
+				}
+			]
+		},
+		{
 			"id": "STATUS_EFFECT_BARRIER",
 			"name": "Barrier",
 			"description": "Blocks 1 Instance Of Damage",
@@ -296,6 +321,41 @@
 			"instanceCount": 2,
 			"endConditions": [
 				"ON_END_TURN"
+			],
+			"endTimeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"absoluteValue": -2
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "STATUS_EFFECT_SMALL_ATTACK_BOOST",
+			"name": "Small Attack Boost",
+			"description": "+2 Damage for 1 turn",
+			"instanceCount": 1,
+			"endConditions": [
+				"ON_POST_ATTACK"
+			],
+			"startTimeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"absoluteValue": 2
+							}
+						]
+					}
+				}
 			],
 			"endTimeline": [
 				{

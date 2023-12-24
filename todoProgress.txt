@@ -18,6 +18,8 @@ Roguelike Dev:
 - More Things (3 specials)
 - More Things (3 passives)
 - More Things (3 enemies)
+- More Things (3 spells)
+- More Things (3 consumables)
 
 - Armor
 
