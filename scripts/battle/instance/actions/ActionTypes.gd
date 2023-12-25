@@ -47,6 +47,10 @@ static func create(actionData:ActionData, parentChar):
 		return ActionShowCharacterUIText.new(actionData, parentChar)
 	elif actionData.type==ActionSpawnCharacterData.ID:
 		return ActionSpawnCharacter.new(actionData, parentChar)
+	elif actionData.type==ActionTeleportToTargetData.ID:
+		return ActionTeleportToTarget.new(actionData, parentChar)
+	elif actionData.type==ActionSwapWithTargetData.ID:
+		return ActionSwapWithTarget.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)
 	return null

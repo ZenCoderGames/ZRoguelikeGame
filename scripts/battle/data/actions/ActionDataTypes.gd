@@ -48,6 +48,10 @@ static func create(dataJS)->ActionData:
 		return ActionShowCharacterUITextData.new(dataJS)
 	elif actionType==ActionSpawnCharacterData.ID:
 		return ActionSpawnCharacterData.new(dataJS)
+	elif actionType==ActionTeleportToTargetData.ID:
+		return ActionTeleportToTargetData.new(dataJS)
+	elif actionType==ActionSwapWithTargetData.ID:
+		return ActionSwapWithTargetData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

@@ -21,7 +21,7 @@
 		{
 			"id": "SPECIAL_BERSERKER",
 			"name": "Whirlwind",
-			"description": "Do a 360 spin attack\n\n(Gain Charge: On Attack)",
+			"description": "Do a 360 spin attack with attack damage\n\n(Gain Charge: On Attack)",
 			"conditions": ["ON_POST_HIT"],
 			"count": 3,
 			"soulCost": 0,
@@ -61,9 +61,180 @@
 			]
 		},
 		{
+			"id": "SPECIAL_BLINK_STRIKE",
+			"name": "Blink Strike",
+			"description": "Teleport behind a target and strike them with attack damage",
+			"conditions": ["ON_POST_HIT"],
+			"count": 2,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 1
+					}
+				},
+				{
+					"type": "TELEPORT_TO_TARGET",
+					"params": {
+						"displacement": 1
+					}
+				}
+			]
+		},
+		{
+			"id": "SPECIAL_SWAP",
+			"name": "Nether Swap",
+			"description": "Swap positions with a target",
+			"conditions": ["ON_POST_HIT"],
+			"count": 2,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 1
+					}
+				},
+				{
+					"type": "SWAP_WITH_TARGET",
+					"params": {
+						
+					}
+				}
+			]
+		},
+		{
+			"id": "SPECIAL_LIFE_DRAIN",
+			"name": "Life Drain",
+			"description": "Drains +2 life from each enemy around the player",
+			"conditions": ["ON_TAKE_HIT"],
+			"count": 4,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 4
+					}
+				},
+				{
+					"type": "LIFEDRAIN",
+					"params": {
+						"flatAmount": 2
+					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "STATUS_EFFECT_BARRIER"
+					}
+				}
+			]
+		},
+		{
+			"id": "SPECIAL_LIGHTNING_BOLT",
+			"name": "Lightning Bolt",
+			"description": "A giant bolt of lightning finds a target near you to rain down upon\n(Range: 3 cells)",
+			"conditions": ["ON_TAKE_HIT"],
+			"count": 4,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 3,
+						"maxTargets": 1
+					}
+				},
+				{
+					"type": "DO_DAMAGE_TO_TARGETS",
+					"params": {
+						"damage": 8
+					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "PLAYER_ATTACK"
+					}
+				}
+			]
+		},
+		{
+			"id": "SPECIAL_AOE_STUN",
+			"name": "Ground Stomp",
+			"description": "Stuns all enemies around you",
+			"conditions": ["ON_TAKE_HIT"],
+			"count": 4,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 4
+					}
+				},
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STUN",
+						"applyToTargets": true
+					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "PLAYER_ATTACK"
+					}
+				}
+			]
+		},
+		{
+			"id": "SPECIAL_FORCE_PUSH",
+			"name": "Force Push",
+			"description": "Pushes all enemies surrounding you away by upto 2 squares",
+			"conditions": ["ON_TAKE_HIT"],
+			"count": 3,
+			"soulCost": 0,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"range": 1,
+						"maxTargets": 4
+					}
+				},
+				{
+					"type": "PUSH",
+					"params": {
+						"amount": 2,
+						"awayFromSource": true
+					}
+				},
+				{
+					"type": "PLAY_AUDIO",
+					"params": {
+						"audioId": "PLAYER_ATTACK"
+					}
+				}
+			]
+		},
+		{
 			"id": "RAT_KING_SPECIAL",
 			"name": "Summon Rats",
 			"description": "Spawn 2 Rats",
+			"useCustomConditions": true,
 			"conditions": ["ON_END_TURN"],
 			"count": 3,
 			"executeCondition": "NONE",
@@ -82,6 +253,7 @@
 			"id": "GHOST_SPECIAL",
 			"name": "Stealth",
 			"description": "Grants the ghost stealth the first time it moves",
+			"useCustomConditions": true,
 			"executeCondition": "NO_NEARBY_ENEMY",
 			"removeAfterExecute": true,
 			"timeline": [
@@ -98,6 +270,7 @@
 			"id": "SERPENT_SPECIAL",
 			"name": "Petrify",
 			"description": "Stuns the target",
+			"useCustomConditions": true,
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 2,
 			"executeCondition": "NONE",

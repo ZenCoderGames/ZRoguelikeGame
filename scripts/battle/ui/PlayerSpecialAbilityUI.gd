@@ -81,6 +81,8 @@ func _refresh_resources():
 		else:
 			resourceSlots[i].set_filled()
 
+	SpecialActiveButton.disabled = (currentEnergy != maxEnergy)
+
 func _on_player_resource_updated(_currentCount:int):
 	_refresh_resources()
 

@@ -28,19 +28,6 @@
 		},
 		{
 			"#disable": true,
-			"id": "ITEM_SPELL_LIFE_DRAIN",
-			"name": "Life Drain",
-			"description": "Drain 2 life from each nearby enemy 1 tile away (Cardinal directions)",
-			"fullDescription": "Drain 2 life from each nearby enemies. \nAffects cardinal directions only.",
-			"path": "entity/items/spells/Spell_Tier1.tscn",
-			"soulCost": 5,
-			"type": "SPELL",
-			"tier": 1,
-			"maxCount": 1,
-			"spellId": "SPELL_LIFE_DRAIN"
-		},
-		{
-			"#disable": true,
 			"id": "ITEM_SPELL_FORCE_PUSH",
 			"name": "Force Push",
 			"description": "Pushes away all nearby enemies by 2 tiles (Cardinal directions)",

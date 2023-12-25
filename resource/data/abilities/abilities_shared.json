@@ -24,7 +24,7 @@
 			"id": "ABILITY_HEALTH_UPGRADE",
 			"characterId": "",
 			"name": "Health Boost",
-			"description": "+2 Max Health",
+			"description": "+4 Max Health",
 			"soulCost": 10,
 			"timeline": [
 				{
@@ -67,7 +67,7 @@
 		{
 			"id": "ABILITY_EVASION_UPGRADE",
 			"characterId": "",
-			"name": "(Upgrade) Evasion Upgrade",
+			"name": "Evasion Upgrade",
 			"description": "Gain +25% Evasion",
 			"timeline": [
 				{
@@ -86,7 +86,7 @@
 		{
 			"id": "ABILITY_SPECIAL_HEAL",
 			"characterId": "",
-			"name": "(Upgrade) Healing Special",
+			"name": "Healing Special",
 			"description": "Heal for 2 when using the special",
 			"timeline": [
 				{

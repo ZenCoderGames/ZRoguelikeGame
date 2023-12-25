@@ -10,9 +10,12 @@ class_name CharacterUI
 @onready var xpBar:ProgressBar = get_node("HSplitContainer/Base/XP/XPBar")
 @onready var levelUpBar:ProgressBar = get_node("HSplitContainer/Base/XP/LevelUpBar")
 @onready var xpLabel:Label = get_node("HSplitContainer/Base/XP/XPLabel")
-const EquippedItemUI := preload("res://ui/battle/EquippedItemUI.tscn")
+const EquippedItemUIScene := preload("res://ui/battle/EquippedItemUI.tscn")
 @onready var soulsIcon:TextureRect = $"%SoulsIcon"
 @onready var soulsLabel:Label = $"%SoulsLabel"
+@onready var ResourceContainer:GridContainer = $"%ResourceContainer"
+const ResourceSlotUI := preload("res://ui/battle/ResourceSlotUI.tscn")
+var resourceSlots:Array = []
 
 @onready var nonBaseContainer:HSplitContainer = get_node("HSplitContainer/NonBase")
 
@@ -21,11 +24,11 @@ const SpellButtonUI := preload("res://ui/battle/SpellButtonUI.tscn")
 
 @onready var potionContainer:VBoxContainer = $"%PotionContainer"
 @onready var potionGridContainer:GridContainer = $"%PotionGridContainer"
-const ConsumableItemUI := preload("res://ui/battle/ConsumableItemUI.tscn")
+const ConsumableItemUIScene := preload("res://ui/battle/ConsumableItemUI.tscn")
 
 @onready var effectContainer:VBoxContainer = $"%EffectContainer"
 @onready var effectGridContainer:GridContainer = $"%EffectGridContainer"
-const EffectItemUI := preload("res://ui/battle/EffectItemUI.tscn")
+const EffectItemUIScene := preload("res://ui/battle/EffectItemUI.tscn")
 
 @export var playerTintColor:Color
 @export var enemyTintColor:Color
@@ -78,21 +81,24 @@ func init(entityObj):
 
 	# Create Base Spells
 	nonBaseContainer.visible = true
-	spellContainer.visible = true
-	for __ in range(character.maxSpellSlots):
+	spellContainer.visible = false
+	'''for __ in range(character.maxSpellSlots):
 		var newSpellUI:SpellItemUI = SpellButtonUI.instantiate()
 		spellContainer.add_child(newSpellUI)
 		newSpellUI.init_as_empty("Spell")
-		spellSlots.append(newSpellUI)
+		spellSlots.append(newSpellUI)'''
 
 	# Create Weapon
 	weaponSlot = _create_item_slot("Weapon")
 	armorSlot = _create_item_slot("Armor")
-	for __ in range(character.maxRuneSlots):
-		runeSlots.append(_create_item_slot("Rune"))
+	#for __ in range(character.maxRuneSlots):
+	#	runeSlots.append(_create_item_slot("Rune"))
+
+	# Energy
+	_init_resource_slots()
 
 func _create_item_slot(slotName:String):
-	var newItemUI = EquippedItemUI.instantiate()
+	var newItemUI = EquippedItemUIScene.instantiate()
 	listContainer.add_child(newItemUI)
 	newItemUI.init_as_empty(slotName)
 	return newItemUI
@@ -166,7 +172,7 @@ func _on_equip_spell_selected(spellItem):
 
 # POTIONS
 func on_consumable_added(item):
-	var consumableItemUI:ConsumableItemUI = ConsumableItemUI.instantiate()
+	var consumableItemUI:ConsumableItemUI = ConsumableItemUIScene.instantiate()
 	potionGridContainer.add_child(consumableItemUI)
 	consumableItemUI.init(item)
 	equippedPotions[item] = consumableItemUI
@@ -186,7 +192,7 @@ func on_passive_added(_character, passive):
 	if passive.data.dontDisplayInUI:
 		return
 
-	var newEffectUI:EffectItemUI = EffectItemUI.instantiate()
+	var newEffectUI:EffectItemUI = EffectItemUIScene.instantiate()
 	effectGridContainer.add_child(newEffectUI)
 	newEffectUI.init(passive, Color.ORANGE)
 	equippedEffects[passive] = newEffectUI
@@ -205,7 +211,7 @@ func on_passive_removed(_character, passive):
 		effectContainer.visible = false
 
 func on_status_effect_added(_character, statusEffect):
-	var newEffectUI = EffectItemUI.instantiate()
+	var newEffectUI = EffectItemUIScene.instantiate()
 	effectGridContainer.add_child(newEffectUI)
 	newEffectUI.init(statusEffect, Color.CYAN)
 	equippedEffects[statusEffect] = newEffectUI
@@ -221,7 +227,7 @@ func on_status_effect_removed(_character, statusEffect):
 		effectContainer.visible = false
 
 func on_ability_added(_character, ability):
-	var newEffectUI = EffectItemUI.instantiate()
+	var newEffectUI = EffectItemUIScene.instantiate()
 	effectGridContainer.add_child(newEffectUI)
 	newEffectUI.init(ability, Color.YELLOW)
 	equippedEffects[ability] = newEffectUI
@@ -238,6 +244,45 @@ func on_ability_removed(_character, ability):
 	
 func has_entity(entity):
 	return character == entity
+
+# RESOURCES
+func _init_resource_slots():
+	_create_all_resource_slots()
+	character.connect("OnStatChanged",Callable(self,"_on_player_resource_updated"))
+
+func _create_all_resource_slots():
+	var maxEnergy:int = character.get_stat_max_value(StatData.STAT_TYPE.ENERGY)
+	for i in maxEnergy:
+		_create_resource_slot()
+	_refresh_resources()
+
+func _create_resource_slot():
+	var resourceSlot := ResourceSlotUI.instantiate()
+	ResourceContainer.add_child(resourceSlot)
+	resourceSlots.append(resourceSlot)
+
+func _refresh_resources():
+	var currentEnergy:int = character.get_stat_value(StatData.STAT_TYPE.ENERGY)
+	var maxEnergy:int = character.get_stat_max_value(StatData.STAT_TYPE.ENERGY)
+
+	if resourceSlots.size() != maxEnergy:
+		_clean_up_resource_slots()
+		_create_all_resource_slots()
+
+	for i in maxEnergy:
+		resourceSlots[i].clear()
+		if currentEnergy<=i:
+			resourceSlots[i].set_empty()
+		else:
+			resourceSlots[i].set_filled()
+
+func _on_player_resource_updated(_character):
+	_refresh_resources()
+
+func _clean_up_resource_slots():
+	for resourceSlot in resourceSlots:
+		resourceSlot.queue_free()
+	resourceSlots.clear()
 
 # HELPERS
 func _get_spell_slot(slotType):

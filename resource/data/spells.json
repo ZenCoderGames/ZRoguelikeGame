@@ -52,31 +52,6 @@
 			]
 		},
 		{
-			"id": "SPELL_LIFE_DRAIN",
-			"cooldown": 10,
-			"timeline": [
-				{
-					"type": "FIND_TARGETS",
-					"params": {
-						"range": 1,
-						"maxTargets": 4
-					}
-				},
-				{
-					"type": "LIFEDRAIN",
-					"params": {
-						"flatAmount": 2
-					}
-				},
-				{
-					"type": "PLAY_AUDIO",
-					"params": {
-						"audioId": "STATUS_EFFECT_BARRIER"
-					}
-				}
-			]
-		},
-		{
 			"id": "SPELL_FORCE_PUSH",
 			"cooldown": 5,
 			"timeline": [

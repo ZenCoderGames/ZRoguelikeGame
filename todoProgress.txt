@@ -12,21 +12,32 @@ Roguelike Dev:
 (D)- New Vendors (Blacksmith, Runesmith)
 (D)- Enemies scale up stats with levels
 (D)- Bug with stats scaling up
-- Figure out what to do with extra items (convert to souls button)
-- More Things (3 runes)
-- More Things (3 items) - 1 left
-- More Things (3 specials)
-- More Things (3 passives)
-- More Things (3 enemies)
-- More Things (3 spells)
-- More Things (3 consumables)
+(D)- Figure out what to do with extra items (convert to souls button)
+(D)- More Things (3 consumables)
+(D)- More Things (3 items)
+(D)- More Things (3 specials)
+(D)- More Things (Convert remaining spells into specials) - disable spells temporarily
+(D)- More Things (Move runes into passives) - disable runes temporarily
+- More Things (3 enemies) - 2 left
 
-- Armor
+(D)- Mana as a system for spells (mana potions)
+- Special slots (passives can give you more)
+- Specials as inventory items
+
+- Sometimes miniboss doesn't spawn and end room doesnt work
+- Refactor on_stat_changed in Character.gd to be derived from the stat.gd instead
+
+- Runes - conditionals that give you big perks on completion (on hit, on kill, on take hit)
+
+- Choice system for pickups (Auto Equip, Replace, Sell For Souls) - Specials, Weapons, Armor, Runes
+
+- Healing Vendor (Cleric)
+- Armor Mechanic
+- Health Shield
 
 - Regenerate map on failure
 
 - Lock and Key
-- Healing Stone (healing)
 - Targeting for Specials/Spells
 
 - Ultimates

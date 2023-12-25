@@ -16,6 +16,10 @@
 					{
 						"type": "DAMAGE",
 						"value": 2
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 4
 					}
 				]
 			},

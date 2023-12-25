@@ -3,8 +3,8 @@
 		{
 			"id": "ABILITY_BERSERKER_RAGE",
 			"characterId": "BERSERKER",
-			"name": "(Upgrade) Berserker Rage",
-			"description": "Every enemy that the Berserker stuns, increases his damage by 2 for 2 turns",
+			"name": "Concussive Rage",
+			"description": "Every enemy that is stunned, increases damage by 2 for 2 turns",
 			"timeline": [
 				{
 					"type": "ADD_PASSIVE",
@@ -17,7 +17,7 @@
 		{
 			"id": "ABILITY_BERSERKER_HEAL",
 			"characterId": "BERSERKER",
-			"name": "(Upgrade) Berserker Heal",
+			"name": "Concussive Heal",
 			"description": "+2 heal when you stun an enemy",
 			"timeline": [
 				{
@@ -31,7 +31,7 @@
 		{
 			"id": "ABILITY_BERSERKER_STUN",
 			"characterId": "BERSERKER",
-			"name": "(Upgrade) Berkerser Stun++",
+			"name": "Bigger Concussive",
 			"description": "Allows [Stun] to last for 1 Additional Turn",
 			"timeline": [
 				{

@@ -59,7 +59,6 @@ signal OnCharacterMoveToCell()
 signal OnCharacterItemPicked()
 signal OnCharacterRoomChanged(newRoom)
 signal OnStatChanged(character)
-signal OnResourceStatChanged()
 signal OnReviveStart()
 signal OnReviveEnd()
 signal OnDeath()
@@ -809,6 +808,10 @@ func get_armor():
 
 func get_max_armor():
 	return get_stat_max_value(StatData.STAT_TYPE.ARMOR)
+
+func consume_energy(val:int):
+	get_stat(StatData.STAT_TYPE.ENERGY).add(-val)
+	on_stats_changed()
 
 func get_energy():
 	return get_stat_value(StatData.STAT_TYPE.ENERGY)

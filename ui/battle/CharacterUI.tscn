@@ -73,6 +73,14 @@ theme = ExtResource("1_tkee7")
 theme_override_font_sizes/font_size = 26
 text = "0"
 
+[node name="ResourceContainer" type="GridContainer" parent="HSplitContainer/Base"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 4
+
 [node name="Name" type="PanelContainer" parent="HSplitContainer/Base"]
 layout_mode = 2
 theme = ExtResource("1_tkee7")

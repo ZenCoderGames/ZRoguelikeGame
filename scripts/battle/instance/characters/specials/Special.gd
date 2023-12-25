@@ -27,10 +27,14 @@ func _init(parentChar,specialData:SpecialData):
 		if(action!=null):
 			timelineActions.append(action)
 
-	if data.triggerConditions.size()>0:
-		_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
+	if specialData.useCustomConditions:
+		if data.triggerConditions.size()>0:
+			_combatEventReceiver = CombatEventReceiver.new(data.triggerConditions, data.triggerConditionParams, character, Callable(self, "on_event_triggered"))
+		else:
+			_set_ready()
 	else:
-		_set_ready()
+		character.connect("OnStatChanged",Callable(self,"_on_player_stat_changed"))
+		check_for_ready_with_energy()
 
 func on_event_triggered():
 	_increment()
@@ -46,6 +50,20 @@ func check_for_ready():
 	emit_signal("OnProgress", (float(currentCount))/(float(maxCount)))
 	if currentCount==maxCount:
 		_set_ready()
+
+func _on_player_stat_changed(character:Character):
+	check_for_ready_with_energy()
+
+func check_for_ready_with_energy():
+	var currentEnergy:int = character.get_energy()
+	var energyNeededToActivate:int = get_max_count()
+	emit_signal("OnProgress", (float(currentEnergy))/(float(energyNeededToActivate)))
+	_updateCount(currentEnergy)
+	if currentEnergy>=energyNeededToActivate:
+		_set_ready()
+	else:
+		# TODO: Let UI know to reset state (Usually when another special has used up energy)
+		pass
 
 func _set_ready():
 	isAvailable = true
@@ -86,6 +104,9 @@ func _activate():
 		character.remove_special(data.id)
 	else:
 		_reset()
+
+	if !data.useCustomConditions:
+		character.consume_energy(get_max_count())
 
 func _reset():
 	isAvailable = false

@@ -3,7 +3,7 @@
 		{
 			"id": "ABILITY_PROTECTION_THORNS",
 			"characterId": "PALADIN",
-			"name": "(Upgrade) Protection Thorns",
+			"name": "Protective Thorns",
 			"description": "Damage any enemies that hit you while [Protected] by 2",
 			"timeline": [
 				{
@@ -33,7 +33,7 @@
 		{
 			"id": "ABILITY_PROTECTION_LONGER",
 			"characterId": "PALADIN",
-			"name": "(Upgrade) Protection++",
+			"name": "Protection++",
 			"description": "Allows [Protection] to last for 1 Additional Turn",
 			"timeline": [
 				{
@@ -48,7 +48,7 @@
 		{
 			"id": "ABILITY_PROTECTION_HEAL",
 			"characterId": "PALADIN",
-			"name": "(Upgrade) Protection Heal",
+			"name": "Protective Heal",
 			"description": "Gaining [Protection] heals you for 2",
 			"timeline": [
 				{

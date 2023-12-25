@@ -36,6 +36,7 @@ func _setup_events():
 	CombatEventManager.connect("OnLevelUpAbilitySelected",Callable(self,"_on_levelup_ability_selected"))
 	CombatEventManager.connect("OnVendorItemSelected",Callable(self,"_on_vendor_item_selected"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityPressed",Callable(self,"_on_special_pressed"))
+	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_post_hit"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
 func pre_update():
@@ -103,6 +104,11 @@ func _on_kill(attacker, defender, _finalDmg):
 	if attacker == self:
 		#_gain_xp(defender.charData.xp)
 		gain_souls(defender.charData.xp)
+
+func _on_post_hit(attacker, _defender, _finalDmg):
+	if attacker == self:
+		get_stat(StatData.STAT_TYPE.ENERGY).add(1)
+		on_stats_changed()
 
 # SOULS
 func gain_souls(val:int):

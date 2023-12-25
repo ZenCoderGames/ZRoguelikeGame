@@ -23,6 +23,7 @@ var id:String
 var name:String
 var description:String
 var soulCost:int
+var useCustomConditions:bool
 var triggerConditions:Array
 var triggerConditionParams:Dictionary
 var count:int
@@ -39,6 +40,7 @@ func _init(dataJS):
 	description = dataJS["description"]
 	count = Utils.get_data_from_json(dataJS, "count", 0)
 	soulCost = Utils.get_data_from_json(dataJS, "soulCost", 0)
+	useCustomConditions = Utils.get_data_from_json(dataJS, "useCustomConditions", false)
 
 	if dataJS.has("conditions"):
 		var conditionsJSList = dataJS["conditions"]

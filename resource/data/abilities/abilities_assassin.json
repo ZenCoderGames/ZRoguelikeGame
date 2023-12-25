@@ -3,7 +3,7 @@
 		{
 			"id": "ABILITY_STEALTH_LONGER",
 			"characterId": "ASSASSIN",
-			"name": "(Upgrade) Stealth++",
+			"name": "Stealth++",
 			"description": "Allows [Stealth] to last for 2 Additional Turns",
 			"timeline": [
 				{
@@ -18,7 +18,7 @@
 		{
 			"id": "ABILITY_STEALTH_ATTACK_BOOST",
 			"characterId": "ASSASSIN",
-			"name": "(Upgrade) Stealth Attack++",
+			"name": "Deadly Assassin",
 			"description": "Attacking out of [Stealth] now gives you 2 Additional Damage",
 			"timeline": [
 				{
@@ -58,7 +58,7 @@
 		{
 			"id": "ABILITY_STEALTH_REFRESH",
 			"characterId": "ASSASSIN",
-			"name": "(Upgrade) Stealth Reset",
+			"name": "Shadow Master",
 			"description": "Any [Stealth] kill instantly refreshes the Special",
 			"timeline": [
 				{

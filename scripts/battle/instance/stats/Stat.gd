@@ -51,11 +51,11 @@ func reset():
 func _is_resetable_stat(statType:int):
 	return statType == StatData.STAT_TYPE.HEALTH or statType == StatData.STAT_TYPE.DAMAGE
 
-# should this be clamped to 0<maxValue
+# This should be allowed to go below 0 so that things like equiment work
 func _update_value(newValue:int):
 	value = newValue
 	if value>maxValue:
-		value = maxValue #Note: We don't want to do a min clamp because of equipment
+		value = maxValue
 	emit_signal("OnValueUpdated", value)
 	emit_signal("OnUpdated")
 
