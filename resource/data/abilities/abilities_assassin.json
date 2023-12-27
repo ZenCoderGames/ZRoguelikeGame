@@ -58,13 +58,13 @@
 		{
 			"id": "ABILITY_STEALTH_REFRESH",
 			"characterId": "ASSASSIN",
-			"name": "Shadow Master",
-			"description": "Any [Stealth] kill instantly refreshes the Special",
+			"name": "Shadow Mage",
+			"description": "Any [Stealth] kill restores 2 Mana",
 			"timeline": [
 				{
 					"type": "ADD_PASSIVE",
 					"params": {
-						"passiveId": "PASSIVE_ASSASSIN_SPECIAL_REFRESH_ON_KILL"
+						"passiveId": "PASSIVE_ASSASSIN_SPECIAL_MANA_ON_KILL"
 					}
 				}
 			]

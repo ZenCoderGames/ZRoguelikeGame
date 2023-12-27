@@ -88,11 +88,13 @@ func init(entityObj):
 		newSpellUI.init_as_empty("Spell")
 		spellSlots.append(newSpellUI)'''
 
-	# Create Weapon
+	# Weapon
 	weaponSlot = _create_item_slot("Weapon")
+	# Armor
 	armorSlot = _create_item_slot("Armor")
-	#for __ in range(character.maxRuneSlots):
-	#	runeSlots.append(_create_item_slot("Rune"))
+	# Runes
+	for __ in range(character.maxRuneSlots):
+		runeSlots.append(_create_item_slot("Rune"))
 
 	# Energy
 	_init_resource_slots()

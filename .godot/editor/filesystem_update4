@@ -44,3 +44,11 @@ res://scripts/battle/data/stats/StatData.gd
 res://scripts/battle/data/items/ItemData.gd
 res://scripts/battle/instance/stats/Stat.gd
 res://scripts/battle/data/specials/SpecialData.gd
+res://scripts/battle/data/vendors/VendorData.gd
+res://scripts/battle/ui/MainMenuUI.gd
+res://scripts/battle/PlayerInput.gd
+res://scripts/battle/instance/characters/CharacterStatus.gd
+res://scripts/battle/ui/Vendor/VendorItemUI.gd
+res://ui/battle/VendorItemSelectUI.tscn
+res://scripts/battle/ui/Vendor/VendorUI.gd
+res://ui/battle/LevelUpItemUI.tscn

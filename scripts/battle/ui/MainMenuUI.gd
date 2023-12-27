@@ -32,7 +32,7 @@ func _on_dungeon_init():
 	_shared_init()
 
 func _shared_init():
-	GameGlobals.dungeon.player.connect("OnDeath",Callable(self,"_on_game_over"))
+	GameGlobals.dungeon.player.connect("OnDeathFinal",Callable(self,"_on_game_over"))
 
 func show_menu():
 	baseMenuUI.visible = true
@@ -79,5 +79,5 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 	if fullRefreshDungeon:
 		var player = GameGlobals.dungeon.player
 		if player!=null and !player.is_queued_for_deletion():
-			player.disconnect("OnDeath",Callable(self,"_on_game_over"))
+			player.disconnect("OnDeathFinal",Callable(self,"_on_game_over"))
 

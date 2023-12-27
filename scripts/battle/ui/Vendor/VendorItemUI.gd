@@ -1,9 +1,10 @@
 extends PanelContainer
 
-class_name VenderItemUI
+class_name VendorItemUI
 
 @onready var nameLabel:Label = $"%UpgradeNameLabel"
 @onready var descLabel:Label = $"%UpgradeDescLabel"
+@onready var soulCostContainer:HBoxContainer = $"%SoulCostContainer"
 @onready var soulCostLabel:Label = $"%SoulCostLabel"
 @onready var chooseBtn:Button = $"%ChooseButton"
 
@@ -37,6 +38,7 @@ func refresh():
 		return
 
 	if _soulCost>0:
+		soulCostContainer.visible = true
 		var playerSouls:int = GameGlobals.dungeon.player.get_souls()
 		var notEnoughCurrency:bool = playerSouls < _soulCost
 		chooseBtn.disabled = notEnoughCurrency
@@ -47,7 +49,7 @@ func refresh():
 	else:
 		chooseBtn.text = "SELECT"
 		chooseBtn.disabled = false
-		soulCostLabel.visible = false
+		soulCostContainer.visible = false
 
 func _is_upgrade_owned():
 	if _data is AbilityData:

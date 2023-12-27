@@ -23,7 +23,7 @@ func _ready():
 
 func _on_dungeon_init():
 	_init_for_level()
-	player.connect("OnDeath",Callable(self,"_on_player_death"))
+	player.connect("OnDeathFinal",Callable(self,"_on_player_death"))
 
 func _on_new_level_loaded():
 	_init_for_level()
@@ -38,7 +38,7 @@ func _init_for_level():
 func _on_player_death():
 	disableInput = true
 	blockInputsForTurn = false
-	player.disconnect("OnDeath",Callable(self,"_on_player_death"))
+	player.disconnect("OnDeathFinal",Callable(self,"_on_player_death"))
 
 func on_menu_on():
 	disableInput = true
@@ -113,4 +113,4 @@ func _on_skip_turn_pressed():
 
 func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 	if fullRefreshDungeon and player!=null:
-		player.disconnect("OnDeath",Callable(self,"_on_player_death"))
+		player.disconnect("OnDeathFinal",Callable(self,"_on_player_death"))

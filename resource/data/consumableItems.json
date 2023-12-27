@@ -53,7 +53,7 @@
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +2",
 			"path": "entity/items/consumables/Consumable_Tier1.tscn",
 			"type": "CONSUMABLE",
-			"soulCost": 1,
+			"soulCost": 0,
 			"tier": 0,
 			"maxCount": 2,
 			"statModifiers": [
@@ -73,7 +73,7 @@
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +4",
 			"path": "entity/items/consumables/Consumable_Tier2.tscn",
 			"type": "CONSUMABLE",
-			"soulCost": 1,
+			"soulCost": 0,
 			"tier": 0,
 			"maxCount": 1,
 			"statModifiers": [
@@ -93,9 +93,10 @@
 			"fullDescription": "A magical elixar of health that on consumption.\nReplenishes the player's health by +8",
 			"path": "entity/items/consumables/Consumable_Tier3.tscn",
 			"type": "CONSUMABLE",
-			"soulCost": 1,
+			"soulCost": 0,
 			"tier": 2,
 			"maxCount": 1,
+			"onlyAtVendors": true,
 			"statModifiers": [
 				{
 					"type": "HEALTH",
@@ -104,6 +105,67 @@
 			],
 			"consumeAudioId": "CONSUMABLE_POTION",
 			"tintColor": "#3bb625"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_MANA_POTION_SMALL",
+			"name": "Small Mana Potion",
+			"description": "A tiny mana potion\n(Restore up to 1 mana)",
+			"fullDescription": "A tiny mana potion\n(Restore up to 1 mana)",
+			"path": "entity/items/consumables/Consumable_Tier1.tscn",
+			"type": "CONSUMABLE",
+			"soulCost": 0,
+			"tier": 0,
+			"maxCount": 2,
+			"statModifiers": [
+				{
+					"type": "ENERGY",
+					"value": 1
+				}
+			],
+			"consumeAudioId": "CONSUMABLE_POTION",
+			"tintColor": "#9fc5e8"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_MANA_POTION_MEDIUM",
+			"name": "Medium Mana Potion",
+			"description": "A medium sized mana potion\n(Restore up to 2 mana)",
+			"fullDescription": "A medium sized mana potion\n(Restore up to 2 mana)",
+			"path": "entity/items/consumables/Consumable_Tier2.tscn",
+			"type": "CONSUMABLE",
+			"soulCost": 0,
+			"tier": 1,
+			"maxCount": 1,
+			"statModifiers": [
+				{
+					"type": "ENERGY",
+					"value": 2
+				}
+			],
+			"consumeAudioId": "CONSUMABLE_POTION",
+			"tintColor": "#9fc5e8"
+		},
+		{
+			"#disable": true,
+			"id": "ITEM_MANA_POTION_LARGE",
+			"name": "Large Mana Potion",
+			"description": "A large mana potion\n(Restore up to 4 mana)",
+			"fullDescription": "A large mana potion\n(Restore up to 4 mana)",
+			"path": "entity/items/consumables/Consumable_Tier3.tscn",
+			"type": "CONSUMABLE",
+			"soulCost": 0,
+			"tier": 2,
+			"maxCount": 1,
+			"onlyAtVendors": true,
+			"statModifiers": [
+				{
+					"type": "ENERGY",
+					"value": 4
+				}
+			],
+			"consumeAudioId": "CONSUMABLE_POTION",
+			"tintColor": "#9fc5e8"
 		},
 		{
 			"#disable": true,

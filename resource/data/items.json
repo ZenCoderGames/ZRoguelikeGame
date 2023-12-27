@@ -103,6 +103,35 @@
 			"tier": 2,
 			"maxCount": 1,
 			"passiveId": "PASSIVE_HEAL_ON_HIT"
+		},
+		{
+			"id": "ITEM_MAGE_ROBE",
+			"name": "Mage Robe",
+			"description": "+2 Mana",
+			"fullDescription": "+2 Mana",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "ARMOR",
+			"soulCost": 2,
+			"tier": 2,
+			"maxCount": 1,
+			"stats": [
+				{
+					"type": "ENERGY",
+					"value": 2
+				}
+			]
+		},
+		{
+			"id": "ITEM_BATTLEMAGE_ROBE",
+			"name": "Battle Mage Robe",
+			"description": "Restore 1 mana back on taking damage",
+			"fullDescription": "Restore 1 mana back on taking damage",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "ARMOR",
+			"soulCost": 2,
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_MANA_ON_HIT"
 		}
 	]
 }

@@ -29,6 +29,7 @@ const ItemUI := preload("res://ui/battle/ItemUI.tscn")
 # vendor
 var vendorUI:VendorUI
 const VendorUI := preload("res://ui/battle/VendorUI.tscn")
+var vendorDict:Dictionary = {}
 # inventory UI
 const InventoryUI := preload("res://ui/battle/InventoryUI.tscn")
 var inventoryUI:InventoryUI = null
@@ -262,15 +263,19 @@ func _remove_level_up_ui():
 
 # VENDOR
 func _on_show_vendor(vendorChar:VendorCharacter, vendorData:VendorData):
-	vendorUI = VendorUI.instantiate()
-	add_child(vendorUI)
-
-	vendorUI.init(vendorChar, vendorData)
+	if vendorDict.has(vendorChar):
+		vendorUI = vendorDict[vendorChar]
+		add_child(vendorUI)
+	else:
+		vendorUI = VendorUI.instantiate()
+		add_child(vendorUI)
+		vendorUI.init(vendorChar, vendorData)
+		vendorDict[vendorChar] = vendorUI
 	UIEventManager.emit_signal("OnSelectionMenuOn")
 
 func _on_vendor_closed():
 	remove_child(vendorUI)
-	vendorUI.queue_free()
+	#vendorUI.queue_free()
 	vendorUI = null
 	UIEventManager.emit_signal("OnSelectionMenuOff")
 

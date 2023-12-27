@@ -7,6 +7,7 @@ var specialDataList = []
 var specialDataMap = {}
 var itemDataMap = {}
 var itemDataList = []
+var nonVendorItemDataList = []
 var spellDataMap = {}
 var vendorDataMap = {}
 var vendorDataList = []
@@ -31,7 +32,7 @@ func _init():
 	init_specials()
 	#init_spells()
 	init_items("resource/data/items.json")
-	#init_items("resource/data/runeItems.json")
+	init_items("resource/data/runeItems.json")
 	init_items("resource/data/consumableItems.json")
 	#init_items("resource/data/spellItems.json")
 	init_abilities("resource/data/abilities/abilities_shared.json")
@@ -102,6 +103,8 @@ func init_items(itemLocation:String):
 		if !newItemData.disable:
 			itemDataMap[newItemData.id] = newItemData
 			itemDataList.append(newItemData)
+			if !newItemData.onlyAtVendors:
+				nonVendorItemDataList.append(newItemData)
 
 func get_item_data(id):
 	if itemDataMap.has(id):
@@ -131,6 +134,8 @@ func init_vendors(vendorLocation:String):
 	var vendorDataJSList:Array = data["vendors"]
 	for vendorDataJS in vendorDataJSList:
 		var newVendorData = VendorData.new(vendorDataJS)
+		if newVendorData.disable:
+			continue
 		vendorDataMap[newVendorData.id] = newVendorData
 		vendorDataList.append(newVendorData)
 
@@ -148,7 +153,7 @@ func get_character_data(charId):
 	return characterDataDict[charId]
 
 func get_random_item_data():
-	return itemDataList[randi() % itemDataList.size()]
+	return nonVendorItemDataList[randi() % nonVendorItemDataList.size()]
 
 func init_spells():
 	var data = Utils.load_data_from_file("resource/data/spells.json")

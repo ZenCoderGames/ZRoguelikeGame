@@ -187,9 +187,9 @@
 			]
 		},
 		{
-			"id": "PASSIVE_ASSASSIN_SPECIAL_REFRESH_ON_KILL",
-			"name": "Special Refresh",
-			"description": "On kill, refresh the Special",
+			"id": "PASSIVE_ASSASSIN_SPECIAL_MANA_ON_KILL",
+			"name": "Mana On Kill With Stealth",
+			"description": "Mana On Kill With Stealth",
 			"conditions": [
 				"ON_KILL"
 			],
@@ -198,10 +198,14 @@
 			}, 
 			"timeline": [
 				{
-					"type": "MODIFY_SPECIAL",
+					"type": "ADD_STAT_MODIFIER",
 					"params": {
-						"specialId": "SPECIAL_ASSASSIN",
-						"refill": true
+						"statModifiers": [
+							{
+								"type": "ENERGY",
+								"value": 1
+							}
+						]
 					}
 				}
 			]
@@ -363,6 +367,27 @@
 						"statModifiers": [
 							{
 								"type": "HEALTH",
+								"value": 1
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_MANA_ON_HIT",
+			"name": "Mana On Hit",
+			"description": "Restore 1 Mana every time you are hit",
+			"conditions": [
+				"ON_TAKE_HIT"
+			],
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "ENERGY",
 								"value": 1
 							}
 						]

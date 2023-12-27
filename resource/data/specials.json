@@ -3,7 +3,7 @@
 		{
 			"id": "SPECIAL_PALADIN",
 			"name": "Protection",
-			"description": "Grants [[Protection]] for 1 turn\n\n(Gain Charge: On Take Hit)",
+			"description": "Grants [[Protection]] for 1 turn\n\nProtection: Invulnerability to damage for 1 turn",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 3,
 			"soulCost": 0,
@@ -21,7 +21,7 @@
 		{
 			"id": "SPECIAL_BERSERKER",
 			"name": "Whirlwind",
-			"description": "Do a 360 spin attack with attack damage\n\n(Gain Charge: On Attack)",
+			"description": "Do a 360 spin attack with your current damage",
 			"conditions": ["ON_POST_HIT"],
 			"count": 3,
 			"soulCost": 0,
@@ -45,7 +45,7 @@
 		{
 			"id": "SPECIAL_ASSASSIN",
 			"name": "Stealth",
-			"description": "Grants [[Stealth]] for 3 turns\n\n(Gain Charge: On Kill)",
+			"description": "Grants [[Stealth]] for 3 turns\n\nStealth: Invisible to enemies",
 			"conditions": ["ON_KILL"],
 			"count": 2,
 			"soulCost": 0,
@@ -111,7 +111,7 @@
 		{
 			"id": "SPECIAL_LIFE_DRAIN",
 			"name": "Life Drain",
-			"description": "Drains +2 life from each enemy around the player",
+			"description": "Drain +2 life from each enemy around you",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 4,
 			"soulCost": 0,
@@ -141,7 +141,7 @@
 		{
 			"id": "SPECIAL_LIGHTNING_BOLT",
 			"name": "Lightning Bolt",
-			"description": "A giant bolt of lightning finds a target near you to rain down upon\n(Range: 3 cells)",
+			"description": "A giant bolt of lightning finds a target and strikes it for 8 damage",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 4,
 			"soulCost": 0,
@@ -150,7 +150,7 @@
 				{
 					"type": "FIND_TARGETS",
 					"params": {
-						"range": 3,
+						"range": 1,
 						"maxTargets": 1
 					}
 				},
@@ -171,7 +171,7 @@
 		{
 			"id": "SPECIAL_AOE_STUN",
 			"name": "Ground Stomp",
-			"description": "Stuns all enemies around you",
+			"description": "Stun all enemies around you",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 4,
 			"soulCost": 0,
@@ -202,7 +202,7 @@
 		{
 			"id": "SPECIAL_FORCE_PUSH",
 			"name": "Force Push",
-			"description": "Pushes all enemies surrounding you away by upto 2 squares",
+			"description": "Pushes all enemies surrounding you away by upto 2 units",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 3,
 			"soulCost": 0,

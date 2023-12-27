@@ -13,6 +13,7 @@ var passives:Array
 var items:Array
 var runes:Array
 var numItemsShown:int
+var disable:bool
 
 func _init(dataJS):
 	id = dataJS["id"]
@@ -23,6 +24,7 @@ func _init(dataJS):
 	numItemsShown = Utils.get_data_from_json(dataJS, "numItemsShown", 1)
 	oneTimePurchaseOnly = Utils.get_data_from_json(dataJS, "oneTimePurchaseOnly", false)
 	onlyUniquePurchases = Utils.get_data_from_json(dataJS, "onlyUniquePurchases", false)
+	disable = Utils.get_data_from_json(dataJS, "disable", false)
 
 	if dataJS.has("abilities"):
 		abilities = dataJS["abilities"]

@@ -153,6 +153,12 @@ func generate_enemy(enemyId):
 	for cell in cells:
 		if cell.is_empty() and cell.is_within_room_buffered(3):
 			freeCells.append(cell)
+		
+	# do a looser search if above failed
+	if freeCells.size()==0:
+		for cell in cells:
+			if cell.is_empty():
+				freeCells.append(cell)
 	
 	if freeCells.size()>0:
 		# choose random free cell
@@ -164,11 +170,16 @@ func generate_enemy(enemyId):
 		var enemy:Node = GameGlobals.dungeon.load_character(loadedScenes, randomCell, randomEnemyData, Constants.ENTITY_TYPE.DYNAMIC, Constants.enemies, Constants.TEAM.ENEMY)
 		enemies.append(enemy)
 		return enemy
+	else:
+		print("No space to spawn enemy", enemyId)
+
 	
 	return null
 
 # MINIBOSS
 func generate_miniboss(enemyId):
+	print("SPAWN MINIBOSS")
+	print(enemyId)
 	var enemy:Node = generate_enemy(enemyId)
 	if enemy!=null:
 		enemy.set_as_miniboss()

@@ -1,8 +1,8 @@
+Label
+HBoxContainer
+TextureRect
 VBoxContainer
 TextureButton
-Label
-TextureRect
-HBoxContainer
 HSplitContainer
 PanelContainer
 Panel

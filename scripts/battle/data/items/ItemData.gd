@@ -37,6 +37,7 @@ var soulCost:int
 var consumeAudioId:String
 var tintColor:String
 
+var onlyAtVendors:bool
 var disable:bool
 
 func _init(itemDataJS):
@@ -68,6 +69,7 @@ func _init(itemDataJS):
 			statModifierDataList.append(StatModifierData.new(statModifierDataJS))
 			
 	disable = Utils.get_data_from_json(itemDataJS, "disable", false)
+	onlyAtVendors = Utils.get_data_from_json(itemDataJS, "onlyAtVendors", false)
 	spellId = Utils.get_data_from_json(itemDataJS, "spellId", "")
 	passiveId = Utils.get_data_from_json(itemDataJS, "passiveId", "")
 	statusEffectId = Utils.get_data_from_json(itemDataJS, "statusEffectId", "")

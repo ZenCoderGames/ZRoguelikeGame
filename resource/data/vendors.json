@@ -20,7 +20,7 @@
 			"name": "Mystic",
 			"description": "Choose a Special",
 			"path": "entity/characters/VendorCharacter.tscn",
-			"tintColor": "#b89184",
+			"tintColor": "#d5a6bd",
 			"numItemsShown": 2,
 			"oneTimePurchaseOnly": true,
 			"onlyUniquePurchases": true,
@@ -92,7 +92,24 @@
 				"ITEM_WOODEN_PLATE",
 				"ITEM_SILVER_PLATE",
 				"ITEM_BLOOD_SWORD",
-				"ITEM_THORNMAIL"
+				"ITEM_THORNMAIL",
+				"ITEM_MAGE_ROBE",
+				"ITEM_BATTLEMAGE_ROBE"
+			]
+		},
+		{
+			"id": "CLERIC_VENDOR",
+			"name": "Cleric",
+			"description": "Offers treatment for your wounds",
+			"path": "entity/characters/VendorCharacter.tscn",
+			"tintColor": "#b6d7a8",
+			"numItemsShown": 3,
+			"oneTimePurchaseOnly": true,
+			"onlyUniquePurchases": true,
+			"items": [
+				"ITEM_HEALTH_POTION_LARGE",
+				"ITEM_MANA_POTION_LARGE",
+				"ITEM_HEALTH_POTION_LARGE"
 			]
 		},
 		{
@@ -105,9 +122,9 @@
 			"oneTimePurchaseOnly": true,
 			"onlyUniquePurchases": true,
 			"runes": [
-				"RUNE_VAMPIRIC",
-				"RUNE_CRITICAL_STUN",
-				"RUNE_BARRIER_ON_KILL"
+				"RUNE_ASSASSIN",
+				"RUNE_GIANT",
+				"RUNE_MAGE"
 			]
 		}
 	]

@@ -18,16 +18,23 @@ Roguelike Dev:
 (D)- More Things (3 specials)
 (D)- More Things (Convert remaining spells into specials) - disable spells temporarily
 (D)- More Things (Move runes into passives) - disable runes temporarily
-- More Things (3 enemies) - 2 left
-
 (D)- Mana as a system for spells (mana potions)
+(D)- Remake Stealth Refresh Special to give back mana instead
+(D)- Be able to hit reviving targets so you don't get stuck
+(IP)- Sometimes miniboss doesn't spawn and end room doesnt work
+- More Things (3 enemies) - 2 left
+- Vendors cache their items and cost is preserved between opening multiple times
+
 - Special slots (passives can give you more)
 - Specials as inventory items
 
-- Sometimes miniboss doesn't spawn and end room doesnt work
 - Refactor on_stat_changed in Character.gd to be derived from the stat.gd instead
 
+- Vulnerable Status Effect
 - Runes - conditionals that give you big perks on completion (on hit, on kill, on take hit)
+- Hades style enigma upgrades
+- Reincarnation on the player
+- Facing direction for enemies and player
 
 - Choice system for pickups (Auto Equip, Replace, Sell For Souls) - Specials, Weapons, Armor, Runes
 

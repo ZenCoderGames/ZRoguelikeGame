@@ -6,7 +6,7 @@ class_name VendorUI
 @onready var title:Label = $"%Title"
 @onready var backBtn:TextureButton = $"%BackButton"
 
-const VendorItemUI := preload("res://ui/battle/VendorItemUI.tscn")
+const VendorItemSelectUI := preload("res://ui/battle/VendorItemSelectUI.tscn")
 
 var initialized:bool = false
 
@@ -57,7 +57,7 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 
 	itemsToConsider.shuffle()
 	for item in itemsToConsider:
-		var vendorItem = VendorItemUI.instantiate()
+		var vendorItem = VendorItemSelectUI.instantiate()
 		itemHolder.add_child(vendorItem)
 		_vendorItemList.append(vendorItem)
 		vendorItem.init(self, item)

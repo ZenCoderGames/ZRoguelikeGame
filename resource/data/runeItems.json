@@ -1,40 +1,67 @@
 {
 	"items": [
 		{
-			"id": "RUNE_VAMPIRIC",
-			"name": "Vampiric",
-			"description": "Lifesteal +3 Health on kill",
-			"fullDescription": "Lifesteal +3 Health on kill",
+			"id": "RUNE_ASSASSIN",
+			"name": "Curse of the Assassin",
+			"description": "+6 Attack\n-6 Health",
+			"fullDescription": "Revive after death once",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"soulCost": 4,
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "PASSIVE_LIFESTEAL_ON_KILL"
+			"stats": [
+				{
+					"type": "DAMAGE",
+					"value": 6
+				},
+				{
+					"type": "HEALTH",
+					"value": -6
+				}
+			]
 		},
 		{
-			"id": "RUNE_CRITICAL_STUN",
-			"name": "Critical On Stun",
-			"description": "Do Critical hits on stunned targets",
-			"fullDescription": "Do Critical hits on stunned targets",
+			"id": "RUNE_GIANT",
+			"name": "Curse of the Giant",
+			"description": "+10 Health\n-4 Attack",
+			"fullDescription": "+10 Health\n-4 Attack",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"soulCost": 4,
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "PASSIVE_STUN_CRITICAL"
+			"stats": [
+				{
+					"type": "DAMAGE",
+					"value": -4
+				},
+				{
+					"type": "HEALTH",
+					"value": 10
+				}
+			]
 		},
 		{
-			"id": "RUNE_BARRIER_ON_KILL",
-			"name": "Barrier On Every 3rd Kill",
-			"description": "After every 3rd kill, gain a barrier",
-			"fullDescription": "After every 3rd kill, gain a barrier",
+			"id": "RUNE_MAGE",
+			"name": "Curse of the Mage",
+			"description": "+4 Max Mana\n-2 Attack",
+			"fullDescription": "+4 Max Mana\n-2 Attack",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"soulCost": 4,
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "PASSIVE_BARRIER_ON_3RD_KILL"
+			"stats": [
+				{
+					"type": "ENERGY",
+					"value": 4
+				},
+				{
+					"type": "DAMAGE",
+					"value": -2
+				}
+			]
 		}
 	]
 }
