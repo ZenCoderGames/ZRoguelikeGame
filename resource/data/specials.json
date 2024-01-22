@@ -65,7 +65,7 @@
 			"name": "Blink Strike",
 			"description": "Teleport behind a target and strike them with attack damage\n\n[color=#9fc5e8]Mana Cost:[/color] 2",
 			"conditions": ["ON_POST_HIT"],
-			"count": 2,
+			"count": 3,
 			"soulCost": 0,
 			"executeCondition": "NONE",
 			"timeline": [

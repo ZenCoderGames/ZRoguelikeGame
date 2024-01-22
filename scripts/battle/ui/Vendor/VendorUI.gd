@@ -5,6 +5,7 @@ class_name VendorUI
 @onready var itemHolder:HBoxContainer = $"%Items"
 @onready var title:Label = $"%Title"
 @onready var backBtn:TextureButton = $"%BackButton"
+@onready var noItemsLabel:Label = $"%NoItemsLabel"
 
 const VendorItemSelectUI := preload("res://ui/battle/VendorItemSelectUI.tscn")
 
@@ -58,14 +59,20 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 				itemsToConsider.append(itemData)
 
 	itemsToConsider.shuffle()
-	for item in itemsToConsider:
-		var vendorItem = VendorItemSelectUI.instantiate()
-		itemHolder.add_child(vendorItem)
-		_vendorItemList.append(vendorItem)
-		vendorItem.init(self, item)
-		maxItemsToDisplay = maxItemsToDisplay - 1
-		if maxItemsToDisplay==0:
-			break
+	itemsToConsider.clear()
+
+	if itemsToConsider.size()==0:
+		noItemsLabel.visible = true
+	else:
+		noItemsLabel.visible = false
+		for item in itemsToConsider:
+			var vendorItem = VendorItemSelectUI.instantiate()
+			itemHolder.add_child(vendorItem)
+			_vendorItemList.append(vendorItem)
+			vendorItem.init(self, item)
+			maxItemsToDisplay = maxItemsToDisplay - 1
+			if maxItemsToDisplay==0:
+				break
 
 	backBtn.connect("button_up",Callable(self,"_on_back_pressed"))
 

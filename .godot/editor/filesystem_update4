@@ -19,3 +19,12 @@ res://scripts/battle/ui/BattleUI.gd
 res://scripts/battle/ui/MainMenuUI.gd
 res://scripts/battle/data/DungeonData.gd
 res://scripts/battle/instance/characters/PlayerCharacter.gd
+res://scripts/battle/ui/InfoUI.gd
+res://scripts/battle/ui/CharPropUI.gd
+res://scripts/battle/instance/characters/Inventory.gd
+res://scripts/battle/ui/ConsumableItemUI.gd
+res://scripts/battle/general/HitResolutionManager.gd
+res://scripts/battle/instance/characters/Character.gd
+res://scripts/battle/data/items/ItemData.gd
+res://ui/MainGUI.tscn
+res://ui/battle/VendorUI.tscn

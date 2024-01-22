@@ -113,9 +113,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
 		CombatEventManager.emit_signal("OnToggleInventory")
 
-	if event.is_action_pressed(Constants.INPUT_TOGGLE_MAIN_MENU):
-		_toggle_main_menu()
-
 func _toggle_main_menu():
 	mainMenuUI.visible = !mainMenuUI.visible
 	if mainMenuUI.visible:

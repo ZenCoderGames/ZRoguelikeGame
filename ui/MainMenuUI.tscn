@@ -53,7 +53,6 @@ vertical_alignment = 1
 
 [node name="DeathUI" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,7 +61,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="DeathUI"]
-self_modulate = Color(1, 1, 1, 0.490196)
+self_modulate = Color(0.427451, 0.427451, 0.427451, 0.490196)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,9 +82,11 @@ grow_horizontal = 2
 scale = Vector2(2, 2)
 theme = ExtResource("2")
 theme_type_variation = &"HeaderMedium"
-theme_override_colors/font_color = Color(0.741176, 0, 0, 1)
+theme_override_colors/font_color = Color(0.447059, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_u04gs")
-text = "You didnt escape the dungeon"
+text = "you died..."
 horizontal_alignment = 1
 vertical_alignment = 1
 

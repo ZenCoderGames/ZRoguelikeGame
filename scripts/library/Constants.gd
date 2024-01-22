@@ -38,7 +38,6 @@ const vendors: String = "vendors"
 
 # INPUTS
 const INPUT_EXIT_GAME: String = "exit"
-const INPUT_TOGGLE_MAIN_MENU: String = "toggle_main_menu"
 
 const INPUT_TOGGLE_INVENTORY: String = "toggle_inventory"
 

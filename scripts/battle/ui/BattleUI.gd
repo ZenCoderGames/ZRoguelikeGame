@@ -105,17 +105,17 @@ func _refresh_ui():
 		skipTurnBtn.self_modulate = SKIP_TURN_DISABLED_COLOR
 	
 func _on_attack(attacker, defender, damage):
-	detailsLabel.text = str(attacker.displayName, " attacked ", defender.displayName, " for ", damage, " damage")
+	_show_detail_info_text(str(attacker.displayName, " attacked ", defender.displayName, " for ", damage, " damage"), 3)
 	
 func _on_kill(attacker, defender, _finalDmg):
 	# Info panel
 	_info_panel_handle_death(defender)
 	
 	# Details panel
-	_show_detail_info_text(str(attacker.displayName, " killed ", defender.displayName), 1)
+	_show_detail_info_text(str(attacker.displayName, " killed ", defender.displayName), 5)
 	
 func _on_item_picked_by_player(item):
-	_show_detail_info_text(str(item.data.name, " picked up "), 1)
+	_show_detail_info_text(str(item.data.name, " picked up "), 5)
 
 func _show_detail_info_text(strVal, duration):
 	detailsUI.visible = true
