@@ -59,7 +59,6 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 				itemsToConsider.append(itemData)
 
 	itemsToConsider.shuffle()
-	itemsToConsider.clear()
 
 	if itemsToConsider.size()==0:
 		noItemsLabel.visible = true
