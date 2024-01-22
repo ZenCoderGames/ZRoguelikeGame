@@ -18,7 +18,7 @@ collision_layer = 2
 shape = SubResource("2")
 
 [node name="Attack" type="Sprite2D" parent="."]
-self_modulate = Color(0.717647, 0.709804, 0.270588, 1)
+self_modulate = Color(0.74902, 0.568627, 0.262745, 1)
 position = Vector2(-9.5, 15)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1")
@@ -48,7 +48,7 @@ text = "8"
 horizontal_alignment = 1
 
 [node name="Health" type="Sprite2D" parent="."]
-self_modulate = Color(0.796078, 0.270588, 0.231373, 1)
+self_modulate = Color(0.784314, 0.278431, 0.313726, 1)
 position = Vector2(9.5, 15)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3")

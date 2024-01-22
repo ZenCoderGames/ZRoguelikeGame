@@ -8,11 +8,11 @@ func _ready():
 	clear()
 
 func set_filled():
-	innerCircle.self_modulate = Color.GREEN
-	
+	innerCircle.self_modulate = Color("#2986cc")
+
 func set_empty():
 	innerCircle.self_modulate = Color.WHITE
 
 func clear():
-	self.self_modulate = Color.TRANSPARENT
+	#self.self_modulate = Color.TRANSPARENT
 	innerCircle.self_modulate = Color.WHITE

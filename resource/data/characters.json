@@ -11,7 +11,7 @@
 				"stats": [
 					{
 						"type": "HEALTH",
-						"value": 15
+						"value": 20
 					},
 					{
 						"type": "DAMAGE",
@@ -98,7 +98,7 @@
 					{
 						"type": "HEALTH",
 						"value": 3,
-						"levelScaling": 2
+						"levelScaling": 1
 					},
 					{
 						"type": "DAMAGE",
@@ -144,7 +144,7 @@
 					{
 						"type": "HEALTH",
 						"value": 3,
-						"levelScaling": 2
+						"levelScaling": 1
 					},
 					{
 						"type": "DAMAGE",
@@ -168,12 +168,12 @@
 					{
 						"type": "HEALTH",
 						"value": 4,
-						"levelScaling": 3
+						"levelScaling": 2
 					},
 					{
 						"type": "DAMAGE",
 						"value": 2,
-						"levelScaling": 2
+						"levelScaling": 1
 					}
 				],
 				"specialId": "GHOST_SPECIAL"
@@ -192,7 +192,7 @@
 					{
 						"type": "HEALTH",
 						"value": 10,
-						"levelScaling": 6
+						"levelScaling": 5
 					},
 					{
 						"type": "DAMAGE",
@@ -216,7 +216,7 @@
 					{
 						"type": "HEALTH",
 						"value": 6,
-						"levelScaling": 3
+						"levelScaling": 2
 					},
 					{
 						"type": "DAMAGE",

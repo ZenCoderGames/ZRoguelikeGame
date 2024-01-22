@@ -7,6 +7,7 @@ signal OnDungeonInitialized()
 signal OnGameOver()
 signal OnNewLevelLoaded()
 signal OnCleanUpForDungeonRecreation(isNewDungeon:bool)
+signal OnBackButtonPressed()
 
 func ready_to_battle():
 	emit_signal("OnReadyToBattle")

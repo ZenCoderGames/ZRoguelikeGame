@@ -10,7 +10,8 @@ func _ready():
 	UIEventManager.connect("OnMainMenuButton",Callable(self,"_on_main_menu_button"))
 	UIEventManager.connect("OnCharacterSelectButton",Callable(self,"_on_character_select_button"))
 	UIEventManager.connect("OnGenericUIEvent",Callable(self,"_on_generic_ui_event"))
-	#UIEventManager.connect("OnMainMenuOn",Callable(self,"_play_menu_music"))
+	UIEventManager.connect("OnMainMenuOn",Callable(self,"_play_menu_music"))
+	UIEventManager.connect("OnMainMenuOff",Callable(self,"_stop_menu_music"))
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_character_attack"))
 	CombatEventManager.connect("OnAnyCharacterDeath",Callable(self,"_on_any_character_death"))
 	CombatEventManager.connect("OnConsumeItem",Callable(self,"_on_consume_item"))
@@ -20,6 +21,9 @@ func _ready():
 # MUSIC
 func _play_menu_music():
 	GameGlobals.audioManager.play_music("MUSIC_TITLE_SCREEN")
+
+func _stop_menu_music():
+	GameGlobals.audioManager.stop_music("MUSIC_TITLE_SCREEN")
 
 func _on_char_selected(_selectedChar):
 	GameGlobals.audioManager.stop_music("MUSIC_TITLE_SCREEN")

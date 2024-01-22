@@ -27,6 +27,7 @@ var useCustomConditions:bool
 var triggerConditions:Array
 var triggerConditionParams:Dictionary
 var count:int
+var cooldown:int
 var itemsGranted:Array
 var timeline:Array
 var removeAfterExecute:bool
@@ -39,6 +40,7 @@ func _init(dataJS):
 	name = dataJS["name"]
 	description = dataJS["description"]
 	count = Utils.get_data_from_json(dataJS, "count", 0)
+	cooldown = Utils.get_data_from_json(dataJS, "cooldown", 2)
 	soulCost = Utils.get_data_from_json(dataJS, "soulCost", 0)
 	useCustomConditions = Utils.get_data_from_json(dataJS, "useCustomConditions", false)
 

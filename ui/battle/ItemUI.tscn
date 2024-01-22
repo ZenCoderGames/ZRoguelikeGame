@@ -54,12 +54,12 @@ size_flags_vertical = 3
 layout_mode = 2
 color = Color(0.14902, 0.152941, 0.152941, 1)
 
-[node name="DescLabel" type="Label" parent="VBoxContainer/PanelContainer3"]
+[node name="DescLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 4
 theme = ExtResource("1")
-text = "Increases max health of the player by +10"
-horizontal_alignment = 1
-vertical_alignment = 1
+bbcode_enabled = true
+text = "Increases max health of the player by +10adasdasdasdsadsadasdsadasdasdasdsadasdasdsdasdasdasdsadsadsdasdasdsdasdasd"
+fit_content = true
 autowrap_mode = 2

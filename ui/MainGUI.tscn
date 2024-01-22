@@ -144,16 +144,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 1)
 
-[node name="DetailsLabel" type="Label" parent="DetailsUI"]
+[node name="DetailsLabel" type="RichTextLabel" parent="DetailsUI"]
+unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1")
-horizontal_alignment = 1
-vertical_alignment = 1
+bbcode_enabled = true
+text = "[center]Operating....
+[/center]"
+fit_content = true
+scroll_active = false
 
 [node name="PlayerPanel" type="Control" parent="."]
 anchors_preset = 0

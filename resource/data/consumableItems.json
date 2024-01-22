@@ -169,6 +169,31 @@
 		},
 		{
 			"#disable": true,
+			"id": "ITEM_HEALTH_MANA_POTION",
+			"name": "Hybrid Potion",
+			"description": "A health and mana hybrid potion\n(Restore 4 Health and 2 mana)",
+			"fullDescription": "A health and mana hybrid potion\n(Restore 4 Health and 2 mana)",
+			"path": "entity/items/consumables/Consumable_Tier3.tscn",
+			"type": "CONSUMABLE",
+			"soulCost": 0,
+			"tier": 2,
+			"maxCount": 1,
+			"onlyAtVendors": true,
+			"statModifiers": [
+				{
+					"type": "HEALTH",
+					"value": 4
+				},
+				{
+					"type": "ENERGY",
+					"value": 2
+				}
+			],
+			"consumeAudioId": "CONSUMABLE_POTION",
+			"tintColor": "#d0e0e3"
+		},
+		{
+			"#disable": true,
 			"id": "ITEM_PRISMATIC_SHIELD",
 			"name": "Prismatic Shield",
 			"description": "Block 1 Instance of Any Damage",

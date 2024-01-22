@@ -48,7 +48,8 @@ func on_menu_off():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
-		get_tree().quit()
+		GameEventManager.emit_signal("OnBackButtonPressed")
+		return
 
 	if player==null or !is_instance_valid(player):
 		return

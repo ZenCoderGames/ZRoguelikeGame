@@ -16,6 +16,8 @@ var _vendorItemList:Array
 
 func init(vendorChar:VendorCharacter, vendorData:VendorData):
 	if initialized:
+		for vendorItem in _vendorItemList:
+			vendorItem.refresh()
 		return
 
 	_vendorChar = vendorChar
@@ -68,6 +70,7 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 	backBtn.connect("button_up",Callable(self,"_on_back_pressed"))
 
 	UIEventManager.emit_signal("OnGenericUIEvent")
+	GameEventManager.connect("OnBackButtonPressed",Callable(self,"_on_back_pressed"))
 
 	initialized = true
 

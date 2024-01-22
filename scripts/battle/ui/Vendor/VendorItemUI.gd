@@ -3,7 +3,7 @@ extends PanelContainer
 class_name VendorItemUI
 
 @onready var nameLabel:Label = $"%UpgradeNameLabel"
-@onready var descLabel:Label = $"%UpgradeDescLabel"
+@onready var descLabel:RichTextLabel = $"%UpgradeDescLabel"
 @onready var soulCostContainer:HBoxContainer = $"%SoulCostContainer"
 @onready var soulCostLabel:Label = $"%SoulCostLabel"
 @onready var chooseBtn:Button = $"%ChooseButton"
@@ -17,7 +17,7 @@ func init(parent:VendorUI, data):
 	_data = data
 	_soulCost = _data.soulCost
 	nameLabel.text = _data.name
-	descLabel.text = _data.description
+	descLabel.text = Utils.format_text(_data.description)
 	soulCostLabel.text = str(_soulCost)
 	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
 	refresh()

@@ -4,7 +4,7 @@
 			"id": "RUNE_ASSASSIN",
 			"name": "Curse of the Assassin",
 			"description": "+6 Attack\n-6 Health",
-			"fullDescription": "Revive after death once",
+			"fullDescription": "+6 Attack\n-6 Health",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"soulCost": 4,

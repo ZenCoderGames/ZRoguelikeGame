@@ -7,6 +7,7 @@ var currentCount:int
 var isAvailable:bool
 var _combatEventReceiver:CombatEventReceiver
 var _specialModifierList:Array = []
+var _cooldownTimer:int
 
 signal OnActivated()
 signal OnProgress(progress)
@@ -35,6 +36,8 @@ func _init(parentChar,specialData:SpecialData):
 	else:
 		character.connect("OnStatChanged",Callable(self,"_on_player_stat_changed"))
 		check_for_ready_with_energy()
+
+	_cooldownTimer = -1
 
 func on_event_triggered():
 	_increment()
@@ -71,6 +74,9 @@ func _set_ready():
 	CombatEventManager.emit_signal("OnPlayerSpecialAbilityReady", self)
 
 func _is_execute_condition_met():
+	if !data.useCustomConditions:
+		return true
+
 	if data.executeCondition == SpecialData.EXECUTE_CONDITION.NONE:
 		return true
 
@@ -84,7 +90,19 @@ func _is_execute_condition_met():
 
 	return false
 
+func is_on_cooldown():
+	return _cooldownTimer>=0 && GameGlobals.dungeon.turnsTaken-_cooldownTimer<data.cooldown
+
+func get_remaining_cooldown():
+	if _cooldownTimer==-1:
+		return 0
+
+	return data.cooldown - (GameGlobals.dungeon.turnsTaken-_cooldownTimer)
+
 func try_activate():
+	if is_on_cooldown():
+		return false
+
 	if _is_execute_condition_met():
 		_activate()
 		return true
@@ -107,6 +125,8 @@ func _activate():
 
 	if !data.useCustomConditions:
 		character.consume_energy(get_max_count())
+
+	_cooldownTimer = GameGlobals.dungeon.turnsTaken
 
 func _reset():
 	isAvailable = false

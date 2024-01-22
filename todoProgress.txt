@@ -21,9 +21,16 @@ Roguelike Dev:
 (D)- Mana as a system for spells (mana potions)
 (D)- Remake Stealth Refresh Special to give back mana instead
 (D)- Be able to hit reviving targets so you don't get stuck
-(IP)- Sometimes miniboss doesn't spawn and end room doesnt work
-- More Things (3 enemies) - 2 left
-- Vendors cache their items and cost is preserved between opening multiple times
+(D)- Healing Vendor (Cleric)
+(D)- Vendors cache their items and cost is preserved between opening multiple times
+(D)- Sometimes miniboss doesn't spawn and end room doesnt work
+(D)- Specials have cooldowns
+(D)- Rich Text Labels in other spots (Util function to parse text)
+- Contextual info not spawning in first room right next to player
+- Tutorial
+
+- More Things (3 enemies) - 2 left [Evil Knight -> Barrier, Healer]
+- Utils.format_text can parse keywords
 
 - Special slots (passives can give you more)
 - Specials as inventory items
@@ -31,14 +38,14 @@ Roguelike Dev:
 - Refactor on_stat_changed in Character.gd to be derived from the stat.gd instead
 
 - Vulnerable Status Effect
-- Runes - conditionals that give you big perks on completion (on hit, on kill, on take hit)
-- Hades style enigma upgrades
+- Quests - conditionals that give you big perks on completion (on hit, on kill, on take hit)
+- Hades style enigma upgrades -> Gods ?
 - Reincarnation on the player
 - Facing direction for enemies and player
+- Directionality of spells
 
 - Choice system for pickups (Auto Equip, Replace, Sell For Souls) - Specials, Weapons, Armor, Runes
 
-- Healing Vendor (Cleric)
 - Armor Mechanic
 - Health Shield
 

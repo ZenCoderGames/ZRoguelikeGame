@@ -25,7 +25,7 @@
 		{
 			"id": "PASSIVE_LIFESTEAL_ON_KILL",
 			"name": "Lifesteal",
-			"description": "Lifesteal +3 On Kill",
+			"description": "Lifesteal +2 On Kill",
 			"conditions": [
 				"ON_KILL"
 			],
@@ -39,7 +39,7 @@
 				{
 					"type": "LIFESTEAL",
 					"params": {
-						"flatAmount": 3
+						"flatAmount": 2
 					}
 				}
 			]
@@ -111,7 +111,7 @@
 		{
 			"id": "PASSIVE_PROTECTION_THORNS",
 			"name": "Protection Thorns",
-			"description": "Damage any enemies that hit you while [Protected] by 2",
+			"description": "Damage any enemies that hit you while [color=#b4a7d6]Protected[/color] by 2",
 			"conditions": [
 				"ON_TAKE_HIT",
 				"ON_BLOCKED_HIT"
@@ -189,7 +189,7 @@
 		{
 			"id": "PASSIVE_ASSASSIN_SPECIAL_MANA_ON_KILL",
 			"name": "Mana On Kill With Stealth",
-			"description": "Mana On Kill With Stealth",
+			"description": "Mana On Kill With [color=#b4a7d6]Stealth[/color]",
 			"conditions": [
 				"ON_KILL"
 			],
@@ -233,7 +233,7 @@
 		{
 			"id": "PASSIVE_BARRIER_ON_KILL",
 			"name": "Barrier On Kill",
-			"description": "After every kill, get a [Barrier]",
+			"description": "After every kill, get a [color=#b4a7d6]Barrier[/color]",
 			"dontDisplayInUI": true,
 			"conditions": [
 				"ON_KILL"
@@ -251,7 +251,7 @@
 		{
 			"id": "PASSIVE_BARRIER_ON_3RD_KILL",
 			"name": "Barrier On Kill (3)",
-			"description": "After every 3rd kill, get a [Barrier]",
+			"description": "After every 3rd kill, get a [color=#b4a7d6]Barrier[/color]",
 			"conditions": [
 				"ON_KILL"
 			], 

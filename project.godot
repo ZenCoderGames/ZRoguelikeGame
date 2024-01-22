@@ -125,6 +125,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.145098, 0.196078, 0.298039, 1)
 environment/defaults/default_environment="res://resource/default_env.tres"

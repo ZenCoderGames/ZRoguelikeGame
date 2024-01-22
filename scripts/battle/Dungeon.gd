@@ -15,6 +15,8 @@ var itemSpawnedMap:Dictionary = {}
 var dungeonData:DungeonData
 
 var isDungeonFinished:bool
+var isInitialized:bool
+var inBackableMenu:bool
 
 func _init():
 	GameGlobals.set_dungeon(self)
@@ -34,15 +36,16 @@ func create(recreatePlayer:bool) -> void:
 	_init_obstacles()
 	_init_items()
 	_init_upgrades()
+	_init_vendors()
 	_init_player(recreatePlayer)
 	_init_enemies()
-	_init_vendors()
-		
+
+	CombatEventManager.emit_signal("OnCombatInitialized")
+	isInitialized = true
+
 	player.connect("OnTurnCompleted",Callable(self,"_on_player_turn_completed"))
 	_init_turns()
 	_start_turn()
-
-	CombatEventManager.emit_signal("OnCombatInitialized")
 
 func _init_rooms():
 	rooms = []
@@ -437,6 +440,8 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 		if player!=null and !player.is_queued_for_deletion():
 			player.disconnect("OnTurnCompleted",Callable(self,"_on_player_turn_completed"))
 		player = null
+
+	isInitialized = false
 
 # HELPERS
 func is_intersecting_with_any_room(testRoom):

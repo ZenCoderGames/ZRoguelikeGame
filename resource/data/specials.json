@@ -3,7 +3,7 @@
 		{
 			"id": "SPECIAL_PALADIN",
 			"name": "Protection",
-			"description": "Grants [[Protection]] for 1 turn\n\nProtection: Invulnerability to damage for 1 turn",
+			"description": "Grants [color=#b4a7d6]Protection[/color] for 1 turn[color=#b4a7d6]\n\nProtection:[/color]Invulnerability to damage for 1 turn\n\n[color=#9fc5e8]Mana Cost:[/color] 3",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 3,
 			"soulCost": 0,
@@ -21,7 +21,7 @@
 		{
 			"id": "SPECIAL_BERSERKER",
 			"name": "Whirlwind",
-			"description": "Do a 360 spin attack with your current damage",
+			"description": "Do a 360 spin attack with your current damage\n\n[color=#9fc5e8]Mana Cost:[/color] 3",
 			"conditions": ["ON_POST_HIT"],
 			"count": 3,
 			"soulCost": 0,
@@ -45,7 +45,7 @@
 		{
 			"id": "SPECIAL_ASSASSIN",
 			"name": "Stealth",
-			"description": "Grants [[Stealth]] for 3 turns\n\nStealth: Invisible to enemies",
+			"description": "Grants [color=#b4a7d6]Stealth[/color] for 3 turns[color=#b4a7d6]\n\nStealth:[/color] Invisible to enemies\n\n[color=#9fc5e8]Mana Cost:[/color] 2",
 			"conditions": ["ON_KILL"],
 			"count": 2,
 			"soulCost": 0,
@@ -63,7 +63,7 @@
 		{
 			"id": "SPECIAL_BLINK_STRIKE",
 			"name": "Blink Strike",
-			"description": "Teleport behind a target and strike them with attack damage",
+			"description": "Teleport behind a target and strike them with attack damage\n\n[color=#9fc5e8]Mana Cost:[/color] 2",
 			"conditions": ["ON_POST_HIT"],
 			"count": 2,
 			"soulCost": 0,
@@ -87,7 +87,7 @@
 		{
 			"id": "SPECIAL_SWAP",
 			"name": "Nether Swap",
-			"description": "Swap positions with a target",
+			"description": "Swap positions with a target\n\n[color=#9fc5e8]Mana Cost:[/color] 2",
 			"conditions": ["ON_POST_HIT"],
 			"count": 2,
 			"soulCost": 0,
@@ -111,7 +111,7 @@
 		{
 			"id": "SPECIAL_LIFE_DRAIN",
 			"name": "Life Drain",
-			"description": "Drain +2 life from each enemy around you",
+			"description": "Drain +2 life from each enemy around you\n\n[color=#9fc5e8]Mana Cost:[/color] 4",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 4,
 			"soulCost": 0,
@@ -141,7 +141,7 @@
 		{
 			"id": "SPECIAL_LIGHTNING_BOLT",
 			"name": "Lightning Bolt",
-			"description": "A giant bolt of lightning finds a target and strikes it for 8 damage",
+			"description": "A giant bolt of lightning finds a random target near the player and strikes it for 8 damage\n\n[color=#9fc5e8]Mana Cost:[/color] 4",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 4,
 			"soulCost": 0,
@@ -171,7 +171,7 @@
 		{
 			"id": "SPECIAL_AOE_STUN",
 			"name": "Ground Stomp",
-			"description": "Stun all enemies around you",
+			"description": "Stun all enemies around you\n\n[color=#9fc5e8]Mana Cost:[/color] 4",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 4,
 			"soulCost": 0,
@@ -202,7 +202,7 @@
 		{
 			"id": "SPECIAL_FORCE_PUSH",
 			"name": "Force Push",
-			"description": "Pushes all enemies surrounding you away by upto 2 units",
+			"description": "Pushes all enemies surrounding you away by upto 2 units\n\n[color=#9fc5e8]Mana Cost:[/color] 3",
 			"conditions": ["ON_TAKE_HIT"],
 			"count": 3,
 			"soulCost": 0,

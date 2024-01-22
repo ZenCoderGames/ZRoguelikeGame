@@ -60,9 +60,9 @@ func _update_stat_color(label, compareWithMax):
 	if compareWithMax==0:
 		label.self_modulate = Color.WHITE
 	elif compareWithMax==-1:
-		label.self_modulate = Color.PALE_VIOLET_RED
+		label.self_modulate = Color.INDIAN_RED
 	elif compareWithMax==1:
-		label.self_modulate = Color.LAWN_GREEN
+		label.self_modulate = Color.LIME_GREEN
 
 func animate_panel(panel, label, newVal):
 	var startScale:Vector2 = Vector2(0.5, 0.5)

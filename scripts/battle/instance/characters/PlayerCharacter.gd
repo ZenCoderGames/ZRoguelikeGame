@@ -39,6 +39,15 @@ func _setup_events():
 	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_post_hit"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
+	await get_tree().create_timer(0.2).timeout
+	_intro_sequence()
+
+func _intro_sequence():
+	Utils.create_return_tween_vector2(self, "scale", self.scale, Vector2(1.25, 1.25), 0.15, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR, 1.5)
+	self.self_modulate = Color.AQUAMARINE
+	await get_tree().create_timer(0.2).timeout
+	reset_color()
+
 func pre_update():
 	super.pre_update()
 	_levelUpThisTurn = false

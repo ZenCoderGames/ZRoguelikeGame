@@ -24,16 +24,18 @@ func init(parentChar:Character, special:Special):
 	self.connect("mouse_exited", Callable(self,"_on_mouse_exited"))
 	SpecialActiveButton.connect("mouse_exited", Callable(self,"_on_mouse_exited"))
 	SpecialActiveButton.connect("pressed", Callable(self,"_on_special_pressed"))
+	CombatEventManager.connect("OnStartTurn",Callable(self,"_on_start_turn"))
 	SpecialActiveButton.text = special.data.name
 
 func _on_ability_ready(_specialVar:Special):
-	SpecialActiveButton.disabled = false
+	_refresh_ui()
 
 func _on_ability_reset(_specialVar:Special):
-	SpecialActiveButton.disabled = true
+	_refresh_ui()
 
 func _on_special_pressed():
 	CombatEventManager.emit_signal("OnPlayerSpecialAbilityPressed", _special)
+	_refresh_ui()
 
 func _on_mouse_entered():
 	CombatEventManager.on_show_info("Special", _special.data.description)
@@ -49,11 +51,14 @@ func _cleanup():
 		_special.disconnect("OnReset",Callable(self,"_on_ability_reset"))
 		_special.disconnect("OnSpecialModifierAdded",Callable(self,"_on_player_resource_updated"))
 		_special.disconnect("OnSpecialModifierRemoved",Callable(self,"_on_player_resource_updated"))
+	
+	CombatEventManager.disconnect("OnStartTurn",Callable(self,"_on_start_turn"))
 
 # RESOURCES
 func _init_resource_slots():
 	_create_all_resource_slots()
 	_special.connect("OnCountUpdated",Callable(self,"_on_player_resource_updated"))
+	_refresh_ui()
 
 func _create_all_resource_slots():
 	var maxEnergy:int = _special.get_max_count()
@@ -81,7 +86,7 @@ func _refresh_resources():
 		else:
 			resourceSlots[i].set_filled()
 
-	SpecialActiveButton.disabled = (currentEnergy != maxEnergy)
+	_refresh_ui()
 
 func _on_player_resource_updated(_character):
 	_refresh_resources()
@@ -90,3 +95,18 @@ func _clean_up_resource_slots():
 	for resourceSlot in resourceSlots:
 		resourceSlot.queue_free()
 	resourceSlots.clear()
+
+# COOLDOWN
+func _on_start_turn():
+	_refresh_ui()
+
+func _refresh_ui():
+	var currentEnergy:int = _parentChar.get_energy()
+	var maxEnergy:int = _special.get_max_count()
+	var remainingCooldown:int = _special.get_remaining_cooldown()
+	if remainingCooldown>0:
+		SpecialActiveButton.text = _special.data.name + "\n(CD: " + str(remainingCooldown) + ")"
+		SpecialActiveButton.disabled = true
+	else:
+		SpecialActiveButton.text = _special.data.name
+		SpecialActiveButton.disabled = (currentEnergy < maxEnergy)

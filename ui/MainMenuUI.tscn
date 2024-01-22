@@ -5,15 +5,8 @@
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://chuqffpcxuinf" path="res://ui/characterSelect/CharacterSelectUI.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="3_8id6n"]
-[ext_resource type="FontFile" uid="uid://chc6t8kyyaiyi" path="res://resource/fonts/kirifont/KiriFont.otf" id="5_p6xlt"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61nyt"]
-bg_color = Color(0.184314, 0.270588, 0.270588, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.263171, 0.451246, 0.308342, 1)
+[ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_co4b8"]
+[ext_resource type="FontFile" uid="uid://chvqhhsv3883r" path="res://resource/fonts/kirifont/KiriFont.ttf" id="6_u04gs"]
 
 [node name="MainMenuUI" type="Control"]
 layout_mode = 3
@@ -26,6 +19,7 @@ theme = ExtResource("1_wsy8d")
 script = ExtResource("1")
 
 [node name="Bg" type="TextureRect" parent="."]
+modulate = Color(0.466667, 0.466667, 0.466667, 1)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,6 +27,29 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("3_8id6n")
 expand_mode = 1
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -371.0
+offset_top = 2.0
+offset_right = 374.0
+offset_bottom = 157.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.603922, 0.239216, 0.160784, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("4_co4b8")
+theme_override_font_sizes/font_size = 50
+text = "Dungeons of Zekonia"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DeathUI" type="Control" parent="."]
 unique_name_in_owner = true
@@ -58,17 +75,17 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -215.0
-offset_top = 146.0
-offset_right = 1.0
-offset_bottom = 189.0
+offset_left = -489.0
+offset_top = 176.0
+offset_right = 4.0
+offset_bottom = 219.0
 grow_horizontal = 2
 scale = Vector2(2, 2)
 theme = ExtResource("2")
 theme_type_variation = &"HeaderMedium"
-theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_p6xlt")
-text = "YOU DIED!"
+theme_override_colors/font_color = Color(0.741176, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_u04gs")
+text = "You didnt escape the dungeon"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -82,8 +99,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -112.0
-offset_top = -83.0
-offset_right = 101.0
+offset_top = -55.0
+offset_right = 83.0
 offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -91,21 +108,7 @@ theme = ExtResource("1_wsy8d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuUI"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="PanelContainer" type="PanelContainer" parent="MenuUI/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_61nyt")
-
-[node name="Label" type="Label" parent="MenuUI/VBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.0
-text = "Dungeons of ZEKONIA"
-horizontal_alignment = 1
-uppercase = true
 
 [node name="NewGameButton" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
@@ -137,3 +140,43 @@ visible = false
 layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BackMenuUI" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.631373, 0.631373, 0.631373, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -55.0
+offset_right = 83.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wsy8d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackMenuUI"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BackToGameButton" type="Button" parent="BackMenuUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_wsy8d")
+text = "Back to Game
+"
+
+[node name="BackToStartMenu" type="Button" parent="BackMenuUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_wsy8d")
+text = "Back to Start Menu"
+
+[node name="ExitGameButton" type="Button" parent="BackMenuUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit Game"

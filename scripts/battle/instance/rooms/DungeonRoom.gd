@@ -178,8 +178,6 @@ func generate_enemy(enemyId):
 
 # MINIBOSS
 func generate_miniboss(enemyId):
-	print("SPAWN MINIBOSS")
-	print(enemyId)
 	var enemy:Node = generate_enemy(enemyId)
 	if enemy!=null:
 		enemy.set_as_miniboss()

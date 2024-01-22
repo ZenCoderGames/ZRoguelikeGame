@@ -13,7 +13,7 @@ class_name BattleUI
 @onready var skipTurnBtn:Button = $TouchControls/SkipTurn
 # details
 @onready var detailsUI:Node = get_node("DetailsUI")
-@onready var detailsLabel:Label = get_node("DetailsUI/DetailsLabel")
+@onready var detailsLabel:RichTextLabel = $"%DetailsLabel"
 # player xp/equipment
 @onready var playerPanel:Node = get_node("PlayerPanel")
 var playerUI:CharacterUI
@@ -119,10 +119,10 @@ func _on_item_picked_by_player(item):
 
 func _show_detail_info_text(strVal, duration):
 	detailsUI.visible = true
-	detailsLabel.text = strVal
+	detailsLabel.text = Utils.format_text(strVal)
 	await get_tree().create_timer(duration).timeout
 	detailsUI.visible = false
-	
+
 # INFO PANEL
 func _on_player_move():
 	for infoObject in infoPanelObjects:
@@ -265,19 +265,20 @@ func _remove_level_up_ui():
 func _on_show_vendor(vendorChar:VendorCharacter, vendorData:VendorData):
 	if vendorDict.has(vendorChar):
 		vendorUI = vendorDict[vendorChar]
-		add_child(vendorUI)
 	else:
 		vendorUI = VendorUI.instantiate()
-		add_child(vendorUI)
-		vendorUI.init(vendorChar, vendorData)
 		vendorDict[vendorChar] = vendorUI
+	add_child(vendorUI)
+	vendorUI.init(vendorChar, vendorData)
 	UIEventManager.emit_signal("OnSelectionMenuOn")
+	GameGlobals.dungeon.inBackableMenu = true
 
 func _on_vendor_closed():
 	remove_child(vendorUI)
 	#vendorUI.queue_free()
 	vendorUI = null
 	UIEventManager.emit_signal("OnSelectionMenuOff")
+	GameGlobals.dungeon.inBackableMenu = false
 
 # SPECIALS
 func _on_player_special_added(character:Character, special:Special):

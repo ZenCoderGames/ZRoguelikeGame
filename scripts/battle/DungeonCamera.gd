@@ -34,8 +34,8 @@ func _ready():
 	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
 	GameEventManager.connect("OnGameOver",Callable(self,"_on_game_over"))
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_attack"))
-	CombatEventManager.connect("OnRoomCombatStarted",Callable(self,"_on_room_combat_started"))
-	CombatEventManager.connect("OnRoomCombatEnded",Callable(self,"_on_room_combat_ended"))
+	#CombatEventManager.connect("OnRoomCombatStarted",Callable(self,"_on_room_combat_started"))
+	#CombatEventManager.connect("OnRoomCombatEnded",Callable(self,"_on_room_combat_ended"))
 	
 func _on_dungeon_init():
 	_register_player(GameGlobals.dungeon.player)

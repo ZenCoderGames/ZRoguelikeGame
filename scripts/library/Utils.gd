@@ -125,3 +125,7 @@ func clean_up_all_signals(node:Node):
 			#cur_conn.source.disconnect(, node, cur_conn.method_name)
 	'''
 	pass
+
+# TODO: Keyword parsing
+func format_text(val:String):
+	return str("[center]", val, "[/center]")

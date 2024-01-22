@@ -4,14 +4,14 @@ class_name ItemUI
 
 @onready var nameBg:ColorRect = $"%NameBg"
 @onready var nameLabel:Label = $"%NameLabel"
-@onready var descLabel:Label = $"%DescLabel"
+@onready var descLabel:RichTextLabel = $"%DescLabel"
 
 var item
 
 func init(itemInstance):
 	item = itemInstance
 	nameLabel.text = item.get_display_name()
-	descLabel.text = item.get_description()
+	descLabel.text = Utils.format_text(item.get_description())
 	if itemInstance is Item:
 		if itemInstance.data.is_gear():
 			nameBg.color = GameGlobals.battleInstance.view.itemGearColor

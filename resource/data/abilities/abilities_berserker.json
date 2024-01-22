@@ -32,7 +32,7 @@
 			"id": "ABILITY_BERSERKER_STUN",
 			"characterId": "BERSERKER",
 			"name": "Bigger Concussive",
-			"description": "Allows [Stun] to last for 1 Additional Turn",
+			"description": "Allows Stun to last for 1 Additional Turn",
 			"timeline": [
 				{
 					"type": "MODIFY_STATUS_EFFECT",

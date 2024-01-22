@@ -98,9 +98,9 @@
 			]
 		},
 		{
-			"id": "CLERIC_VENDOR",
-			"name": "Cleric",
-			"description": "Offers treatment for your wounds",
+			"id": "POTIONSMITH_VENDOR",
+			"name": "Apothecary",
+			"description": "Offers a variety of potions",
 			"path": "entity/characters/VendorCharacter.tscn",
 			"tintColor": "#b6d7a8",
 			"numItemsShown": 3,
@@ -109,7 +109,7 @@
 			"items": [
 				"ITEM_HEALTH_POTION_LARGE",
 				"ITEM_MANA_POTION_LARGE",
-				"ITEM_HEALTH_POTION_LARGE"
+				"ITEM_HEALTH_MANA_POTION"
 			]
 		},
 		{
