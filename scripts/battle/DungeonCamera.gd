@@ -36,10 +36,13 @@ func _ready():
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_attack"))
 	#CombatEventManager.connect("OnRoomCombatStarted",Callable(self,"_on_room_combat_started"))
 	#CombatEventManager.connect("OnRoomCombatEnded",Callable(self,"_on_room_combat_ended"))
-	
+
+	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_attack"))
+	CombatEventManager.connect("OnZoomIn",Callable(self,"_on_zoom_in"))
+	CombatEventManager.connect("OnZoomOut",Callable(self,"_on_zoom_out"))
+
 func _on_dungeon_init():
 	_register_player(GameGlobals.dungeon.player)
-
 
 func _register_player(playerRef):
 	player = playerRef
@@ -124,3 +127,11 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 	if fullRefreshDungeon:
 		if player!=null and !player.is_queued_for_deletion():
 			player.disconnect("OnCharacterMoveToCell",Callable(self,"_update_camera_to_player"))
+
+func _on_zoom_in():
+	self.zoom.x += 0.1
+	self.zoom.y += 0.1
+
+func _on_zoom_out():
+	self.zoom.x -= 0.1
+	self.zoom.y -= 0.1

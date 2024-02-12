@@ -17,6 +17,7 @@ func _ready():
 	CombatEventManager.connect("OnConsumeItem",Callable(self,"_on_consume_item"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_player_special_ready"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityActivated",Callable(self,"_on_player_special_activated"))
+	AudioEventManager.connect("OnGenericPickup",Callable(self,"_on_generic_pickup"))
 
 # MUSIC
 func _play_menu_music():
@@ -51,6 +52,9 @@ func _on_player_failed_to_move(_x, _y):
 	GameGlobals.audioManager.play_sfx("PLAYER_MOVE")
 
 func _on_player_item_picked():
+	GameGlobals.audioManager.play_sfx("ITEM_PICKUP")
+
+func _on_generic_pickup():
 	GameGlobals.audioManager.play_sfx("ITEM_PICKUP")
 
 func _on_any_character_attack(entity):

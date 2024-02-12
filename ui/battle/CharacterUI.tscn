@@ -57,6 +57,7 @@ text = "LEVEL UP!"
 [node name="Souls" type="HBoxContainer" parent="HSplitContainer/Base"]
 layout_mode = 2
 size_flags_horizontal = 4
+tooltip_text = "Souls Collected (Used to purchase upgrades)"
 
 [node name="SoulsIcon" type="TextureRect" parent="HSplitContainer/Base/Souls"]
 unique_name_in_owner = true

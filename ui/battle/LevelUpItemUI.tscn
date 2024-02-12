@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/battle/ui/LevelUp/LevelUpItemUI.gd" id="1_f71is"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itji0"]
-bg_color = Color(0.521569, 0.247059, 0.431373, 1)
+bg_color = Color(0.270588, 0.396078, 0.247059, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2

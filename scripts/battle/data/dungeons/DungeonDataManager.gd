@@ -1,6 +1,7 @@
 # Tracks all the data in the game
 class_name DungeonDataManager
 
+var tutorialPickupDataMap = {}
 var statusEffectDataMap = {}
 var passiveDataMap = {}
 var specialDataList = []
@@ -26,7 +27,6 @@ var abilityDataDict = {}
 var abilityList:Array
 
 func _init():
-	init_dungeon_data()
 	init_status_effects()
 	init_passives()
 	init_specials()
@@ -42,20 +42,23 @@ func _init():
 	init_characters()
 	init_encounters()
 	init_vendors("resource/data/vendors.json")
+	init_encounters()
+	init_tutorials()
 
 func on_character_chosen(charData):
 	playerData = charData
 
 # DUNGEONS
-func init_dungeon_data():
-	var data = Utils.load_data_from_file("resource/data/dungeons.json")
+func init_dungeon_data(dungeonDataPath:String):
+	dungeonDataList.clear()
+	var data = Utils.load_data_from_file(dungeonDataPath)
 	var dungeonDataJSList:Array = data["dungeons"]
 	for dungeonDataJS in dungeonDataJSList:
 		var newDungeonData = DungeonData.new(dungeonDataJS)
 		dungeonDataList.append(newDungeonData)
 
 func get_max_levels():
-	return GameGlobals.dataManager.dungeonDataList.size()
+	return dungeonDataList.size()
 
 func init_status_effects():
 	var data = Utils.load_data_from_file("resource/data/statusEffects.json")
@@ -198,3 +201,14 @@ func get_ability_data(id):
 	else:
 		print("ERROR: INVALID ABILITY ID Requested: " + id)
 		return null
+
+# TUTORIALS
+func init_tutorials():
+	var data = Utils.load_data_from_file("resource/data/tutorialPickups.json")
+	var tutorialPickupDataJSList:Array = data["tutorialPickups"]
+	for tutorialPickupDataJS in tutorialPickupDataJSList:
+		var newTutorialPickupData = TutorialPickupData.new(tutorialPickupDataJS)
+		tutorialPickupDataMap[newTutorialPickupData.id] = newTutorialPickupData
+
+func get_tutorial_pickup_data(id):
+	return tutorialPickupDataMap[id]

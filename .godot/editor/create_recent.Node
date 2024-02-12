@@ -1,3 +1,8 @@
+CheckButton
+Node2D
+Node
+SubViewport
+SubViewportContainer
 Label
 VBoxContainer
 Button
@@ -8,7 +13,3 @@ CenterContainer
 MarginContainer
 HBoxContainer
 TextureRect
-TextureButton
-HSplitContainer
-GridContainer
-Control

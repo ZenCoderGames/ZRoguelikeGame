@@ -2,16 +2,86 @@
 	"characters": {
 		"heroes": [
 			{
-				"id": "GENERIC_HERO",
+				"id": "GENERIC_HERO_TUTORIAL",
 				"displayName": "You",
 				"description": "Champion",
 				"path": "entity/characters/PlayerCharacter.tscn",
 				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Paladin.png",
+				"isGeneric": true,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 30
+					},
+					{
+						"type": "DAMAGE",
+						"value": 2
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 4
+					}
+				]
+			},
+			{
+				"id": "GENERIC_HERO_EASY",
+				"displayName": "You",
+				"description": "Champion",
+				"path": "entity/characters/PlayerCharacter.tscn",
+				"spritePath": "entity/characters/textures/Player_Base.png",
+				"portraitPath": "resource/portraits/Paladin.png",
+				"isGeneric": true,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 30
+					},
+					{
+						"type": "DAMAGE",
+						"value": 2
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 4
+					}
+				]
+			},
+			{
+				"id": "GENERIC_HERO_BALANCED",
+				"displayName": "You",
+				"description": "Champion",
+				"path": "entity/characters/PlayerCharacter.tscn",
+				"spritePath": "entity/characters/textures/Player_Base.png",
+				"portraitPath": "resource/portraits/Paladin.png",
+				"isGeneric": true,
 				"stats": [
 					{
 						"type": "HEALTH",
 						"value": 20
+					},
+					{
+						"type": "DAMAGE",
+						"value": 2
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 4
+					}
+				]
+			},
+			{
+				"id": "GENERIC_HERO_HARD",
+				"displayName": "You",
+				"description": "Champion",
+				"path": "entity/characters/PlayerCharacter.tscn",
+				"spritePath": "entity/characters/textures/Player_Base.png",
+				"portraitPath": "resource/portraits/Paladin.png",
+				"isGeneric": true,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 15
 					},
 					{
 						"type": "DAMAGE",
@@ -38,6 +108,10 @@
 					{
 						"type": "DAMAGE",
 						"value": 2
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 4
 					}
 				],
 				"specialId": "SPECIAL_PALADIN",
@@ -58,6 +132,10 @@
 					{
 						"type": "DAMAGE",
 						"value": 3
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 4
 					}
 				],
 				"specialId": "SPECIAL_BERSERKER",
@@ -77,6 +155,10 @@
 					{
 						"type": "DAMAGE",
 						"value": 5
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 4
 					}
 				],
 				"specialId": "SPECIAL_ASSASSIN",

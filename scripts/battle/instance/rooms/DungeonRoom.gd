@@ -37,6 +37,9 @@ var upgrades:Array = []
 # Vendors
 var vendors:Array = []
 
+# Tutorial Pickups
+var tutorialPickups:Array = []
+
 var maxRows:int
 var maxCols:int
 var startX:int
@@ -120,7 +123,10 @@ func generate_enemy_custom_encounter(encounterId):
 	var customEncounterData:CustomEncounterData = GameGlobals.dataManager.get_custom_encounter(encounterId)
 	for enemySpawnData in customEncounterData.enemySpawnDataList:
 		for i in enemySpawnData.count:
-			generate_enemy(enemySpawnData.type)
+			if enemySpawnData.isMiniboss:
+				generate_miniboss(enemySpawnData.type)
+			else:
+				generate_enemy(enemySpawnData.type)
 
 func generate_enemies(totalEnemiesToSpawn):
 	for i in totalEnemiesToSpawn:
@@ -188,7 +194,7 @@ func _on_miniboss_death():
 	#generate_upgrade(Upgrade.UPGRADE_TYPE.SHARED)
 	#generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
 	if GameGlobals.battleInstance.startWithClasses:
-		generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
+		generate_upgrade(Upgrade.UPGRADE_TYPE.HYBRID)
 	else:
 		generate_vendor("ARCHIVIST_VENDOR")
 
@@ -281,6 +287,25 @@ func generate_vendor(vendorId:String):
 	# spawn random enemy
 	var vendor:Node = GameGlobals.dungeon.load_vendor(loadedScenes, randomCell, vendorId, Constants.ENTITY_TYPE.DYNAMIC, Constants.vendors)
 	vendors.append(vendor)
+
+# TUTORIAL PICKUP
+func generate_tutorial_pickup(tutorialPickupId:String):
+	# find free cells
+	var playerCell = get_safe_starting_cell()
+	var freeCells:Array = []
+	for cell in cells:
+		if cell == playerCell:
+			continue
+
+		if cell.is_empty() and cell.is_within_room_buffered(2):
+			freeCells.append(cell)
+	
+	# choose random free cell
+	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
+
+	# spawn
+	var tutorialPickup:Node = GameGlobals.dungeon.load_tutorial_pickup(loadedScenes, randomCell, tutorialPickupId, Constants.ENTITY_TYPE.DYNAMIC, Constants.vendors)
+	tutorialPickups.append(tutorialPickup)
 
 func register_cell_connection(myCell):
 	if myCell.is_top_edge():
@@ -401,6 +426,17 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			entity.move_to_cell(cell, true)
 			return true
 		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
+			# Tutorial Pickups
+			if cell.entityObject is TutorialPickup:
+				var tutorialPickup = cell.entityObject
+				GameGlobals.dungeon.add_to_dungeon_scenes(tutorialPickup)
+				loadedScenes.erase(tutorialPickup)
+				tutorialPickup.activate()
+				tutorialPickup.hide()
+				currentCell.clear_entity()
+				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
+				entity.move_to_cell(cell, true)
+				return true
 			# Vendor
 			if cell.entityObject is VendorCharacter:
 				var vendor = cell.entityObject

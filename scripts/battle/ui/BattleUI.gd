@@ -11,6 +11,8 @@ class_name BattleUI
 @onready var leftArrowBtn:Button = $TouchControls/LeftArrow
 @onready var rightArrowBtn:Button = $TouchControls/RightArrow
 @onready var skipTurnBtn:Button = $TouchControls/SkipTurn
+@onready var zoomInBtn:Button = $TouchControls/ZoomIn
+@onready var zoomOutBtn:Button = $TouchControls/ZoomOut
 # details
 @onready var detailsUI:Node = get_node("DetailsUI")
 @onready var detailsLabel:RichTextLabel = $"%DetailsLabel"
@@ -210,6 +212,8 @@ func _setup_touch_buttons():
 	rightArrowBtn.connect("pressed",Callable(self,"_on_right_touch_pressed"))
 	downArrowBtn.connect("pressed",Callable(self,"_on_down_touch_pressed"))
 	skipTurnBtn.connect("pressed",Callable(self,"_on_skip_turn_pressed"))
+	zoomInBtn.connect("pressed",Callable(self,"_on_zoom_in_pressed"))
+	zoomOutBtn.connect("pressed",Callable(self,"_on_zoom_out_pressed"))
 
 func _on_left_touch_pressed():
 	CombatEventManager.on_touch_button_pressed(0)
@@ -226,6 +230,12 @@ func _on_down_touch_pressed():
 func _on_skip_turn_pressed():
 	CombatEventManager.on_skip_turn_pressed()
 	_refresh_ui()
+
+func _on_zoom_in_pressed():
+	CombatEventManager.emit_signal("OnZoomIn")
+
+func _on_zoom_out_pressed():
+	CombatEventManager.emit_signal("OnZoomOut")
 
 func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 	if fullRefreshDungeon:

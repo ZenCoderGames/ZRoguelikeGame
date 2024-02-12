@@ -18,6 +18,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Mana - Used to activate specials"
 texture = ExtResource("1_f6ybf")
 expand_mode = 1
 script = ExtResource("2_iet2o")

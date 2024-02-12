@@ -30,6 +30,42 @@
 					"count": 1
 				}
 			]
+		},
+		{
+			"id": "TUTORIAL_FIRST",
+			"enemies": [
+				{
+					"type": "RAT",
+					"count": 1
+				}
+			]
+		},
+		{
+			"id": "TUTORIAL_SECOND",
+			"enemies": [
+				{
+					"type": "RAT",
+					"count": 1
+				},
+				{
+					"type": "SKELETON",
+					"count": 1
+				}
+			]
+		},
+		{
+			"id": "TUTORIAL_MINIBOSS",
+			"enemies": [
+				{
+					"type": "SKELETON",
+					"count": 1,
+					"isMiniboss": true
+				},
+				{
+					"type": "RAT",
+					"count": 3
+				}
+			]
 		}
 	]
 }

@@ -35,6 +35,7 @@ const enemies: String = "enemies"
 const items: String = "items"
 const upgrades: String = "upgrades"
 const vendors: String = "vendors"
+const tutorialPickups: String = "tutorialPickups"
 
 # INPUTS
 const INPUT_EXIT_GAME: String = "exit"

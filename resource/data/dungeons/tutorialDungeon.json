@@ -1,0 +1,68 @@
+{
+	"dungeons": [
+		{
+			"numRooms": 7,
+			"roomMinRows": 8,
+			"roomMaxRows": 12,
+			"roomMinCols": 8,
+			"roomMaxCols": 12,
+			"obstacleChance": 0.75,
+			"minObstacles": 4,
+			"maxObstacles": 6,
+			"itemCountMin": 4,
+			"itemCountMax": 6,
+			"itemHeighestTier": 1,
+			"enemyDifficultyHighestTier": 1,
+			"enemyMinCostPerRoom": 4,
+			"enemyExtraCostForSingleRoom": 4,
+			"enemyScalingCostPerRoom": 2,
+			"customRooms": [
+				{
+					"tutorialPickups": [
+						"TUTORIAL_MOVEMENT",
+						"TUTORIAL_CAMERA",
+						"TUTORIAL_TOOLTIPS"
+					]
+				},
+				{
+					"tutorialPickups": [
+						"TUTORIAL_ATTACK",
+						"TUTORIAL_SKIP_TURN"
+					],
+					"encounterId": "TUTORIAL_FIRST"
+				},
+				{
+					"tutorialPickups": [
+						"TUTORIAL_POTIONS"
+					],
+					"itemId": "ITEM_PRISMATIC_SHIELD"
+				},
+				{
+					"tutorialPickups": [
+						"TUTORIAL_EQUIPMENT"
+					],
+					"itemId": "ITEM_BASIC_SWORD"
+				},
+				{
+					"tutorialPickups": [
+						"TUTORIAL_VENDORS"
+					],
+					"vendorId": "MYSTIC_VENDOR"
+				},
+				{
+					"tutorialPickups": [
+						"TUTORIAL_SPECIAL",
+						"TUTORIAL_MANA"
+					],
+					"encounterId": "TUTORIAL_SECOND"
+				},
+				{
+					"tutorialPickups": [
+						"TUTORIAL_MINIBOSS"
+					],
+					"encounterId": "TUTORIAL_MINIBOSS"
+				}
+			]
+		}
+	]
+}

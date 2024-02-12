@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://v7yoew6veafh"]
 
-[ext_resource path="res://sourceArt/Consumable.png" type="Texture2D" id=1]
-[ext_resource path="res://scripts/battle/instance/items/Item.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://bijatho582wi5" path="res://sourceArt/Consumable.png" id="1"]
+[ext_resource type="Script" path="res://scripts/battle/instance/items/Item.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://c2ub2yn5vtdpe" path="res://ui/battle/HoverInfoUI.tscn" id="3_y4c52"]
 
 [node name="Item_HealthUpgrade" type="Sprite2D"]
-self_modulate = Color( 0.113725, 0.686275, 0.254902, 1 )
-position = Vector2( 209, 69 )
-texture = ExtResource( 1 )
-script = ExtResource( 2 )
+self_modulate = Color(0.113725, 0.686275, 0.254902, 1)
+position = Vector2(209, 69)
+texture = ExtResource("1")
+script = ExtResource("2")
+
+[node name="HoverInfo" parent="." instance=ExtResource("3_y4c52")]
+unique_name_in_owner = true
+title = "Consumable"
+description = "To be picked up"

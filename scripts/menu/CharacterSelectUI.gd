@@ -4,19 +4,19 @@ class_name CharacterSelectUI
 
 @onready var charSelectHolder:HBoxContainer = $"%CharSelectHolder"
 
-const CharacterSelectItemUI := preload("res://ui/characterSelect/CharacterSelectItemUI.tscn")
+const CharacterSelectItemUIClass := preload("res://ui/characterSelect/CharacterSelectItemUI.tscn")
 
 var initialized:bool = false
 
-func init_from_data():
+func init_from_data(dungeonPath:String):
 	if initialized:
 		return
 		
 	for heroData in GameGlobals.dataManager.heroDataList:
-		if heroData.id == "GENERIC_HERO":
+		if heroData.isGeneric:
 			continue
-		var charSelectItem = CharacterSelectItemUI.instantiate()
+		var charSelectItem = CharacterSelectItemUIClass.instantiate()
 		charSelectHolder.add_child(charSelectItem)
-		charSelectItem.init_from_data(heroData)
+		charSelectItem.init_from_data(heroData, dungeonPath)
 	initialized = true
 

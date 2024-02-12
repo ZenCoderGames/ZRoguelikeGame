@@ -30,6 +30,7 @@ GameEventManager="*res://scripts/GameEventManager.gd"
 HitResolutionManager="*res://scripts/battle/general/HitResolutionManager.gd"
 CombatEventManager="*res://scripts/battle/general/CombatEventManager.gd"
 UIEventManager="*res://scripts/UIEventManager.gd"
+AudioEventManager="*res://scripts/audio/AudioEventManager.gd"
 
 [debug]
 
@@ -39,12 +40,17 @@ gdscript/warnings/integer_division=false
 
 [display]
 
-window/size/viewport_height=678
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/energy_saving/keep_screen_on=false
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+
+[gui]
+
+timers/tooltip_delay_sec=0.15
 
 [input]
 

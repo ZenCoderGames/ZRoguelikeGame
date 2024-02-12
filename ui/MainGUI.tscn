@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cusqgwo5ljbli"]
+[gd_scene load_steps=12 format=3 uid="uid://cusqgwo5ljbli"]
 
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wj80w"]
 [ext_resource type="Script" path="res://scripts/battle/ui/BattleUI.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://d1qgge8f51gf7" path="res://sourceArt/Icons/plus.png" id="4_i4bdx"]
 [ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="4_roi72"]
 [ext_resource type="Texture2D" uid="uid://veq3nrj8bnax" path="res://sourceArt/Icons/hourglass.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://catijjauoh13s" path="res://sourceArt/Icons/minus.png" id="5_00vh4"]
 [ext_resource type="Texture2D" uid="uid://cor6yaesr2dar" path="res://sourceArt/Icons/arrowUp.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://cktcjr0tuc4x7" path="res://sourceArt/Icons/arrowDown.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://bmuvff2xqjsds" path="res://sourceArt/Icons/arrowRight.png" id="9"]
@@ -41,6 +43,7 @@ offset_left = 7.98407
 offset_top = -32.0
 offset_right = 43.9841
 offset_bottom = 4.00003
+tooltip_text = "Move Up"
 focus_mode = 0
 theme = ExtResource("1_wj80w")
 
@@ -55,12 +58,55 @@ grow_vertical = 2
 texture = ExtResource("6")
 expand_mode = 1
 
+[node name="ZoomIn" type="Button" parent="TouchControls"]
+layout_mode = 0
+offset_left = 58.0001
+offset_top = -32.0
+offset_right = 94.0002
+offset_bottom = 4.00003
+tooltip_text = "Zoom In"
+focus_mode = 0
+theme = ExtResource("1_wj80w")
+
+[node name="TextureRect" type="TextureRect" parent="TouchControls/ZoomIn"]
+self_modulate = Color(0.698039, 0.698039, 0.698039, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_i4bdx")
+expand_mode = 1
+
+[node name="ZoomOut" type="Button" parent="TouchControls"]
+layout_mode = 0
+offset_left = -39.9999
+offset_top = -32.0
+offset_right = -3.99982
+offset_bottom = 4.00003
+tooltip_text = "Zoom Out"
+focus_mode = 0
+theme = ExtResource("1_wj80w")
+
+[node name="TextureRect" type="TextureRect" parent="TouchControls/ZoomOut"]
+self_modulate = Color(0.698039, 0.698039, 0.698039, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_00vh4")
+expand_mode = 1
+
 [node name="LeftArrow" type="Button" parent="TouchControls"]
 layout_mode = 0
 offset_left = -40.0159
 offset_top = 14.0
 offset_right = -4.01593
 offset_bottom = 50.0
+tooltip_text = "Move Left"
 focus_mode = 0
 theme = ExtResource("1_wj80w")
 
@@ -81,6 +127,7 @@ offset_left = 56.9841
 offset_top = 14.0
 offset_right = 92.9841
 offset_bottom = 50.0
+tooltip_text = "Move Right"
 focus_mode = 0
 theme = ExtResource("1_wj80w")
 
@@ -101,6 +148,7 @@ offset_left = 7.98407
 offset_top = 60.0
 offset_right = 43.9841
 offset_bottom = 96.0
+tooltip_text = "Move Down"
 focus_mode = 0
 theme = ExtResource("1_wj80w")
 
@@ -121,6 +169,7 @@ offset_left = 8.0
 offset_top = 14.0
 offset_right = 44.0
 offset_bottom = 50.0
+tooltip_text = "Skip Your Turn"
 focus_mode = 0
 theme = ExtResource("1_wj80w")
 
@@ -208,6 +257,7 @@ grow_horizontal = 0
 [node name="LevelContainer" type="HBoxContainer" parent="BattleProgressPanel"]
 self_modulate = Color(0.992157, 0.937255, 0.486275, 1)
 layout_mode = 2
+tooltip_text = "Dungeons Descended"
 alignment = 2
 
 [node name="TextureRect2" type="TextureRect" parent="BattleProgressPanel/LevelContainer"]
@@ -228,6 +278,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 9
 size_flags_vertical = 9
+tooltip_text = "Turns Taken"
 alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="BattleProgressPanel/TurnContainer"]

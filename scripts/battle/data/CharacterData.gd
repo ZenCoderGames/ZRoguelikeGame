@@ -15,6 +15,7 @@ var attackAction:ActionData
 var disable:bool
 var specialId:String
 var passiveId:String
+var isGeneric:bool
 
 func _init(dataJS):
 	id = dataJS["id"]
@@ -26,6 +27,7 @@ func _init(dataJS):
 	difficulty = Utils.get_data_from_json(dataJS, "difficulty", 1)
 	cost =  Utils.get_data_from_json(dataJS, "cost", 0)
 	xp =  Utils.get_data_from_json(dataJS, "xp", 0)
+	isGeneric = Utils.get_data_from_json(dataJS, "isGeneric", false)
 	
 	var statDataJSList = dataJS["stats"]
 	for statDataJS in statDataJSList:

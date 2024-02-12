@@ -27,6 +27,8 @@ signal ShowUpgrade(upgradeType)
 signal ShowVendor(vendorChar, vendorData)
 signal OnVendorItemSelected(abilityData)
 signal OnVendorClosed()
+signal OnZoomIn()
+signal OnZoomOut()
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):

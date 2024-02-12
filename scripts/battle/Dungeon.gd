@@ -17,6 +17,7 @@ var dungeonData:DungeonData
 var isDungeonFinished:bool
 var isInitialized:bool
 var inBackableMenu:bool
+var isCustomRoomSetup:bool
 
 func _init():
 	GameGlobals.set_dungeon(self)
@@ -25,6 +26,7 @@ func _init():
 
 func init(dungeonDataRef:DungeonData):
 	dungeonData = dungeonDataRef
+	isCustomRoomSetup = dungeonData.customRoomList.size()>0
 	isDungeonFinished = false
 
 func create(recreatePlayer:bool) -> void:
@@ -39,6 +41,8 @@ func create(recreatePlayer:bool) -> void:
 	_init_vendors()
 	_init_player(recreatePlayer)
 	_init_enemies()
+	if isCustomRoomSetup:
+		_init_custom_rooms()
 
 	CombatEventManager.emit_signal("OnCombatInitialized")
 	isInitialized = true
@@ -101,6 +105,11 @@ func _init_rooms():
 				moveX = xDirn
 			elif randomDirn == 1:
 				moveY = yDirn
+
+			if isCustomRoomSetup:
+				moveX = 1
+				moveY = 0
+
 			# move out of start spawn room
 			while is_intersecting_with_room(newRoom, startSpawnRoom):
 				newRoom.startX += moveX * 1 # Constants.STEP_X
@@ -220,6 +229,9 @@ func _init_enemies():
 
 	if GameGlobals.battleInstance.dontSpawnEnemies:
 		return
+
+	if isCustomRoomSetup:
+		return
 	
 	var minCostPerRoom:int = dungeonData.enemyMinCostPerRoom
 	var extraCostForSingleRoom:int = dungeonData.enemyExtraCostForSingleRoom
@@ -283,6 +295,9 @@ func _init_items():
 	if GameGlobals.battleInstance.debugSpawnItems.size()>0:
 		for debugItem in GameGlobals.battleInstance.debugSpawnItems:
 			startRoom.generate_item(debugItem)
+
+	if isCustomRoomSetup:
+		return
 
 	var itemDataList = Utils.duplicate_array(GameGlobals.dataManager.itemDataList)
 	itemDataList.shuffle()
@@ -354,13 +369,24 @@ func _init_upgrades():
 	if GameGlobals.battleInstance.debugSpawnClassSpecificUpgrade:
 		startRoom.generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
 
+	if GameGlobals.battleInstance.debugSpawnHybridUpgrade:
+		startRoom.generate_upgrade(Upgrade.UPGRADE_TYPE.HYBRID)
+
+	if isCustomRoomSetup:
+		return
+
 func _init_vendors():
 	if !GameGlobals.battleInstance.debugSpawnVendor.is_empty():
 		startRoom.generate_vendor(GameGlobals.battleInstance.debugSpawnVendor)
+	
 	if GameGlobals.battleInstance.debugSouls>0:
 		player.gain_souls(GameGlobals.battleInstance.debugSouls)
 
-	startRoom.generate_vendor("MYSTIC_VENDOR")
+	if isCustomRoomSetup:
+		return
+
+	if !GameGlobals.battleInstance.startWithClasses:
+		startRoom.generate_vendor("MYSTIC_VENDOR")
 	
 	var specialRoom:DungeonRoom = rooms[rooms.size()/2]
 	var specialVendors:Array = ["SHAMAN_VENDOR", "BLACKSMITH_VENDOR", "RUNESMITH_VENDOR"]
@@ -374,6 +400,27 @@ func _init_player(recreatePlayer:bool):
 	else:
 		player.init_for_next_dungeon()
 		player.move_to_cell(cell)
+
+func _init_custom_rooms():
+	var i:int = 0
+	for room in rooms:
+		var customRoomData:DungeonCustomRoomData = dungeonData.customRoomList[i]
+		_init_custom_room(customRoomData, room)
+		i = i+1
+
+func _init_custom_room(customRoomData:DungeonCustomRoomData, room:DungeonRoom):
+	if customRoomData.tutorialPickUps.size()>0:
+		for tutorialPickUpId in customRoomData.tutorialPickUps:
+			room.generate_tutorial_pickup(tutorialPickUpId)
+
+	if customRoomData.itemId:
+		room.generate_item(customRoomData.itemId)
+	
+	if customRoomData.encounterId:
+		room.generate_enemy_custom_encounter(customRoomData.encounterId)
+
+	if customRoomData.vendorId:
+		room.generate_vendor(customRoomData.vendorId)
 
 # TURN LOGIC
 func _init_turns():
@@ -500,6 +547,8 @@ func load_upgrade(parentContainer, cell, upgradeType, entityType, groupName):
 		upgradePath = "entity/upgrades/Upgrade_Shared.tscn"
 	elif upgradeType == Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC:
 		upgradePath = "entity/upgrades/Upgrade_Class.tscn"
+	elif upgradeType == Upgrade.UPGRADE_TYPE.HYBRID:
+		upgradePath = "entity/upgrades/Upgrade_Hybrid.tscn"
 	var upgradePrefab := load(str("res://", upgradePath))
 	var upgradeObject = Utils.create_scene(parentContainer, "Upgrade", upgradePrefab, groupName, cell)
 	cell.init_entity(upgradeObject, entityType)
@@ -513,6 +562,14 @@ func load_vendor(parentContainer, cell, vendorId, entityType, groupName):
 	vendorObject.cell = cell
 	cell.init_entity(vendorObject, entityType)
 	return vendorObject
+
+func load_tutorial_pickup(parentContainer, cell, tutorialPickupId, entityType, groupName):
+	var tutorialPickupData:TutorialPickupData = GameGlobals.dataManager.get_tutorial_pickup_data(tutorialPickupId)
+	var tutorialPickupDataPrefab := load("res://entity/tutorial/TutorialPickup.tscn")
+	var tutorialPickupObject = Utils.create_scene(parentContainer, "TutorialPickup", tutorialPickupDataPrefab, groupName, cell)
+	tutorialPickupObject.init(tutorialPickupData, cell)
+	cell.init_entity(tutorialPickupObject, entityType)
+	return tutorialPickupObject
 
 func get_adjacent_characters(character, relativeTeamType, numTiles:int=1):
 	var currentPlayerRoom:DungeonRoom = player.currentRoom

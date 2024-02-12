@@ -1,0 +1,55 @@
+{
+	"dungeons": [
+		{
+			"numRooms": 6,
+			"roomMinRows": 8,
+			"roomMaxRows": 12,
+			"roomMinCols": 8,
+			"roomMaxCols": 12,
+			"obstacleChance": 0.75,
+			"minObstacles": 4,
+			"maxObstacles": 6,
+			"itemCountMin": 4,
+			"itemCountMax": 6,
+			"itemHeighestTier": 1,
+			"enemyDifficultyHighestTier": 1,
+			"enemyMinCostPerRoom": 4,
+			"enemyExtraCostForSingleRoom": 4,
+			"enemyScalingCostPerRoom": 2
+		},
+		{
+			"numRooms": 6,
+			"roomMinRows": 10,
+			"roomMaxRows": 12,
+			"roomMinCols": 8,
+			"roomMaxCols": 12,
+			"obstacleChance": 0.5,
+			"minObstacles": 2,
+			"maxObstacles": 4,
+			"itemCountMin": 3,
+			"itemCountMax": 4,
+			"itemHeighestTier": 2,
+			"enemyDifficultyHighestTier": 2,
+			"enemyMinCostPerRoom": 8,
+			"enemyExtraCostForSingleRoom": 6,
+			"enemyScalingCostPerRoom": 6
+		},
+		{
+			"numRooms": 7,
+			"roomMinRows": 10,
+			"roomMaxRows": 14,
+			"roomMinCols": 9,
+			"roomMaxCols": 14,
+			"obstacleChance": 0.5,
+			"minObstacles": 3,
+			"maxObstacles": 5,
+			"itemCountMin": 3,
+			"itemCountMax": 5,
+			"itemHeighestTier": 4,
+			"enemyDifficultyHighestTier": 3,
+			"enemyMinCostPerRoom": 9,
+			"enemyExtraCostForSingleRoom": 7,
+			"enemyScalingCostPerRoom": 8
+		}
+	]
+}

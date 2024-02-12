@@ -2,10 +2,12 @@ extends Node
 
 class_name MainMenuUI
 
-@onready var newGameButton:Button = $"%NewGameButton"
-@onready var saveGameButton:Button = $"%SaveGameButton"
-@onready var loadGameButton:Button = $"%LoadGameButton"
+@onready var tutorialButton:Button = $"%Tutorial"
+@onready var easyGameButton:Button = $"%Easy"
+@onready var balancedGameButton:Button = $"%Balanced"
+@onready var hardGameButton:Button = $"%Hard"
 @onready var settingsButton:Button = $"%SettingsButton"
+@onready var classToggle:CheckButton = $"%ClassToggle"
 @onready var backToGameButton:Button = $"%BackToGameButton"
 @onready var backToStartMenuButton:Button = $"%BackToStartMenu"
 @onready var exitGameButton:Button = $"%ExitGameButton"
@@ -17,11 +19,13 @@ class_name MainMenuUI
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	newGameButton.connect("button_up",Callable(self,"on_new_game"))
-	saveGameButton.connect("button_up",Callable(self,"on_save_game"))
-	loadGameButton.connect("button_up",Callable(self,"on_load_game"))
+	tutorialButton.connect("button_up",Callable(self,"on_tutorial"))
+	easyGameButton.connect("button_up",Callable(self,"on_easy_game"))
+	balancedGameButton.connect("button_up",Callable(self,"on_balanced_game"))
+	hardGameButton.connect("button_up",Callable(self,"on_hard_game"))
 	settingsButton.connect("button_up",Callable(self,"on_settings"))
-	
+	classToggle.connect("toggled",Callable(self,"on_class_toggle"))
+
 	deathUI.visible = false
 	
 	backMenuUI.visible = false
@@ -50,26 +54,35 @@ func show_menu():
 	baseMenuUI.visible = true
 	characterSelectUI.visible = false
 
-func on_new_game():
+func on_tutorial():
+	start_battle("GENERIC_HERO_TUTORIAL", "resource/data/dungeons/tutorialDungeon.json")
+
+func on_easy_game():
+	start_battle("GENERIC_HERO_EASY", "resource/data/dungeons/easyDungeon.json")
+	
+func on_balanced_game():
+	start_battle("GENERIC_HERO_BALANCED", "resource/data/dungeons/balancedDungeon.json")
+	
+func on_hard_game():
+	start_battle("GENERIC_HERO_HARD", "resource/data/dungeons/hardDungeon.json")
+
+func start_battle(heroId:String, dungeonPath:String):
 	UIEventManager.emit_signal("OnMainMenuButton")
 	_clean_up()
 	baseMenuUI.visible = false
 
 	if GameGlobals.battleInstance.startWithClasses:
 		characterSelectUI.visible = true
-		characterSelectUI.init_from_data()
+		characterSelectUI.init_from_data(dungeonPath)
 	else:
-		GameEventManager.on_character_chosen(GameGlobals.dataManager.get_character_data("GENERIC_HERO"))
-		GameEventManager.ready_to_battle()
-	
-func on_save_game():
-	pass
-	
-func on_load_game():
-	pass
-	
+		GameEventManager.on_character_chosen(GameGlobals.dataManager.get_character_data(heroId))
+		GameEventManager.ready_to_battle(dungeonPath)
+
 func on_settings():
 	pass
+
+func on_class_toggle(isToggleOn:bool):
+	GameGlobals.battleInstance.startWithClasses = isToggleOn
 
 func _on_game_over():
 	await GameGlobals.battleInstance.get_tree().create_timer(Constants.SHOW_DEATH_UI_TIME).timeout

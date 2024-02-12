@@ -1,5 +1,3 @@
-extends Node
-
 class_name DungeonData
 
 var numRooms:int
@@ -17,6 +15,7 @@ var enemyDifficultyHighestTier:int
 var enemyMinCostPerRoom:int = 5
 var enemyExtraCostForSingleRoom:int = 5
 var enemyScalingCostPerRoom:int = 3
+var customRoomList:Array
 
 func _init(dataJS):
 	numRooms = Utils.get_data_from_json(dataJS, "numRooms", 3)
@@ -34,3 +33,8 @@ func _init(dataJS):
 	enemyMinCostPerRoom = Utils.get_data_from_json(dataJS, "enemyMinCostPerRoom", 5)
 	enemyExtraCostForSingleRoom = Utils.get_data_from_json(dataJS, "enemyExtraCostForSingleRoom", 5)
 	enemyScalingCostPerRoom = Utils.get_data_from_json(dataJS, "enemyScalingCostPerRoom", 3)
+	if dataJS.has("customRooms"):
+		var customRoomJSList = dataJS["customRooms"]
+		for customRoomJS in customRoomJSList:
+			var customRoomData:DungeonCustomRoomData = DungeonCustomRoomData.new(customRoomJS)
+			customRoomList.append(customRoomData)

@@ -111,30 +111,43 @@ theme = ExtResource("1_wsy8d")
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="NewGameButton" type="Button" parent="MenuUI/VBoxContainer"]
+[node name="Tutorial" type="Button" parent="MenuUI/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.368627, 1, 0, 1)
+layout_mode = 2
+text = "Tutorial"
+
+[node name="Easy" type="Button" parent="MenuUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Easy"
+
+[node name="Balanced" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_wsy8d")
-text = "New Game"
+text = "Balanced"
 
-[node name="SaveGameButton" type="Button" parent="MenuUI/VBoxContainer"]
+[node name="Hard" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
+modulate = Color(1, 0.0666667, 0, 1)
 layout_mode = 2
-disabled = true
-text = "Save Game"
-
-[node name="LoadGameButton" type="Button" parent="MenuUI/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-disabled = true
-text = "Load Game"
+theme = ExtResource("1_wsy8d")
+text = "Hard"
 
 [node name="SettingsButton" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 self_modulate = Color(0.54902, 0.968627, 0.898039, 1)
 layout_mode = 2
 disabled = true
 text = "Settings"
+
+[node name="ClassToggle" type="CheckButton" parent="MenuUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "With Classes"
+alignment = 1
 
 [node name="CharacterSelectUI" parent="." instance=ExtResource("3")]
 visible = false

@@ -23,6 +23,7 @@ class_name BattleInstance
 @export var debugSpawnItems:Array # (Array, String)
 @export var debugSpawnSharedUpgrade:bool
 @export var debugSpawnClassSpecificUpgrade:bool
+@export var debugSpawnHybridUpgrade:bool
 @export var debugSpawnVendor:String
 @export var debugSouls:int
 @export var setPlayerInvulnerable:bool
@@ -41,7 +42,6 @@ func _init():
 
 func _ready():
 	currentDungeonIdx = 0
-	GameGlobals.dungeon.init(GameGlobals.dataManager.dungeonDataList[currentDungeonIdx])
 
 	GameEventManager.connect("OnCharacterSelected",Callable(self,"_on_character_chosen"))
 	
@@ -54,14 +54,16 @@ func _ready():
 func _on_character_chosen(charData):
 	GameGlobals.dataManager.on_character_chosen(charData)
 
-func _on_new_game():
+func _on_new_game(dungeonPath:String):
 	if !firstTimeDungeon:
-		_create_dungeon()
+		_create_dungeon(dungeonPath)
 	else:
 		recreate_dungeon(0)
 
-func _create_dungeon():
+func _create_dungeon(dungeonPath:String):
 	_toggle_main_menu()
+	GameGlobals.dataManager.init_dungeon_data(dungeonPath)
+	GameGlobals.dungeon.init(GameGlobals.dataManager.dungeonDataList[currentDungeonIdx])
 	_shared_dungeon_init()
 	firstTimeDungeon = true
 	GameEventManager.emit_signal("OnDungeonInitialized")

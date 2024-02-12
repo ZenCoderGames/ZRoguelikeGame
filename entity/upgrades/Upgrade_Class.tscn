@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/battle/instance/upgrades/Upgrade.gd" id="2_etyeu"]
 
 [node name="Upgrade_ClassSpecific" type="Sprite2D"]
-self_modulate = Color(0.682353, 0.298039, 0.768627, 1)
+self_modulate = Color(0.701961, 0.407843, 0.168627, 1)
 position = Vector2(209, 69)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_xt56m")
