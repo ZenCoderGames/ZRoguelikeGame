@@ -74,6 +74,11 @@ func animate_panel(panel, label, newVal):
 
 func on_mouse_entered():
 	var desc:String = parentCharacter.charData.get_description() + " " + parentCharacter.get_summary()
+	var damage:int = parentCharacter.get_damage()
+	var health:int = parentCharacter.get_health()
+	var maxHealth:int = parentCharacter.get_max_health()
+	desc = desc + "\n[color=#bf9143]Damage:[/color] " + str(damage)
+	desc = desc + "\n[color=#c84750]Health:[/color] " + str(health) + "/" + str(maxHealth)
 	CombatEventManager.on_show_info(parentCharacter.displayName, desc)
 
 func on_mouse_exited():

@@ -46,6 +46,7 @@ theme_override_fonts/font = ExtResource("3_phf1u")
 theme_override_font_sizes/font_size = 20
 text = "8"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Health" type="Sprite2D" parent="."]
 self_modulate = Color(0.784314, 0.278431, 0.313726, 1)

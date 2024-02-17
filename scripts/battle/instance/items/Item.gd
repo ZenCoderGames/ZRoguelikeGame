@@ -12,8 +12,8 @@ func init(itemData, myCell):
 	data = itemData
 	cell = myCell
 	self.position = Vector2(cell.pos.x, cell.pos.y)
-	hoverInfo.title = get_display_name()
-	hoverInfo.description = get_description()
+	hoverInfo.setup_far("Item", "This is an Item. Get Close to Identify.")
+	hoverInfo.setup(get_display_name(), get_description(), cell)
 
 func init_on_picked_up(character):
 	if data.spellId != "":

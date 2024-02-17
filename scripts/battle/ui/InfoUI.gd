@@ -2,7 +2,7 @@ extends MarginContainer
 
 class_name InfoUI
 
-@onready var titleLabel:Label = $Title/ColorRect/Label
+@onready var titleLabel:Label = $"%TitleLabel"
 @onready var contentLabel:RichTextLabel = $"%ContentLabel"
 
 func showUI(title:String, content:String):

@@ -20,45 +20,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.341176, 0.305882, 0.27451, 1)
 
-[node name="Content" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-size_flags_vertical = 3
 
-[node name="ColorRect" type="ColorRect" parent="Content"]
-layout_mode = 2
-size_flags_vertical = 3
-color = Color(0.0705882, 0.12549, 0.12549, 1)
-
-[node name="ContentLabel" type="RichTextLabel" parent="Content/ColorRect"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-bbcode_enabled = true
-text = "[center]This sword gives the player +1 Strength[/center]"
-fit_content = true
-scroll_active = false
-
-[node name="Title" type="MarginContainer" parent="."]
+[node name="Title" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("2_h3yrs")
 
-[node name="ColorRect" type="ColorRect" parent="Title"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Title"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1")
 color = Color(0.141176, 0.211765, 0.25098, 1)
 
-[node name="Label" type="Label" parent="Title/ColorRect"]
+[node name="TitleLabel" type="Label" parent="VBoxContainer/Title/ColorRect"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -72,3 +51,24 @@ theme = ExtResource("1")
 text = "INFO"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Content" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Content"]
+layout_mode = 2
+color = Color(0.0705882, 0.12549, 0.12549, 1)
+
+[node name="ContentLabel" type="RichTextLabel" parent="VBoxContainer/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center]This sword gives the player +1 Stren
+
+Max Health: 6/6
+[/center]
+"
+fit_content = true
+scroll_active = false

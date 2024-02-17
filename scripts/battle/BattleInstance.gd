@@ -55,14 +55,14 @@ func _on_character_chosen(charData):
 	GameGlobals.dataManager.on_character_chosen(charData)
 
 func _on_new_game(dungeonPath:String):
+	GameGlobals.dataManager.init_dungeon_data(dungeonPath)
 	if !firstTimeDungeon:
-		_create_dungeon(dungeonPath)
+		_create_dungeon()
 	else:
 		recreate_dungeon(0)
 
-func _create_dungeon(dungeonPath:String):
+func _create_dungeon():
 	_toggle_main_menu()
-	GameGlobals.dataManager.init_dungeon_data(dungeonPath)
 	GameGlobals.dungeon.init(GameGlobals.dataManager.dungeonDataList[currentDungeonIdx])
 	_shared_dungeon_init()
 	firstTimeDungeon = true

@@ -6,6 +6,8 @@ class_name VendorUI
 @onready var title:Label = $"%Title"
 @onready var backBtn:TextureButton = $"%BackButton"
 @onready var noItemsLabel:Label = $"%NoItemsLabel"
+@onready var attackLabel:Label = $"%AttackLabel"
+@onready var healthLabel:Label = $"%HealthLabel"
 
 const VendorItemSelectUI := preload("res://ui/battle/VendorItemSelectUI.tscn")
 
@@ -25,6 +27,9 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 	_vendorData = vendorData
 	title.text = vendorData.displayName
 	var maxItemsToDisplay:int = vendorData.numItemsShown
+
+	_update_player_stats()
+	GameGlobals.dungeon.player.connect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
 
 	var itemsToConsider:Array = []
 
@@ -83,6 +88,7 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 func _on_back_pressed():
 	CombatEventManager.emit_signal("OnVendorClosed")
 	UIEventManager.emit_signal("OnGenericUIEvent")
+	GameGlobals.dungeon.player.disconnect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
 
 func item_bought():
 	if !_vendorData.oneTimePurchaseOnly:
@@ -107,3 +113,16 @@ func _is_upgrade_owned(_data):
 		return GameGlobals.dungeon.player.inventory.has_item(_data)
 
 	return false
+
+func _on_char_stat_changed(_statChangeChar):
+	_update_player_stats()
+
+func _update_player_stats():
+	attackLabel.text = str(GameGlobals.dungeon.player.get_damage())
+	var health:int = GameGlobals.dungeon.player.get_health()
+	var maxHealth:int = GameGlobals.dungeon.player.get_max_health()
+	healthLabel.text = str(health)
+	if health<maxHealth:
+		healthLabel.self_modulate = Color.INDIAN_RED
+	else:
+		healthLabel.self_modulate = Color.WHITE

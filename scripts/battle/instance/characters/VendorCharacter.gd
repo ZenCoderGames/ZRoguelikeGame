@@ -10,8 +10,8 @@ var cell:DungeonCell
 func init(data:VendorData):
 	_data = data
 	self.self_modulate = Color(data.tintColor)
-	hoverInfo.title = _data.displayName
-	hoverInfo.description = _data.description
+	hoverInfo.setup_far("Vendor", "This is a Special Vendor. Get Close to Identify.")
+	hoverInfo.setup(_data.displayName, _data.description, cell)
 
 func activate():
 	CombatEventManager.emit_signal("ShowVendor", self, _data)

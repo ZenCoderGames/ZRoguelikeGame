@@ -144,7 +144,7 @@ func _on_entity_nearby(entity):
 		#infoPanel.add_child(newCharUI)
 		#infoPanelObjects.append(newCharUI)
 		#newCharUI.init(entity)
-	elif entity is Item or entity is Upgrade or entity is VendorCharacter:
+	elif entity is Item or entity is Upgrade or entity is VendorCharacter or entity is TutorialPickup:
 		var newItemUI = ItemUI.instantiate()
 		infoPanel.add_child(newItemUI)
 		infoPanelObjects.append(newItemUI)
