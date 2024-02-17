@@ -54,3 +54,4 @@ res://scripts/menu/CharacterSelectUI.gd
 res://ui/battle/VendorUI.tscn
 res://scripts/battle/ui/Vendor/VendorUI.gd
 res://scripts/battle/ui/CharacterUI.gd
+res://scripts/battle/data/CharacterData.gd

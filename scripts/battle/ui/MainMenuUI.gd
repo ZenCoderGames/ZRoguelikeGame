@@ -24,7 +24,9 @@ func _ready():
 	balancedGameButton.connect("button_up",Callable(self,"on_balanced_game"))
 	hardGameButton.connect("button_up",Callable(self,"on_hard_game"))
 	settingsButton.connect("button_up",Callable(self,"on_settings"))
-	classToggle.connect("toggled",Callable(self,"on_class_toggle"))
+
+	classToggle.visible = false
+	#classToggle.connect("toggled",Callable(self,"on_class_toggle"))
 
 	deathUI.visible = false
 	
@@ -58,20 +60,21 @@ func on_tutorial():
 	start_battle("GENERIC_HERO_TUTORIAL", "resource/data/dungeons/tutorialDungeon.json")
 
 func on_easy_game():
-	start_battle("GENERIC_HERO_EASY", "resource/data/dungeons/easyDungeon.json")
+	start_battle("", "resource/data/dungeons/easyDungeon.json")
 	
 func on_balanced_game():
-	start_battle("GENERIC_HERO_BALANCED", "resource/data/dungeons/balancedDungeon.json")
+	start_battle("", "resource/data/dungeons/balancedDungeon.json")
 	
 func on_hard_game():
-	start_battle("GENERIC_HERO_HARD", "resource/data/dungeons/hardDungeon.json")
+	start_battle("", "resource/data/dungeons/hardDungeon.json")
 
 func start_battle(heroId:String, dungeonPath:String):
 	UIEventManager.emit_signal("OnMainMenuButton")
 	_clean_up()
 	baseMenuUI.visible = false
-
-	if GameGlobals.battleInstance.startWithClasses:
+	
+	# Always have class selection
+	if heroId.is_empty():
 		characterSelectUI.visible = true
 		characterSelectUI.init_from_data(dungeonPath)
 	else:

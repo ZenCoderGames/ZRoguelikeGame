@@ -100,6 +100,7 @@
 				"path": "entity/characters/PlayerCharacter.tscn",
 				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Paladin.png",
+				"isInCharacterSelect": true,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -124,6 +125,7 @@
 				"path": "entity/characters/PlayerCharacter.tscn",
 				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Berserker.png",
+				"isInCharacterSelect": true,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -147,6 +149,7 @@
 				"path": "entity/characters/PlayerCharacter.tscn",
 				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Assassin.png",
+				"isInCharacterSelect": true,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -163,6 +166,30 @@
 				],
 				"specialId": "SPECIAL_ASSASSIN",
 				"passiveId": "PASSIVE_ASSASSIN"
+			},
+			{
+				"id": "GENERIC_HERO",
+				"displayName": "You",
+				"description": "Classless",
+				"path": "entity/characters/PlayerCharacter.tscn",
+				"spritePath": "entity/characters/textures/Player_Base.png",
+				"portraitPath": "resource/portraits/Random.png",
+				"isGeneric": true,
+				"isInCharacterSelect": true,
+				"stats": [
+					{
+						"type": "HEALTH",
+						"value": 20
+					},
+					{
+						"type": "DAMAGE",
+						"value": 2
+					},
+					{
+						"type": "ENERGY",
+						"maxValue": 4
+					}
+				]
 			}
 		],
 		"enemies": [

@@ -25,12 +25,19 @@ func init_from_data(charData:CharacterData, dungeonPath:String):
 	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
 	var portraitTex = load(str("res://",myCharData.portraitPath))
 	portrait.texture = portraitTex
-	active.tooltip_text = GameGlobals.dataManager.get_special_data(charData.specialId).description
-	passive.tooltip_text = GameGlobals.dataManager.get_passive_data(charData.passiveId).description
+	if !charData.specialId.is_empty():
+		active.tooltip_text = GameGlobals.dataManager.get_special_data(charData.specialId).description
+	else:
+		active.self_modulate = Color.GRAY
+	if !charData.passiveId.is_empty():
+		passive.tooltip_text = GameGlobals.dataManager.get_passive_data(charData.passiveId).description
+	else:
+		passive.self_modulate = Color.GRAY
 
 func _on_item_chosen():
 	UIEventManager.emit_signal("OnCharacterSelectButton")
 	GameEventManager.on_character_chosen(myCharData)
+	GameGlobals.battleInstance.startWithClasses = !myCharData.isGeneric
 	GameEventManager.ready_to_battle(myDungeonPath)
 
 func _is_showable_stat(statData):
