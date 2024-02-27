@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://1unvv0bj1sni"]
+
+[ext_resource type="Script" path="res://scripts/menu/CharacterSelectBuffUI.gd" id="1_r58x7"]
+[ext_resource type="Texture2D" uid="uid://b51yh60n5jf0w" path="res://sourceArt/Random/EffectShape.png" id="2_iqynf"]
+
+[node name="CharacterSelectBuffUI" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(70, 70)
+script = ExtResource("1_r58x7")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_iqynf")
+expand_mode = 5
+stretch_mode = 3

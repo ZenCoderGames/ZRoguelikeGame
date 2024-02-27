@@ -1,0 +1,44 @@
+{
+	"dungeonModifiers": [
+		{
+			"id": "DUNGEON_MOD_TUTORIAL",
+			"description": "Start with +8 Base Health",
+			"statModifier": [
+				{
+					"type": "HEALTH",
+					"value": 8
+				}
+			]
+		},
+		{
+			"id": "DUNGEON_MOD_EASY",
+			"description": "Start with +4 Base Health",
+			"statModifier": [
+				{
+					"type": "HEALTH",
+					"value": 4
+				}
+			]
+		},
+		{
+			"id": "DUNGEON_MOD_HARD_ATTACK",
+			"description": "Start with -1 Base ATTACK",
+			"statModifier": [
+				{
+					"type": "ATTACK",
+					"value": -1
+				}
+			]
+		},
+		{
+			"id": "DUNGEON_MOD_HARD_HEALTH",
+			"description": "Start with -2 Base Health",
+			"statModifier": [
+				{
+					"type": "HEALTH",
+					"value": -2
+				}
+			]
+		}
+	]
+}

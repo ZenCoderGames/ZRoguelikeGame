@@ -57,29 +57,25 @@ func show_menu():
 	characterSelectUI.visible = false
 
 func on_tutorial():
-	start_battle("GENERIC_HERO_TUTORIAL", "resource/data/dungeons/tutorialDungeon.json")
+	start_battle("LEVEL_TUTORIAL")
 
 func on_easy_game():
-	start_battle("", "resource/data/dungeons/easyDungeon.json")
+	start_battle("LEVEL_EASY")
 	
 func on_balanced_game():
-	start_battle("", "resource/data/dungeons/balancedDungeon.json")
+	start_battle("LEVEL_BALANCED")
 	
 func on_hard_game():
-	start_battle("", "resource/data/dungeons/hardDungeon.json")
+	start_battle("LEVEL_HARD")
 
-func start_battle(heroId:String, dungeonPath:String):
+func start_battle(levelId:String):
 	UIEventManager.emit_signal("OnMainMenuButton")
 	_clean_up()
 	baseMenuUI.visible = false
 	
 	# Always have class selection
-	if heroId.is_empty():
-		characterSelectUI.visible = true
-		characterSelectUI.init_from_data(dungeonPath)
-	else:
-		GameEventManager.on_character_chosen(GameGlobals.dataManager.get_character_data(heroId))
-		GameEventManager.ready_to_battle(dungeonPath)
+	characterSelectUI.visible = true
+	characterSelectUI.init_from_data(levelId)
 
 func on_settings():
 	pass

@@ -1,0 +1,27 @@
+{
+	"levels": [
+		{
+			"id": "LEVEL_TUTORIAL",
+			"description": "Tutorial",
+			"dungeonPath": "resource/data/dungeons/tutorialDungeon.json",
+			"dungeonModifiers": ["DUNGEON_MOD_TUTORIAL"]
+		},
+		{
+			"id": "LEVEL_EASY",
+			"description": "The Beginners Journey",
+			"dungeonPath": "resource/data/dungeons/easyDungeon.json",
+			"dungeonModifiers": ["DUNGEON_MOD_EASY"]
+		},
+		{
+			"id": "LEVEL_BALANCED",
+			"description": "The real dungeon",
+			"dungeonPath": "resource/data/dungeons/balancedDungeon.json"
+		},
+		{
+			"id": "LEVEL_HARD",
+			"description": "For the truly hardcore",
+			"dungeonPath": "resource/data/dungeons/hardDungeon.json",
+			"dungeonModifiers": ["DUNGEON_MOD_HARD_ATTACK", "DUNGEON_MOD_HARD_HEALTH"]
+		}
+	]
+}

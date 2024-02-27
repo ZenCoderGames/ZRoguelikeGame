@@ -12,6 +12,9 @@ class_name CharacterSelectItemUI
 var myCharData:CharacterData
 var myDungeonPath:String
 
+signal OnActiveOrPassiveInFocus(data)
+signal OnActiveOrPassiveOutOfFocus
+
 func init_from_data(charData:CharacterData, dungeonPath:String):
 	myCharData = charData
 	myDungeonPath = dungeonPath
@@ -26,11 +29,13 @@ func init_from_data(charData:CharacterData, dungeonPath:String):
 	var portraitTex = load(str("res://",myCharData.portraitPath))
 	portrait.texture = portraitTex
 	if !charData.specialId.is_empty():
-		active.tooltip_text = GameGlobals.dataManager.get_special_data(charData.specialId).description
+		active.connect("mouse_entered",Callable(self,"_on_active_in_focus"))
+		active.connect("mouse_exited",Callable(self,"_on_active_out_of_focus"))
 	else:
 		active.self_modulate = Color.GRAY
 	if !charData.passiveId.is_empty():
-		passive.tooltip_text = GameGlobals.dataManager.get_passive_data(charData.passiveId).description
+		passive.connect("mouse_entered",Callable(self,"_on_passive_in_focus"))
+		passive.connect("mouse_exited",Callable(self,"_on_passive_out_of_focus"))
 	else:
 		passive.self_modulate = Color.GRAY
 
@@ -47,3 +52,15 @@ func _is_showable_stat(statData):
 		return true
 
 	return false
+
+func _on_active_in_focus():
+	emit_signal("OnActiveOrPassiveInFocus", GameGlobals.dataManager.get_special_data(myCharData.specialId).description)
+
+func _on_active_out_of_focus():
+	emit_signal("OnActiveOrPassiveOutOfFocus")
+
+func _on_passive_in_focus():
+	emit_signal("OnActiveOrPassiveInFocus", GameGlobals.dataManager.get_passive_data(myCharData.passiveId).description)
+
+func _on_passive_out_of_focus():
+	emit_signal("OnActiveOrPassiveOutOfFocus")

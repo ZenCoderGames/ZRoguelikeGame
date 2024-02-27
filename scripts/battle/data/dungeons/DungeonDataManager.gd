@@ -26,6 +26,10 @@ var dungeonDataList:Array
 var abilityDataDict = {}
 var abilityList:Array
 
+var dungeonModifierDict = {}
+var levels:Array
+var levelDict = {}
+
 func _init():
 	init_status_effects()
 	init_passives()
@@ -44,6 +48,8 @@ func _init():
 	init_vendors("resource/data/vendors.json")
 	init_encounters()
 	init_tutorials()
+	init_dungeonModifiers()
+	init_levels()
 
 func on_character_chosen(charData):
 	playerData = charData
@@ -55,6 +61,7 @@ func init_dungeon_data(dungeonDataPath:String):
 	var dungeonDataJSList:Array = data["dungeons"]
 	for dungeonDataJS in dungeonDataJSList:
 		var newDungeonData = DungeonData.new(dungeonDataJS)
+		var dungeonId:String = Utils.get_data_from_json(dungeonDataJS, "dungeonId", "INVALID_DUNGEON_ID")
 		dungeonDataList.append(newDungeonData)
 
 func get_max_levels():
@@ -212,3 +219,26 @@ func init_tutorials():
 
 func get_tutorial_pickup_data(id):
 	return tutorialPickupDataMap[id]
+
+# DUNGEON MODIFIERS
+func init_dungeonModifiers():
+	var data = Utils.load_data_from_file("resource/data/dungeonModifiers.json")
+	var dungeonModifierDataJSList:Array = data["dungeonModifiers"]
+	for dungeonModifierDataJS in dungeonModifierDataJSList:
+		var newDungeonModifierData = DungeonModifierData.new(dungeonModifierDataJS)
+		dungeonModifierDict[newDungeonModifierData.id] = newDungeonModifierData
+
+func get_dungeon_modifier_data(dungeonModifierId:String):
+	return dungeonModifierDict[dungeonModifierId]
+
+# LEVELS
+func init_levels():
+	var data = Utils.load_data_from_file("resource/data/levels.json")
+	var levelsJSList:Array = data["levels"]
+	for levelJS in levelsJSList:
+		var newLevelData = LevelData.new(levelJS)
+		levels.append(newLevelData)
+		levelDict[newLevelData.id] = newLevelData
+
+func get_level_data(levelId:String):
+	return levelDict[levelId]
