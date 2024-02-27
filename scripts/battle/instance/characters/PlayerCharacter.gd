@@ -15,8 +15,8 @@ var currentLevel:int = 0
 var _levelUpThisTurn:bool = false
 var _souls:int = 0
 
-func init(charId:int, charData, teamVal):
-	super.init(charId, charData, teamVal)
+func init(charIdVal:int, charDataVal, teamVal):
+	super.init(charIdVal, charDataVal, teamVal)
 
 	var moveData:Dictionary = {}
 	moveData["type"] = "MOVEMENT"

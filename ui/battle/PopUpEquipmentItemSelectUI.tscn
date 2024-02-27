@@ -1,0 +1,141 @@
+[gd_scene load_steps=6 format=3 uid="uid://o8ovj4yp756k"]
+
+[ext_resource type="Script" path="res://scripts/battle/ui/PopUpEquipment/PopUpEquipmentItemUI.gd" id="1_3oimf"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_cdutl"]
+[ext_resource type="Texture2D" uid="uid://dpqcdq2oyp0g0" path="res://sourceArt/Icons/skull.png" id="3_ne23m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d364l"]
+bg_color = Color(0.14902, 0.305882, 0.137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qej1j"]
+bg_color = Color(0.254902, 0, 0, 1)
+
+[node name="PopUpEquipmentItemUI" type="PanelContainer"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(250, 0)
+offset_right = 290.0
+offset_bottom = 315.0
+script = ExtResource("1_3oimf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("2_cdutl")
+
+[node name="EquippedLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Currently Equipped"
+horizontal_alignment = 1
+
+[node name="TitlePanel" type="Panel" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="UpgradeNameLabel" type="Label" parent="VBoxContainer/TitlePanel"]
+unique_name_in_owner = true
+self_modulate = Color(0.537255, 0.862745, 0.94902, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -13.0
+offset_right = 105.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00322, 0.988907)
+size_flags_vertical = 0
+text = "Empty Slot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_cdutl")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer/Panel"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="UpgradeDescLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer/Panel/MarginContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "You can equip a Weapon here."
+fit_content = true
+scroll_active = false
+
+[node name="SoulCostContainer" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="SoulIcon" type="TextureRect" parent="VBoxContainer/SoulCostContainer"]
+self_modulate = Color(0.619608, 0.403922, 0.117647, 1)
+layout_mode = 2
+texture = ExtResource("3_ne23m")
+expand_mode = 3
+
+[node name="SoulCostLabel" type="Label" parent="VBoxContainer/SoulCostContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_cdutl")
+theme_override_colors/font_color = Color(0.584314, 0.345098, 0.152941, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 30
+text = "20"
+
+[node name="DiscardButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.211765, 0.211765, 1)
+layout_mode = 2
+size_flags_vertical = 8
+focus_mode = 0
+theme = ExtResource("2_cdutl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d364l")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_qej1j")
+text = "Convert To Souls"
+
+[node name="EquipButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+focus_mode = 0
+theme = ExtResource("2_cdutl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d364l")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_qej1j")
+text = "Swap"

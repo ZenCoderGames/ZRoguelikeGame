@@ -32,6 +32,9 @@ const ItemUI := preload("res://ui/battle/ItemUI.tscn")
 var vendorUI:VendorUI
 const VendorUI := preload("res://ui/battle/VendorUI.tscn")
 var vendorDict:Dictionary = {}
+# Pop Up Equipment UI
+var popUpEquipmentUI:PopUpEquipmentUI
+const PopUpEquipmentUIClass := preload("res://ui/battle/PopUpEquipmentUI.tscn")
 # inventory UI
 const InventoryUI := preload("res://ui/battle/InventoryUI.tscn")
 var inventoryUI:InventoryUI = null
@@ -59,6 +62,7 @@ func _ready():
 	CombatEventManager.connect("ShowUpgrade",Callable(self,"_on_show_upgrade"))
 	CombatEventManager.connect("ShowVendor",Callable(self,"_on_show_vendor"))
 	CombatEventManager.connect("OnVendorClosed",Callable(self,"_on_vendor_closed"))
+	CombatEventManager.connect("OnPopUpEquipmentClosed",Callable(self,"_on_pop_up_equipment_closed"))
 	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_attack"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
@@ -86,6 +90,7 @@ func _shared_init():
 	GameGlobals.dungeon.player.connect("OnNearbyEntityFound",Callable(self,"_on_entity_nearby"))
 	GameGlobals.dungeon.player.inventory.connect("OnItemAdded",Callable(self,"_on_item_picked_by_player"))
 	GameGlobals.dungeon.player.connect("OnSpecialAdded",Callable(self,"_on_player_special_added"))
+	GameGlobals.dungeon.player.equipment.connect("ShowEquipItemUI",Callable(self,"_on_show_pop_up_equipment"))
 	#GameGlobals.dungeon.player.connect("OnLevelUp",Callable(self,"_on_show_upgrade"))
 	
 	#await get_tree().create_timer(0.1).timeout
@@ -285,7 +290,26 @@ func _on_show_vendor(vendorChar:VendorCharacter, vendorData:VendorData):
 
 func _on_vendor_closed():
 	remove_child(vendorUI)
-	#vendorUI.queue_free()
+	vendorUI = null
+	UIEventManager.emit_signal("OnSelectionMenuOff")
+	GameGlobals.dungeon.inBackableMenu = false
+
+# POPUP EQUIPMENT
+func _on_show_pop_up_equipment(item:Item, slotTypeArray:Array):
+	popUpEquipmentUI = PopUpEquipmentUIClass.instantiate()
+	add_child(popUpEquipmentUI)
+	popUpEquipmentUI.init(item, slotTypeArray)
+	UIEventManager.emit_signal("OnSelectionMenuOn")
+	GameGlobals.dungeon.inBackableMenu = true
+	popUpEquipmentUI.connect("OnStateChanged", Callable(self,"_on_pop_up_equipment_state_change"))
+
+func _on_pop_up_equipment_state_change(item:Item, slotTypeArray:Array):
+	popUpEquipmentUI.clean_up()
+	_on_pop_up_equipment_closed()
+	_on_show_pop_up_equipment(item, slotTypeArray)
+
+func _on_pop_up_equipment_closed():
+	remove_child(popUpEquipmentUI)
 	vendorUI = null
 	UIEventManager.emit_signal("OnSelectionMenuOff")
 	GameGlobals.dungeon.inBackableMenu = false

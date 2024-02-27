@@ -1,0 +1,190 @@
+[gd_scene load_steps=10 format=3 uid="uid://clo6mx3v12wkr"]
+
+[ext_resource type="Script" path="res://scripts/battle/ui/PopUpEquipment/PopUpEquipmentUI.gd" id="1_43gso"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_gnhab"]
+[ext_resource type="FontFile" uid="uid://banvpavkfhevp" path="res://resource/fonts/connection/ConnectionBold.otf" id="3_ce0fw"]
+[ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="4_vn7k1"]
+[ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="5_nsw7t"]
+[ext_resource type="Texture2D" uid="uid://b8ikirvhnbahy" path="res://entity/characters/textures/Player_Base.png" id="6_eca84"]
+[ext_resource type="Texture2D" uid="uid://dcymh0g7l2xvx" path="res://sourceArt/Random/CharAttack.png" id="7_qqkk6"]
+[ext_resource type="FontFile" uid="uid://neuymc5q34ld" path="res://resource/fonts/montreal/Montreal-Bold.ttf" id="8_hdgji"]
+[ext_resource type="Texture2D" uid="uid://erw2pwg1mu5o" path="res://sourceArt/Random/CharHealth.png" id="9_e2aj2"]
+
+[node name="PopUpEquipmentUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_43gso")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.67451)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Panel"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.635294, 0.388235, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.5
+offset_top = 20.0
+offset_right = 96.5
+offset_bottom = 68.0
+grow_horizontal = 2
+theme = ExtResource("2_gnhab")
+theme_override_fonts/font = ExtResource("3_ce0fw")
+theme_override_font_sizes/font_size = 45
+text = "SWAP ITEM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Items" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -142.5
+offset_bottom = 142.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.596078, 0.0705882, 1)
+layout_mode = 0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 160.0
+texture_normal = ExtResource("4_vn7k1")
+texture_pressed = ExtResource("4_vn7k1")
+texture_hover = ExtResource("4_vn7k1")
+texture_disabled = ExtResource("4_vn7k1")
+texture_focused = ExtResource("4_vn7k1")
+
+[node name="NoItemsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.5
+offset_top = -11.5
+offset_right = 80.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.713726, 0.713726, 0.713726, 1)
+theme_override_colors/font_shadow_color = Color(0.196078, 0.196078, 0.196078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nsw7t")
+theme_override_font_sizes/font_size = 40
+text = "No Items Left"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Char" type="TextureRect" parent="."]
+self_modulate = Color(0.0117647, 1, 1, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -165.0
+offset_right = 16.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2.515, 2.515)
+texture = ExtResource("6_eca84")
+metadata/_edit_group_ = true
+
+[node name="Attack" type="TextureRect" parent="Char"]
+self_modulate = Color(0.74902, 0.568627, 0.262745, 1)
+layout_mode = 0
+offset_left = -1.15007
+offset_top = 21.3618
+offset_right = 30.8499
+offset_bottom = 53.3618
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_qqkk6")
+expand_mode = 3
+
+[node name="AttackLabel" type="Label" parent="Char/Attack"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -15.5
+offset_right = 20.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_hdgji")
+theme_override_font_sizes/font_size = 20
+text = "8"
+horizontal_alignment = 1
+
+[node name="Health" type="TextureRect" parent="Char"]
+self_modulate = Color(0.784314, 0.278431, 0.313726, 1)
+layout_mode = 0
+offset_left = 15.8618
+offset_top = 20.5666
+offset_right = 47.8618
+offset_bottom = 52.5666
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_e2aj2")
+expand_mode = 3
+
+[node name="HealthLabel" type="Label" parent="Char/Health"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -14.5
+offset_right = 20.0
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_hdgji")
+theme_override_font_sizes/font_size = 20
+text = "8"
+horizontal_alignment = 1

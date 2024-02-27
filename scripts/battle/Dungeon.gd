@@ -185,14 +185,14 @@ func _init_path():
 	visitedRooms[startRoom] = true
 	# do path calculations
 	while roomsToVisit.size()>0:
-		var room = roomsToVisit[0]
-		for connection in room.connections:
+		var currentRoom = roomsToVisit[0]
+		for connection in currentRoom.connections:
 			var connectedRoom = connection.connectedCell.room
 			if visitedRooms.has(connectedRoom):
 				continue
 			roomsToVisit.append(connectedRoom)
 			visitedRooms[connectedRoom] = true
-			var pathCost = costFromStart[room]+1
+			var pathCost = costFromStart[currentRoom]+1
 			if !costFromStart.has(connectedRoom) or pathCost<costFromStart[connectedRoom]:
 				costFromStart[connectedRoom] = pathCost
 		roomsToVisit.remove_at(0)

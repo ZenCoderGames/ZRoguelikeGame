@@ -27,6 +27,7 @@ signal ShowUpgrade(upgradeType)
 signal ShowVendor(vendorChar, vendorData)
 signal OnVendorItemSelected(abilityData)
 signal OnVendorClosed()
+signal OnPopUpEquipmentClosed()
 signal OnZoomIn()
 signal OnZoomOut()
 

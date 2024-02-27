@@ -7,10 +7,12 @@ class_name BattleInstance
 @onready var screenFade:Panel = $"%ScreenFade"
 @onready var victoryUI:PanelContainer = $"%VictoryUI"
 
-# DEBUG
+# VARIANTS
 @export var startWithClasses:bool
 @export var doorsStayOpenDuringBattle:bool
 @export var useLevelScalingOnEnemies:bool
+@export var usePopUpEquipment:bool
+# DEBUG
 @export var debugLevelScaling:int
 @export var debugStartAtEndRoom:bool
 @export var debugShowAllRooms:bool

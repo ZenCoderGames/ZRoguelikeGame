@@ -27,6 +27,8 @@ func revert_as_empty():
 func _on_Items_mouse_entered():
 	if item!=null:
 		CombatEventManager.on_show_info(item.get_display_name(), item.get_description())
+	else:
+		CombatEventManager.on_show_info("Item Slot", str(_name, " can be equipped here.")) 
 
 func _on_Items_mouse_exited():
 	if item!=null:

@@ -1,3 +1,4 @@
+Label
 TextureRect
 Sprite2D
 VBoxContainer
@@ -6,7 +7,6 @@ Node2D
 Node
 SubViewport
 SubViewportContainer
-Label
 Button
 PanelContainer
 Panel
