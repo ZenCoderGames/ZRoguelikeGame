@@ -6,6 +6,8 @@ class_name CharacterSelectUI
 @onready var buffHolder:HBoxContainer = $"%BuffHolder"
 @onready var infoPanel:Panel = $"%InfoPanel"
 @onready var infoLabel:RichTextLabel = $"%InfoLabel"
+@onready var backButton:TextureButton = $"%BackButton"
+@onready var titleLabel:Label = $"%TitleLabel"
 
 const CharacterSelectItemUIClass := preload("res://ui/characterSelect/CharacterSelectItemUI.tscn")
 const CharacterSelectBuffUIClass := preload("res://ui/characterSelect/CharacterSelectBuffUI.tscn")
@@ -13,11 +15,15 @@ const CharacterSelectBuffUIClass := preload("res://ui/characterSelect/CharacterS
 var charSelectItems:Array
 var charBuffItems:Array
 
+signal OnBackPressed
+
 func init_from_data(levelId:String):
 	clean_up()
 	hide_info()
 	var levelData:LevelData = GameGlobals.dataManager.get_level_data(levelId)
-		
+	
+	titleLabel.text = levelData.description
+
 	for heroData in GameGlobals.dataManager.heroDataList:
 		if heroData.isInCharacterSelect:
 			var charSelectItem = CharacterSelectItemUIClass.instantiate()
@@ -34,6 +40,8 @@ func init_from_data(levelId:String):
 		charBuffItem.init(GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifier))
 		charBuffItem.connect("OnInFocus",Callable(self,"show_info"))
 		charBuffItem.connect("OnOutOfFocus",Callable(self,"hide_info"))
+
+	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
 
 func show_info(str:String):
 	infoPanel.visible = true
@@ -53,3 +61,8 @@ func clean_up():
 		buffHolder.remove_child(charBuffItem)
 		charBuffItem.queue_free()
 	charBuffItems.clear()
+	
+	backButton.disconnect("pressed",Callable(self,"_on_back_button_pressed"))
+
+func _on_back_button_pressed():
+	emit_signal("OnBackPressed")

@@ -1,10 +1,10 @@
+Label
 TextureRect
 CenterContainer
 RichTextLabel
 Panel
 PanelContainer
 VBoxContainer
-Label
 Sprite2D
 CheckButton
 Node2D

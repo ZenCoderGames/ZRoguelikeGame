@@ -3,6 +3,7 @@
 		{
 			"id": "DUNGEON_MOD_TUTORIAL",
 			"description": "Start with +8 Base Health",
+			"isPositive": true,
 			"statModifier": [
 				{
 					"type": "HEALTH",
@@ -13,6 +14,7 @@
 		{
 			"id": "DUNGEON_MOD_EASY",
 			"description": "Start with +4 Base Health",
+			"isPositive": true,
 			"statModifier": [
 				{
 					"type": "HEALTH",
@@ -23,6 +25,7 @@
 		{
 			"id": "DUNGEON_MOD_HARD_ATTACK",
 			"description": "Start with -1 Base ATTACK",
+			"isPositive": false,
 			"statModifier": [
 				{
 					"type": "ATTACK",
@@ -33,6 +36,7 @@
 		{
 			"id": "DUNGEON_MOD_HARD_HEALTH",
 			"description": "Start with -2 Base Health",
+			"isPositive": false,
 			"statModifier": [
 				{
 					"type": "HEALTH",

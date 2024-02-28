@@ -33,6 +33,7 @@ func _ready():
 	backMenuUI.visible = false
 	backToGameButton.connect("button_up",Callable(self,"_on_back_to_game"))
 	backToStartMenuButton.connect("button_up",Callable(self,"_on_back_to_main_menu"))
+	characterSelectUI.connect("OnBackPressed",Callable(self,"_on_back_to_main_menu"))
 	exitGameButton.connect("button_up",Callable(self,"_on_exit_game"))
 	GameEventManager.connect("OnBackButtonPressed",Callable(self,"_show_back_menu"))
 	
@@ -109,6 +110,10 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 func _show_back_menu():
 	if backMenuUI.visible:
 		_on_back_to_game()
+		return
+
+	if characterSelectUI.visible:
+		_on_back_to_main_menu()
 		return
 
 	baseMenuUI.visible = false

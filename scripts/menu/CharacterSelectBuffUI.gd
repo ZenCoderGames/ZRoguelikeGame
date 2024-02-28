@@ -11,7 +11,10 @@ signal OnOutOfFocus
 
 func init(dungeonModifier:DungeonModifierData):
 	_data = dungeonModifier
-	icon.self_modulate = Color.WHITE
+	if dungeonModifier.isPositive:
+		icon.self_modulate = Color.GREEN
+	else:
+		icon.self_modulate = Color.RED
 	icon.connect("mouse_entered",Callable(self,"_on_in_focus"))
 	icon.connect("mouse_exited",Callable(self,"_on_out_of_focus"))
 	

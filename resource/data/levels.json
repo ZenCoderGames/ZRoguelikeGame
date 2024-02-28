@@ -8,18 +8,18 @@
 		},
 		{
 			"id": "LEVEL_EASY",
-			"description": "The Beginners Journey",
+			"description": "Easy",
 			"dungeonPath": "resource/data/dungeons/easyDungeon.json",
 			"dungeonModifiers": ["DUNGEON_MOD_EASY"]
 		},
 		{
 			"id": "LEVEL_BALANCED",
-			"description": "The real dungeon",
+			"description": "Balanced",
 			"dungeonPath": "resource/data/dungeons/balancedDungeon.json"
 		},
 		{
 			"id": "LEVEL_HARD",
-			"description": "For the truly hardcore",
+			"description": "Hard",
 			"dungeonPath": "resource/data/dungeons/hardDungeon.json",
 			"dungeonModifiers": ["DUNGEON_MOD_HARD_ATTACK", "DUNGEON_MOD_HARD_HEALTH"]
 		}
