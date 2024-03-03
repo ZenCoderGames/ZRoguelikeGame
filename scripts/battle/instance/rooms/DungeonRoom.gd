@@ -193,10 +193,10 @@ func _on_miniboss_death():
 	_isCleared = true
 	#generate_upgrade(Upgrade.UPGRADE_TYPE.SHARED)
 	#generate_upgrade(Upgrade.UPGRADE_TYPE.CLASS_SPECIFIC)
-	if GameGlobals.battleInstance.startWithClasses:
-		generate_upgrade(Upgrade.UPGRADE_TYPE.HYBRID)
-	else:
-		generate_vendor("ARCHIVIST_VENDOR")
+	#if GameGlobals.battleInstance.startWithClasses:
+	#	generate_upgrade(Upgrade.UPGRADE_TYPE.HYBRID)
+	#else:
+	generate_vendor("ARCHIVIST_VENDOR")
 
 	#generate_vendor("MYSTIC_VENDOR")
 	generate_item("ITEM_HEALTH_POTION_LARGE")

@@ -1,3 +1,5 @@
+## THIS IS NOW DEPRECATED AND NOT USED BY ANY SYSTEM
+
 extends Control
 
 class_name LevelUpUI

@@ -37,6 +37,9 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 		for abilityId in vendorData.abilities:
 			var abilityData:AbilityData = GameGlobals.dataManager.get_ability_data(abilityId)
 			if !_vendorData.onlyUniquePurchases or !_is_upgrade_owned(abilityData):
+				if GameGlobals.battleInstance.startWithClasses:
+					if abilityData.characterId!="" and abilityData.characterId!=GameGlobals.dungeon.player.charData.id:
+						continue
 				itemsToConsider.append(abilityData)
 
 	if vendorData.specials.size()>0:
