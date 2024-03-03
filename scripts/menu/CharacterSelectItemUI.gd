@@ -10,15 +10,15 @@ class_name CharacterSelectItemUI
 @onready var passive:TextureRect = $"%Passive"
 
 var myCharData:CharacterData
-var myDungeonPath:String
+var myLevelData:LevelData
 
 signal OnActiveOrPassiveInFocus(data)
 signal OnActiveOrPassiveOutOfFocus
 
-func init_from_data(charData:CharacterData, dungeonPath:String):
+func init_from_data(charData:CharacterData, levelData:LevelData):
 	myCharData = charData
-	myDungeonPath = dungeonPath
-	charLabel.text = Utils.convert_to_camel_case(charData.id)
+	myLevelData = levelData
+	charLabel.text = Utils.convert_to_camel_case(charData.description)
 	var statStr:String = ""
 	for statData in charData.statDataList:
 		if _is_showable_stat(statData):
@@ -41,9 +41,9 @@ func init_from_data(charData:CharacterData, dungeonPath:String):
 
 func _on_item_chosen():
 	UIEventManager.emit_signal("OnCharacterSelectButton")
-	GameEventManager.on_character_chosen(myCharData)
 	GameGlobals.battleInstance.startWithClasses = !myCharData.isGeneric
-	GameEventManager.ready_to_battle(myDungeonPath)
+	GameEventManager.on_character_chosen(myCharData)
+	GameEventManager.ready_to_battle(myLevelData)
 
 func _is_showable_stat(statData):
 	if statData.type == StatData.STAT_TYPE.HEALTH or\

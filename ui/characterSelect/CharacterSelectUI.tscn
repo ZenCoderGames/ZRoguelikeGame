@@ -83,6 +83,7 @@ fit_content = true
 [node name="BackButton" type="TextureButton" parent="."]
 unique_name_in_owner = true
 self_modulate = Color(1, 0.596078, 0.0705882, 1)
+layout_mode = 0
 offset_top = 60.0
 offset_right = 100.0
 offset_bottom = 160.0

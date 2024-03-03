@@ -55,13 +55,12 @@ func on_character_chosen(charData):
 	playerData = charData
 
 # DUNGEONS
-func init_dungeon_data(dungeonDataPath:String):
+func init_dungeon_data(levelData:LevelData):
 	dungeonDataList.clear()
-	var data = Utils.load_data_from_file(dungeonDataPath)
+	var data = Utils.load_data_from_file(levelData.dungeonPath)
 	var dungeonDataJSList:Array = data["dungeons"]
 	for dungeonDataJS in dungeonDataJSList:
 		var newDungeonData = DungeonData.new(dungeonDataJS)
-		var dungeonId:String = Utils.get_data_from_json(dungeonDataJS, "dungeonId", "INVALID_DUNGEON_ID")
 		dungeonDataList.append(newDungeonData)
 
 func get_max_levels():

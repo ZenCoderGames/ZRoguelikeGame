@@ -14,6 +14,7 @@ const CharacterSelectBuffUIClass := preload("res://ui/characterSelect/CharacterS
 
 var charSelectItems:Array
 var charBuffItems:Array
+var _levelData:LevelData
 
 signal OnBackPressed
 
@@ -21,17 +22,18 @@ func init_from_data(levelId:String):
 	clean_up()
 	hide_info()
 	var levelData:LevelData = GameGlobals.dataManager.get_level_data(levelId)
+	_levelData = levelData
 	
 	titleLabel.text = levelData.description
 
-	for heroData in GameGlobals.dataManager.heroDataList:
-		if heroData.isInCharacterSelect:
-			var charSelectItem = CharacterSelectItemUIClass.instantiate()
-			charSelectHolder.add_child(charSelectItem)
-			charSelectItems.append(charSelectItem)
-			charSelectItem.init_from_data(heroData, levelData.dungeonPath)
-			charSelectItem.connect("OnActiveOrPassiveInFocus",Callable(self,"show_info"))
-			charSelectItem.connect("OnActiveOrPassiveOutOfFocus",Callable(self,"hide_info"))
+	if levelData.heroList.size()>0:
+		for heroId in levelData.heroList:
+			var heroData:CharacterData = GameGlobals.dataManager.get_character_data(heroId)
+			add_character(heroData)
+	else:
+		for heroData in GameGlobals.dataManager.heroDataList:
+			if heroData.isInCharacterSelect:
+				add_character(heroData)
 
 	for dungeonModifier in levelData.dungeonModifiers:
 		var charBuffItem = CharacterSelectBuffUIClass.instantiate()
@@ -42,6 +44,14 @@ func init_from_data(levelId:String):
 		charBuffItem.connect("OnOutOfFocus",Callable(self,"hide_info"))
 
 	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
+
+func add_character(heroData:CharacterData):
+	var charSelectItem = CharacterSelectItemUIClass.instantiate()
+	charSelectHolder.add_child(charSelectItem)
+	charSelectItems.append(charSelectItem)
+	charSelectItem.init_from_data(heroData, _levelData)
+	charSelectItem.connect("OnActiveOrPassiveInFocus",Callable(self,"show_info"))
+	charSelectItem.connect("OnActiveOrPassiveOutOfFocus",Callable(self,"hide_info"))
 
 func show_info(str:String):
 	infoPanel.visible = true

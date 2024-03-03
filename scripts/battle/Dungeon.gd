@@ -41,8 +41,11 @@ func create(recreatePlayer:bool) -> void:
 	_init_vendors()
 	_init_player(recreatePlayer)
 	_init_enemies()
+	# For tutorials
 	if isCustomRoomSetup:
 		_init_custom_rooms()
+	if recreatePlayer:
+		_init_level_modifiers()
 
 	CombatEventManager.emit_signal("OnCombatInitialized")
 	isInitialized = true
@@ -400,6 +403,15 @@ func _init_player(recreatePlayer:bool):
 	else:
 		player.init_for_next_dungeon()
 		player.move_to_cell(cell)
+
+func _init_level_modifiers():
+	var levelData:LevelData = GameGlobals.battleInstance.currentLevelData
+	for dungeonModifier in levelData.dungeonModifiers:
+		var dungeonModifierData:DungeonModifierData = GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifier)
+		for statModifierData in dungeonModifierData.statModifierDataList:
+			player.modify_stat_value_from_modifier(statModifierData)
+		if !dungeonModifierData.passiveId.is_empty():
+			player.add_passive(GameGlobals.dataManager.get_passive_data(dungeonModifierData.passiveId))
 
 func _init_custom_rooms():
 	var i:int = 0

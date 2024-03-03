@@ -20,7 +20,6 @@
 				{
 					"tutorialPickups": [
 						"TUTORIAL_MOVEMENT",
-						"TUTORIAL_CAMERA",
 						"TUTORIAL_TOOLTIPS"
 					]
 				},

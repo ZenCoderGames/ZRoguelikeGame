@@ -2,86 +2,18 @@
 	"characters": {
 		"heroes": [
 			{
-				"id": "GENERIC_HERO_TUTORIAL",
+				"id": "HERO_TUTORIAL",
 				"displayName": "You",
 				"description": "Champion",
 				"path": "entity/characters/PlayerCharacter.tscn",
 				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Paladin.png",
 				"isGeneric": true,
+				"isInCharacterSelect": false,
 				"stats": [
 					{
 						"type": "HEALTH",
 						"value": 30
-					},
-					{
-						"type": "DAMAGE",
-						"value": 2
-					},
-					{
-						"type": "ENERGY",
-						"maxValue": 4
-					}
-				]
-			},
-			{
-				"id": "GENERIC_HERO_EASY",
-				"displayName": "You",
-				"description": "Champion",
-				"path": "entity/characters/PlayerCharacter.tscn",
-				"spritePath": "entity/characters/textures/Player_Base.png",
-				"portraitPath": "resource/portraits/Paladin.png",
-				"isGeneric": true,
-				"stats": [
-					{
-						"type": "HEALTH",
-						"value": 30
-					},
-					{
-						"type": "DAMAGE",
-						"value": 2
-					},
-					{
-						"type": "ENERGY",
-						"maxValue": 4
-					}
-				]
-			},
-			{
-				"id": "GENERIC_HERO_BALANCED",
-				"displayName": "You",
-				"description": "Champion",
-				"path": "entity/characters/PlayerCharacter.tscn",
-				"spritePath": "entity/characters/textures/Player_Base.png",
-				"portraitPath": "resource/portraits/Paladin.png",
-				"isGeneric": true,
-				"stats": [
-					{
-						"type": "HEALTH",
-						"value": 20
-					},
-					{
-						"type": "DAMAGE",
-						"value": 2
-					},
-					{
-						"type": "ENERGY",
-						"maxValue": 4
-					}
-				]
-			},
-			{
-				"id": "GENERIC_HERO_HARD",
-				"displayName": "You",
-				"description": "Champion",
-				"path": "entity/characters/PlayerCharacter.tscn",
-				"spritePath": "entity/characters/textures/Player_Base.png",
-				"portraitPath": "resource/portraits/Paladin.png",
-				"isGeneric": true,
-				"stats": [
-					{
-						"type": "HEALTH",
-						"value": 15
 					},
 					{
 						"type": "DAMAGE",
@@ -100,6 +32,7 @@
 				"path": "entity/characters/PlayerCharacter.tscn",
 				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Paladin.png",
+				"isGeneric": false,
 				"isInCharacterSelect": true,
 				"stats": [
 					{
@@ -125,6 +58,7 @@
 				"path": "entity/characters/PlayerCharacter.tscn",
 				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Berserker.png",
+				"isGeneric": false,
 				"isInCharacterSelect": true,
 				"stats": [
 					{
@@ -146,9 +80,11 @@
 			{
 				"id": "ASSASSIN",
 				"displayName": "You",
+				"description": "Assassin",
 				"path": "entity/characters/PlayerCharacter.tscn",
 				"spritePath": "entity/characters/textures/Player_Base.png",
 				"portraitPath": "resource/portraits/Assassin.png",
+				"isGeneric": false,
 				"isInCharacterSelect": true,
 				"stats": [
 					{

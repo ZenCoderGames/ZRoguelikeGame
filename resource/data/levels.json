@@ -4,7 +4,8 @@
 			"id": "LEVEL_TUTORIAL",
 			"description": "Tutorial",
 			"dungeonPath": "resource/data/dungeons/tutorialDungeon.json",
-			"dungeonModifiers": ["DUNGEON_MOD_TUTORIAL"]
+			"dungeonModifiers": ["DUNGEON_MOD_TUTORIAL"],
+			"heroList": ["HERO_TUTORIAL"]
 		},
 		{
 			"id": "LEVEL_EASY",
