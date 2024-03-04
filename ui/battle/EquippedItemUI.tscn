@@ -34,5 +34,10 @@ text = "Basic Sword"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.0980392)
+layout_mode = 2
+
 [connection signal="mouse_entered" from="." to="." method="_on_Items_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Items_mouse_exited"]

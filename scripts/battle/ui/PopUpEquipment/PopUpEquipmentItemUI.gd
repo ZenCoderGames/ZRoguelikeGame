@@ -26,9 +26,11 @@ func init(parent:PopUpEquipmentUI, item:Item, slot:int):
 		nameLabel.text = _item.data.name
 		descLabel.text = Utils.format_text(_item.data.description)
 		soulCostLabel.text = str(_soulCost)
+		equipBtn.text = "Swap"
 	else:
 		descLabel.text = Utils.format_text("Item can be equipped here.")
 		soulCostContainer.visible = false
+		equipBtn.text = "Equip"
 	
 	if _slot!=-1:
 		titlePanel.self_modulate = Color(0, 0.882, 1)

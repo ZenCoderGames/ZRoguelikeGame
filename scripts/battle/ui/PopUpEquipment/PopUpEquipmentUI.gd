@@ -84,6 +84,8 @@ func item_equipped(_item:Item, slot:int):
 		emit_signal("OnStateChanged", currentSlotItem, _slotTypeArray)
 
 func item_discarded(_item:Item, slot:int):
+	if GameGlobals.dungeon.player.equipment.is_equipped(_item):
+		GameGlobals.dungeon.player.equipment.unequip_item(_item, GameGlobals.dungeon.player.equipment.get_slot_for_item(_item))
 	GameGlobals.dungeon.player.inventory.remove_item(_item)
 	GameGlobals.dungeon.player.gain_souls(_item.data.soulCost)
 	if slot!=-1:

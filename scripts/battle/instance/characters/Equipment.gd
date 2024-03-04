@@ -57,6 +57,9 @@ func is_slot_free(slotType:int)->bool:
 func _show_equip_ui(item:Item):
 	emit_signal("ShowEquipItemUI", item, Equipment.GET_SLOT_FOR_TYPE(item.data))
 
+func show_equip_ui_for_slot(item:Item):
+	emit_signal("ShowEquipItemUI", null, Equipment.GET_SLOT_FOR_TYPE(item.data))
+
 func equip_item(item:Item, slotType:int):
 	if equippedSlots[slotType] != null:
 		unequip_item(equippedSlots[slotType], slotType)

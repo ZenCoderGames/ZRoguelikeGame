@@ -7,8 +7,8 @@
 		},
 		{
 			"id": "TUTORIAL_CAMERA",
-			"name": "Tutorial: Camera",
-			"description": "Use YGHJ to move the camera"
+			"name": "Tutorial: Camera Zoom",
+			"description": "Use Q/E to zoom in/out the camera"
 		},
 		{
 			"id": "TUTORIAL_TOOLTIPS",

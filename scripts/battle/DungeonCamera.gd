@@ -4,7 +4,6 @@ class_name DungeonCamera
 
 var player
 
-const ZOOM_ON_COMBAT:float = 0.0
 @export var cam_offset = Vector2(0, 0)  # Maximum hor/ver shake in pixels.
 
 # Camera3D Shake Params
@@ -34,8 +33,8 @@ func _ready():
 	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
 	GameEventManager.connect("OnGameOver",Callable(self,"_on_game_over"))
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_attack"))
-	#CombatEventManager.connect("OnRoomCombatStarted",Callable(self,"_on_room_combat_started"))
-	#CombatEventManager.connect("OnRoomCombatEnded",Callable(self,"_on_room_combat_ended"))
+	CombatEventManager.connect("OnRoomCombatStarted",Callable(self,"_on_room_combat_started"))
+	CombatEventManager.connect("OnRoomCombatEnded",Callable(self,"_on_room_combat_ended"))
 
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_attack"))
 	CombatEventManager.connect("OnZoomIn",Callable(self,"_on_zoom_in"))
@@ -52,22 +51,23 @@ func _register_player(playerRef):
 	_update_camera_to_player()
 
 func _update_camera_to_room(newRoom):
-	Utils.create_tween_vector2(self, "position", self.position, newRoom.get_center(), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	Utils.create_tween_vector2(self, "position", self.position, newRoom.get_center(), 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _update_camera_to_player():
-	Utils.create_tween_vector2(self, "position", self.position, player.cell.pos + cam_offset, 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	Utils.create_tween_vector2(self, "position", self.position, player.cell.pos + cam_offset, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 func _on_room_combat_started(_room):
-	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x-ZOOM_ON_COMBAT, self.zoom.y-ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	await GameGlobals.battleInstance.get_tree().create_timer(0.1).timeout
+	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(Constants.CAM_ZOOM_COMBAT.x, Constants.CAM_ZOOM_COMBAT.y), Constants.CAM_ZOOM_EASE_TIME, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 
 func _on_room_combat_ended(_room):
 	await GameGlobals.battleInstance.get_tree().create_timer(0.25).timeout
-	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(Constants.CAM_ZOOM_DEFAULT.x, Constants.CAM_ZOOM_DEFAULT.y), Constants.CAM_ZOOM_EASE_TIME, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 
 func _on_game_over():
 	await GameGlobals.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME).timeout
 
-	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(self.zoom.x+ZOOM_ON_COMBAT, self.zoom.y+ZOOM_ON_COMBAT), 0.35, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(Constants.CAM_ZOOM_COMBAT.x, Constants.CAM_ZOOM_COMBAT.y), Constants.CAM_ZOOM_EASE_TIME, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 
 # CAMERA SHAKE
 func _on_any_attack(entity):
@@ -97,15 +97,15 @@ func _process(delta):
 
 # DEBUG
 func _zoom_input():
-	var zoom:float = 0
+	var zoomVal:float = 0
 	
 	if Input.is_action_pressed(Constants.INPUT_CAM_ZOOM_OUT):
-		zoom = 0.1
+		zoomVal = 0.1
 	elif Input.is_action_pressed(Constants.INPUT_CAM_ZOOM_IN):
-		zoom = -0.1
+		zoomVal = -0.1
 
-	self.zoom.x += zoom
-	self.zoom.y += zoom
+	self.zoom.x += zoomVal
+	self.zoom.y += zoomVal
 
 func _move_input():
 	var x:int = 0

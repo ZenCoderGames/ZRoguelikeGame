@@ -80,3 +80,9 @@ const TIME_BETWEEN_MOVES_ADJACENT_TO_PLAYER:float = 0.05
 
 const SHOW_DEATH_UI_TIME:float = 0.5
 const DEATH_TO_MENU_TIME:float = 2.0
+
+const HOLD_TIME_THRESHOLD:float = 0.35
+
+const CAM_ZOOM_DEFAULT:Vector2 = Vector2(1.1, 1.1)
+const CAM_ZOOM_COMBAT:Vector2 = Vector2(1.3, 1.3)
+const CAM_ZOOM_EASE_TIME:float = 0.35

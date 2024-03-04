@@ -7,6 +7,7 @@ var disableInput:bool = true
 var playerMoveAction:ActionMove
 var inputDelay:float = 0.0
 var blockInputsForTurn:bool
+var _timeSinceLastInput:float
 
 func _ready():
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
@@ -71,15 +72,36 @@ func _unhandled_input(event: InputEvent) -> void:
 	# movement
 	var x:int = 0
 	var y:int = 0
-	
-	if event.is_action_pressed(Constants.INPUT_MOVE_LEFT):
-		x = -1
-	elif event.is_action_pressed(Constants.INPUT_MOVE_RIGHT):
-		x = 1
-	elif event.is_action_pressed(Constants.INPUT_MOVE_UP):
-		y = -1
-	elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
-		y = 1
+
+	if !player.currentRoom.is_in_combat() and _timeSinceLastInput>0 and\
+		GlobalTimer.get_time_since(_timeSinceLastInput)>Constants.HOLD_TIME_THRESHOLD:
+		if event.is_action(Constants.INPUT_MOVE_LEFT):
+			x = -1
+		elif event.is_action(Constants.INPUT_MOVE_RIGHT):
+			x = 1
+		elif event.is_action(Constants.INPUT_MOVE_UP):
+			y = -1
+		elif event.is_action(Constants.INPUT_MOVE_DOWN):
+			y = 1
+	else:
+		if event.is_action_pressed(Constants.INPUT_MOVE_LEFT):
+			x = -1
+			_timeSinceLastInput = GlobalTimer.get_current_time()
+		elif event.is_action_pressed(Constants.INPUT_MOVE_RIGHT):
+			x = 1
+			_timeSinceLastInput = GlobalTimer.get_current_time()
+		elif event.is_action_pressed(Constants.INPUT_MOVE_UP):
+			y = -1
+			_timeSinceLastInput = GlobalTimer.get_current_time()
+		elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
+			y = 1
+			_timeSinceLastInput = GlobalTimer.get_current_time()
+
+	if event.is_action_released(Constants.INPUT_MOVE_LEFT) or\
+		event.is_action_released(Constants.INPUT_MOVE_RIGHT) or\
+		event.is_action_released(Constants.INPUT_MOVE_UP) or\
+		event.is_action_released(Constants.INPUT_MOVE_DOWN):
+		_timeSinceLastInput = 0
 
 	if player != null and !(x==0 and y==0):
 		if playerMoveAction.can_execute():

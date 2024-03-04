@@ -390,7 +390,8 @@ func _show_debug(colorVal):
 
 # DOORS
 func _check_for_doors():
-	CombatEventManager.on_room_combat_started(self)
+	if enemies.size()>0:
+		CombatEventManager.on_room_combat_started(self)
 
 	if GameGlobals.battleInstance.doorsStayOpenDuringBattle:
 		return
@@ -658,6 +659,9 @@ func post_update_entities():
 		enemy.post_update()
 
 # HELPERS
+func is_in_combat():
+	return enemies.size()>0
+
 func get_cell(r:int, c:int):
 	if r<0 or c<0 or r>=maxRows or c>=maxCols:
 		return null

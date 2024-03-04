@@ -31,6 +31,7 @@ HitResolutionManager="*res://scripts/battle/general/HitResolutionManager.gd"
 CombatEventManager="*res://scripts/battle/general/CombatEventManager.gd"
 UIEventManager="*res://scripts/UIEventManager.gd"
 AudioEventManager="*res://scripts/audio/AudioEventManager.gd"
+GlobalTimer="*res://scripts/library/GlobalTimer.gd"
 
 [debug]
 
