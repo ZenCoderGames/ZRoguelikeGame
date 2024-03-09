@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://xjr7expqm850"]
+
+[ext_resource type="Script" path="res://scripts/progression/PlayerData.gd" id="1_ev7dt"]
+
+[resource]
+script = ExtResource("1_ev7dt")
+currentXP = 0

@@ -183,6 +183,9 @@ func generate_enemy(enemyId):
 	return null
 
 # MINIBOSS
+func setup_with_no_miniboss():
+	_isCleared = true
+
 func generate_miniboss(enemyId):
 	var enemy:Node = generate_enemy(enemyId)
 	if enemy!=null:

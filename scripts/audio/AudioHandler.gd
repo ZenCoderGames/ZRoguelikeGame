@@ -6,7 +6,7 @@ func _ready():
 	GameEventManager.connect("OnGameInitialized",Callable(self,"_play_menu_music"))
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_initialized"))
 	GameEventManager.connect("OnCharacterSelected",Callable(self,"_on_char_selected"))
-	GameEventManager.connect("OnGameOver",Callable(self,"_play_menu_music"))
+	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_exited"))
 	UIEventManager.connect("OnMainMenuButton",Callable(self,"_on_main_menu_button"))
 	UIEventManager.connect("OnCharacterSelectButton",Callable(self,"_on_character_select_button"))
 	UIEventManager.connect("OnGenericUIEvent",Callable(self,"_on_generic_ui_event"))
@@ -28,6 +28,9 @@ func _stop_menu_music():
 
 func _on_char_selected(_selectedChar):
 	GameGlobals.audioManager.stop_music("MUSIC_TITLE_SCREEN")
+
+func _on_dungeon_exited(isVictory:bool):
+	_play_menu_music()
 
 # SFX
 func _on_main_menu_button():
@@ -69,10 +72,10 @@ func _on_any_character_death(character:Character):
 	else:
 		GameGlobals.audioManager.play_sfx("PLAYER_DEATH")
 
-func _on_player_special_ready(special:Special):
+func _on_player_special_ready(_special:Special):
 	GameGlobals.audioManager.play_sfx("PLAYER_SPECIAL_READY")
 
-func _on_player_special_activated(special:Special):
+func _on_player_special_activated(_special:Special):
 	GameGlobals.audioManager.play_sfx("PLAYER_SPECIAL_ON_ACTIVATE")
 
 func _on_consume_item(itemData:ItemData):

@@ -15,7 +15,9 @@ class_name MainMenuUI
 @onready var characterSelectUI:CharacterSelectUI = $"%CharacterSelectUI"
 @onready var baseMenuUI:Node = $"%MenuUI"
 @onready var deathUI:Node = $"%DeathUI"
+@onready var victoryUI:Node = $"%VictoryUI"
 @onready var backMenuUI:Node = $"%BackMenuUI"
+@onready var exitToMenuFromVictory:Button = $"%VictoryBackToMenu"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,19 +28,19 @@ func _ready():
 	settingsButton.connect("button_up",Callable(self,"on_settings"))
 
 	classToggle.visible = false
-	#classToggle.connect("toggled",Callable(self,"on_class_toggle"))
-
 	deathUI.visible = false
-	
+	victoryUI.visible = false
 	backMenuUI.visible = false
+
 	backToGameButton.connect("button_up",Callable(self,"_on_back_to_game"))
 	backToStartMenuButton.connect("button_up",Callable(self,"_on_back_to_main_menu"))
 	characterSelectUI.connect("OnBackPressed",Callable(self,"_on_back_to_main_menu"))
 	exitGameButton.connect("button_up",Callable(self,"_on_exit_game"))
+	exitToMenuFromVictory.connect("button_up",Callable(self,"_on_back_to_main_menu"))
+
 	GameEventManager.connect("OnBackButtonPressed",Callable(self,"_show_back_menu"))
-	
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
-	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
+	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_completed"))
 	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
 	GameEventManager.connect("OnCharacterSelected",Callable(self,"_on_character_chosen"))
 
@@ -50,7 +52,13 @@ func _on_dungeon_init():
 	_shared_init()
 
 func _shared_init():
-	GameGlobals.dungeon.player.connect("OnDeathFinal",Callable(self,"_on_game_over"))
+	pass
+
+func _on_dungeon_completed(isVictory:bool):
+	if isVictory:
+		_show_victory()
+	else:
+		_show_defeat()
 
 func show_menu():
 	get_node(".").visible = true
@@ -76,6 +84,10 @@ func start_battle(levelId:String):
 	
 	# Always have class selection
 	characterSelectUI.visible = true
+
+	if !GameGlobals.battleInstance.debugLevelId.is_empty():
+		levelId = GameGlobals.battleInstance.debugLevelId
+
 	characterSelectUI.init_from_data(levelId)
 
 func on_settings():
@@ -84,7 +96,7 @@ func on_settings():
 func on_class_toggle(isToggleOn:bool):
 	GameGlobals.battleInstance.startWithClasses = isToggleOn
 
-func _on_game_over():
+func _show_defeat():
 	await GameGlobals.battleInstance.get_tree().create_timer(Constants.SHOW_DEATH_UI_TIME).timeout
 	
 	get_node(".").visible = true
@@ -96,20 +108,24 @@ func _on_game_over():
 	baseMenuUI.visible = true
 	characterSelectUI.visible = false
 
+func _show_victory():
+	get_node(".").visible = true
+	victoryUI.visible = true
+	baseMenuUI.visible = false
+
 func _clean_up():
+	victoryUI.visible = false
 	deathUI.visible = false
 	characterSelectUI.visible = false
-
-func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
-	if fullRefreshDungeon:
-		var player = GameGlobals.dungeon.player
-		if player!=null and !player.is_queued_for_deletion():
-			player.disconnect("OnDeathFinal",Callable(self,"_on_game_over"))
 
 # BACK MENU
 func _show_back_menu():
 	if backMenuUI.visible:
 		_on_back_to_game()
+		return
+
+	if victoryUI.visible:
+		_on_back_to_main_menu()
 		return
 
 	if characterSelectUI.visible:
@@ -130,7 +146,9 @@ func _on_back_to_game():
 		show_menu()
 
 func _on_back_to_main_menu():
+	UIEventManager.emit_signal("OnMainMenuButton")
 	backMenuUI.visible = false
+	victoryUI.visible = false
 	show_menu()
 
 func _on_exit_game():

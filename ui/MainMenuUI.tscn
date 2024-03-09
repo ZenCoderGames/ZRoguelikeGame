@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://3gpoj14w4qny"]
+[gd_scene load_steps=9 format=3 uid="uid://3gpoj14w4qny"]
 
 [ext_resource type="Script" path="res://scripts/battle/ui/MainMenuUI.gd" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wsy8d"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="3_8id6n"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_co4b8"]
 [ext_resource type="FontFile" uid="uid://chvqhhsv3883r" path="res://resource/fonts/kirifont/KiriFont.ttf" id="6_u04gs"]
+[ext_resource type="Texture2D" uid="uid://c0fswqjk64i3j" path="res://sourceArt/VictoryScreen.png" id="8_sjcn0"]
 
 [node name="MainMenuUI" type="Control"]
 layout_mode = 3
@@ -194,3 +195,26 @@ text = "Back to Start Menu"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit Game"
+
+[node name="VictoryUI" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.380392, 0.301961, 0.301961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VictoryUI"]
+layout_mode = 2
+texture = ExtResource("8_sjcn0")
+
+[node name="VictoryBackToMenu" type="Button" parent="VictoryUI"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("1_wsy8d")
+text = "Back to Menu"
+icon_alignment = 1

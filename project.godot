@@ -32,6 +32,7 @@ CombatEventManager="*res://scripts/battle/general/CombatEventManager.gd"
 UIEventManager="*res://scripts/UIEventManager.gd"
 AudioEventManager="*res://scripts/audio/AudioEventManager.gd"
 GlobalTimer="*res://scripts/library/GlobalTimer.gd"
+PlayerDataManager="*res://scripts/progression/PlayerDataManager.gd"
 
 [debug]
 

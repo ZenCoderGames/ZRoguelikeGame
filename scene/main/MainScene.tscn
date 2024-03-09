@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0vuvgr4glgdp"]
+[gd_scene load_steps=13 format=3 uid="uid://d0vuvgr4glgdp"]
 
 [ext_resource type="Script" path="res://scripts/battle/DungeonCamera.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="1_bihmr"]
@@ -9,8 +9,6 @@
 [ext_resource type="Script" path="res://scripts/battle/instance/effects/EffectManager.gd" id="6"]
 [ext_resource type="Script" path="res://scripts/battle/Dungeon.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://3gpoj14w4qny" path="res://ui/MainMenuUI.tscn" id="8"]
-[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="9_07g2x"]
-[ext_resource type="Texture2D" uid="uid://c0fswqjk64i3j" path="res://sourceArt/VictoryScreen.png" id="10_lb8q0"]
 [ext_resource type="Script" path="res://scripts/audio/AudioManager.gd" id="11_x0m75"]
 [ext_resource type="Script" path="res://scripts/audio/AudioHandler.gd" id="12_w0uop"]
 
@@ -55,6 +53,8 @@ script = ExtResource("4")
 doorsStayOpenDuringBattle = true
 useLevelScalingOnEnemies = true
 usePopUpEquipment = true
+debugLevelId = "LEVEL_TEST"
+dontSpawnEnemies = true
 debugSpawnItems = ["ITEM_MAGE_ROBE", "ITEM_BATTLEMAGE_ROBE"]
 
 [node name="PlayerInput" type="Node" parent="Battle"]
@@ -114,31 +114,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VictoryUI" type="PanelContainer" parent="GameUI"]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(0.380392, 0.301961, 0.301961, 1)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="GameUI/VictoryUI"]
-layout_mode = 2
-texture = ExtResource("10_lb8q0")
-
-[node name="BackToMenu" type="Button" parent="GameUI/VictoryUI"]
-layout_mode = 2
-size_flags_vertical = 8
-theme = ExtResource("9_07g2x")
-text = "Back to Menu"
-icon_alignment = 1
-
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("11_x0m75")
 
 [node name="AudioHandler" type="Node" parent="AudioManager"]
 script = ExtResource("12_w0uop")
-
-[connection signal="button_up" from="GameUI/VictoryUI/BackToMenu" to="Battle" method="back_to_menu_from_victory"]

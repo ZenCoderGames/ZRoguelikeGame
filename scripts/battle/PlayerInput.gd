@@ -69,6 +69,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		_on_skip_turn_pressed()
 		return
 
+	if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
+		CombatEventManager.emit_signal("OnToggleInventory")
+
 	# movement
 	var x:int = 0
 	var y:int = 0

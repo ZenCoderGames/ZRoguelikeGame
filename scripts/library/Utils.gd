@@ -58,6 +58,13 @@ func load_data_from_file(relativePath:String) -> Dictionary:
 		print("file not found " + dataFilePath)
 		return {}
 
+func save_data_to_file(jsonData:JSON, relativePath:String):
+	var dataFilePath:String = str("res://",relativePath)
+	if FileAccess.file_exists(dataFilePath):
+		var file = FileAccess.open(dataFilePath, FileAccess.WRITE)
+		file.store_var(jsonData)
+		file.close()
+
 func do_hit_pause():
 	get_tree().paused = true
 	await get_tree().create_timer(0.5).timeout

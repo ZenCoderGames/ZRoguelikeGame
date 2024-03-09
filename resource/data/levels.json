@@ -1,6 +1,12 @@
 {
 	"levels": [
 		{
+			"id": "LEVEL_TEST",
+			"description": "Test Level",
+			"dungeonPath": "resource/data/dungeons/testDungeon.json",
+			"heroList": ["HERO_TEST"]
+		},
+		{
 			"id": "LEVEL_TUTORIAL",
 			"description": "Tutorial",
 			"dungeonPath": "resource/data/dungeons/tutorialDungeon.json",

@@ -14,20 +14,30 @@ var itemSpawnedMap:Dictionary = {}
 
 var dungeonData:DungeonData
 
-var isDungeonFinished:bool
+var isDungeonPaused:bool
 var isInitialized:bool
 var inBackableMenu:bool
 var isCustomRoomSetup:bool
 
+var dungeonProgress:DungeonProgress
+
 func _init():
 	GameGlobals.set_dungeon(self)
 	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
+	GameEventManager.connect("OnDungeonFloorCompleted",Callable(self,"_on_dungeon_floor_completed"))
+	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_completed"))
 	CombatEventManager.connect("OnAllEnemyTurnsCompleted",Callable(self,"_end_turn"))
 
 func init(dungeonDataRef:DungeonData):
 	dungeonData = dungeonDataRef
 	isCustomRoomSetup = dungeonData.customRoomList.size()>0
-	isDungeonFinished = false
+	isDungeonPaused = false
+
+func _on_dungeon_floor_completed():
+	isDungeonPaused = true
+
+func _on_dungeon_completed(isVictory:bool):
+	isDungeonPaused = true
 
 func create(recreatePlayer:bool) -> void:
 	charCounter = 0
@@ -53,6 +63,8 @@ func create(recreatePlayer:bool) -> void:
 	player.connect("OnTurnCompleted",Callable(self,"_on_player_turn_completed"))
 	_init_turns()
 	_start_turn()
+
+	dungeonProgress = DungeonProgress.new()
 
 func _init_rooms():
 	rooms = []
@@ -231,6 +243,9 @@ func _init_enemies():
 		startRoom.generate_enemy_custom_encounter(GameGlobals.battleInstance.debugSpawnEnemyEncounter)
 
 	if GameGlobals.battleInstance.dontSpawnEnemies:
+		for room in rooms:
+			if room.isEndRoom:
+				room.setup_with_no_miniboss()
 		return
 
 	if isCustomRoomSetup:
@@ -444,7 +459,7 @@ func _init_turns():
 	CombatEventManager.emit_signal("OnEndTurn")
 
 func _start_turn():
-	if isDungeonFinished:
+	if isDungeonPaused:
 		return
 
 	CombatEventManager.emit_signal("OnStartTurn")
@@ -499,6 +514,7 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 		if player!=null and !player.is_queued_for_deletion():
 			player.disconnect("OnTurnCompleted",Callable(self,"_on_player_turn_completed"))
 		player = null
+		dungeonProgress = null
 
 	isInitialized = false
 

@@ -5,7 +5,6 @@ class_name BattleInstance
 @onready var view:BattleView = $"%View"
 @onready var mainMenuUI:MainMenuUI = $"%MainMenuUI"
 @onready var screenFade:Panel = $"%ScreenFade"
-@onready var victoryUI:PanelContainer = $"%VictoryUI"
 
 # VARIANTS
 @export var startWithClasses:bool
@@ -13,6 +12,7 @@ class_name BattleInstance
 @export var useLevelScalingOnEnemies:bool
 @export var usePopUpEquipment:bool
 # DEBUG
+@export var debugLevelId:String
 @export var debugLevelScaling:int
 @export var debugStartAtEndRoom:bool
 @export var debugShowAllRooms:bool
@@ -35,7 +35,6 @@ class_name BattleInstance
 @export var debugStatusEffects:Array # (Array, String)
 
 var firstTimeDungeon:bool = false
-var onGameOver:bool
 
 var currentDungeonIdx:int
 var currentLevelData:LevelData
@@ -102,22 +101,14 @@ func _shared_dungeon_init(recreatePlayer:bool=true):
 	#HitResolutionManager.clean_up()
 
 	GameGlobals.dungeon.create(recreatePlayer)
-	onGameOver = false
 	#_toggle_main_menu()
-	GameGlobals.dungeon.player.connect("OnDeath",Callable(self,"_on_game_over"))
+	GameGlobals.dungeon.player.connect("OnDeath",Callable(self,"_on_player_death"))
 	GameGlobals.dungeon.player.connect("OnPlayerReachedExit",Callable(self,"_on_dungeon_completed"))
-	GameGlobals.dungeon.player.connect("OnPlayerReachedEnd",Callable(self,"_on_game_end"))
+	GameGlobals.dungeon.player.connect("OnPlayerReachedEnd",Callable(self,"_on_player_victory"))
 	
 	await get_tree().create_timer(0.2).timeout
 	
 	screenFade.visible = false
-
-func _unhandled_input(event: InputEvent) -> void:
-	if onGameOver:
-		return
-
-	if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
-		CombatEventManager.emit_signal("OnToggleInventory")
 
 func _toggle_main_menu():
 	mainMenuUI.visible = !mainMenuUI.visible
@@ -127,16 +118,13 @@ func _toggle_main_menu():
 	else:
 		UIEventManager.emit_signal("OnMainMenuOff")
 
-func _on_game_over():
-	onGameOver = true
-	GameGlobals.dungeon.isDungeonFinished = true
-	GameEventManager.emit_signal("OnGameOver")
+func _on_player_death():
+	GameEventManager.emit_signal("OnDungeonExited", false)
 
+# Clean up and load a new floor
 func _on_dungeon_completed():
 	screenFade.visible = true
-	#_toggle_main_menu()
-
-	GameGlobals.dungeon.isDungeonFinished = true
+	GameEventManager.emit_signal("OnDungeonFloorCompleted")
 	
 	await get_tree().create_timer(0.05).timeout
 
@@ -144,16 +132,8 @@ func _on_dungeon_completed():
 	if currentDungeonIdx<GameGlobals.dataManager.dungeonDataList.size():
 		recreate_dungeon(currentDungeonIdx)
 
-func _on_game_end():
-	victoryUI.visible = true
-	GameGlobals.dungeon.isDungeonFinished = true
-	await get_tree().create_timer(0.05).timeout
-	_toggle_main_menu()
-
-func back_to_menu_from_victory():
-	#_toggle_main_menu()
-	victoryUI.visible = false
-	GameGlobals.dungeon.isDungeonFinished = false
+func _on_player_victory():
+	GameEventManager.emit_signal("OnDungeonExited", true)
 
 # HELPERS
 func get_current_level():

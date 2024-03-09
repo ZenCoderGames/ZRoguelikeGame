@@ -31,7 +31,7 @@ func _ready():
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
 	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
 	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
-	GameEventManager.connect("OnGameOver",Callable(self,"_on_game_over"))
+	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_exited"))
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_attack"))
 	CombatEventManager.connect("OnRoomCombatStarted",Callable(self,"_on_room_combat_started"))
 	CombatEventManager.connect("OnRoomCombatEnded",Callable(self,"_on_room_combat_ended"))
@@ -64,7 +64,7 @@ func _on_room_combat_ended(_room):
 	await GameGlobals.battleInstance.get_tree().create_timer(0.25).timeout
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(Constants.CAM_ZOOM_DEFAULT.x, Constants.CAM_ZOOM_DEFAULT.y), Constants.CAM_ZOOM_EASE_TIME, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 
-func _on_game_over():
+func _on_dungeon_exited():
 	await GameGlobals.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME).timeout
 
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(Constants.CAM_ZOOM_COMBAT.x, Constants.CAM_ZOOM_COMBAT.y), Constants.CAM_ZOOM_EASE_TIME, Tween.TRANS_LINEAR, Tween.EASE_OUT)
