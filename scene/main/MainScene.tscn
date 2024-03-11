@@ -53,9 +53,6 @@ script = ExtResource("4")
 doorsStayOpenDuringBattle = true
 useLevelScalingOnEnemies = true
 usePopUpEquipment = true
-debugLevelId = "LEVEL_TEST"
-dontSpawnEnemies = true
-debugSpawnItems = ["ITEM_MAGE_ROBE", "ITEM_BATTLEMAGE_ROBE"]
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource("3")

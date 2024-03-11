@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="3_8id6n"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_co4b8"]
 [ext_resource type="FontFile" uid="uid://chvqhhsv3883r" path="res://resource/fonts/kirifont/KiriFont.ttf" id="6_u04gs"]
-[ext_resource type="Texture2D" uid="uid://c0fswqjk64i3j" path="res://sourceArt/VictoryScreen.png" id="8_sjcn0"]
+[ext_resource type="PackedScene" uid="uid://bhp712q20vgvb" path="res://ui/levelSelect/LevelSelectUI.tscn" id="8_eupbo"]
 
 [node name="MainMenuUI" type="Control"]
 layout_mode = 3
@@ -54,6 +54,7 @@ vertical_alignment = 1
 
 [node name="DeathUI" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,6 +92,43 @@ text = "you died..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="DeathBackToMenu" type="Button" parent="DeathUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme = ExtResource("1_wsy8d")
+text = "Back to Menu"
+icon_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="DeathUI"]
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -155.0
+offset_right = 400.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DeathProgressLabel" type="Label" parent="DeathUI/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Souls Collected = 100"
+vertical_alignment = 1
+
 [node name="MenuUI" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 self_modulate = Color(0.631373, 0.631373, 0.631373, 1)
@@ -103,14 +141,13 @@ anchor_bottom = 0.5
 offset_left = -112.0
 offset_top = -55.0
 offset_right = 83.0
-offset_bottom = 83.0
+offset_bottom = 51.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_wsy8d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuUI"]
 layout_mode = 2
-size_flags_vertical = 4
 
 [node name="Tutorial" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
@@ -118,39 +155,40 @@ modulate = Color(0.368627, 1, 0, 1)
 layout_mode = 2
 text = "Tutorial"
 
-[node name="Easy" type="Button" parent="MenuUI/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Easy"
-
-[node name="Balanced" type="Button" parent="MenuUI/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("1_wsy8d")
-text = "Balanced"
-
-[node name="Hard" type="Button" parent="MenuUI/VBoxContainer"]
-unique_name_in_owner = true
-modulate = Color(1, 0.0666667, 0, 1)
-layout_mode = 2
-theme = ExtResource("1_wsy8d")
-text = "Hard"
-
-[node name="SettingsButton" type="Button" parent="MenuUI/VBoxContainer"]
+[node name="Continue" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-self_modulate = Color(0.54902, 0.968627, 0.898039, 1)
+modulate = Color(0, 1, 0.768627, 1)
+layout_mode = 2
+theme = ExtResource("1_wsy8d")
+text = "Continue"
+
+[node name="NewGame" type="Button" parent="MenuUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+
+[node name="Settings" type="Button" parent="MenuUI/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 disabled = true
 text = "Settings"
 
-[node name="ClassToggle" type="CheckButton" parent="MenuUI/VBoxContainer"]
+[node name="Exit" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
+modulate = Color(0.968627, 0.0627451, 0, 1)
 layout_mode = 2
-text = "With Classes"
-alignment = 1
+theme = ExtResource("1_wsy8d")
+text = "Exit Game"
 
 [node name="CharacterSelectUI" parent="." instance=ExtResource("3")]
+visible = false
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelSelectUI" parent="." instance=ExtResource("8_eupbo")]
 visible = false
 layout_mode = 1
 grow_horizontal = 2
@@ -191,12 +229,7 @@ layout_mode = 2
 theme = ExtResource("1_wsy8d")
 text = "Back to Start Menu"
 
-[node name="ExitGameButton" type="Button" parent="BackMenuUI/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Exit Game"
-
-[node name="VictoryUI" type="PanelContainer" parent="."]
+[node name="VictoryUI" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.380392, 0.301961, 0.301961, 1)
@@ -207,13 +240,47 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="VictoryUI"]
+[node name="Label" type="Label" parent="VictoryUI"]
 layout_mode = 2
-texture = ExtResource("8_sjcn0")
+offset_left = 794.0
+offset_top = 249.0
+offset_right = 1125.0
+offset_bottom = 309.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("2")
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(1, 0.670588, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_u04gs")
+theme_override_font_sizes/font_size = 60
+text = "VICTORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VictoryUI"]
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VictoryProgressLabel" type="Label" parent="VictoryUI/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Souls Collected = 100"
+vertical_alignment = 1
 
 [node name="VictoryBackToMenu" type="Button" parent="VictoryUI"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_top = 1049.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 size_flags_vertical = 8
 theme = ExtResource("1_wsy8d")
 text = "Back to Menu"

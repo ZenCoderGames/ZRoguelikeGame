@@ -1,32 +1,36 @@
 extends Node
 
-#const PLAYER_DATA_PATH:String = "resource/data/progression/playerData.json"
+# Currently only supports 1 profile
+
 const PLAYER_DATA_PATH:String = "resource/data/progression/playerData.tres"
 
 var currentPlayerData:PlayerData
 
 func _init():
-	currentPlayerData = load_character_data()
+	currentPlayerData = load_character_data(PLAYER_DATA_PATH)
 
 func _unit_test():
 	#set_to_current_player_data(0)
 	add_current_xp(100)
-	add_current_level(2)
 	
 func add_current_xp(val:int):
 	currentPlayerData.currentXP = currentPlayerData.currentXP + val
 	currentPlayerData.totalXP = currentPlayerData.totalXP + val
 
-func add_current_level(val:int):
-	currentPlayerData.currentLevel = currentPlayerData.currentLevel + val
-
 func save_to_file():
 	save_character_data(currentPlayerData)
 	
-func load_character_data():
-	if ResourceLoader.exists(PLAYER_DATA_PATH):
-		return load(PLAYER_DATA_PATH)
+func load_character_data(path:String):
+	if ResourceLoader.exists(path):
+		return load(path)
 	return null
 
 func save_character_data(data):
 	ResourceSaver.save(data, PLAYER_DATA_PATH)
+
+func is_new_player():
+	return currentPlayerData.totalXP == 0
+
+func clear_player_data():
+	currentPlayerData.currentXP = 0
+	currentPlayerData.totalXP = 0

@@ -2,31 +2,36 @@
 	"levels": [
 		{
 			"id": "LEVEL_TEST",
-			"description": "Test Level",
+			"name": "Test Level",
+			"description": "This is a debug level",
 			"dungeonPath": "resource/data/dungeons/testDungeon.json",
 			"heroList": ["HERO_TEST"]
 		},
 		{
 			"id": "LEVEL_TUTORIAL",
-			"description": "Tutorial",
+			"name": "Tutorial",
+			"description": "This is a tutorial level",
 			"dungeonPath": "resource/data/dungeons/tutorialDungeon.json",
 			"dungeonModifiers": ["DUNGEON_MOD_TUTORIAL"],
 			"heroList": ["HERO_TUTORIAL"]
 		},
 		{
 			"id": "LEVEL_EASY",
-			"description": "Easy",
+			"name": "Easy",
+			"description": "This is an easy level",
 			"dungeonPath": "resource/data/dungeons/easyDungeon.json",
 			"dungeonModifiers": ["DUNGEON_MOD_EASY"]
 		},
 		{
 			"id": "LEVEL_BALANCED",
-			"description": "Balanced",
+			"name": "Balanced",
+			"description": "This is a normal level",
 			"dungeonPath": "resource/data/dungeons/balancedDungeon.json"
 		},
 		{
 			"id": "LEVEL_HARD",
-			"description": "Hard",
+			"name": "Hard",
+			"description": "This is a hard level",
 			"dungeonPath": "resource/data/dungeons/hardDungeon.json",
 			"dungeonModifiers": ["DUNGEON_MOD_HARD_ATTACK", "DUNGEON_MOD_HARD_HEALTH"]
 		}

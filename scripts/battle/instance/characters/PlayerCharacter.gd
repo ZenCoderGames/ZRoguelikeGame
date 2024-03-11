@@ -8,6 +8,7 @@ signal OnPlayerReachedEnd()
 signal OnXPGained()
 signal OnSoulsModified()
 signal OnLevelUp()
+signal OnEnemyKilled(enemy)
 
 var levelXpList:Array = [0, 30, 50, 80, 120, 170, 230, 300, 380]
 var xp:int = 0
@@ -117,6 +118,8 @@ func _on_kill(attacker, defender, _finalDmg):
 	if attacker == self:
 		#_gain_xp(defender.charData.xp)
 		gain_souls(defender.charData.xp)
+		emit_signal("OnEnemyKilled", defender)
+
 
 func _on_post_hit(attacker, _defender, _finalDmg):
 	if attacker == self:

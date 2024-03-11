@@ -26,11 +26,18 @@ Roguelike Dev:
 (D)- Sometimes miniboss doesn't spawn and end room doesnt work
 (D)- Specials have cooldowns
 (D)- Rich Text Labels in other spots (Util function to parse text)
-- Contextual info not spawning in first room right next to player
-- Tutorial
+(D)- Utils.format_text can parse keywords
+(IP)- Tutorial
+- Get rid of variable startWithClasses
 
+- Progression
+	- Show Progress in Character Select UI 
+	- Show Progress in End Screen UI (Player->EnemyKilled + FloorCompleted + DungeonCompleted)
+	(D)- Level Screen shows level modifiers
+	- Character Select UI has a button for Skill Tree Menu (Shared amongst chars)
+
+- Contextual info not spawning in first room right next to player
 - More Things (3 enemies) - 2 left [Evil Knight -> Barrier, Healer]
-- Utils.format_text can parse keywords
 
 - Special slots (passives can give you more)
 - Specials as inventory items
