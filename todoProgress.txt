@@ -31,9 +31,11 @@ Roguelike Dev:
 - Get rid of variable startWithClasses
 
 - Progression
-	- Show Progress in Character Select UI 
-	- Show Progress in End Screen UI (Player->EnemyKilled + FloorCompleted + DungeonCompleted)
+	(D)- Show Progress in Character Select UI 
+	(D)- Show Progress in End Screen UI (Player->EnemyKilled + FloorCompleted + DungeonCompleted)
 	(D)- Level Screen shows level modifiers
+	- Fix bug with reviving enemies collecting xp twice
+	- Fix bug with new floor clearing xp
 	- Character Select UI has a button for Skill Tree Menu (Shared amongst chars)
 
 - Contextual info not spawning in first room right next to player

@@ -15,13 +15,18 @@ class_name MainMenuUI
 
 @onready var baseMenuUI:Node = $"%MenuUI"
 @onready var deathUI:Node = $"%DeathUI"
+@onready var deathGridContainer:GridContainer = $"%DeathGridContainer"
 @onready var victoryUI:Node = $"%VictoryUI"
+@onready var victoryGridContainer:GridContainer = $"%VictoryGridContainer"
 @onready var backMenuUI:Node = $"%BackMenuUI"
 @onready var exitToMenuFromVictory:Button = $"%VictoryBackToMenu"
 @onready var exitToMenuFromDefeat:Button = $"%DeathBackToMenu"
 
 @onready var victoryProgressLabel:Label = $"%VictoryProgressLabel"
 @onready var deathProgressLabel:Label = $"%DeathProgressLabel"
+@onready var totalSoulsLabel:Label = $"%TotalSoulsLabel"
+
+const BattleEndEnemyXPUIClass := preload("res://ui/battleEnd/BattleEndEnemyXPUI.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,6 +54,11 @@ func _ready():
 	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_completed"))
 	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
 	GameEventManager.connect("OnCharacterSelected",Callable(self,"_on_character_chosen"))
+
+	PlayerDataManager.connect("OnPlayerDataUpdated",Callable(self,"_on_player_data_updated"))
+	_on_player_data_updated()
+
+	show_menu()
 	
 func _on_dungeon_init():
 	_clean_up()
@@ -113,13 +123,29 @@ func _show_defeat():
 	get_node(".").visible = true
 	deathUI.visible = true
 	baseMenuUI.visible = false
-	deathProgressLabel.text = str("Total Souls Collected: ", 50)
+
+	var dp:DungeonProgress = GameGlobals.dungeon.dungeonProgress
+	for enemyKilledData in dp.enemyKilledList:
+		var battleEndEnemyXPUI := BattleEndEnemyXPUIClass.instantiate()
+		deathGridContainer.add_child(battleEndEnemyXPUI)
+		battleEndEnemyXPUI.init(enemyKilledData)
+
+	deathProgressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
+	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
 
 func _show_victory():
 	get_node(".").visible = true
 	victoryUI.visible = true
 	baseMenuUI.visible = false
-	victoryProgressLabel.text = str("Total Souls Collected: ", 100)
+
+	var dp:DungeonProgress = GameGlobals.dungeon.dungeonProgress
+	for enemyKilledData in dp.enemyKilledList:
+		var battleEndEnemyXPUI := BattleEndEnemyXPUIClass.instantiate()
+		victoryGridContainer.add_child(battleEndEnemyXPUI)
+		battleEndEnemyXPUI.init(enemyKilledData)
+
+	victoryProgressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
+	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
 
 func _clean_up():
 	victoryUI.visible = false
@@ -134,6 +160,10 @@ func _show_back_menu():
 		return
 
 	if victoryUI.visible:
+		_on_back_to_main_menu()
+		return
+
+	if deathUI.visible:
 		_on_back_to_main_menu()
 		return
 
@@ -167,3 +197,17 @@ func _on_back_to_main_menu():
 
 func _on_exit_game():
 	get_tree().quit()
+
+func _clear_end_screen():
+	var victoryGridChildren:Array = victoryGridContainer.get_children()
+	for gridItem in victoryGridChildren:
+		victoryGridContainer.remove_child(gridItem)
+		gridItem.queue_free()
+
+	var deathGridChildren:Array = deathGridContainer.get_children()
+	for gridItem in deathGridChildren:
+		deathGridContainer.remove_child(gridItem)
+		gridItem.queue_free()
+
+func _on_player_data_updated():
+	totalSoulsLabel.text = str("Total Souls: ", PlayerDataManager.get_total_xp())

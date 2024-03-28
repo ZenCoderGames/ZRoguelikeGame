@@ -6,8 +6,11 @@ const PLAYER_DATA_PATH:String = "resource/data/progression/playerData.tres"
 
 var currentPlayerData:PlayerData
 
+signal OnPlayerDataUpdated
+
 func _init():
 	currentPlayerData = load_character_data(PLAYER_DATA_PATH)
+	emit_signal("OnPlayerDataUpdated")
 
 func _unit_test():
 	#set_to_current_player_data(0)
@@ -16,6 +19,8 @@ func _unit_test():
 func add_current_xp(val:int):
 	currentPlayerData.currentXP = currentPlayerData.currentXP + val
 	currentPlayerData.totalXP = currentPlayerData.totalXP + val
+	emit_signal("OnPlayerDataUpdated")
+	save_to_file()
 
 func save_to_file():
 	save_character_data(currentPlayerData)
@@ -34,3 +39,7 @@ func is_new_player():
 func clear_player_data():
 	currentPlayerData.currentXP = 0
 	currentPlayerData.totalXP = 0
+	emit_signal("OnPlayerDataUpdated")
+
+func get_total_xp():
+	return currentPlayerData.currentXP
