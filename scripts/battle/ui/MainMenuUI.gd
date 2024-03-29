@@ -46,8 +46,8 @@ func _ready():
 	backToStartMenuButton.connect("button_up",Callable(self,"_on_back_to_main_menu"))
 	characterSelectUI.connect("OnBackPressed",Callable(self,"_on_back_to_main_menu"))
 	levelSelectUI.connect("OnBackPressed",Callable(self,"_on_back_to_character_select"))
-	exitToMenuFromVictory.connect("button_up",Callable(self,"_on_back_to_main_menu"))
-	exitToMenuFromDefeat.connect("button_up",Callable(self,"_on_back_to_main_menu"))
+	exitToMenuFromVictory.connect("button_up",Callable(self,"_show_back_menu"))
+	exitToMenuFromDefeat.connect("button_up",Callable(self,"_show_back_menu"))
 
 	GameEventManager.connect("OnBackButtonPressed",Callable(self,"_show_back_menu"))
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
@@ -161,10 +161,12 @@ func _show_back_menu():
 
 	if victoryUI.visible:
 		_on_back_to_main_menu()
+		_on_back_to_character_select()
 		return
 
 	if deathUI.visible:
 		_on_back_to_main_menu()
+		_on_back_to_character_select()
 		return
 
 	if characterSelectUI.visible:
@@ -210,4 +212,4 @@ func _clear_end_screen():
 		gridItem.queue_free()
 
 func _on_player_data_updated():
-	totalSoulsLabel.text = str("Total Souls: ", PlayerDataManager.get_total_xp())
+	totalSoulsLabel.text = str("Total Souls: ", PlayerDataManager.get_current_xp())

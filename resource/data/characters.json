@@ -58,6 +58,7 @@
 				"portraitPath": "resource/portraits/Paladin.png",
 				"isGeneric": false,
 				"isInCharacterSelect": true,
+				"unlockCost": 100,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -84,6 +85,7 @@
 				"portraitPath": "resource/portraits/Berserker.png",
 				"isGeneric": false,
 				"isInCharacterSelect": true,
+				"unlockCost": 100,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -110,6 +112,7 @@
 				"portraitPath": "resource/portraits/Assassin.png",
 				"isGeneric": false,
 				"isInCharacterSelect": true,
+				"unlockCost": 100,
 				"stats": [
 					{
 						"type": "HEALTH",
@@ -136,6 +139,7 @@
 				"portraitPath": "resource/portraits/Random.png",
 				"isGeneric": true,
 				"isInCharacterSelect": true,
+				"unlockCost": 100,
 				"stats": [
 					{
 						"type": "HEALTH",

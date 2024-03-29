@@ -18,7 +18,7 @@ signal OnBackPressed
 
 func init_from_data():
 	clean_up()
-	hide_info()
+	_hide_info()
 
 	for heroData in GameGlobals.dataManager.heroDataList:
 		if heroData.isInCharacterSelect:
@@ -31,15 +31,20 @@ func add_character(heroData:CharacterData):
 	charSelectHolder.add_child(charSelectItem)
 	charSelectItems.append(charSelectItem)
 	charSelectItem.init_from_data(heroData)
-	charSelectItem.connect("OnActiveOrPassiveInFocus",Callable(self,"show_info"))
-	charSelectItem.connect("OnActiveOrPassiveOutOfFocus",Callable(self,"hide_info"))
+	charSelectItem.connect("OnActiveOrPassiveInFocus",Callable(self,"_show_info"))
+	charSelectItem.connect("OnActiveOrPassiveOutOfFocus",Callable(self,"_hide_info"))
+	charSelectItem.connect("OnUnlocked",Callable(self,"_on_unlocked"))
 
-func show_info(str:String):
+func _show_info(val:String):
 	infoPanel.visible = true
-	infoLabel.text = Utils.format_text(str)
+	infoLabel.text = Utils.format_text(val)
 	
-func hide_info():
+func _hide_info():
 	infoPanel.visible = false
+
+func _on_unlocked():
+	for charSelectItem in charSelectItems:
+		charSelectItem.refresh()
 
 func clean_up():
 	# charholders

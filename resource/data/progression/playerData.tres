@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://c45y0xffbtquv"]
 
 [ext_resource type="Script" path="res://scripts/progression/PlayerData.gd" id="1_ev7dt"]
 
 [resource]
 script = ExtResource("1_ev7dt")
-currentXP = 95
-totalXP = 95
+currentXP = 0
+totalXP = 0
+hero2Unlocked = false
+hero3Unlocked = false
+heroClasslessUnlocked = false

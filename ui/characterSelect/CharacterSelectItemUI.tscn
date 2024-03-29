@@ -62,17 +62,18 @@ text = "Knight"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="Bg" type="PanelContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 250)
 layout_mode = 2
 theme = ExtResource("1_68jt7")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Bg"]
 layout_mode = 2
 theme = ExtResource("1_68jt7")
 alignment = 1
 
-[node name="Portrait" type="TextureRect" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Portrait" type="TextureRect" parent="VBoxContainer/Bg/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
@@ -80,18 +81,18 @@ texture = ExtResource("3_jok4v")
 expand_mode = 4
 stretch_mode = 3
 
-[node name="DescLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="DescLabel" type="Label" parent="VBoxContainer/Bg/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Vitality: 5
 Strength: 3"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bg/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Active" type="TextureRect" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Active" type="TextureRect" parent="VBoxContainer/Bg/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 self_modulate = Color(0.890196, 0.419608, 0.721569, 1)
 layout_mode = 2
@@ -99,7 +100,7 @@ size_flags_horizontal = 4
 texture = ExtResource("4_jhn0k")
 stretch_mode = 3
 
-[node name="Passive" type="TextureRect" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Passive" type="TextureRect" parent="VBoxContainer/Bg/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 self_modulate = Color(0, 0.623529, 0.623529, 1)
 layout_mode = 2
@@ -114,3 +115,11 @@ size_flags_vertical = 8
 focus_mode = 0
 theme = ExtResource("1_68jt7")
 text = "Select"
+
+[node name="UnlockButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+focus_mode = 0
+theme = ExtResource("1_68jt7")
+text = "Unlock (x300)"

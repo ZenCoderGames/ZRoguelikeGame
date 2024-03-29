@@ -9,10 +9,14 @@ class_name CharacterSelectItemUI
 @onready var active:TextureRect = $"%Active"
 @onready var passive:TextureRect = $"%Passive"
 
+@onready var background:PanelContainer = $"%Bg"
+@onready var unlockBtn:Button = $"%UnlockButton"
+
 var myCharData:CharacterData
 
 signal OnActiveOrPassiveInFocus(data)
 signal OnActiveOrPassiveOutOfFocus
+signal OnUnlocked
 
 func init_from_data(charData:CharacterData):
 	myCharData = charData
@@ -24,6 +28,7 @@ func init_from_data(charData:CharacterData):
 	#statStr.erase(statStr.length()-1, 1)
 	descLabel.text = statStr
 	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
+	unlockBtn.connect("button_up",Callable(self,"_on_unlock"))
 	var portraitTex = load(str("res://",myCharData.portraitPath))
 	portrait.texture = portraitTex
 	if !charData.specialId.is_empty():
@@ -36,6 +41,8 @@ func init_from_data(charData:CharacterData):
 		passive.connect("mouse_exited",Callable(self,"_on_passive_out_of_focus"))
 	else:
 		passive.self_modulate = Color.GRAY
+
+	_checkForUnlock()
 
 func _on_item_chosen():
 	UIEventManager.emit_signal("OnCharacterSelectButton")
@@ -61,3 +68,27 @@ func _on_passive_in_focus():
 
 func _on_passive_out_of_focus():
 	emit_signal("OnActiveOrPassiveOutOfFocus")
+
+# Unlocking
+func _checkForUnlock():
+	if !PlayerDataManager.has_character_been_unlocked(myCharData):
+		if PlayerDataManager.can_unlock_character(myCharData):
+			unlockBtn.text = str("Unlock (x", myCharData.unlockCost, ")")
+			unlockBtn.disabled = false
+		else:
+			unlockBtn.text = str("Unlock (x", myCharData.unlockCost, ")")
+			unlockBtn.disabled = true
+		background.self_modulate = Color.RED
+		unlockBtn.visible = true
+		chooseBtn.visible = false
+	else:
+		unlockBtn.visible = false
+		chooseBtn.visible = true
+		background.self_modulate = Color.WHITE
+
+func _on_unlock():
+	PlayerDataManager.unlock_character(myCharData)
+	emit_signal("OnUnlocked")
+
+func refresh():
+	_checkForUnlock()

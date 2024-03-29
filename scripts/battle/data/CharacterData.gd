@@ -17,6 +17,7 @@ var specialId:String
 var passiveId:String
 var isGeneric:bool
 var isInCharacterSelect:bool
+var unlockCost:int
 
 func _init(dataJS):
 	id = dataJS["id"]
@@ -28,6 +29,7 @@ func _init(dataJS):
 	difficulty = Utils.get_data_from_json(dataJS, "difficulty", 1)
 	cost =  Utils.get_data_from_json(dataJS, "cost", 0)
 	xp =  Utils.get_data_from_json(dataJS, "xp", 0)
+	unlockCost =  Utils.get_data_from_json(dataJS, "unlockCost", 0)
 	isGeneric = Utils.get_data_from_json(dataJS, "isGeneric", false)
 	isInCharacterSelect = Utils.get_data_from_json(dataJS, "isInCharacterSelect", false)
 	
