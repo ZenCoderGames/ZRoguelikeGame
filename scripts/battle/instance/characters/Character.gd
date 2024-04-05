@@ -447,6 +447,7 @@ func die():
 		currentRoom.enemy_died(self)
 
 		emit_signal("OnDeathFinal")
+		CombatEventManager.emit_signal("OnAnyCharacterDeathFinal", self)
 		
 		if soulsIcon!=null:
 			soulsIcon.visible = true

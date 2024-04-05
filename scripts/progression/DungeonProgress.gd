@@ -4,26 +4,37 @@ var numEnemiesKilled:int
 var numMinibossesKilled:int
 var numFloorsCompleted:int
 
-const XP_PER_ENEMY:int = 1
+const MULTIPLIER_PER_FLOOR:float = 0.2
 
 var enemyKilledList:Array
-var totalXPEarned:int
+var enemyXPEarned:int
+var totalFloorsCompleted:int
 
 func _init():
-	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
-	CombatEventManager.connect("OnAnyCharacterDeath",Callable(self,"_on_any_character_death"))
+	_on_dungeon_init()
+	CombatEventManager.connect("OnAnyCharacterDeathFinal",Callable(self,"_on_any_character_death"))
 
 func _on_dungeon_init():
 	enemyKilledList.clear()
-	totalXPEarned = 0
+	enemyXPEarned = 0
+	totalFloorsCompleted = 0
+
+func on_dungeon_floor_completed():
+	totalFloorsCompleted = totalFloorsCompleted + 1
 
 func _on_any_character_death(character:Character):
 	if character is EnemyCharacter:
 		enemyKilledList.append(character.charData)
-		totalXPEarned = totalXPEarned + character.charData.xp
+		enemyXPEarned = enemyXPEarned + character.charData.xp
 
 func get_progress()->int:
-	return totalXPEarned
+	return enemyXPEarned + totalFloorsCompleted * MULTIPLIER_PER_FLOOR * enemyXPEarned
 
 func get_progress_description()->String:
-		return str("Souls Collected: ", totalXPEarned)
+	var dungeonProgressDesc:String = ""
+
+	dungeonProgressDesc = str(dungeonProgressDesc, "Floors Completed: ", totalFloorsCompleted)
+	dungeonProgressDesc = str(dungeonProgressDesc, " (+", totalFloorsCompleted * MULTIPLIER_PER_FLOOR * 100, "%)")
+	dungeonProgressDesc = str(dungeonProgressDesc, "\nSouls Collected: ", get_progress())
+
+	return dungeonProgressDesc

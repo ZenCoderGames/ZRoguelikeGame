@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="3_x2i6y"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_mq3ic"]
 
-[node name="LevelSelectUI" type="Panel"]
+[node name="LevelSelectUI" type="Panel" node_paths=PackedStringArray("mapNodes")]
 unique_name_in_owner = true
 self_modulate = Color(0.258824, 0.227451, 0.227451, 0.545098)
 anchors_preset = 15
@@ -15,6 +15,7 @@ anchor_bottom = 1.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_rrfbg")
+mapNodes = [NodePath("Map/HBoxContainer/Tutorial"), NodePath("Map/HBoxContainer/Lvl1"), NodePath("Map/HBoxContainer/Lvl2"), NodePath("Map/HBoxContainer/Lvl3"), NodePath("Map/HBoxContainer/Lvl4"), NodePath("Map/HBoxContainer/Lvl5")]
 
 [node name="Bg" type="TextureRect" parent="."]
 self_modulate = Color(0.772549, 0.772549, 0.772549, 1)
@@ -35,15 +36,11 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+offset_top = 149.0
+offset_bottom = 249.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 25
-
-[node name="LevelSelectHolder" type="HBoxContainer" parent="VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 300)
-layout_mode = 2
-alignment = 1
 
 [node name="BuffHolder" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
@@ -134,3 +131,65 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/font = ExtResource("4_mq3ic")
 theme_override_font_sizes/font_size = 55
 text = "Level Select"
+
+[node name="LevelLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.0
+offset_top = 56.0
+offset_right = 199.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.67451, 0.305882, 0.203922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("4_mq3ic")
+theme_override_font_sizes/font_size = 55
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Map" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.215
+anchor_right = 1.0
+anchor_bottom = 0.53
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 150)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 200
+
+[node name="Tutorial" type="Control" parent="Map/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Lvl1" type="Control" parent="Map/HBoxContainer"]
+layout_mode = 2
+
+[node name="Lvl2" type="Control" parent="Map/HBoxContainer"]
+layout_mode = 2
+
+[node name="Lvl3" type="Control" parent="Map/HBoxContainer"]
+layout_mode = 2
+
+[node name="Lvl4" type="Control" parent="Map/HBoxContainer"]
+layout_mode = 2
+
+[node name="Lvl5" type="Control" parent="Map/HBoxContainer"]
+layout_mode = 2

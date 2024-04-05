@@ -78,6 +78,7 @@ func show_menu():
 	baseMenuUI.visible = true
 	characterSelectUI.visible = false
 	levelSelectUI.visible = false
+	continueGameButton.visible = !PlayerDataManager.is_new_player()
 
 func _on_character_chosen(_charData):
 	baseMenuUI.visible = false

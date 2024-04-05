@@ -64,7 +64,10 @@ func create(recreatePlayer:bool) -> void:
 	_init_turns()
 	_start_turn()
 
-	dungeonProgress = DungeonProgress.new()
+	if recreatePlayer:
+		dungeonProgress = DungeonProgress.new()
+	else:
+		dungeonProgress.on_dungeon_floor_completed()
 
 func _init_rooms():
 	rooms = []

@@ -1,40 +1,40 @@
-extends PanelContainer
+extends TextureButton
 
 class_name LevelSelectItemUI
 
-@onready var charLabel:Label = $"%CharNameLabel"
-@onready var descLabel:Label = $"%DescLabel"
-@onready var chooseBtn:Button = $"%ChooseButton"
-@onready var portrait:TextureRect = $"%Portrait"
-
 var myCharData:CharacterData
 var myLevelData:LevelData
+var isCompleted:bool
+var isLocked:bool
 
-signal OnLevelSelected(levelData)
+signal OnLevelSelected(levelData, isLocked)
 
-func init_from_data(charData:CharacterData, levelData:LevelData):
+func init_from_data(charData:CharacterData, levelData:LevelData, isCompletedVal:bool, isLockedVal:bool):
 	myCharData = charData
 	myLevelData = levelData
-	charLabel.text = Utils.convert_to_camel_case(levelData.name)
-	#statStr.erase(statStr.length()-1, 1)
-	descLabel.text = levelData.description
-	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
-	var portraitTex = load(str("res://",myCharData.portraitPath))
-	portrait.texture = portraitTex
+	isCompleted = isCompletedVal
+	isLocked = isLockedVal
+	self.connect("button_up",Callable(self,"_on_item_chosen"))
+	set_to_default_state()
 
 func _on_item_chosen():
 	UIEventManager.emit_signal("OnCharacterSelectButton")
 	GameGlobals.battleInstance.startWithClasses = !myCharData.isGeneric
-	emit_signal("OnLevelSelected", myLevelData)
-	#GameEventManager.on_character_chosen(myCharData)
-	#GameEventManager.ready_to_battle(myLevelData)
+	emit_signal("OnLevelSelected", myLevelData, isLocked)
 
 func has_level_data(levelData:LevelData):
 	return myLevelData == levelData
 
 func set_selected(isSelected:bool):
-	chooseBtn.disabled = isSelected
 	if isSelected:
-		chooseBtn.text = "Selected"
+		self.self_modulate = Color.YELLOW
 	else:
-		chooseBtn.text = "Select"
+		set_to_default_state()
+
+func set_to_default_state():
+	if isCompleted:
+		self.self_modulate = Color.GREEN
+	elif isLocked:
+		self.self_modulate = Color.BLACK
+	else:
+		self.self_modulate = Color.DARK_SLATE_GRAY

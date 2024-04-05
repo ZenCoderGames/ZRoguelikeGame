@@ -8,7 +8,9 @@ class_name LevelSelectUI
 @onready var infoLabel:RichTextLabel = $"%InfoLabel"
 @onready var backButton:TextureButton = $"%BackButton"
 @onready var titleLabel:Label = $"%TitleLabel"
+@onready var levelLabel:Label = $"%LevelLabel"
 @onready var readyButton:Button = $"%ReadyButton"
+@export var mapNodes:Array[Control]
 
 const LevelSelectItemUIClass := preload("res://ui/levelSelect/LevelSelectItemUI.tscn")
 const CharacterSelectBuffUIClass := preload("res://ui/characterSelect/CharacterSelectBuffUI.tscn")
@@ -18,6 +20,9 @@ var dungeonModifierBuffItems:Array
 
 var _myCharData:CharacterData
 var _selectedLevelData:LevelData
+var _levels:Array[String] = []
+var _completedLevels:Array[String] = []
+var _foundLastCompleted:bool
 
 signal OnBackPressed
 
@@ -27,30 +32,47 @@ func init_from_data(charData:CharacterData):
 
 	_myCharData = charData
 
-	var levels:Array = []
-	levels.append("LEVEL_TUTORIAL")
-	levels.append("LEVEL_EASY")
-	levels.append("LEVEL_BALANCED")
-	levels.append("LEVEL_HARD")
+	_foundLastCompleted = false
+	_levels.clear()
+	_completedLevels.clear()
+	_levels.append("LEVEL_TUTORIAL")
+	_completedLevels.append("LEVEL_TUTORIAL")
+	init_level("LEVEL_01")
+	init_level("LEVEL_02")
+	init_level("LEVEL_03")
+	init_level("LEVEL_04")
+	init_level("LEVEL_BOSS")
 
-	for levelId in levels:
+	var idx:int = 0
+	for levelId in _levels:
 		var levelData:LevelData = GameGlobals.dataManager.get_level_data(levelId)
-		add_level(levelData)
+		add_level(levelData, idx)
+		idx = idx + 1
 
 	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
 	readyButton.connect("pressed",Callable(self,"_on_ready_button_pressed"))
 	readyButton.visible = false
 
-func add_level(levelData:LevelData):
-	var levelSelectItem = LevelSelectItemUIClass.instantiate()
-	levelSelectHolder.add_child(levelSelectItem)
-	levelSelectItems.append(levelSelectItem)
-	levelSelectItem.init_from_data(_myCharData, levelData)
-	levelSelectItem.connect("OnLevelSelected",Callable(self,"_on_level_selected"))
+func init_level(levelId:String):
+	_levels.append(levelId)
+	if PlayerDataManager.is_level_completed(_myCharData, levelId):
+		_completedLevels.append(levelId)
 
-func _on_level_selected(levelData:LevelData):
-	readyButton.visible = true
+func add_level(levelData:LevelData, idx:int):
+	var levelSelectItem = LevelSelectItemUIClass.instantiate()
+	mapNodes[idx].add_child(levelSelectItem)
+	levelSelectItems.append(levelSelectItem)
+	var isCompleted:bool = _completedLevels.has(levelData.id)
+	levelSelectItem.init_from_data(_myCharData, levelData, isCompleted, _foundLastCompleted)
+	levelSelectItem.connect("OnLevelSelected",Callable(self,"_on_level_selected"))
+	if !isCompleted:
+		_foundLastCompleted = true
+
+func _on_level_selected(levelData:LevelData, isLocked:bool):
+	readyButton.visible = !isLocked
 	_selectedLevelData = levelData
+	levelLabel.text = _selectedLevelData.name
+	show_info(_selectedLevelData.description)
 
 	for levelSelectItem in levelSelectItems:
 		levelSelectItem.set_selected(levelSelectItem.has_level_data(levelData))
@@ -67,6 +89,8 @@ func _on_level_selected(levelData:LevelData):
 func show_info(str:String):
 	infoPanel.visible = true
 	infoLabel.text = Utils.format_text(str)
+	await get_tree().create_timer(0.75).timeout
+	hide_info()
 	
 func hide_info():
 	infoPanel.visible = false
@@ -74,10 +98,11 @@ func hide_info():
 func clean_up():
 	_selectedLevelData = null
 	# charholders
-	for levelSelectItem in levelSelectItems:
-		levelSelectHolder.remove_child(levelSelectItem)
-		levelSelectItem.queue_free()
-	levelSelectItems.clear()
+	if levelSelectHolder!=null:
+		for levelSelectItem in levelSelectItems:
+			levelSelectHolder.remove_child(levelSelectItem)
+			levelSelectItem.queue_free()
+		levelSelectItems.clear()
 	# buffholders
 	_clean_up_buffs()
 	

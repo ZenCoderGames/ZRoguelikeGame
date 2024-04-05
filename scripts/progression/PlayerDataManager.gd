@@ -12,7 +12,9 @@ const COST_FOR_CHARACTER_UNLOCK:int = 300
 
 func _init():
 	currentPlayerData = load_character_data(PLAYER_DATA_PATH)
+	currentPlayerData.init()
 	emit_signal("OnPlayerDataUpdated")
+	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_exited"))
 
 func save_to_file():
 	save_character_data(currentPlayerData)
@@ -31,6 +33,7 @@ func is_new_player():
 func clear_player_data():
 	currentPlayerData.clear()
 	emit_signal("OnPlayerDataUpdated")
+	save_to_file()
 
 # OPERATIONS
 func get_current_xp():
@@ -48,27 +51,25 @@ func remove_current_xp(val:int):
 	save_to_file()
 
 func has_character_been_unlocked(charData:CharacterData):
-	if charData.id == "BERSERKER":
-		return currentPlayerData.hero2Unlocked
-	elif charData.id == "ASSASSIN":
-		return currentPlayerData.hero3Unlocked
-	elif charData.id == "GENERIC_HERO":
-		return currentPlayerData.heroClasslessUnlocked
-
-	return true
+	return currentPlayerData.heroDataDict[charData.id].unlocked
 
 func can_unlock_character(charData:CharacterData):
 	return currentPlayerData.currentXP >= charData.unlockCost
 
 func unlock_character(charData:CharacterData):
 	remove_current_xp(charData.unlockCost)
-	if charData.id == "BERSERKER":
-		currentPlayerData.hero2Unlocked = true
-	elif charData.id == "ASSASSIN":
-		currentPlayerData.hero3Unlocked = true
-	elif charData.id == "GENERIC_HERO":
-		currentPlayerData.heroClasslessUnlocked = true
+	currentPlayerData.unlockHero(charData.id) 
 	save_to_file()
+
+func is_level_completed(charData:CharacterData, levelId:String):
+	return currentPlayerData.heroDataDict[charData.id].levelsCompleted.has(levelId)
+
+func level_complete(charData:CharacterData, levelId:String):
+	currentPlayerData.heroDataDict[charData.id].level_completed(levelId)
+
+func _on_dungeon_exited(isVictory:bool):
+	if isVictory:
+		level_complete(GameGlobals.dataManager.playerData, GameGlobals.battleInstance.currentLevelData.id)
 
 # HELPERS
 func _unit_test():
