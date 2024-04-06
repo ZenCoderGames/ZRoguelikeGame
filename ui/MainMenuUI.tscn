@@ -256,11 +256,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="VictoryUI"]
-layout_mode = 2
-offset_left = 794.0
-offset_top = 249.0
-offset_right = 1125.0
-offset_bottom = 309.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -165.0
+offset_top = 205.0
+offset_right = 166.0
+offset_bottom = 265.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -293,21 +296,36 @@ columns = 10
 
 [node name="VictoryProgressLabel" type="Label" parent="VictoryUI"]
 unique_name_in_owner = true
-layout_mode = 2
-offset_left = 759.0
-offset_top = 909.0
-offset_right = 1160.0
-offset_bottom = 964.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -150.0
+offset_right = 197.0
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "Souls Collected = 100"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VictoryBackToMenu" type="Button" parent="VictoryUI"]
 unique_name_in_owner = true
-layout_mode = 2
-offset_top = 1049.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -31.0
+offset_right = 960.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_vertical = 8
 theme = ExtResource("1_wsy8d")
 text = "Back to Menu"

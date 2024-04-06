@@ -51,6 +51,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 		GameEventManager.emit_signal("OnBackButtonPressed")
 		return
+		
+	_debug_inputs(event)
 
 	if player==null or !is_instance_valid(player):
 		return
@@ -140,3 +142,13 @@ func _on_skip_turn_pressed():
 func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 	if fullRefreshDungeon and player!=null:
 		player.disconnect("OnDeathFinal",Callable(self,"_on_player_death"))
+
+func _debug_inputs(event: InputEvent):
+	if event.is_action_pressed("debug_victory"):
+		GameGlobals.dungeon.player.end_dungeon()
+	if event.is_action_pressed("debug_fail"):
+		GameEventManager.emit_signal("OnDungeonExited", false)
+	if event.is_action_pressed("debug_add_souls_100"):
+		PlayerDataManager.add_current_xp(100)
+	if event.is_action_pressed("debug_remove_souls_20"):
+		PlayerDataManager.remove_current_xp(20)

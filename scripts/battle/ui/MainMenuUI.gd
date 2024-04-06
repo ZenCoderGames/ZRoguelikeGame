@@ -111,8 +111,8 @@ func show_character_select():
 	characterSelectUI.init_from_data()
 
 func _on_back_to_character_select():
-	characterSelectUI.visible = true
 	levelSelectUI.visible = false
+	show_character_select()
 
 func on_settings():
 	pass

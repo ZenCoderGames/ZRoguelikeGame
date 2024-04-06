@@ -42,6 +42,7 @@ func init_from_data(charData:CharacterData):
 	init_level("LEVEL_03")
 	init_level("LEVEL_04")
 	init_level("LEVEL_BOSS")
+	levelLabel.text = ""
 
 	var idx:int = 0
 	for levelId in _levels:
