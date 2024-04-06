@@ -2,7 +2,6 @@ extends Node
 
 class_name MainMenuUI
 
-@onready var tutorialButton:Button = $"%Tutorial"
 @onready var continueGameButton:Button = $"%Continue"
 @onready var newGameButton:Button = $"%NewGame"
 @onready var exitGameButton:Button = $"%Exit"
@@ -30,7 +29,6 @@ const BattleEndEnemyXPUIClass := preload("res://ui/battleEnd/BattleEndEnemyXPUI.
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tutorialButton.connect("button_up",Callable(self,"on_tutorial"))
 	continueGameButton.connect("button_up",Callable(self,"on_continue_game"))
 	newGameButton.connect("button_up",Callable(self,"on_new_game"))
 	exitGameButton.connect("button_up",Callable(self,"_on_exit_game"))

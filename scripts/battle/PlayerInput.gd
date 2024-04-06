@@ -113,10 +113,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.move(x, y)
 
 func _on_player_turn_completed():
-	blockInputsForTurn = false ## used to be true
+	blockInputsForTurn = false ## used to be false
 	
 func _on_end_turn():
-	blockInputsForTurn = false
+	if player!=null and player.currentRoom.is_in_combat():
+		blockInputsForTurn = true
+		await get_tree().create_timer(0.15).timeout
+		blockInputsForTurn = false
+	else:
+		blockInputsForTurn = false
 
 func _on_touch_button_pressed(dirn):
 	var x:int = 0
@@ -145,7 +150,7 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 
 func _debug_inputs(event: InputEvent):
 	if event.is_action_pressed("debug_victory"):
-		GameGlobals.dungeon.player.end_dungeon()
+		player.end_dungeon()
 	if event.is_action_pressed("debug_fail"):
 		GameEventManager.emit_signal("OnDungeonExited", false)
 	if event.is_action_pressed("debug_add_souls_100"):
