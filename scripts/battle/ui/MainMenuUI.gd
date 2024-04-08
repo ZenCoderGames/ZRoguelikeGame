@@ -11,6 +11,7 @@ class_name MainMenuUI
 
 @onready var characterSelectUI:CharacterSelectUI = $"%CharacterSelectUI"
 @onready var levelSelectUI:LevelSelectUI = $"%LevelSelectUI"
+@onready var skillTreeUI:Node = $"%SkillTreeUI"
 
 @onready var baseMenuUI:Node = $"%MenuUI"
 @onready var deathUI:Node = $"%DeathUI"
@@ -43,6 +44,8 @@ func _ready():
 	backToGameButton.connect("button_up",Callable(self,"_on_back_to_game"))
 	backToStartMenuButton.connect("button_up",Callable(self,"_on_back_to_main_menu"))
 	characterSelectUI.connect("OnBackPressed",Callable(self,"_on_back_to_main_menu"))
+	characterSelectUI.connect("OnSkillTreePressed",Callable(self,"_on_show_skill_tree"))
+	skillTreeUI.connect("OnBackPressed",Callable(self,"_show_back_menu"))
 	levelSelectUI.connect("OnBackPressed",Callable(self,"_on_back_to_character_select"))
 	exitToMenuFromVictory.connect("button_up",Callable(self,"_show_back_menu"))
 	exitToMenuFromDefeat.connect("button_up",Callable(self,"_show_back_menu"))
@@ -109,6 +112,7 @@ func show_character_select():
 	characterSelectUI.init_from_data()
 
 func _on_back_to_character_select():
+	skillTreeUI.visible = false
 	levelSelectUI.visible = false
 	show_character_select()
 
@@ -146,6 +150,12 @@ func _show_victory():
 	victoryProgressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
 	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
 
+# SKILL TREE
+func _on_show_skill_tree():
+	characterSelectUI.visible = false
+	skillTreeUI.init_from_data(GameGlobals.dataManager.skilltreeDict["SHARED_SKILLTREE"])
+	skillTreeUI.visible = true
+
 func _clean_up():
 	victoryUI.visible = false
 	deathUI.visible = false
@@ -156,6 +166,10 @@ func _clean_up():
 func _show_back_menu():
 	if backMenuUI.visible:
 		_on_back_to_game()
+		return
+		
+	if skillTreeUI.visible:
+		_on_back_to_character_select()
 		return
 
 	if victoryUI.visible:

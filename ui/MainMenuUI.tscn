@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://3gpoj14w4qny"]
+[gd_scene load_steps=11 format=3 uid="uid://3gpoj14w4qny"]
 
 [ext_resource type="Script" path="res://scripts/battle/ui/MainMenuUI.gd" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wsy8d"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_co4b8"]
 [ext_resource type="FontFile" uid="uid://chvqhhsv3883r" path="res://resource/fonts/kirifont/KiriFont.ttf" id="6_u04gs"]
 [ext_resource type="PackedScene" uid="uid://bhp712q20vgvb" path="res://ui/levelSelect/LevelSelectUI.tscn" id="8_eupbo"]
+[ext_resource type="PackedScene" uid="uid://pwh4dx7x3kp3" path="res://ui/skilltree/SkillTreeUI.tscn" id="9_7tqgv"]
 [ext_resource type="FontFile" uid="uid://qg4ohjuldvkx" path="res://resource/fonts/droid-sans/DroidSans-Bold.ttf" id="9_mf20n"]
 
 [node name="MainMenuUI" type="Control"]
@@ -198,6 +199,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LevelSelectUI" parent="." instance=ExtResource("8_eupbo")]
+visible = false
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTreeUI" parent="." instance=ExtResource("9_7tqgv")]
 visible = false
 layout_mode = 1
 grow_horizontal = 2

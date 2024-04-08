@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwsajj2k2i4es"]
+
+[ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="1_p0bjq"]
+[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeItemUI.gd" id="2_3gs6l"]
+
+[node name="TextureButton" type="TextureButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_p0bjq")
+texture_pressed = ExtResource("1_p0bjq")
+texture_hover = ExtResource("1_p0bjq")
+texture_disabled = ExtResource("1_p0bjq")
+texture_focused = ExtResource("1_p0bjq")
+script = ExtResource("2_3gs6l")

@@ -1,0 +1,83 @@
+{
+	"skilltree": {
+		"id": "SHARED_SKILLTREE",
+		"type": "SHARED",
+		"skills": [
+			{
+				"id": "STARTING_EQUIPMENT",
+				"name": "Starter Equipment",
+				"description": "Start combat with equipment",
+				"unlockCost": 50,
+				"uiHolderId": "S_A"
+			},
+			{
+				"id": "STARTING_EQUIPMENT_WEAPON",
+				"name": "Starter Weapon",
+				"description": "Start combat with a Basic Sword (+1 Damage)",
+				"unlockCost": 50,
+				"uiHolderId": "S_A_1",
+				"parentSkillId": "STARTING_EQUIPMENT",
+				"items": ["ITEM_BASIC_SWORD"]
+			},
+			{
+				"id": "STARTING_EQUIPMENT_ARMOR",
+				"name": "Starter Armor",
+				"description": "Start combat with a Wooden Plate (+2 health)",
+				"unlockCost": 50,
+				"uiHolderId": "S_A_2",
+				"parentSkillId": "STARTING_EQUIPMENT",
+				"items": ["ITEM_WOODEN_PLATE"]
+			},
+			{
+				"id": "ECONOMY",
+				"name": "Perks",
+				"description": "Perks are bonus effects that show up in your run",
+				"unlockCost": 50,
+				"uiHolderId": "S_B"
+			},
+			{
+				"id": "SOUL_BOOST",
+				"name": "Soul Booster",
+				"description": "Start combat with 10 souls",
+				"unlockCost": 50,
+				"uiHolderId": "S_B_1",
+				"parentSkillId": "ECONOMY",
+				"dungeonModifiers": ["SOUL_START_10"]
+			},
+			{
+				"id": "VENDOR_DISCOUNT",
+				"name": "Vendor Discount",
+				"description": "All vendor items are 25% cheaper",
+				"unlockCost": 50,
+				"uiHolderId": "S_B_2",
+				"parentSkillId": "ECONOMY",
+				"dungeonModifiers": ["VENDOR_DISCOUNT_25"]
+			},
+			{
+				"id": "PERKS",
+				"name": "Perks",
+				"description": "Perks are bonus effects that show up in your run",
+				"unlockCost": 50,
+				"uiHolderId": "S_C"
+			},
+			{
+				"id": "FLOOR_HEAL",
+				"name": "Rested Warrior",
+				"description": "At the start of each floor, heal up to 50% of your hp",
+				"unlockCost": 50,
+				"uiHolderId": "S_C_1",
+				"parentSkillId": "PERKS",
+				"dungeonModifiers": ["FLOOR_HEAL_50"]
+			},
+			{
+				"id": "REINCARNATION",
+				"name": "Reincarnation",
+				"description": "After your first death, come back to life at 50% of your max hp",
+				"unlockCost": 50,
+				"uiHolderId": "S_C_2",
+				"parentSkillId": "PERKS",
+				"dungeonModifiers": ["REINCARNATION"]
+			}
+		]
+	}
+}

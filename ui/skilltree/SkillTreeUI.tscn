@@ -1,0 +1,224 @@
+[gd_scene load_steps=7 format=3 uid="uid://pwh4dx7x3kp3"]
+
+[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeUI.gd" id="1_3eqju"]
+[ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="2_1lqjd"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="3_w1e6l"]
+[ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="4_jv1l6"]
+[ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="5_lr6n3"]
+[ext_resource type="PackedScene" uid="uid://cwsajj2k2i4es" path="res://ui/skilltree/SkillTreeItemUI.tscn" id="6_ewe8j"]
+
+[node name="SkillTreeUI" type="Panel" node_paths=PackedStringArray("skillItemUIList")]
+unique_name_in_owner = true
+self_modulate = Color(0.258824, 0.227451, 0.227451, 0.545098)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_3eqju")
+skillItemUIList = [NodePath("Map/HBoxContainer/VBoxContainer/SkillNode_A"), NodePath("Map/HBoxContainer/VBoxContainer2/SkillNode_B"), NodePath("Map/HBoxContainer/VBoxContainer2/HBoxContainer/SkillNode_B_01"), NodePath("Map/HBoxContainer/VBoxContainer2/HBoxContainer/SkillNode_B_02"), NodePath("Map/HBoxContainer/VBoxContainer3/SkillNode_C"), NodePath("Map/HBoxContainer/VBoxContainer3/HBoxContainer/SkillNode_C_01"), NodePath("Map/HBoxContainer/VBoxContainer3/HBoxContainer/SkillNode_C_02"), NodePath("Map/HBoxContainer/VBoxContainer/HBoxContainer/SkillNode_A_01"), NodePath("Map/HBoxContainer/VBoxContainer/HBoxContainer/SkillNode_A_02")]
+
+[node name="Bg" type="TextureRect" parent="."]
+self_modulate = Color(0.772549, 0.772549, 0.772549, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_1lqjd")
+expand_mode = 1
+
+[node name="UnlockButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 113.0
+offset_right = 88.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_w1e6l")
+theme_override_font_sizes/font_size = 25
+text = " Unlock (x100) "
+
+[node name="InfoPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="InfoLabel" type="RichTextLabel" parent="InfoPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Hello hbkbkjbbjk
+
+bhbkbkjbb
+
+ mkbkjb[/center]"
+fit_content = true
+
+[node name="BackButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.596078, 0.0705882, 1)
+layout_mode = 0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 160.0
+texture_normal = ExtResource("4_jv1l6")
+texture_pressed = ExtResource("4_jv1l6")
+texture_hover = ExtResource("4_jv1l6")
+texture_disabled = ExtResource("4_jv1l6")
+texture_focused = ExtResource("4_jv1l6")
+
+[node name="TitleLabel" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.678431, 0.741176, 0.937255, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.67451, 0.305882, 0.203922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("5_lr6n3")
+theme_override_font_sizes/font_size = 55
+text = "Skill Tree"
+
+[node name="SkillNameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -241.0
+offset_right = 199.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.67451, 0.305882, 0.203922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("5_lr6n3")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Map" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -236.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 150)
+stretch_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map"]
+layout_mode = 2
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+
+[node name="SkillNode_A" parent="Map/HBoxContainer/VBoxContainer" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+size_flags_horizontal = 4
+id = "S_A"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 100
+
+[node name="SkillNode_A_01" parent="Map/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+id = "S_A_1"
+
+[node name="SkillNode_A_02" parent="Map/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+id = "S_A_2"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Map/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+
+[node name="SkillNode_B" parent="Map/HBoxContainer/VBoxContainer2" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+size_flags_horizontal = 4
+id = "S_B"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="SkillNode_B_01" parent="Map/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+id = "S_B_1"
+
+[node name="SkillNode_B_02" parent="Map/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+id = "S_B_2"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Map/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+
+[node name="SkillNode_C" parent="Map/HBoxContainer/VBoxContainer3" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+size_flags_horizontal = 4
+id = "S_C"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Map/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="SkillNode_C_01" parent="Map/HBoxContainer/VBoxContainer3/HBoxContainer" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+id = "S_C_1"
+
+[node name="SkillNode_C_02" parent="Map/HBoxContainer/VBoxContainer3/HBoxContainer" instance=ExtResource("6_ewe8j")]
+layout_mode = 2
+id = "S_C_2"

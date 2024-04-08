@@ -44,11 +44,10 @@ custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 alignment = 1
 
-[node name="BuffHolder" type="HBoxContainer" parent="VBoxContainer"]
+[node name="SkillTreeButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-alignment = 1
+text = " SKILL TREE "
 
 [node name="InfoPanel" type="Panel" parent="."]
 unique_name_in_owner = true

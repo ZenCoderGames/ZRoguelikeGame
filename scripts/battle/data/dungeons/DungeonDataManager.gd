@@ -30,6 +30,8 @@ var dungeonModifierDict = {}
 var levels:Array
 var levelDict = {}
 
+var skilltreeDict:Dictionary = {}
+
 func _init():
 	init_status_effects()
 	init_passives()
@@ -50,6 +52,7 @@ func _init():
 	init_tutorials()
 	init_dungeonModifiers()
 	init_levels()
+	init_skilltree("resource/data/progression/skilltreeShared.json")
 
 func on_character_chosen(charData):
 	playerData = charData
@@ -241,3 +244,9 @@ func init_levels():
 
 func get_level_data(levelId:String):
 	return levelDict[levelId]
+
+# SKILL TREE
+func init_skilltree(path:String):
+	var data = Utils.load_data_from_file(path)
+	var skilltreeData:SkillTreeData = SkillTreeData.new(data["skilltree"])
+	skilltreeDict[skilltreeData.id] = skilltreeData

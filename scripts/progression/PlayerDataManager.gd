@@ -35,7 +35,7 @@ func clear_player_data():
 	emit_signal("OnPlayerDataUpdated")
 	save_to_file()
 
-# OPERATIONS
+# XP
 func get_current_xp():
 	return currentPlayerData.currentXP
 
@@ -50,6 +50,7 @@ func remove_current_xp(val:int):
 	emit_signal("OnPlayerDataUpdated")
 	save_to_file()
 
+# CHARACTERS
 func has_character_been_unlocked(charData:CharacterData):
 	return currentPlayerData.heroDataDict[charData.id].unlocked
 
@@ -61,6 +62,19 @@ func unlock_character(charData:CharacterData):
 	currentPlayerData.unlockHero(charData.id) 
 	save_to_file()
 
+# SKILL TREE
+func has_skill_been_unlocked(skillDataId:String):
+	return currentPlayerData.isSkillUnlocked(skillDataId)
+
+func can_unlock_skill(skillData:SkillData):
+	return currentPlayerData.currentXP >= skillData.unlockCost
+
+func unlock_skill(skillData:SkillData):
+	remove_current_xp(skillData.unlockCost)
+	currentPlayerData.unlockSkill(skillData.id) 
+	save_to_file()
+
+# LEVELS
 func is_level_completed(charData:CharacterData, levelId:String):
 	return currentPlayerData.heroDataDict[charData.id].levelsCompleted.has(levelId)
 

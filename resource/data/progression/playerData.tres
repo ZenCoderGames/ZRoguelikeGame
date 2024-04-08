@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/progression/PlayerData.gd" id="1_ev7dt"]
 [ext_resource type="Script" path="res://scripts/progression/PlayerHeroData.gd" id="1_toee1"]
 
-[sub_resource type="Resource" id="Resource_q8ofx"]
+[sub_resource type="Resource" id="Resource_brmfd"]
 script = ExtResource("1_toee1")
 unlocked = true
-charId = "ASSASSIN"
+charId = "PALADIN"
 levelsCompleted = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_bsoox"]
@@ -15,26 +15,26 @@ unlocked = false
 charId = "BERSERKER"
 levelsCompleted = Array[String]([])
 
+[sub_resource type="Resource" id="Resource_q8ofx"]
+script = ExtResource("1_toee1")
+unlocked = true
+charId = "ASSASSIN"
+levelsCompleted = Array[String]([])
+
 [sub_resource type="Resource" id="Resource_3071e"]
 script = ExtResource("1_toee1")
 unlocked = false
 charId = "GENERIC_HERO"
 levelsCompleted = Array[String]([])
 
-[sub_resource type="Resource" id="Resource_brmfd"]
-script = ExtResource("1_toee1")
-unlocked = true
-charId = "PALADIN"
-levelsCompleted = Array[String]([])
-
 [resource]
 script = ExtResource("1_ev7dt")
-currentXP = 212
-totalXP = 312
+currentXP = 22
+totalXP = 512
 heroDataList = Array[ExtResource("1_toee1")]([SubResource("Resource_brmfd"), SubResource("Resource_bsoox"), SubResource("Resource_q8ofx"), SubResource("Resource_3071e")])
-heroDataDict = {
-"ASSASSIN": SubResource("Resource_q8ofx"),
-"BERSERKER": SubResource("Resource_bsoox"),
-"GENERIC_HERO": SubResource("Resource_3071e"),
-"PALADIN": SubResource("Resource_brmfd")
+skillDataDict = {
+"ECONOMY": true,
+"STARTING_EQUIPMENT": true,
+"STARTING_EQUIPMENT_ARMOR": true,
+"STARTING_EQUIPMENT_WEAPON": true
 }
