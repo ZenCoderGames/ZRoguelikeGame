@@ -13,6 +13,8 @@ var audioMusicStreams = []
 var audioCurrentPlayingSFXDict = {}
 var audioSfxStreams = []
 
+var isDisabled:bool = false
+
 func _ready():
 	GameGlobals.set_audio_manager(self)
 	_init_data()
@@ -20,6 +22,9 @@ func _ready():
 
 # PLAY MUSIC	
 func play_music(id:String):
+	if isDisabled:
+		return
+		
 	var audioData:AudioData = _get_data(id)
 	if audioData!=null:
 		var audioStreamPlayer:AudioStreamPlayer2D = null
@@ -36,9 +41,17 @@ func stop_music(id:String):
 	if audioCurrentPlayingMusicDict.has(id):
 		audioCurrentPlayingMusicDict[id].stop()
 		audioCurrentPlayingMusicDict.erase(id)
+		
+func stop_all_music():
+	for playingMusic in audioCurrentPlayingMusicDict.values():
+		playingMusic.stop()
+	audioCurrentPlayingMusicDict.clear()
 
 # PLAY SFX
 func play_sfx(id:String):
+	if isDisabled:
+		return
+		
 	var audioData:AudioData = _get_data(id)
 	if audioData!=null:
 		var audioStreamPlayer:AudioStreamPlayer2D = _get_free_sfx_stream()
@@ -51,6 +64,11 @@ func stop_sfx(id:String):
 	if audioCurrentPlayingSFXDict.has(id):
 		audioCurrentPlayingSFXDict[id].stop()
 		audioCurrentPlayingSFXDict.erase(id)
+		
+func stop_all_sfx():
+	for playingSfx in audioCurrentPlayingSFXDict.values():
+		playingSfx.stop()
+	audioCurrentPlayingSFXDict.clear()
 
 # STREAMS
 func _init_streams():
@@ -92,3 +110,10 @@ func _get_data(id:String):
 	else:
 		print("ERROR: INVALID AUDIO ID Requested: " + id)
 		return null
+
+# SETTINGS
+func set_as_disabled(val:bool):
+	isDisabled = val
+	if isDisabled:
+		stop_all_music()
+		stop_all_sfx()

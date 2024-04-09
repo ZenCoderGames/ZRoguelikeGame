@@ -8,6 +8,8 @@ class_name MainMenuUI
 @onready var settingsButton:Button = $"%Settings"
 @onready var backToGameButton:Button = $"%BackToGameButton"
 @onready var backToStartMenuButton:Button = $"%BackToStartMenu"
+@onready var musicOnButton:TextureButton = $"%MusicOnButton"
+@onready var musicOffButton:TextureButton = $"%MusicOffButton"
 
 @onready var characterSelectUI:CharacterSelectUI = $"%CharacterSelectUI"
 @onready var levelSelectUI:LevelSelectUI = $"%LevelSelectUI"
@@ -33,7 +35,9 @@ func _ready():
 	continueGameButton.connect("button_up",Callable(self,"on_continue_game"))
 	newGameButton.connect("button_up",Callable(self,"on_new_game"))
 	exitGameButton.connect("button_up",Callable(self,"_on_exit_game"))
-	settingsButton.connect("button_up",Callable(self,"on_settings"))
+	settingsButton.connect("button_up",Callable(self,"_on_settings"))
+	musicOnButton.connect("button_up",Callable(self,"_on_music_on"))
+	musicOffButton.connect("button_up",Callable(self,"_on_music_off"))
 
 	settingsButton.visible = false
 	deathUI.visible = false
@@ -116,7 +120,7 @@ func _on_back_to_character_select():
 	levelSelectUI.visible = false
 	show_character_select()
 
-func on_settings():
+func _on_settings():
 	pass
 
 func on_class_toggle(isToggleOn:bool):
@@ -226,3 +230,14 @@ func _clear_end_screen():
 
 func _on_player_data_updated():
 	totalSoulsLabel.text = str("Total Souls: ", PlayerDataManager.get_current_xp())
+	
+# SETTINGS
+func _on_music_on():
+	musicOffButton.visible = true
+	musicOnButton.visible = false
+	GameGlobals.audioManager.set_as_disabled(true)
+
+func _on_music_off():
+	musicOffButton.visible = false
+	musicOnButton.visible = true
+	GameGlobals.audioManager.set_as_disabled(false)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://3gpoj14w4qny"]
+[gd_scene load_steps=13 format=3 uid="uid://3gpoj14w4qny"]
 
 [ext_resource type="Script" path="res://scripts/battle/ui/MainMenuUI.gd" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wsy8d"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bhp712q20vgvb" path="res://ui/levelSelect/LevelSelectUI.tscn" id="8_eupbo"]
 [ext_resource type="PackedScene" uid="uid://pwh4dx7x3kp3" path="res://ui/skilltree/SkillTreeUI.tscn" id="9_7tqgv"]
 [ext_resource type="FontFile" uid="uid://qg4ohjuldvkx" path="res://resource/fonts/droid-sans/DroidSans-Bold.ttf" id="9_mf20n"]
+[ext_resource type="Texture2D" uid="uid://l2pqsibnxfbe" path="res://sourceArt/Icons/musicOff.png" id="11_eq3ws"]
+[ext_resource type="Texture2D" uid="uid://dsyn7iw1btnw" path="res://sourceArt/Icons/musicOn.png" id="12_dygwg"]
 
 [node name="MainMenuUI" type="Control"]
 layout_mode = 3
@@ -332,17 +334,21 @@ theme = ExtResource("1_wsy8d")
 text = "Back to Menu"
 icon_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-self_modulate = Color(0.4, 0.4, 0.4, 0.435294)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -272.0
-offset_bottom = 121.0
+offset_left = -40.0
+offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="TotalSoulsLabel" type="Label" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+self_modulate = Color(0.4, 0.4, 0.4, 0.435294)
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 2
+
+[node name="TotalSoulsLabel" type="Label" parent="VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_mf20n")
@@ -350,3 +356,30 @@ theme_override_font_sizes/font_size = 30
 text = "Total Souls: 300"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MusicOffButton" type="TextureButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = ExtResource("11_eq3ws")
+texture_pressed = ExtResource("11_eq3ws")
+texture_hover = ExtResource("11_eq3ws")
+texture_disabled = ExtResource("11_eq3ws")
+texture_focused = ExtResource("11_eq3ws")
+stretch_mode = 0
+
+[node name="MusicOnButton" type="TextureButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = ExtResource("12_dygwg")
+texture_pressed = ExtResource("12_dygwg")
+texture_hover = ExtResource("12_dygwg")
+texture_disabled = ExtResource("12_dygwg")
+texture_focused = ExtResource("12_dygwg")
+stretch_mode = 0
