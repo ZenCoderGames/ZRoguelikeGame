@@ -5,7 +5,8 @@ class_name PlayerData
 @export var totalXP:int
 @export var heroDataList:Array[PlayerHeroData]
 var heroDataDict:Dictionary
-@export var skillDataDict:Dictionary
+@export var skillUnlockedDataList:Array[String]
+@export var skillUnlockedDataDict:Dictionary
 
 func init():
 	for heroData in heroDataList:
@@ -15,15 +16,20 @@ func clear():
 	currentXP = 0
 	totalXP = 0
 	for heroData in heroDataList:
-		heroData.clear()
+		heroData.reset()
 	heroDataList[0].unlock()
-	skillDataDict.clear()
+	skillUnlockedDataDict.clear()
+	skillUnlockedDataList.clear()
 	
 func unlockHero(charId:String):
 	heroDataDict[charId].unlock()
 
 func isSkillUnlocked(skillId:String):
-	return skillDataDict.has(skillId)
+	return skillUnlockedDataDict.has(skillId)
 
 func unlockSkill(skillId:String):
-	skillDataDict[skillId] = true
+	skillUnlockedDataDict[skillId] = true
+	skillUnlockedDataList.append(skillId)
+
+func get_unlocked_skills()->Array[String]:
+	return skillUnlockedDataList

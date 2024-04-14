@@ -8,6 +8,9 @@ var playerMoveAction:ActionMove
 var inputDelay:float = 0.0
 var blockInputsForTurn:bool
 var _timeSinceLastInput:float
+var _cachedTimeSinceLastInput:float
+var _cachedX:int
+var _cachedY:int
 
 func _ready():
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
@@ -18,6 +21,7 @@ func _ready():
 	UIEventManager.connect("OnSelectionMenuOn",Callable(self,"on_menu_on"))
 	UIEventManager.connect("OnSelectionMenuOff",Callable(self,"on_menu_off"))
 	CombatEventManager.connect("OnPlayerTurnCompleted",Callable(self,"_on_player_turn_completed"))
+	CombatEventManager.connect("OnStartTurn",Callable(self,"_on_start_turn")) 
 	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_end_turn")) 
 	CombatEventManager.connect("OnTouchButtonPressed",Callable(self,"_on_touch_button_pressed"))
 	CombatEventManager.connect("OnSkipTurnPressed",Callable(self,"_on_skip_turn_pressed"))
@@ -59,9 +63,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if disableInput:
 		return
-
-	if blockInputsForTurn:
-		return
 	
 	if player.isDead:
 		return
@@ -82,25 +83,41 @@ func _unhandled_input(event: InputEvent) -> void:
 		GlobalTimer.get_time_since(_timeSinceLastInput)>Constants.HOLD_TIME_THRESHOLD:
 		if event.is_action(Constants.INPUT_MOVE_LEFT):
 			x = -1
+			_cachedX = -1
 		elif event.is_action(Constants.INPUT_MOVE_RIGHT):
 			x = 1
+			_cachedX = 1
 		elif event.is_action(Constants.INPUT_MOVE_UP):
 			y = -1
+			_cachedY = -1
 		elif event.is_action(Constants.INPUT_MOVE_DOWN):
 			y = 1
+			_cachedY = 1
 	else:
 		if event.is_action_pressed(Constants.INPUT_MOVE_LEFT):
 			x = -1
+			_cachedX = -1
+			_cachedY = 0
 			_timeSinceLastInput = GlobalTimer.get_current_time()
+			_cachedTimeSinceLastInput = _timeSinceLastInput
 		elif event.is_action_pressed(Constants.INPUT_MOVE_RIGHT):
 			x = 1
+			_cachedX = 1
+			_cachedY = 0
 			_timeSinceLastInput = GlobalTimer.get_current_time()
+			_cachedTimeSinceLastInput = _timeSinceLastInput
 		elif event.is_action_pressed(Constants.INPUT_MOVE_UP):
 			y = -1
+			_cachedY = -1
+			_cachedX = 0
 			_timeSinceLastInput = GlobalTimer.get_current_time()
+			_cachedTimeSinceLastInput = _timeSinceLastInput
 		elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
 			y = 1
+			_cachedY = 1
+			_cachedX = 0
 			_timeSinceLastInput = GlobalTimer.get_current_time()
+			_cachedTimeSinceLastInput = _timeSinceLastInput
 
 	if event.is_action_released(Constants.INPUT_MOVE_LEFT) or\
 		event.is_action_released(Constants.INPUT_MOVE_RIGHT) or\
@@ -108,20 +125,50 @@ func _unhandled_input(event: InputEvent) -> void:
 		event.is_action_released(Constants.INPUT_MOVE_DOWN):
 		_timeSinceLastInput = 0
 
-	if player != null and !(x==0 and y==0):
+	if blockInputsForTurn:
+		return
+
+	if player != null and (x!=0 or y!=0):
 		if playerMoveAction.can_execute():
-			player.move(x, y)
+			if player.currentRoom.is_in_combat():
+				blockInputsForTurn = true
+			var success:bool = player.move(x, y)
+			if !success:
+				blockInputsForTurn = false
+			_cachedX = 0
+			_cachedY = 0
+
+func _process(_delta):
+	if player == null:
+		return
+
+	if !player.currentRoom.is_in_combat() or\
+		GlobalTimer.get_current_time() - _cachedTimeSinceLastInput>Constants.INPUT_CACHE_TIME_THRESHOLD:
+		_cachedX = 0
+		_cachedY = 0
+
+	if blockInputsForTurn:
+		return
+	
+	if (_cachedX!=0 or _cachedY!=0):
+		if playerMoveAction.can_execute():
+			if player.currentRoom.is_in_combat():
+				blockInputsForTurn = true
+			var success:bool = player.move(_cachedX, _cachedY)
+			if !success:
+				blockInputsForTurn = false
+			_cachedX = 0
+			_cachedY = 0
 
 func _on_player_turn_completed():
-	blockInputsForTurn = false ## used to be false
+	pass
+	#blockInputsForTurn = true ## used to be false
 	
+func _on_start_turn():
+	blockInputsForTurn = false
+
 func _on_end_turn():
-	if player!=null and player.currentRoom.is_in_combat():
-		blockInputsForTurn = true
-		await get_tree().create_timer(0.15).timeout
-		blockInputsForTurn = false
-	else:
-		blockInputsForTurn = false
+	blockInputsForTurn = false
 
 func _on_touch_button_pressed(dirn):
 	var x:int = 0

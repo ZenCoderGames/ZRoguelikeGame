@@ -11,7 +11,6 @@ var abilities:Array
 var specials:Array
 var passives:Array
 var items:Array
-var runes:Array
 
 func _init(dataJS):
 	id = dataJS["id"]
@@ -22,7 +21,7 @@ func _init(dataJS):
 	parentSkillId = Utils.get_data_from_json(dataJS, "parentSkillId", "")
 
 	if dataJS.has("dungeonModifiers"):
-		abilities = dataJS["dungeonModifiers"]
+		dungeonModifiers = dataJS["dungeonModifiers"]
 
 	if dataJS.has("abilities"):
 		abilities = dataJS["abilities"]
@@ -35,6 +34,3 @@ func _init(dataJS):
 
 	if dataJS.has("items"):
 		items = dataJS["items"]
-
-	if dataJS.has("runes"):
-		runes = dataJS["runes"]

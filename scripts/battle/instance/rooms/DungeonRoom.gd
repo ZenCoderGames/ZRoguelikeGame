@@ -254,6 +254,7 @@ func generate_and_consume_item(character, itemId):
 	item.picked()
 	items.erase(item)
 	item.cell.clear_entity()
+	return item
 
 func generate_upgrade(upgradeType:Upgrade.UPGRADE_TYPE):
 	# find free cells
@@ -666,6 +667,9 @@ func is_in_combat():
 	return enemies.size()>0
 
 func get_cell(r:int, c:int):
+	if cells.size()==0:
+		return null
+	
 	if r<0 or c<0 or r>=maxRows or c>=maxCols:
 		return null
 		

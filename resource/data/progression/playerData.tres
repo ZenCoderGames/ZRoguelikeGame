@@ -17,7 +17,7 @@ levelsCompleted = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_q8ofx"]
 script = ExtResource("1_toee1")
-unlocked = true
+unlocked = false
 charId = "ASSASSIN"
 levelsCompleted = Array[String]([])
 
@@ -29,11 +29,11 @@ levelsCompleted = Array[String]([])
 
 [resource]
 script = ExtResource("1_ev7dt")
-currentXP = 22
-totalXP = 512
+currentXP = 236
+totalXP = 386
 heroDataList = Array[ExtResource("1_toee1")]([SubResource("Resource_brmfd"), SubResource("Resource_bsoox"), SubResource("Resource_q8ofx"), SubResource("Resource_3071e")])
-skillDataDict = {
-"ECONOMY": true,
+skillUnlockedDataList = Array[String](["STARTING_EQUIPMENT", "STARTING_EQUIPMENT_WEAPON", "STARTING_EQUIPMENT_ARMOR"])
+skillUnlockedDataDict = {
 "STARTING_EQUIPMENT": true,
 "STARTING_EQUIPMENT_ARMOR": true,
 "STARTING_EQUIPMENT_WEAPON": true

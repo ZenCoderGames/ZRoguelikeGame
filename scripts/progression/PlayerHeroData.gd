@@ -11,6 +11,6 @@ func unlock():
 func level_completed(levelId:String):
 	levelsCompleted.append(levelId)
 
-func clear():
+func reset():
 	unlocked = false
 	levelsCompleted.clear()

@@ -54,8 +54,6 @@ func create(recreatePlayer:bool) -> void:
 	# For tutorials
 	if isCustomRoomSetup:
 		_init_custom_rooms()
-	if recreatePlayer:
-		_init_level_modifiers()
 
 	CombatEventManager.emit_signal("OnCombatInitialized")
 	isInitialized = true
@@ -68,6 +66,13 @@ func create(recreatePlayer:bool) -> void:
 		dungeonProgress = DungeonProgress.new()
 	else:
 		dungeonProgress.on_dungeon_floor_completed()
+
+	await get_tree().create_timer(0.1).timeout
+	if recreatePlayer:
+		GameGlobals.battleInstance.usePopUpEquipment = false
+		_init_progression_modifiers()
+		_init_level_modifiers()
+		GameGlobals.battleInstance.usePopUpEquipment = true
 
 func _init_rooms():
 	rooms = []
@@ -422,10 +427,41 @@ func _init_player(recreatePlayer:bool):
 		player.init_for_next_dungeon()
 		player.move_to_cell(cell)
 
+# PROGRESSION MODIFIERS
+var abilities:Array
+var specials:Array
+var passives:Array
+var items:Array
+var runes:Array
+func _init_progression_modifiers():
+	var unlockedSkills:Array[String] = PlayerDataManager.currentPlayerData.get_unlocked_skills()
+	for unlockedSkill in unlockedSkills:
+		var skillData:SkillData = GameGlobals.dataManager.get_skill_data(unlockedSkill)
+		for dungeonModifierId in skillData.dungeonModifiers:
+			var dungeonModifierData:DungeonModifierData = GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifierId)
+			for statModifierData in dungeonModifierData.statModifierDataList:
+				player.modify_stat_value_from_modifier(statModifierData)
+			if !dungeonModifierData.passiveId.is_empty():
+				player.add_passive(GameGlobals.dataManager.get_passive_data(dungeonModifierData.passiveId))
+		for abilityId in skillData.abilities:
+			var abilityData:AbilityData = GameGlobals.dataManager.get_ability_data(abilityId)
+			player.add_ability(abilityData)
+		for specialId in skillData.specials:
+			var specialData:SpecialData = GameGlobals.dataManager.get_special_data(specialId)
+			player.add_special(specialData)
+		for passiveId in skillData.passives:
+			var passiveData:PassiveData = GameGlobals.dataManager.get_passive_data(passiveId)
+			player.add_passive(passiveData)
+		for itemId in skillData.items:
+			var itemData:ItemData = GameGlobals.dataManager.get_item_data(itemId)
+			var item:Item = player.cell.room.generate_and_consume_item(player, itemData.id)
+			player.equipment.equip_item(item, Equipment.GET_SLOT_FOR_TYPE(itemData)[0])
+
+# LEVEL MODIFIERS
 func _init_level_modifiers():
 	var levelData:LevelData = GameGlobals.battleInstance.currentLevelData
-	for dungeonModifier in levelData.dungeonModifiers:
-		var dungeonModifierData:DungeonModifierData = GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifier)
+	for dungeonModifierId in levelData.dungeonModifiers:
+		var dungeonModifierData:DungeonModifierData = GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifierId)
 		for statModifierData in dungeonModifierData.statModifierDataList:
 			player.modify_stat_value_from_modifier(statModifierData)
 		if !dungeonModifierData.passiveId.is_empty():

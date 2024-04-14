@@ -384,7 +384,7 @@ func attack(entity):
 			Utils.freeze_frame(Constants.HIT_PAUSE_DEFAULT_AMOUNT, Constants.HIT_PAUSE_DEFAULT_DURATION)
 		CombatEventManager.on_any_attack(entity)
 
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(Constants.CHARACTER_POST_ATTACK_DELAY).timeout
 
 		emit_signal("OnPostAttack", entity)
 

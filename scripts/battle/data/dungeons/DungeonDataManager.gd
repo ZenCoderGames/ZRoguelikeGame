@@ -31,6 +31,7 @@ var levels:Array
 var levelDict = {}
 
 var skilltreeDict:Dictionary = {}
+var skillDict:Dictionary = {}
 
 func _init():
 	init_status_effects()
@@ -250,3 +251,8 @@ func init_skilltree(path:String):
 	var data = Utils.load_data_from_file(path)
 	var skilltreeData:SkillTreeData = SkillTreeData.new(data["skilltree"])
 	skilltreeDict[skilltreeData.id] = skilltreeData
+	for skillData in skilltreeData.skillList:
+		skillDict[skillData.id] = skillData
+
+func get_skill_data(id:String):
+	return skillDict[id]

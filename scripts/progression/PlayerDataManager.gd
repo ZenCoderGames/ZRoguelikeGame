@@ -74,6 +74,9 @@ func unlock_skill(skillData:SkillData):
 	currentPlayerData.unlockSkill(skillData.id) 
 	save_to_file()
 
+func get_unlocked_skills()->Array[String]:
+	return currentPlayerData.get_unlocked_skills()
+
 # LEVELS
 func is_level_completed(charData:CharacterData, levelId:String):
 	return currentPlayerData.heroDataDict[charData.id].levelsCompleted.has(levelId)
