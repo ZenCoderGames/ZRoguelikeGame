@@ -208,3 +208,10 @@ func _on_special_pressed(special:Special):
 		pass
 	else:
 		CombatEventManager.emit_signal("OnPlayerSpecialAbilityFailedToActivate", special)
+
+# DUNGEON MODIFIERS
+func add_dungeon_modifier(dungeonModifierData:DungeonModifierData):
+	super.add_dungeon_modifier(dungeonModifierData)
+
+	if dungeonModifierData.dungeonStartSouls>0:
+		gain_souls(dungeonModifierData.dungeonStartSouls)

@@ -43,6 +43,12 @@
 					"absoluteValue": -2
 				}
 			]
+		},
+		{
+			"id": "SOUL_START_10",
+			"description": "Start with 10 souls",
+			"isPositive": true,
+			"dungeonStartSouls": 10
 		}
 	]
 }

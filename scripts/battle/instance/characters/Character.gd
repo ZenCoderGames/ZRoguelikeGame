@@ -763,6 +763,13 @@ func skip_turn():
 	await get_tree().create_timer(0.25).timeout
 	on_turn_completed()
 
+# DUNGEON MODIFIERS
+func add_dungeon_modifier(dungeonModifierData:DungeonModifierData):
+	for statModifierData in dungeonModifierData.statModifierDataList:
+		modify_stat_value_from_modifier(statModifierData)
+	if !dungeonModifierData.passiveId.is_empty():
+		add_passive(GameGlobals.dataManager.get_passive_data(dungeonModifierData.passiveId))
+
 # HELPERS
 func is_reviving():
 	return setToRevive>=0

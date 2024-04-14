@@ -52,6 +52,7 @@ expand_mode = 1
 script = ExtResource("4")
 useLevelScalingOnEnemies = true
 usePopUpEquipment = true
+debugSpawnVendor = "MYSTIC_VENDOR"
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource("3")
