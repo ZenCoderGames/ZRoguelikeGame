@@ -33,6 +33,7 @@ func init_from_data(skillTreeData:SkillTreeData):
 	unlockButton.visible = false
 	
 	emit_signal("item_rect_changed")
+	GameEventManager.emit_signal("ShowSkillTree", true)
 
 func init_skill(skillData:SkillData):
 	var skillTreeItemUI:SkillTreeItemUI = _findSkillTreeItemUI(skillData.uiHolderId)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://wddxktisd8wb"]
+
+[ext_resource type="Texture2D" uid="uid://cdbfmuxhyewhy" path="res://sourceArt/Random/Circle.png" id="1_a7mre"]
+[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeNode.gd" id="2_u54xb"]
+
+[node name="SkillTreeNode" type="Sprite2D"]
+position = Vector2(81, -81)
+texture = ExtResource("1_a7mre")
+script = ExtResource("2_u54xb")

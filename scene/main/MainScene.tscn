@@ -1,9 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0vuvgr4glgdp"]
+[gd_scene load_steps=17 format=3 uid="uid://d0vuvgr4glgdp"]
 
 [ext_resource type="Script" path="res://scripts/battle/DungeonCamera.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="1_bihmr"]
 [ext_resource type="PackedScene" uid="uid://cusqgwo5ljbli" path="res://ui/MainGUI.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://cdbfmuxhyewhy" path="res://sourceArt/Random/Circle.png" id="2_fux5l"]
+[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeHolder.gd" id="2_mott5"]
 [ext_resource type="Script" path="res://scripts/battle/PlayerInput.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://wddxktisd8wb" path="res://ui/skilltree/SkillTreeNode.tscn" id="3_8lgtl"]
+[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTree.gd" id="3_d2sne"]
 [ext_resource type="Script" path="res://scripts/battle/BattleInstance.gd" id="4"]
 [ext_resource type="Script" path="res://scripts/battle/BattleView.gd" id="5"]
 [ext_resource type="Script" path="res://scripts/battle/instance/effects/EffectManager.gd" id="6"]
@@ -48,11 +52,32 @@ size_flags_vertical = 3
 texture = ExtResource("1_bihmr")
 expand_mode = 1
 
+[node name="SkillTreeHolder" type="Node2D" parent="."]
+script = ExtResource("2_mott5")
+
+[node name="SkillTreeCamera" type="Camera2D" parent="SkillTreeHolder"]
+z_index = 2
+position = Vector2(-2, -6)
+zoom = Vector2(1.1, 1.1)
+
+[node name="SkillTreeNodes" type="Node2D" parent="SkillTreeHolder"]
+script = ExtResource("3_d2sne")
+
+[node name="StartingNode" type="Sprite2D" parent="SkillTreeHolder/SkillTreeNodes"]
+texture = ExtResource("2_fux5l")
+
+[node name="Node1" parent="SkillTreeHolder/SkillTreeNodes" instance=ExtResource("3_8lgtl")]
+
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource("4")
 useLevelScalingOnEnemies = true
 usePopUpEquipment = true
 debugSpawnVendor = "MYSTIC_VENDOR"
+
+[node name="DungeonCamera" type="Camera2D" parent="Battle"]
+position = Vector2(400, 300)
+zoom = Vector2(1.1, 1.1)
+script = ExtResource("1")
 
 [node name="PlayerInput" type="Node" parent="Battle"]
 script = ExtResource("3")
@@ -85,11 +110,6 @@ script = ExtResource("6")
 
 [node name="Dungeon" type="Node" parent="Battle"]
 script = ExtResource("7")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(400, 300)
-zoom = Vector2(1.1, 1.1)
-script = ExtResource("1")
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 script = SubResource("1")
