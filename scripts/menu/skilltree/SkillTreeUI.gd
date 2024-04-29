@@ -79,6 +79,7 @@ func clean_up():
 
 func _on_back_button_pressed():
 	emit_signal("OnBackPressed")
+	GameEventManager.emit_signal("ShowSkillTree", false)
 
 func _on_unlock_button_pressed():
 	PlayerDataManager.unlock_skill(_selectedSkillData)

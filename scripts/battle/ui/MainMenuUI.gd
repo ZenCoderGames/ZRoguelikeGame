@@ -2,6 +2,8 @@ extends Node
 
 class_name MainMenuUI
 
+@onready var title:Label = $"%Title"
+@onready var background:TextureRect = $"%Bg"
 @onready var continueGameButton:Button = $"%Continue"
 @onready var newGameButton:Button = $"%NewGame"
 @onready var exitGameButton:Button = $"%Exit"
@@ -80,13 +82,13 @@ func _on_dungeon_completed(isVictory:bool):
 
 func show_menu():
 	get_node(".").visible = true
-	baseMenuUI.visible = true
+	_show_base_menu(true)
 	characterSelectUI.visible = false
 	levelSelectUI.visible = false
 	continueGameButton.visible = !PlayerDataManager.is_new_player()
 
 func _on_character_chosen(_charData):
-	baseMenuUI.visible = false
+	_show_base_menu(false)
 	characterSelectUI.visible = false
 	levelSelectUI.visible = true
 	levelSelectUI.init_from_data(_charData)
@@ -106,7 +108,7 @@ func on_new_game():
 func show_character_select():
 	UIEventManager.emit_signal("OnMainMenuButton")
 	_clean_up()
-	baseMenuUI.visible = false
+	_show_base_menu(false)
 
 	characterSelectUI.visible = true
 
@@ -117,6 +119,7 @@ func show_character_select():
 
 func _on_back_to_character_select():
 	skillTreeUI.visible = false
+	background.visible = true
 	levelSelectUI.visible = false
 	show_character_select()
 
@@ -129,7 +132,7 @@ func on_class_toggle(isToggleOn:bool):
 func _show_defeat():
 	get_node(".").visible = true
 	deathUI.visible = true
-	baseMenuUI.visible = false
+	_show_base_menu(false)
 
 	var dp:DungeonProgress = GameGlobals.dungeon.dungeonProgress
 	for enemyKilledData in dp.enemyKilledList:
@@ -143,7 +146,7 @@ func _show_defeat():
 func _show_victory():
 	get_node(".").visible = true
 	victoryUI.visible = true
-	baseMenuUI.visible = false
+	_show_base_menu(false)
 
 	var dp:DungeonProgress = GameGlobals.dungeon.dungeonProgress
 	for enemyKilledData in dp.enemyKilledList:
@@ -159,6 +162,7 @@ func _on_show_skill_tree():
 	characterSelectUI.visible = false
 	skillTreeUI.init_from_data(GameGlobals.dataManager.skilltreeDict["SHARED_SKILLTREE"])
 	skillTreeUI.visible = true
+	background.visible = false
 
 func _clean_up():
 	victoryUI.visible = false
@@ -194,7 +198,7 @@ func _show_back_menu():
 		_on_back_to_character_select()
 		return
 
-	baseMenuUI.visible = false
+	_show_base_menu(false)
 	if GameGlobals.dungeon==null or !GameGlobals.dungeon.inBackableMenu:
 		get_node(".").visible = true
 		backMenuUI.visible = true
@@ -231,6 +235,10 @@ func _clear_end_screen():
 func _on_player_data_updated():
 	totalSoulsLabel.text = str("Total Souls: ", PlayerDataManager.get_current_xp())
 	
+func _show_base_menu(val:bool):
+	title.visible = val
+	baseMenuUI.visible = val
+
 # SETTINGS
 func _on_music_on():
 	musicOffButton.visible = true
