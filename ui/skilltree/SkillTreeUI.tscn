@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://pwh4dx7x3kp3"]
+[gd_scene load_steps=6 format=3 uid="uid://pwh4dx7x3kp3"]
 
 [ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeUI.gd" id="1_3eqju"]
-[ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="2_1lqjd"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="3_w1e6l"]
 [ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="4_jv1l6"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="5_lr6n3"]
@@ -15,22 +14,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 script = ExtResource("1_3eqju")
 skillItemUIList = [NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer/SkillNode_A"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer2/SkillNode_B"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer/SkillNode_B_01"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer/SkillNode_B_02"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer3/SkillNode_C"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer/SkillNode_C_01"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer/SkillNode_C_02"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillNode_A_01"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillNode_A_02")]
-
-[node name="Bg" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(0.772549, 0.772549, 0.772549, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("2_1lqjd")
-expand_mode = 1
 
 [node name="InfoPanel" type="Panel" parent="."]
 unique_name_in_owner = true

@@ -28,10 +28,7 @@ Roguelike Dev:
 (D)- Rich Text Labels in other spots (Util function to parse text)
 (D)- Utils.format_text can parse keywords
 (IP)- Tutorial
-- Get rid of variable startWithClasses
-- Fix speed movement stopping at a vendor
-- Bug: On mystic, back button didn't work -> causes broken state
-- Bug: Fix super fast speed causing enemies to not attack
+(D)- Bug: Fix super fast speed causing enemies to not attack
 
 - Progression
 	(D)- Show Progress in Character Select UI 
@@ -40,6 +37,18 @@ Roguelike Dev:
 	(D)- Fix bug with reviving enemies collecting xp twice
 	(D)- Fix bug with new floor clearing xp
 	(D)- Character Select UI has a button for Skill Tree Menu (Shared amongst chars)
+
+- End of combat, doesn't hide battle and so skill tree menu shows it
+- Bug: On mystic, back button didn't work -> causes broken state (During combat)
+
+- New Skill Tree UI functionality
+
+- Get rid of variable startWithClasses
+- Fix speed movement stopping at a consumable
+
+- New Dungeon Rooms -> Foggy room, 
+- Environmental Objects
+
 
 - Contextual info not spawning in first room right next to player
 - More Things (3 enemies) - 2 left [Evil Knight -> Barrier, Healer]

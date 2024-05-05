@@ -4,11 +4,19 @@
 		"type": "SHARED",
 		"skills": [
 			{
+				"id": "START_NODE",
+				"name": "Skill Tree",
+				"description": "Click on a node to unlock it",
+				"uiHolderId": "S",
+				"children": ["STARTING_EQUIPMENT", "ECONOMY", "PERKS"]
+			},
+			{
 				"id": "STARTING_EQUIPMENT",
 				"name": "Starter Equipment",
 				"description": "Start combat with equipment",
 				"unlockCost": 50,
-				"uiHolderId": "S_A"
+				"uiHolderId": "S_A",
+				"children": ["STARTING_EQUIPMENT_WEAPON", "STARTING_EQUIPMENT_ARMOR"]
 			},
 			{
 				"id": "STARTING_EQUIPMENT_WEAPON",
@@ -30,10 +38,11 @@
 			},
 			{
 				"id": "ECONOMY",
-				"name": "Perks",
-				"description": "Perks are bonus effects that show up in your run",
+				"name": "Economy",
+				"description": "Economic benefits for each run",
 				"unlockCost": 50,
-				"uiHolderId": "S_B"
+				"uiHolderId": "S_B",
+				"children": ["SOUL_BOOST", "VENDOR_DISCOUNT"]
 			},
 			{
 				"id": "SOUL_BOOST",
@@ -58,7 +67,8 @@
 				"name": "Perks",
 				"description": "Perks are bonus effects that show up in your run",
 				"unlockCost": 50,
-				"uiHolderId": "S_C"
+				"uiHolderId": "S_C",
+				"children": ["FLOOR_HEAL", "REINCARNATION"]
 			},
 			{
 				"id": "FLOOR_HEAL",

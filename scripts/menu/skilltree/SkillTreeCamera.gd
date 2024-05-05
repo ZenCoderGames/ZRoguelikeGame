@@ -5,9 +5,9 @@ class_name SkillTreeCamera
 @export var cam_offset = Vector2(0, 0)  # Maximum hor/ver shake in pixels.
 
 func _init():
-	GameEventManager.connect("ShowSkillTree", Callable(self,"_show_camera"))
+	UIEventManager.connect("ShowSkillTree", Callable(self, "_show_camera"))
 
-func _show_camera(val:bool):
+func _show_camera(val:bool, skillTreeId:String):
 	self.enabled = val
 	if val:
 		init()

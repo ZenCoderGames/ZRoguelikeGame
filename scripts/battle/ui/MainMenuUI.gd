@@ -160,7 +160,7 @@ func _show_victory():
 # SKILL TREE
 func _on_show_skill_tree():
 	characterSelectUI.visible = false
-	skillTreeUI.init_from_data(GameGlobals.dataManager.skilltreeDict["SHARED_SKILLTREE"])
+	skillTreeUI.init_from_data("SHARED_SKILLTREE")
 	skillTreeUI.visible = true
 	background.visible = false
 

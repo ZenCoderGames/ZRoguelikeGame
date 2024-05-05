@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbjybrry117wf"]
+
+[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeHolder.gd" id="1_1vj4f"]
+[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeCamera.gd" id="2_7giaw"]
+[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTree.gd" id="3_v5c6u"]
+
+[node name="SkillTreeHolder" type="Node2D"]
+script = ExtResource("1_1vj4f")
+
+[node name="SkillTreeCamera" type="Camera2D" parent="."]
+z_index = 2
+position = Vector2(-2, -6)
+zoom = Vector2(1.1, 1.1)
+script = ExtResource("2_7giaw")
+
+[node name="SkillTreeNodeParent" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_v5c6u")

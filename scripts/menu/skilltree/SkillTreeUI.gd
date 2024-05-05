@@ -15,27 +15,26 @@ var _selectedSkillData:SkillData
 
 signal OnBackPressed
 
-func _ready():
-	for skillTreeItemUI in skillItemUIList:
-		skillTreeItemUI.connect("OnSkillSelected",Callable(self,"_on_skill_selected"))
+func _init():
+	UIEventManager.connect("OnSkillNodeSelected", Callable(self, "_on_skill_selected"))
 
-func init_from_data(skillTreeData:SkillTreeData):
+func init_from_data(skillTreeId:String):
 	clean_up()
 	hide_info()
 
-	_skillTreeData = skillTreeData
+	_skillTreeData = GameGlobals.dataManager.skilltreeDict[skillTreeId]
 
-	for skillData in skillTreeData.skillList:
-		init_skill(skillData)
+	'''_import_pathfor skillData in _skillTreeData.skillList:
+		init_skill(skillData)'''
 
 	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
 	unlockButton.connect("pressed",Callable(self,"_on_unlock_button_pressed"))
 	unlockButton.visible = false
 	
 	emit_signal("item_rect_changed")
-	GameEventManager.emit_signal("ShowSkillTree", true)
+	UIEventManager.emit_signal("ShowSkillTree", true, skillTreeId)
 
-func init_skill(skillData:SkillData):
+'''_add_constant_torquefunc init_skill(skillData:SkillData):
 	var skillTreeItemUI:SkillTreeItemUI = _findSkillTreeItemUI(skillData.uiHolderId)
 	if skillTreeItemUI!=null:
 		var hasBeenUnlocked:bool = PlayerDataManager.has_skill_been_unlocked(skillData.id)
@@ -51,7 +50,7 @@ func _findSkillTreeItemUI(skillTreeItemUIId:String):
 		if skillTreeItemUI.id == skillTreeItemUIId:
 			return skillTreeItemUI
 
-	return null
+	return null'''
 
 func _on_skill_selected(skillData:SkillData, isLocked:bool):
 	unlockButton.visible = !isLocked
@@ -59,10 +58,10 @@ func _on_skill_selected(skillData:SkillData, isLocked:bool):
 	unlockButton.text = str(" Unlock: ", skillData.unlockCost)
 	_selectedSkillData = skillData
 	skillNameLabel.text = skillData.name
-	show_info(_selectedSkillData.description)
+	show_info(skillData.description)
 
-	for skillItemUI in skillItemUIList:
-		skillItemUI.set_selected(skillItemUI.has_skill_data(skillData))
+	'''for skillItemUI in skillItemUIList:
+		skillItemUI.set_selected(skillItemUI.has_skill_data(skillData))'''
 
 func show_info(str:String):
 	infoPanel.visible = true
@@ -79,10 +78,11 @@ func clean_up():
 
 func _on_back_button_pressed():
 	emit_signal("OnBackPressed")
-	GameEventManager.emit_signal("ShowSkillTree", false)
+	UIEventManager.emit_signal("ShowSkillTree", false, "")
 
 func _on_unlock_button_pressed():
 	PlayerDataManager.unlock_skill(_selectedSkillData)
-	for skillData in _skillTreeData.skillList:
-		init_skill(skillData)
+	UIEventManager.emit_signal("OnSkillUnlocked")
+	'''for skillData in _skillTreeData.skillList:
+		init_skill(skillData)'''
 	unlockButton.visible = false
