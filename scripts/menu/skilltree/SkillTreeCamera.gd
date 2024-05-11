@@ -18,6 +18,7 @@ func init():
 
 func _update_camera_to_skilltree_center():
 	self.make_current()
+	self.position = Vector2(0,0)
 	#Utils.create_tween_vector2(self, "position", self.position, player.cell.pos + cam_offset, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 

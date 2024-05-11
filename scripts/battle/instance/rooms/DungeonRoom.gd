@@ -446,7 +446,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			if cell.entityObject is VendorCharacter:
 				var vendor = cell.entityObject
 				vendor.activate()
-				return true
+				return false
 			# Upgrade
 			if cell.entityObject is Upgrade:
 				var upgrade = cell.entityObject

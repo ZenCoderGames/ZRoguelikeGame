@@ -29,8 +29,8 @@ levelsCompleted = Array[String]([])
 
 [resource]
 script = ExtResource("1_ev7dt")
-currentXP = 0
-totalXP = 0
+currentXP = 44
+totalXP = 44
 heroDataList = Array[ExtResource("1_toee1")]([SubResource("Resource_brmfd"), SubResource("Resource_bsoox"), SubResource("Resource_q8ofx"), SubResource("Resource_3071e")])
 skillUnlockedDataList = Array[String]([])
 skillUnlockedDataDict = {}
