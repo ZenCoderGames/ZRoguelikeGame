@@ -91,7 +91,8 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 func _on_back_pressed():
 	CombatEventManager.emit_signal("OnVendorClosed")
 	UIEventManager.emit_signal("OnGenericUIEvent")
-	GameGlobals.dungeon.player.disconnect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
+	if GameGlobals.dungeon.player:
+		GameGlobals.dungeon.player.disconnect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
 
 func item_bought():
 	if !_vendorData.oneTimePurchaseOnly:
