@@ -7,6 +7,7 @@ var numFloorsCompleted:int
 const MULTIPLIER_PER_FLOOR:float = 0.2
 
 var enemyKilledList:Array
+var enemyKillDict:Dictionary
 var enemyXPEarned:int
 var totalFloorsCompleted:int
 
@@ -16,6 +17,7 @@ func _init():
 
 func _on_dungeon_init():
 	enemyKilledList.clear()
+	enemyKillDict.clear()
 	enemyXPEarned = 0
 	totalFloorsCompleted = 0
 
@@ -24,8 +26,15 @@ func on_dungeon_floor_completed():
 
 func _on_any_character_death(character:Character):
 	if character is EnemyCharacter:
-		enemyKilledList.append(character.charData)
+		if enemyKillDict.has(character.charData):
+			enemyKillDict[character.charData] = enemyKillDict[character.charData] + 1
+		else:
+			enemyKilledList.append(character.charData)
+			enemyKillDict[character.charData] = 1
 		enemyXPEarned = enemyXPEarned + character.charData.xp
+
+func get_enemy_count(charData:CharacterData):
+	return enemyKillDict[charData]
 
 func get_progress()->int:
 	return enemyXPEarned + totalFloorsCompleted * MULTIPLIER_PER_FLOOR * enemyXPEarned

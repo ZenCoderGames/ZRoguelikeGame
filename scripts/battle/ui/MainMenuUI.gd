@@ -138,7 +138,7 @@ func _show_defeat():
 	for enemyKilledData in dp.enemyKilledList:
 		var battleEndEnemyXPUI := BattleEndEnemyXPUIClass.instantiate()
 		deathGridContainer.add_child(battleEndEnemyXPUI)
-		battleEndEnemyXPUI.init(enemyKilledData)
+		battleEndEnemyXPUI.init(enemyKilledData, dp.get_enemy_count(enemyKilledData))
 
 	deathProgressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
 	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
@@ -152,10 +152,10 @@ func _show_victory():
 	for enemyKilledData in dp.enemyKilledList:
 		var battleEndEnemyXPUI := BattleEndEnemyXPUIClass.instantiate()
 		victoryGridContainer.add_child(battleEndEnemyXPUI)
-		battleEndEnemyXPUI.init(enemyKilledData)
+		battleEndEnemyXPUI.init(enemyKilledData, dp.get_enemy_count(enemyKilledData))
 
-	victoryProgressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
 	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
+	victoryProgressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
 
 # SKILL TREE
 func _on_show_skill_tree():

@@ -40,10 +40,11 @@ Roguelike Dev:
 
 (D)- New Skill Tree UI functionality
 (D)- Skill Tree doesn't refresh with New Game
+
 (D)- End of combat, doesn't hide battle and so skill tree menu shows it
 (D)- Bug: On mystic, back button didn't work -> causes broken state (During combat)
-
-- Skeleton revive issue
+(D)- Skeleton revive issue
+- Remaining skill tree options
 
 - Get rid of variable startWithClasses
 - Fix speed movement stopping at a consumable
