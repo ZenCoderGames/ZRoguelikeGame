@@ -435,7 +435,7 @@ func die():
 	emit_signal("OnDeath")
 	CombatEventManager.emit_signal("OnAnyCharacterDeath", self)
 
-	if setToRevive>0:
+	if setToRevive>=0:
 		pass
 	else:
 		isDead = true

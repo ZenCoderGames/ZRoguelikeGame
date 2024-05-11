@@ -290,7 +290,7 @@
 			]
 		},
 		{
-			"id": "PASSIVE_REINCARNATION_AFTER_2",
+			"id": "PASSIVE_REINCARNATION_AFTER_1",
 			"name": "Reincarnation",
 			"description": "Revive once after death",
 			"conditions": [
@@ -300,13 +300,13 @@
 				{
 					"type": "REVIVE",
 					"params": {
-						"numTurnsToReviveAfter": 2
+						"numTurnsToReviveAfter": 1
 					}
 				},
 				{
 					"type": "REMOVE_PASSIVE",
 					"params": {
-						"passiveId": "PASSIVE_REINCARNATION_AFTER_2"
+						"passiveId": "PASSIVE_REINCARNATION_AFTER_1"
 					}
 				}
 			]

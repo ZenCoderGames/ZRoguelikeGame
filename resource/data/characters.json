@@ -225,7 +225,7 @@
 						"levelScaling": 1
 					}
 				],
-				"passiveId": "PASSIVE_REINCARNATION_AFTER_2"
+				"passiveId": "PASSIVE_REINCARNATION_AFTER_1"
 			},
 			{
 				"#disable": true,
