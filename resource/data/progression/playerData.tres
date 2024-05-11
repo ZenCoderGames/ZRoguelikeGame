@@ -7,7 +7,7 @@
 script = ExtResource("1_toee1")
 unlocked = true
 charId = "PALADIN"
-levelsCompleted = Array[String]([])
+levelsCompleted = Array[String](["LEVEL_01", "LEVEL_02"])
 
 [sub_resource type="Resource" id="Resource_bsoox"]
 script = ExtResource("1_toee1")

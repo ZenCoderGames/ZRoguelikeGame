@@ -44,15 +44,15 @@ func init_from_data(charData:CharacterData):
 	init_level("LEVEL_BOSS")
 	levelLabel.text = ""
 
+	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
+	readyButton.connect("pressed",Callable(self,"_on_ready_button_pressed"))
+	readyButton.visible = false
+
 	var idx:int = 0
 	for levelId in _levels:
 		var levelData:LevelData = GameGlobals.dataManager.get_level_data(levelId)
 		add_level(levelData, idx)
 		idx = idx + 1
-
-	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
-	readyButton.connect("pressed",Callable(self,"_on_ready_button_pressed"))
-	readyButton.visible = false
 
 func init_level(levelId:String):
 	_levels.append(levelId)
@@ -66,8 +66,9 @@ func add_level(levelData:LevelData, idx:int):
 	var isCompleted:bool = _completedLevels.has(levelData.id)
 	levelSelectItem.init_from_data(_myCharData, levelData, isCompleted, _foundLastCompleted)
 	levelSelectItem.connect("OnLevelSelected",Callable(self,"_on_level_selected"))
-	if !isCompleted:
+	if !isCompleted and !_foundLastCompleted:
 		_foundLastCompleted = true
+		_on_level_selected(levelData, false)
 
 func _on_level_selected(levelData:LevelData, isLocked:bool):
 	readyButton.visible = !isLocked
