@@ -8,7 +8,6 @@ class_name SkillTreeUI
 @onready var titleLabel:Label = $"%TitleLabel"
 @onready var skillNameLabel:Label = $"%SkillNameLabel"
 @onready var unlockButton:Button = $"%UnlockButton"
-@export var skillItemUIList:Array[SkillTreeItemUI]
 
 var _skillTreeData:SkillTreeData
 var _selectedSkillData:SkillData
@@ -36,7 +35,7 @@ func _on_skill_selected(skillData:SkillData, isLocked:bool):
 	unlockButton.visible = !isLocked
 	unlockButton.disabled = !PlayerDataManager.can_unlock_skill(skillData)
 	unlockButton.text = str(" Unlock: ", skillData.unlockCost)
-	if skillData.id == "START_NODE":
+	if skillData.isStartNode:
 		unlockButton.visible = false
 	if PlayerDataManager.has_skill_been_unlocked(skillData.id):
 		unlockButton.visible = false
@@ -65,6 +64,4 @@ func _on_back_button_pressed():
 func _on_unlock_button_pressed():
 	PlayerDataManager.unlock_skill(_selectedSkillData)
 	UIEventManager.emit_signal("OnSkillUnlocked")
-	'''for skillData in _skillTreeData.skillList:
-		init_skill(skillData)'''
 	unlockButton.visible = false

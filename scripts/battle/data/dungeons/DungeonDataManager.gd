@@ -253,6 +253,17 @@ func init_skilltree(path:String):
 	skilltreeDict[skilltreeData.id] = skilltreeData
 	for skillData in skilltreeData.skillList:
 		skillDict[skillData.id] = skillData
+	
+	# Assign Parent relationships
+	for skillData in skilltreeData.skillList:
+		for childSkillId in skillData.children:
+			var childSkillData:SkillData = skillDict[childSkillId]
+			childSkillData.parentSkillId = skillData.id
 
 func get_skill_data(id:String):
 	return skillDict[id]
+
+func is_skill_start_node(id:String):
+	if id.is_empty():
+		return false
+	return skillDict[id].isStartNode

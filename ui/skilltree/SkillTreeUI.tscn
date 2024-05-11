@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://pwh4dx7x3kp3"]
+[gd_scene load_steps=5 format=3 uid="uid://pwh4dx7x3kp3"]
 
 [ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeUI.gd" id="1_3eqju"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="3_w1e6l"]
 [ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="4_jv1l6"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="5_lr6n3"]
-[ext_resource type="PackedScene" uid="uid://cwsajj2k2i4es" path="res://ui/skilltree/SkillTreeItemUI.tscn" id="6_ewe8j"]
 
-[node name="SkillTreeUI" type="Panel" node_paths=PackedStringArray("skillItemUIList")]
+[node name="SkillTreeUI" type="Panel"]
 unique_name_in_owner = true
 self_modulate = Color(0.258824, 0.227451, 0.227451, 0)
 anchors_preset = 15
@@ -16,7 +15,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
 script = ExtResource("1_3eqju")
-skillItemUIList = [NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer/SkillNode_A"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer2/SkillNode_B"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer/SkillNode_B_01"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer/SkillNode_B_02"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer3/SkillNode_C"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer/SkillNode_C_01"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer/SkillNode_C_02"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillNode_A_01"), NodePath("Map/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillNode_A_02")]
 
 [node name="InfoPanel" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -128,92 +126,3 @@ theme_override_fonts/font = ExtResource("5_lr6n3")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Map" type="AspectRatioContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -235.0
-offset_bottom = 165.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(0, 150)
-stretch_mode = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Map"]
-custom_minimum_size = Vector2(800, 400)
-layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/ScrollContainer"]
-layout_mode = 2
-theme_override_constants/separation = 200
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Map/ScrollContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="SkillNode_A" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-size_flags_horizontal = 4
-id = "S_A"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 100
-
-[node name="SkillNode_A_01" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-id = "S_A_1"
-
-[node name="SkillNode_A_02" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-id = "S_A_2"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Map/ScrollContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="SkillNode_B" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-size_flags_horizontal = 4
-id = "S_B"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="SkillNode_B_01" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-id = "S_B_1"
-
-[node name="SkillNode_B_02" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-id = "S_B_2"
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Map/ScrollContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="SkillNode_C" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-size_flags_horizontal = 4
-id = "S_C"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="SkillNode_C_01" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-id = "S_C_1"
-
-[node name="SkillNode_C_02" parent="Map/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer" instance=ExtResource("6_ewe8j")]
-layout_mode = 2
-id = "S_C_2"

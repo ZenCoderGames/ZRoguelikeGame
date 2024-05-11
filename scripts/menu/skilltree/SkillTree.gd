@@ -8,6 +8,7 @@ var _selectedSkillData:SkillData
 const SkillTreeNodeClass := preload("res://ui/skilltree/SkillTreeNode.tscn")
 var skillTreeNodes:Array
 var dictOfSkillTree:Dictionary
+var startSkillNode:SkillTreeNode
 
 const STARTING_ANGLE:float = 90
 const STARTING_RADIUS:float = 150
@@ -30,7 +31,7 @@ func _refresh():
 		var hasBeenUnlocked:bool = PlayerDataManager.has_skill_been_unlocked(skillData.id)
 		var isLocked:bool = false
 		var hasParent:bool = !skillData.parentSkillId.is_empty()
-		if hasParent:
+		if hasParent and !GameGlobals.dataManager.is_skill_start_node(skillData.parentSkillId):
 			var isParentUnlocked:bool = PlayerDataManager.has_skill_been_unlocked(skillData.parentSkillId)
 			isLocked = !isParentUnlocked
 		skillTreeNode.init_from_data(skillData, hasBeenUnlocked, isLocked)
@@ -41,17 +42,18 @@ func _init_skill(skillData:SkillData):
 	var hasBeenUnlocked:bool = PlayerDataManager.has_skill_been_unlocked(skillData.id)
 	var isLocked:bool = false
 	var hasParent:bool = !skillData.parentSkillId.is_empty()
-	if hasParent:
+	if hasParent and !GameGlobals.dataManager.is_skill_start_node(skillData.parentSkillId):
 		var isParentUnlocked:bool = PlayerDataManager.has_skill_been_unlocked(skillData.parentSkillId)
 		isLocked = !isParentUnlocked
 	skillTreeNode.init_from_data(skillData, hasBeenUnlocked, isLocked)
 	skillTreeNodes.append(skillTreeNode)
 	dictOfSkillTree[skillTreeNode.get_skill_data().id] = skillTreeNode
+	if skillData.isStartNode:
+		startSkillNode = skillTreeNode
 
 func _reposition_nodes():
-	var skillTreeStartNode:SkillTreeNode = dictOfSkillTree["START_NODE"]
-	skillTreeStartNode.set_as_start_node()
-	_place_node(skillTreeStartNode, 0, 0, 0, 0)
+	startSkillNode.set_as_start_node()
+	_place_node(startSkillNode, 0, 0, 0, 0)
 
 func _place_node(skillTreeNode:SkillTreeNode, x, y, ang, rad):
 	var posX:int = x + rad * cos(deg_to_rad(ang))
