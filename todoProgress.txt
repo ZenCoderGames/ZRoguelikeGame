@@ -48,6 +48,8 @@ Roguelike Dev:
 
 - Get rid of variable startWithClasses
 - Fix speed movement stopping at a consumable
+- Coins/Gold as an item to pickup for progression instead of souls for upgrades in game
+- Keyboard for all UI selection (Arrow keys, Spacebar, TAB)
 
 - New Dungeon Rooms -> Foggy room, 
 - Environmental Objects

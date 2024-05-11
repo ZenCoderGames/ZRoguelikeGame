@@ -22,6 +22,7 @@ var cell
 var isDead:bool = false
 var setToRevive:int = -1
 var _hasUpdatedThisTurn:bool = false
+var _hasRevivedThisTurn:bool = false
 
 var stats:Array = []
 var statDict:Dictionary = {}
@@ -282,6 +283,10 @@ func modify_stat_value_from_modifier(statModifierData:StatModifierData):
 			elif statModifierData.absoluteValue!=0:
 				stat.modify_max(stat.maxValue + statModifierData.absoluteValue)
 				stat.modify(stat.value + statModifierData.absoluteValue)
+			elif statModifierData.percentOfCurrentValue!=0:
+				stat.modify(stat.value + statModifierData.percentOfCurrentValue * stat.value)
+			elif statModifierData.percentOfMaxValue!=0:
+				stat.modify(stat.value + statModifierData.percentOfMaxValue * stat.maxValue)
 
 			on_stats_changed()
 			return stat.value
@@ -312,7 +317,11 @@ func initiate_revive(numTurns):
 func revive():
 	reset_all_stats()
 	emit_signal("OnReviveEnd")
+	_hasRevivedThisTurn = true
 	# Maybe play an animation here
+
+func has_revived_this_turn():
+	return _hasRevivedThisTurn
 
 func reset_all_stats():
 	for stat in stats:
@@ -559,23 +568,29 @@ func _create_damage_text_tween(_entity):
 	Utils.create_tween_vector2(damageText, "self_modulate", colorOriginal, colorNew, 1.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 
 func is_due_to_skip_turn():
-	return status.is_stunned() or setToRevive==-1
+	return status.is_stunned() or is_reviving()
 
 func pre_update():
 	successfulDamageThisTurn = 0
 	skipThisTurn = false
 	_hasUpdatedThisTurn = false
+	_hasRevivedThisTurn = false
 
 func update():
+	if _hasUpdatedThisTurn:
+		return
+
 	_hasUpdatedThisTurn = true
 
 	if setToRevive>=0:
+		if setToRevive==0:
+			_show_generic_text(self, str("Revive"))
+		else:
+			_show_generic_text(self, str("Revive (", str(setToRevive), ")"))
 		setToRevive = setToRevive - 1
 		skipThisTurn = true
 		if setToRevive==-1:
 			revive()
-		else:
-			_show_generic_text(self, str("Revive x", str(setToRevive+1)))
 		return
 
 	if status.is_stunned():

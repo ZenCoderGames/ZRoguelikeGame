@@ -15,7 +15,7 @@ var _soulCost:int
 func init(parent:VendorUI, data):
 	_parent = parent
 	_data = data
-	_soulCost = _data.soulCost
+	_soulCost = _data.soulCost * GameGlobals.dungeon.player._currentVendorCostMultiplier
 	nameLabel.text = _data.name
 	descLabel.text = Utils.format_text(_data.description)
 	soulCostLabel.text = str(_soulCost)

@@ -74,6 +74,8 @@ func create(recreatePlayer:bool) -> void:
 		_init_progression_modifiers()
 		_init_level_modifiers()
 		GameGlobals.battleInstance.usePopUpEquipment = true
+	
+	CombatEventManager.emit_signal("OnStartFloor")
 
 func _init_rooms():
 	rooms = []
@@ -511,8 +513,14 @@ func _on_player_turn_completed():
 
 	CombatEventManager.emit_signal("OnPlayerTurnCompleted")
 
-	# Wait for Enemy Turns
-	player.cell.room.update_entities()
+	if player.has_revived_this_turn():
+		_end_turn()
+	else:
+		# Wait for Enemy Turns
+		player.cell.room.update_entities()
+
+	'''# Wait for Enemy Turns
+	player.cell.room.update_entities()'''
 
 func _end_turn():
 	turnsTaken += 1

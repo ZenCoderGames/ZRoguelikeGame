@@ -394,6 +394,27 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PASSIVE_HEAL_ON_FLOOR_START",
+			"name": "Heal On Floor Start",
+			"description": "Heal for 50% of max health anytime you start a new dungeon floor",
+			"conditions": [
+				"ON_START_FLOOR"
+			],
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "HEALTH",
+								"percentOfMaxValue": 0.5
+							}
+						]
+					}
+				}
+			]
 		}
 	]
 }

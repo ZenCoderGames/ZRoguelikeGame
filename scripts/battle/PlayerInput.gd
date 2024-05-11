@@ -64,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if disableInput:
 		return
 	
-	if player.isDead:
+	if player.isDead || player.is_reviving():
 		return
 
 	# skip turn

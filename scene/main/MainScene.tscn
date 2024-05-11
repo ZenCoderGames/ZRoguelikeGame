@@ -55,6 +55,7 @@ expand_mode = 1
 script = ExtResource("4")
 useLevelScalingOnEnemies = true
 usePopUpEquipment = true
+debugSpawnEnemyEncounter = "TEST_ENC_SINGLE"
 
 [node name="DungeonCamera" type="Camera2D" parent="Battle"]
 position = Vector2(400, 300)

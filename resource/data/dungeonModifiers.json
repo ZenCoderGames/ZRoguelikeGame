@@ -49,6 +49,12 @@
 			"description": "Start with 10 souls",
 			"isPositive": true,
 			"dungeonStartSouls": 10
+		},
+		{
+			"id": "VENDOR_DISCOUNT_25",
+			"description": "Vendor items are 25% cheaper",
+			"isPositive": true,
+			"vendorCostMultiplier": -0.25
 		}
 	]
 }

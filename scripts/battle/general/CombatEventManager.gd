@@ -1,6 +1,7 @@
 extends Node
 
 signal OnCombatInitialized()
+signal OnStartFloor()
 signal OnStartTurn()
 signal OnEndTurn()
 signal OnEnemyMovedAdjacentToPlayer(enemy)
@@ -67,6 +68,8 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 		parentCharacter.connect("OnStatusEffectAddedToEnemy",Callable(object,"activate_on_add_status_effect"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_NEAR_ENEMY):
 		parentCharacter.connect("OnNearEnemy",Callable(object,"activate"))
+	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_START_FLOOR):
+		connect("OnStartFloor",Callable(object,"activate"))
 
 func on_room_combat_started(room):
 	emit_signal("OnRoomCombatStarted", room)

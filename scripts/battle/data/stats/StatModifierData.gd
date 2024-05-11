@@ -4,6 +4,8 @@ var type:int
 var value:int
 var maxValue:int
 var absoluteValue:int
+var percentOfCurrentValue:float
+var percentOfMaxValue:float
 
 func _init(statModDataJS):
 	var statType = statModDataJS["type"]
@@ -20,3 +22,9 @@ func _init(statModDataJS):
 
 	if statModDataJS.has("absoluteValue"):
 		absoluteValue = statModDataJS["absoluteValue"]
+
+	if statModDataJS.has("percentOfCurrentValue"):
+		percentOfCurrentValue = statModDataJS["percentOfCurrentValue"]
+
+	if statModDataJS.has("percentOfMaxValue"):
+		percentOfMaxValue = statModDataJS["percentOfMaxValue"]

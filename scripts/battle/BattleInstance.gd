@@ -102,7 +102,7 @@ func _shared_dungeon_init(recreatePlayer:bool=true):
 
 	GameGlobals.dungeon.create(recreatePlayer)
 	#_toggle_main_menu()
-	GameGlobals.dungeon.player.connect("OnDeath",Callable(self,"_on_player_death"))
+	GameGlobals.dungeon.player.connect("OnDeathFinal",Callable(self,"_on_player_death"))
 	GameGlobals.dungeon.player.connect("OnPlayerReachedExit",Callable(self,"_on_dungeon_completed"))
 	GameGlobals.dungeon.player.connect("OnPlayerReachedEnd",Callable(self,"_on_player_victory"))
 	

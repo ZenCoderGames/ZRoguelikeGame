@@ -15,6 +15,7 @@ var xp:int = 0
 var currentLevel:int = 0
 var _levelUpThisTurn:bool = false
 var _souls:int = 0
+var _currentVendorCostMultiplier:float = 1
 
 func init(charIdVal:int, charDataVal, teamVal):
 	super.init(charIdVal, charDataVal, teamVal)
@@ -215,3 +216,9 @@ func add_dungeon_modifier(dungeonModifierData:DungeonModifierData):
 
 	if dungeonModifierData.dungeonStartSouls>0:
 		gain_souls(dungeonModifierData.dungeonStartSouls)
+
+	if dungeonModifierData.vendorCostMultiplier!=0:
+		_currentVendorCostMultiplier = _currentVendorCostMultiplier + dungeonModifierData.vendorCostMultiplier
+
+func get_current_vendorcost_multiplier():
+	return _currentVendorCostMultiplier

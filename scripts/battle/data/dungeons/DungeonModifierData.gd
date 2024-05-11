@@ -6,6 +6,7 @@ var isPositive:bool
 var statModifierDataList:Array
 var passiveId:String
 var dungeonStartSouls:int
+var vendorCostMultiplier:float
 
 func _init(dataJS):
 	id = Utils.get_data_from_json(dataJS, "id", "INVALID_ID")
@@ -18,4 +19,5 @@ func _init(dataJS):
 			statModifierDataList.append(StatModifierData.new(statModifierDataJS))
 	
 	passiveId = Utils.get_data_from_json(dataJS, "passiveId", "")
-	dungeonStartSouls = Utils.get_data_from_json(dataJS, "dungeonStartSouls", 0) 
+	dungeonStartSouls = Utils.get_data_from_json(dataJS, "dungeonStartSouls", 0)
+	vendorCostMultiplier = Utils.get_data_from_json(dataJS, "vendorCostMultiplier", 0.0)

@@ -68,14 +68,14 @@
 				"description": "At the start of each floor, heal up to 50% of your hp",
 				"unlockCost": 50,
 				"uiHolderId": "S_C_1",
-				"dungeonModifiers": ["FLOOR_HEAL_50"]
+				"passives": ["PASSIVE_HEAL_ON_FLOOR_START"]
 			},
 			{
 				"id": "REINCARNATION",
 				"name": "Reincarnation",
 				"description": "After your first death, come back to life at 50% of your max hp",
 				"unlockCost": 50,
-				"dungeonModifiers": ["REINCARNATION"]
+				"passives": ["PASSIVE_REINCARNATION"]
 			}
 		]
 	}
