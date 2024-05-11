@@ -11,3 +11,5 @@ func _show(val:bool, skillTreeId:String):
 
 	if val:
 		skillTree.init_from_data(skillTreeId)
+	else:
+		skillTree.reset()

@@ -14,10 +14,10 @@ func _show_camera(val:bool, skillTreeId:String):
 
 func init():
 	#self.position = player.cell.pos
-	_update_camera_to_player()
+	_update_camera_to_skilltree_center()
 
-func _update_camera_to_player():
-	pass
+func _update_camera_to_skilltree_center():
+	self.make_current()
 	#Utils.create_tween_vector2(self, "position", self.position, player.cell.pos + cam_offset, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 
 

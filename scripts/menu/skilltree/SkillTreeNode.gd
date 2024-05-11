@@ -37,6 +37,7 @@ func set_selected(isSelected:bool):
 func set_as_start_node():
 	_isStartNode = true
 	set_to_default_state()
+	_on_item_chosen()
 
 func set_to_default_state():
 	if _isStartNode:

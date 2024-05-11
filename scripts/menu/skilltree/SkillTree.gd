@@ -89,3 +89,11 @@ func _draw():
 		for skillTreeNode in skillTreeNodes:
 			if skillTreeNode.has_parent():
 				draw_line(skillTreeNode.position, skillTreeNode.get_parent_node().position, Color.LIGHT_SLATE_GRAY, 2.0)
+
+func reset():
+	for skillTreeNode in skillTreeNodes:
+		remove_child(skillTreeNode)
+		skillTreeNode.queue_free()
+	skillTreeNodes.clear()
+	dictOfSkillTree.clear()
+	debugDrawNodes.clear()

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerData" load_steps=7 format=3 uid="uid://bxbmxxjcugkhx"]
+[gd_resource type="Resource" script_class="PlayerData" load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/progression/PlayerData.gd" id="1_ev7dt"]
 [ext_resource type="Script" path="res://scripts/progression/PlayerHeroData.gd" id="1_toee1"]
@@ -29,14 +29,8 @@ levelsCompleted = Array[String]([])
 
 [resource]
 script = ExtResource("1_ev7dt")
-currentXP = 30
-totalXP = 300
+currentXP = 0
+totalXP = 0
 heroDataList = Array[ExtResource("1_toee1")]([SubResource("Resource_brmfd"), SubResource("Resource_bsoox"), SubResource("Resource_q8ofx"), SubResource("Resource_3071e")])
-skillUnlockedDataList = Array[String](["STARTING_EQUIPMENT", "ECONOMY", "VENDOR_DISCOUNT", "PERKS", "STARTING_EQUIPMENT_ARMOR"])
-skillUnlockedDataDict = {
-"ECONOMY": true,
-"PERKS": true,
-"STARTING_EQUIPMENT": true,
-"STARTING_EQUIPMENT_ARMOR": true,
-"VENDOR_DISCOUNT": true
-}
+skillUnlockedDataList = Array[String]([])
+skillUnlockedDataDict = {}

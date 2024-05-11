@@ -48,7 +48,7 @@ func _ready():
 	continueGameButton.visible = !PlayerDataManager.is_new_player()
 
 	backToGameButton.connect("button_up",Callable(self,"_on_back_to_game"))
-	backToStartMenuButton.connect("button_up",Callable(self,"_on_back_to_main_menu"))
+	backToStartMenuButton.connect("button_up",Callable(self,"_on_back_to_main_menu_from_battle"))
 	characterSelectUI.connect("OnBackPressed",Callable(self,"_on_back_to_main_menu"))
 	characterSelectUI.connect("OnSkillTreePressed",Callable(self,"_on_show_skill_tree"))
 	skillTreeUI.connect("OnBackPressed",Callable(self,"_show_back_menu"))
@@ -177,16 +177,17 @@ func _show_back_menu():
 		return
 		
 	if skillTreeUI.visible:
+		UIEventManager.emit_signal("ShowSkillTree", false, "")
 		_on_back_to_character_select()
 		return
 
 	if victoryUI.visible:
-		_on_back_to_main_menu()
+		_on_back_to_main_menu_from_battle()
 		_on_back_to_character_select()
 		return
 
 	if deathUI.visible:
-		_on_back_to_main_menu()
+		_on_back_to_main_menu_from_battle()
 		_on_back_to_character_select()
 		return
 
@@ -210,6 +211,10 @@ func _on_back_to_game():
 	backMenuUI.visible = false
 	if GameGlobals.dungeon==null or !GameGlobals.dungeon.isInitialized:
 		show_menu()
+
+func _on_back_to_main_menu_from_battle():
+	GameEventManager.emit_signal("OnCleanUpForDungeonRecreation", true)
+	_on_back_to_main_menu()
 
 func _on_back_to_main_menu():
 	UIEventManager.emit_signal("OnMainMenuButton")

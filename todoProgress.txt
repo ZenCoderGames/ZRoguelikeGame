@@ -38,10 +38,10 @@ Roguelike Dev:
 	(D)- Fix bug with new floor clearing xp
 	(D)- Character Select UI has a button for Skill Tree Menu (Shared amongst chars)
 
-- End of combat, doesn't hide battle and so skill tree menu shows it
+(D)- New Skill Tree UI functionality
+(D)- Skill Tree doesn't refresh with New Game
+(D)- End of combat, doesn't hide battle and so skill tree menu shows it
 - Bug: On mystic, back button didn't work -> causes broken state (During combat)
-
-- New Skill Tree UI functionality
 
 - Get rid of variable startWithClasses
 - Fix speed movement stopping at a consumable

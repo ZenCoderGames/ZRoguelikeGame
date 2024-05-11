@@ -53,6 +53,8 @@ func _ready():
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
 	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
 	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_new_level_loaded"))
+	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_completed"))
+
 	CombatEventManager.connect("OnToggleInventory",Callable(self,"_on_toggle_inventory"))
 	CombatEventManager.connect("OnShowInfo",Callable(self,"_on_show_info"))
 	CombatEventManager.connect("OnHideInfo",Callable(self,"_on_hide_info"))
@@ -63,6 +65,7 @@ func _ready():
 	CombatEventManager.connect("ShowVendor",Callable(self,"_on_show_vendor"))
 	CombatEventManager.connect("OnVendorClosed",Callable(self,"_on_vendor_closed"))
 	CombatEventManager.connect("OnPopUpEquipmentClosed",Callable(self,"_on_pop_up_equipment_closed"))
+
 	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_attack"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
 
@@ -97,9 +100,13 @@ func _shared_init():
 
 	playerUI.init(GameGlobals.dungeon.player)
 	levelLabel.text = str(GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
+	self.visible = true
 
 func _on_new_level_loaded():
 	levelLabel.text = str(GameGlobals.battleInstance.get_current_level(), "/", GameGlobals.dataManager.get_max_levels())
+
+func _on_dungeon_completed(isVictory:bool):
+	self.visible = false
 
 func _on_turn_taken():
 	_refresh_ui()

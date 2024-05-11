@@ -32,6 +32,7 @@ func _ready():
 	GameEventManager.connect("OnCleanUpForDungeonRecreation",Callable(self,"_on_cleanup_for_dungeon"))
 	GameEventManager.connect("OnNewLevelLoaded",Callable(self,"_on_dungeon_init"))
 	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_exited"))
+
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_attack"))
 	CombatEventManager.connect("OnRoomCombatStarted",Callable(self,"_on_room_combat_started"))
 	CombatEventManager.connect("OnRoomCombatEnded",Callable(self,"_on_room_combat_ended"))
@@ -42,6 +43,7 @@ func _ready():
 
 func _on_dungeon_init():
 	_register_player(GameGlobals.dungeon.player)
+	self.visible = true
 
 func _register_player(playerRef):
 	player = playerRef
@@ -55,6 +57,7 @@ func _update_camera_to_room(newRoom):
 
 func _update_camera_to_player():
 	Utils.create_tween_vector2(self, "position", self.position, player.cell.pos + cam_offset, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	self.make_current()
 
 func _on_room_combat_started(_room):
 	await GameGlobals.battleInstance.get_tree().create_timer(0.1).timeout
@@ -64,7 +67,7 @@ func _on_room_combat_ended(_room):
 	await GameGlobals.battleInstance.get_tree().create_timer(0.25).timeout
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(Constants.CAM_ZOOM_DEFAULT.x, Constants.CAM_ZOOM_DEFAULT.y), Constants.CAM_ZOOM_EASE_TIME, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 
-func _on_dungeon_exited():
+func _on_dungeon_exited(isVictory:bool):
 	await GameGlobals.battleInstance.get_tree().create_timer(Constants.DEATH_TO_MENU_TIME).timeout
 
 	Utils.create_tween_vector2(self, "zoom", self.zoom, Vector2(Constants.CAM_ZOOM_COMBAT.x, Constants.CAM_ZOOM_COMBAT.y), Constants.CAM_ZOOM_EASE_TIME, Tween.TRANS_LINEAR, Tween.EASE_OUT)

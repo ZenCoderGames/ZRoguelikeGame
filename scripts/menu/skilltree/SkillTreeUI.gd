@@ -24,9 +24,6 @@ func init_from_data(skillTreeId:String):
 
 	_skillTreeData = GameGlobals.dataManager.skilltreeDict[skillTreeId]
 
-	'''_import_pathfor skillData in _skillTreeData.skillList:
-		init_skill(skillData)'''
-
 	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
 	unlockButton.connect("pressed",Callable(self,"_on_unlock_button_pressed"))
 	unlockButton.visible = false
@@ -34,38 +31,24 @@ func init_from_data(skillTreeId:String):
 	emit_signal("item_rect_changed")
 	UIEventManager.emit_signal("ShowSkillTree", true, skillTreeId)
 
-'''_add_constant_torquefunc init_skill(skillData:SkillData):
-	var skillTreeItemUI:SkillTreeItemUI = _findSkillTreeItemUI(skillData.uiHolderId)
-	if skillTreeItemUI!=null:
-		var hasBeenUnlocked:bool = PlayerDataManager.has_skill_been_unlocked(skillData.id)
-		var isLocked:bool = false
-		var hasParent:bool = !skillData.parentSkillId.is_empty()
-		if hasParent:
-			var isParentUnlocked:bool = PlayerDataManager.has_skill_been_unlocked(skillData.parentSkillId)
-			isLocked = !isParentUnlocked
-		skillTreeItemUI.init_from_data(skillData, hasBeenUnlocked, isLocked)
-
-func _findSkillTreeItemUI(skillTreeItemUIId:String):
-	for skillTreeItemUI in skillItemUIList:
-		if skillTreeItemUI.id == skillTreeItemUIId:
-			return skillTreeItemUI
-
-	return null'''
-
 func _on_skill_selected(skillData:SkillData, isLocked:bool):
+	var skillName:String = skillData.name
 	unlockButton.visible = !isLocked
 	unlockButton.disabled = !PlayerDataManager.can_unlock_skill(skillData)
 	unlockButton.text = str(" Unlock: ", skillData.unlockCost)
+	if skillData.id == "START_NODE":
+		unlockButton.visible = false
+	if PlayerDataManager.has_skill_been_unlocked(skillData.id):
+		unlockButton.visible = false
+		skillName = str(skillName, " (Unlocked)")
+
 	_selectedSkillData = skillData
-	skillNameLabel.text = skillData.name
+	skillNameLabel.text = skillName
 	show_info(skillData.description)
 
-	'''for skillItemUI in skillItemUIList:
-		skillItemUI.set_selected(skillItemUI.has_skill_data(skillData))'''
-
-func show_info(str:String):
+func show_info(val:String):
 	infoPanel.visible = true
-	infoLabel.text = Utils.format_text(str)
+	infoLabel.text = Utils.format_text(val)
 	#await get_tree().create_timer(0.75).timeout
 	#hide_info()
 	
@@ -78,7 +61,6 @@ func clean_up():
 
 func _on_back_button_pressed():
 	emit_signal("OnBackPressed")
-	UIEventManager.emit_signal("ShowSkillTree", false, "")
 
 func _on_unlock_button_pressed():
 	PlayerDataManager.unlock_skill(_selectedSkillData)
