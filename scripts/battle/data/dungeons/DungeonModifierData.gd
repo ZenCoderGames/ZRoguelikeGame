@@ -1,6 +1,7 @@
 class_name DungeonModifierData
 
 var id:String
+var name:String
 var description:String
 var isPositive:bool
 var statModifierDataList:Array
@@ -10,6 +11,7 @@ var vendorCostMultiplier:float
 
 func _init(dataJS):
 	id = Utils.get_data_from_json(dataJS, "id", "INVALID_ID")
+	name = Utils.get_data_from_json(dataJS, "name", "INVALID_DESCRIPTION")
 	description = Utils.get_data_from_json(dataJS, "description", "INVALID_DESCRIPTION")
 	isPositive = Utils.get_data_from_json(dataJS, "isPositive", false)
 
@@ -21,3 +23,9 @@ func _init(dataJS):
 	passiveId = Utils.get_data_from_json(dataJS, "passiveId", "")
 	dungeonStartSouls = Utils.get_data_from_json(dataJS, "dungeonStartSouls", 0)
 	vendorCostMultiplier = Utils.get_data_from_json(dataJS, "vendorCostMultiplier", 0.0)
+
+func get_display_name():
+	return name
+
+func get_description():
+	return description

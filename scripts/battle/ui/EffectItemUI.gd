@@ -20,7 +20,10 @@ func init(itemObj, color:Color):
 	_defaultColor = color
 
 func _on_mouse_entered():
-	CombatEventManager.on_show_info(item.data.get_display_name(), item.data.get_description())
+	if item is DungeonModifierData:
+		CombatEventManager.on_show_info(item.get_display_name(), item.get_description())
+	else:
+		CombatEventManager.on_show_info(item.data.get_display_name(), item.data.get_description())
 
 func _on_mouse_exited():
 	CombatEventManager.on_hide_info()

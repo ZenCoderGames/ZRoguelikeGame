@@ -70,8 +70,11 @@ func _place_node(skillTreeNode:SkillTreeNode, x, y, ang, rad):
 		if childCount==2:
 			childAng = ang + -45
 			childNextAng = 90
-		if childCount==3:
+		elif childCount==3:
 			childAng = ang + -180
+			childNextAng = 90
+		elif childCount==4:
+			childAng = ang + -90
 			childNextAng = 90
 			
 		for child in children:

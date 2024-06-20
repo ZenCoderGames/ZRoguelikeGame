@@ -10,12 +10,14 @@ var timeline:Array
 var triggerCount:int
 var resetCountOnActivate:bool
 var dontDisplayInUI:bool
+var isFromSkillTree:bool
 
 func _init(dataJS):
 	id = dataJS["id"]
 	name = dataJS["name"]
 	description = dataJS["description"]
 	dontDisplayInUI = Utils.get_data_from_json(dataJS, "dontDisplayInUI", false)
+	isFromSkillTree = Utils.get_data_from_json(dataJS, "isFromSkillTree", false)
 	soulCost = Utils.get_data_from_json(dataJS, "soulCost", 0)
 
 	if dataJS.has("conditions"):

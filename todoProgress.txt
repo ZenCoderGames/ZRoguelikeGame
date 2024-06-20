@@ -44,9 +44,10 @@ Roguelike Dev:
 (D)- End of combat, doesn't hide battle and so skill tree menu shows it
 (D)- Bug: On mystic, back button didn't work -> causes broken state (During combat)
 (D)- Skeleton revive issue
-- Remaining skill tree options
+(D)- Remaining skill tree options
 
-- Get rid of variable startWithClasses
+- Gods -> Quest givers similar to Hades Chaos
+
 - Fix speed movement stopping at a consumable
 - Coins/Gold as an item to pickup for progression instead of souls for upgrades in game
 - Keyboard for all UI selection (Arrow keys, Spacebar, TAB)
@@ -66,7 +67,6 @@ Roguelike Dev:
 - Vulnerable Status Effect
 - Quests - conditionals that give you big perks on completion (on hit, on kill, on take hit)
 - Hades style enigma upgrades -> Gods ?
-- Reincarnation on the player
 - Facing direction for enemies and player
 - Directionality of spells
 

@@ -94,7 +94,8 @@ text = "Equipped Items"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NonBase" type="HSplitContainer" parent="HSplitContainer"]
+[node name="NonBase" type="HBoxContainer" parent="HSplitContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -165,6 +166,30 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EffectGridContainer" type="GridContainer" parent="HSplitContainer/NonBase/EffectContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 6
+
+[node name="DungeonModContainer" type="VBoxContainer" parent="HSplitContainer/NonBase"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name" type="PanelContainer" parent="HSplitContainer/NonBase/DungeonModContainer"]
+layout_mode = 2
+theme = ExtResource("1_tkee7")
+
+[node name="NameLabel" type="Label" parent="HSplitContainer/NonBase/DungeonModContainer/Name"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1")
+text = "Dungeon Mod"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DungeonModGridContainer" type="GridContainer" parent="HSplitContainer/NonBase/DungeonModContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 6

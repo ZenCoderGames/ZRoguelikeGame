@@ -17,7 +17,7 @@ const EquippedItemUIScene := preload("res://ui/battle/EquippedItemUI.tscn")
 const ResourceSlotUI := preload("res://ui/battle/ResourceSlotUI.tscn")
 var resourceSlots:Array = []
 
-@onready var nonBaseContainer:HSplitContainer = get_node("HSplitContainer/NonBase")
+@onready var nonBaseContainer:Node = $"%NonBase"
 
 @onready var spellContainer:VBoxContainer = $"%SpellContainer"
 const SpellButtonUI := preload("res://ui/battle/SpellButtonUI.tscn")
@@ -29,6 +29,9 @@ const ConsumableItemUIScene := preload("res://ui/battle/ConsumableItemUI.tscn")
 @onready var effectContainer:VBoxContainer = $"%EffectContainer"
 @onready var effectGridContainer:GridContainer = $"%EffectGridContainer"
 const EffectItemUIScene := preload("res://ui/battle/EffectItemUI.tscn")
+
+@onready var dungeonModContainer:VBoxContainer = $"%DungeonModContainer"
+@onready var dungeonModGridContainer:GridContainer = $"%DungeonModGridContainer"
 
 @export var playerTintColor:Color
 @export var enemyTintColor:Color
@@ -42,6 +45,7 @@ var character:Character
 var equippedItems:Dictionary = {}
 var equippedSpells:Dictionary = {}
 var equippedEffects:Dictionary = {}
+var dungeonModifiers:Dictionary = {}
 var equippedPotions:Dictionary = {}
 var spellSlots:Array = []
 var weaponSlot
@@ -62,6 +66,7 @@ func init(entityObj):
 	character.connect("OnPassiveRemoved",Callable(self,"on_passive_removed"))
 	character.connect("OnStatusEffectAdded",Callable(self,"on_status_effect_added"))
 	character.connect("OnStatusEffectRemoved",Callable(self,"on_status_effect_removed"))
+	character.connect("OnDungeonModifierAdded",Callable(self,"on_dungeon_modifier_added"))
 	#character.connect("OnAbilityAdded",Callable(self,"on_ability_added"))
 	#character.connect("OnAbilityRemoved",Callable(self,"on_ability_removed"))
 	character.equipment.connect("OnItemEquipped",Callable(self,"_on_item_equipped"))
@@ -194,12 +199,15 @@ func on_passive_added(_character, passive):
 	if passive.data.dontDisplayInUI:
 		return
 
-	var newEffectUI:EffectItemUI = EffectItemUIScene.instantiate()
-	effectGridContainer.add_child(newEffectUI)
-	newEffectUI.init(passive, Color.ORANGE)
-	equippedEffects[passive] = newEffectUI
+	if passive.data.isFromSkillTree:
+		on_dungeon_modifier_added(_character, passive)
+	else:
+		var newEffectUI:EffectItemUI = EffectItemUIScene.instantiate()
+		effectGridContainer.add_child(newEffectUI)
+		newEffectUI.init(passive, Color.ORANGE)
+		equippedEffects[passive] = newEffectUI
 
-	effectContainer.visible = true
+		effectContainer.visible = true
 
 func on_passive_removed(_character, passive):
 	if passive.data.dontDisplayInUI:
@@ -244,6 +252,14 @@ func on_ability_removed(_character, ability):
 	if equippedEffects.size()==0:
 		effectContainer.visible = false
 	
+func on_dungeon_modifier_added(_character, dungeonModifierData):
+	var newEffectUI = EffectItemUIScene.instantiate()
+	dungeonModGridContainer.add_child(newEffectUI)
+	newEffectUI.init(dungeonModifierData, Color.BEIGE)
+	dungeonModifiers[dungeonModifierData] = newEffectUI
+
+	dungeonModContainer.visible = true
+
 func has_entity(entity):
 	return character == entity
 

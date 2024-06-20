@@ -2,6 +2,7 @@
 	"dungeonModifiers": [
 		{
 			"id": "DUNGEON_MOD_TUTORIAL",
+			"name": "DungeonMod: Tutorial",
 			"description": "Start with +8 Base Health",
 			"isPositive": true,
 			"statModifiers": [
@@ -13,6 +14,7 @@
 		},
 		{
 			"id": "DUNGEON_MOD_EASY",
+			"name": "DungeonMod: Easy",
 			"description": "Start with +4 Base Health",
 			"isPositive": true,
 			"statModifiers": [
@@ -24,6 +26,7 @@
 		},
 		{
 			"id": "DUNGEON_MOD_HARD_ATTACK",
+			"name": "DungeonMod: Weakened I",
 			"description": "Start with -1 Base ATTACK",
 			"isPositive": false,
 			"statModifiers": [
@@ -35,6 +38,7 @@
 		},
 		{
 			"id": "DUNGEON_MOD_HARD_HEALTH",
+			"name": "DungeonMod: Lower Health I",
 			"description": "Start with -2 Base Health",
 			"isPositive": false,
 			"statModifiers": [
@@ -46,15 +50,28 @@
 		},
 		{
 			"id": "SOUL_START_10",
+			"name": "Soul Boost",
 			"description": "Start with 10 souls",
 			"isPositive": true,
 			"dungeonStartSouls": 10
 		},
 		{
 			"id": "VENDOR_DISCOUNT_25",
+			"name": "DungeonMod: Discount",
 			"description": "Vendor items are 25% cheaper",
 			"isPositive": true,
 			"vendorCostMultiplier": -0.25
+		},
+		{
+			"id": "INCREASED_MANA_1",
+			"name": "DungeonMod: Increased Mana I",
+			"description": "Increased base mana by 1",
+			"statModifiers": [
+				{
+					"type": "ENERGY",
+					"absoluteValue": 1
+				}
+			]
 		}
 	]
 }

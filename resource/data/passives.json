@@ -271,6 +271,7 @@
 			"id": "PASSIVE_REINCARNATION",
 			"name": "Reincarnation",
 			"description": "Revive once after death",
+			"isFromSkillTree": true,
 			"conditions": [
 				"ON_DEATH"
 			],
@@ -399,6 +400,7 @@
 			"id": "PASSIVE_HEAL_ON_FLOOR_START",
 			"name": "Heal On Floor Start",
 			"description": "Heal for 50% of max health anytime you start a new dungeon floor",
+			"isFromSkillTree": true,
 			"conditions": [
 				"ON_START_FLOOR"
 			],
@@ -410,6 +412,28 @@
 							{
 								"type": "HEALTH",
 								"percentOfMaxValue": 0.5
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_MANA_REFILL_ON_FLOOR_START",
+			"name": "Refill Mana",
+			"description": "Refill Mana anytime you start a new dungeon floor",
+			"isFromSkillTree": true,
+			"conditions": [
+				"ON_START_FLOOR"
+			],
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "ENERGY",
+								"percentOfMaxValue": 1
 							}
 						]
 					}

@@ -7,7 +7,7 @@
 				"id": "START_NODE",
 				"name": "Skill Tree",
 				"description": "Click on a node to unlock it",
-				"children": ["STARTING_EQUIPMENT", "ECONOMY", "PERKS"],
+				"children": ["STARTING_EQUIPMENT", "ECONOMY", "PERKS", "IMPROVED_SPECIALS"],
 				"isStartNode": true
 			},
 			{
@@ -67,7 +67,6 @@
 				"name": "Rested Warrior",
 				"description": "At the start of each floor, heal up to 50% of your hp",
 				"unlockCost": 50,
-				"uiHolderId": "S_C_1",
 				"passives": ["PASSIVE_HEAL_ON_FLOOR_START"]
 			},
 			{
@@ -76,6 +75,27 @@
 				"description": "After your first death, come back to life at 50% of your max hp",
 				"unlockCost": 50,
 				"passives": ["PASSIVE_REINCARNATION"]
+			},
+			{
+				"id": "IMPROVED_SPECIALS",
+				"name": "Improved Specials",
+				"description": "Upgrades to your specials",
+				"unlockCost": 50,
+				"children": ["INCREASED_MANA", "SPECIAL_REFRESH"]
+			},
+			{
+				"id": "INCREASED_MANA",
+				"name": "Increased Mana",
+				"description": "Start the game with +1 Mana",
+				"unlockCost": 50,				
+				"dungeonModifiers": ["INCREASED_MANA_1"]
+			},
+			{
+				"id": "SPECIAL_REFRESH",
+				"name": "Refreshed Mana",
+				"description": "At the start of each floor, refill your mana back to full",
+				"unlockCost": 50,
+				"passives": ["PASSIVE_MANA_REFILL_ON_FLOOR_START"]
 			}
 		]
 	}

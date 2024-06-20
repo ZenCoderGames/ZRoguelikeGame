@@ -80,6 +80,7 @@ signal OnPassiveAdded(character, passive)
 signal OnPassiveRemoved(character, passive)
 signal OnAbilityAdded(character, ability)
 signal OnAbilityRemoved(character, ability)
+signal OnDungeonModifierAdded(character, dungeonModifierData)
 signal OnNearEnemy()
 signal OnAnySpecialActivated()
 signal OnSpecialAdded(character, special)
@@ -784,6 +785,8 @@ func add_dungeon_modifier(dungeonModifierData:DungeonModifierData):
 		modify_stat_value_from_modifier(statModifierData)
 	if !dungeonModifierData.passiveId.is_empty():
 		add_passive(GameGlobals.dataManager.get_passive_data(dungeonModifierData.passiveId))
+	
+	emit_signal("OnDungeonModifierAdded", self, dungeonModifierData)
 
 # HELPERS
 func is_reviving():
