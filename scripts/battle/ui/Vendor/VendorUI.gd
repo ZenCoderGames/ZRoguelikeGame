@@ -17,6 +17,10 @@ var _vendorChar:VendorCharacter
 var _vendorData:VendorData
 var _vendorItemList:Array
 
+func _ready():
+	backBtn.connect("button_up",Callable(self,"_on_back_pressed"))
+	GameEventManager.connect("OnBackButtonPressed",Callable(self,"_on_back_pressed"))
+
 func init(vendorChar:VendorCharacter, vendorData:VendorData):
 	if initialized:
 		for vendorItem in _vendorItemList:
@@ -81,10 +85,7 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 			if maxItemsToDisplay==0:
 				break
 
-	backBtn.connect("button_up",Callable(self,"_on_back_pressed"))
-
 	UIEventManager.emit_signal("OnGenericUIEvent")
-	GameEventManager.connect("OnBackButtonPressed",Callable(self,"_on_back_pressed"))
 
 	initialized = true
 

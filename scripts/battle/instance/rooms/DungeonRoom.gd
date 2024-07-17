@@ -1,7 +1,6 @@
 class_name DungeonRoom
 
 # Room.gd
-
 var cells:Array = []
 
 # Wall references
@@ -39,6 +38,9 @@ var vendors:Array = []
 
 # Tutorial Pickups
 var tutorialPickups:Array = []
+
+# Gold Pickup
+var goldPickups:Array = []
 
 var maxRows:int
 var maxCols:int
@@ -311,6 +313,25 @@ func generate_tutorial_pickup(tutorialPickupId:String):
 	var tutorialPickup:Node = GameGlobals.dungeon.load_tutorial_pickup(loadedScenes, randomCell, tutorialPickupId, Constants.ENTITY_TYPE.DYNAMIC, Constants.vendors)
 	tutorialPickups.append(tutorialPickup)
 
+# GOLD
+func generate_gold():
+	# find free cells
+	var playerCell = get_safe_starting_cell()
+	var freeCells:Array = []
+	for cell in cells:
+		if cell == playerCell:
+			continue
+
+		if cell.is_empty() and cell.is_within_room_buffered(2):
+			freeCells.append(cell)
+	
+	# choose random free cell
+	var randomCell:DungeonCell = freeCells[randi() % freeCells.size()]
+
+	# spawn
+	var goldPickup:Node = GameGlobals.dungeon.load_gold_pickup(loadedScenes, randomCell, Constants.ENTITY_TYPE.DYNAMIC, Constants.vendors)
+	goldPickups.append(goldPickup)
+
 func register_cell_connection(myCell):
 	if myCell.is_top_edge():
 		topConnection = myCell
@@ -424,6 +445,8 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 	# within bounds of room
 	if newC>=0 and newR>=0 and newC<maxCols and newR<maxRows:
 		var cell:DungeonCell = get_cell(newR, newC)
+		if cell==null:
+			return false
 		# empty cell
 		if(!cell.has_entity()):
 			currentCell.clear_entity()
@@ -438,6 +461,17 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 				loadedScenes.erase(tutorialPickup)
 				tutorialPickup.activate()
 				tutorialPickup.hide()
+				currentCell.clear_entity()
+				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
+				entity.move_to_cell(cell, true)
+				return true
+			# Gold Pickups
+			if cell.entityObject is GoldPickup:
+				var goldPickup = cell.entityObject
+				GameGlobals.dungeon.add_to_dungeon_scenes(goldPickup)
+				loadedScenes.erase(goldPickup)
+				goldPickup.activate()
+				goldPickup.hide()
 				currentCell.clear_entity()
 				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
 				entity.move_to_cell(cell, true)

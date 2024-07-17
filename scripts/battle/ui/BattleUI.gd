@@ -4,6 +4,7 @@ class_name BattleUI
 
 @onready var levelLabel:Label = get_node("BattleProgressPanel/LevelContainer/LevelLabel")
 @onready var turnLabel:Label = get_node("BattleProgressPanel/TurnContainer/TurnLabel")
+@onready var goldLabel:Label = $"%GoldLabel"
 # touchControls
 @onready var touchControls:Node = $TouchControls
 @onready var upArrowBtn:Button = $TouchControls/UpArrow
@@ -65,6 +66,7 @@ func _ready():
 	CombatEventManager.connect("ShowVendor",Callable(self,"_on_show_vendor"))
 	CombatEventManager.connect("OnVendorClosed",Callable(self,"_on_vendor_closed"))
 	CombatEventManager.connect("OnPopUpEquipmentClosed",Callable(self,"_on_pop_up_equipment_closed"))
+	CombatEventManager.connect("OnGoldUpdated",Callable(self,"_on_gold_updated"))
 
 	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_attack"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
@@ -327,3 +329,7 @@ func _on_player_special_added(character:Character, special:Special):
 	playerAbilitiesListUI.add_child(playerSpecialAbilityUI)
 	_playerAbilityList.append(playerSpecialAbilityUI)
 	playerSpecialAbilityUI.init(character, special)
+
+# GOLD
+func _on_gold_updated():
+	goldLabel.text = str(GameGlobals.dungeon.dungeonProgress.totalGoldCollected)

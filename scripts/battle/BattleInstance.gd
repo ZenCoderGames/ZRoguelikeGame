@@ -22,6 +22,7 @@ class_name BattleInstance
 @export var debugSpawnEnemyEncounter:String
 @export var dontSpawnObstacles:bool
 @export var dontSpawnItems:bool
+@export var debugGold:int
 @export var debugSpawnItems:Array # (Array, String)
 @export var debugSpawnSharedUpgrade:bool
 @export var debugSpawnClassSpecificUpgrade:bool

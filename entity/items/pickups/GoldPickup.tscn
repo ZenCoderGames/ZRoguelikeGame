@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://iskkbhy2kf37"]
+
+[ext_resource type="Texture2D" uid="uid://bijatho582wi5" path="res://sourceArt/Consumable.png" id="1_ma8l5"]
+[ext_resource type="Script" path="res://scripts/battle/instance/pickups/GoldPickup.gd" id="2_yxpjm"]
+[ext_resource type="PackedScene" uid="uid://c2ub2yn5vtdpe" path="res://ui/battle/HoverInfoUI.tscn" id="3_0bisq"]
+
+[node name="GoldPickup" type="Sprite2D"]
+self_modulate = Color(0.604368, 0.475116, 0, 1)
+position = Vector2(209, 69)
+texture = ExtResource("1_ma8l5")
+region_filter_clip_enabled = true
+script = ExtResource("2_yxpjm")
+
+[node name="HoverInfo" parent="." instance=ExtResource("3_0bisq")]
+unique_name_in_owner = true
+title = "Tutorial"
+description = "Go over this to learn"

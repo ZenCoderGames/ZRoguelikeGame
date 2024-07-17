@@ -32,6 +32,7 @@ signal OnVendorClosed()
 signal OnPopUpEquipmentClosed()
 signal OnZoomIn()
 signal OnZoomOut()
+signal OnGoldUpdated()
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):

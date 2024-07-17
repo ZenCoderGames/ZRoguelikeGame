@@ -16,6 +16,7 @@ var enemyMinCostPerRoom:int = 5
 var enemyExtraCostForSingleRoom:int = 5
 var enemyScalingCostPerRoom:int = 3
 var customRoomList:Array
+var totalGold:int
 
 func _init(dataJS):
 	numRooms = Utils.get_data_from_json(dataJS, "numRooms", 3)
@@ -38,3 +39,4 @@ func _init(dataJS):
 		for customRoomJS in customRoomJSList:
 			var customRoomData:DungeonCustomRoomData = DungeonCustomRoomData.new(customRoomJS)
 			customRoomList.append(customRoomData)
+	totalGold = Utils.get_data_from_json(dataJS, "totalGold", 0)

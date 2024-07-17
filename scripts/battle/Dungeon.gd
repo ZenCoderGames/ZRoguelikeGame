@@ -51,6 +51,7 @@ func create(recreatePlayer:bool) -> void:
 	_init_vendors()
 	_init_player(recreatePlayer)
 	_init_enemies()
+	_init_gold()
 	# For tutorials
 	if isCustomRoomSetup:
 		_init_custom_rooms()
@@ -422,6 +423,22 @@ func _init_vendors():
 	specialVendors.shuffle()
 	specialRoom.generate_vendor(specialVendors[0])
 
+func _init_gold():
+	if GameGlobals.battleInstance.debugGold>0:
+		for i in GameGlobals.battleInstance.debugGold:
+			startRoom.generate_gold()
+
+	if dungeonData.totalGold>0:
+		var gold:int = dungeonData.totalGold
+		for room in rooms:
+			if room.isStartRoom or room.isEndRoom:
+				continue
+
+			room.generate_gold()
+			gold = gold - 1
+			if gold==0:
+				break
+
 func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
 	if recreatePlayer:
@@ -638,6 +655,13 @@ func load_tutorial_pickup(parentContainer, cell, tutorialPickupId, entityType, g
 	tutorialPickupObject.init(tutorialPickupData, cell)
 	cell.init_entity(tutorialPickupObject, entityType)
 	return tutorialPickupObject
+
+func load_gold_pickup(parentContainer, cell, entityType, groupName):
+	var goldPickupDataPrefab := load("res://entity/items/pickups/GoldPickup.tscn")
+	var goldPickupObject = Utils.create_scene(parentContainer, "GoldPickup", goldPickupDataPrefab, groupName, cell)
+	goldPickupObject.init(cell)
+	cell.init_entity(goldPickupObject, entityType)
+	return goldPickupObject
 
 func get_adjacent_characters(character, relativeTeamType, numTiles:int=1):
 	var currentPlayerRoom:DungeonRoom = player.currentRoom

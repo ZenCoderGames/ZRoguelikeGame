@@ -88,3 +88,6 @@ const INPUT_CACHE_TIME_THRESHOLD:float = 4.5
 const CAM_ZOOM_DEFAULT:Vector2 = Vector2(1.1, 1.1)
 const CAM_ZOOM_COMBAT:Vector2 = Vector2(1.3, 1.3)
 const CAM_ZOOM_EASE_TIME:float = 0.35
+
+# ECONOMY
+const GOLD_CONSTANT:int = 5

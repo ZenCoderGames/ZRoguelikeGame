@@ -46,18 +46,21 @@ Roguelike Dev:
 (D)- Skeleton revive issue
 (D)- Remaining skill tree options
 
+- Coins as an item to pickup for progression instead of souls for upgrades in game
+- Dash/Swap/Push
+- Boss
+
+- More Things (3 enemies) - 2 left [Evil Knight -> Barrier, Healer]
+
 - Gods -> Quest givers similar to Hades Chaos
 
 - Fix speed movement stopping at a consumable
-- Coins/Gold as an item to pickup for progression instead of souls for upgrades in game
 - Keyboard for all UI selection (Arrow keys, Spacebar, TAB)
 
 - New Dungeon Rooms -> Foggy room, 
 - Environmental Objects
 
-
 - Contextual info not spawning in first room right next to player
-- More Things (3 enemies) - 2 left [Evil Knight -> Barrier, Healer]
 
 - Special slots (passives can give you more)
 - Specials as inventory items
