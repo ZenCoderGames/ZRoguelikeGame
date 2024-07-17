@@ -5,7 +5,7 @@
 			"name": "Protection",
 			"description": "Grants [color=#b4a7d6]Protection[/color] for 1 turn[color=#b4a7d6]\n\nProtection:[/color]Invulnerability to damage for 1 turn\n\n[color=#9fc5e8]Mana Cost:[/color] 3",
 			"conditions": ["ON_TAKE_HIT"],
-			"count": 3,
+			"count": 4,
 			"soulCost": 0,
 			"executeCondition": "NONE",
 			"timeline": [
@@ -23,7 +23,7 @@
 			"name": "Whirlwind",
 			"description": "Do a 360 spin attack with your current damage\n\n[color=#9fc5e8]Mana Cost:[/color] 3",
 			"conditions": ["ON_POST_HIT"],
-			"count": 3,
+			"count": 4,
 			"soulCost": 0,
 			"executeCondition": "NONE",
 			"timeline": [
@@ -47,7 +47,7 @@
 			"name": "Stealth",
 			"description": "Grants [color=#b4a7d6]Stealth[/color] for 3 turns[color=#b4a7d6]\n\nStealth:[/color] Invisible to enemies\n\n[color=#9fc5e8]Mana Cost:[/color] 2",
 			"conditions": ["ON_KILL"],
-			"count": 2,
+			"count": 3,
 			"soulCost": 0,
 			"executeCondition": "NONE",
 			"timeline": [

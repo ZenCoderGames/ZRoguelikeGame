@@ -21,7 +21,7 @@
 					},
 					{
 						"type": "ENERGY",
-						"maxValue": 3
+						"maxValue": 4
 					}
 				]
 			},
@@ -45,7 +45,7 @@
 					},
 					{
 						"type": "ENERGY",
-						"maxValue": 3
+						"maxValue": 4
 					}
 				]
 			},
@@ -70,7 +70,7 @@
 					},
 					{
 						"type": "ENERGY",
-						"maxValue": 3
+						"maxValue": 4
 					}
 				],
 				"specialId": "SPECIAL_PALADIN",
@@ -97,7 +97,7 @@
 					},
 					{
 						"type": "ENERGY",
-						"maxValue": 3
+						"maxValue": 4
 					}
 				],
 				"specialId": "SPECIAL_BERSERKER",

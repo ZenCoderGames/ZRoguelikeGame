@@ -191,17 +191,16 @@ func _on_vendor_item_selected(itemData):
 
 # SKIP_TURN MANAGEMENT
 var _lastSkipTurn:int = -1
-const SKIP_TURN_COOLDOWN:int = 5
 
 func skip_turn():
 	_lastSkipTurn = GameGlobals.dungeon.turnsTaken
 	super.skip_turn()
 
 func can_skip_turn():
-	return _lastSkipTurn==-1 or (GameGlobals.dungeon.turnsTaken - _lastSkipTurn > SKIP_TURN_COOLDOWN)
+	return _lastSkipTurn==-1 or (GameGlobals.dungeon.turnsTaken - _lastSkipTurn > Constants.SKIP_TURN_COOLDOWN)
 
 func get_skip_turn_cooldown():
-	return SKIP_TURN_COOLDOWN - (GameGlobals.dungeon.turnsTaken - _lastSkipTurn) + 1
+	return Constants.SKIP_TURN_COOLDOWN - (GameGlobals.dungeon.turnsTaken - _lastSkipTurn) + 1
 
 # SPECIAL
 func _on_special_pressed(special:Special):

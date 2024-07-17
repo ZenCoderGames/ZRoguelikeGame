@@ -28,7 +28,7 @@ class_name MainMenuUI
 
 @onready var victoryProgressLabel:Label = $"%VictoryProgressLabel"
 @onready var deathProgressLabel:Label = $"%DeathProgressLabel"
-@onready var totalSoulsLabel:Label = $"%TotalSoulsLabel"
+@onready var totalGoldLabel:Label = $"%TotalGoldLabel"
 
 const BattleEndEnemyXPUIClass := preload("res://ui/battleEnd/BattleEndEnemyXPUI.tscn")
 
@@ -238,7 +238,7 @@ func _clear_end_screen():
 		gridItem.queue_free()
 
 func _on_player_data_updated():
-	totalSoulsLabel.text = str("Total Souls: ", PlayerDataManager.get_current_xp())
+	totalGoldLabel.text = str("Total Souls: ", PlayerDataManager.get_current_xp())
 	
 func _show_base_menu(val:bool):
 	title.visible = val
