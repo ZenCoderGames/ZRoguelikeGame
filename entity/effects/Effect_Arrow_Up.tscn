@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhflake1uksw"]
+
+[ext_resource type="Texture2D" uid="uid://cor6yaesr2dar" path="res://sourceArt/Icons/arrowUp.png" id="1_1bypg"]
+
+[node name="ArrowFX" type="Sprite2D"]
+self_modulate = Color(0.34241, 0.622478, 0, 1)
+position = Vector2(208, 169)
+texture = ExtResource("1_1bypg")

@@ -70,10 +70,12 @@
 					},
 					{
 						"type": "ENERGY",
+						"value": 4,
 						"maxValue": 4
 					}
 				],
-				"specialId": "SPECIAL_PALADIN",
+				"#specialId": "SPECIAL_PALADIN",
+				"specialId": "SPECIAL_DASH",
 				"passiveId": "PASSIVE_PALADIN"
 			},
 			{

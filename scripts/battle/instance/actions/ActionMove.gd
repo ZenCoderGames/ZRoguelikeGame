@@ -32,3 +32,12 @@ func execute():
 		else:
 			randomY = 1 if randi() % 100 < 50 else -1
 		character.move(randomX, randomY)
+	# Directional
+	elif actionMoveData.moveType == ActionMoveData.MOVE_TYPE.DIRECTIONAL:
+		var moveX:int = character.specialSelectedDirnX
+		var moveY:int = character.specialSelectedDirnY
+		for i in range(actionMoveData.value):
+			var success:bool = character.move(moveX, moveY, false)
+			if !success:
+				break
+			

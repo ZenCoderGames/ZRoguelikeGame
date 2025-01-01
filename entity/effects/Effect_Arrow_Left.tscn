@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://6e2r3yjnrl3w"]
+
+[ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="1_2cec4"]
+
+[node name="ArrowFX" type="Sprite2D"]
+self_modulate = Color(0.34241, 0.622478, 0, 1)
+position = Vector2(208, 169)
+texture = ExtResource("1_2cec4")

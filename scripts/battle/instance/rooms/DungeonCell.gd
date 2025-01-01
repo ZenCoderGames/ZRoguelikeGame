@@ -84,6 +84,14 @@ func connect_cell(conCell):
 func has_connection():
 	return connectedCell != null
 
+# VFX
+func init_vfx(vfxObject):
+	floorObject.add_child(vfxObject)
+
+func remove_vfx(vfxObject):
+	floorObject.remove_child(vfxObject)
+	vfxObject.queue_free()
+
 # VISIBILITY
 func show():
 	floorObject.show()
@@ -130,6 +138,12 @@ func dim():
 		if is_entity_type(Constants.ENTITY_TYPE.STATIC):
 			entityObject.show()
 			entityObject.modulate = GameGlobals.battleInstance.view.dimWallColor
+
+func darken():
+	floorObject.modulate = GameGlobals.battleInstance.view.dimFloorColor
+
+func lighten():
+	floorObject.modulate = GameGlobals.battleInstance.view.showFloorColor
 
 func showDebug(colorVal):
 	floorObject.show()

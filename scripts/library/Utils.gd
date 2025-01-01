@@ -8,7 +8,8 @@ func create_scene(container:Array, name : String, prefab: PackedScene, group: St
 	new_scene.name = name
 	new_scene.add_to_group(group)
 
-	container.append(new_scene)
+	if(container!=null):
+		container.append(new_scene)
 
 	add_child(new_scene)
 	return new_scene

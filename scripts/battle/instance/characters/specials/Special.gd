@@ -9,6 +9,8 @@ var _combatEventReceiver:CombatEventReceiver
 var _specialModifierList:Array = []
 var _cooldownTimer:int
 
+var _blockActivation:bool
+
 signal OnActivated()
 signal OnProgress(progress)
 signal OnReady(special)
@@ -38,6 +40,10 @@ func _init(parentChar,specialData:SpecialData):
 		check_for_ready_with_energy()
 
 	_cooldownTimer = -1
+	
+	CombatEventManager.connect("OnPlayerSpecialAbilityActivated",Callable(self,"_on_special_activated"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityCompleted",Callable(self,"_on_special_completed"))
+	CombatEventManager.connect("OnPlayerSpecialSelectionCompleted",Callable(self,"_on_special_selection_completed"))
 
 func on_event_triggered():
 	_increment()
@@ -54,7 +60,7 @@ func check_for_ready():
 	if currentCount==maxCount:
 		_set_ready()
 
-func _on_player_stat_changed(character:Character):
+func _on_player_stat_changed(_character:Character):
 	check_for_ready_with_energy()
 
 func check_for_ready_with_energy():
@@ -100,6 +106,9 @@ func get_remaining_cooldown():
 	return data.cooldown - (GameGlobals.dungeon.turnsTaken-_cooldownTimer)
 
 func try_activate():
+	if _blockActivation:
+		return false
+
 	if is_on_cooldown():
 		return false
 
@@ -110,23 +119,66 @@ func try_activate():
 	return false
 
 func _activate():
-	for action in timelineActions:
-		if action.can_execute():
-			action.execute()
-
 	emit_signal("OnActivated")
 	character.emit_signal("OnAnySpecialActivated")
 	CombatEventManager.emit_signal("OnPlayerSpecialAbilityActivated", self)
+
+	if !data.useCustomConditions:
+		character.consume_energy(get_max_count())
+
+	if data.hasSelection:
+		_start_selection()
+	else:
+		_start_activate_timeline()
+
+var InSelectionMode:bool
+var _selectedCells:Array
+var _selectedVFX:Array
+
+func _start_selection():
+	InSelectionMode = true
+	if data.selectionType == SpecialData.SELECTION_TYPE.DIRECTIONAL:
+		var room:DungeonRoom = GameGlobals.dungeon.player.currentRoom
+		room.darken_all_cells()
+		var playerCell:DungeonCell = GameGlobals.dungeon.player.cell
+		playerCell.lighten()
+
+		# right
+		var cell:DungeonCell = GameGlobals.dungeon.player.currentRoom.get_cell(playerCell.row, playerCell.col + 1)
+		var vfx = room.generate_vfx("entity/effects/Effect_Arrow_Right.tscn", cell, 0.35)
+		_selectedCells.append(cell)
+		_selectedVFX.append(vfx)
+		# left
+		cell = GameGlobals.dungeon.player.currentRoom.get_cell(playerCell.row, playerCell.col - 1)
+		vfx = room.generate_vfx("entity/effects/Effect_Arrow_Left.tscn", cell, 0.35)
+		_selectedCells.append(cell)
+		_selectedVFX.append(vfx)
+		# up
+		cell = GameGlobals.dungeon.player.currentRoom.get_cell(playerCell.row - 1, playerCell.col)
+		vfx = room.generate_vfx("entity/effects/Effect_Arrow_Up.tscn", cell, 0.35)
+		_selectedCells.append(cell)
+		_selectedVFX.append(vfx)
+		# down
+		cell = GameGlobals.dungeon.player.currentRoom.get_cell(playerCell.row + 1, playerCell.col)
+		vfx = room.generate_vfx("entity/effects/Effect_Arrow_Down.tscn", cell, 0.35)
+		_selectedCells.append(cell)
+		_selectedVFX.append(vfx)
+
+		CombatEventManager.emit_signal("OnPlayerSpecialSelectionActivated", self)
+
+func _start_activate_timeline():
+	for action in timelineActions:
+		if action.can_execute():
+			action.execute()
 
 	if data.removeAfterExecute:
 		character.remove_special(data.id)
 	else:
 		_reset()
 
-	if !data.useCustomConditions:
-		character.consume_energy(get_max_count())
+	_cooldownTimer = GameGlobals.dungeon.turnsTaken + 1
 
-	_cooldownTimer = GameGlobals.dungeon.turnsTaken
+	CombatEventManager.emit_signal("OnPlayerSpecialAbilityCompleted", self)
 
 func _reset():
 	isAvailable = false
@@ -163,3 +215,37 @@ func remove_modifier(_specialId:String):
 	for i in range(_specialModifierList.size() - 1, -1, -1):
 		_specialModifierList.remove_at(i)
 	emit_signal("OnSpecialModifierRemoved")
+
+# OTHER SPECIALS
+func _on_special_activated(_special:Special):
+	_blockActivation = true
+
+func _on_special_completed(_special:Special):
+	_blockActivation = false
+
+func _on_special_selection_completed(special:Special, dirn:String):
+	if special == self:
+		if dirn==Constants.INPUT_MOVE_LEFT:
+			character.specialSelectedDirnX = -1
+		elif dirn==Constants.INPUT_MOVE_RIGHT:
+			character.specialSelectedDirnX = 1
+		elif dirn==Constants.INPUT_MOVE_UP:
+			character.specialSelectedDirnY = -1
+		elif dirn==Constants.INPUT_MOVE_DOWN:
+			character.specialSelectedDirnY = 1
+		_start_activate_timeline()
+
+		# clean up
+		var room:DungeonRoom = GameGlobals.dungeon.player.currentRoom
+		room.lighten_all_cells()
+		#var playerCell:DungeonCell = GameGlobals.dungeon.player.cell
+		#playerCell.lighten()
+		for i in range(_selectedCells.size()):
+			room.destroy_vfx(_selectedVFX[i], _selectedCells[i])
+		_selectedCells.clear()
+		_selectedVFX.clear()
+
+		character.specialSelectedDirnX = 0
+		character.specialSelectedDirnY = 0
+		InSelectionMode = false
+		

@@ -7,10 +7,12 @@ var disableInput:bool = true
 var playerMoveAction:ActionMove
 var inputDelay:float = 0.0
 var blockInputsForTurn:bool
+var blockMovementInputsForTurn:bool
 var _timeSinceLastInput:float
 var _cachedTimeSinceLastInput:float
 var _cachedX:int
 var _cachedY:int
+var _specialForSelection:Special
 
 func _ready():
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
@@ -25,6 +27,9 @@ func _ready():
 	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_end_turn")) 
 	CombatEventManager.connect("OnTouchButtonPressed",Callable(self,"_on_touch_button_pressed"))
 	CombatEventManager.connect("OnSkipTurnPressed",Callable(self,"_on_skip_turn_pressed"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityActivated",Callable(self,"_on_special_activated"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityCompleted",Callable(self,"_on_special_completed"))
+	CombatEventManager.connect("OnPlayerSpecialSelectionActivated",Callable(self,"_on_special_selection_activated"))
 
 func _on_dungeon_init():
 	_init_for_level()
@@ -75,7 +80,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
 		CombatEventManager.emit_signal("OnToggleInventory")
 
+	# special selection
+	if _specialForSelection!=null:
+		_process_special_selection(event)
+		return
+
 	# movement
+	if blockMovementInputsForTurn:
+		return
+		
 	var x:int = 0
 	var y:int = 0
 
@@ -204,3 +217,27 @@ func _debug_inputs(event: InputEvent):
 		PlayerDataManager.add_current_xp(100)
 	if event.is_action_pressed("debug_remove_souls_20"):
 		PlayerDataManager.remove_current_xp(20)
+
+# SPECIAL
+func _on_special_activated(_special:Special):
+	blockMovementInputsForTurn = true
+
+func _on_special_completed(_special:Special):
+	blockMovementInputsForTurn = false
+
+func _on_special_selection_activated(_special:Special):
+	_specialForSelection = _special
+
+func _process_special_selection(event: InputEvent):
+	if event.is_action_pressed(Constants.INPUT_MOVE_LEFT):
+		_on_special_selection_completed(Constants.INPUT_MOVE_LEFT)
+	elif event.is_action_pressed(Constants.INPUT_MOVE_RIGHT):
+		_on_special_selection_completed(Constants.INPUT_MOVE_RIGHT)
+	elif event.is_action_pressed(Constants.INPUT_MOVE_UP):
+		_on_special_selection_completed(Constants.INPUT_MOVE_UP)
+	elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
+		_on_special_selection_completed(Constants.INPUT_MOVE_DOWN)
+
+func _on_special_selection_completed(dirn:String):
+	CombatEventManager.emit_signal("OnPlayerSpecialSelectionCompleted", _specialForSelection, dirn)
+	_specialForSelection = null

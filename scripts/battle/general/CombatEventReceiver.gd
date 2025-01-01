@@ -45,4 +45,3 @@ func _checkForConditionsAndActivate(_enemy):
 
 func activate():
 	_parentReturnFunc.call()
-

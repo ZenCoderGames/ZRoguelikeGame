@@ -31,6 +31,10 @@ var cooldown:int
 var itemsGranted:Array
 var timeline:Array
 var removeAfterExecute:bool
+var hasSelection:bool
+
+enum SELECTION_TYPE { NONE, DIRECTIONAL }
+var selectionType:int
 
 enum EXECUTE_CONDITION { NONE, NEARBY_ENEMY, NO_NEARBY_ENEMY }
 var executeCondition:int
@@ -69,3 +73,9 @@ func _init(dataJS):
 		executeCondition = EXECUTE_CONDITION.NONE
 
 	removeAfterExecute = Utils.get_data_from_json(dataJS, "removeAfterExecute", false)
+
+	hasSelection = Utils.get_data_from_json(dataJS, "hasSelection", false)
+	if dataJS.has("selectionType"):
+		selectionType = SELECTION_TYPE.get(dataJS["selectionType"])
+	else:
+		selectionType = SELECTION_TYPE.NONE

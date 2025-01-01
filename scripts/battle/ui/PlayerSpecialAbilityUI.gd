@@ -101,6 +101,10 @@ func _on_start_turn():
 	_refresh_ui()
 
 func _refresh_ui():
+	if _special.InSelectionMode:
+		SpecialActiveButton.disabled = true
+		return
+		
 	var currentEnergy:int = _parentChar.get_energy()
 	var maxEnergy:int = _special.get_max_count()
 	var remainingCooldown:int = _special.get_remaining_cooldown()

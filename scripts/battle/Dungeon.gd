@@ -663,6 +663,12 @@ func load_gold_pickup(parentContainer, cell, entityType, groupName):
 	cell.init_entity(goldPickupObject, entityType)
 	return goldPickupObject
 
+func load_vfx(parentContainer, path, cell, groupName):
+	var vfxPrefab := load(str("res://", path))
+	var vfxObject = Utils.create_scene(parentContainer, "VFX", vfxPrefab, groupName, cell)
+	cell.init_vfx(vfxObject)
+	return vfxObject
+
 func get_adjacent_characters(character, relativeTeamType, numTiles:int=1):
 	var currentPlayerRoom:DungeonRoom = player.currentRoom
 	var adjacentChars:Array = []

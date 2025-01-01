@@ -1,6 +1,26 @@
 {
 	"specials": [
 		{
+			"id": "SPECIAL_DASH",
+			"name": "Dash",
+			"description": "Dash forward 2 squares",
+			"count": 0,
+			"soulCost": 0,
+			"cooldown": 4,
+			"executeCondition": "NONE",
+			"hasSelection": true,
+			"selectionType": "DIRECTIONAL",
+			"timeline": [
+				{
+					"type": "MOVEMENT",
+					"params": {
+						"moveType": "DIRECTIONAL",
+						"value": 2
+					}
+				}
+			]
+		},
+		{
 			"id": "SPECIAL_PALADIN",
 			"name": "Protection",
 			"description": "Grants [color=#b4a7d6]Protection[/color] for 1 turn[color=#b4a7d6]\n\nProtection:[/color]Invulnerability to damage for 1 turn\n\n[color=#9fc5e8]Mana Cost:[/color] 3",

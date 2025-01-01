@@ -54,6 +54,9 @@ var attackModifier:AttackModifier
 var maxSpellSlots:int = 2
 var maxRuneSlots:int = 2
 
+var specialSelectedDirnX:int
+var specialSelectedDirnY:int
+
 signal OnCharacterMove(x, y)
 signal OnCharacterFailedToMove(x, y)
 signal OnCharacterMoveToCell()
@@ -147,14 +150,14 @@ func init(id:int, charDataVal, teamVal):
 			animPlayer.play("Idle")
 
 # MOVEMENT
-func move(x, y):
+func move(x, y, triggerTurnCompleted:bool=true):
 	if x==0 and y==0:
 		return
 
 	var newR:int = cell.row + y
 	var newC:int = cell.col + x
 	
-	var success:bool = cell.room.move_entity(self, cell, newR, newC)
+	var success:bool = cell.room.move_entity(self, cell, newR, newC, triggerTurnCompleted)
 	if success:
 		emit_signal("OnCharacterMove", x, y)
 		CombatEventManager.emit_signal("OnAnyCharacterMoved", self)
@@ -356,7 +359,7 @@ func _on_item_unequipped(_item, _slotType):
 	on_stats_changed()
 
 # COMBAT
-func attack(entity):
+func attack(entity, triggerTurnCompleted:bool=true):
 	if entity.is_class(self.get_class()):
 		# shove towards
 		var SHOVE_AMOUNT:float = 7
@@ -398,9 +401,11 @@ func attack(entity):
 
 		emit_signal("OnPostAttack", entity)
 
-		on_turn_completed()
+		if triggerTurnCompleted:
+			on_turn_completed()
 	else:
-		on_turn_completed()
+		if triggerTurnCompleted:
+			on_turn_completed()
 
 func pre_hit(_sourceChar:Character, _targetChar:Character, _damageFromHit:int):
 	var evasionStat:int = get_evasion()

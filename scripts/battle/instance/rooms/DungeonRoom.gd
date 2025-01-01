@@ -42,6 +42,9 @@ var tutorialPickups:Array = []
 # Gold Pickup
 var goldPickups:Array = []
 
+# VFX
+var vfxList:Array = []
+
 var maxRows:int
 var maxCols:int
 var startX:int
@@ -294,6 +297,17 @@ func generate_vendor(vendorId:String):
 	var vendor:Node = GameGlobals.dungeon.load_vendor(loadedScenes, randomCell, vendorId, Constants.ENTITY_TYPE.DYNAMIC, Constants.vendors)
 	vendors.append(vendor)
 
+# VFX
+func generate_vfx(vfxPath:String, cell:DungeonCell, scale:float):
+	var vfx:Node = GameGlobals.dungeon.load_vfx(loadedScenes, vfxPath, cell, Constants.vendors)
+	vfx.scale = Vector2(scale, scale)
+	vfxList.append(vfx)
+	return vfx
+
+func destroy_vfx(vfx:Node, cell:DungeonCell):
+	vfxList.erase(vfx)
+	cell.remove_vfx(vfx)
+
 # TUTORIAL PICKUP
 func generate_tutorial_pickup(tutorialPickupId:String):
 	# find free cells
@@ -357,7 +371,8 @@ func clean_up():
 		enemy.disconnect("OnTurnCompleted",Callable(self,"_update_next_enemy"))
 
 	for loadedScene in loadedScenes:
-		loadedScene.queue_free()
+		if loadedScene!=null:
+			loadedScene.queue_free()
 	loadedScenes.clear()
 	cells.clear()
 	enemies.clear()
@@ -441,7 +456,7 @@ func _destroy_doors():
 	CombatEventManager.on_room_combat_ended(self)
 
 # ENTITY
-func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
+func move_entity(entity, currentCell, newR:int, newC:int, triggerTurnCompleted:bool=true) -> bool:
 	# within bounds of room
 	if newC>=0 and newR>=0 and newC<maxCols and newR<maxRows:
 		var cell:DungeonCell = get_cell(newR, newC)
@@ -451,7 +466,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 		if(!cell.has_entity()):
 			currentCell.clear_entity()
 			cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
-			entity.move_to_cell(cell, true)
+			entity.move_to_cell(cell, triggerTurnCompleted)
 			return true
 		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
 			# Tutorial Pickups
@@ -463,7 +478,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 				tutorialPickup.hide()
 				currentCell.clear_entity()
 				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
-				entity.move_to_cell(cell, true)
+				entity.move_to_cell(cell, triggerTurnCompleted)
 				return true
 			# Gold Pickups
 			if cell.entityObject is GoldPickup:
@@ -474,7 +489,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 				goldPickup.hide()
 				currentCell.clear_entity()
 				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
-				entity.move_to_cell(cell, true)
+				entity.move_to_cell(cell, triggerTurnCompleted)
 				return true
 			# Vendor
 			if cell.entityObject is VendorCharacter:
@@ -490,7 +505,7 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 				upgrade.hide()
 				currentCell.clear_entity()
 				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
-				entity.move_to_cell(cell, true)
+				entity.move_to_cell(cell, triggerTurnCompleted)
 				return true
 			# Item
 			if cell.entityObject is Item:
@@ -502,14 +517,14 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 				items.erase(item)
 				currentCell.clear_entity()
 				cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
-				entity.move_to_cell(cell, true)
+				entity.move_to_cell(cell, triggerTurnCompleted)
 				return true
 			# Enemy
 			if entity.is_opposite_team(cell.entityObject):
 				var enemyChar = cell.entityObject
 				if enemyChar.is_targetable():
-					entity.attack(cell.entityObject)
-					return true
+					entity.attack(cell.entityObject, triggerTurnCompleted)
+					return false
 	# out of bounds of room
 	else:
 		# if there is a connection, move to the connected cell
@@ -517,7 +532,8 @@ func move_entity(entity, currentCell, newR:int, newC:int) -> bool:
 			entity.move_to_cell(currentCell.connectedCell)
 			currentCell.connectedCell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
 			currentCell.clear_entity()
-			entity.on_turn_completed()
+			if triggerTurnCompleted:
+				entity.on_turn_completed()
 			return true
 
 	return false
@@ -695,6 +711,14 @@ func _update_next_enemy():
 func post_update_entities():
 	for enemy in enemies:
 		enemy.post_update()
+
+func darken_all_cells():
+	for cell in cells:
+		cell.darken()
+
+func lighten_all_cells():
+	for cell in cells:
+		cell.lighten()
 
 # HELPERS
 func is_in_combat():

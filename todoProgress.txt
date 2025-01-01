@@ -45,8 +45,9 @@ Roguelike Dev:
 (D)- Bug: On mystic, back button didn't work -> causes broken state (During combat)
 (D)- Skeleton revive issue
 (D)- Remaining skill tree options
+(D)- Gold as an item to pickup for progression instead of souls for upgrades in game
 
-- Coins as an item to pickup for progression instead of souls for upgrades in game
+- Double Selection + Directional Spell (Dash)
 - Dash/Swap/Push
 - Boss
 

@@ -315,7 +315,7 @@ func _on_show_pop_up_equipment(item:Item, slotTypeArray:Array):
 func _on_pop_up_equipment_state_change(item:Item, slotTypeArray:Array):
 	popUpEquipmentUI.clean_up()
 	_on_pop_up_equipment_closed()
-	_on_show_pop_up_equipment(item, slotTypeArray)
+	#_on_show_pop_up_equipment(item, slotTypeArray)
 
 func _on_pop_up_equipment_closed():
 	remove_child(popUpEquipmentUI)
