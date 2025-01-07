@@ -15,9 +15,11 @@ func activate():
 	CombatEventManager.on_show_info(get_display_name(), get_description())
 	AudioEventManager.emit_signal("OnGenericPickup")
 	GameGlobals.dungeon.dungeonProgress.gold_collected()
+	await get_tree().create_timer(0.5).timeout
+	CombatEventManager.on_hide_info()
 
 func get_display_name():
 	return "Gold"
 
 func get_description():
-	return "Pick Gold Up for Meta Progression"
+	return "+5 Gold"

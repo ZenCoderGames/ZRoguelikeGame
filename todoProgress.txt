@@ -1,55 +1,18 @@
 
 Roguelike Dev:
 
-(D)- Refactor Character scenes into one scene
-(D)- Convert xp -> souls
-(D)- Soul vendor
-(D)- Soul vendor -> repeated buys, add an expensive upgrade
-(D)- No classes -> Randomized active/passive at start room
-(D)- Character.gd -> special variable should be a list
-(D)- Special should have its own resources. Get rid of energy. Make multiple specials work.
-(D)- Setup Mystic and Shaman vendors as part of the flow
-(D)- New Vendors (Blacksmith, Runesmith)
-(D)- Enemies scale up stats with levels
-(D)- Bug with stats scaling up
-(D)- Figure out what to do with extra items (convert to souls button)
-(D)- More Things (3 consumables)
-(D)- More Things (3 items)
-(D)- More Things (3 specials)
-(D)- More Things (Convert remaining spells into specials) - disable spells temporarily
-(D)- More Things (Move runes into passives) - disable runes temporarily
-(D)- Mana as a system for spells (mana potions)
-(D)- Remake Stealth Refresh Special to give back mana instead
-(D)- Be able to hit reviving targets so you don't get stuck
-(D)- Healing Vendor (Cleric)
-(D)- Vendors cache their items and cost is preserved between opening multiple times
-(D)- Sometimes miniboss doesn't spawn and end room doesnt work
-(D)- Specials have cooldowns
-(D)- Rich Text Labels in other spots (Util function to parse text)
-(D)- Utils.format_text can parse keywords
-(IP)- Tutorial
-(D)- Bug: Fix super fast speed causing enemies to not attack
+- Test out all the new Skilltree Upgrades
+- Armor
+- Specials have Slots (Unlockable in skill tree)
+- More levels and a Boss or Get Key back to surface
 
-- Progression
-	(D)- Show Progress in Character Select UI 
-	(D)- Show Progress in End Screen UI (Player->EnemyKilled + FloorCompleted + DungeonCompleted)
-	(D)- Level Screen shows level modifiers
-	(D)- Fix bug with reviving enemies collecting xp twice
-	(D)- Fix bug with new floor clearing xp
-	(D)- Character Select UI has a button for Skill Tree Menu (Shared amongst chars)
+- Add a lesser Shaman Vendor with small passives
 
-(D)- New Skill Tree UI functionality
-(D)- Skill Tree doesn't refresh with New Game
+- Keyboard Input for top menu (TAB)
 
-(D)- End of combat, doesn't hide battle and so skill tree menu shows it
-(D)- Bug: On mystic, back button didn't work -> causes broken state (During combat)
-(D)- Skeleton revive issue
-(D)- Remaining skill tree options
-(D)- Gold as an item to pickup for progression instead of souls for upgrades in game
+- More Specials (Hookshot)
 
-- Double Selection + Directional Spell (Dash)
-- Dash/Swap/Push
-- Boss
+--------
 
 - More Things (3 enemies) - 2 left [Evil Knight -> Barrier, Healer]
 
@@ -257,3 +220,52 @@ To Research:
 (D)- Class and General Upgrade Tech
 (D)- Hook up upgrades to mini boss death
 (D)- Potions in UI
+
+
+
+(D)- Refactor Character scenes into one scene
+(D)- Convert xp -> souls
+(D)- Soul vendor
+(D)- Soul vendor -> repeated buys, add an expensive upgrade
+(D)- No classes -> Randomized active/passive at start room
+(D)- Character.gd -> special variable should be a list
+(D)- Special should have its own resources. Get rid of energy. Make multiple specials work.
+(D)- Setup Mystic and Shaman vendors as part of the flow
+(D)- New Vendors (Blacksmith, Runesmith)
+(D)- Enemies scale up stats with levels
+(D)- Bug with stats scaling up
+(D)- Figure out what to do with extra items (convert to souls button)
+(D)- More Things (3 consumables)
+(D)- More Things (3 items)
+(D)- More Things (3 specials)
+(D)- More Things (Convert remaining spells into specials) - disable spells temporarily
+(D)- More Things (Move runes into passives) - disable runes temporarily
+(D)- Mana as a system for spells (mana potions)
+(D)- Remake Stealth Refresh Special to give back mana instead
+(D)- Be able to hit reviving targets so you don't get stuck
+(D)- Healing Vendor (Cleric)
+(D)- Vendors cache their items and cost is preserved between opening multiple times
+(D)- Sometimes miniboss doesn't spawn and end room doesnt work
+(D)- Specials have cooldowns
+(D)- Rich Text Labels in other spots (Util function to parse text)
+(D)- Utils.format_text can parse keywords
+(D)- Bug: Fix super fast speed causing enemies to not attack
+
+- Progression
+	(D)- Show Progress in Character Select UI 
+	(D)- Show Progress in End Screen UI (Player->EnemyKilled + FloorCompleted + DungeonCompleted)
+	(D)- Level Screen shows level modifiers
+	(D)- Fix bug with reviving enemies collecting xp twice
+	(D)- Fix bug with new floor clearing xp
+	(D)- Character Select UI has a button for Skill Tree Menu (Shared amongst chars)
+
+(D)- New Skill Tree UI functionality
+(D)- Skill Tree doesn't refresh with New Game
+
+(D)- End of combat, doesn't hide battle and so skill tree menu shows it
+(D)- Bug: On mystic, back button didn't work -> causes broken state (During combat)
+(D)- Skeleton revive issue
+(D)- Remaining skill tree options
+(D)- Gold as an item to pickup for progression instead of souls for upgrades in game
+(D)- Selection in Specials
+(D)- Equipment Flow is more streamlined

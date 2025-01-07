@@ -1,4 +1,4 @@
-extends Node2D
+extends Sprite2D
 
 class_name Item
 
@@ -14,6 +14,8 @@ func init(itemData, myCell):
 	self.position = Vector2(cell.pos.x, cell.pos.y)
 	hoverInfo.setup_far("Item", "This is an Item. Get Close to Identify.")
 	hoverInfo.setup(get_display_name(), get_description(), cell)
+	if data.is_consumable():
+		self.self_modulate = data.tintColor
 
 func init_on_picked_up(character):
 	if data.spellId != "":

@@ -49,8 +49,29 @@
 			]
 		},
 		{
+			"id": "STARTER_EQUIPMENT",
+			"name": "Starter Equipment",
+			"description": "Start with a random equipment",
+			"isPositive": true,
+			"spawnItem": true
+		},
+		{
+			"id": "STARTER_POTION",
+			"name": "Starter Potion",
+			"description": "Start with a random potion",
+			"isPositive": true,
+			"spawnConsumable": true
+		},
+		{
+			"id": "SOUL_START_5",
+			"name": "Soul Boost I",
+			"description": "Start with 5 souls",
+			"isPositive": true,
+			"dungeonStartSouls": 5
+		},
+		{
 			"id": "SOUL_START_10",
-			"name": "Soul Boost",
+			"name": "Soul Boost II",
 			"description": "Start with 10 souls",
 			"isPositive": true,
 			"dungeonStartSouls": 10
@@ -63,15 +84,56 @@
 			"vendorCostMultiplier": -0.25
 		},
 		{
-			"id": "INCREASED_MANA_1",
-			"name": "DungeonMod: Increased Mana I",
-			"description": "Increased base mana by 1",
+			"id": "BONUS_HEALTH",
+			"name": "DungeonMod: Bonus Health",
+			"description": "Start with +4 Base Health",
+			"isPositive": true,
+			"statModifiers": [
+				{
+					"type": "HEALTH",
+					"absoluteValue": 4
+				}
+			]
+		},
+		{
+			"id": "BONUS_HEALTH",
+			"name": "DungeonMod: Bonus Health",
+			"description": "Start with +4 Base Health",
+			"isPositive": true,
 			"statModifiers": [
 				{
 					"type": "ENERGY",
 					"absoluteValue": 1
 				}
 			]
+		},
+		{
+			"id": "INCREASED_MANA_2",
+			"name": "DungeonMod: Increased Mana II",
+			"description": "Increased base mana by 2",
+			"statModifiers": [
+				{
+					"type": "ENERGY",
+					"absoluteValue": 2
+				}
+			]
+		},
+		{
+			"id": "FULL_MANA",
+			"name": "DungeonMod: Mana Boost",
+			"description": "Start the run with full mana",
+			"statModifiers": [
+				{
+					"type": "ENERGY",
+					"percentOfMaxValue": 1
+				}
+			]
+		},
+		{
+			"id": "ADDITIONAL_ITEM",
+			"name": "DungeonMod: Lucky Charm",
+			"description": "Spawn 1 Additional Item in each Floor",
+			"spawnAdditionalItem": true
 		}
 	]
 }

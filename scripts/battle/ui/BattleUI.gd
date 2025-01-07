@@ -299,7 +299,7 @@ func _on_show_vendor(vendorChar:VendorCharacter, vendorData:VendorData):
 
 func _on_vendor_closed():
 	remove_child(vendorUI)
-	vendorUI = null
+	#vendorUI = null
 	UIEventManager.emit_signal("OnSelectionMenuOff")
 	GameGlobals.dungeon.inBackableMenu = false
 
@@ -315,11 +315,12 @@ func _on_show_pop_up_equipment(item:Item, slotTypeArray:Array):
 func _on_pop_up_equipment_state_change(item:Item, slotTypeArray:Array):
 	popUpEquipmentUI.clean_up()
 	_on_pop_up_equipment_closed()
-	#_on_show_pop_up_equipment(item, slotTypeArray)
+	if item!=null:
+		_on_show_pop_up_equipment(item, slotTypeArray)
 
 func _on_pop_up_equipment_closed():
 	remove_child(popUpEquipmentUI)
-	vendorUI = null
+	#vendorUI = null
 	UIEventManager.emit_signal("OnSelectionMenuOff")
 	GameGlobals.dungeon.inBackableMenu = false
 
@@ -327,8 +328,8 @@ func _on_pop_up_equipment_closed():
 func _on_player_special_added(character:Character, special:Special):
 	var playerSpecialAbilityUI:PlayerSpecialAbilityUI = SpecialAbilityUI.instantiate()
 	playerAbilitiesListUI.add_child(playerSpecialAbilityUI)
+	playerSpecialAbilityUI.init(_playerAbilityList.size(), character, special)
 	_playerAbilityList.append(playerSpecialAbilityUI)
-	playerSpecialAbilityUI.init(character, special)
 
 # GOLD
 func _on_gold_updated():

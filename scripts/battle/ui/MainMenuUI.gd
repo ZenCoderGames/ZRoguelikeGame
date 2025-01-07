@@ -14,7 +14,7 @@ class_name MainMenuUI
 @onready var musicOffButton:TextureButton = $"%MusicOffButton"
 
 @onready var characterSelectUI:CharacterSelectUI = $"%CharacterSelectUI"
-@onready var levelSelectUI:LevelSelectUI = $"%LevelSelectUI"
+@onready var levelSelectUI:LevelSelectUI_v2 = $"%LevelSelectUI_v2"
 @onready var skillTreeUI:Node = $"%SkillTreeUI"
 
 @onready var baseMenuUI:Node = $"%MenuUI"
@@ -238,7 +238,7 @@ func _clear_end_screen():
 		gridItem.queue_free()
 
 func _on_player_data_updated():
-	totalGoldLabel.text = str("Total Souls: ", PlayerDataManager.get_current_xp())
+	totalGoldLabel.text = str(PlayerDataManager.get_current_xp())
 	
 func _show_base_menu(val:bool):
 	title.visible = val

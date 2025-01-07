@@ -141,9 +141,13 @@ func dim():
 
 func darken():
 	floorObject.modulate = GameGlobals.battleInstance.view.dimFloorColor
+	if entityObject!=null:
+		entityObject.modulate = GameGlobals.battleInstance.view.dimFloorColor
 
 func lighten():
 	floorObject.modulate = GameGlobals.battleInstance.view.showFloorColor
+	if entityObject!=null:
+		entityObject.modulate = GameGlobals.battleInstance.view.showFloorColor
 
 func showDebug(colorVal):
 	floorObject.show()

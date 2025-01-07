@@ -32,6 +32,9 @@ func activate_on_add_status_effect(_sourceCharacterOfStatusEffect, statusEffect)
 	if statusEffect.data.id == _triggerConditionParams["statusEffectId"]:
 		activate()
 
+func activate_on_special_added(_characterVal, _special):
+	activate()
+
 func _checkForConditionsAndActivate(_enemy):
 	if _triggerConditionParams.size()==0:
 		activate()

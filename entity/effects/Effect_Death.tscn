@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://qicltc72mle8"]
 
-[ext_resource type="Texture2D" uid="uid://1fllj55cypct" path="res://sourceArt/blood.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://1fllj55cypct" path="res://sourceArt/Icons/blood.png" id="3"]
 
 [node name="DeathFX" type="Sprite2D"]
 modulate = Color(0.42572, 0.446249, 0.484375, 1)

@@ -1,16 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://c7xbl223nhxmq"]
 
-[ext_resource path="res://sourceArt/Bg/Floor/Floor_01.png" type="Texture2D" id=1]
-[ext_resource path="res://themes/guiTheme.tres" type="Theme" id=2]
-[ext_resource path="res://sourceArt/blood.png" type="Texture2D" id=3]
+[ext_resource type="Texture2D" uid="uid://dwcunwqgk6p4w" path="res://sourceArt/Bg/Floor/Floor_01.png" id="1"]
+[ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://1fllj55cypct" path="res://sourceArt/Icons/blood.png" id="3"]
 
 [node name="Floor" type="Sprite2D"]
-modulate = Color( 0.42572, 0.446249, 0.484375, 1 )
-position = Vector2( 208, 169 )
-texture = ExtResource( 1 )
+modulate = Color(0.42572, 0.446249, 0.484375, 1)
+position = Vector2(208, 169)
+texture = ExtResource("1")
 
 [node name="Label" type="Label" parent="."]
 visible = false
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -19,13 +20,13 @@ offset_left = -29.0
 offset_top = -31.5
 offset_right = -3.0
 offset_bottom = -0.5
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 text = "1"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Death" type="Sprite2D" parent="."]
 visible = false
-modulate = Color( 0.843137, 0.321569, 0.368627, 1 )
-scale = Vector2( 0.628906, 0.628906 )
-texture = ExtResource( 3 )
+modulate = Color(0.843137, 0.321569, 0.368627, 1)
+scale = Vector2(0.628906, 0.628906)
+texture = ExtResource("3")

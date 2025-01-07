@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://3gpoj14w4qny"]
+[gd_scene load_steps=15 format=3 uid="uid://3gpoj14w4qny"]
 
 [ext_resource type="Script" path="res://scripts/battle/ui/MainMenuUI.gd" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wsy8d"]
@@ -10,22 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://bhp712q20vgvb" path="res://ui/levelSelect/LevelSelectUI.tscn" id="8_eupbo"]
 [ext_resource type="PackedScene" uid="uid://pwh4dx7x3kp3" path="res://ui/skilltree/SkillTreeUI.tscn" id="9_7tqgv"]
 [ext_resource type="FontFile" uid="uid://qg4ohjuldvkx" path="res://resource/fonts/droid-sans/DroidSans-Bold.ttf" id="9_mf20n"]
+[ext_resource type="PackedScene" uid="uid://ctx688xfbvxbn" path="res://ui/levelSelect/LevelSelectUI_v2.tscn" id="9_vv378"]
+[ext_resource type="Texture2D" uid="uid://ccktqyool75k8" path="res://sourceArt/Icons/coin.png" id="11_dkymv"]
 [ext_resource type="Texture2D" uid="uid://l2pqsibnxfbe" path="res://sourceArt/Icons/musicOff.png" id="11_eq3ws"]
 [ext_resource type="Texture2D" uid="uid://dsyn7iw1btnw" path="res://sourceArt/Icons/musicOn.png" id="12_dygwg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dd13y"]
-bg_color = Color(1, 0.262951, 0.617989, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.801536, 0.702448, 0.742756, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-shadow_size = 2
-shadow_offset = Vector2(1, 1)
 
 [node name="MainMenuUI" type="Control"]
 layout_mode = 3
@@ -49,6 +37,7 @@ texture = ExtResource("3_8id6n")
 expand_mode = 1
 
 [node name="HeaderPanel" type="Panel" parent="."]
+self_modulate = Color(0.31, 0.793, 1, 1)
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 1
 anchors_preset = 10
@@ -194,13 +183,14 @@ layout_mode = 2
 [node name="Continue" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-modulate = Color(0, 1, 0.768627, 1)
+modulate = Color(2.11775e-06, 0.863622, 0.662158, 1)
 layout_mode = 2
 theme = ExtResource("1_wsy8d")
 text = "Continue"
 
 [node name="NewGame" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
+self_modulate = Color(0.102982, 0.717483, 2.69532e-06, 1)
 layout_mode = 2
 text = "New Game"
 
@@ -213,7 +203,7 @@ text = "Settings"
 
 [node name="Exit" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.968627, 0.0627451, 0, 1)
+modulate = Color(0.81, 0.29025, 0.1863, 1)
 layout_mode = 2
 theme = ExtResource("1_wsy8d")
 text = "Exit Game"
@@ -225,6 +215,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LevelSelectUI" parent="." instance=ExtResource("8_eupbo")]
+visible = false
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelSelectUI_v2" parent="." instance=ExtResource("9_vv378")]
 visible = false
 layout_mode = 1
 grow_horizontal = 2
@@ -368,18 +364,28 @@ offset_bottom = 40.0
 grow_horizontal = 0
 theme_override_constants/separation = -3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="MarginContainer" parent="VBoxContainer"]
 self_modulate = Color(0.4, 0.4, 0.4, 0.184314)
-custom_minimum_size = Vector2(300, 90)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_dd13y")
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
 
-[node name="TotalGoldLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+texture = ExtResource("11_dkymv")
+
+[node name="TotalGoldLabel" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_mf20n")
-theme_override_font_sizes/font_size = 30
-text = "Total Gold: 300"
+theme_override_font_sizes/font_size = 50
+text = "300"
 horizontal_alignment = 1
 vertical_alignment = 1
 

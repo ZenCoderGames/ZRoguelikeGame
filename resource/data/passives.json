@@ -439,6 +439,24 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PASSIVE_REDUCE_SPECIAL_COUNT",
+			"name": "Special Efficiency",
+			"description": "Reduce Special Cost by 1",
+			"conditions": [
+				"ON_SPECIAL_ADDED",
+				"ON_START_DUNGEON"
+			],
+			"timeline": [
+				{
+					"type": "MODIFY_SPECIAL",
+					"params": {
+						"useLastSpecialAdded": true,
+						"countModifier": -1
+					}
+				}
+			]
 		}
 	]
 }

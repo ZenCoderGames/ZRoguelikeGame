@@ -11,8 +11,10 @@ class_name VendorItemUI
 var _parent:VendorUI
 var _data
 var _soulCost:int
+var _idx:int
 
-func init(parent:VendorUI, data):
+func init(idx:int, parent:VendorUI, data):
+	_idx = idx
 	_parent = parent
 	_data = data
 	_soulCost = _data.soulCost * GameGlobals.dungeon.player._currentVendorCostMultiplier
@@ -45,9 +47,9 @@ func refresh():
 		if notEnoughCurrency:
 			chooseBtn.text = "NOT ENOUGH SOULS"
 		else:
-			chooseBtn.text = "BUY"
+			chooseBtn.text = str(_get_input_str(), "BUY")
 	else:
-		chooseBtn.text = "SELECT"
+		chooseBtn.text = str(_get_input_str(), "SELECT")
 		chooseBtn.disabled = false
 		soulCostContainer.visible = false
 
@@ -60,3 +62,27 @@ func _is_upgrade_owned():
 		return GameGlobals.dungeon.player.has_passive(_data)
 
 	return false
+
+func _unhandled_input(event: InputEvent) -> void:
+	if chooseBtn.disabled:
+		return
+		
+	if _idx==0:
+		if event.is_action_pressed(Constants.INPUT_VENDOR_OPTION1):
+			_on_item_chosen()
+	elif _idx==1:
+		if event.is_action_pressed(Constants.INPUT_VENDOR_OPTION2):
+			_on_item_chosen()
+	elif _idx==2:
+		if event.is_action_pressed(Constants.INPUT_VENDOR_OPTION3):
+			_on_item_chosen()
+
+func _get_input_str():
+	if _idx==0:
+		return "(Z) "
+	elif _idx==1:
+		return "(X) "
+	elif _idx==2:
+		return "(C) "
+	
+	return ""

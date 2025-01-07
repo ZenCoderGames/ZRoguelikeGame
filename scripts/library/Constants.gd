@@ -56,11 +56,23 @@ const INPUT_CAM_MOVE_RIGHT: String = "cam_move_right"
 const INPUT_CAM_MOVE_UP: String = "cam_move_up"
 const INPUT_CAM_MOVE_DOWN: String = "cam_move_down"
 
+const INPUT_VENDOR_OPTION1: String = "vendor_option_1"
+const INPUT_VENDOR_OPTION2: String = "vendor_option_2"
+const INPUT_VENDOR_OPTION3: String = "vendor_option_3"
+
+const INPUT_CANCEL_VENDOR_OPTION1: String = "cancel_vendor_option_1"
+const INPUT_CANCEL_VENDOR_OPTION2: String = "cancel_vendor_option_2"
+const INPUT_CANCEL_VENDOR_OPTION3: String = "cancel_vendor_option_3"
+
+const INPUT_USE_SPECIAL1: String = "use_special_1"
+const INPUT_USE_SPECIAL2: String = "use_special_2"
+const INPUT_USE_SPECIAL3: String = "use_special_3"
+
 # GAMEPLAY
 enum TRIGGER_CONDITION { NONE, ON_PRE_ATTACK, ON_PRE_HIT, ON_BLOCKED_HIT, ON_EVADED_HIT, ON_TAKE_HIT, ON_POST_HIT, ON_POST_ATTACK,\
 							ON_KILL, ON_DEATH, ON_START_TURN, ON_END_TURN, ON_MOVE, ON_SPELL_ACTIVATE,\
 							ON_ADD_STATUS_EFFECT_TO_SELF, ON_ADD_STATUS_EFFECT_TO_ENEMY, ON_NEAR_ENEMY,\
-							ON_SPECIAL_ACTIVATE, ON_START_FLOOR}
+							ON_SPECIAL_ACTIVATE, ON_START_FLOOR, ON_SPECIAL_ADDED, ON_START_DUNGEON}
 
 
 enum KEYWORDS { PROTECTION, PUSH, BARRIER, SPELL, KILL }

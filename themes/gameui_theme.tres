@@ -31,19 +31,20 @@ shadow_color = Color(0.112185, 0.309172, 0.371656, 1)
 shadow_size = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8gk7"]
-bg_color = Color(0.109804, 0.243137, 0.266667, 1)
+bg_color = Color(0.284429, 0.284068, 0.327185, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.14276, 0.373156, 0.446361, 1)
+border_color = Color(0.479225, 0.7982, 0.908373, 1)
 border_blend = true
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
-shadow_color = Color(0.112185, 0.309172, 0.371656, 1)
+shadow_color = Color(0.00012659, 0.000841442, 0.0012331, 1)
 shadow_size = 2
+shadow_offset = Vector2(1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqq8m"]
 bg_color = Color(0.470588, 0.796078, 0.905882, 1)
@@ -61,12 +62,12 @@ shadow_color = Color(0.112185, 0.309172, 0.371656, 1)
 shadow_size = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gi1ck"]
-bg_color = Color(0.133333, 0.133333, 0.133333, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.129412, 0.486275, 0.513726, 1)
+bg_color = Color(0.13574, 0.189918, 0.176416, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.36297, 0.425416, 0.44121, 1)
 shadow_size = 2
 shadow_offset = Vector2(1, 1)
 
@@ -82,7 +83,7 @@ bg_color = Color(0.298039, 0.27451, 0.109804, 1)
 bg_color = Color(0.39688, 0.66, 0.3168, 1)
 
 [resource]
-Button/colors/font_color = Color(0.788235, 0.65098, 0.466667, 1)
+Button/colors/font_color = Color(0.899258, 0.899258, 0.899258, 1)
 Button/styles/disabled = SubResource("StyleBoxFlat_n10l8")
 Button/styles/hover = SubResource("StyleBoxFlat_8vykn")
 Button/styles/normal = SubResource("StyleBoxFlat_k8gk7")

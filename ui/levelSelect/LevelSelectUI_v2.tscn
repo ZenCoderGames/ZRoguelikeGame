@@ -1,0 +1,300 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctx688xfbvxbn"]
+
+[ext_resource type="Script" path="res://scripts/menu/levelSelect/LevelSelectUI_v2.gd" id="1_xoenu"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_lfedl"]
+[ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="3_ypwfo"]
+[ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_n2jl8"]
+[ext_resource type="Texture2D" uid="uid://bxftno62wj3pw" path="res://sourceArt/Icons/locked.png" id="5_sfn5q"]
+
+[node name="LevelSelectUI_v2" type="Panel"]
+unique_name_in_owner = true
+self_modulate = Color(0.26, 0.2288, 0.2288, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_xoenu")
+
+[node name="InfoPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="InfoLabel" type="RichTextLabel" parent="InfoPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]Choose your path [/center]"
+fit_content = true
+
+[node name="BackButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.596078, 0.0705882, 1)
+layout_mode = 0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 120.0
+texture_normal = ExtResource("3_ypwfo")
+texture_pressed = ExtResource("3_ypwfo")
+texture_hover = ExtResource("3_ypwfo")
+texture_disabled = ExtResource("3_ypwfo")
+texture_focused = ExtResource("3_ypwfo")
+
+[node name="TitleLabel" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.980392, 0.568627, 1, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -199.0
+offset_top = 22.0
+offset_right = 199.0
+offset_bottom = 118.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.67451, 0.305882, 0.203922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("4_n2jl8")
+theme_override_font_sizes/font_size = 55
+text = "Level Select"
+
+[node name="Map" type="PanelContainer" parent="."]
+self_modulate = Color(0.8, 0.5816, 0.488, 0.686275)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.265
+anchor_right = 1.0
+anchor_bottom = 0.587
+offset_top = -18.0
+offset_bottom = 325.4
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 150)
+theme = ExtResource("2_lfedl")
+
+[node name="LevelSelectItems" type="HBoxContainer" parent="Map"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+
+[node name="Tutorial" type="Panel" parent="Map/LevelSelectItems"]
+custom_minimum_size = Vector2(220, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/LevelSelectItems/Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Panel" parent="Map/LevelSelectItems/Tutorial/VBoxContainer"]
+self_modulate = Color(0.2, 0.986667, 1, 1)
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Map/LevelSelectItems/Tutorial/VBoxContainer/Title"]
+self_modulate = Color(0.88, 1, 0.1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TUTORIAL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Panel" parent="Map/LevelSelectItems/Tutorial/VBoxContainer"]
+self_modulate = Color(0.068, 0.7718, 0.85, 1)
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Map/LevelSelectItems/Tutorial/VBoxContainer/Desc"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "An Overview of the Mechanics to prepare you for the journey"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Ready" type="Panel" parent="Map/LevelSelectItems/Tutorial/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button_Tutorial" type="Button" parent="Map/LevelSelectItems/Tutorial/VBoxContainer/Ready"]
+unique_name_in_owner = true
+self_modulate = Color(0.196, 0.966934, 0.98, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enter"
+
+[node name="Campaign" type="Panel" parent="Map/LevelSelectItems"]
+custom_minimum_size = Vector2(220, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/LevelSelectItems/Campaign"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Panel" parent="Map/LevelSelectItems/Campaign/VBoxContainer"]
+self_modulate = Color(0.37, 1, 0.3, 1)
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Map/LevelSelectItems/Campaign/VBoxContainer/Title"]
+self_modulate = Color(0.1, 1, 0.19, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CAMPAIGN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Panel" parent="Map/LevelSelectItems/Campaign/VBoxContainer"]
+self_modulate = Color(0.63382, 0.67, 0.1273, 1)
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Map/LevelSelectItems/Campaign/VBoxContainer/Desc"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "The Dungeons of Zekonia"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Ready" type="Panel" parent="Map/LevelSelectItems/Campaign/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button_Campaign" type="Button" parent="Map/LevelSelectItems/Campaign/VBoxContainer/Ready"]
+unique_name_in_owner = true
+self_modulate = Color(0.37, 1, 0.3, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enter"
+
+[node name="Challenges" type="Panel" parent="Map/LevelSelectItems"]
+custom_minimum_size = Vector2(220, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Map/LevelSelectItems/Challenges"]
+modulate = Color(0.26, 0.26, 0.26, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Panel" parent="Map/LevelSelectItems/Challenges/VBoxContainer"]
+self_modulate = Color(0.94, 0.1504, 0.1504, 1)
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Map/LevelSelectItems/Challenges/VBoxContainer/Title"]
+self_modulate = Color(1, 0.16, 0.1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CHALLENGES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Panel" parent="Map/LevelSelectItems/Challenges/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Map/LevelSelectItems/Challenges/VBoxContainer/Desc"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Take on the hardest challenges in Zekonia"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Ready" type="Panel" parent="Map/LevelSelectItems/Challenges/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button_Challenges" type="Button" parent="Map/LevelSelectItems/Challenges/VBoxContainer/Ready"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+text = "Enter"
+
+[node name="TextureRect" type="TextureRect" parent="Map/LevelSelectItems/Challenges"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_sfn5q")
+expand_mode = 1

@@ -32,8 +32,9 @@ var itemsGranted:Array
 var timeline:Array
 var removeAfterExecute:bool
 var hasSelection:bool
+var selectionRange:int
 
-enum SELECTION_TYPE { NONE, DIRECTIONAL }
+enum SELECTION_TYPE { NONE, DIRECTIONAL, DIRECTIONAL_CELL }
 var selectionType:int
 
 enum EXECUTE_CONDITION { NONE, NEARBY_ENEMY, NO_NEARBY_ENEMY }
@@ -79,3 +80,4 @@ func _init(dataJS):
 		selectionType = SELECTION_TYPE.get(dataJS["selectionType"])
 	else:
 		selectionType = SELECTION_TYPE.NONE
+	selectionRange = Utils.get_data_from_json(dataJS, "selectionRange", 1)

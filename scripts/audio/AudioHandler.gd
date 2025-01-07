@@ -17,6 +17,7 @@ func _ready():
 	CombatEventManager.connect("OnConsumeItem",Callable(self,"_on_consume_item"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityReady",Callable(self,"_on_player_special_ready"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityActivated",Callable(self,"_on_player_special_activated"))
+	CombatEventManager.connect("OnPlayerSpecialAbilityCompleted",Callable(self,"_on_player_special_completed"))
 	AudioEventManager.connect("OnGenericPickup",Callable(self,"_on_generic_pickup"))
 
 # MUSIC
@@ -77,6 +78,9 @@ func _on_player_special_ready(_special:Special):
 
 func _on_player_special_activated(_special:Special):
 	GameGlobals.audioManager.play_sfx("PLAYER_SPECIAL_ON_ACTIVATE")
+
+func _on_player_special_completed(_special:Special):
+	GameGlobals.audioManager.play_sfx("PLAYER_SPECIAL_READY")
 
 func _on_consume_item(itemData:ItemData):
 	if !itemData.consumeAudioId.is_empty():

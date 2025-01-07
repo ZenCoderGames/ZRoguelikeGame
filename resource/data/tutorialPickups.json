@@ -8,7 +8,7 @@
 		{
 			"id": "TUTORIAL_CAMERA",
 			"name": "Tutorial: Camera Zoom",
-			"description": "Use Q/E to zoom in/out the camera"
+			"description": "Use [,] to zoom in/out the camera"
 		},
 		{
 			"id": "TUTORIAL_TOOLTIPS",
@@ -38,12 +38,12 @@
 		{
 			"id": "TUTORIAL_SKIP_TURN",
 			"name": "Tutorial: SKIP TURN",
-			"description": "Press X to skip a turn. Enemies will play their turn after this. Good way to get positioning advantages."
+			"description": "Press H to skip a turn."
 		},
 		{
 			"id": "TUTORIAL_POTIONS",
 			"name": "Tutorial: POTIONS",
-			"description": "Potions can be consumed to give buffs or bonus effects. When picked up they go to the top left section of the UI Panel above."
+			"description": "Potions can be consumed to give buffs or bonus effects."
 		},
 		{
 			"id": "TUTORIAL_EQUIPMENT",
@@ -53,7 +53,7 @@
 		{
 			"id": "TUTORIAL_VENDORS",
 			"name": "Tutorial: VENDORS",
-			"description": "These special characters can give you unique rewards or items to buy"
+			"description": "These special characters give you unique rewards or items to buy"
 		},
 		{
 			"id": "TUTORIAL_MINIBOSS",

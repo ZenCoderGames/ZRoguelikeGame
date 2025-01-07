@@ -4,11 +4,11 @@
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_5kadx"]
 [ext_resource type="Texture2D" uid="uid://dpqcdq2oyp0g0" path="res://sourceArt/Icons/skull.png" id="3_tssq3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d364l"]
-bg_color = Color(0.14902, 0.305882, 0.137255, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qej1j"]
 bg_color = Color(0.254902, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d364l"]
+bg_color = Color(0.14902, 0.305882, 0.137255, 1)
 
 [node name="VendorItemUI" type="PanelContainer"]
 self_modulate = Color(0, 0, 0, 1)
@@ -118,6 +118,6 @@ layout_mode = 2
 size_flags_vertical = 8
 focus_mode = 0
 theme = ExtResource("2_5kadx")
-theme_override_styles/normal = SubResource("StyleBoxFlat_d364l")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_qej1j")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d364l")
 text = "Select"

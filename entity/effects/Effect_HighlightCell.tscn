@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://0dm4lu5hhvp"]
+
+[ext_resource type="Texture2D" uid="uid://byjs5owwy64qa" path="res://sourceArt/Icons/highlightCell.png" id="1_1bqe0"]
+
+[node name="HighlightFX" type="Sprite2D"]
+self_modulate = Color(0.34241, 0.622478, 0, 1)
+z_index = -1
+position = Vector2(208, 169)
+texture = ExtResource("1_1bqe0")

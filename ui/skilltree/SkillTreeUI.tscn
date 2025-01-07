@@ -84,6 +84,7 @@ text = "Skill Tree"
 
 [node name="UnlockButton" type="Button" parent="."]
 unique_name_in_owner = true
+self_modulate = Color(0.05, 1, 0.0658333, 1)
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 1
 anchors_preset = 8

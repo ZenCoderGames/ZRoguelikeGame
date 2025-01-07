@@ -75,6 +75,7 @@ func create(recreatePlayer:bool) -> void:
 		_init_progression_modifiers()
 		_init_level_modifiers()
 		GameGlobals.battleInstance.usePopUpEquipment = true
+		CombatEventManager.emit_signal("OnStartDungeon")
 	
 	CombatEventManager.emit_signal("OnStartFloor")
 
@@ -269,6 +270,8 @@ func _init_enemies():
 	var numCriticalPathRooms = reverse_path.size();
 	for room in rooms:
 		if room.isStartRoom:
+			if dungeonProgress!=null:
+				room.generate_vendor("SOUL_VENDOR")
 			continue
 		
 		if !costFromStart.has(room):
@@ -294,7 +297,6 @@ func _init_enemies():
 		if room.isEndRoom:
 			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]
 			room.generate_miniboss(enemyData.id)
-			room.generate_vendor("SOUL_VENDOR")
 
 		while(currentCost<encounterCost):
 			var enemyData:CharacterData = enemyDataList[randi() % enemyDataList.size()]
@@ -367,6 +369,9 @@ func _init_items():
 		for room in rooms:
 			if roomVisitedMap.has(room):
 				continue
+
+			if room.isStartRoom:
+				continue
 	
 			for itemData in itemDataList:
 				if itemData.tier > dungeonData.itemHeighestTier:
@@ -406,20 +411,18 @@ func _init_upgrades():
 		return
 
 func _init_vendors():
-	if !GameGlobals.battleInstance.debugSpawnVendor.is_empty():
-		startRoom.generate_vendor(GameGlobals.battleInstance.debugSpawnVendor)
-	
-	if GameGlobals.battleInstance.debugSouls>0:
-		player.gain_souls(GameGlobals.battleInstance.debugSouls)
+	if !GameGlobals.battleInstance.debugSpawnVendors.is_empty():
+		for vendor in GameGlobals.battleInstance.debugSpawnVendors:
+			startRoom.generate_vendor(vendor)
 
 	if isCustomRoomSetup:
 		return
 
-	if !GameGlobals.battleInstance.startWithClasses:
+	if !GameGlobals.battleInstance.startWithClasses and dungeonProgress==null:
 		startRoom.generate_vendor("MYSTIC_VENDOR")
 	
 	var specialRoom:DungeonRoom = rooms[rooms.size()/2]
-	var specialVendors:Array = ["SHAMAN_VENDOR", "BLACKSMITH_VENDOR", "RUNESMITH_VENDOR"]
+	var specialVendors:Array = ["POTIONSMITH_VENDOR", "BLACKSMITH_VENDOR", "RUNESMITH_VENDOR"]
 	specialVendors.shuffle()
 	specialRoom.generate_vendor(specialVendors[0])
 
@@ -438,6 +441,9 @@ func _init_gold():
 			gold = gold - 1
 			if gold==0:
 				break
+
+	if GameGlobals.battleInstance.debugSouls>0:
+		player.gain_souls(GameGlobals.battleInstance.debugSouls)
 
 func _init_player(recreatePlayer:bool):
 	var cell:DungeonCell = rooms[0].get_safe_starting_cell()
@@ -458,7 +464,58 @@ func _init_progression_modifiers():
 	for unlockedSkill in unlockedSkills:
 		var skillData:SkillData = GameGlobals.dataManager.get_skill_data(unlockedSkill)
 		for dungeonModifierId in skillData.dungeonModifiers:
-			player.add_dungeon_modifier(GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifierId))
+			var dungeonModData:DungeonModifierData = GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifierId)
+			player.add_dungeon_modifier(dungeonModData)
+			# Spawn Item
+			if dungeonModData.spawnItem:
+				var itemDataList = Utils.duplicate_array(GameGlobals.dataManager.itemDataList)
+				itemDataList.shuffle()
+				for itemData in itemDataList:
+					if itemData.tier > dungeonData.itemHeighestTier:
+						continue
+					
+					if itemData.is_consumable():
+						continue
+
+					_spawn_item(player.currentRoom, itemData)
+					break
+			# Spawn Consumable	
+			if dungeonModData.spawnConsumable:
+				var itemDataList = Utils.duplicate_array(GameGlobals.dataManager.itemDataList)
+				itemDataList.shuffle()
+				for itemData in itemDataList:
+					if itemData.tier > dungeonData.itemHeighestTier:
+						continue
+					
+					if !itemData.is_consumable():
+						continue
+						
+					_spawn_item(player.currentRoom, itemData)
+					break
+			# Spawn Additional Item
+			if dungeonModData.spawnAdditionalItem:
+				var itemDataList = Utils.duplicate_array(GameGlobals.dataManager.itemDataList)
+				itemDataList.shuffle()
+				rooms.shuffle()
+				for itemData in itemDataList:
+					if itemData.tier > dungeonData.itemHeighestTier:
+						continue
+					
+					if !itemData.is_consumable():
+						continue
+						
+					for room in rooms:
+						if room.isStartRoom:
+							continue
+
+						if room.isEndRoom:
+							continue
+
+						_spawn_item(room, itemData)
+						break
+						
+					break
+
 		for abilityId in skillData.abilities:
 			var abilityData:AbilityData = GameGlobals.dataManager.get_ability_data(abilityId)
 			player.add_ability(abilityData)
@@ -620,8 +677,8 @@ func load_item(parentContainer, cell, itemData, entityType, groupName):
 	itemObject.init(itemData, cell)
 	if itemData.is_gear():
 		itemObject.self_modulate = GameGlobals.battleInstance.view.itemGearColor
-	if itemData.is_consumable():
-		itemObject.self_modulate = GameGlobals.battleInstance.view.itemConsumableColor
+	#if itemData.is_consumable():
+	#	itemObject.self_modulate = GameGlobals.battleInstance.view.itemConsumableColor
 	if itemData.is_spell():
 		itemObject.self_modulate = GameGlobals.battleInstance.view.itemSpellColor
 	return itemObject

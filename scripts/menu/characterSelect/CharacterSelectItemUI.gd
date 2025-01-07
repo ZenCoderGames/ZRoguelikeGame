@@ -75,16 +75,18 @@ func _checkForUnlock():
 		if PlayerDataManager.can_unlock_character(myCharData):
 			unlockBtn.text = str("Unlock (x", myCharData.unlockCost, ")")
 			unlockBtn.disabled = false
+			unlockBtn.self_modulate = Color.GREEN
 		else:
 			unlockBtn.text = str("Unlock (x", myCharData.unlockCost, ")")
 			unlockBtn.disabled = true
-		background.self_modulate = Color.RED
+			unlockBtn.self_modulate = Color.RED
 		unlockBtn.visible = true
 		chooseBtn.visible = false
+		background.modulate = Color.DIM_GRAY
 	else:
 		unlockBtn.visible = false
 		chooseBtn.visible = true
-		background.self_modulate = Color.WHITE
+		background.modulate = Color.WHITE
 
 func _on_unlock():
 	PlayerDataManager.unlock_character(myCharData)

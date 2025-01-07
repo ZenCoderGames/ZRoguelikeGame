@@ -7,44 +7,44 @@
 				"id": "START_NODE",
 				"name": "Skill Tree",
 				"description": "Click on a node to unlock it",
-				"children": ["STARTING_EQUIPMENT", "ECONOMY", "PERKS", "IMPROVED_SPECIALS"],
+				"children": ["STARTING_ITEMS", "ECONOMY", "PERKS", "IMPROVED_SPECIALS"],
 				"isStartNode": true
+			},
+			{
+				"id": "STARTING_ITEMS",
+				"name": "Starter Items",
+				"description": "Spawn 1 Additional Item in each Floor",
+				"unlockCost": 50,
+				"dungeonModifiers": ["ADDITIONAL_ITEM"],
+				"children": ["STARTING_EQUIPMENT", "STARTING_POTION"]
 			},
 			{
 				"id": "STARTING_EQUIPMENT",
 				"name": "Starter Equipment",
-				"description": "Start combat with equipment",
-				"unlockCost": 50,
-				"children": ["STARTING_EQUIPMENT_WEAPON", "STARTING_EQUIPMENT_ARMOR"]
+				"description": "Start combat with a Random Equipment",
+				"unlockCost": 100,
+				"dungeonModifiers": ["STARTER_EQUIPMENT"]
 			},
 			{
-				"id": "STARTING_EQUIPMENT_WEAPON",
-				"name": "Starter Weapon",
-				"description": "Start combat with a Basic Sword (+1 Damage)",
-				"unlockCost": 50,
-				"parentSkillId": "STARTING_EQUIPMENT",
-				"items": ["ITEM_BASIC_SWORD"]
-			},
-			{
-				"id": "STARTING_EQUIPMENT_ARMOR",
-				"name": "Starter Armor",
-				"description": "Start combat with a Wooden Plate (+2 health)",
-				"unlockCost": 50,
-				"parentSkillId": "STARTING_EQUIPMENT",
-				"items": ["ITEM_WOODEN_PLATE"]
+				"id": "STARTING_POTION",
+				"name": "Starter Potion",
+				"description": "Start combat with a Random Potion",
+				"unlockCost": 100,
+				"dungeonModifiers": ["STARTER_POTION"]
 			},
 			{
 				"id": "ECONOMY",
 				"name": "Economy",
-				"description": "Economic benefits for each run",
+				"description": "Start combat with 5 souls",
 				"unlockCost": 50,
+				"dungeonModifiers": ["SOUL_START_5"],
 				"children": ["SOUL_BOOST", "VENDOR_DISCOUNT"]
 			},
 			{
 				"id": "SOUL_BOOST",
 				"name": "Soul Booster",
-				"description": "Start combat with 10 souls",
-				"unlockCost": 50,
+				"description": "Start combat with 10 additional souls",
+				"unlockCost": 100,
 				"parentSkillId": "ECONOMY",
 				"dungeonModifiers": ["SOUL_START_10"]
 			},
@@ -52,49 +52,51 @@
 				"id": "VENDOR_DISCOUNT",
 				"name": "Vendor Discount",
 				"description": "All vendor items are 25% cheaper",
-				"unlockCost": 50,
+				"unlockCost": 100,
 				"dungeonModifiers": ["VENDOR_DISCOUNT_25"]
 			},
 			{
 				"id": "PERKS",
 				"name": "Perks",
-				"description": "Perks are bonus effects that show up in your run",
+				"description": "Gain +4 Starting Health",
 				"unlockCost": 50,
+				"dungeonModifiers": ["BONUS_HEALTH"],
 				"children": ["FLOOR_HEAL", "REINCARNATION"]
 			},
 			{
 				"id": "FLOOR_HEAL",
 				"name": "Rested Warrior",
 				"description": "At the start of each floor, heal up to 50% of your hp",
-				"unlockCost": 50,
+				"unlockCost": 100,
 				"passives": ["PASSIVE_HEAL_ON_FLOOR_START"]
 			},
 			{
 				"id": "REINCARNATION",
 				"name": "Reincarnation",
 				"description": "After your first death, come back to life at 50% of your max hp",
-				"unlockCost": 50,
+				"unlockCost": 100,
 				"passives": ["PASSIVE_REINCARNATION"]
 			},
 			{
 				"id": "IMPROVED_SPECIALS",
-				"name": "Improved Specials",
-				"description": "Upgrades to your specials",
+				"name": "Bonus Mana",
+				"description": "Gain 1 Bonus Base Mana",
 				"unlockCost": 50,
-				"children": ["INCREASED_MANA", "SPECIAL_REFRESH"]
+				"dungeonModifiers": ["BONUS_MANA"],
+				"children": ["SPECIAL_EFFICIENCY", "SPECIAL_REFRESH"]
 			},
 			{
-				"id": "INCREASED_MANA",
-				"name": "Increased Mana",
-				"description": "Start the game with +1 Mana",
-				"unlockCost": 50,				
-				"dungeonModifiers": ["INCREASED_MANA_1"]
+				"id": "SPECIAL_EFFICIENCY",
+				"name": "Special Cost Reduction",
+				"description": "Specials cost 1 less mana",
+				"unlockCost": 100,				
+				"passives": ["PASSIVE_REDUCE_SPECIAL_COUNT"]
 			},
 			{
 				"id": "SPECIAL_REFRESH",
 				"name": "Refreshed Mana",
 				"description": "At the start of each floor, refill your mana back to full",
-				"unlockCost": 50,
+				"unlockCost": 100,
 				"passives": ["PASSIVE_MANA_REFILL_ON_FLOOR_START"]
 			}
 		]

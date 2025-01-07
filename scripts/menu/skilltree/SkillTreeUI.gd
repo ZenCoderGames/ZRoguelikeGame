@@ -34,7 +34,7 @@ func _on_skill_selected(skillData:SkillData, isLocked:bool):
 	var skillName:String = skillData.name
 	unlockButton.visible = !isLocked
 	unlockButton.disabled = !PlayerDataManager.can_unlock_skill(skillData)
-	unlockButton.text = str(" Unlock: ", skillData.unlockCost)
+	unlockButton.text = str(" Unlock: x", skillData.unlockCost)
 	if skillData.isStartNode:
 		unlockButton.visible = false
 	if PlayerDataManager.has_skill_been_unlocked(skillData.id):

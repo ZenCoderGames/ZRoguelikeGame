@@ -37,7 +37,7 @@ func execute():
 		var moveX:int = character.specialSelectedDirnX
 		var moveY:int = character.specialSelectedDirnY
 		for i in range(actionMoveData.value):
-			var success:bool = character.move(moveX, moveY, false)
+			var success:bool = character.move(moveX, moveY, true, false)
 			if !success:
 				break
 			

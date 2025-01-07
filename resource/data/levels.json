@@ -16,37 +16,17 @@
 			"heroList": ["HERO_TUTORIAL"]
 		},
 		{
-			"id": "LEVEL_01",
-			"name": "Level 1",
-			"description": "Let the journey begin",
-			"dungeonPath": "resource/data/dungeons/easyDungeon.json",
-			"dungeonModifiers": ["DUNGEON_MOD_EASY"]
-		},
-		{
-			"id": "LEVEL_02",
+			"id": "LEVEL_CAMPAIGN",
 			"name": "Level 2",
 			"description": "Apprentice",
 			"dungeonPath": "resource/data/dungeons/balancedDungeon.json"
 		},
 		{
-			"id": "LEVEL_03",
-			"name": "Level 3",
-			"description": "Intermediate",
-			"dungeonPath": "resource/data/dungeons/hardDungeon.json",
-			"dungeonModifiers": ["DUNGEON_MOD_HARD_ATTACK"]
-		},
-		{
-			"id": "LEVEL_04",
+			"id": "LEVEL_CHALLENGE",
 			"name": "Level 4",
 			"description": "Advanced",
 			"dungeonPath": "resource/data/dungeons/hardDungeon.json",
 			"dungeonModifiers": ["DUNGEON_MOD_HARD_ATTACK", "DUNGEON_MOD_HARD_HEALTH"]
-		},
-		{
-			"id": "LEVEL_BOSS",
-			"name": "Boss",
-			"description": "This is a boss level",
-			"dungeonPath": "resource/data/dungeons/bossDungeon.json"
 		}
 	]
 }

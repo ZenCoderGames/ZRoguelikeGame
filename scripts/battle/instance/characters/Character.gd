@@ -56,6 +56,7 @@ var maxRuneSlots:int = 2
 
 var specialSelectedDirnX:int
 var specialSelectedDirnY:int
+var specialSelectedCells:Array[DungeonCell]
 
 signal OnCharacterMove(x, y)
 signal OnCharacterFailedToMove(x, y)
@@ -87,6 +88,7 @@ signal OnDungeonModifierAdded(character, dungeonModifierData)
 signal OnNearEnemy()
 signal OnAnySpecialActivated()
 signal OnSpecialAdded(character, special)
+signal OnAnySpecialAdded()
 signal OnSpecialRemoved(character, special)
 
 signal OnTurnCompleted()
@@ -150,14 +152,14 @@ func init(id:int, charDataVal, teamVal):
 			animPlayer.play("Idle")
 
 # MOVEMENT
-func move(x, y, triggerTurnCompleted:bool=true):
+func move(x, y, stopAtFirstCollision:bool=false, triggerTurnCompleted:bool=true):
 	if x==0 and y==0:
 		return
 
 	var newR:int = cell.row + y
 	var newC:int = cell.col + x
 	
-	var success:bool = cell.room.move_entity(self, cell, newR, newC, triggerTurnCompleted)
+	var success:bool = cell.room.move_entity(self, cell, newR, newC, stopAtFirstCollision, triggerTurnCompleted)
 	if success:
 		emit_signal("OnCharacterMove", x, y)
 		CombatEventManager.emit_signal("OnAnyCharacterMoved", self)
@@ -720,9 +722,13 @@ func has_passive(passiveData:PassiveData):
 # SPECIAL
 func add_special(specialData:SpecialData):
 	var special = Special.new(self, specialData)
-	emit_signal("OnSpecialAdded", self, special)
 	specialList.append(special)
 	specialDict[special.data.id] = special
+	emit_signal("OnSpecialAdded", self, special)
+	emit_signal("OnAnySpecialAdded")
+
+func get_last_special_added()->Special:
+	return specialList[specialList.size()-1]
 
 func add_special_modifier(specialId:String, specialModifier:SpecialModifier):
 	if !specialId.is_empty():

@@ -10,6 +10,12 @@ func execute():
 
 	character.clear_targets()
 
+	if findTargetData.useSelectedCells:
+		for cell in character.specialSelectedCells:
+			if cell.has_entity() and cell.entityObject is Character:
+				character.add_target(cell.entityObject)
+		return
+
 	if findTargetData.lastHitTarget:
 		if character.lastHitTarget!=null:
 			character.add_target(character.lastHitTarget)

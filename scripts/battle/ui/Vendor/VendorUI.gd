@@ -79,9 +79,11 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 		for item in itemsToConsider:
 			var vendorItem = VendorItemSelectUI.instantiate()
 			itemHolder.add_child(vendorItem)
+			vendorItem.init(_vendorItemList.size(), self, item)
 			_vendorItemList.append(vendorItem)
-			vendorItem.init(self, item)
 			maxItemsToDisplay = maxItemsToDisplay - 1
+			if _vendorItemList.size()==0:
+				vendorItem.set_selected(true)
 			if maxItemsToDisplay==0:
 				break
 

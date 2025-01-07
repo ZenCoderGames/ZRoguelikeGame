@@ -204,9 +204,10 @@ func _on_miniboss_death():
 	#if GameGlobals.battleInstance.startWithClasses:
 	#	generate_upgrade(Upgrade.UPGRADE_TYPE.HYBRID)
 	#else:
-	generate_vendor("ARCHIVIST_VENDOR")
-
-	#generate_vendor("MYSTIC_VENDOR")
+	var specialVendors:Array = ["ARCHIVIST_VENDOR", "MYSTIC_VENDOR", "SHAMAN_VENDOR"]
+	specialVendors.shuffle()
+	generate_vendor(specialVendors[0])
+	
 	generate_item("ITEM_HEALTH_POTION_LARGE")
 
 func is_cleared():
@@ -456,7 +457,7 @@ func _destroy_doors():
 	CombatEventManager.on_room_combat_ended(self)
 
 # ENTITY
-func move_entity(entity, currentCell, newR:int, newC:int, triggerTurnCompleted:bool=true) -> bool:
+func move_entity(entity, currentCell, newR:int, newC:int, stopAtFirstCollision:bool=false, triggerTurnCompleted:bool=true) -> bool:
 	# within bounds of room
 	if newC>=0 and newR>=0 and newC<maxCols and newR<maxRows:
 		var cell:DungeonCell = get_cell(newR, newC)
@@ -468,6 +469,8 @@ func move_entity(entity, currentCell, newR:int, newC:int, triggerTurnCompleted:b
 			cell.init_entity(entity, Constants.ENTITY_TYPE.DYNAMIC)
 			entity.move_to_cell(cell, triggerTurnCompleted)
 			return true
+		elif stopAtFirstCollision:
+			return false
 		elif(cell.is_entity_type(Constants.ENTITY_TYPE.DYNAMIC)):
 			# Tutorial Pickups
 			if cell.entityObject is TutorialPickup:

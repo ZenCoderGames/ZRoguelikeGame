@@ -70,12 +70,14 @@
 					},
 					{
 						"type": "ENERGY",
-						"value": 4,
+						"value": 0,
 						"maxValue": 4
 					}
 				],
-				"#specialId": "SPECIAL_PALADIN",
-				"specialId": "SPECIAL_DASH",
+				"specialId": "SPECIAL_PALADIN",
+				"#specialId": "SPECIAL_DASH",
+				"#specialId": "SPECIAL_SWAP",
+				"#specialId": "SPECIAL_LIGHTNING_BOLT",
 				"passiveId": "PASSIVE_PALADIN"
 			},
 			{
@@ -149,11 +151,11 @@
 					},
 					{
 						"type": "DAMAGE",
-						"value": 2
+						"value": 3
 					},
 					{
 						"type": "ENERGY",
-						"maxValue": 3
+						"maxValue": 4
 					}
 				]
 			}

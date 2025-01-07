@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cktcjr0tuc4x7" path="res://sourceArt/Icons/arrowDown.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://bmuvff2xqjsds" path="res://sourceArt/Icons/arrowRight.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://bbh8mtn84lvlf" path="res://sourceArt/Icons/signal3.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://cdbfmuxhyewhy" path="res://sourceArt/Random/Circle.png" id="12_tecsw"]
+[ext_resource type="Texture2D" uid="uid://ccktqyool75k8" path="res://sourceArt/Icons/coin.png" id="12_stvnx"]
 
 [node name="MainGUI" type="Control"]
 layout_mode = 3
@@ -247,12 +247,13 @@ mouse_filter = 2
 alignment = 1
 
 [node name="BattleProgressPanel" type="VBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -67.0
-offset_right = -1.0
-offset_bottom = 68.0
+offset_left = -80.0
+offset_right = -10.0
+offset_bottom = 98.0
 grow_horizontal = 0
 
 [node name="LevelContainer" type="HBoxContainer" parent="BattleProgressPanel"]
@@ -307,7 +308,7 @@ alignment = 2
 self_modulate = Color(0.664044, 0.655774, 7.70092e-07, 1)
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("12_tecsw")
+texture = ExtResource("12_stvnx")
 expand_mode = 1
 stretch_mode = 5
 

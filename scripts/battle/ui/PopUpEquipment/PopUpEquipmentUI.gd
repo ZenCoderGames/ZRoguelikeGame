@@ -36,18 +36,18 @@ func init(newItem:Item, slotTypeArray:Array):
 	for equipmentSlot in slotTypeArray:
 		var currentSlotPopUpItem = PopUpEquipmentItemUIClass.instantiate()
 		itemHolder.add_child(currentSlotPopUpItem)
-		_popUpItemList.append(currentSlotPopUpItem)
 		if GameGlobals.dungeon.player.equipment.is_slot_free(equipmentSlot):	
-			currentSlotPopUpItem.init(self, null, equipmentSlot)
+			currentSlotPopUpItem.init(_popUpItemList.size(), self, null, equipmentSlot)
 		else:
-			currentSlotPopUpItem.init(self, GameGlobals.dungeon.player.equipment.get_item_for_slot(equipmentSlot), equipmentSlot)
-	
+			currentSlotPopUpItem.init(_popUpItemList.size(), self, GameGlobals.dungeon.player.equipment.get_item_for_slot(equipmentSlot), equipmentSlot)
+		_popUpItemList.append(currentSlotPopUpItem)
+
 	# New Item
 	if newItem!=null:
 		var newPopUpItem = PopUpEquipmentItemUIClass.instantiate()
 		itemHolder.add_child(newPopUpItem)
+		newPopUpItem.init(_popUpItemList.size(), self, newItem, -1)
 		_popUpItemList.append(newPopUpItem)
-		newPopUpItem.init(self, newItem, -1)
 
 	backBtn.visible = newItem==null
 	backBtn.connect("button_up",Callable(self,"_on_back_pressed"))
@@ -96,7 +96,8 @@ func item_discarded(_item:Item, slot:int):
 func clean_up():
 	CombatEventManager.emit_signal("OnPopUpEquipmentClosed")
 	UIEventManager.emit_signal("OnGenericUIEvent")
-	GameGlobals.dungeon.player.disconnect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
+	if GameGlobals.dungeon.player!=null:
+		GameGlobals.dungeon.player.disconnect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
 
 # UTILS
 func has_new_item():

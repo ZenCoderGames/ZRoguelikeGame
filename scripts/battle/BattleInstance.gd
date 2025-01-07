@@ -27,7 +27,7 @@ class_name BattleInstance
 @export var debugSpawnSharedUpgrade:bool
 @export var debugSpawnClassSpecificUpgrade:bool
 @export var debugSpawnHybridUpgrade:bool
-@export var debugSpawnVendor:String
+@export var debugSpawnVendors:Array # (Array, String)
 @export var debugSouls:int
 @export var setPlayerInvulnerable:bool
 @export var setEnemiesInvulnerable:bool

@@ -16,7 +16,7 @@ signal OnProgress(progress)
 signal OnReady(special)
 signal OnReset(special)
 signal OnCountIncremented(special)
-signal OnCountUpdated(currentResourceCount)
+signal OnCountUpdated()
 signal OnSpecialModifierAdded()
 signal OnSpecialModifierRemoved()
 
@@ -131,41 +131,6 @@ func _activate():
 	else:
 		_start_activate_timeline()
 
-var InSelectionMode:bool
-var _selectedCells:Array
-var _selectedVFX:Array
-
-func _start_selection():
-	InSelectionMode = true
-	if data.selectionType == SpecialData.SELECTION_TYPE.DIRECTIONAL:
-		var room:DungeonRoom = GameGlobals.dungeon.player.currentRoom
-		room.darken_all_cells()
-		var playerCell:DungeonCell = GameGlobals.dungeon.player.cell
-		playerCell.lighten()
-
-		# right
-		var cell:DungeonCell = GameGlobals.dungeon.player.currentRoom.get_cell(playerCell.row, playerCell.col + 1)
-		var vfx = room.generate_vfx("entity/effects/Effect_Arrow_Right.tscn", cell, 0.35)
-		_selectedCells.append(cell)
-		_selectedVFX.append(vfx)
-		# left
-		cell = GameGlobals.dungeon.player.currentRoom.get_cell(playerCell.row, playerCell.col - 1)
-		vfx = room.generate_vfx("entity/effects/Effect_Arrow_Left.tscn", cell, 0.35)
-		_selectedCells.append(cell)
-		_selectedVFX.append(vfx)
-		# up
-		cell = GameGlobals.dungeon.player.currentRoom.get_cell(playerCell.row - 1, playerCell.col)
-		vfx = room.generate_vfx("entity/effects/Effect_Arrow_Up.tscn", cell, 0.35)
-		_selectedCells.append(cell)
-		_selectedVFX.append(vfx)
-		# down
-		cell = GameGlobals.dungeon.player.currentRoom.get_cell(playerCell.row + 1, playerCell.col)
-		vfx = room.generate_vfx("entity/effects/Effect_Arrow_Down.tscn", cell, 0.35)
-		_selectedCells.append(cell)
-		_selectedVFX.append(vfx)
-
-		CombatEventManager.emit_signal("OnPlayerSpecialSelectionActivated", self)
-
 func _start_activate_timeline():
 	for action in timelineActions:
 		if action.can_execute():
@@ -200,7 +165,7 @@ func get_max_count()->int:
 
 func _updateCount(newCount:int):
 	currentCount = newCount
-	emit_signal("OnCountUpdated", currentCount)
+	emit_signal("OnCountUpdated")
 
 func get_remaining_count():
 	return get_max_count() - currentCount
@@ -223,16 +188,90 @@ func _on_special_activated(_special:Special):
 func _on_special_completed(_special:Special):
 	_blockActivation = false
 
+# SELECTION
+var InSelectionMode:bool
+var _selectedCells:Array
+var _selectedCellsLeft:Array
+var _selectedCellsRight:Array
+var _selectedCellsUp:Array
+var _selectedCellsDown:Array
+var _selectedVFX:Array
+
+func _start_selection():
+	InSelectionMode = true
+	if data.selectionType == SpecialData.SELECTION_TYPE.DIRECTIONAL:
+		var room:DungeonRoom = GameGlobals.dungeon.player.currentRoom
+		room.darken_all_cells()
+		var playerCell:DungeonCell = GameGlobals.dungeon.player.cell
+		playerCell.lighten()
+
+		# left
+		for i in range(data.selectionRange):
+			_highlight_selected_cell(_selectedCellsLeft, playerCell.row, playerCell.col - (i+1), false, "entity/effects/Effect_Arrow_Left.tscn")
+		# right
+		for i in range(data.selectionRange):
+			_highlight_selected_cell(_selectedCellsRight, playerCell.row, playerCell.col + (i + 1), false, "entity/effects/Effect_Arrow_Right.tscn")
+		# up
+		for i in range(data.selectionRange):
+			_highlight_selected_cell(_selectedCellsUp, playerCell.row - (i+1), playerCell.col, false, "entity/effects/Effect_Arrow_Up.tscn")
+		# down
+		for i in range(data.selectionRange):
+			_highlight_selected_cell(_selectedCellsDown, playerCell.row + (i+1), playerCell.col, false, "entity/effects/Effect_Arrow_Down.tscn")
+	elif data.selectionType == SpecialData.SELECTION_TYPE.DIRECTIONAL_CELL:
+		var room:DungeonRoom = GameGlobals.dungeon.player.currentRoom
+		room.darken_all_cells()
+		var playerCell:DungeonCell = GameGlobals.dungeon.player.cell
+		playerCell.lighten()
+
+		# left
+		for i in range(data.selectionRange):
+			_highlight_selected_cell(_selectedCellsLeft, playerCell.row, playerCell.col - (i+1), true, "entity/effects/Effect_HighlightCell.tscn")
+		# right
+		for i in range(data.selectionRange):
+			_highlight_selected_cell(_selectedCellsRight, playerCell.row, playerCell.col + (i + 1), true, "entity/effects/Effect_HighlightCell.tscn")
+		# up
+		for i in range(data.selectionRange):
+			_highlight_selected_cell(_selectedCellsUp, playerCell.row - (i+1), playerCell.col, true, "entity/effects/Effect_HighlightCell.tscn")
+		# down
+		for i in range(data.selectionRange):
+			_highlight_selected_cell(_selectedCellsDown, playerCell.row + (i+1), playerCell.col, true, "entity/effects/Effect_HighlightCell.tscn")
+
+	CombatEventManager.emit_signal("OnPlayerSpecialSelectionActivated", self)
+
+func _highlight_selected_cell(directionalCellArray:Array, row:int, col:int, lightenCell:bool, vfxPath:String):
+	var room:DungeonRoom = GameGlobals.dungeon.player.currentRoom
+	var cell:DungeonCell = GameGlobals.dungeon.player.currentRoom.get_cell(row, col)
+	if cell!=null:
+		var vfx = room.generate_vfx(vfxPath, cell, 0.35)
+		directionalCellArray.append(cell)
+		_selectedCells.append(cell)
+		_selectedVFX.append(vfx)
+		if lightenCell:
+			cell.lighten()
+		if cell.is_entity_type(Constants.ENTITY_TYPE.STATIC):
+			vfx.self_modulate = Color.RED
+
 func _on_special_selection_completed(special:Special, dirn:String):
 	if special == self:
-		if dirn==Constants.INPUT_MOVE_LEFT:
-			character.specialSelectedDirnX = -1
-		elif dirn==Constants.INPUT_MOVE_RIGHT:
-			character.specialSelectedDirnX = 1
-		elif dirn==Constants.INPUT_MOVE_UP:
-			character.specialSelectedDirnY = -1
-		elif dirn==Constants.INPUT_MOVE_DOWN:
-			character.specialSelectedDirnY = 1
+		if data.selectionType == SpecialData.SELECTION_TYPE.DIRECTIONAL:
+			if dirn==Constants.INPUT_MOVE_LEFT:
+				character.specialSelectedDirnX = -1
+			elif dirn==Constants.INPUT_MOVE_RIGHT:
+				character.specialSelectedDirnX = 1
+			elif dirn==Constants.INPUT_MOVE_UP:
+				character.specialSelectedDirnY = -1
+			elif dirn==Constants.INPUT_MOVE_DOWN:
+				character.specialSelectedDirnY = 1
+		elif data.selectionType == SpecialData.SELECTION_TYPE.DIRECTIONAL_CELL:
+			if dirn==Constants.INPUT_MOVE_LEFT:
+				character.specialSelectedCells.append_array(_selectedCellsLeft)
+			elif dirn==Constants.INPUT_MOVE_RIGHT:
+				character.specialSelectedCells.append_array(_selectedCellsRight)
+			elif dirn==Constants.INPUT_MOVE_UP:
+				character.specialSelectedCells.append_array(_selectedCellsUp)
+			elif dirn==Constants.INPUT_MOVE_DOWN:
+				character.specialSelectedCells.append_array(_selectedCellsDown)
+
 		_start_activate_timeline()
 
 		# clean up
@@ -244,8 +283,13 @@ func _on_special_selection_completed(special:Special, dirn:String):
 			room.destroy_vfx(_selectedVFX[i], _selectedCells[i])
 		_selectedCells.clear()
 		_selectedVFX.clear()
+		_selectedCellsLeft.clear()
+		_selectedCellsRight.clear()
+		_selectedCellsUp.clear()
+		_selectedCellsDown.clear()
 
 		character.specialSelectedDirnX = 0
 		character.specialSelectedDirnY = 0
+		character.specialSelectedCells.clear()
 		InSelectionMode = false
 		

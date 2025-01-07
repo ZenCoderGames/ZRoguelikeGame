@@ -210,7 +210,8 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 
 func _debug_inputs(event: InputEvent):
 	if event.is_action_pressed("debug_victory"):
-		player.end_dungeon()
+		if player!=null:
+			player.end_dungeon()
 	if event.is_action_pressed("debug_fail"):
 		GameEventManager.emit_signal("OnDungeonExited", false)
 	if event.is_action_pressed("debug_add_souls_100"):

@@ -93,6 +93,9 @@ func init(entityObj):
 		newSpellUI.init_as_empty("Spell")
 		spellSlots.append(newSpellUI)'''
 
+	# Potions
+	potionContainer.visible = false
+
 	# Weapon
 	weaponSlot = _create_item_slot("Weapon")
 	# Armor

@@ -1,6 +1,7 @@
 extends Node
 
 signal OnCombatInitialized()
+signal OnStartDungeon()
 signal OnStartFloor()
 signal OnStartTurn()
 signal OnEndTurn()
@@ -66,6 +67,8 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 		parentCharacter.equipment.connect("OnSpellActivated",Callable(object,"activate_on_parentCharacter_spell"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPECIAL_ACTIVATE):
 		parentCharacter.connect("OnAnySpecialActivated",Callable(object,"activate"))
+	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_SPECIAL_ADDED):
+		parentCharacter.connect("OnAnySpecialAdded",Callable(object,"activate"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_ADD_STATUS_EFFECT_TO_SELF):
 		parentCharacter.connect("OnStatusEffectAdded",Callable(object,"activate_on_add_status_effect"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_ADD_STATUS_EFFECT_TO_ENEMY):
@@ -74,6 +77,8 @@ func register_for_conditional_events(triggerConditions:Array, object, parentChar
 		parentCharacter.connect("OnNearEnemy",Callable(object,"activate"))
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_START_FLOOR):
 		connect("OnStartFloor",Callable(object,"activate"))
+	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_START_DUNGEON):
+		connect("OnStartDungeon",Callable(object,"activate"))
 
 func on_room_combat_started(room):
 	emit_signal("OnRoomCombatStarted", room)
