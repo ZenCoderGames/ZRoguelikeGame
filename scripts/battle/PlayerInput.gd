@@ -5,14 +5,18 @@ extends Node
 var player:PlayerCharacter
 var disableInput:bool = true
 var playerMoveAction:ActionMove
-var inputDelay:float = 0.0
+var _inputDelay:float = 0
+var moveInputDelay:float = 0.15
+var combatInputDelay:float = 0.2
+var inputThreshold:float = 0.8
 var blockInputsForTurn:bool
 var blockMovementInputsForTurn:bool
 var _timeSinceLastInput:float
-var _cachedTimeSinceLastInput:float
-var _cachedX:int
-var _cachedY:int
 var _specialForSelection:Special
+var _moveX:int
+var _moveY:int
+var _joysticksConnected:bool
+var _gotMoveInputsThisFrame:bool
 
 func _ready():
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
@@ -85,93 +89,42 @@ func _unhandled_input(event: InputEvent) -> void:
 		_process_special_selection(event)
 		return
 
-	# movement
-	if blockMovementInputsForTurn:
+func _process(_delta):
+	if player==null or !is_instance_valid(player):
 		return
 		
-	var x:int = 0
-	var y:int = 0
-
-	if !player.currentRoom.is_in_combat() and _timeSinceLastInput>0 and\
-		GlobalTimer.get_time_since(_timeSinceLastInput)>Constants.HOLD_TIME_THRESHOLD:
-		if event.is_action(Constants.INPUT_MOVE_LEFT):
-			x = -1
-			_cachedX = -1
-		elif event.is_action(Constants.INPUT_MOVE_RIGHT):
-			x = 1
-			_cachedX = 1
-		elif event.is_action(Constants.INPUT_MOVE_UP):
-			y = -1
-			_cachedY = -1
-		elif event.is_action(Constants.INPUT_MOVE_DOWN):
-			y = 1
-			_cachedY = 1
-	else:
-		if event.is_action_pressed(Constants.INPUT_MOVE_LEFT):
-			x = -1
-			_cachedX = -1
-			_cachedY = 0
-			_timeSinceLastInput = GlobalTimer.get_current_time()
-			_cachedTimeSinceLastInput = _timeSinceLastInput
-		elif event.is_action_pressed(Constants.INPUT_MOVE_RIGHT):
-			x = 1
-			_cachedX = 1
-			_cachedY = 0
-			_timeSinceLastInput = GlobalTimer.get_current_time()
-			_cachedTimeSinceLastInput = _timeSinceLastInput
-		elif event.is_action_pressed(Constants.INPUT_MOVE_UP):
-			y = -1
-			_cachedY = -1
-			_cachedX = 0
-			_timeSinceLastInput = GlobalTimer.get_current_time()
-			_cachedTimeSinceLastInput = _timeSinceLastInput
-		elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
-			y = 1
-			_cachedY = 1
-			_cachedX = 0
-			_timeSinceLastInput = GlobalTimer.get_current_time()
-			_cachedTimeSinceLastInput = _timeSinceLastInput
-
-	if event.is_action_released(Constants.INPUT_MOVE_LEFT) or\
-		event.is_action_released(Constants.INPUT_MOVE_RIGHT) or\
-		event.is_action_released(Constants.INPUT_MOVE_UP) or\
-		event.is_action_released(Constants.INPUT_MOVE_DOWN):
-		_timeSinceLastInput = 0
+	_process_keyboard_movement_inputs()
+	_process_joystick_movement_inputs()
+		
+	if !_gotMoveInputsThisFrame:
+		_moveX = 0
+		_moveY = 0
+		
+	_gotMoveInputsThisFrame = false		
 
 	if blockInputsForTurn:
 		return
+		
+	if blockMovementInputsForTurn:
+		return
 
-	if player != null and (x!=0 or y!=0):
+	if _timeSinceLastInput>0 and GlobalTimer.get_time_since(_timeSinceLastInput)<_inputDelay:
+		return
+
+	if (_moveX!=0 or _moveY!=0):
+		_timeSinceLastInput = GlobalTimer.get_current_time()
+		if player.currentRoom.is_in_combat():
+			_inputDelay = combatInputDelay
+		else:
+			_inputDelay = moveInputDelay
+		
+	if player != null and (_moveX!=0 or _moveY!=0):
 		if playerMoveAction.can_execute():
 			if player.currentRoom.is_in_combat():
 				blockInputsForTurn = true
-			var success:bool = player.move(x, y)
+			var success:bool = player.move(_moveX, _moveY)
 			if !success:
 				blockInputsForTurn = false
-			_cachedX = 0
-			_cachedY = 0
-
-func _process(_delta):
-	if player == null:
-		return
-
-	if !player.currentRoom.is_in_combat() or\
-		GlobalTimer.get_current_time() - _cachedTimeSinceLastInput>Constants.INPUT_CACHE_TIME_THRESHOLD:
-		_cachedX = 0
-		_cachedY = 0
-
-	if blockInputsForTurn:
-		return
-	
-	if (_cachedX!=0 or _cachedY!=0):
-		if playerMoveAction.can_execute():
-			if player.currentRoom.is_in_combat():
-				blockInputsForTurn = true
-			var success:bool = player.move(_cachedX, _cachedY)
-			if !success:
-				blockInputsForTurn = false
-			_cachedX = 0
-			_cachedY = 0
 
 func _on_player_turn_completed():
 	pass
@@ -242,3 +195,58 @@ func _process_special_selection(event: InputEvent):
 func _on_special_selection_completed(dirn:String):
 	CombatEventManager.emit_signal("OnPlayerSpecialSelectionCompleted", _specialForSelection, dirn)
 	_specialForSelection = null
+
+# KEYBOARD
+func _process_keyboard_movement_inputs():
+	if !Utils.is_joystick_enabled():
+		var left_stick_x = Input.get_axis(Constants.INPUT_MOVE_LEFT, Constants.INPUT_MOVE_RIGHT)
+		var left_stick_y = Input.get_axis(Constants.INPUT_MOVE_UP, Constants.INPUT_MOVE_DOWN)
+		if abs(left_stick_x)>abs(left_stick_y):
+			left_stick_y = 0
+		else:
+			left_stick_x = 0
+		if abs(left_stick_x)>inputThreshold:
+			if left_stick_x>0:
+				_moveX = 1
+			else:
+				_moveX = -1
+			_gotMoveInputsThisFrame = true
+		else:
+			_moveX = 0
+		if abs(left_stick_y)>inputThreshold:
+			if left_stick_y>0:
+				_moveY = 1
+			else:
+				_moveY = -1
+			_gotMoveInputsThisFrame = true
+		else:
+			_moveY = 0
+		
+# JOYSTICK
+func _process_joystick_movement_inputs():
+	if Utils.is_joystick_enabled():
+		var joypad_id = 0
+		var left_stick_x = Input.get_joy_axis(joypad_id, JOY_AXIS_LEFT_X)
+		var left_stick_y = Input.get_joy_axis(joypad_id, JOY_AXIS_LEFT_Y)
+		#var right_stick_x = Input.get_joy_axis(joypad_id, JOY_AXIS_RIGHT_X)
+		#var right_stick_y = Input.get_joy_axis(joypad_id, JOY_AXIS_RIGHT_Y)
+		if abs(left_stick_x)>abs(left_stick_y):
+			left_stick_y = 0
+		else:
+			left_stick_x = 0
+		if abs(left_stick_x)>inputThreshold:
+			if left_stick_x>0:
+				_moveX = 1
+			else:
+				_moveX = -1
+			_gotMoveInputsThisFrame = true
+		else:
+			_moveX = 0
+		if abs(left_stick_y)>inputThreshold:
+			if left_stick_y>0:
+				_moveY = 1
+			else:
+				_moveY = -1
+			_gotMoveInputsThisFrame = true
+		else:
+			_moveY = 0

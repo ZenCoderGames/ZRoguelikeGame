@@ -161,7 +161,6 @@ vertical_alignment = 1
 
 [node name="MenuUI" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -190,7 +189,7 @@ text = "Continue"
 
 [node name="NewGame" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
-self_modulate = Color(0.102982, 0.717483, 2.69532e-06, 1)
+modulate = Color(0.101961, 0.717647, 0, 1)
 layout_mode = 2
 text = "New Game"
 

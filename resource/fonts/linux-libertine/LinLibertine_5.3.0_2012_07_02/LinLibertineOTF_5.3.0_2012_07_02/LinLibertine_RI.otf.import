@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/LinLibertine_RI.otf-48ec71ec495a8664e76822b21
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

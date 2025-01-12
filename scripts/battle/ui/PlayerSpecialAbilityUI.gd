@@ -137,11 +137,19 @@ func get_special_input_str():
 	return ""
 
 func _get_input_str():
-	if _idx==0:
-		return "(Q) "
-	elif _idx==1:
-		return "(E) "
-	elif _idx==2:
-		return "(R) "
+	if Utils.is_joystick_enabled():
+		if _idx==0:
+			return "(X) "
+		elif _idx==1:
+			return "(Y) "
+		elif _idx==2:
+			return "(A) "
+	else:
+		if _idx==0:
+			return "(Q) "
+		elif _idx==1:
+			return "(E) "
+		elif _idx==2:
+			return "(R) "
 	
 	return ""

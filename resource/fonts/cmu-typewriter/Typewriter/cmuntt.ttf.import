@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/cmuntt.ttf-1291816c17c2fea891ecf03d12d0b632.f
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

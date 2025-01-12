@@ -78,11 +78,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			_on_item_chosen()
 
 func _get_input_str():
-	if _idx==0:
-		return "(Z) "
-	elif _idx==1:
-		return "(X) "
-	elif _idx==2:
-		return "(C) "
+	if Utils.is_joystick_enabled():
+		if _idx==0:
+			return "(Up) "
+		elif _idx==1:
+			return "(Right) "
+		elif _idx==2:
+			return "(Down) "
+	else:
+		if _idx==0:
+			return "(Z) "
+		elif _idx==1:
+			return "(X) "
+		elif _idx==2:
+			return "(C) "
 	
 	return ""

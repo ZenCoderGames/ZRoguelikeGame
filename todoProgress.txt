@@ -1,6 +1,9 @@
 
 Roguelike Dev:
 
+- Get build on Steam deck
+- Fill out Notion
+
 - Test out all the new Skilltree Upgrades
 - Armor
 - Specials have Slots (Unlockable in skill tree)

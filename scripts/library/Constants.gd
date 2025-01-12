@@ -60,6 +60,7 @@ const INPUT_VENDOR_OPTION1: String = "vendor_option_1"
 const INPUT_VENDOR_OPTION2: String = "vendor_option_2"
 const INPUT_VENDOR_OPTION3: String = "vendor_option_3"
 
+const INPUT_CANCEL_VENDOR_MODIFIER: String = "cancel_vendor_modifier"
 const INPUT_CANCEL_VENDOR_OPTION1: String = "cancel_vendor_option_1"
 const INPUT_CANCEL_VENDOR_OPTION2: String = "cancel_vendor_option_2"
 const INPUT_CANCEL_VENDOR_OPTION3: String = "cancel_vendor_option_3"
@@ -67,6 +68,8 @@ const INPUT_CANCEL_VENDOR_OPTION3: String = "cancel_vendor_option_3"
 const INPUT_USE_SPECIAL1: String = "use_special_1"
 const INPUT_USE_SPECIAL2: String = "use_special_2"
 const INPUT_USE_SPECIAL3: String = "use_special_3"
+
+const INPUT_MENU_ACCEPT: String = "menu_accept"
 
 # GAMEPLAY
 enum TRIGGER_CONDITION { NONE, ON_PRE_ATTACK, ON_PRE_HIT, ON_BLOCKED_HIT, ON_EVADED_HIT, ON_TAKE_HIT, ON_POST_HIT, ON_POST_ATTACK,\
@@ -99,8 +102,8 @@ const DEATH_TO_MENU_TIME:float = 2.0
 const HOLD_TIME_THRESHOLD:float = 0.35
 const INPUT_CACHE_TIME_THRESHOLD:float = 4.5
 
-const CAM_ZOOM_DEFAULT:Vector2 = Vector2(1.1, 1.1)
-const CAM_ZOOM_COMBAT:Vector2 = Vector2(1.3, 1.3)
+const CAM_ZOOM_DEFAULT:Vector2 = Vector2(1.5, 1.5)
+const CAM_ZOOM_COMBAT:Vector2 = Vector2(1.75, 1.75)
 const CAM_ZOOM_EASE_TIME:float = 0.35
 
 # ECONOMY

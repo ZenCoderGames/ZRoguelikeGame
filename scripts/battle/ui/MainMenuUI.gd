@@ -32,6 +32,10 @@ class_name MainMenuUI
 
 const BattleEndEnemyXPUIClass := preload("res://ui/battleEnd/BattleEndEnemyXPUI.tscn")
 
+# Keyboard Controls
+var _keyboardFocusList:Array[Button]
+var _keyboardFocusIdx:int
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	continueGameButton.connect("button_up",Callable(self,"on_continue_game"))
@@ -66,6 +70,8 @@ func _ready():
 	_on_player_data_updated()
 
 	show_menu()
+	
+	_setup_keyboard_focus()
 	
 func _on_dungeon_init():
 	_clean_up()
@@ -254,3 +260,33 @@ func _on_music_off():
 	musicOffButton.visible = false
 	musicOnButton.visible = true
 	GameGlobals.audioManager.set_as_disabled(false)
+
+# KEYBOARD FOCUS
+func _setup_keyboard_focus():
+	if !PlayerDataManager.is_new_player():
+		_keyboardFocusList.append(continueGameButton)
+	_keyboardFocusList.append(newGameButton)
+	_keyboardFocusList.append(exitGameButton)
+	_update_keyboard_focus()
+
+func _input(event: InputEvent) -> void:
+	if _keyboardFocusList.is_empty():
+		return
+		
+	if event.is_action_pressed(Constants.INPUT_MOVE_UP):
+		_keyboardFocusIdx = _keyboardFocusIdx - 1
+		_update_keyboard_focus()
+	elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
+		_keyboardFocusIdx = _keyboardFocusIdx + 1
+		_update_keyboard_focus()
+		
+	if event.is_action_pressed(Constants.INPUT_MENU_ACCEPT):
+		_keyboardFocusList[_keyboardFocusIdx].emit_signal("button_up")
+		
+func _update_keyboard_focus():
+	if _keyboardFocusIdx<0:
+		_keyboardFocusIdx = 0
+	elif _keyboardFocusIdx>_keyboardFocusList.size()-1:
+		_keyboardFocusIdx = _keyboardFocusList.size()-1
+		
+	_keyboardFocusList[_keyboardFocusIdx].grab_focus()

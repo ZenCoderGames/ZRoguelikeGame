@@ -62,40 +62,63 @@ func refresh():
 	equippedLabel.visible = (_item!=null) and (_slot!=-1)
 	equipBtn.visible = (_slot!=-1) and _parent.has_new_item()
 	discardBtn.visible = (_item!=null)
-
+	
+var _isCancelMode:bool = false
+func _process(delta: float) -> void:
+	_isCancelMode = Input.is_action_pressed(Constants.INPUT_CANCEL_VENDOR_MODIFIER)
+		
 func _unhandled_input(event: InputEvent) -> void:
 	if _idx==0:
-		if event.is_action_pressed(Constants.INPUT_CANCEL_VENDOR_OPTION1):
-			_on_item_discarded()
-		elif event.is_action_pressed(Constants.INPUT_VENDOR_OPTION1):
-			_on_item_equipped()
+		if event.is_action_pressed(Constants.INPUT_VENDOR_OPTION1):
+			if _isCancelMode:
+				_on_item_discarded()
+			else:
+				_on_item_equipped()
 	elif _idx==1:
-		if event.is_action_pressed(Constants.INPUT_CANCEL_VENDOR_OPTION2):
-			_on_item_discarded()
-		elif event.is_action_pressed(Constants.INPUT_VENDOR_OPTION2):
-			_on_item_equipped()
+		if event.is_action_pressed(Constants.INPUT_VENDOR_OPTION2):
+			if _isCancelMode:
+				_on_item_discarded()
+			else:
+				_on_item_equipped()
 	elif _idx==2:
-		if event.is_action_pressed(Constants.INPUT_CANCEL_VENDOR_OPTION3):
-			_on_item_discarded()
-		elif event.is_action_pressed(Constants.INPUT_VENDOR_OPTION3):
-			_on_item_equipped()
+		if event.is_action_pressed(Constants.INPUT_VENDOR_OPTION3):
+			if _isCancelMode:
+				_on_item_discarded()
+			else:
+				_on_item_equipped()
 
 func _get_input_str():
-	if _idx==0:
-		return "(Z) "
-	elif _idx==1:
-		return "(X) "
-	elif _idx==2:
-		return "(C) "
+	if Utils.is_joystick_enabled():
+		if _idx==0:
+			return "(Up) "
+		elif _idx==1:
+			return "(Right) "
+		elif _idx==2:
+			return "(Down) "
+	else:
+		if _idx==0:
+			return "(Z) "
+		elif _idx==1:
+			return "(X) "
+		elif _idx==2:
+			return "(C) "
 	
 	return ""
 
 func _get_discard_input_str():
-	if _idx==0:
-		return "(Alt+Z) "
-	elif _idx==1:
-		return "(Alt+X) "
-	elif _idx==2:
-		return "(Alt+C) "
+	if Utils.is_joystick_enabled():
+		if _idx==0:
+			return "(L1+Up) "
+		elif _idx==1:
+			return "(L1+Right) "
+		elif _idx==2:
+			return "(L1+Down) "
+	else:
+		if _idx==0:
+			return "(Alt+Z) "
+		elif _idx==1:
+			return "(Alt+X) "
+		elif _idx==2:
+			return "(Alt+C) "
 	
 	return ""

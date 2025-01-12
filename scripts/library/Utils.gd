@@ -133,6 +133,10 @@ func clean_up_all_signals(node:Node):
 			#cur_conn.source.disconnect(, node, cur_conn.method_name)
 	'''
 	pass
+	
+func is_joystick_enabled():
+	var connected_joypads = Input.get_connected_joypads()
+	return connected_joypads.size()>0
 
 # TODO: Keyword parsing
 func format_text(val:String):

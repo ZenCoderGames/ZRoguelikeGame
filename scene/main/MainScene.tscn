@@ -58,7 +58,7 @@ usePopUpEquipment = true
 
 [node name="DungeonCamera" type="Camera2D" parent="Battle"]
 position = Vector2(400, 300)
-zoom = Vector2(1.1, 1.1)
+zoom = Vector2(1.5, 1.5)
 script = ExtResource("1")
 
 [node name="PlayerInput" type="Node" parent="Battle"]
