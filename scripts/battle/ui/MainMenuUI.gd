@@ -32,10 +32,6 @@ class_name MainMenuUI
 
 const BattleEndEnemyXPUIClass := preload("res://ui/battleEnd/BattleEndEnemyXPUI.tscn")
 
-# Keyboard Controls
-var _keyboardFocusList:Array[Button]
-var _keyboardFocusIdx:int
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	continueGameButton.connect("button_up",Callable(self,"on_continue_game"))
@@ -71,8 +67,6 @@ func _ready():
 
 	show_menu()
 	
-	_setup_keyboard_focus()
-	
 func _on_dungeon_init():
 	_clean_up()
 	_shared_init()
@@ -92,6 +86,7 @@ func show_menu():
 	characterSelectUI.visible = false
 	levelSelectUI.visible = false
 	continueGameButton.visible = !PlayerDataManager.is_new_player()
+	_setup_keyboard_focus()
 
 func _on_character_chosen(_charData):
 	_show_base_menu(false)
@@ -99,6 +94,7 @@ func _on_character_chosen(_charData):
 	levelSelectUI.visible = true
 	levelSelectUI.init_from_data(_charData)
 	#GameEventManager.ready_to_battle(myLevelData)
+	GameGlobals.change_state(GameGlobals.STATES.LEVEL_SELECT)
 
 func on_tutorial():
 	show_character_select()
@@ -122,6 +118,7 @@ func show_character_select():
 	#	levelId = GameGlobals.battleInstance.debugLevelId
 
 	characterSelectUI.init_from_data()
+	GameGlobals.change_state(GameGlobals.STATES.CHARACTER_SELECT)
 
 func _on_back_to_character_select():
 	skillTreeUI.visible = false
@@ -169,6 +166,7 @@ func _on_show_skill_tree():
 	skillTreeUI.init_from_data("SHARED_SKILLTREE")
 	skillTreeUI.visible = true
 	background.visible = false
+	GameGlobals.change_state(GameGlobals.STATES.SKILL_TREE)
 
 func _clean_up():
 	victoryUI.visible = false
@@ -178,39 +176,26 @@ func _clean_up():
 
 # BACK MENU
 func _show_back_menu():
-	if backMenuUI.visible:
-		_on_back_to_game()
-		return
-		
-	if skillTreeUI.visible:
+	if GameGlobals.is_in_state(GameGlobals.STATES.BATTLE):
+		if victoryUI.visible or deathUI.visible:
+			_on_back_to_main_menu_from_battle()
+			_on_back_to_character_select()
+		elif backMenuUI.visible:
+			_on_back_to_game()
+		else:
+			_show_base_menu(false)
+			if GameGlobals.dungeon==null or !GameGlobals.dungeon.inBackableMenu:
+				get_node(".").visible = true
+				backMenuUI.visible = true
+			else:
+				_on_back_to_game()
+	elif GameGlobals.is_in_state(GameGlobals.STATES.SKILL_TREE):
 		UIEventManager.emit_signal("ShowSkillTree", false, "")
 		_on_back_to_character_select()
-		return
-
-	if victoryUI.visible:
-		_on_back_to_main_menu_from_battle()
-		_on_back_to_character_select()
-		return
-
-	if deathUI.visible:
-		_on_back_to_main_menu_from_battle()
-		_on_back_to_character_select()
-		return
-
-	if characterSelectUI.visible:
+	elif GameGlobals.is_in_state(GameGlobals.STATES.CHARACTER_SELECT):
 		_on_back_to_main_menu()
-		return
-
-	if levelSelectUI.visible:
+	elif GameGlobals.is_in_state(GameGlobals.STATES.LEVEL_SELECT):
 		_on_back_to_character_select()
-		return
-
-	_show_base_menu(false)
-	if GameGlobals.dungeon==null or !GameGlobals.dungeon.inBackableMenu:
-		get_node(".").visible = true
-		backMenuUI.visible = true
-	else:
-		_on_back_to_game()
 
 func _on_back_to_game():
 	get_node(".").visible = false
@@ -249,6 +234,8 @@ func _on_player_data_updated():
 func _show_base_menu(val:bool):
 	title.visible = val
 	baseMenuUI.visible = val
+	if val:
+		GameGlobals.change_state(GameGlobals.STATES.MAIN_MENU)
 
 # SETTINGS
 func _on_music_on():
@@ -262,7 +249,12 @@ func _on_music_off():
 	GameGlobals.audioManager.set_as_disabled(false)
 
 # KEYBOARD FOCUS
+var _keyboardFocusList:Array[Button]
+var _keyboardFocusIdx:int
+var _prevFocusedButton:Button
+
 func _setup_keyboard_focus():
+	_keyboardFocusList.clear()
 	if !PlayerDataManager.is_new_player():
 		_keyboardFocusList.append(continueGameButton)
 	_keyboardFocusList.append(newGameButton)
@@ -270,18 +262,19 @@ func _setup_keyboard_focus():
 	_update_keyboard_focus()
 
 func _input(event: InputEvent) -> void:
-	if _keyboardFocusList.is_empty():
-		return
-		
-	if event.is_action_pressed(Constants.INPUT_MOVE_UP):
-		_keyboardFocusIdx = _keyboardFocusIdx - 1
-		_update_keyboard_focus()
-	elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
-		_keyboardFocusIdx = _keyboardFocusIdx + 1
-		_update_keyboard_focus()
-		
-	if event.is_action_pressed(Constants.INPUT_MENU_ACCEPT):
-		_keyboardFocusList[_keyboardFocusIdx].emit_signal("button_up")
+	if GameGlobals.is_in_state(GameGlobals.STATES.MAIN_MENU):
+		if _keyboardFocusList.is_empty():
+			return
+			
+		if event.is_action_pressed(Constants.INPUT_MOVE_UP):
+			_keyboardFocusIdx = _keyboardFocusIdx - 1
+			_update_keyboard_focus()
+		elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
+			_keyboardFocusIdx = _keyboardFocusIdx + 1
+			_update_keyboard_focus()
+			
+		if event.is_action_pressed(Constants.INPUT_MENU_ACCEPT):
+			_keyboardFocusList[_keyboardFocusIdx].emit_signal("button_up")
 		
 func _update_keyboard_focus():
 	if _keyboardFocusIdx<0:
@@ -289,4 +282,7 @@ func _update_keyboard_focus():
 	elif _keyboardFocusIdx>_keyboardFocusList.size()-1:
 		_keyboardFocusIdx = _keyboardFocusList.size()-1
 		
-	_keyboardFocusList[_keyboardFocusIdx].grab_focus()
+	if _prevFocusedButton!=null and _prevFocusedButton!=_keyboardFocusList[_keyboardFocusIdx]:
+		_prevFocusedButton.modulate = Color.WHITE
+	_keyboardFocusList[_keyboardFocusIdx].modulate = Color.YELLOW
+	_prevFocusedButton = _keyboardFocusList[_keyboardFocusIdx]

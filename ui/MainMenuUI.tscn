@@ -161,6 +161,7 @@ vertical_alignment = 1
 
 [node name="MenuUI" type="PanelContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -182,15 +183,16 @@ layout_mode = 2
 [node name="Continue" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-modulate = Color(2.11775e-06, 0.863622, 0.662158, 1)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../NewGame")
 theme = ExtResource("1_wsy8d")
 text = "Continue"
 
 [node name="NewGame" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.101961, 0.717647, 0, 1)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Continue")
+focus_neighbor_bottom = NodePath("../Exit")
 text = "New Game"
 
 [node name="Settings" type="Button" parent="MenuUI/VBoxContainer"]
@@ -202,8 +204,8 @@ text = "Settings"
 
 [node name="Exit" type="Button" parent="MenuUI/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.81, 0.29025, 0.1863, 1)
 layout_mode = 2
+focus_neighbor_top = NodePath("../NewGame")
 theme = ExtResource("1_wsy8d")
 text = "Exit Game"
 

@@ -38,7 +38,7 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("2_y35o2")
 theme_override_font_sizes/font_size = 22
-text = " SKILL TREE "
+text = " (Y) SKILL TREE "
 
 [node name="InfoPanel" type="Panel" parent="."]
 unique_name_in_owner = true

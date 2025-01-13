@@ -111,7 +111,6 @@ stretch_mode = 3
 
 [node name="ChooseButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-self_modulate = Color(0.22, 1, 0.779, 1)
 layout_mode = 2
 size_flags_vertical = 8
 focus_mode = 0
@@ -120,7 +119,6 @@ text = "Select"
 
 [node name="UnlockButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-self_modulate = Color(0.228667, 1, 0.11, 1)
 layout_mode = 2
 size_flags_vertical = 8
 focus_mode = 0

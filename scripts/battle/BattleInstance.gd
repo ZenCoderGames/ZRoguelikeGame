@@ -58,6 +58,7 @@ func _on_character_chosen(charData):
 	GameGlobals.dataManager.on_character_chosen(charData)
 
 func _on_new_game(levelData:LevelData):
+	GameGlobals.change_state(GameGlobals.STATES.BATTLE)
 	GameGlobals.dataManager.init_dungeon_data(levelData)
 	currentLevelData = levelData
 	if !firstTimeDungeon:

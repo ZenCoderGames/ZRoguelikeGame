@@ -71,15 +71,15 @@ func _on_passive_out_of_focus():
 
 # Unlocking
 func _checkForUnlock():
-	if !PlayerDataManager.has_character_been_unlocked(myCharData):
-		if PlayerDataManager.can_unlock_character(myCharData):
+	if !is_unlocked():
+		if is_unlockable():
 			unlockBtn.text = str("Unlock (x", myCharData.unlockCost, ")")
 			unlockBtn.disabled = false
-			unlockBtn.self_modulate = Color.GREEN
+			unlockBtn.modulate = Color.GREEN
 		else:
 			unlockBtn.text = str("Unlock (x", myCharData.unlockCost, ")")
 			unlockBtn.disabled = true
-			unlockBtn.self_modulate = Color.RED
+			unlockBtn.modulate = Color.RED
 		unlockBtn.visible = true
 		chooseBtn.visible = false
 		background.modulate = Color.DIM_GRAY
@@ -94,3 +94,24 @@ func _on_unlock():
 
 func refresh():
 	_checkForUnlock()
+
+func select():
+	chooseBtn.modulate = Color.YELLOW
+	unlockBtn.modulate = Color.YELLOW
+	
+func deselect():
+	chooseBtn.modulate = Color.WHITE
+	unlockBtn.modulate = Color.WHITE
+	_checkForUnlock()
+	
+func confirm():
+	if is_unlocked():
+		chooseBtn.emit_signal("button_up")
+	else:
+		unlockBtn.emit_signal("button_up")
+
+func is_unlocked():
+	return PlayerDataManager.has_character_been_unlocked(myCharData)
+	
+func is_unlockable():
+	return PlayerDataManager.can_unlock_character(myCharData)

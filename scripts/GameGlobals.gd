@@ -6,6 +6,9 @@ var dataManager:DungeonDataManager
 var effectManager:EffectManager
 var audioManager:AudioManager
 
+enum STATES { MAIN_MENU, CHARACTER_SELECT, SKILL_TREE, LEVEL_SELECT, BATTLE }
+var _currentState:STATES = STATES.MAIN_MENU
+
 func _init():
 	create_data_manager()
 
@@ -23,3 +26,10 @@ func set_effect_manager(effectManagerObj:EffectManager):
 
 func set_audio_manager(audioManagerObj:AudioManager):
 	audioManager = audioManagerObj
+
+# STATES
+func is_in_state(state):
+	return _currentState == state
+
+func change_state(state):
+	_currentState = state

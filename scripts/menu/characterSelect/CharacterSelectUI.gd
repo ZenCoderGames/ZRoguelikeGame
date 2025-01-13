@@ -27,6 +27,8 @@ func init_from_data():
 	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
 	skillTreeButton.connect("pressed",Callable(self,"_on_skilltree_button_pressed"))
 
+	_setup_keyboard_focus()
+
 func add_character(heroData:CharacterData):
 	var charSelectItem = CharacterSelectItemUIClass.instantiate()
 	charSelectHolder.add_child(charSelectItem)
@@ -61,3 +63,49 @@ func clean_up():
 
 func _on_back_button_pressed():
 	emit_signal("OnBackPressed")
+
+# KEYBOARD FOCUS
+var _keyboardFocusList:Array[CharacterSelectItemUI]
+var _keyboardFocusIdx:int
+var _prevFocusedButton:CharacterSelectItemUI
+var _prevKeyboardFocusIdx:int
+
+func _setup_keyboard_focus():
+	_keyboardFocusList.clear()
+	for item in charSelectItems:
+		_keyboardFocusList.append(item)
+	_update_keyboard_focus()
+
+func _input(event: InputEvent) -> void:
+	if GameGlobals.is_in_state(GameGlobals.STATES.CHARACTER_SELECT):
+		if _keyboardFocusList.is_empty():
+			return
+	
+		if event.is_action_pressed(Constants.INPUT_MOVE_LEFT):
+			_keyboardFocusIdx = _keyboardFocusIdx - 1
+			_update_keyboard_focus()
+		elif event.is_action_pressed(Constants.INPUT_MOVE_RIGHT):
+			_keyboardFocusIdx = _keyboardFocusIdx + 1
+			_update_keyboard_focus()
+	
+		if event.is_action_pressed(Constants.INPUT_MENU_ACCEPT):
+			_keyboardFocusList[_keyboardFocusIdx].confirm()
+			
+		if event.is_action_pressed(Constants.INPUT_USE_SPECIAL2):
+			_on_skilltree_button_pressed()
+
+func _update_keyboard_focus():
+	if _keyboardFocusIdx<0:
+		_keyboardFocusIdx = 0
+	elif _keyboardFocusIdx>_keyboardFocusList.size()-1:
+		_keyboardFocusIdx = _keyboardFocusList.size()-1
+
+	if !_keyboardFocusList[_keyboardFocusIdx].is_unlocked() and !_keyboardFocusList[_keyboardFocusIdx].is_unlockable():
+		_keyboardFocusIdx = _prevKeyboardFocusIdx
+		return
+
+	if _prevFocusedButton!=null and _prevFocusedButton!=_keyboardFocusList[_keyboardFocusIdx]:
+		_prevFocusedButton.deselect()
+	_keyboardFocusList[_keyboardFocusIdx].select()
+	_prevFocusedButton = _keyboardFocusList[_keyboardFocusIdx]
+	_prevKeyboardFocusIdx = _keyboardFocusIdx
