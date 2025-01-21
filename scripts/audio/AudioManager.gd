@@ -13,7 +13,7 @@ var audioMusicStreams = []
 var audioCurrentPlayingSFXDict = {}
 var audioSfxStreams = []
 
-var isDisabled:bool = false
+var isDisabled:bool = true
 
 func _ready():
 	GameGlobals.set_audio_manager(self)
@@ -36,6 +36,17 @@ func play_music(id:String):
 		audioStreamPlayer.stream = audioData.stream
 		audioStreamPlayer.set_volume_db(linear_to_db(audioData.volume))
 		audioStreamPlayer.play()
+
+func dim_music_volume(id:String, val:bool):
+	var audioData:AudioData = _get_data(id)
+	if audioData!=null:
+		var audioStreamPlayer:AudioStreamPlayer2D = null
+		if audioCurrentPlayingMusicDict.has(id):
+			audioStreamPlayer = audioCurrentPlayingMusicDict[id]
+			if val:
+				audioStreamPlayer.volume_db = -15
+			else:
+				audioStreamPlayer.set_volume_db(linear_to_db(audioData.volume))
 
 func stop_music(id:String):
 	if audioCurrentPlayingMusicDict.has(id):
@@ -117,3 +128,5 @@ func set_as_disabled(val:bool):
 	if isDisabled:
 		stop_all_music()
 		stop_all_sfx()
+	GameEventManager.emit_signal("OnAudioModeChanged", !val)
+		

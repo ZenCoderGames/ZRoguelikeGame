@@ -7,11 +7,12 @@ func _ready():
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_initialized"))
 	GameEventManager.connect("OnCharacterSelected",Callable(self,"_on_char_selected"))
 	GameEventManager.connect("OnDungeonExited",Callable(self,"_on_dungeon_exited"))
+	GameEventManager.connect("OnAudioModeChanged",Callable(self,"_on_audio_mode_changed"))
 	UIEventManager.connect("OnMainMenuButton",Callable(self,"_on_main_menu_button"))
 	UIEventManager.connect("OnCharacterSelectButton",Callable(self,"_on_character_select_button"))
 	UIEventManager.connect("OnGenericUIEvent",Callable(self,"_on_generic_ui_event"))
-	UIEventManager.connect("OnMainMenuOn",Callable(self,"_play_menu_music"))
-	UIEventManager.connect("OnMainMenuOff",Callable(self,"_stop_menu_music"))
+	UIEventManager.connect("OnMainMenuOn",Callable(self,"_on_menu_on"))
+	UIEventManager.connect("OnMainMenuOff",Callable(self,"_on_menu_off"))
 	CombatEventManager.connect("OnAnyAttack",Callable(self,"_on_any_character_attack"))
 	CombatEventManager.connect("OnAnyCharacterDeath",Callable(self,"_on_any_character_death"))
 	CombatEventManager.connect("OnConsumeItem",Callable(self,"_on_consume_item"))
@@ -21,17 +22,18 @@ func _ready():
 	AudioEventManager.connect("OnGenericPickup",Callable(self,"_on_generic_pickup"))
 
 # MUSIC
-func _play_menu_music():
-	GameGlobals.audioManager.play_music("MUSIC_TITLE_SCREEN")
+func _on_menu_on():
+	GameGlobals.audioManager.dim_music_volume("MUSIC_TITLE_SCREEN", false)
 
-func _stop_menu_music():
-	GameGlobals.audioManager.stop_music("MUSIC_TITLE_SCREEN")
+func _on_menu_off():
+	GameGlobals.audioManager.dim_music_volume("MUSIC_TITLE_SCREEN", true)
 
 func _on_char_selected(_selectedChar):
-	GameGlobals.audioManager.stop_music("MUSIC_TITLE_SCREEN")
+	pass
+	#_on_menu_off()
 
 func _on_dungeon_exited(isVictory:bool):
-	_play_menu_music()
+	_on_menu_on()
 
 # SFX
 func _on_main_menu_button():
@@ -85,3 +87,9 @@ func _on_player_special_completed(_special:Special):
 func _on_consume_item(itemData:ItemData):
 	if !itemData.consumeAudioId.is_empty():
 		GameGlobals.audioManager.play_sfx(itemData.consumeAudioId)
+		
+func _on_audio_mode_changed(val:bool):
+	if val:
+		GameGlobals.audioManager.play_music("MUSIC_TITLE_SCREEN")
+	else:
+		GameGlobals.audioManager.stop_music("MUSIC_TITLE_SCREEN")

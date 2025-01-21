@@ -8,6 +8,17 @@ var heroDataDict:Dictionary
 @export var skillUnlockedDataList:Array[String]
 @export var skillUnlockedDataDict:Dictionary
 
+func init_as_new() -> void:
+	heroDataList.append(add_hero_to_starting_list("PALADIN"))
+	heroDataList.append(add_hero_to_starting_list("BERSERKER"))
+	heroDataList.append(add_hero_to_starting_list("ASSASSIN"))
+	heroDataList.append(add_hero_to_starting_list("GENERIC_HERO"))
+
+func add_hero_to_starting_list(heroId:String):
+	var heroData:PlayerHeroData = PlayerHeroData.new()
+	heroData.charId = heroId
+	return heroData
+
 func init():
 	for heroData in heroDataList:
 		heroDataDict[heroData.charId] = heroData

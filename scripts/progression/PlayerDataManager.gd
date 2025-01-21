@@ -2,7 +2,8 @@ extends Node
 
 # Currently only supports 1 profile
 
-const PLAYER_DATA_PATH:String = "resource/data/progression/playerData.tres"
+#const PLAYER_DATA_PATH:String = "resource/data/progression/playerData.tres"
+const PLAYER_DATA_PATH:String = "user://playerData.tres"
 
 var currentPlayerData:PlayerData
 
@@ -21,8 +22,12 @@ func save_to_file():
 	
 func load_character_data(path:String):
 	if ResourceLoader.exists(path):
-		return load(path)
-	return null
+		return ResourceLoader.load(path)
+	
+	var newPlayerData = PlayerData.new()
+	newPlayerData.init_as_new()
+	save_character_data(newPlayerData)
+	return newPlayerData
 
 func save_character_data(data):
 	ResourceSaver.save(data, PLAYER_DATA_PATH)

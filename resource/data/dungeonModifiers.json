@@ -108,13 +108,13 @@
 			]
 		},
 		{
-			"id": "INCREASED_MANA_2",
-			"name": "DungeonMod: Increased Mana II",
-			"description": "Increased base mana by 2",
+			"id": "BONUS_MANA",
+			"name": "DungeonMod: Increased Mana I",
+			"description": "Increased base mana by 1",
 			"statModifiers": [
 				{
 					"type": "ENERGY",
-					"absoluteValue": 2
+					"absoluteValue": 1
 				}
 			]
 		},

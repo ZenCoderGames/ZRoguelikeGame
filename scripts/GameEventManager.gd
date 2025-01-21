@@ -9,6 +9,7 @@ signal OnDungeonExited(isVictory)
 signal OnNewLevelLoaded()
 signal OnCleanUpForDungeonRecreation(isNewDungeon:bool)
 signal OnBackButtonPressed()
+signal OnAudioModeChanged(val)
 
 func ready_to_battle(levelData:LevelData):
 	emit_signal("OnReadyToBattle", levelData)

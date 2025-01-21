@@ -467,7 +467,7 @@ func _init_progression_modifiers():
 			var dungeonModData:DungeonModifierData = GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifierId)
 			player.add_dungeon_modifier(dungeonModData)
 			# Spawn Item
-			if dungeonModData.spawnItem:
+			if dungeonModData.spawnEquipment:
 				var itemDataList = Utils.duplicate_array(GameGlobals.dataManager.itemDataList)
 				itemDataList.shuffle()
 				for itemData in itemDataList:

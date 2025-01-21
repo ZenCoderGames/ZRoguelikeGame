@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerData" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="PlayerData" load_steps=7 format=3 uid="uid://ca6381mpc4e86"]
 
 [ext_resource type="Script" path="res://scripts/progression/PlayerHeroData.gd" id="1_6hic4"]
 [ext_resource type="Script" path="res://scripts/progression/PlayerData.gd" id="2_jpvrc"]

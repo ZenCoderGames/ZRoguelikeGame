@@ -241,17 +241,22 @@ func _show_base_menu(val:bool):
 func _on_music_on():
 	musicOffButton.visible = true
 	musicOnButton.visible = false
+	musicOffButton.disabled = false
+	musicOnButton.disabled = true
 	GameGlobals.audioManager.set_as_disabled(true)
 
 func _on_music_off():
 	musicOffButton.visible = false
 	musicOnButton.visible = true
+	musicOffButton.disabled = true
+	musicOnButton.disabled = false
 	GameGlobals.audioManager.set_as_disabled(false)
 
 # KEYBOARD FOCUS
 var _keyboardFocusList:Array[Button]
 var _keyboardFocusIdx:int
 var _prevFocusedButton:Button
+var _timeSinceLastInput:float
 
 func _setup_keyboard_focus():
 	_keyboardFocusList.clear()
@@ -262,6 +267,9 @@ func _setup_keyboard_focus():
 	_update_keyboard_focus()
 
 func _input(event: InputEvent) -> void:
+	if _timeSinceLastInput>0 and GlobalTimer.get_time_since(_timeSinceLastInput)<0.25:
+		return
+		
 	if GameGlobals.is_in_state(GameGlobals.STATES.MAIN_MENU):
 		if _keyboardFocusList.is_empty():
 			return
@@ -286,3 +294,5 @@ func _update_keyboard_focus():
 		_prevFocusedButton.modulate = Color.WHITE
 	_keyboardFocusList[_keyboardFocusIdx].modulate = Color.YELLOW
 	_prevFocusedButton = _keyboardFocusList[_keyboardFocusIdx]
+	
+	_timeSinceLastInput = GlobalTimer.get_current_time()

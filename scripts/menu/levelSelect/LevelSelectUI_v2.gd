@@ -46,6 +46,7 @@ func _on_challenges_button_pressed():
 var _keyboardFocusList:Array[Button]
 var _keyboardFocusIdx:int
 var _prevFocusedButton:Button
+var _timeSinceLastInput:float
 
 func _setup_keyboard_focus():
 	_keyboardFocusList.append(readyButton_Tutorial)
@@ -53,6 +54,9 @@ func _setup_keyboard_focus():
 	_update_keyboard_focus()
 
 func _input(event: InputEvent) -> void:
+	if _timeSinceLastInput>0 and GlobalTimer.get_time_since(_timeSinceLastInput)<0.25:
+		return
+		
 	if GameGlobals.is_in_state(GameGlobals.STATES.LEVEL_SELECT):
 		if _keyboardFocusList.is_empty():
 			return
@@ -77,3 +81,5 @@ func _update_keyboard_focus():
 		_prevFocusedButton.modulate = Color.WHITE
 	_keyboardFocusList[_keyboardFocusIdx].modulate = Color.YELLOW
 	_prevFocusedButton = _keyboardFocusList[_keyboardFocusIdx]
+	
+	_timeSinceLastInput = GlobalTimer.get_current_time()

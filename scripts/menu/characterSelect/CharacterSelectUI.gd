@@ -69,6 +69,7 @@ var _keyboardFocusList:Array[CharacterSelectItemUI]
 var _keyboardFocusIdx:int
 var _prevFocusedButton:CharacterSelectItemUI
 var _prevKeyboardFocusIdx:int
+var _timeSinceLastInput:float
 
 func _setup_keyboard_focus():
 	_keyboardFocusList.clear()
@@ -77,6 +78,9 @@ func _setup_keyboard_focus():
 	_update_keyboard_focus()
 
 func _input(event: InputEvent) -> void:
+	if _timeSinceLastInput>0 and GlobalTimer.get_time_since(_timeSinceLastInput)<0.25:
+		return
+		
 	if GameGlobals.is_in_state(GameGlobals.STATES.CHARACTER_SELECT):
 		if _keyboardFocusList.is_empty():
 			return
@@ -109,3 +113,5 @@ func _update_keyboard_focus():
 	_keyboardFocusList[_keyboardFocusIdx].select()
 	_prevFocusedButton = _keyboardFocusList[_keyboardFocusIdx]
 	_prevKeyboardFocusIdx = _keyboardFocusIdx
+	
+	_timeSinceLastInput = GlobalTimer.get_current_time()

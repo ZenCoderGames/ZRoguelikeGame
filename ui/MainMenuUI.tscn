@@ -392,7 +392,6 @@ vertical_alignment = 1
 
 [node name="MusicOffButton" type="TextureButton" parent="VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -406,10 +405,12 @@ stretch_mode = 0
 
 [node name="MusicOnButton" type="TextureButton" parent="VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+disabled = true
 texture_normal = ExtResource("12_dygwg")
 texture_pressed = ExtResource("12_dygwg")
 texture_hover = ExtResource("12_dygwg")
