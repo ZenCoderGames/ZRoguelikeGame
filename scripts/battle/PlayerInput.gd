@@ -93,6 +93,9 @@ func _process(_delta):
 	if player==null or !is_instance_valid(player):
 		return
 		
+	if disableInput:
+		return
+		
 	_process_keyboard_movement_inputs()
 	_process_joystick_movement_inputs()
 		
