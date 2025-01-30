@@ -11,8 +11,8 @@ func _init(triggerConditions:Array,triggerConditionParams:Dictionary,character,r
 	_triggerConditionParams = triggerConditionParams
 	CombatEventManager.register_for_conditional_events(triggerConditions, self, character)
 
-func activate_on_parentCharacter_attack(_defender):
-	_checkForConditionsAndActivate(_defender)
+func activate_on_parentCharacter_attack(_attacker, _defender):
+	_checkForConditionsAndActivate(_attacker)
 
 func activate_on_parentCharacter_move():
 	_checkForConditionsAndActivate(null)

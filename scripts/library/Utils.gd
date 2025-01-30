@@ -34,14 +34,16 @@ func create_return_tween_vector2(node, fieldName, startPose, endPose, duration, 
 	var tween = get_tree().create_tween()
 	tween.tween_property(
 		node, fieldName, endPose, duration).from(startPose).set_trans(transType).set_ease(easeType)
-		
-	await get_tree().create_timer(duration).timeout
+	tween.chain().tween_interval(duration)
 
-	var return_tween = get_tree().create_tween()
-	return_tween.tween_property(
+	#await get_tree().create_timer(duration).timeout
+
+	#var return_tween = get_tree().create_tween()
+	tween.chain().tween_property(
 		node, fieldName, startPose, duration).from(startPose).set_trans(transType).set_ease(easeType)
 
-	return return_tween
+	return tween
+	#return return_tween
 
 func load_data_from_file(relativePath:String) -> Dictionary:
 	var dataFilePath:String = str("res://",relativePath)

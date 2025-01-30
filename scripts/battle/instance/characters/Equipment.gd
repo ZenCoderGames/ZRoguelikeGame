@@ -23,13 +23,19 @@ func _init(characterRef):
 	character.inventory.connect("OnItemAdded",Callable(self,"_on_item_added"))
 
 func _on_item_added(item:Item):
-	if GameGlobals.battleInstance.usePopUpEquipment:
+	var freeSlot:int = _get_free_slot(item.data)
+	if freeSlot>=0:
+		equip_item(item, freeSlot)
+	else:
+		if item.data.is_gear():
+			_show_equip_ui(item)
+	'''if GameGlobals.battleInstance.usePopUpEquipment:
 		if item.data.is_gear():
 			_show_equip_ui(item)
 	else:
 		var freeSlot:int = _get_free_slot(item.data)
 		if freeSlot>=0:
-			equip_item(item, freeSlot)
+			equip_item(item, freeSlot)'''
 
 func get_stat_bonus_from_equipped_items(statType):
 	var statValue:int = 0

@@ -54,9 +54,10 @@ func _on_item_equipped():
 	refresh()
 
 func _on_item_discarded():
-	UIEventManager.emit_signal("OnGenericUIEvent")
-	_parent.item_discarded(_item, _slot)
-	refresh()
+	if _item!=null:
+		UIEventManager.emit_signal("OnGenericUIEvent")
+		_parent.item_discarded(_item, _slot)
+		refresh()
 
 func refresh():
 	equippedLabel.visible = (_item!=null) and (_slot!=-1)
@@ -115,10 +116,10 @@ func _get_discard_input_str():
 			return "(L1+Down) "
 	else:
 		if _idx==0:
-			return "(Alt+Z) "
+			return "(Shift+Z) "
 		elif _idx==1:
-			return "(Alt+X) "
+			return "(Shift+X) "
 		elif _idx==2:
-			return "(Alt+C) "
+			return "(Shift+C) "
 	
 	return ""

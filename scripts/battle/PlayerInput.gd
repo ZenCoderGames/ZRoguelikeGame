@@ -38,6 +38,7 @@ func _ready():
 func _on_dungeon_init():
 	_init_for_level()
 	player.connect("OnDeathFinal",Callable(self,"_on_player_death"))
+	player.connect("OnPreAttack",Callable(self,"_on_pre_attack"))
 
 func _on_new_level_loaded():
 	_init_for_level()
@@ -53,6 +54,7 @@ func _on_player_death():
 	disableInput = true
 	blockInputsForTurn = false
 	player.disconnect("OnDeathFinal",Callable(self,"_on_player_death"))
+	player.disconnect("OnPreAttack",Callable(self,"_on_pre_attack"))
 
 func on_menu_on():
 	disableInput = true
@@ -130,11 +132,15 @@ func _process(_delta):
 				blockInputsForTurn = false
 
 func _on_player_turn_completed():
-	pass
-	#blockInputsForTurn = true ## used to be false
+	#pass
+	blockMovementInputsForTurn = false ## used to be false
 	
 func _on_start_turn():
 	blockInputsForTurn = false
+
+func _on_pre_attack(attacker, defender):
+	if attacker==player:
+		blockMovementInputsForTurn = true
 
 func _on_end_turn():
 	blockInputsForTurn = false

@@ -70,10 +70,11 @@ signal OnDeath()
 signal OnDeathFinal()
 signal HideCharacterUI()
 
-signal OnPreAttack(defender)
-signal OnPostAttack(defender)
+signal OnPreAttack(attacker, defender)
+signal OnPostAttack(attacker, defender)
 var successfulDamageThisTurn:int
 var skipThisTurn:bool
+var attackTween:Tween
 
 signal OnConsumableAdded(character, consumable)
 signal OnConsumableRemoved(character, consumable)
@@ -363,24 +364,31 @@ func _on_item_unequipped(_item, _slotType):
 # COMBAT
 func attack(entity, triggerTurnCompleted:bool=true):
 	if entity.is_class(self.get_class()):
+		emit_signal("OnPreAttack", self, entity)
+		
 		# shove towards
+		if attackTween!=null:
+			attackTween.stop()
+			attackTween = null
+			self.position = cell.pos
 		var SHOVE_AMOUNT:float = 7
 		var dirn:int = dirn_to_character(entity)
 		var originalPos:Vector2 = self.position
 		if dirn==Constants.DIRN_TYPE.LEFT:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(SHOVE_AMOUNT, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			attackTween = Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(SHOVE_AMOUNT, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.RIGHT:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-SHOVE_AMOUNT, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			attackTween = Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-SHOVE_AMOUNT, 0), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.DOWN:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			attackTween = Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.UP:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
+			attackTween = Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, SHOVE_AMOUNT), 0.05, Tween.TRANS_BOUNCE, Tween.TRANS_LINEAR)
 		
-		await get_tree().create_timer(0.075).timeout
+		await get_tree().create_timer(0.1).timeout
 
-		self.position = originalPos
-
-		emit_signal("OnPreAttack", entity)
+		if attackTween!=null:
+			attackTween.stop()
+			attackTween = null
+		self.position = cell.pos
 
 		var damageAmount:int = get_stat_value(StatData.STAT_TYPE.DAMAGE)
 
@@ -401,7 +409,9 @@ func attack(entity, triggerTurnCompleted:bool=true):
 
 		await get_tree().create_timer(Constants.CHARACTER_POST_ATTACK_DELAY).timeout
 
-		emit_signal("OnPostAttack", entity)
+		emit_signal("OnPostAttack", self, entity)
+		
+		self.position = cell.pos # just in case of edge cases
 
 		if triggerTurnCompleted:
 			on_turn_completed()
@@ -482,15 +492,19 @@ func die():
 func show_hit(entity, _dmg, isCritical):
 	# shove
 	if !isDead:
+		if attackTween!=null:
+			attackTween.stop()
+			attackTween = null
+			self.position = cell.pos
 		var dirn:int = dirn_to_character(entity)
 		if dirn==Constants.DIRN_TYPE.RIGHT:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+			attackTween = Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.LEFT:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+			attackTween = Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(-10, 0), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.UP:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+			attackTween = Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, -10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 		elif dirn==Constants.DIRN_TYPE.DOWN:
-			Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+			attackTween = Utils.create_return_tween_vector2(self, "position", self.position, self.position + Vector2(0, 10), 0.05, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 		
 	show_hit_flash()
 	if isCritical:
