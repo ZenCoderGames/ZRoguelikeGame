@@ -63,9 +63,14 @@ func on_menu_off():
 	disableInput = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
-		GameEventManager.emit_signal("OnBackButtonPressed")
-		return
+	if GameGlobals.is_in_state(GameGlobals.STATES.BATTLE):
+		if event.is_action_pressed(Constants.INPUT_BATTLE_MENU):
+			GameEventManager.emit_signal("OnBackButtonPressed")
+			return
+	else:
+		if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
+			GameEventManager.emit_signal("OnBackButtonPressed")
+			return
 		
 	_debug_inputs(event)
 
@@ -93,6 +98,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(_delta):
 	if player==null or !is_instance_valid(player):
+		return
+		
+	if !GameGlobals.is_in_state(GameGlobals.STATES.BATTLE):
+		return
+		
+	if !GameGlobals.is_in_substate(GameGlobals.SUB_STATES.NONE):
 		return
 		
 	if disableInput:

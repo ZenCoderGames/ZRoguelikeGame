@@ -133,6 +133,7 @@ func on_class_toggle(isToggleOn:bool):
 	GameGlobals.battleInstance.startWithClasses = isToggleOn
 
 func _show_defeat():
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.DEFEAT)
 	get_node(".").visible = true
 	deathUI.visible = true
 	_show_base_menu(false)
@@ -147,6 +148,7 @@ func _show_defeat():
 	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
 
 func _show_victory():
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.VICTORY)
 	get_node(".").visible = true
 	victoryUI.visible = true
 	_show_base_menu(false)
@@ -177,16 +179,15 @@ func _clean_up():
 # BACK MENU
 func _show_back_menu():
 	if GameGlobals.is_in_state(GameGlobals.STATES.BATTLE):
-		if victoryUI.visible or deathUI.visible:
+		if GameGlobals.is_in_substate(GameGlobals.SUB_STATES.VICTORY) or GameGlobals.is_in_substate(GameGlobals.SUB_STATES.DEFEAT) :
 			_on_back_to_main_menu_from_battle()
 			_on_back_to_character_select()
-		elif backMenuUI.visible:
+		elif GameGlobals.is_in_substate(GameGlobals.SUB_STATES.BACK_MENU):
 			_on_back_to_game()
 		else:
 			_show_base_menu(false)
 			if GameGlobals.dungeon==null or !GameGlobals.dungeon.inBackableMenu:
-				get_node(".").visible = true
-				backMenuUI.visible = true
+				_show_battle_back_menu()
 			else:
 				_on_back_to_game()
 	elif GameGlobals.is_in_state(GameGlobals.STATES.SKILL_TREE):
@@ -197,7 +198,14 @@ func _show_back_menu():
 	elif GameGlobals.is_in_state(GameGlobals.STATES.LEVEL_SELECT):
 		_on_back_to_character_select()
 
+func _show_battle_back_menu():
+	get_node(".").visible = true
+	backMenuUI.visible = true
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.BACK_MENU)
+	_setup_keyboard_focus()
+
 func _on_back_to_game():
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)
 	get_node(".").visible = false
 	backMenuUI.visible = false
 	if GameGlobals.dungeon==null or !GameGlobals.dungeon.isInitialized:
@@ -260,17 +268,21 @@ var _timeSinceLastInput:float
 
 func _setup_keyboard_focus():
 	_keyboardFocusList.clear()
-	if !PlayerDataManager.is_new_player():
-		_keyboardFocusList.append(continueGameButton)
-	_keyboardFocusList.append(newGameButton)
-	_keyboardFocusList.append(exitGameButton)
+	if GameGlobals.is_in_state(GameGlobals.STATES.BATTLE):
+		_keyboardFocusList.append(backToGameButton)
+		_keyboardFocusList.append(backToStartMenuButton)
+	else:
+		if !PlayerDataManager.is_new_player():
+			_keyboardFocusList.append(continueGameButton)
+		_keyboardFocusList.append(newGameButton)
+		_keyboardFocusList.append(exitGameButton)
 	_update_keyboard_focus()
 
 func _input(event: InputEvent) -> void:
 	if _timeSinceLastInput>0 and GlobalTimer.get_time_since(_timeSinceLastInput)<0.25:
 		return
 		
-	if GameGlobals.is_in_state(GameGlobals.STATES.MAIN_MENU):
+	if GameGlobals.is_in_state(GameGlobals.STATES.MAIN_MENU) or GameGlobals.is_in_substate(GameGlobals.SUB_STATES.BACK_MENU):
 		if _keyboardFocusList.is_empty():
 			return
 			

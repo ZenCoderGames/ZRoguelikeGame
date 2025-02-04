@@ -120,9 +120,6 @@ func _toggle_main_menu():
 	else:
 		UIEventManager.emit_signal("OnMainMenuOff")
 
-func _on_player_death():
-	GameEventManager.emit_signal("OnDungeonExited", false)
-
 # Clean up and load a new floor
 func _on_dungeon_completed():
 	screenFade.visible = true
@@ -136,6 +133,9 @@ func _on_dungeon_completed():
 
 func _on_player_victory():
 	GameEventManager.emit_signal("OnDungeonExited", true)
+
+func _on_player_death():
+	GameEventManager.emit_signal("OnDungeonExited", false)
 
 # HELPERS
 func get_current_level():
