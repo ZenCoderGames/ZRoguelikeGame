@@ -6,8 +6,9 @@
 			"description": "Skips a turn for tactical advantages",
 			"count": 1,
 			"soulCost": 0,
-			"cooldown": 1,
+			"cooldown": 4,
 			"executeCondition": "NONE",
+			"useDefenseSlot": true,
 			"timeline": [
 				{
 					"type": "SKIP_TURN",

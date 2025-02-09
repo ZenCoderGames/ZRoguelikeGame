@@ -70,6 +70,7 @@ const INPUT_CANCEL_VENDOR_OPTION3: String = "cancel_vendor_option_3"
 const INPUT_USE_SPECIAL1: String = "use_special_1"
 const INPUT_USE_SPECIAL2: String = "use_special_2"
 const INPUT_USE_SPECIAL3: String = "use_special_3"
+const INPUT_USE_SPECIAL_DEFENSE: String = "use_special_defense"
 
 const INPUT_MENU_ACCEPT: String = "menu_accept"
 

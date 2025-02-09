@@ -33,6 +33,7 @@ var timeline:Array
 var removeAfterExecute:bool
 var hasSelection:bool
 var selectionRange:int
+var useDefenseSlot:bool
 
 enum SELECTION_TYPE { NONE, DIRECTIONAL, DIRECTIONAL_CELL }
 var selectionType:int
@@ -48,6 +49,7 @@ func _init(dataJS):
 	cooldown = Utils.get_data_from_json(dataJS, "cooldown", 2)
 	soulCost = Utils.get_data_from_json(dataJS, "soulCost", 0)
 	useCustomConditions = Utils.get_data_from_json(dataJS, "useCustomConditions", false)
+	useDefenseSlot = Utils.get_data_from_json(dataJS, "useDefenseSlot", false)
 
 	if dataJS.has("conditions"):
 		var conditionsJSList = dataJS["conditions"]

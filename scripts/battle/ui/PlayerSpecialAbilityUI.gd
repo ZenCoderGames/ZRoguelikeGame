@@ -127,6 +127,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			_on_special_pressed()
 
 func get_special_input_str():
+	if _special.data.useDefenseSlot:
+		return Constants.INPUT_USE_SPECIAL_DEFENSE
+		
 	if _idx==0:
 		return Constants.INPUT_USE_SPECIAL1
 	elif _idx==1:
@@ -138,13 +141,19 @@ func get_special_input_str():
 
 func _get_input_str():
 	if Utils.is_joystick_enabled():
+		if _special.data.useDefenseSlot:
+			return "(B) "
+		
 		if _idx==0:
-			return "(X) "
-		elif _idx==1:
-			return "(Y) "
-		elif _idx==2:
 			return "(A) "
+		elif _idx==1:
+			return "(X) "
+		elif _idx==2:
+			return "(Y) "
 	else:
+		if _special.data.useDefenseSlot:
+			return "(H) "
+			
 		if _idx==0:
 			return "(Q) "
 		elif _idx==1:

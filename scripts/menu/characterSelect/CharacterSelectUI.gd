@@ -72,6 +72,7 @@ var _prevKeyboardFocusIdx:int
 var _timeSinceLastInput:float
 
 func _setup_keyboard_focus():
+	_keyboardFocusIdx = 0
 	_keyboardFocusList.clear()
 	for item in charSelectItems:
 		_keyboardFocusList.append(item)
@@ -104,9 +105,9 @@ func _update_keyboard_focus():
 	elif _keyboardFocusIdx>_keyboardFocusList.size()-1:
 		_keyboardFocusIdx = _keyboardFocusList.size()-1
 
-	if !_keyboardFocusList[_keyboardFocusIdx].is_unlocked() and !_keyboardFocusList[_keyboardFocusIdx].is_unlockable():
+	'''if !_keyboardFocusList[_keyboardFocusIdx].is_unlocked() and !_keyboardFocusList[_keyboardFocusIdx].is_unlockable():
 		_keyboardFocusIdx = _prevKeyboardFocusIdx
-		return
+		return'''
 
 	if _prevFocusedButton!=null and _prevFocusedButton!=_keyboardFocusList[_keyboardFocusIdx]:
 		_prevFocusedButton.deselect()

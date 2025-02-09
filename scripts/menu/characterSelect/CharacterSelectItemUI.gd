@@ -89,8 +89,9 @@ func _checkForUnlock():
 		background.modulate = Color.WHITE
 
 func _on_unlock():
-	PlayerDataManager.unlock_character(myCharData)
-	emit_signal("OnUnlocked")
+	if is_unlockable():
+		PlayerDataManager.unlock_character(myCharData)
+		emit_signal("OnUnlocked")
 
 func refresh():
 	_checkForUnlock()

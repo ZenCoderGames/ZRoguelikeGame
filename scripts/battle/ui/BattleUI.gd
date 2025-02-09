@@ -43,9 +43,11 @@ var inventoryUI:InventoryUI = null
 const InfoUI := preload("res://ui/battle/InfoUI.tscn")
 var infoUI:InfoUI = null
 # special UI
-@onready var playerAbilitiesListUI:Node = $"%PlayerAbilities"
 const SpecialAbilityUI := preload("res://ui/battle/PlayerAbilityUI.tscn")
+@onready var playerAbilitiesListUI:Node = $"%PlayerAbilities"
 var _playerAbilityList:Array
+@onready var defenseAbilitiesListUI:Node = $"%DefenseAbilities"
+var _defenseAbilityList:Array
 
 const SKIP_TURN_COLOR:Color = Color("#74a09c9c")
 const SKIP_TURN_DISABLED_COLOR:Color = Color("#800000")
@@ -266,6 +268,11 @@ func _on_cleanup_for_dungeon(fullRefreshDungeon:bool=true):
 			playerAbilityUI._cleanup()
 			playerAbilitiesListUI.remove_child(playerAbilityUI)
 		_playerAbilityList.clear()
+		
+		for playerAbilityUI in _defenseAbilityList:
+			playerAbilityUI._cleanup()
+			defenseAbilitiesListUI.remove_child(playerAbilityUI)
+		_defenseAbilityList.clear()
 
 # LEVEL UP
 func _on_show_upgrade(upgradeType:Upgrade.UPGRADE_TYPE):
@@ -333,9 +340,14 @@ func _on_pop_up_equipment_closed():
 # SPECIALS
 func _on_player_special_added(character:Character, special:Special):
 	var playerSpecialAbilityUI:PlayerSpecialAbilityUI = SpecialAbilityUI.instantiate()
-	playerAbilitiesListUI.add_child(playerSpecialAbilityUI)
-	playerSpecialAbilityUI.init(_playerAbilityList.size(), character, special)
-	_playerAbilityList.append(playerSpecialAbilityUI)
+	if special.data.useDefenseSlot:
+		defenseAbilitiesListUI.add_child(playerSpecialAbilityUI)
+		playerSpecialAbilityUI.init(_defenseAbilityList.size(), character, special)
+		_defenseAbilityList.append(playerSpecialAbilityUI)
+	else:
+		playerAbilitiesListUI.add_child(playerSpecialAbilityUI)
+		playerSpecialAbilityUI.init(_playerAbilityList.size(), character, special)
+		_playerAbilityList.append(playerSpecialAbilityUI)
 
 # GOLD
 func _on_gold_updated():

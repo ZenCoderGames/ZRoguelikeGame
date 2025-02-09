@@ -202,6 +202,9 @@ func _on_special_activated(_special:Special):
 	blockMovementInputsForTurn = true
 
 func _on_special_completed(_special:Special):
+	await get_tree().create_timer(0.5).timeout
+	_moveX = 0
+	_moveY = 0
 	blockMovementInputsForTurn = false
 
 func _on_special_selection_activated(_special:Special):

@@ -154,7 +154,8 @@
 						"type": "ENERGY",
 						"maxValue": 4
 					}
-				]
+				],
+				"specials": ["SPECIAL_SKIP_TURN"]
 			}
 		],
 		"enemies": [
