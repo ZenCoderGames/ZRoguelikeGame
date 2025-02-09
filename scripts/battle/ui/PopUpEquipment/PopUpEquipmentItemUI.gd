@@ -23,15 +23,17 @@ func init(idx:int, parent:PopUpEquipmentUI, item:Item, slot:int):
 	_parent = parent
 	_item = item
 	_slot = slot
+	soulCostContainer.visible = false
 	if _item!=null:
 		_soulCost = _item.data.soulCost
 		nameLabel.text = _item.data.name
 		descLabel.text = Utils.format_text(_item.data.description)
 		soulCostLabel.text = str(_soulCost)
 		equipBtn.text = str(_get_input_str(), "Swap")
+		if Constants.SHOW_DISCARD:
+			soulCostContainer.visible = true
 	else:
 		descLabel.text = Utils.format_text("Item can be equipped here.")
-		soulCostContainer.visible = false
 		equipBtn.text = str(_get_input_str(), "Equip")
 	
 	if _slot!=-1:
@@ -62,11 +64,13 @@ func _on_item_discarded():
 func refresh():
 	equippedLabel.visible = (_item!=null) and (_slot!=-1)
 	equipBtn.visible = (_slot!=-1) and _parent.has_new_item()
-	discardBtn.visible = (_item!=null)
+	if Constants.SHOW_DISCARD:
+		discardBtn.visible = (_item!=null)
 	
 var _isCancelMode:bool = false
 func _process(delta: float) -> void:
-	_isCancelMode = Input.is_action_pressed(Constants.INPUT_CANCEL_VENDOR_MODIFIER)
+	if Constants.SHOW_DISCARD:
+		_isCancelMode = Input.is_action_pressed(Constants.INPUT_CANCEL_VENDOR_MODIFIER)
 		
 func _unhandled_input(event: InputEvent) -> void:
 	if _idx==0:

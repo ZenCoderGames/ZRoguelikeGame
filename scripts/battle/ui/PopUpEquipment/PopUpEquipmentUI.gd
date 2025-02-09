@@ -49,7 +49,7 @@ func init(newItem:Item, slotTypeArray:Array):
 		newPopUpItem.init(_popUpItemList.size(), self, newItem, -1)
 		_popUpItemList.append(newPopUpItem)
 
-	backBtn.visible = newItem==null
+	#backBtn.visible = newItem==null
 	backBtn.connect("button_up",Callable(self,"_on_back_pressed"))
 
 	UIEventManager.emit_signal("OnGenericUIEvent")
@@ -79,15 +79,21 @@ func item_equipped(_item:Item, slot:int):
 		GameGlobals.dungeon.player.equipment.equip_item(_newItem, slot)
 		emit_signal("OnStateChanged", null, _slotTypeArray)
 	else:
-		GameGlobals.dungeon.player.equipment.unequip_item(currentSlotItem, slot)
-		GameGlobals.dungeon.player.equipment.equip_item(_newItem, slot)
-		emit_signal("OnStateChanged", currentSlotItem, _slotTypeArray)
+		if Constants.SHOW_DISCARD:
+			GameGlobals.dungeon.player.equipment.unequip_item(currentSlotItem, slot)
+			GameGlobals.dungeon.player.equipment.equip_item(_newItem, slot)
+			emit_signal("OnStateChanged", currentSlotItem, _slotTypeArray)
+		else:
+			item_discarded(currentSlotItem, slot)
+			GameGlobals.dungeon.player.equipment.equip_item(_newItem, slot)
+			emit_signal("OnStateChanged", null, _slotTypeArray)
 
 func item_discarded(_item:Item, slot:int):
 	if GameGlobals.dungeon.player.equipment.is_equipped(_item):
 		GameGlobals.dungeon.player.equipment.unequip_item(_item, GameGlobals.dungeon.player.equipment.get_slot_for_item(_item))
 	GameGlobals.dungeon.player.inventory.remove_item(_item)
-	GameGlobals.dungeon.player.gain_souls(_item.data.soulCost)
+	if Constants.SHOW_DISCARD:
+		GameGlobals.dungeon.player.gain_souls(_item.data.soulCost)
 	if slot!=-1:
 		emit_signal("OnStateChanged", _newItem, _slotTypeArray)
 	else:

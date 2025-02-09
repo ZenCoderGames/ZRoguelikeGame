@@ -52,6 +52,8 @@ static func create(dataJS)->ActionData:
 		return ActionTeleportToTargetData.new(dataJS)
 	elif actionType==ActionSwapWithTargetData.ID:
 		return ActionSwapWithTargetData.new(dataJS)
+	elif actionType==ActionSkipTurnData.ID:
+		return ActionSkipTurnData.new(dataJS)
 
 	print_debug("[ERROR] Invalid Action Data Type", actionType)
 	return null

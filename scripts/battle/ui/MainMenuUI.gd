@@ -18,19 +18,11 @@ class_name MainMenuUI
 @onready var skillTreeUI:Node = $"%SkillTreeUI"
 
 @onready var baseMenuUI:Node = $"%MenuUI"
-@onready var deathUI:Node = $"%DeathUI"
-@onready var deathGridContainer:GridContainer = $"%DeathGridContainer"
-@onready var victoryUI:Node = $"%VictoryUI"
-@onready var victoryGridContainer:GridContainer = $"%VictoryGridContainer"
+@onready var deathUI:DeathUI = $"%DeathUI"
+@onready var victoryUI:VictoryUI = $"%VictoryUI"
 @onready var backMenuUI:Node = $"%BackMenuUI"
-@onready var exitToMenuFromVictory:Button = $"%VictoryBackToMenu"
-@onready var exitToMenuFromDefeat:Button = $"%DeathBackToMenu"
 
-@onready var victoryProgressLabel:Label = $"%VictoryProgressLabel"
-@onready var deathProgressLabel:Label = $"%DeathProgressLabel"
 @onready var totalGoldLabel:Label = $"%TotalGoldLabel"
-
-const BattleEndEnemyXPUIClass := preload("res://ui/battleEnd/BattleEndEnemyXPUI.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,8 +45,8 @@ func _ready():
 	characterSelectUI.connect("OnSkillTreePressed",Callable(self,"_on_show_skill_tree"))
 	skillTreeUI.connect("OnBackPressed",Callable(self,"_show_back_menu"))
 	levelSelectUI.connect("OnBackPressed",Callable(self,"_on_back_to_character_select"))
-	exitToMenuFromVictory.connect("button_up",Callable(self,"_show_back_menu"))
-	exitToMenuFromDefeat.connect("button_up",Callable(self,"_show_back_menu"))
+	victoryUI.connect("OnBackPressed",Callable(self,"_show_back_menu"))
+	deathUI.connect("OnBackPressed",Callable(self,"_show_back_menu"))
 
 	GameEventManager.connect("OnBackButtonPressed",Callable(self,"_show_back_menu"))
 	GameEventManager.connect("OnDungeonInitialized",Callable(self,"_on_dungeon_init"))
@@ -135,32 +127,16 @@ func on_class_toggle(isToggleOn:bool):
 func _show_defeat():
 	GameGlobals.change_substate(GameGlobals.SUB_STATES.DEFEAT)
 	get_node(".").visible = true
+	deathUI.init_data()
 	deathUI.visible = true
 	_show_base_menu(false)
-
-	var dp:DungeonProgress = GameGlobals.dungeon.dungeonProgress
-	for enemyKilledData in dp.enemyKilledList:
-		var battleEndEnemyXPUI := BattleEndEnemyXPUIClass.instantiate()
-		deathGridContainer.add_child(battleEndEnemyXPUI)
-		battleEndEnemyXPUI.init(enemyKilledData, dp.get_enemy_count(enemyKilledData))
-
-	deathProgressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
-	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
 
 func _show_victory():
 	GameGlobals.change_substate(GameGlobals.SUB_STATES.VICTORY)
 	get_node(".").visible = true
+	victoryUI.init_data()
 	victoryUI.visible = true
 	_show_base_menu(false)
-
-	var dp:DungeonProgress = GameGlobals.dungeon.dungeonProgress
-	for enemyKilledData in dp.enemyKilledList:
-		var battleEndEnemyXPUI := BattleEndEnemyXPUIClass.instantiate()
-		victoryGridContainer.add_child(battleEndEnemyXPUI)
-		battleEndEnemyXPUI.init(enemyKilledData, dp.get_enemy_count(enemyKilledData))
-
-	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
-	victoryProgressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
 
 # SKILL TREE
 func _on_show_skill_tree():
@@ -182,7 +158,7 @@ func _show_back_menu():
 		if GameGlobals.is_in_substate(GameGlobals.SUB_STATES.VICTORY) or GameGlobals.is_in_substate(GameGlobals.SUB_STATES.DEFEAT) :
 			_on_back_to_main_menu_from_battle()
 			_on_back_to_character_select()
-		elif GameGlobals.is_in_substate(GameGlobals.SUB_STATES.BACK_MENU):
+		elif GameGlobals.is_in_substate(GameGlobals.SUB_STATES.IN_BATTLE_BACK_MENU):
 			_on_back_to_game()
 		else:
 			_show_base_menu(false)
@@ -201,7 +177,7 @@ func _show_back_menu():
 func _show_battle_back_menu():
 	get_node(".").visible = true
 	backMenuUI.visible = true
-	GameGlobals.change_substate(GameGlobals.SUB_STATES.BACK_MENU)
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.IN_BATTLE_BACK_MENU)
 	_setup_keyboard_focus()
 
 func _on_back_to_game():
@@ -226,15 +202,8 @@ func _on_exit_game():
 	get_tree().quit()
 
 func _clear_end_screen():
-	var victoryGridChildren:Array = victoryGridContainer.get_children()
-	for gridItem in victoryGridChildren:
-		victoryGridContainer.remove_child(gridItem)
-		gridItem.queue_free()
-
-	var deathGridChildren:Array = deathGridContainer.get_children()
-	for gridItem in deathGridChildren:
-		deathGridContainer.remove_child(gridItem)
-		gridItem.queue_free()
+	victoryUI.clean_up()
+	deathUI.clean_up()
 
 func _on_player_data_updated():
 	totalGoldLabel.text = str(PlayerDataManager.get_current_xp())
@@ -282,7 +251,7 @@ func _input(event: InputEvent) -> void:
 	if _timeSinceLastInput>0 and GlobalTimer.get_time_since(_timeSinceLastInput)<0.25:
 		return
 		
-	if GameGlobals.is_in_state(GameGlobals.STATES.MAIN_MENU) or GameGlobals.is_in_substate(GameGlobals.SUB_STATES.BACK_MENU):
+	if GameGlobals.is_in_state(GameGlobals.STATES.MAIN_MENU) or GameGlobals.is_in_substate(GameGlobals.SUB_STATES.IN_BATTLE_BACK_MENU):
 		if _keyboardFocusList.is_empty():
 			return
 			

@@ -51,6 +51,8 @@ static func create(actionData:ActionData, parentChar):
 		return ActionTeleportToTarget.new(actionData, parentChar)
 	elif actionData.type==ActionSwapWithTargetData.ID:
 		return ActionSwapWithTarget.new(actionData, parentChar)
+	elif actionData.type==ActionSkipTurnData.ID:
+		return ActionSkipTurn.new(actionData, parentChar)
 
 	print_debug("[ERROR] Invalid Action Type", actionData.type)
 	return null

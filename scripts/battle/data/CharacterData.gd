@@ -13,8 +13,8 @@ var statDataList:Array
 var moveAction:ActionData
 var attackAction:ActionData
 var disable:bool
-var specialId:String
-var passiveId:String
+var specials:Array
+var passives:Array
 var isGeneric:bool
 var isInCharacterSelect:bool
 var unlockCost:int
@@ -45,11 +45,11 @@ func _init(dataJS):
 
 	disable =  Utils.get_data_from_json(dataJS, "disable", false)
 
-	if dataJS.has("specialId"):
-		specialId = Utils.get_data_from_json(dataJS, "specialId", "")
+	if dataJS.has("specials"):
+		specials = dataJS["specials"]
 
-	if dataJS.has("passiveId"):
-		passiveId = Utils.get_data_from_json(dataJS, "passiveId", "")
+	if dataJS.has("passives"):
+		passives = dataJS["passives"]
 
 func get_display_name():
 	return displayName

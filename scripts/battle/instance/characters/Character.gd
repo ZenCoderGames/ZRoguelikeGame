@@ -139,11 +139,13 @@ func init(id:int, charDataVal, teamVal):
 	# need this for some edge case initialization flow
 	await get_tree().create_timer(0.05).timeout
 
-	if !charData.specialId.is_empty():
-		add_special(GameGlobals.dataManager.get_special_data(charData.specialId))
+	if !charData.specials.is_empty():
+		for special in charData.specials:
+			add_special(GameGlobals.dataManager.get_special_data(special))
 
-	if !charData.passiveId.is_empty():
-		add_passive(GameGlobals.dataManager.get_passive_data(charData.passiveId))
+	if !charData.passives.is_empty():
+		for passive in charData.passives:
+			add_passive(GameGlobals.dataManager.get_passive_data(passive))
 
 	# Visuals
 	if !charData.spritePath.is_empty():

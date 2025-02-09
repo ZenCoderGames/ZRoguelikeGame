@@ -1,6 +1,23 @@
 {
 	"specials": [
 		{
+			"id": "SPECIAL_SKIP_TURN",
+			"name": "Skip Turn",
+			"description": "Skips a turn for tactical advantages",
+			"count": 1,
+			"soulCost": 0,
+			"cooldown": 1,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "SKIP_TURN",
+					"params": {
+						
+					}
+				}
+			]
+		},
+		{
 			"id": "SPECIAL_DASH",
 			"name": "Dash",
 			"description": "Dash forward 2 squares",
@@ -311,6 +328,33 @@
 					"params": {
 						"statusEffectId": "STATUS_EFFECT_STUN_FROM_ENEMY",
 						"applyToTargets": true
+					}
+				}
+			]
+		},
+		{
+			"id": "AUTOMATON_SPECIAL",
+			"name": "Regeneration",
+			"description": "Heal",
+			"conditions": ["ON_TAKE_HIT"],
+			"count": 4,
+			"executeCondition": "NONE",
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "HEALTH",
+								"value": 10
+							}
+						]
+					}
+				},
+				{
+					"type": "SHOW_CHARACTER_UI_TEXT",
+					"params": {
+						"text": "Repair"
 					}
 				}
 			]

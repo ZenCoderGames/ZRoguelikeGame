@@ -70,15 +70,12 @@
 					},
 					{
 						"type": "ENERGY",
-						"value": 4,
+						"value": 0,
 						"maxValue": 4
 					}
 				],
-				"specialId": "SPECIAL_PALADIN",
-				"#specialId": "SPECIAL_DASH",
-				"#specialId": "SPECIAL_SWAP",
-				"#specialId": "SPECIAL_LIGHTNING_BOLT",
-				"passiveId": "PASSIVE_PALADIN"
+				"specials": ["SPECIAL_PALADIN", "SPECIAL_SKIP_TURN"],
+				"passives": ["PASSIVE_PALADIN"]
 			},
 			{
 				"id": "BERSERKER",
@@ -104,8 +101,8 @@
 						"maxValue": 4
 					}
 				],
-				"specialId": "SPECIAL_BERSERKER",
-				"passiveId": "PASSIVE_BERSERKER"
+				"specials": ["SPECIAL_BERSERKER", "SPECIAL_SKIP_TURN"],
+				"passives": ["PASSIVE_BERSERKER"]
 			},
 			{
 				"id": "ASSASSIN",
@@ -131,8 +128,8 @@
 						"maxValue": 3
 					}
 				],
-				"specialId": "SPECIAL_ASSASSIN",
-				"passiveId": "PASSIVE_ASSASSIN"
+				"specials": ["SPECIAL_ASSASSIN", "SPECIAL_SKIP_TURN"],
+				"passives": ["PASSIVE_ASSASSIN"]
 			},
 			{
 				"id": "GENERIC_HERO",
@@ -206,7 +203,7 @@
 						"levelScaling": 1
 					}
 				],
-				"specialId": "RAT_KING_SPECIAL"
+				"specials": ["RAT_KING_SPECIAL"]
 			},
 			{
 				"id": "SKELETON",
@@ -229,7 +226,7 @@
 						"levelScaling": 1
 					}
 				],
-				"passiveId": "PASSIVE_REINCARNATION_AFTER_1"
+				"passives": ["PASSIVE_REINCARNATION_AFTER_1"]
 			},
 			{
 				"#disable": true,
@@ -253,7 +250,7 @@
 						"levelScaling": 1
 					}
 				],
-				"specialId": "GHOST_SPECIAL"
+				"specials": ["GHOST_SPECIAL"]
 			},
 			{
 				"#disable": true,
@@ -277,7 +274,7 @@
 						"levelScaling": 1
 					}
 				],
-				"passiveId": "PASSIVE_REGENERATION"
+				"passives": ["PASSIVE_REGENERATION"]
 			},
 			{
 				"#disable": true,
@@ -301,7 +298,7 @@
 						"levelScaling": 2
 					}
 				],
-				"specialId": "SERPENT_SPECIAL"
+				"specials": ["SERPENT_SPECIAL"]
 			},
 			{
 				"#disable": true,
@@ -325,32 +322,7 @@
 						"levelScaling": 2
 					}
 				],
-				"special": {
-					"id": "AUTOMATON_SPECIAL",
-					"description": "Heal",
-					"conditions": ["ON_TAKE_HIT"],
-					"count": 4,
-					"executeCondition": "NONE",
-					"timeline": [
-						{
-							"type": "ADD_STAT_MODIFIER",
-							"params": {
-								"statModifiers": [
-									{
-										"type": "HEALTH",
-										"value": 10
-									}
-								]
-							}
-						},
-						{
-							"type": "SHOW_CHARACTER_UI_TEXT",
-							"params": {
-								"text": "Repair"
-							}
-						}
-					]
-				}
+				"specials": ["AUTOMATON_SPECIAL"]
 			},
 			{
 				"#disable": true,

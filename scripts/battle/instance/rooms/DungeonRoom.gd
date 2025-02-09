@@ -739,7 +739,7 @@ func get_cell(r:int, c:int):
 func get_safe_starting_cell():
 	var freeCells:Array = []
 	for cell in cells:
-		if cell.is_empty() and cell.is_within_room_buffered(1):
+		if cell.is_empty() and cell.is_within_room_buffered(2):
 			freeCells.append(cell)
 	
 	if freeCells.size()>0:

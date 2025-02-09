@@ -48,6 +48,7 @@ const INPUT_MOVE_UP: String = "move_up"
 const INPUT_MOVE_DOWN: String = "move_down"
 const INPUT_SKIP_TURN: String = "skip_turn"
 const INPUT_BATTLE_MENU: String = "battle_menu"
+const INPUT_BATTLE_BACK_MENU: String = "battle_back_menu"
 
 const INPUT_CAM_ZOOM_OUT: String = "cam_zoom_out"
 const INPUT_CAM_ZOOM_IN: String = "cam_zoom_in"
@@ -109,3 +110,6 @@ const CAM_ZOOM_EASE_TIME:float = 0.35
 
 # ECONOMY
 const GOLD_CONSTANT:int = 5
+
+# UI/UX
+const SHOW_DISCARD:bool = false

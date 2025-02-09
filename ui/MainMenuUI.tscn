@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://scripts/battle/ui/MainMenuUI.gd" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wsy8d"]
-[ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://chuqffpcxuinf" path="res://ui/characterSelect/CharacterSelectUI.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="3_8id6n"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_co4b8"]
-[ext_resource type="FontFile" uid="uid://chvqhhsv3883r" path="res://resource/fonts/kirifont/KiriFont.ttf" id="6_u04gs"]
+[ext_resource type="PackedScene" uid="uid://bso3mul8wry3p" path="res://ui/battle/DeathUI.tscn" id="5_1787i"]
 [ext_resource type="PackedScene" uid="uid://bhp712q20vgvb" path="res://ui/levelSelect/LevelSelectUI.tscn" id="8_eupbo"]
 [ext_resource type="PackedScene" uid="uid://pwh4dx7x3kp3" path="res://ui/skilltree/SkillTreeUI.tscn" id="9_7tqgv"]
 [ext_resource type="FontFile" uid="uid://qg4ohjuldvkx" path="res://resource/fonts/droid-sans/DroidSans-Bold.ttf" id="9_mf20n"]
 [ext_resource type="PackedScene" uid="uid://ctx688xfbvxbn" path="res://ui/levelSelect/LevelSelectUI_v2.tscn" id="9_vv378"]
+[ext_resource type="PackedScene" uid="uid://ccim6t4jtaxsb" path="res://ui/battle/VictoryUI.tscn" id="10_v3fok"]
 [ext_resource type="Texture2D" uid="uid://ccktqyool75k8" path="res://sourceArt/Icons/coin.png" id="11_dkymv"]
 [ext_resource type="Texture2D" uid="uid://l2pqsibnxfbe" path="res://sourceArt/Icons/musicOff.png" id="11_eq3ws"]
 [ext_resource type="Texture2D" uid="uid://dsyn7iw1btnw" path="res://sourceArt/Icons/musicOn.png" id="12_dygwg"]
@@ -69,95 +69,9 @@ text = "Dungeons of Zekonia"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DeathUI" type="Control" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="DeathUI"]
-visible = false
-self_modulate = Color(0.427451, 0.427451, 0.427451, 0.490196)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DeathGridContainer" type="GridContainer" parent="DeathUI"]
+[node name="DeathUI" parent="." instance=ExtResource("5_1787i")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -32.0
-offset_right = 48.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 10
-
-[node name="Label" type="Label" parent="DeathUI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -489.0
-offset_top = 176.0
-offset_right = 4.0
-offset_bottom = 219.0
-grow_horizontal = 2
-scale = Vector2(2, 2)
-theme = ExtResource("2")
-theme_type_variation = &"HeaderMedium"
-theme_override_colors/font_color = Color(0.447059, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_u04gs")
-text = "you died..."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DeathBackToMenu" type="Button" parent="DeathUI"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -31.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
-theme = ExtResource("1_wsy8d")
-text = "Back to Menu"
-icon_alignment = 1
-
-[node name="DeathProgressLabel" type="Label" parent="DeathUI"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -193.0
-offset_right = 201.0
-offset_bottom = -138.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 40
-text = "Souls Collected = 100"
-vertical_alignment = 1
 
 [node name="MenuUI" type="PanelContainer" parent="."]
 unique_name_in_owner = true
@@ -268,92 +182,9 @@ layout_mode = 2
 theme = ExtResource("1_wsy8d")
 text = "Back to Start Menu"
 
-[node name="VictoryUI" type="Control" parent="."]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(0.380392, 0.301961, 0.301961, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="VictoryUI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -165.0
-offset_top = 205.0
-offset_right = 166.0
-offset_bottom = 265.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme = ExtResource("2")
-theme_type_variation = &"HeaderMedium"
-theme_override_colors/font_color = Color(1, 0.670588, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_u04gs")
-theme_override_font_sizes/font_size = 60
-text = "VICTORY"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VictoryGridContainer" type="GridContainer" parent="VictoryUI"]
+[node name="VictoryUI" parent="." instance=ExtResource("10_v3fok")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -32.0
-offset_right = 48.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 10
-
-[node name="VictoryProgressLabel" type="Label" parent="VictoryUI"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -204.0
-offset_top = -150.0
-offset_right = 197.0
-offset_bottom = -95.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 40
-text = "Souls Collected = 100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VictoryBackToMenu" type="Button" parent="VictoryUI"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -960.0
-offset_top = -31.0
-offset_right = 960.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
-theme = ExtResource("1_wsy8d")
-text = "Back to Menu"
-icon_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

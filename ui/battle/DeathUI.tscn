@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://bso3mul8wry3p"]
+
+[ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1_er6je"]
+[ext_resource type="Script" path="res://scripts/battle/ui/BattleEnd/DeathUI.gd" id="1_tw07m"]
+[ext_resource type="FontFile" uid="uid://chvqhhsv3883r" path="res://resource/fonts/kirifont/KiriFont.ttf" id="2_kibtk"]
+[ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="4_pdjre"]
+
+[node name="DeathUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tw07m")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+self_modulate = Color(0.427451, 0.427451, 0.427451, 0.490196)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DeathGridContainer" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -32.0
+offset_right = 48.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 10
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -489.0
+offset_top = 176.0
+offset_right = 4.0
+offset_bottom = 219.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+theme = ExtResource("1_er6je")
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.447059, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_kibtk")
+text = "you died..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeathProgressLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -193.0
+offset_right = 201.0
+offset_bottom = -138.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Souls Collected = 100"
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.596078, 0.0705882, 1)
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 120.0
+texture_normal = ExtResource("4_pdjre")
+texture_pressed = ExtResource("4_pdjre")
+texture_hover = ExtResource("4_pdjre")
+texture_disabled = ExtResource("4_pdjre")
+texture_focused = ExtResource("4_pdjre")

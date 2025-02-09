@@ -80,11 +80,13 @@ func _ready():
 	
 	_setup_touch_buttons()
 	
+	touchControls.visible = false
+	
 func _on_dungeon_init():
 	_shared_init()
 
 func _shared_init():
-	touchControls.visible = true
+	#touchControls.visible = true
 	
 	playerUI = CharacterUI.instantiate()
 	playerPanel.add_child(playerUI)
@@ -225,7 +227,7 @@ func _setup_touch_buttons():
 	upArrowBtn.connect("pressed",Callable(self,"_on_up_touch_pressed"))
 	rightArrowBtn.connect("pressed",Callable(self,"_on_right_touch_pressed"))
 	downArrowBtn.connect("pressed",Callable(self,"_on_down_touch_pressed"))
-	skipTurnBtn.connect("pressed",Callable(self,"_on_skip_turn_pressed"))
+	#skipTurnBtn.connect("pressed",Callable(self,"_on_skip_turn_pressed"))
 	zoomInBtn.connect("pressed",Callable(self,"_on_zoom_in_pressed"))
 	zoomOutBtn.connect("pressed",Callable(self,"_on_zoom_out_pressed"))
 
@@ -287,6 +289,7 @@ func _remove_level_up_ui():
 
 # VENDOR
 func _on_show_vendor(vendorChar:VendorCharacter, vendorData:VendorData):
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.IN_BATTLE_MENU)
 	if vendorDict.has(vendorChar):
 		vendorUI = vendorDict[vendorChar]
 	else:
@@ -298,6 +301,7 @@ func _on_show_vendor(vendorChar:VendorCharacter, vendorData:VendorData):
 	GameGlobals.dungeon.inBackableMenu = true
 
 func _on_vendor_closed():
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)
 	remove_child(vendorUI)
 	#vendorUI = null
 	UIEventManager.emit_signal("OnSelectionMenuOff")
@@ -305,6 +309,7 @@ func _on_vendor_closed():
 
 # POPUP EQUIPMENT
 func _on_show_pop_up_equipment(item:Item, slotTypeArray:Array):
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.IN_BATTLE_MENU)
 	popUpEquipmentUI = PopUpEquipmentUIClass.instantiate()
 	add_child(popUpEquipmentUI)
 	popUpEquipmentUI.init(item, slotTypeArray)
@@ -313,6 +318,7 @@ func _on_show_pop_up_equipment(item:Item, slotTypeArray:Array):
 	popUpEquipmentUI.connect("OnStateChanged", Callable(self,"_on_pop_up_equipment_state_change"))
 
 func _on_pop_up_equipment_state_change(item:Item, slotTypeArray:Array):
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)
 	popUpEquipmentUI.clean_up()
 	_on_pop_up_equipment_closed()
 	if item!=null:

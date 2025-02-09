@@ -30,7 +30,7 @@ func _ready():
 	CombatEventManager.connect("OnStartTurn",Callable(self,"_on_start_turn")) 
 	CombatEventManager.connect("OnEndTurn",Callable(self,"_on_end_turn")) 
 	CombatEventManager.connect("OnTouchButtonPressed",Callable(self,"_on_touch_button_pressed"))
-	CombatEventManager.connect("OnSkipTurnPressed",Callable(self,"_on_skip_turn_pressed"))
+	#CombatEventManager.connect("OnSkipTurnPressed",Callable(self,"_on_skip_turn_pressed"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityActivated",Callable(self,"_on_special_activated"))
 	CombatEventManager.connect("OnPlayerSpecialAbilityCompleted",Callable(self,"_on_special_completed"))
 	CombatEventManager.connect("OnPlayerSpecialSelectionActivated",Callable(self,"_on_special_selection_activated"))
@@ -64,9 +64,14 @@ func on_menu_off():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if GameGlobals.is_in_state(GameGlobals.STATES.BATTLE):
-		if event.is_action_pressed(Constants.INPUT_BATTLE_MENU):
-			GameEventManager.emit_signal("OnBackButtonPressed")
-			return
+		if GameGlobals.is_in_substate(GameGlobals.SUB_STATES.NONE):
+			if event.is_action_pressed(Constants.INPUT_BATTLE_BACK_MENU):
+				GameEventManager.emit_signal("OnBackButtonPressed")
+				return
+		else:
+			if event.is_action_pressed(Constants.INPUT_BATTLE_MENU):
+				GameEventManager.emit_signal("OnBackButtonPressed")
+				return
 	else:
 		if event.is_action_pressed(Constants.INPUT_EXIT_GAME):
 			GameEventManager.emit_signal("OnBackButtonPressed")
@@ -84,12 +89,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	# skip turn
-	if event.is_action_pressed(Constants.INPUT_SKIP_TURN):
-		_on_skip_turn_pressed()
-		return
+	#if event.is_action_pressed(Constants.INPUT_SKIP_TURN):
+	#	_on_skip_turn_pressed()
+	#	return
 
-	if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
-		CombatEventManager.emit_signal("OnToggleInventory")
+	#if event.is_action_pressed(Constants.INPUT_TOGGLE_INVENTORY):
+	#	CombatEventManager.emit_signal("OnToggleInventory")
 
 	# special selection
 	if _specialForSelection!=null:
