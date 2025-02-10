@@ -308,11 +308,12 @@ func _on_show_vendor(vendorChar:VendorCharacter, vendorData:VendorData):
 	GameGlobals.dungeon.inBackableMenu = true
 
 func _on_vendor_closed():
-	GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)
 	remove_child(vendorUI)
 	#vendorUI = null
 	UIEventManager.emit_signal("OnSelectionMenuOff")
 	GameGlobals.dungeon.inBackableMenu = false
+	await get_tree().create_timer(0.25).timeout
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)
 
 # POPUP EQUIPMENT
 func _on_show_pop_up_equipment(item:Item, slotTypeArray:Array):
@@ -325,11 +326,13 @@ func _on_show_pop_up_equipment(item:Item, slotTypeArray:Array):
 	popUpEquipmentUI.connect("OnStateChanged", Callable(self,"_on_pop_up_equipment_state_change"))
 
 func _on_pop_up_equipment_state_change(item:Item, slotTypeArray:Array):
-	GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)
 	popUpEquipmentUI.clean_up()
 	_on_pop_up_equipment_closed()
 	if item!=null:
 		_on_show_pop_up_equipment(item, slotTypeArray)
+	else:
+		await get_tree().create_timer(0.25).timeout
+		GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)
 
 func _on_pop_up_equipment_closed():
 	remove_child(popUpEquipmentUI)

@@ -119,12 +119,10 @@ func _refresh_ui():
 
 # INPUT
 func _unhandled_input(event: InputEvent) -> void:
-	if GameGlobals.dungeon.inBackableMenu:
-		return
-		
-	if event.is_action_pressed(get_special_input_str()):
-		if !SpecialActiveButton.disabled:
-			_on_special_pressed()
+	if GameGlobals.is_in_state(GameGlobals.STATES.BATTLE) and GameGlobals.is_in_substate(GameGlobals.SUB_STATES.NONE):
+		if event.is_action_pressed(get_special_input_str()):
+			if !SpecialActiveButton.disabled:
+				_on_special_pressed()
 
 func get_special_input_str():
 	if _special.data.useDefenseSlot:

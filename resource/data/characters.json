@@ -125,6 +125,7 @@
 					},
 					{
 						"type": "ENERGY",
+						"value": 0,
 						"maxValue": 3
 					}
 				],
