@@ -95,11 +95,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func _get_input_str():
 	if Utils.is_joystick_enabled():
 		if _idx==0:
-			return "(Up) "
+			return "(A) "
 		elif _idx==1:
-			return "(Right) "
+			return "(X) "
 		elif _idx==2:
-			return "(Down) "
+			return "(Y) "
 	else:
 		if _idx==0:
 			return "(Z) "
