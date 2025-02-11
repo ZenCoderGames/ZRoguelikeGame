@@ -46,7 +46,7 @@
 			"description": "Stuns for 1 turn",
 			"instanceCount": 2,
 			"endConditions": [
-				"ON_START_TURN"
+				"ON_END_TURN"
 			],
 			"startTimeline": [ 
 				{

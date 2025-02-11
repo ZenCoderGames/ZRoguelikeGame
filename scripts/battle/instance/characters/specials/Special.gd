@@ -49,7 +49,7 @@ func on_event_triggered():
 	_increment()
 
 func _increment():
-	if !isAvailable:
+	if !isAvailable and !is_on_cooldown():
 		_updateCount(currentCount + 1)
 		check_for_ready()
 	emit_signal("OnCountIncremented", self)

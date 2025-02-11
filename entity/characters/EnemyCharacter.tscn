@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck65kfnu25xkn"]
+[gd_scene load_steps=10 format=3 uid="uid://ck65kfnu25xkn"]
 
 [ext_resource type="Texture2D" uid="uid://b855b2vytd5lh" path="res://entity/characters/textures/Giant_01.png" id="1_6m1ro"]
 [ext_resource type="Script" path="res://scripts/battle/instance/characters/EnemyCharacter.gd" id="2_ksw3y"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="4_hqlgr"]
 [ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="5_1psgf"]
 [ext_resource type="Texture2D" uid="uid://dpqcdq2oyp0g0" path="res://sourceArt/Icons/skull.png" id="6_4aukl"]
+[ext_resource type="Texture2D" uid="uid://bfxxf26xhserd" path="res://resource/sprites/skull.png" id="6_fb3t8"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="7_1ihey"]
 [ext_resource type="FontFile" uid="uid://b7hngmc0h5ao5" path="res://resource/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="8_rl370"]
 
@@ -40,29 +41,49 @@ custom_minimum_size = Vector2(10, 10)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -26.0
+offset_left = -24.0
 offset_top = -23.0
-offset_right = -6.0
-offset_bottom = -2.0
+offset_right = -8.0
+offset_bottom = -7.0
 grow_horizontal = 2
 texture = ExtResource("5_1psgf")
 expand_mode = 1
 
 [node name="CounterText" parent="CounterHolder" instance=ExtResource("4_hqlgr")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.6, 0.6)
 text = "2"
+
+[node name="CounterReady" type="TextureRect" parent="CounterHolder"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 0.593957, 0.450897, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_fb3t8")
+expand_mode = 1
 
 [node name="SoulsIcon" type="TextureRect" parent="."]
 unique_name_in_owner = true

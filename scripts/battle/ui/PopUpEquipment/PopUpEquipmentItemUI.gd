@@ -102,11 +102,11 @@ func _get_input_str():
 			return "(Y) "
 	else:
 		if _idx==0:
-			return "(Z) "
+			return "(Q) "
 		elif _idx==1:
-			return "(X) "
+			return "(E) "
 		elif _idx==2:
-			return "(C) "
+			return "(R) "
 	
 	return ""
 

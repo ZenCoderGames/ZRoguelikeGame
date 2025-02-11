@@ -313,9 +313,11 @@
 			"name": "Petrify",
 			"description": "Stuns the target",
 			"useCustomConditions": true,
-			"conditions": ["ON_TAKE_HIT"],
+			"#conditions": ["ON_TAKE_HIT"],
+			"conditions": ["ON_END_TURN"],
 			"count": 2,
-			"executeCondition": "NONE",
+			"cooldown": 1,
+			"executeCondition": "NEARBY_ENEMY",
 			"timeline": [
 				{
 					"type": "FIND_TARGETS",

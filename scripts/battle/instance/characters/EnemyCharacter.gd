@@ -2,6 +2,10 @@ extends Character
 
 class_name EnemyCharacter
 
+@onready var counterHolder:TextureRect = $"%CounterHolder"
+@onready var counterText:Label = $"%CounterText"
+@onready var counterReady:TextureRect = $"%CounterReady"
+
 var USE_SIMPLE_LOS:bool
 var _hasSeenPlayer:bool
 var lastVisitedCellsSincePlayerMoved:Array
@@ -49,11 +53,14 @@ func update():
 		on_turn_completed()
 		return
 
+	_hide_counter()
 	for special in specialList:
 		if special.isAvailable:
-			if special.try_activate():
-				on_turn_completed()
-				return
+			if !special.try_activate():
+				_show_counter_ready_to_attack()
+			#if special.try_activate():
+			#	on_turn_completed()
+			#	return
 		else:
 			_show_counter_text(self, str(special.get_remaining_count()))
 
@@ -123,3 +130,18 @@ func set_as_miniboss():
 	originalColor = GameGlobals.battleInstance.view.minibossDamageColor
 	reset_color()
 	displayName = "(Elite) " + displayName
+
+func _show_counter_text(entity, val:String, duration:float=0.75):
+	counterHolder.visible = true
+	counterReady.visible = false
+	counterText.visible = true
+	counterText.text = val
+	_create_damage_text_tween(entity)
+
+func _show_counter_ready_to_attack():
+	counterHolder.visible = true
+	counterReady.visible = true
+	counterText.visible = false
+	
+func _hide_counter():
+	counterHolder.visible = false

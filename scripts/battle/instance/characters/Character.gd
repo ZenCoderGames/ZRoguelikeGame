@@ -5,8 +5,6 @@ class_name Character
 
 @onready var root:Sprite2D = $"%Root"
 @onready var damageText:Label = get_node("DamageText")
-@onready var counterHolder:TextureRect = $"%CounterHolder"
-@onready var counterText:Label = $"%CounterText"
 @onready var animPlayer:AnimationPlayer = get_node("AnimationPlayer")
 @onready var soulsIcon:Node = $"%SoulsIcon"
 @onready var soulsLabel:Label = $"%SoulsLabel"
@@ -556,13 +554,6 @@ func _show_generic_text(entity, val:String, duration:float=0.75):
 	_create_damage_text_tween(entity)
 	await get_tree().create_timer(duration).timeout
 	damageText.visible = false
-
-func _show_counter_text(entity, val:String, duration:float=0.75):
-	counterHolder.visible = true
-	counterText.text = val
-	_create_damage_text_tween(entity)
-	await get_tree().create_timer(duration).timeout
-	counterHolder.visible = false
 
 func _create_damage_text_tween(_entity):
 	"""var dirn:int = dirn_to_character(entity)
