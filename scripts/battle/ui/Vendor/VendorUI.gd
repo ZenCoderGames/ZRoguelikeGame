@@ -22,6 +22,9 @@ func _ready():
 	GameEventManager.connect("OnBackButtonPressed",Callable(self,"_on_back_pressed"))
 
 func init(vendorChar:VendorCharacter, vendorData:VendorData):
+	_update_player_stats()
+	GameGlobals.dungeon.player.connect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
+	
 	if initialized:
 		for vendorItem in _vendorItemList:
 			vendorItem.refresh()
@@ -31,9 +34,6 @@ func init(vendorChar:VendorCharacter, vendorData:VendorData):
 	_vendorData = vendorData
 	title.text = vendorData.displayName
 	var maxItemsToDisplay:int = vendorData.numItemsShown
-
-	_update_player_stats()
-	GameGlobals.dungeon.player.connect("OnStatChanged",Callable(self,"_on_char_stat_changed"))
 
 	var itemsToConsider:Array = []
 
