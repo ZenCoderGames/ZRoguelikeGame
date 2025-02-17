@@ -55,6 +55,8 @@ expand_mode = 1
 script = ExtResource("4")
 useLevelScalingOnEnemies = true
 usePopUpEquipment = true
+debugSpawnItems = ["ITEM_BASIC_SWORD", "RUNE_ASSASSIN"]
+debugSpawnVendors = ["BLACKSMITH_VENDOR"]
 
 [node name="DungeonCamera" type="Camera2D" parent="Battle"]
 position = Vector2(400, 300)

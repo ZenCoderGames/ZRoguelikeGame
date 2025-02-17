@@ -17,6 +17,7 @@ var _item:Item
 var _soulCost:int
 var _slot:int
 var _idx:int
+var _isCancelMode:bool = false
 
 func init(idx:int, parent:PopUpEquipmentUI, item:Item, slot:int):
 	_idx = idx
@@ -44,7 +45,7 @@ func init(idx:int, parent:PopUpEquipmentUI, item:Item, slot:int):
 
 	equipBtn.connect("button_up",Callable(self,"_on_item_equipped"))
 	discardBtn.connect("button_up",Callable(self,"_on_item_discarded"))
-	discardBtn.text = str(_get_discard_input_str(), "Convert to Souls")
+	discardBtn.text = str(_get_input_str(), "Convert to Souls")
 	equippedLabel.visible = false
 	equipBtn.visible = false
 	discardBtn.visible = false
@@ -64,13 +65,14 @@ func _on_item_discarded():
 func refresh():
 	equippedLabel.visible = (_item!=null) and (_slot!=-1)
 	equipBtn.visible = (_slot!=-1) and _parent.has_new_item()
-	if Constants.SHOW_DISCARD:
+	if Constants.SHOW_DISCARD || !_parent.has_new_item():
 		discardBtn.visible = (_item!=null)
+		_isCancelMode = _item!=null
 	
-var _isCancelMode:bool = false
+'''var _isCancelMode:bool = false
 func _process(delta: float) -> void:
 	if Constants.SHOW_DISCARD:
-		_isCancelMode = Input.is_action_pressed(Constants.INPUT_CANCEL_VENDOR_MODIFIER)
+		_isCancelMode = Input.is_action_pressed(Constants.INPUT_CANCEL_VENDOR_MODIFIER)'''
 		
 func _unhandled_input(event: InputEvent) -> void:
 	if _idx==0:
