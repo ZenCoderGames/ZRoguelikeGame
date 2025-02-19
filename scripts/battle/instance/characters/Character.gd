@@ -466,10 +466,6 @@ func die():
 		pass
 	else:
 		isDead = true
-		if animPlayer!=null:
-			animPlayer.play("Death")
-		else:
-			set_sprite(DEATH_SPRITE_PATH)
 		
 		currentRoom.enemy_died(self)
 
@@ -889,3 +885,9 @@ func set_sprite(spritePath:String):
 	var root_node:Node = self
 	var mySprite:Sprite2D = root_node as Sprite2D
 	mySprite.texture = load(spritePath)
+
+func clean_up_on_death():
+	if animPlayer!=null:
+		animPlayer.play("Death")
+	else:
+		set_sprite(DEATH_SPRITE_PATH)

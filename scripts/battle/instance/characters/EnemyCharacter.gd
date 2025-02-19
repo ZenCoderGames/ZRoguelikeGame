@@ -145,3 +145,8 @@ func _show_counter_ready_to_attack():
 	
 func _hide_counter():
 	counterHolder.visible = false
+
+func clean_up_on_death():
+	super.clean_up_on_death()
+	
+	_hide_counter()
