@@ -3,6 +3,7 @@ extends PanelContainer
 class_name CharacterSelectItemUI
 
 @onready var charLabel:Label = $"%CharNameLabel"
+@onready var levelLabel:Label = $"%LevelLabel"
 @onready var descLabel:Label = $"%DescLabel"
 @onready var chooseBtn:Button = $"%ChooseButton"
 @onready var portrait:TextureRect = $"%Portrait"
@@ -12,6 +13,9 @@ class_name CharacterSelectItemUI
 @onready var background:PanelContainer = $"%Bg"
 @onready var unlockBtn:Button = $"%UnlockButton"
 
+@onready var levelHolder:HBoxContainer = $"%LevelHolder"
+@onready var xpProgressBar:ProgressBar = $"%XPProgressBar"
+
 var myCharData:CharacterData
 
 signal OnActiveOrPassiveInFocus(data)
@@ -20,12 +24,15 @@ signal OnUnlocked
 
 func init_from_data(charData:CharacterData):
 	myCharData = charData
+	var xp:int = PlayerDataManager.currentPlayerData.get_hero_xp_for_next_level(charData.id)
+	var level:int = PlayerDataManager.currentPlayerData.get_hero_level(charData.id)
 	charLabel.text = Utils.convert_to_camel_case(charData.description)
 	var statStr:String = ""
 	for statData in charData.statDataList:
 		if _is_showable_stat(statData):
 			statStr = statStr + Utils.convert_to_camel_case(statData.get_stat_name()) + ": " + str(statData.value) + "\n"
 	#statStr.erase(statStr.length()-1, 1)
+	levelLabel.text = str("Level: ", level)
 	descLabel.text = statStr
 	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
 	unlockBtn.connect("button_up",Callable(self,"_on_unlock"))
@@ -41,8 +48,12 @@ func init_from_data(charData:CharacterData):
 		passive.connect("mouse_exited",Callable(self,"_on_passive_out_of_focus"))
 	else:
 		passive.self_modulate = Color.GRAY
-
+		
+	xpProgressBar.value = xp
+	
 	_checkForUnlock()
+	
+	levelHolder.visible = is_unlocked()
 
 func _on_item_chosen():
 	UIEventManager.emit_signal("OnCharacterSelectButton")

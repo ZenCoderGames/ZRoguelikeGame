@@ -37,6 +37,9 @@ signal OnPopUpEquipmentClosed()
 signal OnZoomIn()
 signal OnZoomOut()
 signal OnGoldUpdated()
+signal OnPlayerReachedExit()
+signal OnPlayerReachedEnd()
+signal OnPlayerConfirmedExit()
 
 func register_for_conditional_events(triggerConditions:Array, object, parentCharacter:Character):
 	if triggerConditions.has(Constants.TRIGGER_CONDITION.ON_PRE_ATTACK):

@@ -54,6 +54,11 @@ func remove_current_xp(val:int):
 	currentPlayerData.currentXP = currentPlayerData.currentXP - val
 	emit_signal("OnPlayerDataUpdated")
 	save_to_file()
+	
+func add_hero_xp(charId:String, val:int):
+	currentPlayerData.add_hero_xp(charId, val)
+	emit_signal("OnPlayerDataUpdated")
+	save_to_file()
 
 # CHARACTERS
 func has_character_been_unlocked(charData:CharacterData):

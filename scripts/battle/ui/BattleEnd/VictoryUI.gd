@@ -20,8 +20,9 @@ func init_data():
 		gridContainer.add_child(battleEndEnemyXPUI)
 		battleEndEnemyXPUI.init(enemyKilledData, dp.get_enemy_count(enemyKilledData))
 
-	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
 	progressLabel.text = GameGlobals.dungeon.dungeonProgress.get_progress_description()
+	PlayerDataManager.add_hero_xp(GameGlobals.dungeon.player.charData.id, GameGlobals.dungeon.dungeonProgress.enemyXPEarned)
+	PlayerDataManager.add_current_xp(GameGlobals.dungeon.dungeonProgress.get_progress())
 
 func clean_up():
 	var deathGridChildren:Array = gridContainer.get_children()

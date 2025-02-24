@@ -54,5 +54,6 @@ func get_progress_description()->String:
 	#dungeonProgressDesc = str(dungeonProgressDesc, "\nSouls Collected: ", get_progress())
 
 	dungeonProgressDesc = str(dungeonProgressDesc, "Gold Collected: ", get_progress())
+	dungeonProgressDesc = str(dungeonProgressDesc, "\n\n", "Hero XP Earned: ", enemyXPEarned)
 
 	return dungeonProgressDesc

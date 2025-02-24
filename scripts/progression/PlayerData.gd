@@ -16,7 +16,7 @@ func init_as_new() -> void:
 
 func add_hero_to_starting_list(heroId:String):
 	var heroData:PlayerHeroData = PlayerHeroData.new()
-	heroData.charId = heroId
+	heroData.init(heroId, 0)
 	return heroData
 
 func init():
@@ -44,3 +44,19 @@ func unlockSkill(skillId:String):
 
 func get_unlocked_skills()->Array[String]:
 	return skillUnlockedDataList
+
+# Hero XP and Levels
+func get_hero_prev_xp(charId:String):
+	return heroDataDict[charId].get_prev_xp_for_next_level()
+
+func get_hero_xp_for_next_level(charId:String):
+	return heroDataDict[charId].get_xp_for_next_level()
+
+func add_hero_xp(charId:String, xpToAdd:int):
+	heroDataDict[charId].add_xp(xpToAdd)
+
+func set_hero_xp_as_seen(charId:String):
+	heroDataDict[charId].set_hero_xp_as_seen()
+
+func get_hero_level(charId:String):
+	return heroDataDict[charId].get_level()

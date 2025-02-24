@@ -33,6 +33,9 @@ const ItemUI := preload("res://ui/battle/ItemUI.tscn")
 var vendorUI:VendorUI
 const VendorUI := preload("res://ui/battle/VendorUI.tscn")
 var vendorDict:Dictionary = {}
+# Pop Up UI
+var popUpUI:PopUpUI
+const PopUpUIClass := preload("res://ui/battle/PopUpUI.tscn")
 # Pop Up Equipment UI
 var popUpEquipmentUI:PopUpEquipmentUI
 const PopUpEquipmentUIClass := preload("res://ui/battle/PopUpEquipmentUI.tscn")
@@ -69,6 +72,7 @@ func _ready():
 	CombatEventManager.connect("OnVendorClosed",Callable(self,"_on_vendor_closed"))
 	CombatEventManager.connect("OnPopUpEquipmentClosed",Callable(self,"_on_pop_up_equipment_closed"))
 	CombatEventManager.connect("OnGoldUpdated",Callable(self,"_on_gold_updated"))
+	CombatEventManager.connect("OnPlayerReachedExit", Callable(self,"_show_exit_floor_pop_up"))
 
 	HitResolutionManager.connect("OnPostHit",Callable(self,"_on_attack"))
 	HitResolutionManager.connect("OnKill",Callable(self,"_on_kill"))
@@ -311,6 +315,30 @@ func _on_vendor_closed():
 	remove_child(vendorUI)
 	#vendorUI = null
 	UIEventManager.emit_signal("OnSelectionMenuOff")
+	GameGlobals.dungeon.inBackableMenu = false
+	await get_tree().create_timer(0.25).timeout
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)
+
+# POPUP UI
+func _show_exit_floor_pop_up():
+	_show_pop_up("Floor Completed", str("Go to the next floor ?"))
+	popUpUI.connect("OnConfirm", Callable(self,"_on_exit_pop_up_confirm"))
+	popUpUI.connect("OnBack", Callable(self,"_hide_pop_up"))
+
+func _on_exit_pop_up_confirm():
+	_hide_pop_up()
+	CombatEventManager.emit_signal("OnPlayerConfirmedExit")
+
+func _show_pop_up(title:String, desc:String):
+	GameGlobals.change_substate(GameGlobals.SUB_STATES.IN_BATTLE_MENU)
+	GameGlobals.dungeon.inBackableMenu = true
+	popUpUI = PopUpUIClass.instantiate()
+	add_child(popUpUI)
+	popUpUI.init(title, desc)
+	
+func _hide_pop_up():
+	remove_child(popUpUI)
+	popUpUI.queue_free()
 	GameGlobals.dungeon.inBackableMenu = false
 	await get_tree().create_timer(0.25).timeout
 	GameGlobals.change_substate(GameGlobals.SUB_STATES.NONE)

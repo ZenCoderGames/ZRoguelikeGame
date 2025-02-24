@@ -479,6 +479,7 @@ func die():
 			var endScale:Vector2 = Vector2(1.25, 1.25)
 			Utils.create_return_tween_vector2(soulsIcon, "scale", startScale, endScale, 0.25, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR, 0.25)
 
+		clean_up_on_death()
 		await get_tree().create_timer(0.5).timeout
 		cell.clear_entity_on_death()
 

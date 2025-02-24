@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2qlk6b40v1c"]
+
+[ext_resource type="Script" path="res://scripts/battle/ui/PopUpUI.gd" id="1_rdt84"]
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_yy2km"]
+[ext_resource type="FontFile" uid="uid://banvpavkfhevp" path="res://resource/fonts/connection/ConnectionBold.otf" id="3_b6tt7"]
+[ext_resource type="FontFile" path="res://resource/fonts/cmu-typewriter/Typewriter.tres" id="4_o3th6"]
+[ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="5_x55gc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovkci"]
+bg_color = Color(0.254902, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnvwx"]
+bg_color = Color(0.14902, 0.305882, 0.137255, 1)
+
+[node name="PopUpUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rdt84")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.67451)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Panel"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.635294, 0.388235, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.5
+offset_top = 20.0
+offset_right = 96.5
+offset_bottom = 68.0
+grow_horizontal = 2
+theme = ExtResource("2_yy2km")
+theme_override_fonts/font = ExtResource("3_b6tt7")
+theme_override_font_sizes/font_size = 45
+text = "NEXT FLOOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Panel"]
+unique_name_in_owner = true
+self_modulate = Color(0.523208, 0.825623, 0.470156, 1)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -22.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_yy2km")
+theme_override_fonts/font = ExtResource("4_o3th6")
+theme_override_font_sizes/font_size = 45
+text = "Ready for Next Floor (2/4)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+focus_mode = 0
+theme = ExtResource("2_yy2km")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ovkci")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bnvwx")
+text = "JOURNEY ON..."
+
+[node name="BackButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.596078, 0.0705882, 1)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 106.0
+offset_bottom = 106.0
+texture_normal = ExtResource("5_x55gc")
+texture_pressed = ExtResource("5_x55gc")
+texture_hover = ExtResource("5_x55gc")
+texture_disabled = ExtResource("5_x55gc")
+texture_focused = ExtResource("5_x55gc")

@@ -194,6 +194,8 @@ func _debug_inputs(event: InputEvent):
 		GameEventManager.emit_signal("OnDungeonExited", false)
 	if event.is_action_pressed("debug_add_souls_100"):
 		PlayerDataManager.add_current_xp(100)
+		if GameGlobals.dataManager.playerData!=null:
+			PlayerDataManager.add_hero_xp(GameGlobals.dataManager.playerData.id, 50)
 	if event.is_action_pressed("debug_remove_souls_20"):
 		PlayerDataManager.remove_current_xp(20)
 

@@ -92,17 +92,14 @@ func move_to_cell(newCell, triggerTurnCompleteEvent:bool=false):
 
 	if newCell.is_exit():
 		if newCell.room.is_cleared():
-			emit_signal("OnPlayerReachedExit")
+			CombatEventManager.emit_signal("OnPlayerReachedExit")
 		else:
 			CombatEventManager.on_show_info("Exit", "Kill Miniboss to exit")
 	elif newCell.is_end():
 		if newCell.room.is_cleared():
-			end_dungeon()
+			CombatEventManager.emit_signal("OnPlayerReachedEnd")
 		else:
 			CombatEventManager.on_show_info("Exit", "Kill Boss to exit")
-	
-func end_dungeon():
-	emit_signal("OnPlayerReachedEnd")
 
 func on_enemy_moved_adjacent(_enemy):
 	check_for_nearby_entities()

@@ -79,7 +79,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 texture = ExtResource("3_jok4v")
-expand_mode = 4
+expand_mode = 3
 stretch_mode = 3
 
 [node name="DescLabel" type="Label" parent="VBoxContainer/Bg/VBoxContainer"]
@@ -124,3 +124,29 @@ size_flags_vertical = 8
 focus_mode = 0
 theme = ExtResource("1_68jt7")
 text = "Unlock (x300)"
+
+[node name="LevelHolder" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="XPProgressBar" type="ProgressBar" parent="VBoxContainer/LevelHolder"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+value = 30.0
+rounded = true
+
+[node name="LevelPanel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("1_68jt7")
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer/LevelPanel"]
+unique_name_in_owner = true
+self_modulate = Color(0.29, 1, 0.29, 1)
+layout_mode = 2
+offset_top = 4.0
+offset_right = 210.0
+offset_bottom = 27.0
+text = "Level: 5"
+horizontal_alignment = 1
