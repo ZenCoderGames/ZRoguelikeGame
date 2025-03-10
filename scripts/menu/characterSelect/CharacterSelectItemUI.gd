@@ -5,12 +5,13 @@ class_name CharacterSelectItemUI
 @onready var charLabel:Label = $"%CharNameLabel"
 @onready var levelLabel:Label = $"%LevelLabel"
 @onready var descLabel:Label = $"%DescLabel"
-@onready var chooseBtn:Button = $"%ChooseButton"
 @onready var portrait:TextureRect = $"%Portrait"
 @onready var active:TextureRect = $"%Active"
 @onready var passive:TextureRect = $"%Passive"
 
 @onready var background:PanelContainer = $"%Bg"
+@onready var selectBtn:Button = $"%SelectButton"
+@onready var confirmBtn:Button = $"%ConfirmButton"
 @onready var unlockBtn:Button = $"%UnlockButton"
 
 @onready var levelHolder:HBoxContainer = $"%LevelHolder"
@@ -18,6 +19,7 @@ class_name CharacterSelectItemUI
 
 var myCharData:CharacterData
 
+signal OnSelected(itemUI)
 signal OnActiveOrPassiveInFocus(data)
 signal OnActiveOrPassiveOutOfFocus
 signal OnUnlocked
@@ -34,7 +36,8 @@ func init_from_data(charData:CharacterData):
 	#statStr.erase(statStr.length()-1, 1)
 	levelLabel.text = str("Level: ", level)
 	descLabel.text = statStr
-	chooseBtn.connect("button_up",Callable(self,"_on_item_chosen"))
+	selectBtn.connect("button_up",Callable(self,"_on_item_selected"))
+	confirmBtn.connect("button_up",Callable(self,"_on_item_chosen"))
 	unlockBtn.connect("button_up",Callable(self,"_on_unlock"))
 	var portraitTex = load(str("res://",myCharData.portraitPath))
 	portrait.texture = portraitTex
@@ -54,6 +57,9 @@ func init_from_data(charData:CharacterData):
 	_checkForUnlock()
 	
 	levelHolder.visible = is_unlocked()
+
+func _on_item_selected():
+	emit_signal("OnSelected", self)
 
 func _on_item_chosen():
 	UIEventManager.emit_signal("OnCharacterSelectButton")
@@ -92,11 +98,13 @@ func _checkForUnlock():
 			unlockBtn.disabled = true
 			unlockBtn.modulate = Color.RED
 		unlockBtn.visible = true
-		chooseBtn.visible = false
+		selectBtn.visible = false
+		confirmBtn.visible = false
 		background.modulate = Color.DIM_GRAY
 	else:
 		unlockBtn.visible = false
-		chooseBtn.visible = true
+		selectBtn.visible = true
+		confirmBtn.visible = false
 		background.modulate = Color.WHITE
 
 func _on_unlock():
@@ -108,17 +116,21 @@ func refresh():
 	_checkForUnlock()
 
 func select():
-	chooseBtn.modulate = Color.YELLOW
+	selectBtn.modulate = Color.YELLOW
 	unlockBtn.modulate = Color.YELLOW
+	selectBtn.visible = false
+	confirmBtn.visible = true
+	GameGlobals.currentSelectedHero = myCharData
+	print(myCharData.id)
 	
 func deselect():
-	chooseBtn.modulate = Color.WHITE
+	selectBtn.modulate = Color.WHITE
 	unlockBtn.modulate = Color.WHITE
 	_checkForUnlock()
 	
 func confirm():
 	if is_unlocked():
-		chooseBtn.emit_signal("button_up")
+		confirmBtn.emit_signal("button_up")
 	else:
 		unlockBtn.emit_signal("button_up")
 

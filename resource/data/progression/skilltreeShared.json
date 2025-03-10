@@ -4,13 +4,6 @@
 		"type": "SHARED",
 		"skills": [
 			{
-				"id": "START_NODE",
-				"name": "Skill Tree",
-				"description": "Click on a node to unlock it",
-				"children": ["STARTING_ITEMS", "ECONOMY", "PERKS", "IMPROVED_SPECIALS"],
-				"isStartNode": true
-			},
-			{
 				"id": "STARTING_ITEMS",
 				"name": "Starter Items",
 				"description": "Spawn 1 Additional Item in each Floor",

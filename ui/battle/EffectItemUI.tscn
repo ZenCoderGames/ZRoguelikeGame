@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://fopkttbvmi5l"]
 
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_4hovs"]
-[ext_resource type="Script" path="res://scripts/battle/ui/EffectItemUI.gd" id="2"]
+[ext_resource type="Script" uid="uid://cipgdnlog6ago" path="res://scripts/battle/ui/EffectItemUI.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://b51yh60n5jf0w" path="res://sourceArt/Random/EffectShape.png" id="2_d46m2"]
 [ext_resource type="FontFile" uid="uid://neuymc5q34ld" path="res://resource/fonts/montreal/Montreal-Bold.ttf" id="4_na8j5"]
 

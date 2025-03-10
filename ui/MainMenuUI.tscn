@@ -1,15 +1,15 @@
 [gd_scene load_steps=15 format=3 uid="uid://3gpoj14w4qny"]
 
-[ext_resource type="Script" path="res://scripts/battle/ui/MainMenuUI.gd" id="1"]
+[ext_resource type="Script" uid="uid://cfxc6gecleayv" path="res://scripts/battle/ui/MainMenuUI.gd" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wsy8d"]
 [ext_resource type="PackedScene" uid="uid://chuqffpcxuinf" path="res://ui/characterSelect/CharacterSelectUI.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="3_8id6n"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_co4b8"]
 [ext_resource type="PackedScene" uid="uid://bso3mul8wry3p" path="res://ui/battle/DeathUI.tscn" id="5_1787i"]
 [ext_resource type="PackedScene" uid="uid://bhp712q20vgvb" path="res://ui/levelSelect/LevelSelectUI.tscn" id="8_eupbo"]
-[ext_resource type="PackedScene" uid="uid://pwh4dx7x3kp3" path="res://ui/skilltree/SkillTreeUI.tscn" id="9_7tqgv"]
 [ext_resource type="FontFile" uid="uid://qg4ohjuldvkx" path="res://resource/fonts/droid-sans/DroidSans-Bold.ttf" id="9_mf20n"]
 [ext_resource type="PackedScene" uid="uid://ctx688xfbvxbn" path="res://ui/levelSelect/LevelSelectUI_v2.tscn" id="9_vv378"]
+[ext_resource type="PackedScene" uid="uid://d88jykgl6jdq" path="res://ui/skilltree/SkillTreeUI_v2.tscn" id="10_jmq50"]
 [ext_resource type="PackedScene" uid="uid://ccim6t4jtaxsb" path="res://ui/battle/VictoryUI.tscn" id="10_v3fok"]
 [ext_resource type="Texture2D" uid="uid://ccktqyool75k8" path="res://sourceArt/Icons/coin.png" id="11_dkymv"]
 [ext_resource type="Texture2D" uid="uid://l2pqsibnxfbe" path="res://sourceArt/Icons/musicOff.png" id="11_eq3ws"]
@@ -141,7 +141,7 @@ layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SkillTreeUI" parent="." instance=ExtResource("9_7tqgv")]
+[node name="SkillTreeUI_v2" parent="." instance=ExtResource("10_jmq50")]
 visible = false
 layout_mode = 1
 grow_horizontal = 2
@@ -194,7 +194,7 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
-theme_override_constants/separation = -3
+theme_override_constants/separation = -10
 
 [node name="PanelContainer" type="MarginContainer" parent="VBoxContainer"]
 self_modulate = Color(0.4, 0.4, 0.4, 0.184314)

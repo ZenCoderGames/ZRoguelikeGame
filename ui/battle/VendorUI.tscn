@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://soar1ogeef0j"]
 
-[ext_resource type="Script" path="res://scripts/battle/ui/Vendor/VendorUI.gd" id="1_aq5ji"]
+[ext_resource type="Script" uid="uid://8gyse652o4es" path="res://scripts/battle/ui/Vendor/VendorUI.gd" id="1_aq5ji"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_pwadx"]
 [ext_resource type="FontFile" uid="uid://banvpavkfhevp" path="res://resource/fonts/connection/ConnectionBold.otf" id="3_jsxga"]
 [ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="4_8cbis"]

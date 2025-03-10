@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dcymh0g7l2xvx" path="res://sourceArt/Random/CharAttack.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://erw2pwg1mu5o" path="res://sourceArt/Random/CharHealth.png" id="3"]
 [ext_resource type="FontFile" uid="uid://neuymc5q34ld" path="res://resource/fonts/montreal/Montreal-Bold.ttf" id="3_phf1u"]
-[ext_resource type="Script" path="res://scripts/battle/ui/CharPropUI.gd" id="4"]
+[ext_resource type="Script" uid="uid://cvdcfdwpobn7d" path="res://scripts/battle/ui/CharPropUI.gd" id="4"]
 
 [sub_resource type="CircleShape2D" id="2"]
 radius = 12.0

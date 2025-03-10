@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4uvdji3u721u"]
 
 [ext_resource type="Texture2D" uid="uid://bijatho582wi5" path="res://sourceArt/Icons/Consumable.png" id="1"]
-[ext_resource type="Script" path="res://scripts/battle/instance/items/Item.gd" id="2"]
+[ext_resource type="Script" uid="uid://cp051mmy04hk4" path="res://scripts/battle/instance/items/Item.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://c2ub2yn5vtdpe" path="res://ui/battle/HoverInfoUI.tscn" id="3_doiua"]
 
 [node name="Consumable_Tier1" type="Sprite2D"]

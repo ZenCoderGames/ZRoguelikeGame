@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6knqc3plr5a7"]
 
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_wpwn5"]
-[ext_resource type="Script" path="res://scripts/battle/ui/SpellItemUI.gd" id="2"]
+[ext_resource type="Script" uid="uid://dnamhkjncgfmj" path="res://scripts/battle/ui/SpellItemUI.gd" id="2"]
 
 [node name="SpellButton" type="Button"]
 custom_minimum_size = Vector2(0, 30)

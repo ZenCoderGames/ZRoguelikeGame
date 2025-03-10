@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dbjybrry117wf"]
 
-[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeHolder.gd" id="1_1vj4f"]
-[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeCamera.gd" id="2_7giaw"]
-[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTree.gd" id="3_v5c6u"]
+[ext_resource type="Script" uid="uid://by5si8i72m41q" path="res://scripts/menu/skilltree/SkillTreeHolder.gd" id="1_1vj4f"]
+[ext_resource type="Script" uid="uid://bnaxj3t6rl3kx" path="res://scripts/menu/skilltree/SkillTreeCamera.gd" id="2_7giaw"]
+[ext_resource type="Script" uid="uid://puktcwalxhvf" path="res://scripts/menu/skilltree/SkillTree.gd" id="3_v5c6u"]
 
 [node name="SkillTreeHolder" type="Node2D"]
 script = ExtResource("1_1vj4f")

@@ -26,8 +26,20 @@ func init_from_data():
 		
 	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
 	skillTreeButton.connect("pressed",Callable(self,"_on_skilltree_button_pressed"))
-
+			
+	var prevChosenHero:CharacterData = GameGlobals.currentSelectedHero
+			
 	_setup_keyboard_focus()
+	
+	# Start at the last chosen character
+	var idx:int = 0
+	for charSelectItem in charSelectItems:
+		if prevChosenHero == charSelectItem.myCharData:
+			_keyboardFocusIdx = idx
+			break
+		idx = idx + 1
+		
+	_update_keyboard_focus()
 
 func add_character(heroData:CharacterData):
 	var charSelectItem = CharacterSelectItemUIClass.instantiate()
@@ -37,6 +49,7 @@ func add_character(heroData:CharacterData):
 	charSelectItem.connect("OnActiveOrPassiveInFocus",Callable(self,"_show_info"))
 	charSelectItem.connect("OnActiveOrPassiveOutOfFocus",Callable(self,"_hide_info"))
 	charSelectItem.connect("OnUnlocked",Callable(self,"_on_unlocked"))
+	charSelectItem.connect("OnSelected",Callable(self,"_on_selected"))
 
 func _show_info(val:String):
 	infoPanel.visible = true
@@ -48,6 +61,13 @@ func _hide_info():
 func _on_unlocked():
 	for charSelectItem in charSelectItems:
 		charSelectItem.refresh()
+
+func _on_selected(itemUI:CharacterSelectItemUI):
+	for charSelectItem in charSelectItems:
+		if (charSelectItem == itemUI):
+			charSelectItem.select()
+		else:
+			charSelectItem.deselect()
 
 func _on_skilltree_button_pressed():
 	emit_signal("OnSkillTreePressed")
@@ -72,6 +92,7 @@ var _prevKeyboardFocusIdx:int
 var _timeSinceLastInput:float
 
 func _setup_keyboard_focus():
+	_prevKeyboardFocusIdx = 0
 	_keyboardFocusIdx = 0
 	_keyboardFocusList.clear()
 	for item in charSelectItems:
@@ -111,7 +132,7 @@ func _update_keyboard_focus():
 
 	if _prevFocusedButton!=null and _prevFocusedButton!=_keyboardFocusList[_keyboardFocusIdx]:
 		_prevFocusedButton.deselect()
-	_keyboardFocusList[_keyboardFocusIdx].select()
+	_keyboardFocusList[_keyboardFocusIdx]._on_item_selected()
 	_prevFocusedButton = _keyboardFocusList[_keyboardFocusIdx]
 	_prevKeyboardFocusIdx = _keyboardFocusIdx
 	

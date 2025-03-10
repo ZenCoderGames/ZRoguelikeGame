@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_8fv76"]
 [ext_resource type="Texture2D" uid="uid://8hwykvr4s81q" path="res://sourceArt/Icons/flask_full.png" id="2_gwyaf"]
-[ext_resource type="Script" path="res://scripts/battle/ui/ConsumableItemUI.gd" id="2_p8863"]
+[ext_resource type="Script" uid="uid://dq40lnydr67f4" path="res://scripts/battle/ui/ConsumableItemUI.gd" id="2_p8863"]
 
 [node name="ConsumableButton" type="Button"]
 custom_minimum_size = Vector2(30, 30)

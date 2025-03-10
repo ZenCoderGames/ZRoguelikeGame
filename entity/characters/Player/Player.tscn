@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://clruuu5jhyxtn" path="res://entity/characters/Player/Player_01.png" id="1_4yqio"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="2"]
-[ext_resource type="Script" path="res://scripts/battle/instance/characters/PlayerCharacter.gd" id="3"]
+[ext_resource type="Script" uid="uid://1xwe5gyysp3r" path="res://scripts/battle/instance/characters/PlayerCharacter.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="6"]
 
 [sub_resource type="Animation" id="Animation_jtpl6"]
@@ -134,8 +134,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pvh5t"]
 _data = {
-"Death": SubResource("Animation_jtpl6"),
-"Idle": SubResource("Animation_art81")
+&"Death": SubResource("Animation_jtpl6"),
+&"Idle": SubResource("Animation_art81")
 }
 
 [node name="Player" type="Sprite2D"]

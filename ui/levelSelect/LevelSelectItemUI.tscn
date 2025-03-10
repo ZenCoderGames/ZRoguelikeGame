@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmh6j8fk6ufc0"]
 
 [ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="1_ry0s8"]
-[ext_resource type="Script" path="res://scripts/menu/levelSelect/LevelSelectItemUI.gd" id="2_dwxd1"]
+[ext_resource type="Script" uid="uid://bxwtxixtsfqlx" path="res://scripts/menu/levelSelect/LevelSelectItemUI.gd" id="2_dwxd1"]
 
 [node name="TextureButton" type="TextureButton"]
 anchors_preset = 8

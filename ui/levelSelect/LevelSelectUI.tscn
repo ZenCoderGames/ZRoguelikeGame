@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhp712q20vgvb"]
 
-[ext_resource type="Script" path="res://scripts/menu/levelSelect/LevelSelectUI.gd" id="1_rrfbg"]
+[ext_resource type="Script" uid="uid://b2y84jhe2ik5w" path="res://scripts/menu/levelSelect/LevelSelectUI.gd" id="1_rrfbg"]
 [ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="3_b6hi4"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="3_x2i6y"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="4_mq3ic"]

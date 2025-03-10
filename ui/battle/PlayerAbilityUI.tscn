@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2wgar6caudl2"]
 
-[ext_resource type="Script" path="res://scripts/battle/ui/PlayerSpecialAbilityUI.gd" id="2_1o1vb"]
+[ext_resource type="Script" uid="uid://b76gn3geh1stk" path="res://scripts/battle/ui/PlayerSpecialAbilityUI.gd" id="2_1o1vb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryb5y"]
 bg_color = Color(0.122252, 0.122252, 0.122252, 1)

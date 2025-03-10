@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c2qlk6b40v1c"]
 
-[ext_resource type="Script" path="res://scripts/battle/ui/PopUpUI.gd" id="1_rdt84"]
+[ext_resource type="Script" uid="uid://dmqpcg80bdv1r" path="res://scripts/battle/ui/PopUpUI.gd" id="1_rdt84"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_yy2km"]
 [ext_resource type="FontFile" uid="uid://banvpavkfhevp" path="res://resource/fonts/connection/ConnectionBold.otf" id="3_b6tt7"]
 [ext_resource type="FontFile" path="res://resource/fonts/cmu-typewriter/Typewriter.tres" id="4_o3th6"]

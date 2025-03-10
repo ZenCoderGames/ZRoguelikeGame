@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://3vxws5wqblgu"]
 
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
-[ext_resource type="Script" path="res://scripts/battle/ui/InfoUI.gd" id="2"]
+[ext_resource type="Script" uid="uid://cw8gk3qluvfo1" path="res://scripts/battle/ui/InfoUI.gd" id="2"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_h3yrs"]
 
 [node name="InfoUI" type="MarginContainer"]

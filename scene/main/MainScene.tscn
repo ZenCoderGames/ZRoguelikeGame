@@ -1,17 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0vuvgr4glgdp"]
+[gd_scene load_steps=13 format=3 uid="uid://d0vuvgr4glgdp"]
 
-[ext_resource type="Script" path="res://scripts/battle/DungeonCamera.gd" id="1"]
+[ext_resource type="Script" uid="uid://8uj1uqiv6k4g" path="res://scripts/battle/DungeonCamera.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cj3igdotfum8" path="res://sourceArt/Bg/Game/Bg.png" id="1_bihmr"]
 [ext_resource type="PackedScene" uid="uid://cusqgwo5ljbli" path="res://ui/MainGUI.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://dbjybrry117wf" path="res://ui/skilltree/SkillTreeHolder.tscn" id="2_dlu5r"]
-[ext_resource type="Script" path="res://scripts/battle/PlayerInput.gd" id="3"]
-[ext_resource type="Script" path="res://scripts/battle/BattleInstance.gd" id="4"]
-[ext_resource type="Script" path="res://scripts/battle/BattleView.gd" id="5"]
-[ext_resource type="Script" path="res://scripts/battle/instance/effects/EffectManager.gd" id="6"]
-[ext_resource type="Script" path="res://scripts/battle/Dungeon.gd" id="7"]
+[ext_resource type="Script" uid="uid://cfa6icbp46nav" path="res://scripts/battle/PlayerInput.gd" id="3"]
+[ext_resource type="Script" uid="uid://cclmwcbf43blb" path="res://scripts/battle/BattleInstance.gd" id="4"]
+[ext_resource type="Script" uid="uid://clrxff4hmfqki" path="res://scripts/battle/BattleView.gd" id="5"]
+[ext_resource type="Script" uid="uid://bwbo4mi6hcpvo" path="res://scripts/battle/instance/effects/EffectManager.gd" id="6"]
+[ext_resource type="Script" uid="uid://1je3f2r475sy" path="res://scripts/battle/Dungeon.gd" id="7"]
 [ext_resource type="PackedScene" uid="uid://3gpoj14w4qny" path="res://ui/MainMenuUI.tscn" id="8"]
-[ext_resource type="Script" path="res://scripts/audio/AudioManager.gd" id="11_x0m75"]
-[ext_resource type="Script" path="res://scripts/audio/AudioHandler.gd" id="12_w0uop"]
+[ext_resource type="Script" uid="uid://c83wg3q4ml45n" path="res://scripts/audio/AudioManager.gd" id="11_x0m75"]
+[ext_resource type="Script" uid="uid://c4oajtdbrkron" path="res://scripts/audio/AudioHandler.gd" id="12_w0uop"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends Node
@@ -48,8 +47,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("1_bihmr")
 expand_mode = 1
-
-[node name="SkillTreeHolder" parent="." instance=ExtResource("2_dlu5r")]
 
 [node name="Battle" type="Node2D" parent="."]
 script = ExtResource("4")

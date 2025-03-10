@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2ub2yn5vtdpe"]
 
-[ext_resource type="Script" path="res://scripts/battle/ui/HoverInfoUI.gd" id="1_vp1gk"]
+[ext_resource type="Script" uid="uid://dishxpfhxo5i4" path="res://scripts/battle/ui/HoverInfoUI.gd" id="1_vp1gk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pam5r"]
 radius = 15.0

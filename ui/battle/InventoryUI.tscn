@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cr2gmt2ecajml"]
 
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
-[ext_resource type="Script" path="res://scripts/battle/ui/InventoryUI.gd" id="2"]
+[ext_resource type="Script" uid="uid://cdcmjrq7h4krm" path="res://scripts/battle/ui/InventoryUI.gd" id="2"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="3_rxc0g"]
 
 [node name="InventoryUI" type="MarginContainer"]

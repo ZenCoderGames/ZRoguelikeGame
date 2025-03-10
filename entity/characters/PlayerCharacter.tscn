@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgf8yg2gwlrus"]
 
 [ext_resource type="Texture2D" uid="uid://b855b2vytd5lh" path="res://entity/characters/textures/Giant_01.png" id="1_5a5gy"]
-[ext_resource type="Script" path="res://scripts/battle/instance/characters/PlayerCharacter.gd" id="2_r8m2l"]
+[ext_resource type="Script" uid="uid://1xwe5gyysp3r" path="res://scripts/battle/instance/characters/PlayerCharacter.gd" id="2_r8m2l"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="3_si5vp"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="4_wkxwc"]
 [ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="5_7vvrp"]

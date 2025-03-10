@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://qixpot32bwql"]
 
 [ext_resource type="Texture2D" uid="uid://bifv52dqhcgf5" path="res://sourceArt/Icons/warning.png" id="1_8fqit"]
-[ext_resource type="Script" path="res://scripts/battle/instance/tutorial/TutorialPickup.gd" id="2_7w6qd"]
+[ext_resource type="Script" uid="uid://b7n875wsme2wu" path="res://scripts/battle/instance/tutorial/TutorialPickup.gd" id="2_7w6qd"]
 [ext_resource type="PackedScene" uid="uid://c2ub2yn5vtdpe" path="res://ui/battle/HoverInfoUI.tscn" id="3_0f60n"]
 
 [node name="TutorialPickup" type="Sprite2D"]

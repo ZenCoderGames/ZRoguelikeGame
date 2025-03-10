@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccim6t4jtaxsb"]
 
-[ext_resource type="Script" path="res://scripts/battle/ui/BattleEnd/VictoryUI.gd" id="1_3emos"]
+[ext_resource type="Script" uid="uid://b5l1aqw450i6e" path="res://scripts/battle/ui/BattleEnd/VictoryUI.gd" id="1_3emos"]
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1_fgy2r"]
 [ext_resource type="FontFile" uid="uid://chvqhhsv3883r" path="res://resource/fonts/kirifont/KiriFont.ttf" id="2_xvr60"]
 [ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="5_somnn"]

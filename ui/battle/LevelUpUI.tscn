@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b87keu24557qu"]
 
-[ext_resource type="Script" path="res://scripts/battle/ui/LevelUp/LevelUpUI.gd" id="1_lhxo6"]
+[ext_resource type="Script" uid="uid://dn45nu63k2pnh" path="res://scripts/battle/ui/LevelUp/LevelUpUI.gd" id="1_lhxo6"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_ql13v"]
 [ext_resource type="FontFile" uid="uid://banvpavkfhevp" path="res://resource/fonts/connection/ConnectionBold.otf" id="3_hxxv4"]
 

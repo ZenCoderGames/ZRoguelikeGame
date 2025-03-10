@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://csc0ao834ms1j"]
 
 [ext_resource type="Texture2D" uid="uid://cv7erey0w52ra" path="res://sourceArt/Random/ShadedStar.png" id="1_xt56m"]
-[ext_resource type="Script" path="res://scripts/battle/instance/upgrades/Upgrade.gd" id="2_etyeu"]
+[ext_resource type="Script" uid="uid://m8ksaq0c1oks" path="res://scripts/battle/instance/upgrades/Upgrade.gd" id="2_etyeu"]
 
 [node name="Upgrade_ClassSpecific" type="Sprite2D"]
 self_modulate = Color(0.701961, 0.407843, 0.168627, 1)

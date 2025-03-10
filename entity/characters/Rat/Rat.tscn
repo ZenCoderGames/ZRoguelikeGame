@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b6m7i41j5gb7m"]
 
 [ext_resource type="Texture2D" uid="uid://dx3ycb5nxh5v3" path="res://entity/characters/Rat/Rat_01.png" id="1_rsup7"]
-[ext_resource type="Script" path="res://scripts/battle/instance/characters/EnemyCharacter.gd" id="2_ny5nt"]
+[ext_resource type="Script" uid="uid://b52xenxtr8s6p" path="res://scripts/battle/instance/characters/EnemyCharacter.gd" id="2_ny5nt"]
 [ext_resource type="PackedScene" uid="uid://dliukgn1p4wan" path="res://ui/battle/CharPropUI.tscn" id="3_kpf6d"]
 [ext_resource type="PackedScene" uid="uid://d3ws0y1qr1yda" path="res://ui/battle/DamageText.tscn" id="4_jyejt"]
 [ext_resource type="Texture2D" uid="uid://d16gej7txt2ta" path="res://sourceArt/Random/ShadedCircle.png" id="5_yeqhy"]
@@ -135,8 +135,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fthc7"]
 _data = {
-"Death": SubResource("Animation_2hrqu"),
-"Idle": SubResource("Animation_rojfc")
+&"Death": SubResource("Animation_2hrqu"),
+&"Idle": SubResource("Animation_rojfc")
 }
 
 [node name="Rat" type="Sprite2D"]

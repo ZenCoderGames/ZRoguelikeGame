@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ufg4otstwt0i"]
 
 [ext_resource type="Texture2D" uid="uid://bwyhivsdx3lj4" path="res://sourceArt/Vendors/SoulVendor.png" id="1_xn3qb"]
-[ext_resource type="Script" path="res://scripts/battle/instance/characters/VendorCharacter.gd" id="2_dt2ul"]
+[ext_resource type="Script" uid="uid://cmei06n82cnae" path="res://scripts/battle/instance/characters/VendorCharacter.gd" id="2_dt2ul"]
 [ext_resource type="PackedScene" uid="uid://c2ub2yn5vtdpe" path="res://ui/battle/HoverInfoUI.tscn" id="3_wfgdm"]
 
 [node name="Root" type="Sprite2D"]

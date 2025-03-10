@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://q8xwlwsmijas" path="res://entity/characters/textures/RatKing.png" id="1_d1nir"]
 [ext_resource type="FontFile" uid="uid://neuymc5q34ld" path="res://resource/fonts/montreal/Montreal-Bold.ttf" id="2_kq5sm"]
-[ext_resource type="Script" path="res://scripts/battle/ui/BattleEnd/BattleEndEnemyXPUI.gd" id="2_w5d1x"]
+[ext_resource type="Script" uid="uid://c5pqr4y41pjo4" path="res://scripts/battle/ui/BattleEnd/BattleEndEnemyXPUI.gd" id="2_w5d1x"]
 
 [node name="Container" type="PanelContainer"]
 offset_right = 40.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://pwh4dx7x3kp3"]
 
-[ext_resource type="Script" path="res://scripts/menu/skilltree/SkillTreeUI.gd" id="1_3eqju"]
+[ext_resource type="Script" uid="uid://dtgk8ffqxbtny" path="res://scripts/menu/skilltree/SkillTreeUI.gd" id="1_3eqju"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="3_w1e6l"]
 [ext_resource type="Texture2D" uid="uid://b4tlhj27xqekg" path="res://sourceArt/Icons/arrowLeft.png" id="4_jv1l6"]
 [ext_resource type="FontFile" uid="uid://h7k15drun7xd" path="res://resource/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="5_lr6n3"]

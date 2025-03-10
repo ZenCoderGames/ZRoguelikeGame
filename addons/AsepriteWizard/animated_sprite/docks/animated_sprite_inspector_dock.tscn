@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://vej7yqkbtd5f"]
 
-[ext_resource type="Script" path="res://addons/AsepriteWizard/animated_sprite/docks/animated_sprite_inspector_dock.gd" id="1"]
+[ext_resource type="Script" uid="uid://h2wqlcjsd0ni" path="res://addons/AsepriteWizard/animated_sprite/docks/animated_sprite_inspector_dock.gd" id="1"]
 
 [node name="animated_sprite_inspector_dock" type="PanelContainer"]
 offset_right = 14.0

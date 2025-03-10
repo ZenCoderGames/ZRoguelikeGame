@@ -5,6 +5,7 @@ var battleInstance:BattleInstance
 var dataManager:DungeonDataManager
 var effectManager:EffectManager
 var audioManager:AudioManager
+var currentSelectedHero:CharacterData
 
 enum STATES { MAIN_MENU, CHARACTER_SELECT, SKILL_TREE, LEVEL_SELECT, BATTLE }
 enum SUB_STATES { NONE, IN_BATTLE_MENU, IN_BATTLE_BACK_MENU, IN_POP_UP, VICTORY, DEFEAT }

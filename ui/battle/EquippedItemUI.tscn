@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://brsvqpkn34kxe" path="res://themes/guiTheme.tres" id="1"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_dw35q"]
-[ext_resource type="Script" path="res://scripts/battle/ui/EquippedItemUI.gd" id="3"]
+[ext_resource type="Script" uid="uid://c5wjuc4tjuhdj" path="res://scripts/battle/ui/EquippedItemUI.gd" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7sml"]
 draw_center = false

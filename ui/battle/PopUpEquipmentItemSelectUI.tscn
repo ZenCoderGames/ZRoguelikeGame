@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://o8ovj4yp756k"]
 
-[ext_resource type="Script" path="res://scripts/battle/ui/PopUpEquipment/PopUpEquipmentItemUI.gd" id="1_3oimf"]
+[ext_resource type="Script" uid="uid://dbygbhhiwfgjt" path="res://scripts/battle/ui/PopUpEquipment/PopUpEquipmentItemUI.gd" id="1_3oimf"]
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="2_cdutl"]
 [ext_resource type="Texture2D" uid="uid://dpqcdq2oyp0g0" path="res://sourceArt/Icons/skull.png" id="3_ne23m"]
 

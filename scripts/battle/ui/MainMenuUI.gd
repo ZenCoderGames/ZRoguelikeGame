@@ -15,7 +15,7 @@ class_name MainMenuUI
 
 @onready var characterSelectUI:CharacterSelectUI = $"%CharacterSelectUI"
 @onready var levelSelectUI:LevelSelectUI_v2 = $"%LevelSelectUI_v2"
-@onready var skillTreeUI:Node = $"%SkillTreeUI"
+@onready var skillTreeUI:Node = $"%SkillTreeUI_v2"
 
 @onready var baseMenuUI:Node = $"%MenuUI"
 @onready var deathUI:DeathUI = $"%DeathUI"

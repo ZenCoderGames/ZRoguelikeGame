@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cx55o77d3jahg"]
 
 [ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_8x1tg"]
-[ext_resource type="Script" path="res://scripts/battle/ui/LevelUp/LevelUpItemUI.gd" id="1_f71is"]
+[ext_resource type="Script" uid="uid://b88gjmkah6n4x" path="res://scripts/battle/ui/LevelUp/LevelUpItemUI.gd" id="1_f71is"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itji0"]
 bg_color = Color(0.270588, 0.396078, 0.247059, 1)

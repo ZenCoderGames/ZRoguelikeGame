@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw2w4i6qh1bg1"]
+
+[ext_resource type="Theme" uid="uid://dcn0qri7xl5ii" path="res://themes/gameui_theme.tres" id="1_tsryh"]
+[ext_resource type="Script" uid="uid://c565u1ivmmhm0" path="res://scripts/menu/skilltree/SkillTreeNode_v2.gd" id="2_4h5fw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4h5fw"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.983333, 0, 1)
+
+[node name="SkillTreeNode_v2" type="Panel" node_paths=PackedStringArray("nameLabel", "selectedPanel")]
+self_modulate = Color(2.72901e-05, 0.851976, 0.100038, 1)
+z_index = 5
+custom_minimum_size = Vector2(150, 200)
+theme = ExtResource("1_tsryh")
+script = ExtResource("2_4h5fw")
+nameLabel = NodePath("MarginContainer/NameLabel")
+selectedPanel = NodePath("SelectedPanel")
+
+[node name="SelectedPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4h5fw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="NameLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+self_modulate = Color(0.991333, 1, 0.48, 1)
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "REINCARNATION OF LEGEND"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 1.0
+offset_right = 149.0
+offset_bottom = 200.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cskseidnwrkp2"]
 
 [ext_resource type="Texture2D" uid="uid://cxsiy2hwhcan0" path="res://resource/images/curses_vector_24x36.png" id="1"]
-[ext_resource type="Script" path="res://scripts/battle/instance/items/Item.gd" id="2"]
+[ext_resource type="Script" uid="uid://cp051mmy04hk4" path="res://scripts/battle/instance/items/Item.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://c2ub2yn5vtdpe" path="res://ui/battle/HoverInfoUI.tscn" id="3_0uyqk"]
 
 [sub_resource type="AtlasTexture" id="1"]

@@ -1,15 +1,14 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://btt0xuunnar3v"]
 
 [ext_resource type="Texture2D" uid="uid://cxsiy2hwhcan0" path="res://resource/images/curses_vector_24x36.png" id="1"]
-[ext_resource type="Script" path="res://scripts/battle/instance/items/Item.gd" id="2"]
+[ext_resource type="Script" uid="uid://cp051mmy04hk4" path="res://scripts/battle/instance/items/Item.gd" id="2"]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 24, 72, 24, 36 )
+[sub_resource type="AtlasTexture" id="1"]
+atlas = ExtResource("1")
+region = Rect2(24, 72, 24, 36)
 
 [node name="Item_LightningBolt" type="Sprite2D"]
-self_modulate = Color( 0.482353, 0.0823529, 0.435294, 1 )
-position = Vector2( 209, 69 )
-texture = SubResource( 1 )
-script = ExtResource( 2 )
+self_modulate = Color(0.482353, 0.0823529, 0.435294, 1)
+position = Vector2(209, 69)
+texture = SubResource("1")
+script = ExtResource("2")
