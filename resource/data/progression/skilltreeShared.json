@@ -8,6 +8,7 @@
 				"name": "Starter Items",
 				"description": "Spawn 1 Additional Item in each Floor",
 				"unlockCost": 50,
+				"enableCost": 1,
 				"dungeonModifiers": ["ADDITIONAL_ITEM"],
 				"children": ["STARTING_EQUIPMENT", "STARTING_POTION"]
 			},
@@ -16,6 +17,7 @@
 				"name": "Starter Equipment",
 				"description": "Start combat with a Random Equipment",
 				"unlockCost": 100,
+				"enableCost": 1,
 				"dungeonModifiers": ["STARTER_EQUIPMENT"]
 			},
 			{
@@ -23,6 +25,7 @@
 				"name": "Starter Potion",
 				"description": "Start combat with a Random Potion",
 				"unlockCost": 100,
+				"enableCost": 1,
 				"dungeonModifiers": ["STARTER_POTION"]
 			},
 			{
@@ -30,6 +33,7 @@
 				"name": "Economy",
 				"description": "Start combat with 5 souls",
 				"unlockCost": 50,
+				"enableCost": 1,
 				"dungeonModifiers": ["SOUL_START_5"],
 				"children": ["SOUL_BOOST", "VENDOR_DISCOUNT"]
 			},
@@ -38,6 +42,7 @@
 				"name": "Soul Booster",
 				"description": "Start combat with 10 additional souls",
 				"unlockCost": 100,
+				"enableCost": 2,
 				"parentSkillId": "ECONOMY",
 				"dungeonModifiers": ["SOUL_START_10"]
 			},
@@ -46,6 +51,7 @@
 				"name": "Vendor Discount",
 				"description": "All vendor items are 25% cheaper",
 				"unlockCost": 100,
+				"enableCost": 1,
 				"dungeonModifiers": ["VENDOR_DISCOUNT_25"]
 			},
 			{
@@ -53,6 +59,7 @@
 				"name": "Perks",
 				"description": "Gain +4 Starting Health",
 				"unlockCost": 50,
+				"enableCost": 1,
 				"dungeonModifiers": ["BONUS_HEALTH"],
 				"children": ["FLOOR_HEAL", "REINCARNATION"]
 			},
@@ -61,6 +68,7 @@
 				"name": "Rested Warrior",
 				"description": "At the start of each floor, heal up to 50% of your hp",
 				"unlockCost": 100,
+				"enableCost": 1,
 				"passives": ["PASSIVE_HEAL_ON_FLOOR_START"]
 			},
 			{
@@ -68,6 +76,7 @@
 				"name": "Reincarnation",
 				"description": "After your first death, come back to life at 50% of your max hp",
 				"unlockCost": 100,
+				"enableCost": 3,
 				"passives": ["PASSIVE_REINCARNATION"]
 			},
 			{
@@ -75,6 +84,7 @@
 				"name": "Bonus Mana",
 				"description": "Gain 1 Bonus Base Mana",
 				"unlockCost": 50,
+				"enableCost": 2,
 				"dungeonModifiers": ["BONUS_MANA"],
 				"children": ["SPECIAL_EFFICIENCY", "SPECIAL_REFRESH"]
 			},
@@ -82,7 +92,8 @@
 				"id": "SPECIAL_EFFICIENCY",
 				"name": "Special Cost Reduction",
 				"description": "Specials cost 1 less mana",
-				"unlockCost": 100,				
+				"unlockCost": 100,
+				"enableCost": 2,		
 				"passives": ["PASSIVE_REDUCE_SPECIAL_COUNT"]
 			},
 			{
@@ -90,6 +101,7 @@
 				"name": "Refreshed Mana",
 				"description": "At the start of each floor, refill your mana back to full",
 				"unlockCost": 100,
+				"enableCost": 1,
 				"passives": ["PASSIVE_MANA_REFILL_ON_FLOOR_START"]
 			}
 		]

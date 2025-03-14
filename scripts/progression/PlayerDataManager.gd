@@ -87,6 +87,23 @@ func unlock_skill(skillData:SkillData):
 func get_unlocked_skills()->Array[String]:
 	return currentPlayerData.get_unlocked_skills()
 
+func is_skill_enabled(charData:CharacterData, skillData:SkillData):
+	return currentPlayerData.is_skill_enabled(charData, skillData.id)
+
+func can_enable_skill(charData:CharacterData, skillData:SkillData):
+	return currentPlayerData.can_enable_skill(charData, skillData.id)
+
+func get_remaining_skill_threshold(charData:CharacterData):
+	return currentPlayerData.get_remaining_skill_threshold(charData)
+
+func enable_skill(charData:CharacterData, skillData:SkillData):
+	currentPlayerData.enable_skill(charData, skillData.id) 
+	save_to_file()
+	
+func disable_skill(charData:CharacterData, skillData:SkillData):
+	currentPlayerData.disable_skill(charData, skillData.id) 
+	save_to_file()
+
 # LEVELS
 func is_level_completed(charData:CharacterData, levelId:String):
 	return currentPlayerData.heroDataDict[charData.id].levelsCompleted.has(levelId)

@@ -82,7 +82,7 @@ stretch_mode = 3
 
 [node name="SoulsLabel" type="Label" parent="HBoxContainer/SoulHolder"]
 unique_name_in_owner = true
-self_modulate = Color(1, 0.773667, 0.03, 1)
+self_modulate = Color(0.735534, 0.353235, 1, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -148,7 +148,7 @@ text = " Unlock (x100 Gold) "
 [node name="EnableButton" type="Button" parent="HBoxContainer/InfoPanel/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-self_modulate = Color(0.05, 1, 0.0658333, 1)
+self_modulate = Color(0.735534, 0.353235, 1, 1)
 layout_mode = 2
 size_flags_vertical = 10
 theme = ExtResource("4_yjofd")

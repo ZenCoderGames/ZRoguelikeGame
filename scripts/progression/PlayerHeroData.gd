@@ -2,6 +2,7 @@ extends Resource
 class_name PlayerHeroData
 
 @export var unlocked:bool
+@export var enabledSkills:Array[String]
 @export var charId:String
 @export var prevXp:int
 @export var xp:int
@@ -17,6 +18,38 @@ func init(charIdVal:String, xpVal:int):
 func unlock():
 	unlocked = true
 
+func is_skill_enabled(skillId:String):
+	return enabledSkills.has(skillId)
+
+func can_enable_skill(skillId:String):
+	var currentLevel:int = get_level()
+	var currentSkillCost:int = get_enabled_skill_cost()
+		
+	currentSkillCost = currentSkillCost + GameGlobals.dataManager.get_skill_data(skillId).enableCost
+		
+	return currentSkillCost<=currentLevel
+
+func get_enabled_skill_cost():
+	var currentSkillCost:int = 0
+	for currentSkillId in enabledSkills:
+		currentSkillCost = currentSkillCost + GameGlobals.dataManager.get_skill_data(currentSkillId).enableCost
+	return currentSkillCost
+	
+func get_remaining_skill_threshold():
+	var currentLevel:int = get_level()
+	var currentSkillCost:int = get_enabled_skill_cost()
+	
+	return currentLevel - currentSkillCost
+
+func get_enabled_skills()->Array[String]:
+	return enabledSkills
+
+func enable(skillId:String):
+	enabledSkills.append(skillId)
+	
+func disable(skillId:String):
+	enabledSkills.erase(skillId)
+	
 func level_completed(levelId:String):
 	levelsCompleted.append(levelId)
 
@@ -25,7 +58,7 @@ func add_xp(val:int):
 	xp = xp + val
 	if xp>MAX_XP:
 		xp = MAX_XP
-	
+
 func set_hero_xp_as_seen():
 	prevXp = xp
 
@@ -42,3 +75,4 @@ func reset():
 	unlocked = false
 	xp = 0
 	levelsCompleted.clear()
+	enabledSkills.clear()

@@ -460,9 +460,9 @@ var passives:Array
 var items:Array
 var runes:Array
 func _init_progression_modifiers():
-	var unlockedSkills:Array[String] = PlayerDataManager.currentPlayerData.get_unlocked_skills()
-	for unlockedSkill in unlockedSkills:
-		var skillData:SkillData = GameGlobals.dataManager.get_skill_data(unlockedSkill)
+	var enabledSkills:Array[String] = PlayerDataManager.currentPlayerData.get_enabled_skills(player.charData)
+	for enabledSkill in enabledSkills:
+		var skillData:SkillData = GameGlobals.dataManager.get_skill_data(enabledSkill)
 		for dungeonModifierId in skillData.dungeonModifiers:
 			var dungeonModData:DungeonModifierData = GameGlobals.dataManager.get_dungeon_modifier_data(dungeonModifierId)
 			player.add_dungeon_modifier(dungeonModData)

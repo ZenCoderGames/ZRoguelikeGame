@@ -121,7 +121,6 @@ func select():
 	selectBtn.visible = false
 	confirmBtn.visible = true
 	GameGlobals.currentSelectedHero = myCharData
-	print(myCharData.id)
 	
 func deselect():
 	selectBtn.modulate = Color.WHITE

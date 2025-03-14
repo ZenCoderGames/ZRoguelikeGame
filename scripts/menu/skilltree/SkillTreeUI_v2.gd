@@ -54,11 +54,14 @@ func init_from_data(skillTreeId:String):
 		
 	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
 	unlockButton.connect("pressed",Callable(self,"_on_unlock_button_pressed"))
+	enableButton.connect("pressed",Callable(self,"_on_enable_button_pressed"))
+	disableButton.connect("pressed",Callable(self,"_on_disable_button_pressed"))
 	unlockButton.visible = false
+	enableButton.visible = false
+	disableButton.visible = false
 	
 	charPortrait.texture = load(str("res://",GameGlobals.currentSelectedHero.portraitPath))
-	_availableSouls = PlayerDataManager.currentPlayerData.get_hero_level(GameGlobals.currentSelectedHero.id)
-	soulsLabel.text = str(_availableSouls)
+	_refresh_ui()
 	infoPanel.visible = false
 	
 	emit_signal("item_rect_changed")
@@ -68,15 +71,32 @@ func init_from_data(skillTreeId:String):
 	
 	_initialized = true
 
-func _on_skill_selected(skillData:SkillData, isLocked:bool):
+func _refresh_ui():
+	var charLevel:int = PlayerDataManager.currentPlayerData.get_hero_level(GameGlobals.currentSelectedHero.id)
+	var remainingThreshold:int = PlayerDataManager.get_remaining_skill_threshold(GameGlobals.currentSelectedHero)
+	_availableSouls = remainingThreshold
+	soulsLabel.text = str(_availableSouls)
+
+func _on_skill_selected(skillData:SkillData):
 	var skillName:String = skillData.name
-	unlockButton.visible = !isLocked
-	unlockButton.disabled = !PlayerDataManager.can_unlock_skill(skillData)
+	unlockButton.visible = true
+	#unlockButton.disabled = !PlayerDataManager.can_unlock_skill(skillData)
 	unlockButton.text = str(" Unlock: x", skillData.unlockCost)
-	if skillData.isStartNode:
-		unlockButton.visible = false
+	#if skillData.isStartNode:
+	#	unlockButton.visible = false
+	enableButton.visible = false
+	disableButton.visible = false
 	if PlayerDataManager.has_skill_been_unlocked(skillData.id):
 		unlockButton.visible = false
+		var isEnabled:bool = PlayerDataManager.is_skill_enabled(GameGlobals.currentSelectedHero, skillData)
+		var hasCostToEnable:bool = PlayerDataManager.can_enable_skill(GameGlobals.currentSelectedHero, skillData)
+		#enableButton.disabled = !isEnabled
+		enableButton.visible = !isEnabled
+		enableButton.disabled = !hasCostToEnable
+		enableButton.text = str("Enable (x", skillData.enableCost, " Souls)")
+		disableButton.disabled = !isEnabled
+		disableButton.visible = isEnabled
+		disableButton.text = str("Disable (x", skillData.enableCost, " Souls)")
 
 	_selectedSkillData = skillData
 	infoTitle.text = Utils.format_text(skillName)
@@ -85,6 +105,8 @@ func _on_skill_selected(skillData:SkillData, isLocked:bool):
 	
 	for skillTreeNode in _skillTreeNodes:
 		skillTreeNode.set_selected(skillTreeNode.has_skill_data(skillData))
+		
+	_refresh_ui()
 	
 func hide_info():
 	infoPanel.visible = false
@@ -101,6 +123,19 @@ func _on_unlock_button_pressed():
 	UIEventManager.emit_signal("OnSkillUnlocked")
 	unlockButton.visible = false
 	_skillTreeDict[_selectedSkillData].refresh()
+	_on_skill_selected(_selectedSkillData)
+
+func _on_enable_button_pressed():
+	PlayerDataManager.enable_skill(GameGlobals.currentSelectedHero, _selectedSkillData)
+	UIEventManager.emit_signal("OnSkillEnabled")
+	_skillTreeDict[_selectedSkillData].refresh()
+	_on_skill_selected(_selectedSkillData)
+	
+func _on_disable_button_pressed():
+	PlayerDataManager.disable_skill(GameGlobals.currentSelectedHero, _selectedSkillData)
+	UIEventManager.emit_signal("OnSkillDisabled")
+	_skillTreeDict[_selectedSkillData].refresh()
+	_on_skill_selected(_selectedSkillData)
 
 # KEYBOARD FOCUS
 var _keyboardFocusList:Array
@@ -139,7 +174,12 @@ func _input(event: InputEvent) -> void:
 			_update_keyboard_focus()
 	
 		if event.is_action_pressed(Constants.INPUT_MENU_ACCEPT):
-			_on_unlock_button_pressed()
+			if unlockButton.visible:
+				_on_unlock_button_pressed()
+			elif enableButton.visible and !enableButton.disabled:
+				_on_enable_button_pressed()
+			elif disableButton.visible and !disableButton.disabled:
+				_on_disable_button_pressed()
 
 func _update_keyboard_focus():
 	if _keyboardFocusIdx<0:

@@ -20,8 +20,8 @@ theme = ExtResource("1_tsryh")
 script = ExtResource("2_4h5fw")
 nameLabel = NodePath("MarginContainer/NameLabel")
 selectedPanel = NodePath("SelectedPanel")
-enabledTex = NodePath("MarginContainer2/Enabled")
-disabledTex = NodePath("MarginContainer2/Disabled")
+enabledTex = NodePath("Enabled")
+disabledTex = NodePath("Disabled")
 
 [node name="SelectedPanel" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -59,7 +59,10 @@ offset_left = 1.0
 offset_right = 149.0
 offset_bottom = 200.0
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="Enabled" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 0.918, 0.18, 1)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -68,21 +71,22 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 5
-
-[node name="Enabled" type="TextureRect" parent="MarginContainer2"]
-unique_name_in_owner = true
-self_modulate = Color(0.735534, 0.353235, 1, 1)
-layout_mode = 2
 texture = ExtResource("3_eogl4")
-expand_mode = 5
+expand_mode = 1
 
-[node name="Disabled" type="TextureRect" parent="MarginContainer2"]
+[node name="Disabled" type="TextureRect" parent="."]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.605274, 0.605274, 0.605274, 1)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
 texture = ExtResource("3_eogl4")
-expand_mode = 5
+expand_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -15,3 +15,5 @@ signal OnSelectionMenuOff
 signal ShowSkillTree(val, skillTreeId)
 signal OnSkillNodeSelected(skillData, isLocked)
 signal OnSkillUnlocked()
+signal OnSkillEnabled()
+signal OnSkillDisabled()

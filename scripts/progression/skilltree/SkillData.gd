@@ -4,6 +4,7 @@ var id:String
 var name:String
 var description:String
 var unlockCost:int
+var enableCost:int
 var children:Array
 var dungeonModifiers:Array
 var abilities:Array
@@ -18,6 +19,7 @@ func _init(dataJS):
 	name = dataJS["name"]
 	description = dataJS["description"]
 	unlockCost = Utils.get_data_from_json(dataJS, "unlockCost", 0)
+	enableCost = Utils.get_data_from_json(dataJS, "enableCost", 1)
 
 	if dataJS.has("children"):
 		children = dataJS["children"]
