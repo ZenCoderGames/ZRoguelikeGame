@@ -119,7 +119,8 @@ func select():
 	selectBtn.modulate = Color.YELLOW
 	unlockBtn.modulate = Color.YELLOW
 	selectBtn.visible = false
-	confirmBtn.visible = true
+	if is_unlocked():
+		confirmBtn.visible = true
 	GameGlobals.currentSelectedHero = myCharData
 	
 func deselect():

@@ -149,6 +149,12 @@ func lighten():
 	if entityObject!=null:
 		entityObject.modulate = GameGlobals.battleInstance.view.showFloorColor
 
+func update_position():
+	pos = room.get_world_position(row, col)
+	floorObject.position = pos
+	if entityObject!=null:
+		entityObject.position = pos
+
 func showDebug(colorVal):
 	floorObject.show()
 	if entityObject!=null:

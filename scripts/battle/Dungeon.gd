@@ -44,6 +44,7 @@ func create(recreatePlayer:bool) -> void:
 
 	_init_rooms()
 	_init_connections()
+	_init_corridoors()
 	_init_path()
 	_init_obstacles()
 	_init_items()
@@ -152,6 +153,8 @@ func _init_rooms():
 		# now that rooms isn't colliding, initialize
 		newRoom.initialize()
 		rooms.append(newRoom)
+		
+	startRoom = rooms[0]
 
 func _init_connections():
 	# Try and find connections for each wall in each room
@@ -192,6 +195,14 @@ func findConnection(con1, con2, con1Array, con2Array, isYCheck):
 						conCell.connect_cell(con1Array[c2])
 						return
 
+func _init_corridoors():
+	for room in rooms:
+		if room != startRoom:
+			var dirnFromStart:Vector2 = Vector2(room.startX - startRoom.startX, room.startY - startRoom.startY)
+			var displacement = dirnFromStart * randf_range(0.25, 0.75)
+			room.move(displacement)
+			
+
 var costFromStart:Dictionary = {}
 var roomsToVisit:Array = []
 var visitedRooms:Dictionary = {}
@@ -200,7 +211,6 @@ var startRoom
 var furthestRoom 
 func _init_path():
 	# reset variables
-	startRoom = rooms[0]
 	furthestRoom = null
 	reverse_path = []
 	visitedRooms = {}

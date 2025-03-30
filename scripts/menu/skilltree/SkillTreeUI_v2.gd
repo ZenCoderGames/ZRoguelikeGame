@@ -37,7 +37,7 @@ func init_from_data(skillTreeId:String):
 		_skillTreeData = GameGlobals.dataManager.skilltreeDict[skillTreeId]
 		
 		for skillData:SkillData in _skillTreeData.skillList:
-			var skillTreeNode = SkillTreeNodeClass.instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+			var skillTreeNode = SkillTreeNodeClass.instantiate()
 			var hasBeenUnlocked:bool = PlayerDataManager.has_skill_been_unlocked(skillData.id)
 			var isLocked:bool = false
 			var hasParent:bool = !skillData.parentSkillId.is_empty()
@@ -80,7 +80,7 @@ func _refresh_ui():
 func _on_skill_selected(skillData:SkillData):
 	var skillName:String = skillData.name
 	unlockButton.visible = true
-	#unlockButton.disabled = !PlayerDataManager.can_unlock_skill(skillData)
+	unlockButton.disabled = !PlayerDataManager.can_unlock_skill(skillData)
 	unlockButton.text = str(" Unlock: x", skillData.unlockCost)
 	#if skillData.isStartNode:
 	#	unlockButton.visible = false

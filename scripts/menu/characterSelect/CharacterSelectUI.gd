@@ -26,6 +26,9 @@ func init_from_data():
 		
 	backButton.connect("pressed",Callable(self,"_on_back_button_pressed"))
 	skillTreeButton.connect("pressed",Callable(self,"_on_skilltree_button_pressed"))
+	skillTreeButton.text = "(E) SKILL TREE"
+	if Utils.is_joystick_enabled():
+		skillTreeButton.text = "(X) SKILL TREE"
 			
 	var prevChosenHero:CharacterData = GameGlobals.currentSelectedHero
 			

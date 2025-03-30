@@ -723,6 +723,13 @@ func lighten_all_cells():
 	for cell in cells:
 		cell.lighten()
 
+# SETUP
+func move(moveAmt:Vector2):
+	startX += moveAmt.x
+	startY += moveAmt.y
+	for cell in cells:
+		cell.update_position()
+
 # HELPERS
 func is_in_combat():
 	return enemies.size()>0
