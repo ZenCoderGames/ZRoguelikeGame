@@ -157,24 +157,31 @@ func _input(event: InputEvent) -> void:
 	if GameGlobals.is_in_state(GameGlobals.STATES.SKILL_TREE):
 		if _keyboardFocusList.is_empty():
 			return
+			
+		var left_stick_x = 0
+		var left_stick_y = 0
+		var joyInputThreshold = 0.8
+		if Utils.is_joystick_enabled():
+			left_stick_x = Input.get_joy_axis(0, JOY_AXIS_LEFT_X)
+			left_stick_y = Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
 	
-		if event.is_action_pressed(Constants.INPUT_MOVE_LEFT):
+		if (!Utils.is_joystick_enabled() and event.is_action(Constants.INPUT_MOVE_LEFT)) or (left_stick_x<-joyInputThreshold):
 			_keyboardFocusIdx = _keyboardFocusIdx - 1
 			_update_keyboard_focus()
-		elif event.is_action_pressed(Constants.INPUT_MOVE_RIGHT):
+		elif (!Utils.is_joystick_enabled() and event.is_action(Constants.INPUT_MOVE_RIGHT)) or (left_stick_x>joyInputThreshold):
 			_keyboardFocusIdx = _keyboardFocusIdx + 1
 			_update_keyboard_focus()
-		elif event.is_action_pressed(Constants.INPUT_MOVE_UP):
-			if _keyboardFocusIdx-8>0:
+		elif (!Utils.is_joystick_enabled() and event.is_action(Constants.INPUT_MOVE_UP)) or (left_stick_y<-joyInputThreshold):
+			if _keyboardFocusIdx-8>=0:
 				_keyboardFocusIdx = _keyboardFocusIdx - 8
 			_update_keyboard_focus()
-		elif event.is_action_pressed(Constants.INPUT_MOVE_DOWN):
+		elif (!Utils.is_joystick_enabled() and event.is_action(Constants.INPUT_MOVE_DOWN)) or (left_stick_y>joyInputThreshold):
 			if _keyboardFocusIdx+8<_skillTreeNodes.size():
 				_keyboardFocusIdx = _keyboardFocusIdx + 8
 			_update_keyboard_focus()
 	
 		if event.is_action_pressed(Constants.INPUT_MENU_ACCEPT):
-			if unlockButton.visible:
+			if unlockButton.visible and !unlockButton.disabled:
 				_on_unlock_button_pressed()
 			elif enableButton.visible and !enableButton.disabled:
 				_on_enable_button_pressed()

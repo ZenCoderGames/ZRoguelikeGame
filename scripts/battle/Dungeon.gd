@@ -198,8 +198,9 @@ func findConnection(con1, con2, con1Array, con2Array, isYCheck):
 func _init_corridoors():
 	for room in rooms:
 		if room != startRoom:
-			var dirnFromStart:Vector2 = Vector2(room.startX - startRoom.startX, room.startY - startRoom.startY)
-			var displacement = dirnFromStart * randf_range(0.25, 0.75)
+			var dirnFromStart:Vector2 = room.get_center() - startRoom.get_center()
+			#var displacement = dirnFromStart * randf_range(0.25, 0.75)
+			var displacement = dirnFromStart * randf_range(0.2, 0.4)
 			room.move(displacement)
 			
 

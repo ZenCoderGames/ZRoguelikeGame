@@ -17,7 +17,7 @@ func init_from_data(skillDataVal:SkillData, isUnlockedVal:bool, isLockedVal:bool
 	_skillData = skillDataVal
 	_isUnlocked = isUnlockedVal
 	refresh()
-	nameLabel.text = _skillData.name
+	nameLabel.text = str(_skillData.name, "\n(x", _skillData.enableCost, ")")
 
 func _on_item_chosen():
 	UIEventManager.emit_signal("OnCharacterSelectButton")

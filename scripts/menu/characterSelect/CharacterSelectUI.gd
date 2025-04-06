@@ -109,11 +109,18 @@ func _input(event: InputEvent) -> void:
 	if GameGlobals.is_in_state(GameGlobals.STATES.CHARACTER_SELECT):
 		if _keyboardFocusList.is_empty():
 			return
-	
-		if event.is_action_pressed(Constants.INPUT_MOVE_LEFT):
+		
+		var left_stick_x = 0
+		var left_stick_y = 0
+		var joyInputThreshold = 0.8
+		if Utils.is_joystick_enabled():
+			left_stick_x = Input.get_joy_axis(0, JOY_AXIS_LEFT_X)
+			left_stick_y = Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
+			
+		if (!Utils.is_joystick_enabled() and event.is_action(Constants.INPUT_MOVE_LEFT)) or (left_stick_x<-joyInputThreshold):
 			_keyboardFocusIdx = _keyboardFocusIdx - 1
 			_update_keyboard_focus()
-		elif event.is_action_pressed(Constants.INPUT_MOVE_RIGHT):
+		elif (!Utils.is_joystick_enabled() and event.is_action_pressed(Constants.INPUT_MOVE_RIGHT)) or (left_stick_x>joyInputThreshold):
 			_keyboardFocusIdx = _keyboardFocusIdx + 1
 			_update_keyboard_focus()
 	
