@@ -370,6 +370,41 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "STATUS_EFFECT_CURSED_BLADE",
+			"name": "Cursed Blade Effect",
+			"description": "2x damage on blade when below 50% health",
+			"instanceCount": 1,
+			"endConditions": [
+				"ON_POST_ATTACK"
+			],
+			"startTimeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"absoluteValue": 2
+							}
+						]
+					}
+				}
+			],
+			"endTimeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "DAMAGE",
+								"absoluteValue": -2
+							}
+						]
+					}
+				}
+			]
 		}
 	]
 }

@@ -111,9 +111,9 @@
 			]
 		},
 		{
-			"id": "RUNESMITH_VENDOR",
-			"name": "Runesmith",
-			"description": "Offers various runes to buy",
+			"id": "SPECIALIST_VENDOR",
+			"name": "Specialist",
+			"description": "Offers various specializations",
 			"path": "entity/characters/VendorCharacter.tscn",
 			"tintColor": "#1b9c56",
 			"numItemsShown": 2,
@@ -122,7 +122,10 @@
 			"runes": [
 				"RUNE_ASSASSIN",
 				"RUNE_GIANT",
-				"RUNE_MAGE"
+				"RUNE_MAGE",
+				"RUNE_BATTLE_MAGE",
+				"RUNE_BERSERKER",
+				"RUNE_ROGUE"
 			]
 		}
 	]

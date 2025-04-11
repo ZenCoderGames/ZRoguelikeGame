@@ -2,14 +2,14 @@
 	"items": [
 		{
 			"id": "RUNE_ASSASSIN",
-			"name": "Curse of the Assassin",
+			"name": "Assassin",
 			"description": "+6 Attack\n-6 Health",
 			"fullDescription": "+6 Attack\n-6 Health",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"soulCost": 4,
 			"tier": 2,
-			"maxCount": 1,
+			"maxCount": 2,
 			"stats": [
 				{
 					"type": "DAMAGE",
@@ -17,41 +17,41 @@
 				},
 				{
 					"type": "HEALTH",
-					"value": -6
+					"value": -4
 				}
 			]
 		},
 		{
 			"id": "RUNE_GIANT",
-			"name": "Curse of the Giant",
+			"name": "Giant",
 			"description": "+10 Health\n-4 Attack",
 			"fullDescription": "+10 Health\n-4 Attack",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"soulCost": 4,
 			"tier": 2,
-			"maxCount": 1,
+			"maxCount": 2,
 			"stats": [
 				{
 					"type": "DAMAGE",
-					"value": -4
+					"value": -2
 				},
 				{
 					"type": "HEALTH",
-					"value": 10
+					"value": 8
 				}
 			]
 		},
 		{
 			"id": "RUNE_MAGE",
-			"name": "Curse of the Mage",
+			"name": "Elder Mage",
 			"description": "+4 Max Mana\n-2 Attack",
 			"fullDescription": "+4 Max Mana\n-2 Attack",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "RUNE",
 			"soulCost": 4,
 			"tier": 2,
-			"maxCount": 1,
+			"maxCount": 2,
 			"stats": [
 				{
 					"type": "ENERGY",
@@ -60,6 +60,81 @@
 				{
 					"type": "DAMAGE",
 					"value": -2
+				}
+			]
+		},
+		{
+			"id": "RUNE_BATTLE_MAGE",
+			"name": "Battle Mage",
+			"description": "+2 Max Mana\n+4 Health\n-2 Attack",
+			"fullDescription": "+2 Max Mana\n+4 Health\n-2 Attack",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"soulCost": 4,
+			"tier": 2,
+			"maxCount": 2,
+			"stats": [
+				{
+					"type": "ENERGY",
+					"value": 2
+				},
+				{
+					"type": "HEALTH",
+					"value": 4
+				},
+				{
+					"type": "DAMAGE",
+					"value": -2
+				}
+			]
+		},
+		{
+			"id": "RUNE_BERSERKER",
+			"name": "Berserker",
+			"description": "+2 Damage\n+4 Health\n-2 Max Mana",
+			"fullDescription": "+2 Damage\n+4 Health\n-2 Max Mana",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"soulCost": 4,
+			"tier": 2,
+			"maxCount": 2,
+			"stats": [
+				{
+					"type": "ENERGY",
+					"value": -2
+				},
+				{
+					"type": "HEALTH",
+					"value": 4
+				},
+				{
+					"type": "DAMAGE",
+					"value": 4
+				}
+			]
+		},
+		{
+			"id": "RUNE_ROGUE",
+			"name": "Rogue",
+			"description": "+2 Damage\n-2 Health\n+2 Max Mana",
+			"fullDescription": "+2 Damage\n-2 Health\n+2 Max Mana",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "RUNE",
+			"soulCost": 4,
+			"tier": 2,
+			"maxCount": 2,
+			"stats": [
+				{
+					"type": "ENERGY",
+					"value": 2
+				},
+				{
+					"type": "HEALTH",
+					"value": -2
+				},
+				{
+					"type": "DAMAGE",
+					"value": 4
 				}
 			]
 		}

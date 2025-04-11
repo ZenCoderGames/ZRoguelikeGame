@@ -457,6 +457,115 @@
 					}
 				}
 			]
+		},
+		{
+			"id": "PASSIVE_MANA_BLADE",
+			"name": "Mana Blade",
+			"description": "This weapon gives +1 mana for every kill",
+			"conditions": [
+				"ON_KILL"
+			],
+			"timeline": [
+				{
+					"type": "ADD_STAT_MODIFIER",
+					"params": {
+						"statModifiers": [
+							{
+								"type": "ENERGY",
+								"value": 1
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_3HIT_STUN",
+			"name": "3rd Hit Stun",
+			"description": "Every 3rd attack will stun the target",
+			"conditions": [
+				"ON_POST_ATTACK"
+			], 
+			"triggerCount": 3,
+			"resetCountOnActivate": true,
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"lastHitTarget": true
+					}
+				},
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STUN",
+						"applyToTargets": true
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_3HIT_CRITICAL",
+			"name": "3rd Hit Crit",
+			"description": "Every 3rd attack will do a guarenteed crit",
+			"conditions": [
+				"ON_POST_ATTACK"
+			], 
+			"triggerCount": 2,
+			"resetCountOnActivate": true,
+			"timeline": [
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_CRITICAL",
+						"applyToSource": true
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_3HIT_STEALTH",
+			"name": "3rd Hit Stealth",
+			"description": "After every 3rd attack go into Stealth",
+			"conditions": [
+				"ON_POST_ATTACK"
+			], 
+			"triggerCount": 3,
+			"resetCountOnActivate": true,
+			"timeline": [
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STEALTH",
+						"applyToSource": true
+					}
+				}
+			]
+		},
+		{
+			"id": "PASSIVE_STUN_ON_HIT",
+			"name": "Stun On Hit",
+			"description": "Stun an enemy target every 3rd hit taken",
+			"conditions": [
+				"ON_TAKE_HIT"
+			],
+			"triggerCount": 3,
+			"resetCountOnActivate": true,
+			"timeline": [
+				{
+					"type": "FIND_TARGETS",
+					"params": {
+						"lastHitTarget": true
+					}
+				},
+				{
+					"type": "ADD_STATUS_EFFECT",
+					"params": {
+						"statusEffectId": "STATUS_EFFECT_STUN_FROM_ENEMY",
+						"applyToTargets": true
+					}
+				}
+			]
 		}
 	]
 }

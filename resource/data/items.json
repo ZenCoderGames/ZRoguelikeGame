@@ -35,6 +35,27 @@
 			]
 		},
 		{
+			"id": "ITEM_PALADINS_SWORD",
+			"name": "Balanced Sword",
+			"description": "A sword that balances offense and defense\n(+1 damage/+2 health)",
+			"fullDescription": "A good balanced sword",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "WEAPON",
+			"soulCost": 2,
+			"tier": 1,
+			"maxCount": 1,
+			"stats": [
+				{
+					"type": "DAMAGE",
+					"value": 1
+				},
+				{
+					"type": "HEALTH",
+					"value": 2
+				}
+			]
+		},
+		{
 			"id": "ITEM_BLOOD_SWORD",
 			"name": "Blood Sword",
 			"description": "Lifesteal +1 on hit",
@@ -45,6 +66,54 @@
 			"tier": 1,
 			"maxCount": 1,
 			"passiveId": "PASSIVE_LIFESTEAL_ON_HIT"
+		},
+		{
+			"id": "ITEM_MANA_BLADE",
+			"name": "Mana Blade",
+			"description": "Refreshes +1 mana on kill",
+			"fullDescription": "This blade can combo well with specials",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "WEAPON",
+			"soulCost": 2,
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_MANA_BLADE"
+		},
+		{
+			"id": "ITEM_STUN_CLUB",
+			"name": "Stun Club",
+			"description": "Every 3rd hit STUNS the target",
+			"fullDescription": "This blade can combo well with any STUN effects",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "WEAPON",
+			"soulCost": 2,
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_3HIT_STUN"
+		},
+		{
+			"id": "ITEM_CRIT_DAGGER",
+			"name": "Skirmish Dagger",
+			"description": "Every 3rd hit is a critical strike",
+			"fullDescription": "This blade can combo well with any CRIT effects",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "WEAPON",
+			"soulCost": 2,
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_3HIT_CRITICAL"
+		},
+		{
+			"id": "ITEM_GHOST_BLADE",
+			"name": "Ghost Blade",
+			"description": "After every 3rd attack, you gain STEALTH",
+			"fullDescription": "This blade can combo well with any STEALTH effects",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "WEAPON",
+			"soulCost": 4,
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_3HIT_STEALTH"
 		},
 		{
 			"id": "ITEM_WOODEN_PLATE",
@@ -66,8 +135,8 @@
 		{
 			"id": "ITEM_SILVER_PLATE",
 			"name": "Silver Plate",
-			"description": "A heavy armored piece\n(+4 health)",
-			"fullDescription": "A heavy armored piece that protects the player.\nIncreases player's health by +4",
+			"description": "A medium armored piece\n(+4 health)",
+			"fullDescription": "A medium armored piece that protects the player.\nIncreases player's health by +4",
 			"path": "entity/items/gear/Gear_Tier2.tscn",
 			"type": "ARMOR",
 			"soulCost": 2,
@@ -77,6 +146,23 @@
 				{
 					"type": "HEALTH",
 					"value": 4
+				}
+			]
+		},
+		{
+			"id": "ITEM_GOLD_PLATE",
+			"name": "Gold Plate",
+			"description": "A heavy armored piece\n(+8 health)",
+			"fullDescription": "A heavy armored piece that protects the player.\nIncreases player's health by +8",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "ARMOR",
+			"soulCost": 4,
+			"tier": 2,
+			"maxCount": 1,
+			"stats": [
+				{
+					"type": "HEALTH",
+					"value": 8
 				}
 			]
 		},
@@ -131,7 +217,31 @@
 			"soulCost": 2,
 			"tier": 2,
 			"maxCount": 1,
-			"passiveId": "PASSIVE_MANA_ON_HIT"
+			"passiveId": "PASSIVE_MANA_ON_HIT",
+			"stats": [
+				{
+					"type": "HEALTH",
+					"value": 2
+				}
+			]
+		},
+		{
+			"id": "ITEM_STUN_ARMOR",
+			"name": "Shock Armor",
+			"description": "Shocks an enemy every 3 times you are hit",
+			"fullDescription": "When you are hit, disable the attacker",
+			"path": "entity/items/gear/Gear_Tier2.tscn",
+			"type": "ARMOR",
+			"soulCost": 4,
+			"tier": 2,
+			"maxCount": 1,
+			"passiveId": "PASSIVE_STUN_ON_HIT",
+			"stats": [
+				{
+					"type": "HEALTH",
+					"value": 2
+				}
+			]
 		}
 	]
 }

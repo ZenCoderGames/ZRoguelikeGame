@@ -1,11 +1,22 @@
 
 Roguelike Dev:
 
-- Get build on Steam deck
-- Fill out Notion
+Item ideas:
+- Isolation Damage
+- 
+
+----
+
+- Armor
+- Shield
+
+----
+
+- Lock and Key Chest
+- Lock and Key Miniboss Room
+- Fake Chests
 
 - Test out all the new Skilltree Upgrades
-- Armor
 - Specials have Slots (Unlockable in skill tree)
 - More levels and a Boss or Get Key back to surface
 

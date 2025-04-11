@@ -246,7 +246,7 @@
 			"name": "Force Push",
 			"description": "Pushes all enemies surrounding you away by upto 2 units\n\n[color=#9fc5e8]Mana Cost:[/color] 3",
 			"conditions": ["ON_TAKE_HIT"],
-			"count": 3,
+			"count": 2,
 			"soulCost": 0,
 			"executeCondition": "NONE",
 			"timeline": [

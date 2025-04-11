@@ -433,7 +433,7 @@ func _init_vendors():
 		startRoom.generate_vendor("MYSTIC_VENDOR")
 	
 	var specialRoom:DungeonRoom = rooms[rooms.size()/2]
-	var specialVendors:Array = ["POTIONSMITH_VENDOR", "BLACKSMITH_VENDOR", "RUNESMITH_VENDOR"]
+	var specialVendors:Array = ["POTIONSMITH_VENDOR", "BLACKSMITH_VENDOR", "SPECIALIST_VENDOR"]
 	specialVendors.shuffle()
 	specialRoom.generate_vendor(specialVendors[0])
 
